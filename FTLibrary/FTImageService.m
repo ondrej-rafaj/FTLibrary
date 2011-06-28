@@ -72,7 +72,7 @@
 	
 	if(cachedImageData != nil) {
 		if([imageDate compare:[cachedImageData objectForKey:kCacheKeyImageDate]] == NSOrderedSame) {
-			cachedImage = [cachedImageData objectForKey:kCacheKeyImage];
+			cachedImage = [cachedImageData objectForKey:kCacheKeyImage]; 
 		} else {
 			[urlImageCache removeObjectForKey:url];
 		}
