@@ -1,0 +1,397 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4C03655213BA023A00E8FA09 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C03655113BA023A00E8FA09 /* Foundation.framework */; };
+		4C03655D13BA023A00E8FA09 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C03655C13BA023A00E8FA09 /* UIKit.framework */; };
+		4C03655E13BA023A00E8FA09 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C03655113BA023A00E8FA09 /* Foundation.framework */; };
+		4C03656013BA023A00E8FA09 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C03655F13BA023A00E8FA09 /* CoreGraphics.framework */; };
+		4C03656313BA023A00E8FA09 /* libFTLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C03654E13BA023A00E8FA09 /* libFTLibrary.a */; };
+		4C03656913BA023A00E8FA09 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C03656713BA023A00E8FA09 /* InfoPlist.strings */; };
+		4C03656C13BA023A00E8FA09 /* FTLibraryTests.h in Resources */ = {isa = PBXBuildFile; fileRef = 4C03656B13BA023A00E8FA09 /* FTLibraryTests.h */; };
+		4C03656E13BA023A00E8FA09 /* FTLibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03656D13BA023A00E8FA09 /* FTLibraryTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4C03656113BA023A00E8FA09 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4C03654513BA023A00E8FA09 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C03654D13BA023A00E8FA09;
+			remoteInfo = FTLibrary;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4C03654E13BA023A00E8FA09 /* libFTLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFTLibrary.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C03655113BA023A00E8FA09 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4C03655513BA023A00E8FA09 /* FTLibrary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FTLibrary-Prefix.pch"; sourceTree = "<group>"; };
+		4C03655B13BA023A00E8FA09 /* FTLibraryTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FTLibraryTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C03655C13BA023A00E8FA09 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		4C03655F13BA023A00E8FA09 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4C03656613BA023A00E8FA09 /* FTLibraryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FTLibraryTests-Info.plist"; sourceTree = "<group>"; };
+		4C03656813BA023A00E8FA09 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4C03656A13BA023A00E8FA09 /* FTLibraryTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FTLibraryTests-Prefix.pch"; sourceTree = "<group>"; };
+		4C03656B13BA023A00E8FA09 /* FTLibraryTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTLibraryTests.h; sourceTree = "<group>"; };
+		4C03656D13BA023A00E8FA09 /* FTLibraryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTLibraryTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4C03654B13BA023A00E8FA09 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C03655213BA023A00E8FA09 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C03655713BA023A00E8FA09 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C03655D13BA023A00E8FA09 /* UIKit.framework in Frameworks */,
+				4C03655E13BA023A00E8FA09 /* Foundation.framework in Frameworks */,
+				4C03656013BA023A00E8FA09 /* CoreGraphics.framework in Frameworks */,
+				4C03656313BA023A00E8FA09 /* libFTLibrary.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4C03654313BA023A00E8FA09 = {
+			isa = PBXGroup;
+			children = (
+				4C03655313BA023A00E8FA09 /* FTLibrary */,
+				4C03656413BA023A00E8FA09 /* FTLibraryTests */,
+				4C03655013BA023A00E8FA09 /* Frameworks */,
+				4C03654F13BA023A00E8FA09 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4C03654F13BA023A00E8FA09 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4C03654E13BA023A00E8FA09 /* libFTLibrary.a */,
+				4C03655B13BA023A00E8FA09 /* FTLibraryTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4C03655013BA023A00E8FA09 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C03655113BA023A00E8FA09 /* Foundation.framework */,
+				4C03655C13BA023A00E8FA09 /* UIKit.framework */,
+				4C03655F13BA023A00E8FA09 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4C03655313BA023A00E8FA09 /* FTLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				4C03655413BA023A00E8FA09 /* Supporting Files */,
+			);
+			path = FTLibrary;
+			sourceTree = "<group>";
+		};
+		4C03655413BA023A00E8FA09 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4C03655513BA023A00E8FA09 /* FTLibrary-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4C03656413BA023A00E8FA09 /* FTLibraryTests */ = {
+			isa = PBXGroup;
+			children = (
+				4C03656B13BA023A00E8FA09 /* FTLibraryTests.h */,
+				4C03656D13BA023A00E8FA09 /* FTLibraryTests.m */,
+				4C03656513BA023A00E8FA09 /* Supporting Files */,
+			);
+			path = FTLibraryTests;
+			sourceTree = "<group>";
+		};
+		4C03656513BA023A00E8FA09 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4C03656613BA023A00E8FA09 /* FTLibraryTests-Info.plist */,
+				4C03656713BA023A00E8FA09 /* InfoPlist.strings */,
+				4C03656A13BA023A00E8FA09 /* FTLibraryTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4C03654C13BA023A00E8FA09 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4C03654D13BA023A00E8FA09 /* FTLibrary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C03657113BA023A00E8FA09 /* Build configuration list for PBXNativeTarget "FTLibrary" */;
+			buildPhases = (
+				4C03654A13BA023A00E8FA09 /* Sources */,
+				4C03654B13BA023A00E8FA09 /* Frameworks */,
+				4C03654C13BA023A00E8FA09 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FTLibrary;
+			productName = FTLibrary;
+			productReference = 4C03654E13BA023A00E8FA09 /* libFTLibrary.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		4C03655A13BA023A00E8FA09 /* FTLibraryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4C03657413BA023A00E8FA09 /* Build configuration list for PBXNativeTarget "FTLibraryTests" */;
+			buildPhases = (
+				4C03655613BA023A00E8FA09 /* Sources */,
+				4C03655713BA023A00E8FA09 /* Frameworks */,
+				4C03655813BA023A00E8FA09 /* Resources */,
+				4C03655913BA023A00E8FA09 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4C03656213BA023A00E8FA09 /* PBXTargetDependency */,
+			);
+			name = FTLibraryTests;
+			productName = FTLibraryTests;
+			productReference = 4C03655B13BA023A00E8FA09 /* FTLibraryTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4C03654513BA023A00E8FA09 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Fuerte International";
+			};
+			buildConfigurationList = 4C03654813BA023A00E8FA09 /* Build configuration list for PBXProject "FTLibrary" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4C03654313BA023A00E8FA09;
+			productRefGroup = 4C03654F13BA023A00E8FA09 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4C03654D13BA023A00E8FA09 /* FTLibrary */,
+				4C03655A13BA023A00E8FA09 /* FTLibraryTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4C03655813BA023A00E8FA09 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C03656913BA023A00E8FA09 /* InfoPlist.strings in Resources */,
+				4C03656C13BA023A00E8FA09 /* FTLibraryTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4C03655913BA023A00E8FA09 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4C03654A13BA023A00E8FA09 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4C03655613BA023A00E8FA09 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4C03656E13BA023A00E8FA09 /* FTLibraryTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4C03656213BA023A00E8FA09 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4C03654D13BA023A00E8FA09 /* FTLibrary */;
+			targetProxy = 4C03656113BA023A00E8FA09 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4C03656713BA023A00E8FA09 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4C03656813BA023A00E8FA09 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4C03656F13BA023A00E8FA09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		4C03657013BA023A00E8FA09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		4C03657213BA023A00E8FA09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/FTLibrary.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FTLibrary/FTLibrary-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4C03657313BA023A00E8FA09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/FTLibrary.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FTLibrary/FTLibrary-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		4C03657513BA023A00E8FA09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FTLibraryTests/FTLibraryTests-Prefix.pch";
+				INFOPLIST_FILE = "FTLibraryTests/FTLibraryTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		4C03657613BA023A00E8FA09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FTLibraryTests/FTLibraryTests-Prefix.pch";
+				INFOPLIST_FILE = "FTLibraryTests/FTLibraryTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4C03654813BA023A00E8FA09 /* Build configuration list for PBXProject "FTLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C03656F13BA023A00E8FA09 /* Debug */,
+				4C03657013BA023A00E8FA09 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4C03657113BA023A00E8FA09 /* Build configuration list for PBXNativeTarget "FTLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C03657213BA023A00E8FA09 /* Debug */,
+				4C03657313BA023A00E8FA09 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		4C03657413BA023A00E8FA09 /* Build configuration list for PBXNativeTarget "FTLibraryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4C03657513BA023A00E8FA09 /* Debug */,
+				4C03657613BA023A00E8FA09 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4C03654513BA023A00E8FA09 /* Project object */;
+}
