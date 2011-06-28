@@ -85,6 +85,12 @@
 		4C03667313BA0D6000E8FA09 /* FTViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C03667113BA0D6000E8FA09 /* FTViewController.h */; };
 		4C03667413BA0D6000E8FA09 /* FTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03667213BA0D6000E8FA09 /* FTViewController.m */; };
 		4C03667513BA0D6600E8FA09 /* FTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03667213BA0D6000E8FA09 /* FTViewController.m */; };
+		4C72E6C413BA1A6E003EB741 /* FTProjectInitialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C72E6C213BA1A6E003EB741 /* FTProjectInitialization.h */; };
+		4C72E6C513BA1A6E003EB741 /* FTProjectInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */; };
+		4C72E6C613BA1A6E003EB741 /* FTProjectInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */; };
+		4C72E6C913BA1AC6003EB741 /* FTTracking.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C72E6C713BA1AC6003EB741 /* FTTracking.h */; };
+		4C72E6CA13BA1AC6003EB741 /* FTTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E6C813BA1AC6003EB741 /* FTTracking.m */; };
+		4C72E6CB13BA1AC6003EB741 /* FTTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E6C813BA1AC6003EB741 /* FTTracking.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,6 +162,10 @@
 		4C03666913BA0C1100E8FA09 /* FTImageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTImageService.m; sourceTree = "<group>"; };
 		4C03667113BA0D6000E8FA09 /* FTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTViewController.h; sourceTree = "<group>"; };
 		4C03667213BA0D6000E8FA09 /* FTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTViewController.m; sourceTree = "<group>"; };
+		4C72E6C213BA1A6E003EB741 /* FTProjectInitialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProjectInitialization.h; sourceTree = "<group>"; };
+		4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProjectInitialization.m; sourceTree = "<group>"; };
+		4C72E6C713BA1AC6003EB741 /* FTTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTracking.h; sourceTree = "<group>"; };
+		4C72E6C813BA1AC6003EB741 /* FTTracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTracking.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +224,8 @@
 		4C03655313BA023A00E8FA09 /* FTLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				4CD65F8213BA1CD5000754E4 /* Thirdparty */,
+				4C72E6C013BA1A39003EB741 /* Project initialization */,
 				4C03667013BA0D4300E8FA09 /* Controllers */,
 				4C03666D13BA0C1300E8FA09 /* Images */,
 				4C03661213BA0B1F00E8FA09 /* Categories */,
@@ -334,6 +346,24 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		4C72E6C013BA1A39003EB741 /* Project initialization */ = {
+			isa = PBXGroup;
+			children = (
+				4C72E6C213BA1A6E003EB741 /* FTProjectInitialization.h */,
+				4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */,
+				4C72E6C713BA1AC6003EB741 /* FTTracking.h */,
+				4C72E6C813BA1AC6003EB741 /* FTTracking.m */,
+			);
+			name = "Project initialization";
+			sourceTree = "<group>";
+		};
+		4CD65F8213BA1CD5000754E4 /* Thirdparty */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Thirdparty;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -365,6 +395,8 @@
 				4C03666513BA0B3100E8FA09 /* UIViewController+Utilities.h in Headers */,
 				4C03666A13BA0C1100E8FA09 /* FTImageService.h in Headers */,
 				4C03667313BA0D6000E8FA09 /* FTViewController.h in Headers */,
+				4C72E6C413BA1A6E003EB741 /* FTProjectInitialization.h in Headers */,
+				4C72E6C913BA1AC6003EB741 /* FTTracking.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +445,7 @@
 		4C03654513BA023A00E8FA09 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Fuerte International";
 			};
 			buildConfigurationList = 4C03654813BA023A00E8FA09 /* Build configuration list for PBXProject "FTLibrary" */;
@@ -489,6 +522,8 @@
 				4C03666613BA0B3100E8FA09 /* UIViewController+Utilities.m in Sources */,
 				4C03666B13BA0C1100E8FA09 /* FTImageService.m in Sources */,
 				4C03667413BA0D6000E8FA09 /* FTViewController.m in Sources */,
+				4C72E6C513BA1A6E003EB741 /* FTProjectInitialization.m in Sources */,
+				4C72E6CA13BA1AC6003EB741 /* FTTracking.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +555,8 @@
 				4C03666713BA0B3100E8FA09 /* UIViewController+Utilities.m in Sources */,
 				4C03666C13BA0C1100E8FA09 /* FTImageService.m in Sources */,
 				4C03667513BA0D6600E8FA09 /* FTViewController.m in Sources */,
+				4C72E6C613BA1A6E003EB741 /* FTProjectInitialization.m in Sources */,
+				4C72E6CB13BA1AC6003EB741 /* FTTracking.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

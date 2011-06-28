@@ -11,12 +11,21 @@
 
 @implementation FTViewController
 
+@synthesize table;
+@synthesize data;
+
 
 #pragma mark Positioning
+
+- (CGRect)fullscreenRect {
+	return CGRectZero;
+}
 
 #pragma mark Memory management
 
 - (void)dealloc {
+	[table release];
+	[data release];
     [super dealloc];
 }
 
