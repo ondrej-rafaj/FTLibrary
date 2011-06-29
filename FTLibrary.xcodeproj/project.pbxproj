@@ -242,6 +242,8 @@
 		4C85BC8D13BB18BB00CB7FCA /* FTError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC8B13BB18BB00CB7FCA /* FTError.h */; };
 		4C85BC8E13BB18BB00CB7FCA /* FTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC8C13BB18BB00CB7FCA /* FTError.m */; };
 		4C85BC8F13BB18BB00CB7FCA /* FTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC8C13BB18BB00CB7FCA /* FTError.m */; };
+		4C85BC9C13BB5D4000CB7FCA /* FTSystemKillSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */; };
+		4C85BC9D13BB5D4000CB7FCA /* FTSystemKillSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -429,6 +431,8 @@
 		4C85BC8413BB15E100CB7FCA /* FTDataPlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDataPlist.m; sourceTree = "<group>"; };
 		4C85BC8B13BB18BB00CB7FCA /* FTError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTError.h; sourceTree = "<group>"; };
 		4C85BC8C13BB18BB00CB7FCA /* FTError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTError.m; sourceTree = "<group>"; };
+		4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSystemKillSwitch.h; sourceTree = "<group>"; };
+		4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSystemKillSwitch.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -524,7 +528,7 @@
 		4C03655313BA023A00E8FA09 /* FTLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				4C85BC8A13BB18A000CB7FCA /* Errors */,
+				4C85BC9913BB5D0700CB7FCA /* System */,
 				4C85BB0413BA4AFD00CB7FCA /* Thirdparty */,
 				4C85BC7513BB156100CB7FCA /* Data */,
 				4C85BC7613BB156A00CB7FCA /* Caching */,
@@ -534,7 +538,6 @@
 				4C03666D13BA0C1300E8FA09 /* Images */,
 				4C03661213BA0B1F00E8FA09 /* Categories */,
 				4C03660913BA095400E8FA09 /* Text */,
-				4C0365C913BA08DE00E8FA09 /* Filesystem */,
 			);
 			path = FTLibrary;
 			sourceTree = "<group>";
@@ -865,6 +868,25 @@
 			name = Errors;
 			sourceTree = "<group>";
 		};
+		4C85BC9813BB5CFD00CB7FCA /* Kill switch */ = {
+			isa = PBXGroup;
+			children = (
+				4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */,
+				4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */,
+			);
+			name = "Kill switch";
+			sourceTree = "<group>";
+		};
+		4C85BC9913BB5D0700CB7FCA /* System */ = {
+			isa = PBXGroup;
+			children = (
+				4C0365C913BA08DE00E8FA09 /* Filesystem */,
+				4C85BC8A13BB18A000CB7FCA /* Errors */,
+				4C85BC9813BB5CFD00CB7FCA /* Kill switch */,
+			);
+			name = System;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -949,6 +971,7 @@
 				4C85BC8113BB15CC00CB7FCA /* FTDataXml.h in Headers */,
 				4C85BC8513BB15E100CB7FCA /* FTDataPlist.h in Headers */,
 				4C85BC8D13BB18BB00CB7FCA /* FTError.h in Headers */,
+				4C85BC9C13BB5D4000CB7FCA /* FTSystemKillSwitch.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1119,6 +1142,7 @@
 				4C85BC8213BB15CC00CB7FCA /* FTDataXml.m in Sources */,
 				4C85BC8613BB15E100CB7FCA /* FTDataPlist.m in Sources */,
 				4C85BC8E13BB18BB00CB7FCA /* FTError.m in Sources */,
+				4C85BC9D13BB5D4000CB7FCA /* FTSystemKillSwitch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
