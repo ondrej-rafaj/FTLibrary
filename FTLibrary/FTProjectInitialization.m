@@ -7,6 +7,11 @@
 //
 
 #import "FTProjectInitialization.h"
+#import "FlurryAPI.h"
+
+
+#define kFTProjectInitializationFunctionalityKey				@"FTProjectInitializationFunctionalityKey"
+
 
 @implementation FTProjectInitialization
 
@@ -30,8 +35,22 @@
 
 #pragma mark Settings
 
++ (NSString *)functionalityKey:(FTProjectInitializationFunctionType)functionality {
+	return [NSString stringWithFormat:@"%@%d", kFTProjectInitializationFunctionalityKey, functionality];
+}
+
++ (void)setUsedFunctionality:(FTProjectInitializationFunctionType)functionality {
+	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[self functionalityKey:functionality]];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL)isUsing:(FTProjectInitializationFunctionType)functionality {
+	return [[NSUserDefaults standardUserDefaults] boolForKey:[self functionalityKey:functionality]];
+}
+
 + (void)enableFlurryWithApiKey:(NSString *)apiKey {
-	
+	[FlurryAPI startSession:apiKey];
+	[self setUsedFunctionality:FTProjectInitializationFunctionTypeTrackingFlurry];
 }
 
 

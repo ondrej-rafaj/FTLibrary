@@ -7,17 +7,25 @@
 //
 
 #import "FTTracking.h"
+#import "FTProjectInitialization.h"
+#import "FTError.h"
+
 
 @implementation FTTracking
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
+- (void)logEvent:(NSString *)event {
+	BOOL ok = NO;
+	if ([FTProjectInitialization isUsing:FTProjectInitializationFunctionTypeTrackingFlurry]) {
+		[FlurryAPI logEvent:event];
+		ok = YES;
+	}
+	if ([FTProjectInitialization isUsing:FTProjectInitializationFunctionTypeTrackingGoogle]) {
+		
+		ok = YES;
+	}
+	if (!ok) {
+		[FTError handleErrorWithString:@"No tracking has been initialized!"];
+	}
 }
 
 @end

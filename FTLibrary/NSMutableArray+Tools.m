@@ -1,15 +1,15 @@
 //
-//  NSMutableArray+IGTools.m
-//  Book
+//  NSMutableArray+Tools.m
+//  FTLibrary
 //
 //  Created by Ondrej Rafaj on 14/02/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
 //
 
-#import "NSMutableArray+IGTools.h"
+#import "NSMutableArray+Tools.h"
 
 
-@implementation NSMutableArray (NSMutableArray_IGTools)
+@implementation NSMutableArray (Tools)
 
 - (void)reverse {
     NSUInteger i = 0;

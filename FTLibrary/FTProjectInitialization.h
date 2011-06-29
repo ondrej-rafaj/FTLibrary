@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+
+typedef enum {
+	
+	FTProjectInitializationFunctionTypeTrackingFlurry,
+	FTProjectInitializationFunctionTypeTrackingGoogle
+	
+} FTProjectInitializationFunctionType;
+
+
 @interface FTProjectInitialization : NSObject {
 	
 }
@@ -17,6 +26,8 @@
 + (void)resume;
 
 + (void)enableFlurryWithApiKey:(NSString *)apiKey;
+
++ (BOOL)isUsing:(FTProjectInitializationFunctionType)functionality;
 
 
 @end

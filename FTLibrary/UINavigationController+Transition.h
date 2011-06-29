@@ -15,6 +15,9 @@
 - (void)pushViewController:(UIViewController *)controller transition:(UIViewAnimationTransition)transition;
 
 - (void)pushViewControllerWithFade:(UIViewController *)controller;
+
+- (void)popViewControllerWithFadeInTime:(NSTimeInterval)time;
+
 - (void)popViewControllerWithFade;
 
 

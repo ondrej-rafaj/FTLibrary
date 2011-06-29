@@ -1,5 +1,5 @@
 //
-//  UIView+IGTools.h
+//  UIView+Tools.h
 //  CanvasApp
 //
 //  Created by Ondrej Rafaj on 20/02/2011.
@@ -10,10 +10,11 @@
 #import <UIKit/UIKit.h>
 
 
-@interface UIView (UIView_IGTools)
+@interface UIView (Effects)
 
 - (void)addShadowWithOffset:(CGFloat)offset withColor:(UIColor *)color andOpacity:(CGFloat)opacity;
 
 - (void)addShadow;
+
 
 @end

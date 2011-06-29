@@ -1,15 +1,15 @@
 //
-//  NSArray+IGTools.m
-//  Book
+//  NSArray+Tools.m
+//  FTLibrary
 //
 //  Created by Ondrej Rafaj on 14/02/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
 //
 
-#import "NSArray+IGTools.h"
+#import "NSArray+Tools.h"
 
 
-@implementation NSArray (NSArray_IGTools)
+@implementation NSArray (Tools)
 
 - (NSArray *)reversedArray {
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:[self count]];

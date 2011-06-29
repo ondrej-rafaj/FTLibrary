@@ -1,16 +1,16 @@
 //
-//  UIView+IGTools.m
+//  UIView+Tools.m
 //  CanvasApp
 //
 //  Created by Ondrej Rafaj on 20/02/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
 //
 
-#import "UIView+IGTools.h"
+#import "UIView+Effects.h"
 #import <QuartzCore/QuartzCore.h>
 
 
-@implementation UIView (UIView_IGTools)
+@implementation UIView (Effects)
 
 - (void)addShadowWithOffset:(CGFloat)offset withColor:(UIColor *)color andOpacity:(CGFloat)opacity {
     self.layer.shadowColor = [color CGColor];
@@ -18,7 +18,6 @@
     self.layer.shadowOpacity = opacity;
     self.layer.shadowRadius = offset;
     self.layer.shouldRasterize = YES;
-    //self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
 }
 
 - (void)addShadow {

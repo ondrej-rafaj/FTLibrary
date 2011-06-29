@@ -1,16 +1,38 @@
 //
-//  UIColor+HEXConverter.m
-//  AsiaETrading
+//  UIColor+Tools.m
+//  IGFrameworkProject
 //
-//  Created by cescofry on 26/01/2011.
-//  Copyright 2011 ziofritz.com. All rights reserved.
+//  Created by Ondrej Rafaj on 7.6.10.
+//  Copyright 2010 Home. All rights reserved.
 //
 
-#import "UIColor+HEXConverter.h"
+#import "UIColor+Tools.h"
 
 
-@implementation UIColor (HEXConverter)
+#define DEFAULT_VOID_COLOR					[UIColor blackColor]
 
+
+@implementation UIColor (Tools)
+
++ (CGFloat)getFrom:(CGFloat)value {
+	//NSLog(@"From value:%f to: %f", value, (value / 255));
+	return (value / 255);
+}
+
++ (UIColor *)colorWithRealRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha {
+	return [UIColor colorWithRed:[self getFrom:red] green:[self getFrom:green] blue:[self getFrom:blue] alpha:alpha];
+}
+
+- (UIColor *)colorWithRealRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha {
+	return [UIColor colorWithRed:[UIColor getFrom:red] green:[UIColor getFrom:green] blue:[UIColor getFrom:blue] alpha:alpha];
+}
+
++ (UIColor *)randomColor {
+	CGFloat red =  (CGFloat)random() / (CGFloat)RAND_MAX;
+	CGFloat blue = (CGFloat)random() / (CGFloat)RAND_MAX;
+	CGFloat green = (CGFloat)random() / (CGFloat)RAND_MAX;
+	return [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
+}
 
 + (UIColor *)colorWithHexString: (NSString *)stringToConvert{
 	NSString *cString = [[stringToConvert stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
@@ -46,5 +68,8 @@
 							blue:((float) b / 255.0f)
 						   alpha:1.0f];
 }
+
+
+
 
 @end

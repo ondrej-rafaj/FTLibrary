@@ -30,16 +30,20 @@
 	[UIView commitAnimations];
 }
 
-- (void)popViewControllerWithFade {
+- (void)popViewControllerWithFadeInTime:(NSTimeInterval)time {
 	UIViewController *vc = self.visibleViewController;
 	[vc retain];
 	
 	[UIView beginAnimations:nil context:nil];
-	[UIView setAnimationDuration:0.75];
+	[UIView setAnimationDuration:time];
 	vc.view.alpha = 0.0;
 	[UIView commitAnimations];
 	
 	[self popViewControllerAnimated:NO];
+}
+
+- (void)popViewControllerWithFade {
+	[self popViewControllerWithFadeInTime:0.45];
 }
 
 @end

@@ -1,15 +1,15 @@
 //
-//  NSString+IGTools.m
-//  Book
+//  NSString+Tools.m
+//  FTLibrary
 //
 //  Created by Ondrej Rafaj on 09/02/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
 //
 
-#import "NSString+IGTools.h"
+#import "NSString+Tools.h"
 
 
-@implementation NSString (NSString_IGTools)
+@implementation NSString (Tools)
 
 + (NSString *)stringFromNumber:(int)number withCharacterSizeLength:(int)numberOfChars {
     NSString *no = [NSString stringWithFormat:@"%d", number];
