@@ -7,8 +7,24 @@
 //
 
 #import "FTDataJson.h"
+#import "JSON.h"
+#import "FTError.h"
 
 
 @implementation FTDataJson
+
++ (id)jsonDataFromString:(NSString *)string {
+	SBJsonParser *parser = [[SBJsonParser alloc] init];
+	NSError *error = nil;
+	id d = [parser objectWithString:string error:&error];
+	if (error) [FTError handleError:error];
+	return d;
+}
+
++ (id)jsonDataFromUrl:(NSString *)url {
+	NSString *string = [super stringWithContentsOfUrl:url];
+	return [self jsonDataFromUrl:string];
+}
+
 
 @end

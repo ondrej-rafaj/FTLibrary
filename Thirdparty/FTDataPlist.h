@@ -10,8 +10,15 @@
 #import "FTData.h"
 
 
-@interface FTDataPlist : FTData {
-    
-}
+@interface FTDataPlist : FTData
+
++ (NSDictionary *)plistDictionaryFromString:(NSString *)string;
+
++ (NSDictionary *)plistDictionaryFromUrl:(NSString *)url;
+
++ (NSArray *)plistArrayFromString:(NSString *)string;
+
++ (NSArray *)plistArrayFromUrl:(NSString *)url;
+
 
 @end

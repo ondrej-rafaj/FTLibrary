@@ -10,8 +10,7 @@
 #import "FTData.h"
 
 
-@interface FTDataXml : FTData {
-    
-}
+@interface FTDataXml : FTData
+
 
 @end

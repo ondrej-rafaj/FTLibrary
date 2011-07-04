@@ -8,6 +8,7 @@
 
 #import "FTLang.h"
 #import "FTProject.h"
+#import "FTData.h"
 
 
 static NSDictionary *translations;
@@ -18,9 +19,23 @@ static NSString *updateUrl;
 
 #pragma mark Update process
 
-- (void)startBackgroundDownloading {
+- (void)downloadLanguage:(FTLang *)lang {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	
+	@synchronized(self) {
+		NSError *error = nil;
+		NSString *string = [FTData stringWithContentsOfUrl:updateUrl];
+		if (error) [FTError handleError:error];
+		else {
+			
+		}
+	}
+	[lang release];
+	[pool drain];
+}
+
+- (void)startBackgroundDownloading:(FTLang *)lang {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	[self performSelectorInBackground:@selector(downloadLanguage:) withObject:lang];
 	[pool drain];
 }
 
@@ -56,7 +71,7 @@ static NSString *updateUrl;
 
 + (void)update {
 	FTLang *lng = [[FTLang alloc] init];
-	[NSThread detachNewThreadSelector:@selector(startBackgroundDownloading) toTarget:lng withObject:nil];
+	[NSThread detachNewThreadSelector:@selector(startBackgroundDownloading:) toTarget:lng withObject:lng];
 }
 
 

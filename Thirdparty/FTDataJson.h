@@ -10,8 +10,11 @@
 #import "FTData.h"
 
 
-@interface FTDataJson : FTData {
-    
-}
+@interface FTDataJson : FTData 
+
++ (id)jsonDataFromString:(NSString *)string;
+
++ (id)jsonDataFromUrl:(NSString *)url;
+
 
 @end
