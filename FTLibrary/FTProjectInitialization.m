@@ -8,12 +8,17 @@
 
 #import "FTProjectInitialization.h"
 #import "FlurryAPI.h"
+#import "FTLang.h"
 
 
 #define kFTProjectInitializationFunctionalityKey				@"FTProjectInitializationFunctionalityKey"
+#define kFTProjectInitializationDebuggingKey					@"FTProjectInitializationDebuggingKey"
 
 
 @implementation FTProjectInitialization
+
+@synthesize killSwitch;
+
 
 #pragma mark Initialization
 
@@ -51,6 +56,41 @@
 + (void)enableFlurryWithApiKey:(NSString *)apiKey {
 	[FlurryAPI startSession:apiKey];
 	[self setUsedFunctionality:FTProjectInitializationFunctionTypeTrackingFlurry];
+}
+
+- (void)enableKillSwitchWith:(id<FTSystemKillSwitchDelegate>)del andUrl:(NSString *)url {
+	killSwitch = [[FTSystemKillSwitch alloc] initWithAppIdUrl:url];
+	[killSwitch setDelegate:self];
+}
+
+#pragma mark KillSwitch delegate & data source methods
+
+- (void)appKillSwitch:(FTSystemKillSwitch *)killSwitch shouldDisableApp:(BOOL)disable {
+	NSLog(@"App disabled looser :)");
+}
+
+- (UIView *)viewForAppKillSwitch:(FTSystemKillSwitch *)killSwitch {
+	UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 250, 60)];
+	[lbl setText:[FTLang get:@"Application is unavailable at the moment. Sorry for any inconvenience caused"]];
+	return lbl;
+}
+
+#pragma mark Debugging
+
++ (void)enableDebugging:(BOOL)debugging {
+	[[NSUserDefaults standardUserDefaults] setBool:debugging forKey:kFTProjectInitializationDebuggingKey];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL)debugging {
+	return [[NSUserDefaults standardUserDefaults] boolForKey:kFTProjectInitializationDebuggingKey];
+}
+
+#pragma mark Memory management
+
+- (void)dealloc {
+	[killSwitch release];
+	[super dealloc];
 }
 
 

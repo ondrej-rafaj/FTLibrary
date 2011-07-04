@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FTSystemKillSwitch.h"
 
 
 typedef enum {
@@ -17,9 +18,14 @@ typedef enum {
 } FTProjectInitializationFunctionType;
 
 
-@interface FTProjectInitialization : NSObject {
+@interface FTProjectInitialization : NSObject <FTSystemKillSwitchDelegate> {
+	
+	FTSystemKillSwitch *killSwitch;
 	
 }
+
+@property (nonatomic, retain) FTSystemKillSwitch *killSwitch;
+
 
 + (void)initialize;
 
@@ -28,6 +34,12 @@ typedef enum {
 + (void)enableFlurryWithApiKey:(NSString *)apiKey;
 
 + (BOOL)isUsing:(FTProjectInitializationFunctionType)functionality;
+
+- (void)enableKillSwitchWith:(id <FTSystemKillSwitchDelegate>)del andUrl:(NSString *)url;
+
++ (void)enableDebugging:(BOOL)debugging;
+
++ (BOOL)debugging;
 
 
 @end

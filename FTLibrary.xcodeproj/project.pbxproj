@@ -82,6 +82,10 @@
 		4C03667313BA0D6000E8FA09 /* FTViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C03667113BA0D6000E8FA09 /* FTViewController.h */; };
 		4C03667413BA0D6000E8FA09 /* FTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03667213BA0D6000E8FA09 /* FTViewController.m */; };
 		4C03667513BA0D6600E8FA09 /* FTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03667213BA0D6000E8FA09 /* FTViewController.m */; };
+		4C4030A113BEA2A000E6A4A2 /* FTLang.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C40309F13BEA2A000E6A4A2 /* FTLang.h */; };
+		4C4030A213BEA2A000E6A4A2 /* FTLang.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4030A013BEA2A000E6A4A2 /* FTLang.m */; };
+		4C6F5F3113C1B5E400EECED4 /* FTProject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F5F2F13C1B5E400EECED4 /* FTProject.h */; };
+		4C6F5F3213C1B5E400EECED4 /* FTProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F5F3013C1B5E400EECED4 /* FTProject.m */; };
 		4C72E6C413BA1A6E003EB741 /* FTProjectInitialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C72E6C213BA1A6E003EB741 /* FTProjectInitialization.h */; };
 		4C72E6C513BA1A6E003EB741 /* FTProjectInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */; };
 		4C72E6C613BA1A6E003EB741 /* FTProjectInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */; };
@@ -313,6 +317,10 @@
 		4C03666913BA0C1100E8FA09 /* FTImageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTImageService.m; sourceTree = "<group>"; };
 		4C03667113BA0D6000E8FA09 /* FTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTViewController.h; sourceTree = "<group>"; };
 		4C03667213BA0D6000E8FA09 /* FTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTViewController.m; sourceTree = "<group>"; };
+		4C40309F13BEA2A000E6A4A2 /* FTLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLang.h; sourceTree = "<group>"; };
+		4C4030A013BEA2A000E6A4A2 /* FTLang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLang.m; sourceTree = "<group>"; };
+		4C6F5F2F13C1B5E400EECED4 /* FTProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProject.h; sourceTree = "<group>"; };
+		4C6F5F3013C1B5E400EECED4 /* FTProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProject.m; sourceTree = "<group>"; };
 		4C72E6C213BA1A6E003EB741 /* FTProjectInitialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProjectInitialization.h; sourceTree = "<group>"; };
 		4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProjectInitialization.m; sourceTree = "<group>"; };
 		4C72E6C713BA1AC6003EB741 /* FTTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTracking.h; sourceTree = "<group>"; };
@@ -651,6 +659,15 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		4C40309D13BEA27D00E6A4A2 /* Localizations */ = {
+			isa = PBXGroup;
+			children = (
+				4C40309F13BEA2A000E6A4A2 /* FTLang.h */,
+				4C4030A013BEA2A000E6A4A2 /* FTLang.m */,
+			);
+			name = Localizations;
+			sourceTree = "<group>";
+		};
 		4C72E6C013BA1A39003EB741 /* Project initialization */ = {
 			isa = PBXGroup;
 			children = (
@@ -658,6 +675,8 @@
 				4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */,
 				4C72E6C713BA1AC6003EB741 /* FTTracking.h */,
 				4C72E6C813BA1AC6003EB741 /* FTTracking.m */,
+				4C6F5F2F13C1B5E400EECED4 /* FTProject.h */,
+				4C6F5F3013C1B5E400EECED4 /* FTProject.m */,
 			);
 			name = "Project initialization";
 			sourceTree = "<group>";
@@ -880,6 +899,7 @@
 		4C85BC9913BB5D0700CB7FCA /* System */ = {
 			isa = PBXGroup;
 			children = (
+				4C40309D13BEA27D00E6A4A2 /* Localizations */,
 				4C0365C913BA08DE00E8FA09 /* Filesystem */,
 				4C85BC8A13BB18A000CB7FCA /* Errors */,
 				4C85BC9813BB5CFD00CB7FCA /* Kill switch */,
@@ -972,6 +992,8 @@
 				4C85BC8513BB15E100CB7FCA /* FTDataPlist.h in Headers */,
 				4C85BC8D13BB18BB00CB7FCA /* FTError.h in Headers */,
 				4C85BC9C13BB5D4000CB7FCA /* FTSystemKillSwitch.h in Headers */,
+				4C4030A113BEA2A000E6A4A2 /* FTLang.h in Headers */,
+				4C6F5F3113C1B5E400EECED4 /* FTProject.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1143,6 +1165,8 @@
 				4C85BC8613BB15E100CB7FCA /* FTDataPlist.m in Sources */,
 				4C85BC8E13BB18BB00CB7FCA /* FTError.m in Sources */,
 				4C85BC9D13BB5D4000CB7FCA /* FTSystemKillSwitch.m in Sources */,
+				4C4030A213BEA2A000E6A4A2 /* FTLang.m in Sources */,
+				4C6F5F3213C1B5E400EECED4 /* FTProject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

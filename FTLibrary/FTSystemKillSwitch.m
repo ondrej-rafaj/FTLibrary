@@ -15,6 +15,11 @@
 @synthesize url;
 @synthesize delegate;
 @synthesize appWindow;
+@synthesize blockerShadow;
+
+
+#pragma mark Positioning
+
 
 
 #pragma mark Initialization
@@ -26,7 +31,10 @@
 - (id)initWithAppIdUrl:(NSString *)url {
 	self = [super init];
 	if (self) {
-		
+		if ([[UIApplication sharedApplication] respondsToSelector:@selector(window)]) {
+			appWindow = [[UIApplication sharedApplication] performSelector:@selector(window)];
+		}
+		blockerShadow = 0.6;
 	}
 	return self;
 }
@@ -34,11 +42,11 @@
 #pragma mark Settings
 
 + (NSInteger)currentAppVersion {
-	
+	return 1;
 }
 
 + (NSInteger)remoteAllowedAppVersion {
-	
+	return 1;
 }
 
 + (BOOL)isAppEnabled {

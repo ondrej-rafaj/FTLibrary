@@ -18,7 +18,7 @@
 
 - (void)appKillSwitch:(FTSystemKillSwitch *)killSwitch shouldDisableApp:(BOOL)disable;
 
-@optional
+//@optional
 
 - (UIView *)viewForAppKillSwitch:(FTSystemKillSwitch *)killSwitch;
 
@@ -33,12 +33,16 @@
 	
 	UIWindow *appWindow;
 	
+	CGFloat blockerShadow;
+	
 }
 
 @property (nonatomic, retain) NSString *url;
 
 @property (nonatomic, assign) id <FTSystemKillSwitchDelegate> delegate;
 @property (nonatomic, assign) UIWindow *appWindow;
+
+@property (nonatomic) CGFloat blockerShadow;
 
 
 + (id)instanceWithAppIdUrl:(NSString *)url;
