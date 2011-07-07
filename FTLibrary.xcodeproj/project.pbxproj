@@ -548,7 +548,6 @@
 		4C03655313BA023A00E8FA09 /* FTLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				4C57611D13C5E7570049371F /* Views */,
 				4C85BC9913BB5D0700CB7FCA /* System */,
 				4C85BB0413BA4AFD00CB7FCA /* Thirdparty */,
 				4C85BC7513BB156100CB7FCA /* Data */,
@@ -556,6 +555,7 @@
 				4C85BC8713BB15E500CB7FCA /* Networking */,
 				4C72E6C013BA1A39003EB741 /* Project initialization */,
 				4C03667013BA0D4300E8FA09 /* Controllers */,
+				4C57611D13C5E7570049371F /* Views */,
 				4C03666D13BA0C1300E8FA09 /* Images */,
 				4C03661213BA0B1F00E8FA09 /* Categories */,
 				4C03660913BA095400E8FA09 /* Text */,
@@ -666,8 +666,7 @@
 		4C03667013BA0D4300E8FA09 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4C03667113BA0D6000E8FA09 /* FTViewController.h */,
-				4C03667213BA0D6000E8FA09 /* FTViewController.m */,
+				4C57612513C5EA910049371F /* Basic view controller */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -705,6 +704,15 @@
 				4C57612013C5E7770049371F /* FTProgressView.m */,
 			);
 			name = Progress;
+			sourceTree = "<group>";
+		};
+		4C57612513C5EA910049371F /* Basic view controller */ = {
+			isa = PBXGroup;
+			children = (
+				4C03667113BA0D6000E8FA09 /* FTViewController.h */,
+				4C03667213BA0D6000E8FA09 /* FTViewController.m */,
+			);
+			name = "Basic view controller";
 			sourceTree = "<group>";
 		};
 		4C6F5F4C13C45C7200EECED4 /* App delegate */ = {
