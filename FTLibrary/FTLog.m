@@ -26,7 +26,7 @@ void _FTLog(Class <LOGGING> klass, const char *file, int lineNumber, const char 
     NSString *extendedFormat = nil;
     
 	if (threadName) {
-		extendedFormat = [[NSString alloc] initWithFormat:@"%s/%s (%s:%d) \r\n %@", threadName, funcName, [fileName UTF8String], lineNumber, format];
+		extendedFormat = [[NSString alloc] initWithFormat:@"%s/%s (%s:%d)\n%@\n", threadName, funcName, [fileName UTF8String], lineNumber, format];
 	}
 	else {
 		extendedFormat = [[NSString alloc] initWithFormat:@"%p/%s (%s:%d) \r\n %@", [NSThread currentThread], funcName, [fileName UTF8String], lineNumber, format];
@@ -43,7 +43,9 @@ void _FTLog(Class <LOGGING> klass, const char *file, int lineNumber, const char 
 #if defined(DEBUG)
 @implementation NSObject (LOGGING)
 
-+ (BOOL)LOGGING_shouldLog {		
++ (BOOL)LOGGING_shouldLog {
+	return YES;
+	
     NSString *key = nil;
     BOOL result = NO;
 	

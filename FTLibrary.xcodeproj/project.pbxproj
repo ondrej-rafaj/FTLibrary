@@ -87,6 +87,9 @@
 		4C5760F213C5CDBD0049371F /* FTLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C5760F013C5CDBD0049371F /* FTLog.h */; };
 		4C5760F313C5CDBD0049371F /* FTLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5760F113C5CDBD0049371F /* FTLog.m */; };
 		4C5760F413C5CDBD0049371F /* FTLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5760F113C5CDBD0049371F /* FTLog.m */; };
+		4C57612113C5E7770049371F /* FTProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C57611F13C5E7770049371F /* FTProgressView.h */; };
+		4C57612213C5E7770049371F /* FTProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C57612013C5E7770049371F /* FTProgressView.m */; };
+		4C57612313C5E7770049371F /* FTProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C57612013C5E7770049371F /* FTProgressView.m */; };
 		4C6F5F3113C1B5E400EECED4 /* FTProject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F5F2F13C1B5E400EECED4 /* FTProject.h */; };
 		4C6F5F3213C1B5E400EECED4 /* FTProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F5F3013C1B5E400EECED4 /* FTProject.m */; };
 		4C6F5F4F13C45CA100EECED4 /* FTAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */; };
@@ -325,6 +328,8 @@
 		4C4030A013BEA2A000E6A4A2 /* FTLang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLang.m; sourceTree = "<group>"; };
 		4C5760F013C5CDBD0049371F /* FTLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLog.h; sourceTree = "<group>"; };
 		4C5760F113C5CDBD0049371F /* FTLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLog.m; sourceTree = "<group>"; };
+		4C57611F13C5E7770049371F /* FTProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProgressView.h; sourceTree = "<group>"; };
+		4C57612013C5E7770049371F /* FTProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProgressView.m; sourceTree = "<group>"; };
 		4C6F5F2F13C1B5E400EECED4 /* FTProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProject.h; sourceTree = "<group>"; };
 		4C6F5F3013C1B5E400EECED4 /* FTProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProject.m; sourceTree = "<group>"; };
 		4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAppDelegate.h; sourceTree = "<group>"; };
@@ -543,6 +548,7 @@
 		4C03655313BA023A00E8FA09 /* FTLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				4C57611D13C5E7570049371F /* Views */,
 				4C85BC9913BB5D0700CB7FCA /* System */,
 				4C85BB0413BA4AFD00CB7FCA /* Thirdparty */,
 				4C85BC7513BB156100CB7FCA /* Data */,
@@ -682,6 +688,23 @@
 				4C5760F113C5CDBD0049371F /* FTLog.m */,
 			);
 			name = Debugging;
+			sourceTree = "<group>";
+		};
+		4C57611D13C5E7570049371F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4C57612413C5E77D0049371F /* Progress */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		4C57612413C5E77D0049371F /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				4C57611F13C5E7770049371F /* FTProgressView.h */,
+				4C57612013C5E7770049371F /* FTProgressView.m */,
+			);
+			name = Progress;
 			sourceTree = "<group>";
 		};
 		4C6F5F4C13C45C7200EECED4 /* App delegate */ = {
@@ -1021,6 +1044,7 @@
 				4C6F5F3113C1B5E400EECED4 /* FTProject.h in Headers */,
 				4C6F5F4F13C45CA100EECED4 /* FTAppDelegate.h in Headers */,
 				4C5760F213C5CDBD0049371F /* FTLog.h in Headers */,
+				4C57612113C5E7770049371F /* FTProgressView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1196,6 +1220,7 @@
 				4C6F5F3213C1B5E400EECED4 /* FTProject.m in Sources */,
 				4C6F5F5013C45CA100EECED4 /* FTAppDelegate.m in Sources */,
 				4C5760F313C5CDBD0049371F /* FTLog.m in Sources */,
+				4C57612213C5E7770049371F /* FTProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1268,6 +1293,7 @@
 				4C85BC5113BA4E5D00CB7FCA /* FBRequest.m in Sources */,
 				4C85BC8F13BB18BB00CB7FCA /* FTError.m in Sources */,
 				4C5760F413C5CDBD0049371F /* FTLog.m in Sources */,
+				4C57612313C5E7770049371F /* FTProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
