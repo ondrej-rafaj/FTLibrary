@@ -17,6 +17,8 @@
 	NSArray *data;
 	
 	BOOL isLandscape;
+    
+    UIImageView *backgroundView;
 	
 }
 
@@ -24,8 +26,12 @@
 
 @property (nonatomic, retain) NSArray *data;
 
+@property (nonatomic, retain) UIImageView *backgroundView;
+
 
 - (CGRect)fullscreenRect;
+
+- (void)setBackgroundWithImageName:(NSString *)imageName;
 
 
 @end

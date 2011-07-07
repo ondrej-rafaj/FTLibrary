@@ -13,6 +13,7 @@
 
 @synthesize table;
 @synthesize data;
+@synthesize backgroundView;
 
 
 #pragma mark Positioning
@@ -24,6 +25,7 @@
 #pragma mark Memory management
 
 - (void)dealloc {
+    [backgroundView release];
 	[table release];
 	[data release];
     [super dealloc];
@@ -46,6 +48,24 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
+}
+
+
+#pragma custom setting background
+- (void)setBackgroundWithImageName:(NSString *)imageName {
+    
+    UIImage *img = [UIImage imageNamed:imageName];
+    if (!img) return;
+    
+    if (backgroundView) {
+        [backgroundView removeFromSuperview];
+        backgroundView = nil;
+    }
+    
+    backgroundView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    [backgroundView setImage:img];
+    [self.view addSubview:backgroundView];
+    [self.view sendSubviewToBack:backgroundView];
 }
 
 @end
