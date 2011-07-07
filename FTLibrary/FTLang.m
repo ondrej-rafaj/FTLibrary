@@ -9,24 +9,78 @@
 #import "FTLang.h"
 #import "FTProject.h"
 #import "FTData.h"
+#import "FTDataJson.h"
+#import "FTFilesystem.h"
 
 
 static NSDictionary *translations;
+static NSMutableArray *missingTranslations;
 static NSString *updateUrl;
 
 
 @implementation FTLang
+
+#pragma mark Initialization
+
++ (void)initializeWithBaseUrl:(NSString *)baseUrl {
+	[updateUrl release];
+	updateUrl = baseUrl;
+	[updateUrl retain];
+}
+
+#pragma mark Memory management
+
++ (void)clean {
+	[translations release];
+	[missingTranslations release];
+	[updateUrl release];
+}
+
+#pragma mark Reporting
+
++ (void)reportMissingTranslation:(NSString *)key {
+	if (!missingTranslations) missingTranslations = [[NSMutableArray alloc] init];
+	[missingTranslations addObject:key];
+}
+
++ (void)submitMissingTranslations {
+	
+}
+
+#pragma mark File cache path
+
++ (NSArray *)availableLanguages {
+	return [NSArray array];
+}
+
++ (NSString *)currentLanguage {
+	return @"en";
+}
+
++ (NSString *)filenameForLang:(NSString *)lang {
+	return [NSString stringWithFormat:@"%@.lang", lang];
+}
+
++ (NSString *)getPathForFileInLanguage:(NSString *)lang {
+	return [[[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:@"langs"] stringByAppendingPathComponent:[self filenameForLang:lang]];
+}
+
+#pragma mark Lang update checks
+
++ (BOOL)needsUpdate {
+	return YES;
+}
 
 #pragma mark Update process
 
 - (void)downloadLanguage:(FTLang *)lang {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	@synchronized(self) {
-		NSError *error = nil;
-		NSString *string = [FTData stringWithContentsOfUrl:updateUrl];
-		if (error) [FTError handleError:error];
+		NSDictionary *d = [FTDataJson jsonDataFromUrl:updateUrl];
+		if (!d) [FTError handleErrorWithString:@"No language file available"];
 		else {
-			
+			NSLog(@"Youuuu haaaaave toooo finiiiiish thiiiiis ooooooneeeeee!!!!! :)");
+			abort();
 		}
 	}
 	[lang release];
@@ -41,32 +95,71 @@ static NSString *updateUrl;
 
 #pragma mark Static settings methods
 
-+ (NSDictionary *)translations {
-	return translations;
++ (void)loadLocalTranslations {
+	NSString *path = [[NSBundle mainBundle] pathForResource:[self filenameForLang:[self currentLanguage]] ofType:nil];
+	if (!path) path = [[NSBundle mainBundle] pathForResource:@"default.lang" ofType:nil];
+	if (path) {
+		[translations release];
+		translations = [NSDictionary dictionaryWithContentsOfFile:path];
+		[translations retain];
+	}
+	else [FTError handleErrorWithString:@"There is no local traslation file in the bundle, please add default.lang or any other localization."];
 }
 
++ (void)loadTranslations {
+	NSString *file = [self getPathForFileInLanguage:[self currentLanguage]];
+	if ([FTFilesystemIO isFile:file]) {
+		[translations release];
+		translations = [NSDictionary dictionaryWithContentsOfFile:file];
+		[translations retain];
+	}
+	else {
+		NSDictionary *t = [FTDataJson jsonDataFromUrl:@"sooooomeeeeefaaaaakeeeeurrrrrllll :)"];
+		if (t) {
+			[[t objectForKey:@"data"] writeToFile:file atomically:YES];
+			[translations release];
+			translations = [t objectForKey:@"data"];
+			[translations retain];
+		}
+		else {
+			[FTError handleErrorWithString:@"Translations could not be loaded"];
+			[self loadLocalTranslations];
+		}
+	}
+}
+
+//+ (NSDictionary *)translations {
+//	if (!translations) [self loadTranslations];
+//	return translations;
+//}
+
 + (NSString *)get:(NSString *)key {
-	NSDictionary *t = [self translations];
-	if (t) {
-		NSString *ret = [t objectForKey:key];
+	if (!translations) [self loadTranslations];
+	if (translations) {
+		NSString *ret = [translations objectForKey:key];
 		if (!ret) {
 			if ([FTProject debugging]) {
 				[FTError handleErrorWithString:[NSString stringWithFormat:@"No translation for key: %@", key]];
+				[self reportMissingTranslation:key];
 			}
 		}
 		return ret;
+	}
+	else {
+		[FTError handleErrorWithString:@"Missing translations"];
 	}
 	return NSLocalizedString(key, key);
 }
 
 + (void)prepareWithUrl:(NSString *)url {
+	[updateUrl release];
 	updateUrl = url;
 	[updateUrl retain];
 	[self update];
 }
 
-+ (NSInteger)currentLangVersion {
-	return 0;
++ (NSString *)currentLangVersion {
+	return @"en";
 }
 
 + (void)update {

@@ -8,6 +8,7 @@
 
 #import "FTSystemKillSwitch.h"
 #import "FTDataJson.h"
+#import "FTAppDelegate.h"
 
 
 @implementation FTSystemKillSwitch
@@ -31,9 +32,7 @@
 - (id)initWithAppIdUrl:(NSString *)url {
 	self = [super init];
 	if (self) {
-		if ([[UIApplication sharedApplication] respondsToSelector:@selector(window)]) {
-			appWindow = [[UIApplication sharedApplication] performSelector:@selector(window)];
-		}
+		appWindow = [FTAppDelegate window];
 		blockerShadow = 0.6;
 	}
 	return self;

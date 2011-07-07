@@ -11,13 +11,21 @@
 
 @interface FTLang : NSObject
 
++ (void)initializeWithBaseUrl:(NSString *)baseUrl;
+
 + (void)prepareWithUrl:(NSString *)url;
 
 + (NSString *)get:(NSString *)key;
 
-+ (NSInteger)currentLangVersion;
++ (NSString *)currentLangVersion;
 
 + (void)update;
+
++ (BOOL)needsUpdate;
+
++ (void)submitMissingTranslations;
+
++ (void)clean;
 
 
 @end

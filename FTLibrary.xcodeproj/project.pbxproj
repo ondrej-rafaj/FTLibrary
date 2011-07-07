@@ -86,6 +86,8 @@
 		4C4030A213BEA2A000E6A4A2 /* FTLang.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4030A013BEA2A000E6A4A2 /* FTLang.m */; };
 		4C6F5F3113C1B5E400EECED4 /* FTProject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F5F2F13C1B5E400EECED4 /* FTProject.h */; };
 		4C6F5F3213C1B5E400EECED4 /* FTProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F5F3013C1B5E400EECED4 /* FTProject.m */; };
+		4C6F5F4F13C45CA100EECED4 /* FTAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */; };
+		4C6F5F5013C45CA100EECED4 /* FTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F5F4E13C45CA100EECED4 /* FTAppDelegate.m */; };
 		4C72E6C413BA1A6E003EB741 /* FTProjectInitialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C72E6C213BA1A6E003EB741 /* FTProjectInitialization.h */; };
 		4C72E6C513BA1A6E003EB741 /* FTProjectInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */; };
 		4C72E6C613BA1A6E003EB741 /* FTProjectInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */; };
@@ -321,6 +323,8 @@
 		4C4030A013BEA2A000E6A4A2 /* FTLang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLang.m; sourceTree = "<group>"; };
 		4C6F5F2F13C1B5E400EECED4 /* FTProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProject.h; sourceTree = "<group>"; };
 		4C6F5F3013C1B5E400EECED4 /* FTProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProject.m; sourceTree = "<group>"; };
+		4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAppDelegate.h; sourceTree = "<group>"; };
+		4C6F5F4E13C45CA100EECED4 /* FTAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAppDelegate.m; sourceTree = "<group>"; };
 		4C72E6C213BA1A6E003EB741 /* FTProjectInitialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProjectInitialization.h; sourceTree = "<group>"; };
 		4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProjectInitialization.m; sourceTree = "<group>"; };
 		4C72E6C713BA1AC6003EB741 /* FTTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTracking.h; sourceTree = "<group>"; };
@@ -668,6 +672,15 @@
 			name = Localizations;
 			sourceTree = "<group>";
 		};
+		4C6F5F4C13C45C7200EECED4 /* App delegate */ = {
+			isa = PBXGroup;
+			children = (
+				4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */,
+				4C6F5F4E13C45CA100EECED4 /* FTAppDelegate.m */,
+			);
+			name = "App delegate";
+			sourceTree = "<group>";
+		};
 		4C72E6C013BA1A39003EB741 /* Project initialization */ = {
 			isa = PBXGroup;
 			children = (
@@ -899,6 +912,7 @@
 		4C85BC9913BB5D0700CB7FCA /* System */ = {
 			isa = PBXGroup;
 			children = (
+				4C6F5F4C13C45C7200EECED4 /* App delegate */,
 				4C40309D13BEA27D00E6A4A2 /* Localizations */,
 				4C0365C913BA08DE00E8FA09 /* Filesystem */,
 				4C85BC8A13BB18A000CB7FCA /* Errors */,
@@ -994,6 +1008,7 @@
 				4C85BC9C13BB5D4000CB7FCA /* FTSystemKillSwitch.h in Headers */,
 				4C4030A113BEA2A000E6A4A2 /* FTLang.h in Headers */,
 				4C6F5F3113C1B5E400EECED4 /* FTProject.h in Headers */,
+				4C6F5F4F13C45CA100EECED4 /* FTAppDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1167,6 +1182,7 @@
 				4C85BC9D13BB5D4000CB7FCA /* FTSystemKillSwitch.m in Sources */,
 				4C4030A213BEA2A000E6A4A2 /* FTLang.m in Sources */,
 				4C6F5F3213C1B5E400EECED4 /* FTProject.m in Sources */,
+				4C6F5F5013C45CA100EECED4 /* FTAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
