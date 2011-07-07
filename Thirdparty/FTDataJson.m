@@ -7,7 +7,7 @@
 //
 
 #import "FTDataJson.h"
-#import "JSON.h"
+#import "SBJson.h"
 #import "FTError.h"
 
 

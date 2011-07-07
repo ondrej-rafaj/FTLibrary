@@ -20,14 +20,6 @@ static NSString *updateUrl;
 
 @implementation FTLang
 
-#pragma mark Initialization
-
-+ (void)initializeWithBaseUrl:(NSString *)baseUrl {
-	[updateUrl release];
-	updateUrl = baseUrl;
-	[updateUrl retain];
-}
-
 #pragma mark Memory management
 
 + (void)clean {
@@ -38,7 +30,7 @@ static NSString *updateUrl;
 
 #pragma mark Reporting
 
-+ (void)reportMissingTranslation:(NSString *)key {
++ (void)reportMissingTranslation:(NSString *)key andComment:(NSString *)comment {
 	if (!missingTranslations) missingTranslations = [[NSMutableArray alloc] init];
 	[missingTranslations addObject:key];
 }
@@ -95,25 +87,33 @@ static NSString *updateUrl;
 
 #pragma mark Static settings methods
 
-+ (void)loadLocalTranslations {
-	NSString *path = [[NSBundle mainBundle] pathForResource:[self filenameForLang:[self currentLanguage]] ofType:nil];
-	if (!path) path = [[NSBundle mainBundle] pathForResource:@"default.lang" ofType:nil];
-	if (path) {
-		[translations release];
-		translations = [NSDictionary dictionaryWithContentsOfFile:path];
-		[translations retain];
-	}
-	else [FTError handleErrorWithString:@"There is no local traslation file in the bundle, please add default.lang or any other localization."];
-}
-
-+ (void)loadTranslations {
++ (BOOL)loadLocalizationFromCache {
 	NSString *file = [self getPathForFileInLanguage:[self currentLanguage]];
 	if ([FTFilesystemIO isFile:file]) {
 		[translations release];
 		translations = [NSDictionary dictionaryWithContentsOfFile:file];
 		[translations retain];
+		return YES;
 	}
-	else {
+	else return NO;
+}
+
++ (void)loadLocalTranslations {
+	if (![self loadLocalizationFromCache]) {
+		NSString *path = [[NSBundle mainBundle] pathForResource:[self filenameForLang:[self currentLanguage]] ofType:nil];
+		if (!path) path = [[NSBundle mainBundle] pathForResource:@"default.lang" ofType:nil];
+		if (path) {
+			[translations release];
+			translations = [NSDictionary dictionaryWithContentsOfFile:path];
+			[translations retain];
+		}
+		else [FTError handleErrorWithString:@"There is no local traslation file in the bundle, please add default.lang or any other localization."];
+	}
+}
+
++ (void)loadTranslations {
+	if (![self loadLocalizationFromCache]) {
+		NSString *file = [self getPathForFileInLanguage:[self currentLanguage]];
 		NSDictionary *t = [FTDataJson jsonDataFromUrl:@"sooooomeeeeefaaaaakeeeeurrrrrllll :)"];
 		if (t) {
 			[[t objectForKey:@"data"] writeToFile:file atomically:YES];
@@ -133,14 +133,14 @@ static NSString *updateUrl;
 //	return translations;
 //}
 
-+ (NSString *)get:(NSString *)key {
++ (NSString *)get:(NSString *)key comment:(NSString *)comment {
 	if (!translations) [self loadTranslations];
 	if (translations) {
 		NSString *ret = [translations objectForKey:key];
 		if (!ret) {
 			if ([FTProject debugging]) {
 				[FTError handleErrorWithString:[NSString stringWithFormat:@"No translation for key: %@", key]];
-				[self reportMissingTranslation:key];
+				[self reportMissingTranslation:key andComment:comment];
 			}
 		}
 		return ret;
@@ -148,7 +148,11 @@ static NSString *updateUrl;
 	else {
 		[FTError handleErrorWithString:@"Missing translations"];
 	}
-	return NSLocalizedString(key, key);
+	return NSLocalizedString(key, comment);
+}
+
++ (NSString *)get:(NSString *)key {
+	return [self get:key comment:@""];
 }
 
 + (void)prepareWithUrl:(NSString *)url {
@@ -166,6 +170,17 @@ static NSString *updateUrl;
 	FTLang *lng = [[FTLang alloc] init];
 	[NSThread detachNewThreadSelector:@selector(startBackgroundDownloading:) toTarget:lng withObject:lng];
 }
+
+#pragma mark Initialization
+
++ (void)initializeWithBaseUrl:(NSString *)baseUrl {
+	[updateUrl release];
+	updateUrl = baseUrl;
+	[updateUrl retain];
+	[self loadLocalTranslations];
+}
+	 
+
 
 
 @end

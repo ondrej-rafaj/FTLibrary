@@ -9,11 +9,16 @@
 #import <Foundation/Foundation.h>
 
 
+#define FTLocalizedString(key, comment)			[FTLang get:(key) comment:(comment)]
+
+
 @interface FTLang : NSObject
 
 + (void)initializeWithBaseUrl:(NSString *)baseUrl;
 
 + (void)prepareWithUrl:(NSString *)url;
+
++ (NSString *)get:(NSString *)key comment:(NSString *)comment;
 
 + (NSString *)get:(NSString *)key;
 
@@ -26,6 +31,8 @@
 + (void)submitMissingTranslations;
 
 + (void)clean;
+
++ (void)loadLocalTranslations;
 
 
 @end

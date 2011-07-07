@@ -84,6 +84,9 @@
 		4C03667513BA0D6600E8FA09 /* FTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03667213BA0D6000E8FA09 /* FTViewController.m */; };
 		4C4030A113BEA2A000E6A4A2 /* FTLang.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C40309F13BEA2A000E6A4A2 /* FTLang.h */; };
 		4C4030A213BEA2A000E6A4A2 /* FTLang.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4030A013BEA2A000E6A4A2 /* FTLang.m */; };
+		4C5760F213C5CDBD0049371F /* FTLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C5760F013C5CDBD0049371F /* FTLog.h */; };
+		4C5760F313C5CDBD0049371F /* FTLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5760F113C5CDBD0049371F /* FTLog.m */; };
+		4C5760F413C5CDBD0049371F /* FTLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5760F113C5CDBD0049371F /* FTLog.m */; };
 		4C6F5F3113C1B5E400EECED4 /* FTProject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F5F2F13C1B5E400EECED4 /* FTProject.h */; };
 		4C6F5F3213C1B5E400EECED4 /* FTProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F5F3013C1B5E400EECED4 /* FTProject.m */; };
 		4C6F5F4F13C45CA100EECED4 /* FTAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */; };
@@ -236,7 +239,6 @@
 		4C85BC4F13BA4E5D00CB7FCA /* FBRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC4213BA4E5D00CB7FCA /* FBRequest.h */; };
 		4C85BC5013BA4E5D00CB7FCA /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC4313BA4E5D00CB7FCA /* FBRequest.m */; };
 		4C85BC5113BA4E5D00CB7FCA /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC4313BA4E5D00CB7FCA /* FBRequest.m */; };
-		4C85BC7413BB13D000CB7FCA /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC7313BB13D000CB7FCA /* JSON.h */; };
 		4C85BC7913BB158C00CB7FCA /* FTData.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC7713BB158C00CB7FCA /* FTData.h */; };
 		4C85BC7A13BB158C00CB7FCA /* FTData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC7813BB158C00CB7FCA /* FTData.m */; };
 		4C85BC7D13BB15BC00CB7FCA /* FTDataJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC7B13BB15BC00CB7FCA /* FTDataJson.h */; };
@@ -321,6 +323,8 @@
 		4C03667213BA0D6000E8FA09 /* FTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTViewController.m; sourceTree = "<group>"; };
 		4C40309F13BEA2A000E6A4A2 /* FTLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLang.h; sourceTree = "<group>"; };
 		4C4030A013BEA2A000E6A4A2 /* FTLang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLang.m; sourceTree = "<group>"; };
+		4C5760F013C5CDBD0049371F /* FTLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLog.h; sourceTree = "<group>"; };
+		4C5760F113C5CDBD0049371F /* FTLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLog.m; sourceTree = "<group>"; };
 		4C6F5F2F13C1B5E400EECED4 /* FTProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProject.h; sourceTree = "<group>"; };
 		4C6F5F3013C1B5E400EECED4 /* FTProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProject.m; sourceTree = "<group>"; };
 		4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAppDelegate.h; sourceTree = "<group>"; };
@@ -432,7 +436,6 @@
 		4C85BC4113BA4E5D00CB7FCA /* FBLoginDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLoginDialog.m; sourceTree = "<group>"; };
 		4C85BC4213BA4E5D00CB7FCA /* FBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBRequest.h; sourceTree = "<group>"; };
 		4C85BC4313BA4E5D00CB7FCA /* FBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBRequest.m; sourceTree = "<group>"; };
-		4C85BC7313BB13D000CB7FCA /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		4C85BC7713BB158C00CB7FCA /* FTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTData.h; sourceTree = "<group>"; };
 		4C85BC7813BB158C00CB7FCA /* FTData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTData.m; sourceTree = "<group>"; };
 		4C85BC7B13BB15BC00CB7FCA /* FTDataJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDataJson.h; sourceTree = "<group>"; };
@@ -672,6 +675,15 @@
 			name = Localizations;
 			sourceTree = "<group>";
 		};
+		4C5760E613C5CAA00049371F /* Debugging */ = {
+			isa = PBXGroup;
+			children = (
+				4C5760F013C5CDBD0049371F /* FTLog.h */,
+				4C5760F113C5CDBD0049371F /* FTLog.m */,
+			);
+			name = Debugging;
+			sourceTree = "<group>";
+		};
 		4C6F5F4C13C45C7200EECED4 /* App delegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -789,7 +801,6 @@
 			children = (
 				4C85BB5C13BA4AFD00CB7FCA /* NSObject+SBJson.h */,
 				4C85BB5D13BA4AFD00CB7FCA /* NSObject+SBJson.m */,
-				4C85BC7313BB13D000CB7FCA /* JSON.h */,
 				4C85BB5E13BA4AFD00CB7FCA /* SBJson.h */,
 				4C85BB5F13BA4AFD00CB7FCA /* SBJsonParser.h */,
 				4C85BB6013BA4AFD00CB7FCA /* SBJsonParser.m */,
@@ -912,6 +923,7 @@
 		4C85BC9913BB5D0700CB7FCA /* System */ = {
 			isa = PBXGroup;
 			children = (
+				4C5760E613C5CAA00049371F /* Debugging */,
 				4C6F5F4C13C45C7200EECED4 /* App delegate */,
 				4C40309D13BEA27D00E6A4A2 /* Localizations */,
 				4C0365C913BA08DE00E8FA09 /* Filesystem */,
@@ -999,7 +1011,6 @@
 				4C85BC4913BA4E5D00CB7FCA /* FBDialog.h in Headers */,
 				4C85BC4C13BA4E5D00CB7FCA /* FBLoginDialog.h in Headers */,
 				4C85BC4F13BA4E5D00CB7FCA /* FBRequest.h in Headers */,
-				4C85BC7413BB13D000CB7FCA /* JSON.h in Headers */,
 				4C85BC7913BB158C00CB7FCA /* FTData.h in Headers */,
 				4C85BC7D13BB15BC00CB7FCA /* FTDataJson.h in Headers */,
 				4C85BC8113BB15CC00CB7FCA /* FTDataXml.h in Headers */,
@@ -1009,6 +1020,7 @@
 				4C4030A113BEA2A000E6A4A2 /* FTLang.h in Headers */,
 				4C6F5F3113C1B5E400EECED4 /* FTProject.h in Headers */,
 				4C6F5F4F13C45CA100EECED4 /* FTAppDelegate.h in Headers */,
+				4C5760F213C5CDBD0049371F /* FTLog.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1183,6 +1195,7 @@
 				4C4030A213BEA2A000E6A4A2 /* FTLang.m in Sources */,
 				4C6F5F3213C1B5E400EECED4 /* FTProject.m in Sources */,
 				4C6F5F5013C45CA100EECED4 /* FTAppDelegate.m in Sources */,
+				4C5760F313C5CDBD0049371F /* FTLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1254,6 +1267,7 @@
 				4C85BC4E13BA4E5D00CB7FCA /* FBLoginDialog.m in Sources */,
 				4C85BC5113BA4E5D00CB7FCA /* FBRequest.m in Sources */,
 				4C85BC8F13BB18BB00CB7FCA /* FTError.m in Sources */,
+				4C5760F413C5CDBD0049371F /* FTLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

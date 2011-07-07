@@ -31,11 +31,11 @@
 }
 
 + (void)initialize {
-	
+	[FTLang loadLocalTranslations];
 }
 
 + (void)resume {
-	
+	[FTLang loadLocalTranslations];
 }
 
 #pragma mark Settings
