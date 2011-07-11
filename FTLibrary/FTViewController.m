@@ -50,8 +50,8 @@
     return YES;
 }
 
-
 #pragma custom setting background
+
 - (void)setBackgroundWithImageName:(NSString *)imageName {
     
     UIImage *img = [UIImage imageNamed:imageName];
@@ -67,5 +67,6 @@
     [self.view addSubview:backgroundView];
     [self.view sendSubviewToBack:backgroundView];
 }
+
 
 @end
