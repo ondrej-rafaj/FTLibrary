@@ -10,6 +10,7 @@
 
 
 #define FTLocalizedString(key, comment)			[FTLang get:(key) comment:(comment)]
+#define FTLangGet(key)							[FTLang get:(key)]
 
 
 @interface FTLang : NSObject

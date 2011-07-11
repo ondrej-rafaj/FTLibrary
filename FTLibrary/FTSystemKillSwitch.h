@@ -18,7 +18,7 @@
 
 - (void)appKillSwitch:(FTSystemKillSwitch *)killSwitch shouldDisableApp:(BOOL)disable;
 
-//@optional
+@optional
 
 - (UIView *)viewForAppKillSwitch:(FTSystemKillSwitch *)killSwitch;
 

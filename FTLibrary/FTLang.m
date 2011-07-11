@@ -103,9 +103,11 @@ static NSString *updateUrl;
 		NSString *path = [[NSBundle mainBundle] pathForResource:[self filenameForLang:[self currentLanguage]] ofType:nil];
 		if (!path) path = [[NSBundle mainBundle] pathForResource:@"default.lang" ofType:nil];
 		if (path) {
+			NSDictionary *d = [FTDataJson jsonDataFromString:[NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil]];
 			[translations release];
-			translations = [NSDictionary dictionaryWithContentsOfFile:path];
+			translations = [NSDictionary dictionaryWithContentsOfFile:[d objectForKey:@"data"]];
 			[translations retain];
+			[translations writeToFile:path atomically:YES];
 		}
 		else [FTError handleErrorWithString:@"There is no local traslation file in the bundle, please add default.lang or any other localization."];
 	}
@@ -134,6 +136,7 @@ static NSString *updateUrl;
 //}
 
 + (NSString *)get:(NSString *)key comment:(NSString *)comment {
+	return key;
 	if (!translations) [self loadTranslations];
 	if (translations) {
 		NSString *ret = [translations objectForKey:key];
