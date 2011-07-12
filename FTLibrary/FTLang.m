@@ -99,6 +99,7 @@ static NSString *updateUrl;
 }
 
 + (void)loadLocalTranslations {
+	return;
 	if (![self loadLocalizationFromCache]) {
 		NSString *path = [[NSBundle mainBundle] pathForResource:[self filenameForLang:[self currentLanguage]] ofType:nil];
 		if (!path) path = [[NSBundle mainBundle] pathForResource:@"default.lang" ofType:nil];

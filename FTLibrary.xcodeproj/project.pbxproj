@@ -92,6 +92,8 @@
 		4C57612313C5E7770049371F /* FTProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C57612013C5E7770049371F /* FTProgressView.m */; };
 		4C5761A713CAE93B0049371F /* FTBlockerShadeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C5761A513CAE93B0049371F /* FTBlockerShadeView.h */; };
 		4C5761A813CAE93B0049371F /* FTBlockerShadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5761A613CAE93B0049371F /* FTBlockerShadeView.m */; };
+		4C57633D13CB8E170049371F /* FTCarouselView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C57633B13CB8E170049371F /* FTCarouselView.h */; };
+		4C57633E13CB8E170049371F /* FTCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C57633C13CB8E170049371F /* FTCarouselView.m */; };
 		4C6F5F3113C1B5E400EECED4 /* FTProject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F5F2F13C1B5E400EECED4 /* FTProject.h */; };
 		4C6F5F3213C1B5E400EECED4 /* FTProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F5F3013C1B5E400EECED4 /* FTProject.m */; };
 		4C6F5F4F13C45CA100EECED4 /* FTAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */; };
@@ -334,6 +336,8 @@
 		4C57612013C5E7770049371F /* FTProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProgressView.m; sourceTree = "<group>"; };
 		4C5761A513CAE93B0049371F /* FTBlockerShadeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBlockerShadeView.h; sourceTree = "<group>"; };
 		4C5761A613CAE93B0049371F /* FTBlockerShadeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTBlockerShadeView.m; sourceTree = "<group>"; };
+		4C57633B13CB8E170049371F /* FTCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCarouselView.h; sourceTree = "<group>"; };
+		4C57633C13CB8E170049371F /* FTCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCarouselView.m; sourceTree = "<group>"; };
 		4C6F5F2F13C1B5E400EECED4 /* FTProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProject.h; sourceTree = "<group>"; };
 		4C6F5F3013C1B5E400EECED4 /* FTProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProject.m; sourceTree = "<group>"; };
 		4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAppDelegate.h; sourceTree = "<group>"; };
@@ -696,6 +700,7 @@
 		4C57611D13C5E7570049371F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4C57633913CB8E090049371F /* iCarousel */,
 				4C5761A413CAE9130049371F /* Alert view */,
 				4C5761A113CAE8CC0049371F /* Shade view */,
 				4C5761A313CAE8DC0049371F /* Window level views */,
@@ -743,6 +748,15 @@
 			children = (
 			);
 			name = "Alert view";
+			sourceTree = "<group>";
+		};
+		4C57633913CB8E090049371F /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				4C57633B13CB8E170049371F /* FTCarouselView.h */,
+				4C57633C13CB8E170049371F /* FTCarouselView.m */,
+			);
+			name = iCarousel;
 			sourceTree = "<group>";
 		};
 		4C6F5F4C13C45C7200EECED4 /* App delegate */ = {
@@ -1084,6 +1098,7 @@
 				4C5760F213C5CDBD0049371F /* FTLog.h in Headers */,
 				4C57612113C5E7770049371F /* FTProgressView.h in Headers */,
 				4C5761A713CAE93B0049371F /* FTBlockerShadeView.h in Headers */,
+				4C57633D13CB8E170049371F /* FTCarouselView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1261,6 +1276,7 @@
 				4C5760F313C5CDBD0049371F /* FTLog.m in Sources */,
 				4C57612213C5E7770049371F /* FTProgressView.m in Sources */,
 				4C5761A813CAE93B0049371F /* FTBlockerShadeView.m in Sources */,
+				4C57633E13CB8E170049371F /* FTCarouselView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
