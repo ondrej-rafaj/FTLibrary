@@ -23,7 +23,7 @@
 
 + (id)jsonDataFromUrl:(NSString *)url {
 	NSString *string = [super stringWithContentsOfUrl:url];
-	return [self jsonDataFromUrl:string];
+	return [self jsonDataFromString:string];
 }
 
 

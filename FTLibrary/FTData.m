@@ -17,7 +17,7 @@
 }
 
 + (NSString *)stringWithContentsOfUrl:(NSString *)url {
-	NSError *error;
+	NSError *error = nil;
 	NSString *string = [NSString stringWithContentsOfURL:[NSURL URLWithString:url] encoding:NSUTF8StringEncoding error:&error];
 	if (error) {
 		[FTError handleError:error];
