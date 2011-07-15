@@ -19,6 +19,7 @@
 @synthesize name;
 @synthesize sensor;
 @synthesize APIKey;
+@synthesize reference;
 
 
 - (id)init {
@@ -28,6 +29,7 @@
         language = [[NSString alloc] initWithString:@"en"];
         name = [[NSString alloc] init];
         APIKey = [[NSString alloc] init];
+        reference = [[NSString alloc] init];
     }
     return self;
 }
@@ -37,6 +39,7 @@
     [language release];
     [name release];
     [APIKey release];
+    [reference release];
     [super dealloc];
 }
 
@@ -67,6 +70,26 @@
     NSString *format = (output == FTGooglePlaceRequestOutputJSON)? @"json" : @"xml";
     NSString *urlString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/%@%@", format, components];
     return urlString;
+}
+
+- (NSURL *)urlForFurtherData {
+    return [NSURL URLWithString:[self urlStringForFurtherData]];
+}
+
+- (NSString *)urlStringForFurtherData {
+    if ([reference isEqualToString:@""] || [APIKey isEqualToString:@""]) {
+        [NSException raise:@"Some data are empty is empty" format:@"Reference or APIKey are empty"];
+    }
+    NSMutableString *components = [NSMutableString string];
+    [components appendFormat:@"?reference=%@", reference];
+    [components appendFormat:@"&language=%@", language];
+    [components appendFormat:@"&sensor=%@", (sensor)? @"true" : @"false"];
+    [components appendFormat:@"&key=%@", APIKey];
+    
+    NSString *format = (output == FTGooglePlaceRequestOutputJSON)? @"json" : @"xml";
+    NSString *urlString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/details/%@%@", format, components];
+    return urlString;
+
 }
 
 @end

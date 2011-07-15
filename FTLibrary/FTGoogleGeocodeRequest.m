@@ -44,9 +44,9 @@
 }
 
 
-- (NSString *)urlStringForRequest; {
-    if ((location.latitude == 0.0 && location.longitude == 0.0) || [address isEqualToString:@""]) {
-        [NSException raise:@"some of the required fields are nil" format:@"location %.2f,%.2f | address %@ ", output, location.latitude, address];
+- (NSString *)urlStringForRequest {
+    if ((location.latitude == 0.0 && location.longitude == 0.0) && [address isEqualToString:@""]) {
+        [NSException raise:@"some of the required fields are nil" format:@"some of the required fields are nil"];
     }
     NSMutableString *components = [NSMutableString string];
     
@@ -55,7 +55,7 @@
         [components appendFormat:@"&location=%f,%f",location.latitude, location.longitude];
     }
     if (![address isEqualToString:@""]) {
-        [components appendFormat:@"&address=%d", address];
+        [components appendFormat:@"&address=%@", address];
     }
     [components appendFormat:@"&region=%@", region];
 

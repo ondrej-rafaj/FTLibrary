@@ -23,6 +23,7 @@ typedef enum {
     NSString *name;
     BOOL sensor;
     NSString *APIKey;
+    NSString *reference;
 }
 
 @property (nonatomic, assign) CLLocationCoordinate2D location;
@@ -33,9 +34,13 @@ typedef enum {
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, assign, getter=isSensor) BOOL sensor;
 @property (nonatomic, retain) NSString *APIKey;
+@property (nonatomic, retain) NSString *reference;
 
 - (NSURL *)urlForRequest;
 - (NSString *)urlStringForRequest;
+
+- (NSURL *)urlForFurtherData;
+- (NSString *)urlStringForFurtherData;
 
 @end
 
