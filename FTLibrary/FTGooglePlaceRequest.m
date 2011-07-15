@@ -48,20 +48,14 @@
 
 
 - (NSString *)urlStringForRequest; {
-    if (!output || (location.latitude == 0.0 && location.longitude == 0.0) || !radius || [APIKey isEqualToString:@""]) {
-        [NSException raise:@"some of the required fields are nil" format:@"output %@ | location %.2f,%.2f | radius %d | API Key %@ ", output, location.latitude, location.longitude, radius, APIKey];
+    if ((location.latitude == 0.0 && location.longitude == 0.0) || !radius || [APIKey isEqualToString:@""]) {
+        [NSException raise:@"some of the required fields are nil" format:@"location %.2f,%.2f | radius %d | API Key %@ ", output, location.latitude, location.longitude, radius, APIKey];
     }
-    NSMutableString *components;
+    NSMutableString *components = [NSMutableString string];
     [components appendFormat:@"?location=%f,%f",location.latitude, location.longitude];
     [components appendFormat:@"&radius=%d", radius];
     if (types && [types count] > 0) {
-        [components appendFormat:@"&types="];
-        for (NSString *type in types) {
-            [components appendFormat:@"type"];
-            if (![type isEqualToString:[types lastObject]]) {
-                [components appendFormat:@"|"];
-            }
-        }
+        [components appendFormat:@"&types=%@", [types componentsJoinedByString:@"|"]];
     }
     [components appendFormat:@"&language=%@", language];
     if (![name isEqualToString:@""]) {
@@ -105,23 +99,12 @@
     [super dealloc];
 }
 
-- (NSArray *)typesFromPipedString:(NSString *)string {
-    NSMutableArray *result = [NSMutableArray array];
-    NSScanner *scanner = [NSScanner scannerWithString:string];
-    NSString *scanned;
-    while ([scanner scanUpToString:@"|" intoString:&scanned]){
-        [result addObject:scanned];
-    }
-    
-    return (NSArray *)result;
-
-}
 
 - (id)initWithDictionaryResult:(NSDictionary *)dictionary {
     
     self = [super init];
     
-    if (self) {
+    if (self && dictionary) {
         NSDictionary *position_ = [[dictionary objectForKey:@"geometry"] objectForKey:@"location"];
         CLLocationCoordinate2D loc =  CLLocationCoordinate2DMake([[position_ objectForKey:@"lat"] floatValue], [[position_ objectForKey:@"lng"] floatValue]);
         [self setLocation:loc];
@@ -130,7 +113,7 @@
         
         [self setVicinity:(NSString *)[dictionary objectForKey:@"vicinity"]];
         
-        [self setTypes:[self typesFromPipedString:(NSString *)[dictionary objectForKey:@"types"]]];
+        [self setTypes:(NSArray *)[dictionary objectForKey:@"types"]];
         
         [self setIconURL:[NSURL URLWithString:(NSString *)[dictionary objectForKey:@"icon"]]];
         
