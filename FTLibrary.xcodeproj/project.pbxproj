@@ -251,6 +251,8 @@
 		4C85BC8F13BB18BB00CB7FCA /* FTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC8C13BB18BB00CB7FCA /* FTError.m */; };
 		4C85BC9C13BB5D4000CB7FCA /* FTSystemKillSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */; };
 		4C85BC9D13BB5D4000CB7FCA /* FTSystemKillSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */; };
+		6861786013D03B9F00F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861785E13D03B9F00F57408 /* FTGooglePlaceRequest.h */; };
+		6861786113D03B9F00F57408 /* FTGooglePlaceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861785F13D03B9F00F57408 /* FTGooglePlaceRequest.m */; };
 		68DF4E2A13CEF9D200B67940 /* FTData.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DF4E2213CEF9D200B67940 /* FTData.h */; };
 		68DF4E2B13CEF9D200B67940 /* FTData.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DF4E2313CEF9D200B67940 /* FTData.m */; };
 		68DF4E2C13CEF9D200B67940 /* FTDataJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DF4E2413CEF9D200B67940 /* FTDataJson.h */; };
@@ -453,6 +455,8 @@
 		4C85BC8C13BB18BB00CB7FCA /* FTError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTError.m; sourceTree = "<group>"; };
 		4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSystemKillSwitch.h; sourceTree = "<group>"; };
 		4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSystemKillSwitch.m; sourceTree = "<group>"; };
+		6861785E13D03B9F00F57408 /* FTGooglePlaceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGooglePlaceRequest.h; sourceTree = "<group>"; };
+		6861785F13D03B9F00F57408 /* FTGooglePlaceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTGooglePlaceRequest.m; sourceTree = "<group>"; };
 		68DF4E2213CEF9D200B67940 /* FTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTData.h; path = FTLibrary/FTData.h; sourceTree = SOURCE_ROOT; };
 		68DF4E2313CEF9D200B67940 /* FTData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTData.m; path = FTLibrary/FTData.m; sourceTree = SOURCE_ROOT; };
 		68DF4E2413CEF9D200B67940 /* FTDataJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTDataJson.h; path = FTLibrary/FTDataJson.h; sourceTree = SOURCE_ROOT; };
@@ -932,6 +936,7 @@
 		4C85BC7513BB156100CB7FCA /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				6861785B13D03B5900F57408 /* Google */,
 				68DF4E2213CEF9D200B67940 /* FTData.h */,
 				68DF4E2313CEF9D200B67940 /* FTData.m */,
 				68DF4E2413CEF9D200B67940 /* FTDataJson.h */,
@@ -1006,6 +1011,15 @@
 				4C85BC9813BB5CFD00CB7FCA /* Kill switch */,
 			);
 			name = System;
+			sourceTree = "<group>";
+		};
+		6861785B13D03B5900F57408 /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				6861785E13D03B9F00F57408 /* FTGooglePlaceRequest.h */,
+				6861785F13D03B9F00F57408 /* FTGooglePlaceRequest.m */,
+			);
+			name = Google;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1099,6 +1113,7 @@
 				68DF4E2C13CEF9D200B67940 /* FTDataJson.h in Headers */,
 				68DF4E2E13CEF9D200B67940 /* FTDataPlist.h in Headers */,
 				68DF4E3013CEF9D200B67940 /* FTDataXml.h in Headers */,
+				6861786013D03B9F00F57408 /* FTGooglePlaceRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1277,6 +1292,7 @@
 				68DF4E2D13CEF9D200B67940 /* FTDataJson.m in Sources */,
 				68DF4E2F13CEF9D200B67940 /* FTDataPlist.m in Sources */,
 				68DF4E3113CEF9D200B67940 /* FTDataXml.m in Sources */,
+				6861786113D03B9F00F57408 /* FTGooglePlaceRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
