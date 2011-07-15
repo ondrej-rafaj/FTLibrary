@@ -253,6 +253,8 @@
 		4C85BC9D13BB5D4000CB7FCA /* FTSystemKillSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */; };
 		6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */; };
 		6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */; };
+		6861789D13D071C600F57408 /* FTGoogleGeocodeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861789B13D071C600F57408 /* FTGoogleGeocodeRequest.h */; };
+		6861789E13D071C600F57408 /* FTGoogleGeocodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861789C13D071C600F57408 /* FTGoogleGeocodeRequest.m */; };
 		68DF4E2A13CEF9D200B67940 /* FTData.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DF4E2213CEF9D200B67940 /* FTData.h */; };
 		68DF4E2B13CEF9D200B67940 /* FTData.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DF4E2313CEF9D200B67940 /* FTData.m */; };
 		68DF4E2C13CEF9D200B67940 /* FTDataJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DF4E2413CEF9D200B67940 /* FTDataJson.h */; };
@@ -457,6 +459,8 @@
 		4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSystemKillSwitch.m; sourceTree = "<group>"; };
 		6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGooglePlaceRequest.h; path = FTLibrary/FTGooglePlaceRequest.h; sourceTree = SOURCE_ROOT; };
 		6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGooglePlaceRequest.m; path = FTLibrary/FTGooglePlaceRequest.m; sourceTree = SOURCE_ROOT; };
+		6861789B13D071C600F57408 /* FTGoogleGeocodeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGoogleGeocodeRequest.h; path = FTLibrary/FTGoogleGeocodeRequest.h; sourceTree = SOURCE_ROOT; };
+		6861789C13D071C600F57408 /* FTGoogleGeocodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGoogleGeocodeRequest.m; path = FTLibrary/FTGoogleGeocodeRequest.m; sourceTree = SOURCE_ROOT; };
 		68DF4E2213CEF9D200B67940 /* FTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTData.h; path = FTLibrary/FTData.h; sourceTree = SOURCE_ROOT; };
 		68DF4E2313CEF9D200B67940 /* FTData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTData.m; path = FTLibrary/FTData.m; sourceTree = SOURCE_ROOT; };
 		68DF4E2413CEF9D200B67940 /* FTDataJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTDataJson.h; path = FTLibrary/FTDataJson.h; sourceTree = SOURCE_ROOT; };
@@ -1016,6 +1020,8 @@
 		6861785B13D03B5900F57408 /* Google */ = {
 			isa = PBXGroup;
 			children = (
+				6861789B13D071C600F57408 /* FTGoogleGeocodeRequest.h */,
+				6861789C13D071C600F57408 /* FTGoogleGeocodeRequest.m */,
 				6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */,
 				6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */,
 			);
@@ -1114,6 +1120,7 @@
 				68DF4E2E13CEF9D200B67940 /* FTDataPlist.h in Headers */,
 				68DF4E3013CEF9D200B67940 /* FTDataXml.h in Headers */,
 				6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */,
+				6861789D13D071C600F57408 /* FTGoogleGeocodeRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1293,6 +1300,7 @@
 				68DF4E2F13CEF9D200B67940 /* FTDataPlist.m in Sources */,
 				68DF4E3113CEF9D200B67940 /* FTDataXml.m in Sources */,
 				6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */,
+				6861789E13D071C600F57408 /* FTGoogleGeocodeRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -64,7 +64,7 @@
     [components appendFormat:@"&sensor=%@", (sensor)? @"true" : @"false"];
     [components appendFormat:@"&key=%@", APIKey];
     
-    NSString *format = (output == FTGooglePalceRequestOutputJSON)? @"json" : @"xml";
+    NSString *format = (output == FTGooglePlaceRequestOutputJSON)? @"json" : @"xml";
     NSString *urlString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/%@%@", format, components];
     return urlString;
 }

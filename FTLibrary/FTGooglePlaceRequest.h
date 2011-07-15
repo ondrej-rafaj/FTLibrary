@@ -10,13 +10,13 @@
 #import <CoreLocation/CoreLocation.h>
 
 typedef enum {
-    FTGooglePalceRequestOutputJSON,
-    FTGooglePalceRequestOutputXML
-}FTGooglePalceRequestOutput;
+    FTGooglePlaceRequestOutputJSON,
+    FTGooglePlaceRequestOutputXML
+}FTGooglePlaceRequestOutput;
 
 @interface FTGooglePlaceRequest : NSObject {
     CLLocationCoordinate2D location;
-    FTGooglePalceRequestOutput output;
+    FTGooglePlaceRequestOutput output;
     NSInteger radius;
     NSArray *types;
     NSString *language;
@@ -26,7 +26,7 @@ typedef enum {
 }
 
 @property (nonatomic, assign) CLLocationCoordinate2D location;
-@property (nonatomic, assign) FTGooglePalceRequestOutput output;
+@property (nonatomic, assign) FTGooglePlaceRequestOutput output;
 @property (nonatomic, assign) NSInteger radius;
 @property (nonatomic, retain) NSArray *types;
 @property (nonatomic, retain) NSString *language;
