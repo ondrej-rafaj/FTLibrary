@@ -84,6 +84,14 @@
 		4C03667513BA0D6600E8FA09 /* FTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03667213BA0D6000E8FA09 /* FTViewController.m */; };
 		4C4030A113BEA2A000E6A4A2 /* FTLang.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C40309F13BEA2A000E6A4A2 /* FTLang.h */; };
 		4C4030A213BEA2A000E6A4A2 /* FTLang.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4030A013BEA2A000E6A4A2 /* FTLang.m */; };
+		4C4A0CFA13D0CC9300D6581A /* FTEditableElementView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4A0CF213D0CC9300D6581A /* FTEditableElementView.h */; };
+		4C4A0CFB13D0CC9300D6581A /* FTEditableElementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A0CF313D0CC9300D6581A /* FTEditableElementView.m */; };
+		4C4A0CFC13D0CC9300D6581A /* FTEditableImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4A0CF413D0CC9300D6581A /* FTEditableImageView.h */; };
+		4C4A0CFD13D0CC9300D6581A /* FTEditableImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A0CF513D0CC9300D6581A /* FTEditableImageView.m */; };
+		4C4A0CFE13D0CC9300D6581A /* FTEditableLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4A0CF613D0CC9300D6581A /* FTEditableLabel.h */; };
+		4C4A0CFF13D0CC9300D6581A /* FTEditableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A0CF713D0CC9300D6581A /* FTEditableLabel.m */; };
+		4C4A0D0013D0CC9300D6581A /* FTGoogleGeocodeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4A0CF813D0CC9300D6581A /* FTGoogleGeocodeRequest.h */; };
+		4C4A0D0113D0CC9300D6581A /* FTGoogleGeocodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A0CF913D0CC9300D6581A /* FTGoogleGeocodeRequest.m */; };
 		4C5760F213C5CDBD0049371F /* FTLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C5760F013C5CDBD0049371F /* FTLog.h */; };
 		4C5760F313C5CDBD0049371F /* FTLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5760F113C5CDBD0049371F /* FTLog.m */; };
 		4C5760F413C5CDBD0049371F /* FTLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5760F113C5CDBD0049371F /* FTLog.m */; };
@@ -253,8 +261,6 @@
 		4C85BC9D13BB5D4000CB7FCA /* FTSystemKillSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */; };
 		6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */; };
 		6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */; };
-		6861789D13D071C600F57408 /* FTGoogleGeocodeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861789B13D071C600F57408 /* FTGoogleGeocodeRequest.h */; };
-		6861789E13D071C600F57408 /* FTGoogleGeocodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861789C13D071C600F57408 /* FTGoogleGeocodeRequest.m */; };
 		68DF4E2A13CEF9D200B67940 /* FTData.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DF4E2213CEF9D200B67940 /* FTData.h */; };
 		68DF4E2B13CEF9D200B67940 /* FTData.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DF4E2313CEF9D200B67940 /* FTData.m */; };
 		68DF4E2C13CEF9D200B67940 /* FTDataJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DF4E2413CEF9D200B67940 /* FTDataJson.h */; };
@@ -334,6 +340,14 @@
 		4C03667213BA0D6000E8FA09 /* FTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTViewController.m; sourceTree = "<group>"; };
 		4C40309F13BEA2A000E6A4A2 /* FTLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLang.h; sourceTree = "<group>"; };
 		4C4030A013BEA2A000E6A4A2 /* FTLang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLang.m; sourceTree = "<group>"; };
+		4C4A0CF213D0CC9300D6581A /* FTEditableElementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTEditableElementView.h; sourceTree = "<group>"; };
+		4C4A0CF313D0CC9300D6581A /* FTEditableElementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTEditableElementView.m; sourceTree = "<group>"; };
+		4C4A0CF413D0CC9300D6581A /* FTEditableImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTEditableImageView.h; sourceTree = "<group>"; };
+		4C4A0CF513D0CC9300D6581A /* FTEditableImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTEditableImageView.m; sourceTree = "<group>"; };
+		4C4A0CF613D0CC9300D6581A /* FTEditableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTEditableLabel.h; sourceTree = "<group>"; };
+		4C4A0CF713D0CC9300D6581A /* FTEditableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTEditableLabel.m; sourceTree = "<group>"; };
+		4C4A0CF813D0CC9300D6581A /* FTGoogleGeocodeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGoogleGeocodeRequest.h; sourceTree = "<group>"; };
+		4C4A0CF913D0CC9300D6581A /* FTGoogleGeocodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTGoogleGeocodeRequest.m; sourceTree = "<group>"; };
 		4C5760F013C5CDBD0049371F /* FTLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLog.h; sourceTree = "<group>"; };
 		4C5760F113C5CDBD0049371F /* FTLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLog.m; sourceTree = "<group>"; };
 		4C57611F13C5E7770049371F /* FTProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProgressView.h; sourceTree = "<group>"; };
@@ -459,8 +473,6 @@
 		4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSystemKillSwitch.m; sourceTree = "<group>"; };
 		6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGooglePlaceRequest.h; path = FTLibrary/FTGooglePlaceRequest.h; sourceTree = SOURCE_ROOT; };
 		6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGooglePlaceRequest.m; path = FTLibrary/FTGooglePlaceRequest.m; sourceTree = SOURCE_ROOT; };
-		6861789B13D071C600F57408 /* FTGoogleGeocodeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGoogleGeocodeRequest.h; path = FTLibrary/FTGoogleGeocodeRequest.h; sourceTree = SOURCE_ROOT; };
-		6861789C13D071C600F57408 /* FTGoogleGeocodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGoogleGeocodeRequest.m; path = FTLibrary/FTGoogleGeocodeRequest.m; sourceTree = SOURCE_ROOT; };
 		68DF4E2213CEF9D200B67940 /* FTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTData.h; path = FTLibrary/FTData.h; sourceTree = SOURCE_ROOT; };
 		68DF4E2313CEF9D200B67940 /* FTData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTData.m; path = FTLibrary/FTData.m; sourceTree = SOURCE_ROOT; };
 		68DF4E2413CEF9D200B67940 /* FTDataJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTDataJson.h; path = FTLibrary/FTDataJson.h; sourceTree = SOURCE_ROOT; };
@@ -564,6 +576,8 @@
 		4C03655313BA023A00E8FA09 /* FTLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				4C4A0CF813D0CC9300D6581A /* FTGoogleGeocodeRequest.h */,
+				4C4A0CF913D0CC9300D6581A /* FTGoogleGeocodeRequest.m */,
 				4C85BC9913BB5D0700CB7FCA /* System */,
 				4C85BB0413BA4AFD00CB7FCA /* Thirdparty */,
 				4C85BC7513BB156100CB7FCA /* Data */,
@@ -696,6 +710,19 @@
 			name = Localizations;
 			sourceTree = "<group>";
 		};
+		4C4A0D0313D0CC9800D6581A /* Editable elements */ = {
+			isa = PBXGroup;
+			children = (
+				4C4A0CF213D0CC9300D6581A /* FTEditableElementView.h */,
+				4C4A0CF313D0CC9300D6581A /* FTEditableElementView.m */,
+				4C4A0CF413D0CC9300D6581A /* FTEditableImageView.h */,
+				4C4A0CF513D0CC9300D6581A /* FTEditableImageView.m */,
+				4C4A0CF613D0CC9300D6581A /* FTEditableLabel.h */,
+				4C4A0CF713D0CC9300D6581A /* FTEditableLabel.m */,
+			);
+			name = "Editable elements";
+			sourceTree = "<group>";
+		};
 		4C5760E613C5CAA00049371F /* Debugging */ = {
 			isa = PBXGroup;
 			children = (
@@ -708,6 +735,7 @@
 		4C57611D13C5E7570049371F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4C4A0D0313D0CC9800D6581A /* Editable elements */,
 				4C57633913CB8E090049371F /* iCarousel */,
 				4C5761A413CAE9130049371F /* Alert view */,
 				4C5761A113CAE8CC0049371F /* Shade view */,
@@ -1020,8 +1048,6 @@
 		6861785B13D03B5900F57408 /* Google */ = {
 			isa = PBXGroup;
 			children = (
-				6861789B13D071C600F57408 /* FTGoogleGeocodeRequest.h */,
-				6861789C13D071C600F57408 /* FTGoogleGeocodeRequest.m */,
 				6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */,
 				6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */,
 			);
@@ -1120,7 +1146,10 @@
 				68DF4E2E13CEF9D200B67940 /* FTDataPlist.h in Headers */,
 				68DF4E3013CEF9D200B67940 /* FTDataXml.h in Headers */,
 				6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */,
-				6861789D13D071C600F57408 /* FTGoogleGeocodeRequest.h in Headers */,
+				4C4A0CFA13D0CC9300D6581A /* FTEditableElementView.h in Headers */,
+				4C4A0CFC13D0CC9300D6581A /* FTEditableImageView.h in Headers */,
+				4C4A0CFE13D0CC9300D6581A /* FTEditableLabel.h in Headers */,
+				4C4A0D0013D0CC9300D6581A /* FTGoogleGeocodeRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1300,7 +1329,10 @@
 				68DF4E2F13CEF9D200B67940 /* FTDataPlist.m in Sources */,
 				68DF4E3113CEF9D200B67940 /* FTDataXml.m in Sources */,
 				6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */,
-				6861789E13D071C600F57408 /* FTGoogleGeocodeRequest.m in Sources */,
+				4C4A0CFB13D0CC9300D6581A /* FTEditableElementView.m in Sources */,
+				4C4A0CFD13D0CC9300D6581A /* FTEditableImageView.m in Sources */,
+				4C4A0CFF13D0CC9300D6581A /* FTEditableLabel.m in Sources */,
+				4C4A0D0113D0CC9300D6581A /* FTGoogleGeocodeRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

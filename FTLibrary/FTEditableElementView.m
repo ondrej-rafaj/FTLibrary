@@ -193,6 +193,10 @@
 	}
 }
 
+- (FTEditableElementViewBorderStyle)borderStyle {
+	return _borderStyle;
+}
+
 - (void)setToggleEditModeAutomatically:(BOOL)automatically {
 	_toggleEditModeAutomatically = automatically;
 }
