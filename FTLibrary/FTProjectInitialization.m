@@ -58,9 +58,15 @@
 	[self setUsedFunctionality:FTProjectInitializationFunctionTypeTrackingFlurry];
 }
 
-- (void)enableKillSwitchWith:(id<FTSystemKillSwitchDelegate>)del andUrl:(NSString *)url {
-	killSwitch = [[FTSystemKillSwitch alloc] initWithAppIdUrl:url];
-	[killSwitch setDelegate:self];
+- (void)enableKillSwitchWith:(id<FTSystemKillSwitchDelegate>)del window:(UIWindow *)window andUrl:(NSString *)url {
+    static BOOL execute = YES;
+    if (!execute) return;
+    
+	self.killSwitch = [[FTSystemKillSwitch alloc] initWithAppURL:url];
+    [self.killSwitch setDelegate:del];
+    [self.killSwitch setAppWindow:window];
+    [self.killSwitch killSwitchApp];
+    execute = NO;
 }
 
 #pragma mark KillSwitch delegate & data source methods

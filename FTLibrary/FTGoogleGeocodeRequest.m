@@ -66,5 +66,11 @@
     return urlString;
 }
 
+- (void)setAddress:(NSString *)anAdress {
+    [address release];
+    NSString *newAdress = [[NSString alloc] initWithString:[anAdress stringByReplacingOccurrencesOfString:@" " withString:@"+"]];
+    address = newAdress;
+}
+
 
 @end

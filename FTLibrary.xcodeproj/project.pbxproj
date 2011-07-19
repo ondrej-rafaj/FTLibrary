@@ -249,8 +249,8 @@
 		4C85BC8D13BB18BB00CB7FCA /* FTError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC8B13BB18BB00CB7FCA /* FTError.h */; };
 		4C85BC8E13BB18BB00CB7FCA /* FTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC8C13BB18BB00CB7FCA /* FTError.m */; };
 		4C85BC8F13BB18BB00CB7FCA /* FTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC8C13BB18BB00CB7FCA /* FTError.m */; };
-		4C85BC9C13BB5D4000CB7FCA /* FTSystemKillSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */; };
 		4C85BC9D13BB5D4000CB7FCA /* FTSystemKillSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */; };
+		6813CB9113D5BF76003C0512 /* FTSystemKillSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */; settings = {ATTRIBUTES = (); }; };
 		6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */; };
 		6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */; };
 		6861789D13D071C600F57408 /* FTGoogleGeocodeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861789B13D071C600F57408 /* FTGoogleGeocodeRequest.h */; };
@@ -1107,7 +1107,6 @@
 				4C85BC4C13BA4E5D00CB7FCA /* FBLoginDialog.h in Headers */,
 				4C85BC4F13BA4E5D00CB7FCA /* FBRequest.h in Headers */,
 				4C85BC8D13BB18BB00CB7FCA /* FTError.h in Headers */,
-				4C85BC9C13BB5D4000CB7FCA /* FTSystemKillSwitch.h in Headers */,
 				4C4030A113BEA2A000E6A4A2 /* FTLang.h in Headers */,
 				4C6F5F3113C1B5E400EECED4 /* FTProject.h in Headers */,
 				4C6F5F4F13C45CA100EECED4 /* FTAppDelegate.h in Headers */,
@@ -1121,6 +1120,7 @@
 				68DF4E3013CEF9D200B67940 /* FTDataXml.h in Headers */,
 				6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */,
 				6861789D13D071C600F57408 /* FTGoogleGeocodeRequest.h in Headers */,
+				6813CB9113D5BF76003C0512 /* FTSystemKillSwitch.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

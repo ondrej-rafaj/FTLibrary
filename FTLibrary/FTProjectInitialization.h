@@ -35,7 +35,7 @@ typedef enum {
 
 + (BOOL)isUsing:(FTProjectInitializationFunctionType)functionality;
 
-- (void)enableKillSwitchWith:(id <FTSystemKillSwitchDelegate>)del andUrl:(NSString *)url;
+- (void)enableKillSwitchWith:(id<FTSystemKillSwitchDelegate>)del window:(UIWindow *)window andUrl:(NSString *)url;
 
 + (void)enableDebugging:(BOOL)debugging;
 

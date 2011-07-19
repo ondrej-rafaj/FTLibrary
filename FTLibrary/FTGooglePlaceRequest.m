@@ -127,7 +127,7 @@
     
     self = [super init];
     
-    if (self && dictionary) {
+    if (self && dictionary && [dictionary isKindOfClass:[NSDictionary class]]) {
         NSDictionary *position_ = [[dictionary objectForKey:@"geometry"] objectForKey:@"location"];
         CLLocationCoordinate2D loc =  CLLocationCoordinate2DMake([[position_ objectForKey:@"lat"] floatValue], [[position_ objectForKey:@"lng"] floatValue]);
         [self setLocation:loc];
