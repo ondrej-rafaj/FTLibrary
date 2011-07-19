@@ -102,6 +102,12 @@
 		4C5761A813CAE93B0049371F /* FTBlockerShadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5761A613CAE93B0049371F /* FTBlockerShadeView.m */; };
 		4C57633D13CB8E170049371F /* FTCarouselView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C57633B13CB8E170049371F /* FTCarouselView.h */; };
 		4C57633E13CB8E170049371F /* FTCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C57633C13CB8E170049371F /* FTCarouselView.m */; };
+		4C684DAD13D5D76E0074E3C2 /* FTDomainObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C684DA913D5D76E0074E3C2 /* FTDomainObject.h */; };
+		4C684DAE13D5D76E0074E3C2 /* FTDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C684DAA13D5D76E0074E3C2 /* FTDomainObject.m */; };
+		4C684DAF13D5D76E0074E3C2 /* FTDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C684DAA13D5D76E0074E3C2 /* FTDomainObject.m */; };
+		4C684DB013D5D76E0074E3C2 /* FTStorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C684DAB13D5D76E0074E3C2 /* FTStorageService.h */; };
+		4C684DB113D5D76E0074E3C2 /* FTStorageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C684DAC13D5D76E0074E3C2 /* FTStorageService.m */; };
+		4C684DB213D5D76E0074E3C2 /* FTStorageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C684DAC13D5D76E0074E3C2 /* FTStorageService.m */; };
 		4C6F5F3113C1B5E400EECED4 /* FTProject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F5F2F13C1B5E400EECED4 /* FTProject.h */; };
 		4C6F5F3213C1B5E400EECED4 /* FTProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F5F3013C1B5E400EECED4 /* FTProject.m */; };
 		4C6F5F4F13C45CA100EECED4 /* FTAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */; };
@@ -295,6 +301,8 @@
 		4CB6E23A13D5D59E002FEC0A /* zip.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E22F13D5D59E002FEC0A /* zip.h */; };
 		4CB6E23B13D5D59E002FEC0A /* ZipArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E23013D5D59E002FEC0A /* ZipArchive.h */; };
 		4CB6E23C13D5D59E002FEC0A /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E23113D5D59E002FEC0A /* ZipArchive.mm */; };
+		4CB6E24813D5D672002FEC0A /* FTCacheService.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E24613D5D672002FEC0A /* FTCacheService.h */; };
+		4CB6E24913D5D672002FEC0A /* FTCacheService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E24713D5D672002FEC0A /* FTCacheService.m */; };
 		6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */; };
 		6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */; };
 		68DF4E2A13CEF9D200B67940 /* FTData.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DF4E2213CEF9D200B67940 /* FTData.h */; };
@@ -392,6 +400,10 @@
 		4C5761A613CAE93B0049371F /* FTBlockerShadeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTBlockerShadeView.m; sourceTree = "<group>"; };
 		4C57633B13CB8E170049371F /* FTCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCarouselView.h; sourceTree = "<group>"; };
 		4C57633C13CB8E170049371F /* FTCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCarouselView.m; sourceTree = "<group>"; };
+		4C684DA913D5D76E0074E3C2 /* FTDomainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTDomainObject.h; path = FTLibrary/FTDomainObject.h; sourceTree = SOURCE_ROOT; };
+		4C684DAA13D5D76E0074E3C2 /* FTDomainObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTDomainObject.m; path = FTLibrary/FTDomainObject.m; sourceTree = SOURCE_ROOT; };
+		4C684DAB13D5D76E0074E3C2 /* FTStorageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTStorageService.h; path = FTLibrary/FTStorageService.h; sourceTree = SOURCE_ROOT; };
+		4C684DAC13D5D76E0074E3C2 /* FTStorageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTStorageService.m; path = FTLibrary/FTStorageService.m; sourceTree = SOURCE_ROOT; };
 		4C6F5F2F13C1B5E400EECED4 /* FTProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProject.h; sourceTree = "<group>"; };
 		4C6F5F3013C1B5E400EECED4 /* FTProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProject.m; sourceTree = "<group>"; };
 		4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAppDelegate.h; sourceTree = "<group>"; };
@@ -542,6 +554,8 @@
 		4CB6E22F13D5D59E002FEC0A /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		4CB6E23013D5D59E002FEC0A /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
 		4CB6E23113D5D59E002FEC0A /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
+		4CB6E24613D5D672002FEC0A /* FTCacheService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTCacheService.h; path = FTLibrary/FTCacheService.h; sourceTree = SOURCE_ROOT; };
+		4CB6E24713D5D672002FEC0A /* FTCacheService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTCacheService.m; path = FTLibrary/FTCacheService.m; sourceTree = SOURCE_ROOT; };
 		6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGooglePlaceRequest.h; path = FTLibrary/FTGooglePlaceRequest.h; sourceTree = SOURCE_ROOT; };
 		6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGooglePlaceRequest.m; path = FTLibrary/FTGooglePlaceRequest.m; sourceTree = SOURCE_ROOT; };
 		68DF4E2213CEF9D200B67940 /* FTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTData.h; path = FTLibrary/FTData.h; sourceTree = SOURCE_ROOT; };
@@ -1057,6 +1071,7 @@
 		4C85BC7513BB156100CB7FCA /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				4CB6E23D13D5D603002FEC0A /* Core data */,
 				4CB6E22413D5D4CF002FEC0A /* NSData */,
 				4CB6E1F113D5D2FF002FEC0A /* Simple DB */,
 				4CB6E1F013D5D2E8002FEC0A /* Data + parsing */,
@@ -1069,6 +1084,8 @@
 		4C85BC7613BB156A00CB7FCA /* Caching */ = {
 			isa = PBXGroup;
 			children = (
+				4CB6E24613D5D672002FEC0A /* FTCacheService.h */,
+				4CB6E24713D5D672002FEC0A /* FTCacheService.m */,
 			);
 			name = Caching;
 			path = ../Thirdparty;
@@ -1197,6 +1214,17 @@
 			path = minizip;
 			sourceTree = "<group>";
 		};
+		4CB6E23D13D5D603002FEC0A /* Core data */ = {
+			isa = PBXGroup;
+			children = (
+				4C684DA913D5D76E0074E3C2 /* FTDomainObject.h */,
+				4C684DAA13D5D76E0074E3C2 /* FTDomainObject.m */,
+				4C684DAB13D5D76E0074E3C2 /* FTStorageService.h */,
+				4C684DAC13D5D76E0074E3C2 /* FTStorageService.m */,
+			);
+			name = "Core data";
+			sourceTree = "<group>";
+		};
 		6861785B13D03B5900F57408 /* Google */ = {
 			isa = PBXGroup;
 			children = (
@@ -1322,6 +1350,9 @@
 				4CB6E23813D5D59E002FEC0A /* unzip.h in Headers */,
 				4CB6E23A13D5D59E002FEC0A /* zip.h in Headers */,
 				4CB6E23B13D5D59E002FEC0A /* ZipArchive.h in Headers */,
+				4CB6E24813D5D672002FEC0A /* FTCacheService.h in Headers */,
+				4C684DAD13D5D76E0074E3C2 /* FTDomainObject.h in Headers */,
+				4C684DB013D5D76E0074E3C2 /* FTStorageService.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1522,6 +1553,9 @@
 				4CB6E23713D5D59E002FEC0A /* unzip.c in Sources */,
 				4CB6E23913D5D59E002FEC0A /* zip.c in Sources */,
 				4CB6E23C13D5D59E002FEC0A /* ZipArchive.mm in Sources */,
+				4CB6E24913D5D672002FEC0A /* FTCacheService.m in Sources */,
+				4C684DAE13D5D76E0074E3C2 /* FTDomainObject.m in Sources */,
+				4C684DB113D5D76E0074E3C2 /* FTStorageService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1596,6 +1630,8 @@
 				4C5760F413C5CDBD0049371F /* FTLog.m in Sources */,
 				4C57612313C5E7770049371F /* FTProgressView.m in Sources */,
 				4CB6E1FB13D5D37C002FEC0A /* FTSimpleDB.m in Sources */,
+				4C684DAF13D5D76E0074E3C2 /* FTDomainObject.m in Sources */,
+				4C684DB213D5D76E0074E3C2 /* FTStorageService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
