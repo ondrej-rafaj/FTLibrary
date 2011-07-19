@@ -25,6 +25,10 @@ typedef enum {
     FTProgressViewAnimationZoom
 } FTProgressViewAnimation;
 
+
+@class FTProgressView;
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 @protocol FTProgressViewDelegate <NSObject>
@@ -34,7 +38,7 @@ typedef enum {
 /** 
  * A callback function that is called after the HUD was fully hidden from the screen. 
  */
-- (void)progressViewHasBeenHidden:(FTProgressView)progressView;
+- (void)progressViewHasBeenHidden:(FTProgressView *)progressView;
 
 @end
 
@@ -181,8 +185,8 @@ typedef enum {
 @property (assign) FTProgressViewAnimation animationType;
 
 /** 
- * The HUD delegate object. If set the delegate will receive progressViewHasBeenHidden:(FTProgressView)progressView callbacks when the HUD was hidden. The
- * delegate should conform to the FTProgressViewDelegate protocol and implement the progressViewHasBeenHidden:(FTProgressView)progressView method. The delegate
+ * The HUD delegate object. If set the delegate will receive progressViewHasBeenHidden: callbacks when the HUD was hidden. The
+ * delegate should conform to the FTProgressViewDelegate protocol and implement the progressViewHasBeenHidden: method. The delegate
  * object will not be retained.
  */
 @property (assign) id<FTProgressViewDelegate> delegate;
@@ -276,7 +280,7 @@ typedef enum {
 - (void)show:(BOOL)animated;
 
 /** 
- * Hide the HUD, this still calls the progressViewHasBeenHidden:(FTProgressView)progressView delegate. This is the counterpart of the hide: method. Use it to
+ * Hide the HUD, this still calls the progressViewHasBeenHidden: delegate. This is the counterpart of the hide: method. Use it to
  * hide the HUD when your task completes.
  *
  * @param animated If set to YES the HUD will disappear using the current animationType. If set to NO the HUD will not use

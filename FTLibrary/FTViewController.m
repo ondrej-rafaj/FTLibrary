@@ -8,6 +8,7 @@
 
 #import "FTViewController.h"
 #import "FTAppDelegate.h"
+#import "FTLang.h"
 
 
 @implementation FTViewController
@@ -100,11 +101,12 @@
 #pragma mark Table view delegate and data source methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 0;
+	return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [data count];
+	int count = [data count];
+	return count;
 }
 
 - (void)configureCell:(FTTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
@@ -145,40 +147,69 @@
 
 #pragma mark Loading progress view
 
-- (void)generateLoadingProgressView {
-	loadingProgressView = [[FTProgressView alloc] initWithView:self.view];
+- (void)configureLoadingProgressView {
+	[self.view addSubview:loadingProgressView];
+	[self.view bringSubviewToFront:loadingProgressView];
+	[loadingProgressView setDelegate:self];
 }
 
 - (void)enableLoadingProgressViewInWindowWithTitle:(NSString *)title withAnimationStyle:(FTProgressViewAnimation)animation showWhileExecuting:(SEL)method onTarget:(id)target withObject:(id)object animated:(BOOL)animated {
-	loadingProgressView = [[FTProgressView alloc] initWithWindow:[FTAppDelegate window]];
-	[loadingProgressView setAnimationType:animation];
-	[loadingProgressView setLabelText:title];
-	[loadingProgressView showWhileExecuting:method onTarget:target withObject:object animated:animated];
+	if (!loadingProgressView) {
+		loadingProgressView = [[FTProgressView alloc] initWithWindow:[FTAppDelegate window]];
+		[self configureLoadingProgressView];
+		[loadingProgressView setAnimationType:animation];
+		[loadingProgressView setLabelText:title];
+		[loadingProgressView showWhileExecuting:method onTarget:target withObject:object animated:animated];
+	}
 }
 
 - (void)enableLoadingProgressViewInWindowWithTitle:(NSString *)title andAnimationStyle:(FTProgressViewAnimation)animation {
-	loadingProgressView = [[FTProgressView alloc] initWithWindow:[FTAppDelegate window]];
-	[loadingProgressView setLabelText:title];
-	[loadingProgressView setAnimationType:animation];
+	if (!loadingProgressView) {
+		loadingProgressView = [[FTProgressView alloc] initWithWindow:[FTAppDelegate window]];
+		[self configureLoadingProgressView];
+		[loadingProgressView setLabelText:title];
+		[loadingProgressView setAnimationType:animation];
+	}
 }
 
 - (void)enableLoadingProgressViewWithTitle:(NSString *)title withAnimationStyle:(FTProgressViewAnimation)animation showWhileExecuting:(SEL)method onTarget:(id)target withObject:(id)object animated:(BOOL)animated {
-	[self generateLoadingProgressView];
-	[loadingProgressView setAnimationType:animation];
-	[loadingProgressView setLabelText:title];
-	[loadingProgressView showWhileExecuting:method onTarget:target withObject:object animated:animated];
+	if (!loadingProgressView) {
+		loadingProgressView = [[FTProgressView alloc] initWithView:self.view];
+		[self configureLoadingProgressView];
+		[loadingProgressView setAnimationType:animation];
+		[loadingProgressView setLabelText:title];
+		[loadingProgressView showWhileExecuting:method onTarget:target withObject:object animated:animated];
+	}
 }
 
 - (void)enableLoadingProgressViewWithTitle:(NSString *)title andAnimationStyle:(FTProgressViewAnimation)animation {
-	[self generateLoadingProgressView];
-	[loadingProgressView setLabelText:title];
-	[loadingProgressView setAnimationType:animation];
+	if (!loadingProgressView) {
+		loadingProgressView = [[FTProgressView alloc] initWithView:self.view];
+		[self configureLoadingProgressView];
+		[loadingProgressView setLabelText:title];
+		[loadingProgressView setAnimationType:animation];
+	}
 }
 
 - (void)disableLoadingProgressView {
 	if (loadingProgressView) {
 		[loadingProgressView hide:YES];
 	}
+}
+
+#pragma mark Translations
+
+- (void)setTitle:(NSString *)title {
+	title = FTLangGet(title);
+	[super setTitle:title];
+}
+
+#pragma mark FTProgressView delegate method
+
+- (void)progressViewHasBeenHidden:(FTProgressView *)progressView {
+	[progressView removeFromSuperview];
+	[progressView release];
+	progressView = nil;
 }
 
 
