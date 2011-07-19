@@ -1,6 +1,6 @@
 //
 //  NSMutableArray+StringSerialiser.m
-//  Locassa
+//  FTLibrary
 //
 //  Created by Simon Lee on 15/08/2009.
 //  Copyright 2009 Fuerte International. All rights reserved.
