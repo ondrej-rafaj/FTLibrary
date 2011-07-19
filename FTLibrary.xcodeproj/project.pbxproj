@@ -264,6 +264,26 @@
 		4CB6E1F913D5D37C002FEC0A /* FTSimpleDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */; };
 		4CB6E1FA13D5D37C002FEC0A /* FTSimpleDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E1F813D5D37C002FEC0A /* FTSimpleDB.m */; };
 		4CB6E1FB13D5D37C002FEC0A /* FTSimpleDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E1F813D5D37C002FEC0A /* FTSimpleDB.m */; };
+		4CB6E1FE13D5D442002FEC0A /* UIScrollView+Layout.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E1FC13D5D442002FEC0A /* UIScrollView+Layout.h */; };
+		4CB6E1FF13D5D442002FEC0A /* UIScrollView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E1FD13D5D442002FEC0A /* UIScrollView+Layout.m */; };
+		4CB6E21213D5D499002FEC0A /* NSData+Encryption.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20013D5D496002FEC0A /* NSData+Encryption.h */; };
+		4CB6E21313D5D499002FEC0A /* NSData+Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20113D5D496002FEC0A /* NSData+Encryption.m */; };
+		4CB6E21413D5D499002FEC0A /* NSDataAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20213D5D496002FEC0A /* NSDataAdditions.h */; };
+		4CB6E21513D5D499002FEC0A /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20313D5D497002FEC0A /* NSDataAdditions.m */; };
+		4CB6E21613D5D499002FEC0A /* NSDate+ISO8601.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20413D5D497002FEC0A /* NSDate+ISO8601.h */; };
+		4CB6E21713D5D499002FEC0A /* NSDate+ISO8601.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20513D5D497002FEC0A /* NSDate+ISO8601.m */; };
+		4CB6E21813D5D499002FEC0A /* NSDate+Summarise.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20613D5D497002FEC0A /* NSDate+Summarise.h */; };
+		4CB6E21913D5D499002FEC0A /* NSDate+Summarise.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20713D5D497002FEC0A /* NSDate+Summarise.m */; };
+		4CB6E21A13D5D499002FEC0A /* NSDictionary+KeyValuePair.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20813D5D497002FEC0A /* NSDictionary+KeyValuePair.h */; };
+		4CB6E21B13D5D499002FEC0A /* NSDictionary+KeyValuePair.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20913D5D497002FEC0A /* NSDictionary+KeyValuePair.m */; };
+		4CB6E21C13D5D499002FEC0A /* NSMutableArray+StringSerialiser.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20A13D5D498002FEC0A /* NSMutableArray+StringSerialiser.h */; };
+		4CB6E21D13D5D499002FEC0A /* NSMutableArray+StringSerialiser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20B13D5D498002FEC0A /* NSMutableArray+StringSerialiser.m */; };
+		4CB6E21E13D5D499002FEC0A /* NSNumber+Comparison.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20C13D5D498002FEC0A /* NSNumber+Comparison.h */; };
+		4CB6E21F13D5D499002FEC0A /* NSNumber+Comparison.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20D13D5D498002FEC0A /* NSNumber+Comparison.m */; };
+		4CB6E22013D5D499002FEC0A /* NSString+Base64Encoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20E13D5D498002FEC0A /* NSString+Base64Encoding.h */; };
+		4CB6E22113D5D499002FEC0A /* NSString+Base64Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20F13D5D498002FEC0A /* NSString+Base64Encoding.m */; };
+		4CB6E22213D5D499002FEC0A /* NSString+SHA1.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E21013D5D498002FEC0A /* NSString+SHA1.h */; };
+		4CB6E22313D5D499002FEC0A /* NSString+SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E21113D5D499002FEC0A /* NSString+SHA1.m */; };
 		6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */; };
 		6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */; };
 		68DF4E2A13CEF9D200B67940 /* FTData.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DF4E2213CEF9D200B67940 /* FTData.h */; };
@@ -480,6 +500,26 @@
 		4CB6E1CE13D5A3A7002FEC0A /* FTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTableViewCell.m; sourceTree = "<group>"; };
 		4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTSimpleDB.h; path = FTLibrary/FTSimpleDB.h; sourceTree = SOURCE_ROOT; };
 		4CB6E1F813D5D37C002FEC0A /* FTSimpleDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTSimpleDB.m; path = FTLibrary/FTSimpleDB.m; sourceTree = SOURCE_ROOT; };
+		4CB6E1FC13D5D442002FEC0A /* UIScrollView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Layout.h"; sourceTree = "<group>"; };
+		4CB6E1FD13D5D442002FEC0A /* UIScrollView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Layout.m"; sourceTree = "<group>"; };
+		4CB6E20013D5D496002FEC0A /* NSData+Encryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Encryption.h"; sourceTree = "<group>"; };
+		4CB6E20113D5D496002FEC0A /* NSData+Encryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Encryption.m"; sourceTree = "<group>"; };
+		4CB6E20213D5D496002FEC0A /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDataAdditions.h; path = ../FTLibrary/NSDataAdditions.h; sourceTree = "<group>"; };
+		4CB6E20313D5D497002FEC0A /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDataAdditions.m; path = ../FTLibrary/NSDataAdditions.m; sourceTree = "<group>"; };
+		4CB6E20413D5D497002FEC0A /* NSDate+ISO8601.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ISO8601.h"; sourceTree = "<group>"; };
+		4CB6E20513D5D497002FEC0A /* NSDate+ISO8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ISO8601.m"; sourceTree = "<group>"; };
+		4CB6E20613D5D497002FEC0A /* NSDate+Summarise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Summarise.h"; sourceTree = "<group>"; };
+		4CB6E20713D5D497002FEC0A /* NSDate+Summarise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Summarise.m"; sourceTree = "<group>"; };
+		4CB6E20813D5D497002FEC0A /* NSDictionary+KeyValuePair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+KeyValuePair.h"; sourceTree = "<group>"; };
+		4CB6E20913D5D497002FEC0A /* NSDictionary+KeyValuePair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+KeyValuePair.m"; sourceTree = "<group>"; };
+		4CB6E20A13D5D498002FEC0A /* NSMutableArray+StringSerialiser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+StringSerialiser.h"; sourceTree = "<group>"; };
+		4CB6E20B13D5D498002FEC0A /* NSMutableArray+StringSerialiser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+StringSerialiser.m"; sourceTree = "<group>"; };
+		4CB6E20C13D5D498002FEC0A /* NSNumber+Comparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Comparison.h"; sourceTree = "<group>"; };
+		4CB6E20D13D5D498002FEC0A /* NSNumber+Comparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Comparison.m"; sourceTree = "<group>"; };
+		4CB6E20E13D5D498002FEC0A /* NSString+Base64Encoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64Encoding.h"; sourceTree = "<group>"; };
+		4CB6E20F13D5D498002FEC0A /* NSString+Base64Encoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64Encoding.m"; sourceTree = "<group>"; };
+		4CB6E21013D5D498002FEC0A /* NSString+SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SHA1.h"; sourceTree = "<group>"; };
+		4CB6E21113D5D499002FEC0A /* NSString+SHA1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SHA1.m"; sourceTree = "<group>"; };
 		6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGooglePlaceRequest.h; path = FTLibrary/FTGooglePlaceRequest.h; sourceTree = SOURCE_ROOT; };
 		6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGooglePlaceRequest.m; path = FTLibrary/FTGooglePlaceRequest.m; sourceTree = SOURCE_ROOT; };
 		68DF4E2213CEF9D200B67940 /* FTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTData.h; path = FTLibrary/FTData.h; sourceTree = SOURCE_ROOT; };
@@ -658,6 +698,24 @@
 		4C03661213BA0B1F00E8FA09 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				4CB6E20013D5D496002FEC0A /* NSData+Encryption.h */,
+				4CB6E20113D5D496002FEC0A /* NSData+Encryption.m */,
+				4CB6E20413D5D497002FEC0A /* NSDate+ISO8601.h */,
+				4CB6E20513D5D497002FEC0A /* NSDate+ISO8601.m */,
+				4CB6E20613D5D497002FEC0A /* NSDate+Summarise.h */,
+				4CB6E20713D5D497002FEC0A /* NSDate+Summarise.m */,
+				4CB6E20813D5D497002FEC0A /* NSDictionary+KeyValuePair.h */,
+				4CB6E20913D5D497002FEC0A /* NSDictionary+KeyValuePair.m */,
+				4CB6E20A13D5D498002FEC0A /* NSMutableArray+StringSerialiser.h */,
+				4CB6E20B13D5D498002FEC0A /* NSMutableArray+StringSerialiser.m */,
+				4CB6E20C13D5D498002FEC0A /* NSNumber+Comparison.h */,
+				4CB6E20D13D5D498002FEC0A /* NSNumber+Comparison.m */,
+				4CB6E20E13D5D498002FEC0A /* NSString+Base64Encoding.h */,
+				4CB6E20F13D5D498002FEC0A /* NSString+Base64Encoding.m */,
+				4CB6E21013D5D498002FEC0A /* NSString+SHA1.h */,
+				4CB6E21113D5D499002FEC0A /* NSString+SHA1.m */,
+				4CB6E1FC13D5D442002FEC0A /* UIScrollView+Layout.h */,
+				4CB6E1FD13D5D442002FEC0A /* UIScrollView+Layout.m */,
 				4C03661313BA0B3000E8FA09 /* NSArray+Tools.h */,
 				4C03661413BA0B3000E8FA09 /* NSArray+Tools.m */,
 				4C03661513BA0B3000E8FA09 /* NSMutableArray+Tools.h */,
@@ -976,6 +1034,7 @@
 		4C85BC7513BB156100CB7FCA /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				4CB6E22413D5D4CF002FEC0A /* NSData */,
 				4CB6E1F113D5D2FF002FEC0A /* Simple DB */,
 				4CB6E1F013D5D2E8002FEC0A /* Data + parsing */,
 				6861785B13D03B5900F57408 /* Google */,
@@ -1078,6 +1137,15 @@
 				4CB6E1F813D5D37C002FEC0A /* FTSimpleDB.m */,
 			);
 			name = "Simple DB";
+			sourceTree = "<group>";
+		};
+		4CB6E22413D5D4CF002FEC0A /* NSData */ = {
+			isa = PBXGroup;
+			children = (
+				4CB6E20213D5D496002FEC0A /* NSDataAdditions.h */,
+				4CB6E20313D5D497002FEC0A /* NSDataAdditions.m */,
+			);
+			name = NSData;
 			sourceTree = "<group>";
 		};
 		6861785B13D03B5900F57408 /* Google */ = {
@@ -1189,6 +1257,16 @@
 				4C4A0D0013D0CC9300D6581A /* FTGoogleGeocodeRequest.h in Headers */,
 				4CB6E1CF13D5A3A7002FEC0A /* FTTableViewCell.h in Headers */,
 				4CB6E1F913D5D37C002FEC0A /* FTSimpleDB.h in Headers */,
+				4CB6E1FE13D5D442002FEC0A /* UIScrollView+Layout.h in Headers */,
+				4CB6E21213D5D499002FEC0A /* NSData+Encryption.h in Headers */,
+				4CB6E21413D5D499002FEC0A /* NSDataAdditions.h in Headers */,
+				4CB6E21613D5D499002FEC0A /* NSDate+ISO8601.h in Headers */,
+				4CB6E21813D5D499002FEC0A /* NSDate+Summarise.h in Headers */,
+				4CB6E21A13D5D499002FEC0A /* NSDictionary+KeyValuePair.h in Headers */,
+				4CB6E21C13D5D499002FEC0A /* NSMutableArray+StringSerialiser.h in Headers */,
+				4CB6E21E13D5D499002FEC0A /* NSNumber+Comparison.h in Headers */,
+				4CB6E22013D5D499002FEC0A /* NSString+Base64Encoding.h in Headers */,
+				4CB6E22213D5D499002FEC0A /* NSString+SHA1.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1374,6 +1452,16 @@
 				4C4A0D0113D0CC9300D6581A /* FTGoogleGeocodeRequest.m in Sources */,
 				4CB6E1D013D5A3A7002FEC0A /* FTTableViewCell.m in Sources */,
 				4CB6E1FA13D5D37C002FEC0A /* FTSimpleDB.m in Sources */,
+				4CB6E1FF13D5D442002FEC0A /* UIScrollView+Layout.m in Sources */,
+				4CB6E21313D5D499002FEC0A /* NSData+Encryption.m in Sources */,
+				4CB6E21513D5D499002FEC0A /* NSDataAdditions.m in Sources */,
+				4CB6E21713D5D499002FEC0A /* NSDate+ISO8601.m in Sources */,
+				4CB6E21913D5D499002FEC0A /* NSDate+Summarise.m in Sources */,
+				4CB6E21B13D5D499002FEC0A /* NSDictionary+KeyValuePair.m in Sources */,
+				4CB6E21D13D5D499002FEC0A /* NSMutableArray+StringSerialiser.m in Sources */,
+				4CB6E21F13D5D499002FEC0A /* NSNumber+Comparison.m in Sources */,
+				4CB6E22113D5D499002FEC0A /* NSString+Base64Encoding.m in Sources */,
+				4CB6E22313D5D499002FEC0A /* NSString+SHA1.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
