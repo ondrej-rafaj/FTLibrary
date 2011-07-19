@@ -71,8 +71,13 @@
 
 #pragma mark KillSwitch delegate & data source methods
 
+
 - (void)appKillSwitch:(FTSystemKillSwitch *)killSwitch shouldDisableApp:(BOOL)disable {
 	NSLog(@"App disabled looser :)");
+}
+
+- (CGFloat)killSwitchViewShadow {
+    return 0.6;
 }
 
 - (UIView *)viewForAppKillSwitch:(FTSystemKillSwitch *)killSwitch {

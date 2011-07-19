@@ -72,12 +72,12 @@ typedef struct {
 @protocol FTSystemKillSwitchDelegate <NSObject>
 @required
 - (void)appKillSwitch:(FTSystemKillSwitch *)killSwitch shouldDisableApp:(BOOL)disable;
-- (float)appVersion;
-- (CGFloat)killSwitchViewShadow;
+
 
 @optional
 
 - (UIView *)viewForAppKillSwitchWithMessage:(FTSystemKillSwitchMessage *)message;
-
+- (float)appVersion;
+- (CGFloat)killSwitchViewShadow;
 
 @end
