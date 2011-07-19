@@ -494,8 +494,8 @@
     self.alpha = 0.0;
     
     if(delegate != nil && [delegate conformsToProtocol:@protocol(FTProgressViewDelegate)]) {
-		if([delegate respondsToSelector:@selector(hudWasHidden)]) {
-			[delegate performSelector:@selector(hudWasHidden)];
+		if([delegate respondsToSelector:@selector(progressViewHasBeenHidden:)]) {
+			[delegate performSelector:@selector(progressViewHasBeenHidden:) withObject:self];
 		}
     }
 	

@@ -7,6 +7,7 @@
 //
 
 #import "FTViewController.h"
+#import "FTAppDelegate.h"
 
 
 @implementation FTViewController
@@ -15,6 +16,7 @@
 @synthesize data;
 @synthesize backgroundView;
 @synthesize isLandscape;
+@synthesize loadingProgressView;
 
 
 #pragma mark Positioning
@@ -34,6 +36,7 @@
     [backgroundView release];
 	[table release];
 	[data release];
+	[loadingProgressView release];
     [super dealloc];
 }
 
@@ -105,18 +108,22 @@
 }
 
 - (void)configureCell:(FTTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-	
+	[cell.textLabel setText:@"Fuerte ROCKS !!!"];
+	[cell.detailTextLabel setText:@"http://www.fuerteint.com/"];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	static NSString *cellIdentifier = @"FTBasicCell";
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-	
+	FTTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	if (!cell) {
+		cell = [[[FTTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier] autorelease];
+	}
+	[self configureCell:cell atIndexPath:indexPath];
 	return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSLog(@"Did select row in section %d with index: %d", indexPath.section, indexPath.row);
+	NSLog(@"Did select row in section %d with index %d and agreed that Fuerte ROCKS !!!", indexPath.section, indexPath.row);
 }
 
 #pragma mark Custom setting background
@@ -134,6 +141,44 @@
     [backgroundView setImage:img];
     [self.view addSubview:backgroundView];
     [self.view sendSubviewToBack:backgroundView];
+}
+
+#pragma mark Loading progress view
+
+- (void)generateLoadingProgressView {
+	loadingProgressView = [[FTProgressView alloc] initWithView:self.view];
+}
+
+- (void)enableLoadingProgressViewInWindowWithTitle:(NSString *)title withAnimationStyle:(FTProgressViewAnimation)animation showWhileExecuting:(SEL)method onTarget:(id)target withObject:(id)object animated:(BOOL)animated {
+	loadingProgressView = [[FTProgressView alloc] initWithWindow:[FTAppDelegate window]];
+	[loadingProgressView setAnimationType:animation];
+	[loadingProgressView setLabelText:title];
+	[loadingProgressView showWhileExecuting:method onTarget:target withObject:object animated:animated];
+}
+
+- (void)enableLoadingProgressViewInWindowWithTitle:(NSString *)title andAnimationStyle:(FTProgressViewAnimation)animation {
+	loadingProgressView = [[FTProgressView alloc] initWithWindow:[FTAppDelegate window]];
+	[loadingProgressView setLabelText:title];
+	[loadingProgressView setAnimationType:animation];
+}
+
+- (void)enableLoadingProgressViewWithTitle:(NSString *)title withAnimationStyle:(FTProgressViewAnimation)animation showWhileExecuting:(SEL)method onTarget:(id)target withObject:(id)object animated:(BOOL)animated {
+	[self generateLoadingProgressView];
+	[loadingProgressView setAnimationType:animation];
+	[loadingProgressView setLabelText:title];
+	[loadingProgressView showWhileExecuting:method onTarget:target withObject:object animated:animated];
+}
+
+- (void)enableLoadingProgressViewWithTitle:(NSString *)title andAnimationStyle:(FTProgressViewAnimation)animation {
+	[self generateLoadingProgressView];
+	[loadingProgressView setLabelText:title];
+	[loadingProgressView setAnimationType:animation];
+}
+
+- (void)disableLoadingProgressView {
+	if (loadingProgressView) {
+		[loadingProgressView hide:YES];
+	}
 }
 
 
