@@ -84,6 +84,14 @@
 		4C03667513BA0D6600E8FA09 /* FTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03667213BA0D6000E8FA09 /* FTViewController.m */; };
 		4C4030A113BEA2A000E6A4A2 /* FTLang.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C40309F13BEA2A000E6A4A2 /* FTLang.h */; };
 		4C4030A213BEA2A000E6A4A2 /* FTLang.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4030A013BEA2A000E6A4A2 /* FTLang.m */; };
+		4C4A0CFA13D0CC9300D6581A /* FTEditableElementView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4A0CF213D0CC9300D6581A /* FTEditableElementView.h */; };
+		4C4A0CFB13D0CC9300D6581A /* FTEditableElementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A0CF313D0CC9300D6581A /* FTEditableElementView.m */; };
+		4C4A0CFC13D0CC9300D6581A /* FTEditableImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4A0CF413D0CC9300D6581A /* FTEditableImageView.h */; };
+		4C4A0CFD13D0CC9300D6581A /* FTEditableImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A0CF513D0CC9300D6581A /* FTEditableImageView.m */; };
+		4C4A0CFE13D0CC9300D6581A /* FTEditableLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4A0CF613D0CC9300D6581A /* FTEditableLabel.h */; };
+		4C4A0CFF13D0CC9300D6581A /* FTEditableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A0CF713D0CC9300D6581A /* FTEditableLabel.m */; };
+		4C4A0D0013D0CC9300D6581A /* FTGoogleGeocodeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4A0CF813D0CC9300D6581A /* FTGoogleGeocodeRequest.h */; };
+		4C4A0D0113D0CC9300D6581A /* FTGoogleGeocodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A0CF913D0CC9300D6581A /* FTGoogleGeocodeRequest.m */; };
 		4C5760F213C5CDBD0049371F /* FTLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C5760F013C5CDBD0049371F /* FTLog.h */; };
 		4C5760F313C5CDBD0049371F /* FTLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5760F113C5CDBD0049371F /* FTLog.m */; };
 		4C5760F413C5CDBD0049371F /* FTLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5760F113C5CDBD0049371F /* FTLog.m */; };
@@ -94,6 +102,14 @@
 		4C5761A813CAE93B0049371F /* FTBlockerShadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5761A613CAE93B0049371F /* FTBlockerShadeView.m */; };
 		4C57633D13CB8E170049371F /* FTCarouselView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C57633B13CB8E170049371F /* FTCarouselView.h */; };
 		4C57633E13CB8E170049371F /* FTCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C57633C13CB8E170049371F /* FTCarouselView.m */; };
+		4C684DAD13D5D76E0074E3C2 /* FTDomainObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C684DA913D5D76E0074E3C2 /* FTDomainObject.h */; };
+		4C684DAE13D5D76E0074E3C2 /* FTDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C684DAA13D5D76E0074E3C2 /* FTDomainObject.m */; };
+		4C684DAF13D5D76E0074E3C2 /* FTDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C684DAA13D5D76E0074E3C2 /* FTDomainObject.m */; };
+		4C684DB013D5D76E0074E3C2 /* FTStorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C684DAB13D5D76E0074E3C2 /* FTStorageService.h */; };
+		4C684DB113D5D76E0074E3C2 /* FTStorageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C684DAC13D5D76E0074E3C2 /* FTStorageService.m */; };
+		4C684DB213D5D76E0074E3C2 /* FTStorageService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C684DAC13D5D76E0074E3C2 /* FTStorageService.m */; };
+		4C684DB913D5D94C0074E3C2 /* FTEditTextLineViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C684DB713D5D94C0074E3C2 /* FTEditTextLineViewController.h */; };
+		4C684DBA13D5D94C0074E3C2 /* FTEditTextLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C684DB813D5D94C0074E3C2 /* FTEditTextLineViewController.m */; };
 		4C6F5F3113C1B5E400EECED4 /* FTProject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F5F2F13C1B5E400EECED4 /* FTProject.h */; };
 		4C6F5F3213C1B5E400EECED4 /* FTProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F5F3013C1B5E400EECED4 /* FTProject.m */; };
 		4C6F5F4F13C45CA100EECED4 /* FTAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */; };
@@ -249,12 +265,48 @@
 		4C85BC8D13BB18BB00CB7FCA /* FTError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC8B13BB18BB00CB7FCA /* FTError.h */; };
 		4C85BC8E13BB18BB00CB7FCA /* FTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC8C13BB18BB00CB7FCA /* FTError.m */; };
 		4C85BC8F13BB18BB00CB7FCA /* FTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC8C13BB18BB00CB7FCA /* FTError.m */; };
+		4C85BC9C13BB5D4000CB7FCA /* FTSystemKillSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */; };
 		4C85BC9D13BB5D4000CB7FCA /* FTSystemKillSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */; };
-		6813CB9113D5BF76003C0512 /* FTSystemKillSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */; settings = {ATTRIBUTES = (); }; };
+		4CB6E1CF13D5A3A7002FEC0A /* FTTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E1CD13D5A3A7002FEC0A /* FTTableViewCell.h */; };
+		4CB6E1D013D5A3A7002FEC0A /* FTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E1CE13D5A3A7002FEC0A /* FTTableViewCell.m */; };
+		4CB6E1F913D5D37C002FEC0A /* FTSimpleDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */; };
+		4CB6E1FA13D5D37C002FEC0A /* FTSimpleDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E1F813D5D37C002FEC0A /* FTSimpleDB.m */; };
+		4CB6E1FB13D5D37C002FEC0A /* FTSimpleDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E1F813D5D37C002FEC0A /* FTSimpleDB.m */; };
+		4CB6E1FE13D5D442002FEC0A /* UIScrollView+Layout.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E1FC13D5D442002FEC0A /* UIScrollView+Layout.h */; };
+		4CB6E1FF13D5D442002FEC0A /* UIScrollView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E1FD13D5D442002FEC0A /* UIScrollView+Layout.m */; };
+		4CB6E21213D5D499002FEC0A /* NSData+Encryption.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20013D5D496002FEC0A /* NSData+Encryption.h */; };
+		4CB6E21313D5D499002FEC0A /* NSData+Encryption.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20113D5D496002FEC0A /* NSData+Encryption.m */; };
+		4CB6E21413D5D499002FEC0A /* NSDataAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20213D5D496002FEC0A /* NSDataAdditions.h */; };
+		4CB6E21513D5D499002FEC0A /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20313D5D497002FEC0A /* NSDataAdditions.m */; };
+		4CB6E21613D5D499002FEC0A /* NSDate+ISO8601.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20413D5D497002FEC0A /* NSDate+ISO8601.h */; };
+		4CB6E21713D5D499002FEC0A /* NSDate+ISO8601.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20513D5D497002FEC0A /* NSDate+ISO8601.m */; };
+		4CB6E21813D5D499002FEC0A /* NSDate+Summarise.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20613D5D497002FEC0A /* NSDate+Summarise.h */; };
+		4CB6E21913D5D499002FEC0A /* NSDate+Summarise.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20713D5D497002FEC0A /* NSDate+Summarise.m */; };
+		4CB6E21A13D5D499002FEC0A /* NSDictionary+KeyValuePair.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20813D5D497002FEC0A /* NSDictionary+KeyValuePair.h */; };
+		4CB6E21B13D5D499002FEC0A /* NSDictionary+KeyValuePair.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20913D5D497002FEC0A /* NSDictionary+KeyValuePair.m */; };
+		4CB6E21C13D5D499002FEC0A /* NSMutableArray+StringSerialiser.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20A13D5D498002FEC0A /* NSMutableArray+StringSerialiser.h */; };
+		4CB6E21D13D5D499002FEC0A /* NSMutableArray+StringSerialiser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20B13D5D498002FEC0A /* NSMutableArray+StringSerialiser.m */; };
+		4CB6E21E13D5D499002FEC0A /* NSNumber+Comparison.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20C13D5D498002FEC0A /* NSNumber+Comparison.h */; };
+		4CB6E21F13D5D499002FEC0A /* NSNumber+Comparison.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20D13D5D498002FEC0A /* NSNumber+Comparison.m */; };
+		4CB6E22013D5D499002FEC0A /* NSString+Base64Encoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20E13D5D498002FEC0A /* NSString+Base64Encoding.h */; };
+		4CB6E22113D5D499002FEC0A /* NSString+Base64Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20F13D5D498002FEC0A /* NSString+Base64Encoding.m */; };
+		4CB6E22213D5D499002FEC0A /* NSString+SHA1.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E21013D5D498002FEC0A /* NSString+SHA1.h */; };
+		4CB6E22313D5D499002FEC0A /* NSString+SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E21113D5D499002FEC0A /* NSString+SHA1.m */; };
+		4CB6E23213D5D59E002FEC0A /* crypt.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E22713D5D59E002FEC0A /* crypt.h */; };
+		4CB6E23313D5D59E002FEC0A /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E22813D5D59E002FEC0A /* ioapi.c */; };
+		4CB6E23413D5D59E002FEC0A /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E22913D5D59E002FEC0A /* ioapi.h */; };
+		4CB6E23513D5D59E002FEC0A /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E22A13D5D59E002FEC0A /* mztools.c */; };
+		4CB6E23613D5D59E002FEC0A /* mztools.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E22B13D5D59E002FEC0A /* mztools.h */; };
+		4CB6E23713D5D59E002FEC0A /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E22C13D5D59E002FEC0A /* unzip.c */; };
+		4CB6E23813D5D59E002FEC0A /* unzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E22D13D5D59E002FEC0A /* unzip.h */; };
+		4CB6E23913D5D59E002FEC0A /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E22E13D5D59E002FEC0A /* zip.c */; };
+		4CB6E23A13D5D59E002FEC0A /* zip.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E22F13D5D59E002FEC0A /* zip.h */; };
+		4CB6E23B13D5D59E002FEC0A /* ZipArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E23013D5D59E002FEC0A /* ZipArchive.h */; };
+		4CB6E23C13D5D59E002FEC0A /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E23113D5D59E002FEC0A /* ZipArchive.mm */; };
+		4CB6E24813D5D672002FEC0A /* FTCacheService.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E24613D5D672002FEC0A /* FTCacheService.h */; };
+		4CB6E24913D5D672002FEC0A /* FTCacheService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E24713D5D672002FEC0A /* FTCacheService.m */; };
 		6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */; };
 		6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */; };
-		6861789D13D071C600F57408 /* FTGoogleGeocodeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861789B13D071C600F57408 /* FTGoogleGeocodeRequest.h */; };
-		6861789E13D071C600F57408 /* FTGoogleGeocodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861789C13D071C600F57408 /* FTGoogleGeocodeRequest.m */; };
 		68DF4E2A13CEF9D200B67940 /* FTData.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DF4E2213CEF9D200B67940 /* FTData.h */; };
 		68DF4E2B13CEF9D200B67940 /* FTData.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DF4E2313CEF9D200B67940 /* FTData.m */; };
 		68DF4E2C13CEF9D200B67940 /* FTDataJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DF4E2413CEF9D200B67940 /* FTDataJson.h */; };
@@ -334,6 +386,14 @@
 		4C03667213BA0D6000E8FA09 /* FTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTViewController.m; sourceTree = "<group>"; };
 		4C40309F13BEA2A000E6A4A2 /* FTLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLang.h; sourceTree = "<group>"; };
 		4C4030A013BEA2A000E6A4A2 /* FTLang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLang.m; sourceTree = "<group>"; };
+		4C4A0CF213D0CC9300D6581A /* FTEditableElementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTEditableElementView.h; sourceTree = "<group>"; };
+		4C4A0CF313D0CC9300D6581A /* FTEditableElementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTEditableElementView.m; sourceTree = "<group>"; };
+		4C4A0CF413D0CC9300D6581A /* FTEditableImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTEditableImageView.h; sourceTree = "<group>"; };
+		4C4A0CF513D0CC9300D6581A /* FTEditableImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTEditableImageView.m; sourceTree = "<group>"; };
+		4C4A0CF613D0CC9300D6581A /* FTEditableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTEditableLabel.h; sourceTree = "<group>"; };
+		4C4A0CF713D0CC9300D6581A /* FTEditableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTEditableLabel.m; sourceTree = "<group>"; };
+		4C4A0CF813D0CC9300D6581A /* FTGoogleGeocodeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGoogleGeocodeRequest.h; path = ../FTLibrary/FTGoogleGeocodeRequest.h; sourceTree = "<group>"; };
+		4C4A0CF913D0CC9300D6581A /* FTGoogleGeocodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGoogleGeocodeRequest.m; path = ../FTLibrary/FTGoogleGeocodeRequest.m; sourceTree = "<group>"; };
 		4C5760F013C5CDBD0049371F /* FTLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLog.h; sourceTree = "<group>"; };
 		4C5760F113C5CDBD0049371F /* FTLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLog.m; sourceTree = "<group>"; };
 		4C57611F13C5E7770049371F /* FTProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProgressView.h; sourceTree = "<group>"; };
@@ -342,6 +402,12 @@
 		4C5761A613CAE93B0049371F /* FTBlockerShadeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTBlockerShadeView.m; sourceTree = "<group>"; };
 		4C57633B13CB8E170049371F /* FTCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCarouselView.h; sourceTree = "<group>"; };
 		4C57633C13CB8E170049371F /* FTCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCarouselView.m; sourceTree = "<group>"; };
+		4C684DA913D5D76E0074E3C2 /* FTDomainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTDomainObject.h; path = FTLibrary/FTDomainObject.h; sourceTree = SOURCE_ROOT; };
+		4C684DAA13D5D76E0074E3C2 /* FTDomainObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTDomainObject.m; path = FTLibrary/FTDomainObject.m; sourceTree = SOURCE_ROOT; };
+		4C684DAB13D5D76E0074E3C2 /* FTStorageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTStorageService.h; path = FTLibrary/FTStorageService.h; sourceTree = SOURCE_ROOT; };
+		4C684DAC13D5D76E0074E3C2 /* FTStorageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTStorageService.m; path = FTLibrary/FTStorageService.m; sourceTree = SOURCE_ROOT; };
+		4C684DB713D5D94C0074E3C2 /* FTEditTextLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTEditTextLineViewController.h; sourceTree = "<group>"; };
+		4C684DB813D5D94C0074E3C2 /* FTEditTextLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTEditTextLineViewController.m; sourceTree = "<group>"; };
 		4C6F5F2F13C1B5E400EECED4 /* FTProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProject.h; sourceTree = "<group>"; };
 		4C6F5F3013C1B5E400EECED4 /* FTProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProject.m; sourceTree = "<group>"; };
 		4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAppDelegate.h; sourceTree = "<group>"; };
@@ -457,10 +523,45 @@
 		4C85BC8C13BB18BB00CB7FCA /* FTError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTError.m; sourceTree = "<group>"; };
 		4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSystemKillSwitch.h; sourceTree = "<group>"; };
 		4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSystemKillSwitch.m; sourceTree = "<group>"; };
+		4CB6E1CD13D5A3A7002FEC0A /* FTTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTableViewCell.h; sourceTree = "<group>"; };
+		4CB6E1CE13D5A3A7002FEC0A /* FTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTableViewCell.m; sourceTree = "<group>"; };
+		4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTSimpleDB.h; path = FTLibrary/FTSimpleDB.h; sourceTree = SOURCE_ROOT; };
+		4CB6E1F813D5D37C002FEC0A /* FTSimpleDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTSimpleDB.m; path = FTLibrary/FTSimpleDB.m; sourceTree = SOURCE_ROOT; };
+		4CB6E1FC13D5D442002FEC0A /* UIScrollView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Layout.h"; sourceTree = "<group>"; };
+		4CB6E1FD13D5D442002FEC0A /* UIScrollView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+Layout.m"; sourceTree = "<group>"; };
+		4CB6E20013D5D496002FEC0A /* NSData+Encryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Encryption.h"; sourceTree = "<group>"; };
+		4CB6E20113D5D496002FEC0A /* NSData+Encryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Encryption.m"; sourceTree = "<group>"; };
+		4CB6E20213D5D496002FEC0A /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSDataAdditions.h; path = ../FTLibrary/NSDataAdditions.h; sourceTree = "<group>"; };
+		4CB6E20313D5D497002FEC0A /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDataAdditions.m; path = ../FTLibrary/NSDataAdditions.m; sourceTree = "<group>"; };
+		4CB6E20413D5D497002FEC0A /* NSDate+ISO8601.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ISO8601.h"; sourceTree = "<group>"; };
+		4CB6E20513D5D497002FEC0A /* NSDate+ISO8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ISO8601.m"; sourceTree = "<group>"; };
+		4CB6E20613D5D497002FEC0A /* NSDate+Summarise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Summarise.h"; sourceTree = "<group>"; };
+		4CB6E20713D5D497002FEC0A /* NSDate+Summarise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Summarise.m"; sourceTree = "<group>"; };
+		4CB6E20813D5D497002FEC0A /* NSDictionary+KeyValuePair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+KeyValuePair.h"; sourceTree = "<group>"; };
+		4CB6E20913D5D497002FEC0A /* NSDictionary+KeyValuePair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+KeyValuePair.m"; sourceTree = "<group>"; };
+		4CB6E20A13D5D498002FEC0A /* NSMutableArray+StringSerialiser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+StringSerialiser.h"; sourceTree = "<group>"; };
+		4CB6E20B13D5D498002FEC0A /* NSMutableArray+StringSerialiser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+StringSerialiser.m"; sourceTree = "<group>"; };
+		4CB6E20C13D5D498002FEC0A /* NSNumber+Comparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Comparison.h"; sourceTree = "<group>"; };
+		4CB6E20D13D5D498002FEC0A /* NSNumber+Comparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+Comparison.m"; sourceTree = "<group>"; };
+		4CB6E20E13D5D498002FEC0A /* NSString+Base64Encoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64Encoding.h"; sourceTree = "<group>"; };
+		4CB6E20F13D5D498002FEC0A /* NSString+Base64Encoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64Encoding.m"; sourceTree = "<group>"; };
+		4CB6E21013D5D498002FEC0A /* NSString+SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SHA1.h"; sourceTree = "<group>"; };
+		4CB6E21113D5D499002FEC0A /* NSString+SHA1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SHA1.m"; sourceTree = "<group>"; };
+		4CB6E22713D5D59E002FEC0A /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		4CB6E22813D5D59E002FEC0A /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		4CB6E22913D5D59E002FEC0A /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		4CB6E22A13D5D59E002FEC0A /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		4CB6E22B13D5D59E002FEC0A /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		4CB6E22C13D5D59E002FEC0A /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		4CB6E22D13D5D59E002FEC0A /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		4CB6E22E13D5D59E002FEC0A /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		4CB6E22F13D5D59E002FEC0A /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		4CB6E23013D5D59E002FEC0A /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		4CB6E23113D5D59E002FEC0A /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
+		4CB6E24613D5D672002FEC0A /* FTCacheService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTCacheService.h; path = FTLibrary/FTCacheService.h; sourceTree = SOURCE_ROOT; };
+		4CB6E24713D5D672002FEC0A /* FTCacheService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTCacheService.m; path = FTLibrary/FTCacheService.m; sourceTree = SOURCE_ROOT; };
 		6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGooglePlaceRequest.h; path = FTLibrary/FTGooglePlaceRequest.h; sourceTree = SOURCE_ROOT; };
 		6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGooglePlaceRequest.m; path = FTLibrary/FTGooglePlaceRequest.m; sourceTree = SOURCE_ROOT; };
-		6861789B13D071C600F57408 /* FTGoogleGeocodeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGoogleGeocodeRequest.h; path = FTLibrary/FTGoogleGeocodeRequest.h; sourceTree = SOURCE_ROOT; };
-		6861789C13D071C600F57408 /* FTGoogleGeocodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGoogleGeocodeRequest.m; path = FTLibrary/FTGoogleGeocodeRequest.m; sourceTree = SOURCE_ROOT; };
 		68DF4E2213CEF9D200B67940 /* FTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTData.h; path = FTLibrary/FTData.h; sourceTree = SOURCE_ROOT; };
 		68DF4E2313CEF9D200B67940 /* FTData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTData.m; path = FTLibrary/FTData.m; sourceTree = SOURCE_ROOT; };
 		68DF4E2413CEF9D200B67940 /* FTDataJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTDataJson.h; path = FTLibrary/FTDataJson.h; sourceTree = SOURCE_ROOT; };
@@ -518,7 +619,6 @@
 			children = (
 				4C03655313BA023A00E8FA09 /* FTLibrary */,
 				4C03655413BA023A00E8FA09 /* Supporting Files */,
-				4C03656413BA023A00E8FA09 /* FTLibraryTests */,
 				4C03655013BA023A00E8FA09 /* Frameworks */,
 				4C03654F13BA023A00E8FA09 /* Products */,
 			);
@@ -564,6 +664,7 @@
 		4C03655313BA023A00E8FA09 /* FTLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				4CB6E1CB13D5A392002FEC0A /* Cells */,
 				4C85BC9913BB5D0700CB7FCA /* System */,
 				4C85BB0413BA4AFD00CB7FCA /* Thirdparty */,
 				4C85BC7513BB156100CB7FCA /* Data */,
@@ -596,7 +697,7 @@
 				4C03656513BA023A00E8FA09 /* Supporting Files */,
 			);
 			path = FTLibraryTests;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		4C03656513BA023A00E8FA09 /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -623,6 +724,7 @@
 		4C03660913BA095400E8FA09 /* Text */ = {
 			isa = PBXGroup;
 			children = (
+				4C03656413BA023A00E8FA09 /* FTLibraryTests */,
 				4C0365F713BA094300E8FA09 /* FTText.h */,
 				4C0365F813BA094300E8FA09 /* FTText.m */,
 				4C0365F913BA094300E8FA09 /* FTValidationText.h */,
@@ -636,6 +738,24 @@
 		4C03661213BA0B1F00E8FA09 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				4CB6E20013D5D496002FEC0A /* NSData+Encryption.h */,
+				4CB6E20113D5D496002FEC0A /* NSData+Encryption.m */,
+				4CB6E20413D5D497002FEC0A /* NSDate+ISO8601.h */,
+				4CB6E20513D5D497002FEC0A /* NSDate+ISO8601.m */,
+				4CB6E20613D5D497002FEC0A /* NSDate+Summarise.h */,
+				4CB6E20713D5D497002FEC0A /* NSDate+Summarise.m */,
+				4CB6E20813D5D497002FEC0A /* NSDictionary+KeyValuePair.h */,
+				4CB6E20913D5D497002FEC0A /* NSDictionary+KeyValuePair.m */,
+				4CB6E20A13D5D498002FEC0A /* NSMutableArray+StringSerialiser.h */,
+				4CB6E20B13D5D498002FEC0A /* NSMutableArray+StringSerialiser.m */,
+				4CB6E20C13D5D498002FEC0A /* NSNumber+Comparison.h */,
+				4CB6E20D13D5D498002FEC0A /* NSNumber+Comparison.m */,
+				4CB6E20E13D5D498002FEC0A /* NSString+Base64Encoding.h */,
+				4CB6E20F13D5D498002FEC0A /* NSString+Base64Encoding.m */,
+				4CB6E21013D5D498002FEC0A /* NSString+SHA1.h */,
+				4CB6E21113D5D499002FEC0A /* NSString+SHA1.m */,
+				4CB6E1FC13D5D442002FEC0A /* UIScrollView+Layout.h */,
+				4CB6E1FD13D5D442002FEC0A /* UIScrollView+Layout.m */,
 				4C03661313BA0B3000E8FA09 /* NSArray+Tools.h */,
 				4C03661413BA0B3000E8FA09 /* NSArray+Tools.m */,
 				4C03661513BA0B3000E8FA09 /* NSMutableArray+Tools.h */,
@@ -682,6 +802,7 @@
 		4C03667013BA0D4300E8FA09 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4C684DBB13D5D9510074E3C2 /* Edit controllers */,
 				4C57612513C5EA910049371F /* Basic view controller */,
 			);
 			name = Controllers;
@@ -696,6 +817,19 @@
 			name = Localizations;
 			sourceTree = "<group>";
 		};
+		4C4A0D0313D0CC9800D6581A /* Editable elements */ = {
+			isa = PBXGroup;
+			children = (
+				4C4A0CF213D0CC9300D6581A /* FTEditableElementView.h */,
+				4C4A0CF313D0CC9300D6581A /* FTEditableElementView.m */,
+				4C4A0CF413D0CC9300D6581A /* FTEditableImageView.h */,
+				4C4A0CF513D0CC9300D6581A /* FTEditableImageView.m */,
+				4C4A0CF613D0CC9300D6581A /* FTEditableLabel.h */,
+				4C4A0CF713D0CC9300D6581A /* FTEditableLabel.m */,
+			);
+			name = "Editable elements";
+			sourceTree = "<group>";
+		};
 		4C5760E613C5CAA00049371F /* Debugging */ = {
 			isa = PBXGroup;
 			children = (
@@ -708,6 +842,7 @@
 		4C57611D13C5E7570049371F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4C4A0D0313D0CC9800D6581A /* Editable elements */,
 				4C57633913CB8E090049371F /* iCarousel */,
 				4C5761A413CAE9130049371F /* Alert view */,
 				4C5761A113CAE8CC0049371F /* Shade view */,
@@ -767,6 +902,23 @@
 			name = iCarousel;
 			sourceTree = "<group>";
 		};
+		4C684DBB13D5D9510074E3C2 /* Edit controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4C684DBC13D5D95B0074E3C2 /* One line copy */,
+			);
+			name = "Edit controllers";
+			sourceTree = "<group>";
+		};
+		4C684DBC13D5D95B0074E3C2 /* One line copy */ = {
+			isa = PBXGroup;
+			children = (
+				4C684DB713D5D94C0074E3C2 /* FTEditTextLineViewController.h */,
+				4C684DB813D5D94C0074E3C2 /* FTEditTextLineViewController.m */,
+			);
+			name = "One line copy";
+			sourceTree = "<group>";
+		};
 		4C6F5F4C13C45C7200EECED4 /* App delegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -792,6 +944,7 @@
 		4C85BB0413BA4AFD00CB7FCA /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				4CB6E22513D5D59E002FEC0A /* ZipArchive */,
 				4C85BC3913BA4E5D00CB7FCA /* Facebook */,
 				4C85BC3313BA4CF200CB7FCA /* Reachability */,
 				4C85BB0513BA4AFD00CB7FCA /* ASIHTTPRequest */,
@@ -940,15 +1093,11 @@
 		4C85BC7513BB156100CB7FCA /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				4CB6E23D13D5D603002FEC0A /* Core data */,
+				4CB6E22413D5D4CF002FEC0A /* NSData */,
+				4CB6E1F113D5D2FF002FEC0A /* Simple DB */,
+				4CB6E1F013D5D2E8002FEC0A /* Data + parsing */,
 				6861785B13D03B5900F57408 /* Google */,
-				68DF4E2213CEF9D200B67940 /* FTData.h */,
-				68DF4E2313CEF9D200B67940 /* FTData.m */,
-				68DF4E2413CEF9D200B67940 /* FTDataJson.h */,
-				68DF4E2513CEF9D200B67940 /* FTDataJson.m */,
-				68DF4E2613CEF9D200B67940 /* FTDataPlist.h */,
-				68DF4E2713CEF9D200B67940 /* FTDataPlist.m */,
-				68DF4E2813CEF9D200B67940 /* FTDataXml.h */,
-				68DF4E2913CEF9D200B67940 /* FTDataXml.m */,
 			);
 			name = Data;
 			path = ../Thirdparty;
@@ -957,6 +1106,8 @@
 		4C85BC7613BB156A00CB7FCA /* Caching */ = {
 			isa = PBXGroup;
 			children = (
+				4CB6E24613D5D672002FEC0A /* FTCacheService.h */,
+				4CB6E24713D5D672002FEC0A /* FTCacheService.m */,
 			);
 			name = Caching;
 			path = ../Thirdparty;
@@ -1017,11 +1168,90 @@
 			name = System;
 			sourceTree = "<group>";
 		};
+		4CB6E1CB13D5A392002FEC0A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4CB6E1CD13D5A3A7002FEC0A /* FTTableViewCell.h */,
+				4CB6E1CE13D5A3A7002FEC0A /* FTTableViewCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		4CB6E1F013D5D2E8002FEC0A /* Data + parsing */ = {
+			isa = PBXGroup;
+			children = (
+				68DF4E2213CEF9D200B67940 /* FTData.h */,
+				68DF4E2313CEF9D200B67940 /* FTData.m */,
+				68DF4E2413CEF9D200B67940 /* FTDataJson.h */,
+				68DF4E2513CEF9D200B67940 /* FTDataJson.m */,
+				68DF4E2613CEF9D200B67940 /* FTDataPlist.h */,
+				68DF4E2713CEF9D200B67940 /* FTDataPlist.m */,
+				68DF4E2813CEF9D200B67940 /* FTDataXml.h */,
+				68DF4E2913CEF9D200B67940 /* FTDataXml.m */,
+			);
+			name = "Data + parsing";
+			sourceTree = "<group>";
+		};
+		4CB6E1F113D5D2FF002FEC0A /* Simple DB */ = {
+			isa = PBXGroup;
+			children = (
+				4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */,
+				4CB6E1F813D5D37C002FEC0A /* FTSimpleDB.m */,
+			);
+			name = "Simple DB";
+			sourceTree = "<group>";
+		};
+		4CB6E22413D5D4CF002FEC0A /* NSData */ = {
+			isa = PBXGroup;
+			children = (
+				4CB6E20213D5D496002FEC0A /* NSDataAdditions.h */,
+				4CB6E20313D5D497002FEC0A /* NSDataAdditions.m */,
+			);
+			name = NSData;
+			sourceTree = "<group>";
+		};
+		4CB6E22513D5D59E002FEC0A /* ZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				4CB6E22613D5D59E002FEC0A /* minizip */,
+				4CB6E23013D5D59E002FEC0A /* ZipArchive.h */,
+				4CB6E23113D5D59E002FEC0A /* ZipArchive.mm */,
+			);
+			path = ZipArchive;
+			sourceTree = "<group>";
+		};
+		4CB6E22613D5D59E002FEC0A /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				4CB6E22713D5D59E002FEC0A /* crypt.h */,
+				4CB6E22813D5D59E002FEC0A /* ioapi.c */,
+				4CB6E22913D5D59E002FEC0A /* ioapi.h */,
+				4CB6E22A13D5D59E002FEC0A /* mztools.c */,
+				4CB6E22B13D5D59E002FEC0A /* mztools.h */,
+				4CB6E22C13D5D59E002FEC0A /* unzip.c */,
+				4CB6E22D13D5D59E002FEC0A /* unzip.h */,
+				4CB6E22E13D5D59E002FEC0A /* zip.c */,
+				4CB6E22F13D5D59E002FEC0A /* zip.h */,
+			);
+			path = minizip;
+			sourceTree = "<group>";
+		};
+		4CB6E23D13D5D603002FEC0A /* Core data */ = {
+			isa = PBXGroup;
+			children = (
+				4C684DA913D5D76E0074E3C2 /* FTDomainObject.h */,
+				4C684DAA13D5D76E0074E3C2 /* FTDomainObject.m */,
+				4C684DAB13D5D76E0074E3C2 /* FTStorageService.h */,
+				4C684DAC13D5D76E0074E3C2 /* FTStorageService.m */,
+			);
+			name = "Core data";
+			sourceTree = "<group>";
+		};
 		6861785B13D03B5900F57408 /* Google */ = {
 			isa = PBXGroup;
 			children = (
-				6861789B13D071C600F57408 /* FTGoogleGeocodeRequest.h */,
-				6861789C13D071C600F57408 /* FTGoogleGeocodeRequest.m */,
+				4C4A0CF813D0CC9300D6581A /* FTGoogleGeocodeRequest.h */,
+				4C4A0CF913D0CC9300D6581A /* FTGoogleGeocodeRequest.m */,
 				6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */,
 				6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */,
 			);
@@ -1107,6 +1337,7 @@
 				4C85BC4C13BA4E5D00CB7FCA /* FBLoginDialog.h in Headers */,
 				4C85BC4F13BA4E5D00CB7FCA /* FBRequest.h in Headers */,
 				4C85BC8D13BB18BB00CB7FCA /* FTError.h in Headers */,
+				4C85BC9C13BB5D4000CB7FCA /* FTSystemKillSwitch.h in Headers */,
 				4C4030A113BEA2A000E6A4A2 /* FTLang.h in Headers */,
 				4C6F5F3113C1B5E400EECED4 /* FTProject.h in Headers */,
 				4C6F5F4F13C45CA100EECED4 /* FTAppDelegate.h in Headers */,
@@ -1119,8 +1350,32 @@
 				68DF4E2E13CEF9D200B67940 /* FTDataPlist.h in Headers */,
 				68DF4E3013CEF9D200B67940 /* FTDataXml.h in Headers */,
 				6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */,
-				6861789D13D071C600F57408 /* FTGoogleGeocodeRequest.h in Headers */,
-				6813CB9113D5BF76003C0512 /* FTSystemKillSwitch.h in Headers */,
+				4C4A0CFA13D0CC9300D6581A /* FTEditableElementView.h in Headers */,
+				4C4A0CFC13D0CC9300D6581A /* FTEditableImageView.h in Headers */,
+				4C4A0CFE13D0CC9300D6581A /* FTEditableLabel.h in Headers */,
+				4C4A0D0013D0CC9300D6581A /* FTGoogleGeocodeRequest.h in Headers */,
+				4CB6E1CF13D5A3A7002FEC0A /* FTTableViewCell.h in Headers */,
+				4CB6E1F913D5D37C002FEC0A /* FTSimpleDB.h in Headers */,
+				4CB6E1FE13D5D442002FEC0A /* UIScrollView+Layout.h in Headers */,
+				4CB6E21213D5D499002FEC0A /* NSData+Encryption.h in Headers */,
+				4CB6E21413D5D499002FEC0A /* NSDataAdditions.h in Headers */,
+				4CB6E21613D5D499002FEC0A /* NSDate+ISO8601.h in Headers */,
+				4CB6E21813D5D499002FEC0A /* NSDate+Summarise.h in Headers */,
+				4CB6E21A13D5D499002FEC0A /* NSDictionary+KeyValuePair.h in Headers */,
+				4CB6E21C13D5D499002FEC0A /* NSMutableArray+StringSerialiser.h in Headers */,
+				4CB6E21E13D5D499002FEC0A /* NSNumber+Comparison.h in Headers */,
+				4CB6E22013D5D499002FEC0A /* NSString+Base64Encoding.h in Headers */,
+				4CB6E22213D5D499002FEC0A /* NSString+SHA1.h in Headers */,
+				4CB6E23213D5D59E002FEC0A /* crypt.h in Headers */,
+				4CB6E23413D5D59E002FEC0A /* ioapi.h in Headers */,
+				4CB6E23613D5D59E002FEC0A /* mztools.h in Headers */,
+				4CB6E23813D5D59E002FEC0A /* unzip.h in Headers */,
+				4CB6E23A13D5D59E002FEC0A /* zip.h in Headers */,
+				4CB6E23B13D5D59E002FEC0A /* ZipArchive.h in Headers */,
+				4CB6E24813D5D672002FEC0A /* FTCacheService.h in Headers */,
+				4C684DAD13D5D76E0074E3C2 /* FTDomainObject.h in Headers */,
+				4C684DB013D5D76E0074E3C2 /* FTStorageService.h in Headers */,
+				4C684DB913D5D94C0074E3C2 /* FTEditTextLineViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1300,7 +1555,31 @@
 				68DF4E2F13CEF9D200B67940 /* FTDataPlist.m in Sources */,
 				68DF4E3113CEF9D200B67940 /* FTDataXml.m in Sources */,
 				6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */,
-				6861789E13D071C600F57408 /* FTGoogleGeocodeRequest.m in Sources */,
+				4C4A0CFB13D0CC9300D6581A /* FTEditableElementView.m in Sources */,
+				4C4A0CFD13D0CC9300D6581A /* FTEditableImageView.m in Sources */,
+				4C4A0CFF13D0CC9300D6581A /* FTEditableLabel.m in Sources */,
+				4C4A0D0113D0CC9300D6581A /* FTGoogleGeocodeRequest.m in Sources */,
+				4CB6E1D013D5A3A7002FEC0A /* FTTableViewCell.m in Sources */,
+				4CB6E1FA13D5D37C002FEC0A /* FTSimpleDB.m in Sources */,
+				4CB6E1FF13D5D442002FEC0A /* UIScrollView+Layout.m in Sources */,
+				4CB6E21313D5D499002FEC0A /* NSData+Encryption.m in Sources */,
+				4CB6E21513D5D499002FEC0A /* NSDataAdditions.m in Sources */,
+				4CB6E21713D5D499002FEC0A /* NSDate+ISO8601.m in Sources */,
+				4CB6E21913D5D499002FEC0A /* NSDate+Summarise.m in Sources */,
+				4CB6E21B13D5D499002FEC0A /* NSDictionary+KeyValuePair.m in Sources */,
+				4CB6E21D13D5D499002FEC0A /* NSMutableArray+StringSerialiser.m in Sources */,
+				4CB6E21F13D5D499002FEC0A /* NSNumber+Comparison.m in Sources */,
+				4CB6E22113D5D499002FEC0A /* NSString+Base64Encoding.m in Sources */,
+				4CB6E22313D5D499002FEC0A /* NSString+SHA1.m in Sources */,
+				4CB6E23313D5D59E002FEC0A /* ioapi.c in Sources */,
+				4CB6E23513D5D59E002FEC0A /* mztools.c in Sources */,
+				4CB6E23713D5D59E002FEC0A /* unzip.c in Sources */,
+				4CB6E23913D5D59E002FEC0A /* zip.c in Sources */,
+				4CB6E23C13D5D59E002FEC0A /* ZipArchive.mm in Sources */,
+				4CB6E24913D5D672002FEC0A /* FTCacheService.m in Sources */,
+				4C684DAE13D5D76E0074E3C2 /* FTDomainObject.m in Sources */,
+				4C684DB113D5D76E0074E3C2 /* FTStorageService.m in Sources */,
+				4C684DBA13D5D94C0074E3C2 /* FTEditTextLineViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1374,6 +1653,9 @@
 				4C85BC8F13BB18BB00CB7FCA /* FTError.m in Sources */,
 				4C5760F413C5CDBD0049371F /* FTLog.m in Sources */,
 				4C57612313C5E7770049371F /* FTProgressView.m in Sources */,
+				4CB6E1FB13D5D37C002FEC0A /* FTSimpleDB.m in Sources */,
+				4C684DAF13D5D76E0074E3C2 /* FTDomainObject.m in Sources */,
+				4C684DB213D5D76E0074E3C2 /* FTStorageService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
