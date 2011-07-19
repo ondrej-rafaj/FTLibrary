@@ -530,7 +530,6 @@
 			children = (
 				4C03655313BA023A00E8FA09 /* FTLibrary */,
 				4C03655413BA023A00E8FA09 /* Supporting Files */,
-				4C03656413BA023A00E8FA09 /* FTLibraryTests */,
 				4C03655013BA023A00E8FA09 /* Frameworks */,
 				4C03654F13BA023A00E8FA09 /* Products */,
 			);
@@ -610,7 +609,7 @@
 				4C03656513BA023A00E8FA09 /* Supporting Files */,
 			);
 			path = FTLibraryTests;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		4C03656513BA023A00E8FA09 /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -637,6 +636,7 @@
 		4C03660913BA095400E8FA09 /* Text */ = {
 			isa = PBXGroup;
 			children = (
+				4C03656413BA023A00E8FA09 /* FTLibraryTests */,
 				4C0365F713BA094300E8FA09 /* FTText.h */,
 				4C0365F813BA094300E8FA09 /* FTText.m */,
 				4C0365F913BA094300E8FA09 /* FTValidationText.h */,

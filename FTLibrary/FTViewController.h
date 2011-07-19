@@ -10,15 +10,15 @@
 #import <UIKit/UIKit.h>
 
 
-@interface FTViewController : UIViewController {
+@interface FTViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
     
 	UITableView *table;
 	
 	NSArray *data;
 	
+	UIImageView *backgroundView;
+	
 	BOOL isLandscape;
-    
-    UIImageView *backgroundView;
 	
 }
 
@@ -28,10 +28,18 @@
 
 @property (nonatomic, retain) UIImageView *backgroundView;
 
+@property (nonatomic) BOOL isLandscape;
+
 
 - (CGRect)fullscreenRect;
 
 - (void)setBackgroundWithImageName:(NSString *)imageName;
+
+- (void)doLayoutSubviews;
+
+- (void)createTableViewWithStyle:(UITableViewStyle)style andAddToTheMainView:(BOOL)addToView;
+- (void)createTableViewWithStyle:(UITableViewStyle)style;
+- (void)createTableView;
 
 
 @end
