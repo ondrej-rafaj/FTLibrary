@@ -104,6 +104,10 @@
 	return [data count];
 }
 
+- (void)configureCell:(FTTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+	
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	static NSString *cellIdentifier = @"FTBasicCell";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];

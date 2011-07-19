@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "FTTableViewCell.h"
 
 
 @interface FTViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
@@ -40,6 +41,8 @@
 - (void)createTableViewWithStyle:(UITableViewStyle)style andAddToTheMainView:(BOOL)addToView;
 - (void)createTableViewWithStyle:(UITableViewStyle)style;
 - (void)createTableView;
+
+- (void)configureCell:(FTTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 
 @end

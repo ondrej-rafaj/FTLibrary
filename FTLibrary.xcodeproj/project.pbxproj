@@ -259,6 +259,8 @@
 		4C85BC8F13BB18BB00CB7FCA /* FTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC8C13BB18BB00CB7FCA /* FTError.m */; };
 		4C85BC9C13BB5D4000CB7FCA /* FTSystemKillSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */; };
 		4C85BC9D13BB5D4000CB7FCA /* FTSystemKillSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */; };
+		4CB6E1CF13D5A3A7002FEC0A /* FTTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E1CD13D5A3A7002FEC0A /* FTTableViewCell.h */; };
+		4CB6E1D013D5A3A7002FEC0A /* FTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E1CE13D5A3A7002FEC0A /* FTTableViewCell.m */; };
 		6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */; };
 		6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */; };
 		68DF4E2A13CEF9D200B67940 /* FTData.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DF4E2213CEF9D200B67940 /* FTData.h */; };
@@ -471,6 +473,8 @@
 		4C85BC8C13BB18BB00CB7FCA /* FTError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTError.m; sourceTree = "<group>"; };
 		4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSystemKillSwitch.h; sourceTree = "<group>"; };
 		4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSystemKillSwitch.m; sourceTree = "<group>"; };
+		4CB6E1CD13D5A3A7002FEC0A /* FTTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTableViewCell.h; sourceTree = "<group>"; };
+		4CB6E1CE13D5A3A7002FEC0A /* FTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTableViewCell.m; sourceTree = "<group>"; };
 		6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGooglePlaceRequest.h; path = FTLibrary/FTGooglePlaceRequest.h; sourceTree = SOURCE_ROOT; };
 		6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGooglePlaceRequest.m; path = FTLibrary/FTGooglePlaceRequest.m; sourceTree = SOURCE_ROOT; };
 		68DF4E2213CEF9D200B67940 /* FTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTData.h; path = FTLibrary/FTData.h; sourceTree = SOURCE_ROOT; };
@@ -575,6 +579,7 @@
 		4C03655313BA023A00E8FA09 /* FTLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				4CB6E1CB13D5A392002FEC0A /* Cells */,
 				4C4A0CF813D0CC9300D6581A /* FTGoogleGeocodeRequest.h */,
 				4C4A0CF913D0CC9300D6581A /* FTGoogleGeocodeRequest.m */,
 				4C85BC9913BB5D0700CB7FCA /* System */,
@@ -1045,6 +1050,15 @@
 			name = System;
 			sourceTree = "<group>";
 		};
+		4CB6E1CB13D5A392002FEC0A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4CB6E1CD13D5A3A7002FEC0A /* FTTableViewCell.h */,
+				4CB6E1CE13D5A3A7002FEC0A /* FTTableViewCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		6861785B13D03B5900F57408 /* Google */ = {
 			isa = PBXGroup;
 			children = (
@@ -1150,6 +1164,7 @@
 				4C4A0CFC13D0CC9300D6581A /* FTEditableImageView.h in Headers */,
 				4C4A0CFE13D0CC9300D6581A /* FTEditableLabel.h in Headers */,
 				4C4A0D0013D0CC9300D6581A /* FTGoogleGeocodeRequest.h in Headers */,
+				4CB6E1CF13D5A3A7002FEC0A /* FTTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1333,6 +1348,7 @@
 				4C4A0CFD13D0CC9300D6581A /* FTEditableImageView.m in Sources */,
 				4C4A0CFF13D0CC9300D6581A /* FTEditableLabel.m in Sources */,
 				4C4A0D0113D0CC9300D6581A /* FTGoogleGeocodeRequest.m in Sources */,
+				4CB6E1D013D5A3A7002FEC0A /* FTTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
