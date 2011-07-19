@@ -284,6 +284,17 @@
 		4CB6E22113D5D499002FEC0A /* NSString+Base64Encoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20F13D5D498002FEC0A /* NSString+Base64Encoding.m */; };
 		4CB6E22213D5D499002FEC0A /* NSString+SHA1.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E21013D5D498002FEC0A /* NSString+SHA1.h */; };
 		4CB6E22313D5D499002FEC0A /* NSString+SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E21113D5D499002FEC0A /* NSString+SHA1.m */; };
+		4CB6E23213D5D59E002FEC0A /* crypt.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E22713D5D59E002FEC0A /* crypt.h */; };
+		4CB6E23313D5D59E002FEC0A /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E22813D5D59E002FEC0A /* ioapi.c */; };
+		4CB6E23413D5D59E002FEC0A /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E22913D5D59E002FEC0A /* ioapi.h */; };
+		4CB6E23513D5D59E002FEC0A /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E22A13D5D59E002FEC0A /* mztools.c */; };
+		4CB6E23613D5D59E002FEC0A /* mztools.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E22B13D5D59E002FEC0A /* mztools.h */; };
+		4CB6E23713D5D59E002FEC0A /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E22C13D5D59E002FEC0A /* unzip.c */; };
+		4CB6E23813D5D59E002FEC0A /* unzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E22D13D5D59E002FEC0A /* unzip.h */; };
+		4CB6E23913D5D59E002FEC0A /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E22E13D5D59E002FEC0A /* zip.c */; };
+		4CB6E23A13D5D59E002FEC0A /* zip.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E22F13D5D59E002FEC0A /* zip.h */; };
+		4CB6E23B13D5D59E002FEC0A /* ZipArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E23013D5D59E002FEC0A /* ZipArchive.h */; };
+		4CB6E23C13D5D59E002FEC0A /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E23113D5D59E002FEC0A /* ZipArchive.mm */; };
 		6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */; };
 		6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */; };
 		68DF4E2A13CEF9D200B67940 /* FTData.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DF4E2213CEF9D200B67940 /* FTData.h */; };
@@ -520,6 +531,17 @@
 		4CB6E20F13D5D498002FEC0A /* NSString+Base64Encoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64Encoding.m"; sourceTree = "<group>"; };
 		4CB6E21013D5D498002FEC0A /* NSString+SHA1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SHA1.h"; sourceTree = "<group>"; };
 		4CB6E21113D5D499002FEC0A /* NSString+SHA1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SHA1.m"; sourceTree = "<group>"; };
+		4CB6E22713D5D59E002FEC0A /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		4CB6E22813D5D59E002FEC0A /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		4CB6E22913D5D59E002FEC0A /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		4CB6E22A13D5D59E002FEC0A /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		4CB6E22B13D5D59E002FEC0A /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		4CB6E22C13D5D59E002FEC0A /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		4CB6E22D13D5D59E002FEC0A /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		4CB6E22E13D5D59E002FEC0A /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		4CB6E22F13D5D59E002FEC0A /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		4CB6E23013D5D59E002FEC0A /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		4CB6E23113D5D59E002FEC0A /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
 		6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGooglePlaceRequest.h; path = FTLibrary/FTGooglePlaceRequest.h; sourceTree = SOURCE_ROOT; };
 		6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGooglePlaceRequest.m; path = FTLibrary/FTGooglePlaceRequest.m; sourceTree = SOURCE_ROOT; };
 		68DF4E2213CEF9D200B67940 /* FTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTData.h; path = FTLibrary/FTData.h; sourceTree = SOURCE_ROOT; };
@@ -886,6 +908,7 @@
 		4C85BB0413BA4AFD00CB7FCA /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				4CB6E22513D5D59E002FEC0A /* ZipArchive */,
 				4C85BC3913BA4E5D00CB7FCA /* Facebook */,
 				4C85BC3313BA4CF200CB7FCA /* Reachability */,
 				4C85BB0513BA4AFD00CB7FCA /* ASIHTTPRequest */,
@@ -1148,6 +1171,32 @@
 			name = NSData;
 			sourceTree = "<group>";
 		};
+		4CB6E22513D5D59E002FEC0A /* ZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				4CB6E22613D5D59E002FEC0A /* minizip */,
+				4CB6E23013D5D59E002FEC0A /* ZipArchive.h */,
+				4CB6E23113D5D59E002FEC0A /* ZipArchive.mm */,
+			);
+			path = ZipArchive;
+			sourceTree = "<group>";
+		};
+		4CB6E22613D5D59E002FEC0A /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				4CB6E22713D5D59E002FEC0A /* crypt.h */,
+				4CB6E22813D5D59E002FEC0A /* ioapi.c */,
+				4CB6E22913D5D59E002FEC0A /* ioapi.h */,
+				4CB6E22A13D5D59E002FEC0A /* mztools.c */,
+				4CB6E22B13D5D59E002FEC0A /* mztools.h */,
+				4CB6E22C13D5D59E002FEC0A /* unzip.c */,
+				4CB6E22D13D5D59E002FEC0A /* unzip.h */,
+				4CB6E22E13D5D59E002FEC0A /* zip.c */,
+				4CB6E22F13D5D59E002FEC0A /* zip.h */,
+			);
+			path = minizip;
+			sourceTree = "<group>";
+		};
 		6861785B13D03B5900F57408 /* Google */ = {
 			isa = PBXGroup;
 			children = (
@@ -1267,6 +1316,12 @@
 				4CB6E21E13D5D499002FEC0A /* NSNumber+Comparison.h in Headers */,
 				4CB6E22013D5D499002FEC0A /* NSString+Base64Encoding.h in Headers */,
 				4CB6E22213D5D499002FEC0A /* NSString+SHA1.h in Headers */,
+				4CB6E23213D5D59E002FEC0A /* crypt.h in Headers */,
+				4CB6E23413D5D59E002FEC0A /* ioapi.h in Headers */,
+				4CB6E23613D5D59E002FEC0A /* mztools.h in Headers */,
+				4CB6E23813D5D59E002FEC0A /* unzip.h in Headers */,
+				4CB6E23A13D5D59E002FEC0A /* zip.h in Headers */,
+				4CB6E23B13D5D59E002FEC0A /* ZipArchive.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1462,6 +1517,11 @@
 				4CB6E21F13D5D499002FEC0A /* NSNumber+Comparison.m in Sources */,
 				4CB6E22113D5D499002FEC0A /* NSString+Base64Encoding.m in Sources */,
 				4CB6E22313D5D499002FEC0A /* NSString+SHA1.m in Sources */,
+				4CB6E23313D5D59E002FEC0A /* ioapi.c in Sources */,
+				4CB6E23513D5D59E002FEC0A /* mztools.c in Sources */,
+				4CB6E23713D5D59E002FEC0A /* unzip.c in Sources */,
+				4CB6E23913D5D59E002FEC0A /* zip.c in Sources */,
+				4CB6E23C13D5D59E002FEC0A /* ZipArchive.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
