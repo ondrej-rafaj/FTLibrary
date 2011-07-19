@@ -53,7 +53,7 @@
 
 - (void)show:(BOOL)animated {
 	isAnimated = animated;
-	UIWindow *w = [FTAppDelegate window];
+	//UIWindow *w = [FTAppDelegate window];
     
 }
 

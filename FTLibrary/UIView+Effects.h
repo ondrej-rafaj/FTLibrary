@@ -16,5 +16,7 @@
 
 - (void)addShadow;
 
+- (UIImage *)captureImage;
+
 
 @end

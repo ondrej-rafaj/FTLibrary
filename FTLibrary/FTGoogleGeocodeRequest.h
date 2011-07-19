@@ -11,6 +11,7 @@
 
 
 @interface FTGoogleGeocodeRequest : NSObject {
+	
     FTGooglePlaceRequestOutput output;
     CLLocationCoordinate2D location;
     NSString *address;
@@ -27,7 +28,9 @@
 @property (nonatomic, retain) NSString *region;
 @property (nonatomic, assign, getter=isSensor) BOOL sensor;
 
+
 - (NSURL *)urlForRequest;
 - (NSString *)urlStringForRequest;
+
 
 @end

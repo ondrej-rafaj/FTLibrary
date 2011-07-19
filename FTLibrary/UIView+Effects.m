@@ -24,5 +24,13 @@
     [self addShadowWithOffset:2.0f withColor:[UIColor blackColor] andOpacity:0.4f];
 }
 
+- (UIImage *)captureImage {
+	UIGraphicsBeginImageContext(self.bounds.size);
+	[self.layer renderInContext:UIGraphicsGetCurrentContext()];
+	UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	return viewImage;
+}
+
 
 @end
