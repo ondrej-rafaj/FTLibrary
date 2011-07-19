@@ -96,6 +96,21 @@
 
 #pragma mark Table view delegate and data source methods
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	return 0;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	return [data count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	static NSString *cellIdentifier = @"FTBasicCell";
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	
+	return cell;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSLog(@"Did select row in section %d with index: %d", indexPath.section, indexPath.row);
 }
