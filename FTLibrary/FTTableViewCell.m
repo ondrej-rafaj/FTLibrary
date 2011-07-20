@@ -10,20 +10,36 @@
 
 @implementation FTTableViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+@synthesize backgroundImageView;
+
+
+#pragma mark Initialization
+
+- (void)createAllElements {
+//	backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
+//	[backgroundImageView setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
+//	[backgroundImageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+//	[self.backgroundView addSubview:backgroundImageView];
+	[self setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
+}
+
+- (void)doInit {
+	[self createAllElements];
+}
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+		[self doInit];
     }
     return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
+#pragma mark Actions
 
-    // Configure the view for the selected state
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
 }
+
 
 @end

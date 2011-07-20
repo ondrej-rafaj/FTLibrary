@@ -19,9 +19,11 @@
 @end
 
 
-@interface FTEditTextLineViewController : FTViewController {
+@interface FTEditTextLineViewController : FTViewController <UITextFieldDelegate> {
 	
 	UITextField *textField;
+	
+	UILabel *descriptionLabel;
 	
 	id <FTEditTextLineViewControllerDelegate> delegate;
 	
@@ -29,6 +31,8 @@
 
 
 @property (nonatomic, retain) UITextField *textField;
+
+@property (nonatomic, retain) UILabel *descriptionLabel;
 
 @property (nonatomic, assign) id <FTEditTextLineViewControllerDelegate> delegate;
 

@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FTTableViewCell : UITableViewCell
+@interface FTTableViewCell : UITableViewCell {
+	
+	UIImageView *backgroundImageView;
+	
+}
+
+@property (nonatomic, retain) UIImageView *backgroundImageView;
+
 
 @end

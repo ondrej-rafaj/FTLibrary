@@ -7,11 +7,13 @@
 //
 
 #import "FTEditTextLineViewController.h"
+#import "UILabel+DynamicHeight.h"
 
 
 @implementation FTEditTextLineViewController
 
 @synthesize textField;
+@synthesize descriptionLabel;
 @synthesize delegate;
 
 
@@ -19,6 +21,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	[self.view setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
+	
+	textField = [[UITextField alloc] initWithFrame:CGRectMake(10, 20, 300, 36)];
+	[textField setDelegate:self];
+	[textField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+	[textField setBorderStyle:UITextBorderStyleRoundedRect];
+	[textField setReturnKeyType:UIReturnKeyDone];
+	[self.view addSubview:textField];
+	
+	descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 76, 300, 104)];
+	[descriptionLabel setBackgroundColor:[UIColor clearColor]];
+	[descriptionLabel setFont:[UIFont systemFontOfSize:12]];
+	[descriptionLabel setTextColor:[UIColor blackColor]];
+	[descriptionLabel setContentMode:UIViewContentModeTop];
+	[self.view addSubview:descriptionLabel];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -33,10 +51,18 @@
 	}
 }
 
+#pragma merk Text field delegate method
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	[self.navigationController popViewControllerAnimated:YES];
+	return YES;
+}
+
 #pragma mark Memory management
 
 - (void)dealloc {
 	[textField release];
+	[descriptionLabel release];
 	[super dealloc];
 }
 
