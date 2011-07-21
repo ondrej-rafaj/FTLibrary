@@ -2,7 +2,7 @@
 //  FTImageView.m
 //  FTLibrary
 //
-//  Created by Tim Storey on 27/04/2011.
+//  Created by Ondrej Rafaj on 27/04/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
 //
 

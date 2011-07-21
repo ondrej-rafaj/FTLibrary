@@ -1,6 +1,6 @@
 //
 //  FTDragDropMenuView.h
-//  iDeviant
+//  FTLibrary
 //
 //  Created by Ondrej Rafaj on 09/06/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  FTTableHeaderView.h
-//  iDeviant
+//  FTLibrary
 //
 //  Created by Ondrej Rafaj on 20/05/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
