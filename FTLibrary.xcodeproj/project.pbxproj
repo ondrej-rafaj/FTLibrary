@@ -267,6 +267,8 @@
 		4C85BC8F13BB18BB00CB7FCA /* FTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC8C13BB18BB00CB7FCA /* FTError.m */; };
 		4C85BC9C13BB5D4000CB7FCA /* FTSystemKillSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */; };
 		4C85BC9D13BB5D4000CB7FCA /* FTSystemKillSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */; };
+		4C95CECE13D740E100190E64 /* FTWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C95CECC13D740E100190E64 /* FTWebViewController.h */; };
+		4C95CECF13D740E100190E64 /* FTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C95CECD13D740E100190E64 /* FTWebViewController.m */; };
 		4CB6E1CF13D5A3A7002FEC0A /* FTTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E1CD13D5A3A7002FEC0A /* FTTableViewCell.h */; };
 		4CB6E1D013D5A3A7002FEC0A /* FTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E1CE13D5A3A7002FEC0A /* FTTableViewCell.m */; };
 		4CB6E1F913D5D37C002FEC0A /* FTSimpleDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */; };
@@ -305,6 +307,24 @@
 		4CB6E23C13D5D59E002FEC0A /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E23113D5D59E002FEC0A /* ZipArchive.mm */; };
 		4CB6E24813D5D672002FEC0A /* FTCacheService.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E24613D5D672002FEC0A /* FTCacheService.h */; };
 		4CB6E24913D5D672002FEC0A /* FTCacheService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E24713D5D672002FEC0A /* FTCacheService.m */; };
+		4CCD122213D84CB60004EF5D /* FTHorizontalTableFooterView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCD121813D84CB60004EF5D /* FTHorizontalTableFooterView.h */; };
+		4CCD122313D84CB60004EF5D /* FTHorizontalTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD121913D84CB60004EF5D /* FTHorizontalTableFooterView.m */; };
+		4CCD122413D84CB60004EF5D /* FTHorizontalTableHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCD121A13D84CB60004EF5D /* FTHorizontalTableHeaderView.h */; };
+		4CCD122513D84CB60004EF5D /* FTHorizontalTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD121B13D84CB60004EF5D /* FTHorizontalTableHeaderView.m */; };
+		4CCD122613D84CB60004EF5D /* FTHorizontalTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCD121C13D84CB60004EF5D /* FTHorizontalTableView.h */; };
+		4CCD122713D84CB60004EF5D /* FTHorizontalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD121D13D84CB60004EF5D /* FTHorizontalTableView.m */; };
+		4CCD122813D84CB60004EF5D /* FTHorizontalTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCD121E13D84CB60004EF5D /* FTHorizontalTableViewCell.h */; };
+		4CCD122913D84CB60004EF5D /* FTHorizontalTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD121F13D84CB60004EF5D /* FTHorizontalTableViewCell.m */; };
+		4CCD122A13D84CB60004EF5D /* FTHorizontalTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCD122013D84CB60004EF5D /* FTHorizontalTableViewDataSource.h */; };
+		4CCD122B13D84CB60004EF5D /* FTHorizontalTableViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCD122113D84CB60004EF5D /* FTHorizontalTableViewDelegate.h */; };
+		4CCD123013D84D430004EF5D /* FTVideoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCD122E13D84D430004EF5D /* FTVideoViewController.h */; };
+		4CCD123113D84D430004EF5D /* FTVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD122F13D84D430004EF5D /* FTVideoViewController.m */; };
+		4CCD123813D84E560004EF5D /* FTImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCD123213D84E550004EF5D /* FTImageView.h */; };
+		4CCD123913D84E560004EF5D /* FTImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD123313D84E550004EF5D /* FTImageView.m */; };
+		4CCD123A13D84E560004EF5D /* FTImageZoomView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCD123413D84E550004EF5D /* FTImageZoomView.h */; };
+		4CCD123B13D84E560004EF5D /* FTImageZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD123513D84E550004EF5D /* FTImageZoomView.m */; };
+		4CCD123C13D84E560004EF5D /* FTZoomView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCD123613D84E560004EF5D /* FTZoomView.h */; };
+		4CCD123D13D84E560004EF5D /* FTZoomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD123713D84E560004EF5D /* FTZoomView.m */; };
 		6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */; };
 		6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */; };
 		68DF4E2A13CEF9D200B67940 /* FTData.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DF4E2213CEF9D200B67940 /* FTData.h */; };
@@ -523,6 +543,8 @@
 		4C85BC8C13BB18BB00CB7FCA /* FTError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTError.m; sourceTree = "<group>"; };
 		4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSystemKillSwitch.h; sourceTree = "<group>"; };
 		4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSystemKillSwitch.m; sourceTree = "<group>"; };
+		4C95CECC13D740E100190E64 /* FTWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTWebViewController.h; sourceTree = "<group>"; };
+		4C95CECD13D740E100190E64 /* FTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTWebViewController.m; sourceTree = "<group>"; };
 		4CB6E1CD13D5A3A7002FEC0A /* FTTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTableViewCell.h; sourceTree = "<group>"; };
 		4CB6E1CE13D5A3A7002FEC0A /* FTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTableViewCell.m; sourceTree = "<group>"; };
 		4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTSimpleDB.h; path = FTLibrary/FTSimpleDB.h; sourceTree = SOURCE_ROOT; };
@@ -560,6 +582,24 @@
 		4CB6E23113D5D59E002FEC0A /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
 		4CB6E24613D5D672002FEC0A /* FTCacheService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTCacheService.h; path = FTLibrary/FTCacheService.h; sourceTree = SOURCE_ROOT; };
 		4CB6E24713D5D672002FEC0A /* FTCacheService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTCacheService.m; path = FTLibrary/FTCacheService.m; sourceTree = SOURCE_ROOT; };
+		4CCD121813D84CB60004EF5D /* FTHorizontalTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTHorizontalTableFooterView.h; sourceTree = "<group>"; };
+		4CCD121913D84CB60004EF5D /* FTHorizontalTableFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTHorizontalTableFooterView.m; sourceTree = "<group>"; };
+		4CCD121A13D84CB60004EF5D /* FTHorizontalTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTHorizontalTableHeaderView.h; sourceTree = "<group>"; };
+		4CCD121B13D84CB60004EF5D /* FTHorizontalTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTHorizontalTableHeaderView.m; sourceTree = "<group>"; };
+		4CCD121C13D84CB60004EF5D /* FTHorizontalTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTHorizontalTableView.h; sourceTree = "<group>"; };
+		4CCD121D13D84CB60004EF5D /* FTHorizontalTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTHorizontalTableView.m; sourceTree = "<group>"; };
+		4CCD121E13D84CB60004EF5D /* FTHorizontalTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTHorizontalTableViewCell.h; sourceTree = "<group>"; };
+		4CCD121F13D84CB60004EF5D /* FTHorizontalTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTHorizontalTableViewCell.m; sourceTree = "<group>"; };
+		4CCD122013D84CB60004EF5D /* FTHorizontalTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTHorizontalTableViewDataSource.h; sourceTree = "<group>"; };
+		4CCD122113D84CB60004EF5D /* FTHorizontalTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTHorizontalTableViewDelegate.h; sourceTree = "<group>"; };
+		4CCD122E13D84D430004EF5D /* FTVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTVideoViewController.h; sourceTree = "<group>"; };
+		4CCD122F13D84D430004EF5D /* FTVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTVideoViewController.m; sourceTree = "<group>"; };
+		4CCD123213D84E550004EF5D /* FTImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTImageView.h; sourceTree = "<group>"; };
+		4CCD123313D84E550004EF5D /* FTImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTImageView.m; sourceTree = "<group>"; };
+		4CCD123413D84E550004EF5D /* FTImageZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTImageZoomView.h; sourceTree = "<group>"; };
+		4CCD123513D84E550004EF5D /* FTImageZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTImageZoomView.m; sourceTree = "<group>"; };
+		4CCD123613D84E560004EF5D /* FTZoomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTZoomView.h; sourceTree = "<group>"; };
+		4CCD123713D84E560004EF5D /* FTZoomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTZoomView.m; sourceTree = "<group>"; };
 		6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGooglePlaceRequest.h; path = FTLibrary/FTGooglePlaceRequest.h; sourceTree = SOURCE_ROOT; };
 		6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGooglePlaceRequest.m; path = FTLibrary/FTGooglePlaceRequest.m; sourceTree = SOURCE_ROOT; };
 		68DF4E2213CEF9D200B67940 /* FTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTData.h; path = FTLibrary/FTData.h; sourceTree = SOURCE_ROOT; };
@@ -802,6 +842,8 @@
 		4C03667013BA0D4300E8FA09 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4CCD122C13D84D290004EF5D /* Media controllers */,
+				4C95CECA13D740B700190E64 /* Web controller */,
 				4C684DBB13D5D9510074E3C2 /* Edit controllers */,
 				4C57612513C5EA910049371F /* Basic view controller */,
 			);
@@ -842,6 +884,9 @@
 		4C57611D13C5E7570049371F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4CCD123F13D84E8D0004EF5D /* Image views */,
+				4CCD123E13D84E780004EF5D /* Zoom views */,
+				4CCD121513D84BD40004EF5D /* Table views */,
 				4C4A0D0313D0CC9800D6581A /* Editable elements */,
 				4C57633913CB8E090049371F /* iCarousel */,
 				4C5761A413CAE9130049371F /* Alert view */,
@@ -1168,6 +1213,15 @@
 			name = System;
 			sourceTree = "<group>";
 		};
+		4C95CECA13D740B700190E64 /* Web controller */ = {
+			isa = PBXGroup;
+			children = (
+				4C95CECC13D740E100190E64 /* FTWebViewController.h */,
+				4C95CECD13D740E100190E64 /* FTWebViewController.m */,
+			);
+			name = "Web controller";
+			sourceTree = "<group>";
+		};
 		4CB6E1CB13D5A392002FEC0A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1245,6 +1299,68 @@
 				4C684DAC13D5D76E0074E3C2 /* FTStorageService.m */,
 			);
 			name = "Core data";
+			sourceTree = "<group>";
+		};
+		4CCD121513D84BD40004EF5D /* Table views */ = {
+			isa = PBXGroup;
+			children = (
+				4CCD121713D84BDF0004EF5D /* Horizontal table view */,
+			);
+			name = "Table views";
+			sourceTree = "<group>";
+		};
+		4CCD121713D84BDF0004EF5D /* Horizontal table view */ = {
+			isa = PBXGroup;
+			children = (
+				4CCD121813D84CB60004EF5D /* FTHorizontalTableFooterView.h */,
+				4CCD121913D84CB60004EF5D /* FTHorizontalTableFooterView.m */,
+				4CCD121A13D84CB60004EF5D /* FTHorizontalTableHeaderView.h */,
+				4CCD121B13D84CB60004EF5D /* FTHorizontalTableHeaderView.m */,
+				4CCD121C13D84CB60004EF5D /* FTHorizontalTableView.h */,
+				4CCD121D13D84CB60004EF5D /* FTHorizontalTableView.m */,
+				4CCD121E13D84CB60004EF5D /* FTHorizontalTableViewCell.h */,
+				4CCD121F13D84CB60004EF5D /* FTHorizontalTableViewCell.m */,
+				4CCD122013D84CB60004EF5D /* FTHorizontalTableViewDataSource.h */,
+				4CCD122113D84CB60004EF5D /* FTHorizontalTableViewDelegate.h */,
+			);
+			name = "Horizontal table view";
+			sourceTree = "<group>";
+		};
+		4CCD122C13D84D290004EF5D /* Media controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4CCD122D13D84D330004EF5D /* Video controller */,
+			);
+			name = "Media controllers";
+			sourceTree = "<group>";
+		};
+		4CCD122D13D84D330004EF5D /* Video controller */ = {
+			isa = PBXGroup;
+			children = (
+				4CCD122E13D84D430004EF5D /* FTVideoViewController.h */,
+				4CCD122F13D84D430004EF5D /* FTVideoViewController.m */,
+			);
+			name = "Video controller";
+			sourceTree = "<group>";
+		};
+		4CCD123E13D84E780004EF5D /* Zoom views */ = {
+			isa = PBXGroup;
+			children = (
+				4CCD123413D84E550004EF5D /* FTImageZoomView.h */,
+				4CCD123513D84E550004EF5D /* FTImageZoomView.m */,
+				4CCD123613D84E560004EF5D /* FTZoomView.h */,
+				4CCD123713D84E560004EF5D /* FTZoomView.m */,
+			);
+			name = "Zoom views";
+			sourceTree = "<group>";
+		};
+		4CCD123F13D84E8D0004EF5D /* Image views */ = {
+			isa = PBXGroup;
+			children = (
+				4CCD123213D84E550004EF5D /* FTImageView.h */,
+				4CCD123313D84E550004EF5D /* FTImageView.m */,
+			);
+			name = "Image views";
 			sourceTree = "<group>";
 		};
 		6861785B13D03B5900F57408 /* Google */ = {
@@ -1376,6 +1492,17 @@
 				4C684DAD13D5D76E0074E3C2 /* FTDomainObject.h in Headers */,
 				4C684DB013D5D76E0074E3C2 /* FTStorageService.h in Headers */,
 				4C684DB913D5D94C0074E3C2 /* FTEditTextLineViewController.h in Headers */,
+				4C95CECE13D740E100190E64 /* FTWebViewController.h in Headers */,
+				4CCD122213D84CB60004EF5D /* FTHorizontalTableFooterView.h in Headers */,
+				4CCD122413D84CB60004EF5D /* FTHorizontalTableHeaderView.h in Headers */,
+				4CCD122613D84CB60004EF5D /* FTHorizontalTableView.h in Headers */,
+				4CCD122813D84CB60004EF5D /* FTHorizontalTableViewCell.h in Headers */,
+				4CCD122A13D84CB60004EF5D /* FTHorizontalTableViewDataSource.h in Headers */,
+				4CCD122B13D84CB60004EF5D /* FTHorizontalTableViewDelegate.h in Headers */,
+				4CCD123013D84D430004EF5D /* FTVideoViewController.h in Headers */,
+				4CCD123813D84E560004EF5D /* FTImageView.h in Headers */,
+				4CCD123A13D84E560004EF5D /* FTImageZoomView.h in Headers */,
+				4CCD123C13D84E560004EF5D /* FTZoomView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1580,6 +1707,15 @@
 				4C684DAE13D5D76E0074E3C2 /* FTDomainObject.m in Sources */,
 				4C684DB113D5D76E0074E3C2 /* FTStorageService.m in Sources */,
 				4C684DBA13D5D94C0074E3C2 /* FTEditTextLineViewController.m in Sources */,
+				4C95CECF13D740E100190E64 /* FTWebViewController.m in Sources */,
+				4CCD122313D84CB60004EF5D /* FTHorizontalTableFooterView.m in Sources */,
+				4CCD122513D84CB60004EF5D /* FTHorizontalTableHeaderView.m in Sources */,
+				4CCD122713D84CB60004EF5D /* FTHorizontalTableView.m in Sources */,
+				4CCD122913D84CB60004EF5D /* FTHorizontalTableViewCell.m in Sources */,
+				4CCD123113D84D430004EF5D /* FTVideoViewController.m in Sources */,
+				4CCD123913D84E560004EF5D /* FTImageView.m in Sources */,
+				4CCD123B13D84E560004EF5D /* FTImageZoomView.m in Sources */,
+				4CCD123D13D84E560004EF5D /* FTZoomView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

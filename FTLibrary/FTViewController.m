@@ -31,13 +31,42 @@
 	return CGRectMake(0, 0, 320, height);
 }
 
+#pragma mark Initialization
+
+- (void)initializingSequence {
+	
+}
+
+- (id)init {
+	self = [super init];
+	if (self) {
+		[self initializingSequence];
+	}
+	return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+	self = [super initWithCoder:aDecoder];
+	if (self) {
+		[self initializingSequence];
+	}
+	return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	if (self) {
+		[self initializingSequence];
+	}
+	return self;
+}
+
 #pragma mark Memory management
 
 - (void)dealloc {
     [backgroundView release];
 	[table release];
 	[data release];
-	[loadingProgressView release];
     [super dealloc];
 }
 
@@ -66,6 +95,13 @@
 	[super viewWillAppear:animated];
 	isLandscape = UIInterfaceOrientationIsLandscape([[UIDevice currentDevice] orientation]);
 	[self doLayoutAllElements];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	[super viewWillDisappear:animated];
+	if (loadingProgressView) {
+		//[loadingProgressView hide:YES];
+	}
 }
 
 - (void)viewDidUnload {

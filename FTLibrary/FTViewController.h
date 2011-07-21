@@ -37,6 +37,9 @@
 @property (nonatomic, retain) FTProgressView *loadingProgressView;
 
 
+// Initialization
+- (void)initializingSequence;
+
 // Layout
 - (CGRect)fullscreenRect;
 
