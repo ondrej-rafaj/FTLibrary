@@ -19,7 +19,6 @@
 @synthesize delegate;
 @synthesize activityIndicator;
 @synthesize progressLoadingView;
-@synthesize useASIHTTPRequest;
 @synthesize debugMode;
 @synthesize imageUrl;
 
@@ -42,7 +41,6 @@
 	// Basic self setup
 	[self setContentMode:UIViewContentModeScaleAspectFill];
 	[self setClipsToBounds:YES];
-	[self setUseASIHTTPRequest:NO];
 	debugMode = NO;
 	
 	// Adding overlay image
@@ -118,41 +116,41 @@
 	[UIView commitAnimations];
 }
 
-- (void)enableProgressLoadingView:(BOOL)enable {
-	if (enable) {
-		if (!progressLoadingView) {
-			progressLoadingView = [[UIProgressView alloc] initWithFrame:CGRectMake(10, ([self height] - 25), ([self width] - 20), 15)];
-			[activityIndicator setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth];
-			[progressLoadingView setAlpha:0];
-			[self addSubview:progressLoadingView];
-			if (imageRequest) {
-				if ([imageRequest isExecuting]) {
-					[imageRequest setDownloadProgressDelegate:progressLoadingView];
-				}
-			}
-			[self enableLoadingElements:YES];
-		}
-	}
-	else {
-		if (progressLoadingView) {
-			[UIView animateWithDuration:0.3
-							 animations:^{
-								 [progressLoadingView setAlpha:0];
-							 }
-							 completion:^(BOOL finished) {
-								 if (imageRequest) {
-									 if ([imageRequest isExecuting]) {
-										 [imageRequest setDownloadProgressDelegate:nil];
-									 }
-								 }
-								 [progressLoadingView removeFromSuperview];
-								 [progressLoadingView release];
-								 progressLoadingView = nil;
-							 }
-			 ];
-		}
-	}
-}
+//- (void)enableProgressLoadingView:(BOOL)enable {
+//	if (enable) {
+//		if (!progressLoadingView) {
+//			progressLoadingView = [[UIProgressView alloc] initWithFrame:CGRectMake(10, ([self height] - 25), ([self width] - 20), 15)];
+//			[activityIndicator setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth];
+//			[progressLoadingView setAlpha:0];
+//			[self addSubview:progressLoadingView];
+//			if (imageRequest) {
+//				if ([imageRequest isExecuting]) {
+//					[imageRequest setDownloadProgressDelegate:progressLoadingView];
+//				}
+//			}
+//			[self enableLoadingElements:YES];
+//		}
+//	}
+//	else {
+//		if (progressLoadingView) {
+//			[UIView animateWithDuration:0.3
+//							 animations:^{
+//								 [progressLoadingView setAlpha:0];
+//							 }
+//							 completion:^(BOOL finished) {
+//								 if (imageRequest) {
+//									 if ([imageRequest isExecuting]) {
+//										 [imageRequest setDownloadProgressDelegate:nil];
+//									 }
+//								 }
+//								 [progressLoadingView removeFromSuperview];
+//								 [progressLoadingView release];
+//								 progressLoadingView = nil;
+//							 }
+//			 ];
+//		}
+//	}
+//}
 
 - (void)enableActivityIndicator:(BOOL)enable {
 	if (enable) {
@@ -226,46 +224,37 @@
 		return;
 	}
 	else [self updateDebugInfo:@"Loading url from web"];
-	if (useASIHTTPRequest) {
-		imageRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
-		[imageRequest setNumberOfTimesToRetryOnTimeout:2];
-		[imageRequest setDelegate:self];
-		if (progressLoadingView) {
-			[imageRequest setDownloadProgressDelegate:progressLoadingView];
-		}
-		[imageRequest startAsynchronous];
-	}
-	else [NSThread detachNewThreadSelector:@selector(loadImageFromUrlOnBackground:) toTarget:self withObject:url];
+	[NSThread detachNewThreadSelector:@selector(loadImageFromUrlOnBackground:) toTarget:self withObject:url];
 }
 
-#pragma mark ASIHTTPRequest delegate methods
-
-- (void)requestFinished:(ASIHTTPRequest *)request {
-	[self updateDebugInfo:@"Request successful"];
-	[self enableLoadingElements:NO];
-	UIImage *img = [UIImage imageWithData:[request responseData]];
-	[self performSelectorOnMainThread:@selector(setImage:) withObject:img waitUntilDone:NO];
-	
-	if ([delegate respondsToSelector:@selector(imageView:didFinishLoadingImage:)]) {
-		[delegate imageView:self didFinishLoadingImage:img];
-	}
-}
-
-- (void)requestFailed:(ASIHTTPRequest *)request {
-	[self updateDebugInfo:@"Request failed"];
-	[self enableLoadingElements:NO];
-	if ([delegate respondsToSelector:@selector(imageViewDidFailLoadingImage:withError:)]) {
-		[delegate imageViewDidFailLoadingImage:self withError:[request error]];
-	}
-}
-
-- (void)requestStarted:(ASIHTTPRequest *)request {
-	[self updateDebugInfo:@"Request started"];
-	[self enableLoadingElements:YES];
-	if ([delegate respondsToSelector:@selector(imageViewDidStartLoadingImage:)]) {
-		[delegate imageViewDidStartLoadingImage:self];
-	}
-}
+//#pragma mark ASIHTTPRequest delegate methods
+//
+//- (void)requestFinished:(ASIHTTPRequest *)request {
+//	[self updateDebugInfo:@"Request successful"];
+//	[self enableLoadingElements:NO];
+//	UIImage *img = [UIImage imageWithData:[request responseData]];
+//	[self performSelectorOnMainThread:@selector(setImage:) withObject:img waitUntilDone:NO];
+//	
+//	if ([delegate respondsToSelector:@selector(imageView:didFinishLoadingImage:)]) {
+//		[delegate imageView:self didFinishLoadingImage:img];
+//	}
+//}
+//
+//- (void)requestFailed:(ASIHTTPRequest *)request {
+//	[self updateDebugInfo:@"Request failed"];
+//	[self enableLoadingElements:NO];
+//	if ([delegate respondsToSelector:@selector(imageViewDidFailLoadingImage:withError:)]) {
+//		[delegate imageViewDidFailLoadingImage:self withError:[request error]];
+//	}
+//}
+//
+//- (void)requestStarted:(ASIHTTPRequest *)request {
+//	[self updateDebugInfo:@"Request started"];
+//	[self enableLoadingElements:YES];
+//	if ([delegate respondsToSelector:@selector(imageViewDidStartLoadingImage:)]) {
+//		[delegate imageViewDidStartLoadingImage:self];
+//	}
+//}
 
 #pragma mark Memory management
 
@@ -273,8 +262,8 @@
     [overlayImage release];
 	[activityIndicator release];
 	[progressLoadingView release];
-	if ([imageRequest isExecuting]) [imageRequest cancel];
-	[imageRequest release];
+//	if ([imageRequest isExecuting]) [imageRequest cancel];
+//	[imageRequest release];
 	[debugLabel release];
 	[imageUrl release];
     [super dealloc];

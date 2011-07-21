@@ -1083,8 +1083,9 @@
 				4C85BB1D13BA4AFD00CB7FCA /* CloudFiles */,
 				4C85BB2C13BA4AFD00CB7FCA /* S3 */,
 			);
-			path = ASIHTTPRequest;
-			sourceTree = "<group>";
+			name = ASIHTTPRequest;
+			path = Thirdparty/ASIHTTPRequest;
+			sourceTree = SOURCE_ROOT;
 		};
 		4C85BB1D13BA4AFD00CB7FCA /* CloudFiles */ = {
 			isa = PBXGroup;

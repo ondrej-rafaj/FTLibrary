@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ASIHTTPRequest.h"
+#import <UIKit/UIKit.h>
 
 
 @class FTImageView;
@@ -23,7 +23,7 @@
 @end
 
 
-@interface FTImageView : UIImageView <ASIHTTPRequestDelegate> {
+@interface FTImageView : UIImageView {
     
     UIImageView *overlayImage;
 	
@@ -34,11 +34,7 @@
 	UIActivityIndicatorView *activityIndicator;
 	
 	UIProgressView *progressLoadingView;
-	
-	ASIHTTPRequest *imageRequest;
-	
-	BOOL useASIHTTPRequest;
-	
+		
 	BOOL debugMode;
 	UILabel *debugLabel;
 	
@@ -54,8 +50,6 @@
 
 @property (nonatomic, retain) UIProgressView *progressLoadingView;
 
-@property (nonatomic) BOOL useASIHTTPRequest;
-
 @property (nonatomic, readonly) BOOL debugMode;
 
 @property (nonatomic, readonly) NSString *imageUrl;
@@ -68,7 +62,7 @@
 
 - (void)loadImageFromUrl:(NSString *)url;
 
-- (void)enableProgressLoadingView:(BOOL)enable;
+//- (void)enableProgressLoadingView:(BOOL)enable;
 
 - (void)enableActivityIndicator:(BOOL)enable;
 
