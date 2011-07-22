@@ -79,6 +79,7 @@
 
 - (void)setDynamicDetailText:(NSString *)text {
 	CGFloat origHeight = cellDetailLabel.frame.size.height;
+	[cellDetailLabel setNumberOfLines:0];
 	[cellDetailLabel setText:text withWidth:cellDetailLabel.frame.size.width];
 	[cellDetailLabel setHeight:([cellDetailLabel height] + 4)];
 	if (cellDetailLabel.frame.size.height > origHeight) {

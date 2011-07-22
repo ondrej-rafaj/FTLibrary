@@ -36,7 +36,7 @@
 
 // Accessories (disclosures). 
 
-- (UITableViewCellAccessoryType)tableView:(FTHorizontalTableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_NA,__MAC_NA,__IPHONE_2_0,__IPHONE_3_0);
+//- (UITableViewCellAccessoryType)tableView:(FTHorizontalTableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_NA,__MAC_NA,__IPHONE_2_0,__IPHONE_3_0);
 - (void)tableView:(FTHorizontalTableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath;
 
 // Selection

@@ -70,9 +70,7 @@
 
 - (void)setContentSize:(CGSize)contentSize {
 	CGSize s = contentSize;
-	//s.height = self.frame.size.height;
 	[super setContentSize:s];
-	NSLog(@"Content size: %@", NSStringFromCGSize(contentSize));
 }
 
 #pragma mark Inverted values
@@ -276,12 +274,13 @@
 
 // Accessories (disclosures). 
 
-- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath {
-	if ([_horizontalTableDelegate respondsToSelector:@selector(tableView:accessoryTypeForRowWithIndexPath:)]) {
-		return [_horizontalTableDelegate tableView:self accessoryTypeForRowWithIndexPath:indexPath];
-	}
-	else return UITableViewCellAccessoryNone;
-}
+// Has been deprecated !!!
+//- (UITableViewCellAccessoryType)tableView:(UITableView *)tableView accessoryTypeForRowWithIndexPath:(NSIndexPath *)indexPath {
+//	if ([_horizontalTableDelegate respondsToSelector:@selector(tableView:accessoryTypeForRowWithIndexPath:)]) {
+//		return [_horizontalTableDelegate tableView:self accessoryTypeForRowWithIndexPath:indexPath];
+//	}
+//	else return UITableViewCellAccessoryNone;
+//}
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
 	if ([_horizontalTableDelegate respondsToSelector:@selector(tableView:accessoryButtonTappedForRowWithIndexPath:)]) {
