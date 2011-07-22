@@ -34,15 +34,19 @@
             NSRange rangeStart;
             NSRange rangeActive;
             
-            if ([style.name isEqualToString:@"bullet"]) {
+            NSRange underscoreRange = [style.name rangeOfString:@"_"];
+            BOOL isSpecial = (underscoreRange.location == 0 && underscoreRange.length == 1);
+            if (isSpecial){
+                if ([style.name isEqualToString:@"_bullet"]) {
 
-                 rangeStart = [_processedString rangeOfString:[NSString stringWithFormat:@"<bullet />", style.name]];
-                if ((rangeStart.length == 0) || (rangeStart.location >= [_processedString length])) {
-                    break;
+                     rangeStart = [_processedString rangeOfString:[NSString stringWithFormat:@"<bullet />", style.name]];
+                    if ((rangeStart.length == 0) || (rangeStart.location >= [_processedString length])) {
+                        break;
+                    }
+                    [_processedString replaceCharactersInRange:rangeStart withString:@"•"];
+                    rangeActive = rangeActive = NSMakeRange(rangeStart.location, 1);
+                    
                 }
-                [_processedString replaceCharactersInRange:rangeStart withString:@"•"];
-                rangeActive = rangeActive = NSMakeRange(rangeStart.location, 1);
-                
             }
             else {
                 NSRange rangeStart = [_processedString rangeOfString:[NSString stringWithFormat:@"<%@>", style.name]];
@@ -101,7 +105,7 @@
     NSLog(@"def style : %@", _defaultStyle.name);
     
     if (!_defaultStyle.name) {
-        _defaultStyle.name = @"default";
+        _defaultStyle.name = @"_default";
         _defaultStyle.font = [UIFont systemFontOfSize:14];
         _defaultStyle.color= [UIColor blackColor];
     }
@@ -130,7 +134,7 @@
         NSRange aRange = [(NSValue *)[dict objectForKey:@"range"] rangeValue];
         FTCoreTextStyle style;
         [[dict objectForKey:@"style"] getValue:&style];
-        if ((aRange.location + aRange.length) > [_text length] || [style.name isEqualToString:@"default"]) continue;
+        if ((aRange.location + aRange.length) > [_text length] ) continue;
         
         
         
@@ -207,7 +211,7 @@
 
 - (void)addStyle:(FTCoreTextStyle)style {
     
-    if ([style.name isEqualToString:@"default"]) {
+    if ([style.name isEqualToString:@"_default"]) {
         _defaultStyle = style;
         [self setNeedsDisplay];
         return;

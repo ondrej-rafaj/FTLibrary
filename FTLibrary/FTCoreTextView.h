@@ -6,6 +6,11 @@
 //  Copyright 2011 Fuerte International. All rights reserved.
 //
 
+//     Special markers:
+//     _default: It is the default applyed to the whole text. MArkups is not needed on the text
+//     _bullet: define styles for bullets. Respond to Markups <bullets />
+ 
+
 #import <UIKit/UIKit.h>
 
 typedef struct {
