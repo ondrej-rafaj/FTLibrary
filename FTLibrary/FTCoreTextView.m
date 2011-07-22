@@ -30,16 +30,34 @@
         [styleV getValue:&style];
         
         while (YES) {
-            NSRange rangeStart = [_processedString rangeOfString:[NSString stringWithFormat:@"<%@>", style.name]];
-            if ((rangeStart.length == 0) || (rangeStart.location >= [_processedString length])) {
-                break;
-            }
-            [_processedString replaceCharactersInRange:rangeStart withString:@""];
-            NSRange rangeEnd = [_processedString rangeOfString:[NSString stringWithFormat:@"</%@>", style.name]];
-            [_processedString replaceCharactersInRange:rangeEnd withString:@""];
+            int length;
+            NSRange rangeStart;
+            NSRange rangeActive;
             
-            int length = rangeEnd.location - rangeStart.location;
-            NSRange rangeActive = NSMakeRange(rangeStart.location, length);
+            if ([style.name isEqualToString:@"bullet"]) {
+
+                 rangeStart = [_processedString rangeOfString:[NSString stringWithFormat:@"<bullet />", style.name]];
+                if ((rangeStart.length == 0) || (rangeStart.location >= [_processedString length])) {
+                    break;
+                }
+                [_processedString replaceCharactersInRange:rangeStart withString:@"•"];
+                rangeActive = rangeActive = NSMakeRange(rangeStart.location, 1);
+                
+            }
+            else {
+                NSRange rangeStart = [_processedString rangeOfString:[NSString stringWithFormat:@"<%@>", style.name]];
+                if ((rangeStart.length == 0) || (rangeStart.location >= [_processedString length])) {
+                    break;
+                }
+                [_processedString replaceCharactersInRange:rangeStart withString:@""];
+                NSRange rangeEnd = [_processedString rangeOfString:[NSString stringWithFormat:@"</%@>", style.name]];
+                [_processedString replaceCharactersInRange:rangeEnd withString:@""];
+                
+                length = rangeEnd.location - rangeStart.location;
+                rangeActive = NSMakeRange(rangeStart.location, length);
+            }
+            
+            
             NSValue *rangeValue = [NSValue valueWithRange:rangeActive];
             NSDictionary *dict = [NSDictionary 
                                   dictionaryWithObjects:[NSArray arrayWithObjects:rangeValue, styleV, nil]                                                     
