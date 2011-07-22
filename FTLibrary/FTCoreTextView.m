@@ -17,6 +17,7 @@
 @synthesize markers = _markers;
 @synthesize defaultStyle = _defaultStyle;
 @synthesize processedString = _processedString;
+@synthesize path = _path;
 
 
 - (void)processText {
@@ -27,13 +28,6 @@
     for (NSValue *styleV in _styles) {
         FTCoreTextStyle style;
         [styleV getValue:&style];
-        
-        if ([style.name isEqualToString:@"default"]) {
-            _defaultStyle = style;
-            continue;
-        }
-        
-        
         
         while (YES) {
             NSRange rangeStart = [_processedString rangeOfString:[NSString stringWithFormat:@"<%@>", style.name]];
@@ -55,6 +49,8 @@
         }
       
     }
+    
+    //search for undefined markers!
     
     
 }
@@ -145,16 +141,24 @@
     
     
 	// left column form
-	CGMutablePathRef leftColumnPath = CGPathCreateMutable();
-	CGPathAddRect(leftColumnPath, NULL, 
-                  CGRectMake(0, 0, 
-                             self.bounds.size.width,
-                             self.bounds.size.height));
+	CGMutablePathRef mainPath = CGPathCreateMutable();
+   	
+    if (!_path) {
+        CGPathAddRect(mainPath, NULL, 
+                      CGRectMake(0, 0, 
+                                 self.bounds.size.width,
+                                 self.bounds.size.height));  
+    }
+    else {
+        CGPathAddPath(mainPath, NULL, _path);
+    }
+    
+
     
 	// left column frame
-	CTFrameRef leftFrame = CTFramesetterCreateFrame(framesetter, 
+	CTFrameRef drawFrame = CTFramesetterCreateFrame(framesetter, 
                                                     CFRangeMake(0, 0),
-                                                    leftColumnPath, NULL);
+                                                    mainPath, NULL);
     
     // flip the coordinate system
 	CGContextRef context = UIGraphicsGetCurrentContext();
@@ -163,16 +167,19 @@
 	CGContextScaleCTM(context, 1.0, -1.0);
     
 	// draw
-	CTFrameDraw(leftFrame, context);
+	CTFrameDraw(drawFrame, context);
     
     
     
 	// cleanup
-	CFRelease(leftFrame);
-	CGPathRelease(leftColumnPath);
+	CFRelease(drawFrame);
+	CGPathRelease(mainPath);
 	CFRelease(framesetter);
 	[string release];
 }
+
+#pragma mark --
+#pragma mark custom setters
 
 - (void)setText:(NSString *)text {
     [_text release];
@@ -181,6 +188,13 @@
 }
 
 - (void)addStyle:(FTCoreTextStyle)style {
+    
+    if ([style.name isEqualToString:@"default"]) {
+        _defaultStyle = style;
+        [self setNeedsDisplay];
+        return;
+    }
+    
     NSMutableArray *array = [NSMutableArray arrayWithArray:_styles];
     [array addObject:[NSValue value:&style withObjCType:@encode(FTCoreTextStyle)]];
     [self setStyles:array];
@@ -189,6 +203,11 @@
 - (void)setStyles:(NSArray *)styles {
     [_styles release];
     _styles = [styles retain];
+    [self setNeedsDisplay];
+}
+
+- (void)setPath:(CGPathRef)path {
+    _path = path;
     [self setNeedsDisplay];
 }
 

@@ -22,13 +22,16 @@ typedef struct {
     NSMutableArray *_markers;
     FTCoreTextStyle _defaultStyle;
     NSMutableString *_processedString;
+    CGPathRef _path;
+    
 }
 
 @property (nonatomic, retain) NSString *text;
 @property (nonatomic, retain) NSArray *styles;
 @property (nonatomic, retain) NSMutableArray *markers;
 @property (nonatomic, assign) FTCoreTextStyle defaultStyle;
-@property (nonatomic, assign) NSMutableString *processedString;
+@property (nonatomic, retain) NSMutableString *processedString;
+@property (nonatomic, assign) CGPathRef path;
 
 - (id)initWithFrame:(CGRect)frame;
 - (void)addStyle:(FTCoreTextStyle)style;
