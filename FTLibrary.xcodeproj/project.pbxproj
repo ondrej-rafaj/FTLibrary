@@ -361,6 +361,8 @@
 		4CCD128613D852590004EF5D /* FTDragDropMenuView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCD128413D852590004EF5D /* FTDragDropMenuView.h */; };
 		4CCD128713D852590004EF5D /* FTDragDropMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD128513D852590004EF5D /* FTDragDropMenuView.m */; };
 		4CCD128813D852590004EF5D /* FTDragDropMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD128513D852590004EF5D /* FTDragDropMenuView.m */; };
+		6834BE2913D9B2EA00781018 /* FTLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6834BE2713D9B2EA00781018 /* FTLabel.h */; };
+		6834BE2A13D9B2EA00781018 /* FTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6834BE2813D9B2EA00781018 /* FTLabel.m */; };
 		6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */; };
 		6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */; };
 		68DD055413D98063004C02C8 /* FTCoreTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DD055213D98063004C02C8 /* FTCoreTextView.h */; };
@@ -662,6 +664,8 @@
 		4CCD127E13D8521C0004EF5D /* FTRemoteInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTRemoteInfoView.m; sourceTree = "<group>"; };
 		4CCD128413D852590004EF5D /* FTDragDropMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDragDropMenuView.h; sourceTree = "<group>"; };
 		4CCD128513D852590004EF5D /* FTDragDropMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDragDropMenuView.m; sourceTree = "<group>"; };
+		6834BE2713D9B2EA00781018 /* FTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLabel.h; sourceTree = "<group>"; };
+		6834BE2813D9B2EA00781018 /* FTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLabel.m; sourceTree = "<group>"; };
 		6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGooglePlaceRequest.h; path = FTLibrary/FTGooglePlaceRequest.h; sourceTree = SOURCE_ROOT; };
 		6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGooglePlaceRequest.m; path = FTLibrary/FTGooglePlaceRequest.m; sourceTree = SOURCE_ROOT; };
 		68DD055213D98063004C02C8 /* FTCoreTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCoreTextView.h; sourceTree = "<group>"; };
@@ -942,6 +946,7 @@
 		4C57611D13C5E7570049371F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6834BE2B13D9B2F000781018 /* Labels */,
 				68DD054C13D97F27004C02C8 /* TextView */,
 				4CCD128313D8524C0004EF5D /* Drag & Drop */,
 				4CCD128213D852210004EF5D /* Remote info view */,
@@ -1525,6 +1530,15 @@
 			name = "Drag & Drop";
 			sourceTree = "<group>";
 		};
+		6834BE2B13D9B2F000781018 /* Labels */ = {
+			isa = PBXGroup;
+			children = (
+				6834BE2713D9B2EA00781018 /* FTLabel.h */,
+				6834BE2813D9B2EA00781018 /* FTLabel.m */,
+			);
+			name = Labels;
+			sourceTree = "<group>";
+		};
 		6861785B13D03B5900F57408 /* Google */ = {
 			isa = PBXGroup;
 			children = (
@@ -1688,6 +1702,7 @@
 				4CCD127F13D8521D0004EF5D /* FTRemoteInfoView.h in Headers */,
 				4CCD128613D852590004EF5D /* FTDragDropMenuView.h in Headers */,
 				68DD055413D98063004C02C8 /* FTCoreTextView.h in Headers */,
+				6834BE2913D9B2EA00781018 /* FTLabel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1913,6 +1928,7 @@
 				4CCD128013D8521D0004EF5D /* FTRemoteInfoView.m in Sources */,
 				4CCD128713D852590004EF5D /* FTDragDropMenuView.m in Sources */,
 				68DD055513D98063004C02C8 /* FTCoreTextView.m in Sources */,
+				6834BE2A13D9B2EA00781018 /* FTLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
