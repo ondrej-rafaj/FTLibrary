@@ -280,8 +280,8 @@
 		4CB6E21513D5D499002FEC0A /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20313D5D497002FEC0A /* NSDataAdditions.m */; };
 		4CB6E21613D5D499002FEC0A /* NSDate+ISO8601.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20413D5D497002FEC0A /* NSDate+ISO8601.h */; };
 		4CB6E21713D5D499002FEC0A /* NSDate+ISO8601.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20513D5D497002FEC0A /* NSDate+ISO8601.m */; };
-		4CB6E21813D5D499002FEC0A /* NSDate+Summarise.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20613D5D497002FEC0A /* NSDate+Summarise.h */; };
-		4CB6E21913D5D499002FEC0A /* NSDate+Summarise.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20713D5D497002FEC0A /* NSDate+Summarise.m */; };
+		4CB6E21813D5D499002FEC0A /* NSDate+Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20613D5D497002FEC0A /* NSDate+Tools.h */; };
+		4CB6E21913D5D499002FEC0A /* NSDate+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20713D5D497002FEC0A /* NSDate+Tools.m */; };
 		4CB6E21A13D5D499002FEC0A /* NSDictionary+KeyValuePair.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20813D5D497002FEC0A /* NSDictionary+KeyValuePair.h */; };
 		4CB6E21B13D5D499002FEC0A /* NSDictionary+KeyValuePair.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E20913D5D497002FEC0A /* NSDictionary+KeyValuePair.m */; };
 		4CB6E21C13D5D499002FEC0A /* NSMutableArray+StringSerialiser.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E20A13D5D498002FEC0A /* NSMutableArray+StringSerialiser.h */; };
@@ -593,8 +593,8 @@
 		4CB6E20313D5D497002FEC0A /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSDataAdditions.m; path = ../FTLibrary/NSDataAdditions.m; sourceTree = "<group>"; };
 		4CB6E20413D5D497002FEC0A /* NSDate+ISO8601.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ISO8601.h"; sourceTree = "<group>"; };
 		4CB6E20513D5D497002FEC0A /* NSDate+ISO8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ISO8601.m"; sourceTree = "<group>"; };
-		4CB6E20613D5D497002FEC0A /* NSDate+Summarise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Summarise.h"; sourceTree = "<group>"; };
-		4CB6E20713D5D497002FEC0A /* NSDate+Summarise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Summarise.m"; sourceTree = "<group>"; };
+		4CB6E20613D5D497002FEC0A /* NSDate+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Tools.h"; sourceTree = "<group>"; };
+		4CB6E20713D5D497002FEC0A /* NSDate+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Tools.m"; sourceTree = "<group>"; };
 		4CB6E20813D5D497002FEC0A /* NSDictionary+KeyValuePair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+KeyValuePair.h"; sourceTree = "<group>"; };
 		4CB6E20913D5D497002FEC0A /* NSDictionary+KeyValuePair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+KeyValuePair.m"; sourceTree = "<group>"; };
 		4CB6E20A13D5D498002FEC0A /* NSMutableArray+StringSerialiser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+StringSerialiser.h"; sourceTree = "<group>"; };
@@ -839,8 +839,8 @@
 				4CB6E20113D5D496002FEC0A /* NSData+Encryption.m */,
 				4CB6E20413D5D497002FEC0A /* NSDate+ISO8601.h */,
 				4CB6E20513D5D497002FEC0A /* NSDate+ISO8601.m */,
-				4CB6E20613D5D497002FEC0A /* NSDate+Summarise.h */,
-				4CB6E20713D5D497002FEC0A /* NSDate+Summarise.m */,
+				4CB6E20613D5D497002FEC0A /* NSDate+Tools.h */,
+				4CB6E20713D5D497002FEC0A /* NSDate+Tools.m */,
 				4CB6E20813D5D497002FEC0A /* NSDictionary+KeyValuePair.h */,
 				4CB6E20913D5D497002FEC0A /* NSDictionary+KeyValuePair.m */,
 				4CB6E20A13D5D498002FEC0A /* NSMutableArray+StringSerialiser.h */,
@@ -1646,7 +1646,7 @@
 				4CB6E21213D5D499002FEC0A /* NSData+Encryption.h in Headers */,
 				4CB6E21413D5D499002FEC0A /* NSDataAdditions.h in Headers */,
 				4CB6E21613D5D499002FEC0A /* NSDate+ISO8601.h in Headers */,
-				4CB6E21813D5D499002FEC0A /* NSDate+Summarise.h in Headers */,
+				4CB6E21813D5D499002FEC0A /* NSDate+Tools.h in Headers */,
 				4CB6E21A13D5D499002FEC0A /* NSDictionary+KeyValuePair.h in Headers */,
 				4CB6E21C13D5D499002FEC0A /* NSMutableArray+StringSerialiser.h in Headers */,
 				4CB6E21E13D5D499002FEC0A /* NSNumber+Comparison.h in Headers */,
@@ -1876,7 +1876,7 @@
 				4CB6E21313D5D499002FEC0A /* NSData+Encryption.m in Sources */,
 				4CB6E21513D5D499002FEC0A /* NSDataAdditions.m in Sources */,
 				4CB6E21713D5D499002FEC0A /* NSDate+ISO8601.m in Sources */,
-				4CB6E21913D5D499002FEC0A /* NSDate+Summarise.m in Sources */,
+				4CB6E21913D5D499002FEC0A /* NSDate+Tools.m in Sources */,
 				4CB6E21B13D5D499002FEC0A /* NSDictionary+KeyValuePair.m in Sources */,
 				4CB6E21D13D5D499002FEC0A /* NSMutableArray+StringSerialiser.m in Sources */,
 				4CB6E21F13D5D499002FEC0A /* NSNumber+Comparison.m in Sources */,

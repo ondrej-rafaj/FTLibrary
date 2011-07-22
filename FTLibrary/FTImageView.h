@@ -14,6 +14,8 @@
 
 @protocol FTImageViewDelegate <NSObject>
 
+@optional
+
 - (void)imageView:(FTImageView *)imgView didFinishLoadingImage:(UIImage *)image;
 
 - (void)imageViewDidFailLoadingImage:(FTImageView *)imgView withError:(NSError *)error;

@@ -9,6 +9,7 @@
 #import "FTViewController.h"
 #import "FTAppDelegate.h"
 #import "FTLang.h"
+#import "FTSystem.h"
 
 
 @implementation FTViewController
@@ -88,12 +89,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	isLandscape = UIInterfaceOrientationIsLandscape([[UIDevice currentDevice] orientation]);
+	isLandscape = UIInterfaceOrientationIsLandscape([FTSystem interfaceOrientation]);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	isLandscape = UIInterfaceOrientationIsLandscape([[UIDevice currentDevice] orientation]);
+	isLandscape = UIInterfaceOrientationIsLandscape([FTSystem interfaceOrientation]);
 	[self doLayoutAllElements];
 }
 
@@ -145,7 +146,7 @@
 	return count;
 }
 
-- (void)configureCell:(FTTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(FTTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView {
 	[cell.textLabel setText:@"Fuerte ROCKS !!!"];
 	[cell.detailTextLabel setText:@"http://www.fuerteint.com/"];
 }
@@ -156,7 +157,7 @@
 	if (!cell) {
 		cell = [[[FTTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier] autorelease];
 	}
-	[self configureCell:cell atIndexPath:indexPath];
+	[self configureCell:cell atIndexPath:indexPath forTableView:tableView];
 	return cell;
 }
 

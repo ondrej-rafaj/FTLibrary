@@ -53,7 +53,7 @@
 - (void)createTableViewWithStyle:(UITableViewStyle)style;
 - (void)createTableView;
 
-- (void)configureCell:(FTTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)configureCell:(FTTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath forTableView:(UITableView *)tableView;
 
 // Loading progress view
 - (void)enableLoadingProgressViewInWindowWithTitle:(NSString *)title withAnimationStyle:(FTProgressViewAnimation)animation showWhileExecuting:(SEL)method onTarget:(id)target withObject:(id)object animated:(BOOL)animated;
