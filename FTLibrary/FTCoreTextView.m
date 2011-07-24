@@ -26,8 +26,11 @@
     _processedString = (NSMutableString *)_text;
     
     for (NSValue *styleV in _styles) {
+        
         FTCoreTextStyle style;
         [styleV getValue:&style];
+        
+        NSLog(@"Processing Tag: %@", style.name);
         
         while (YES) {
             int length;
@@ -212,6 +215,7 @@
 
 - (void)addStyle:(FTCoreTextStyle)style {
     NSMutableArray *array = [NSMutableArray arrayWithArray:_styles];
+
     NSValue *value = [NSValue valueWithBytes:&style objCType:@encode(FTCoreTextStyle)];
     if ([array containsObject:value]) [array removeObject:value];
     [array addObject:[NSValue value:&style withObjCType:@encode(FTCoreTextStyle)]];
@@ -221,17 +225,21 @@
 - (void)setStyles:(NSArray *)styles {
     
     NSMutableArray *mutStyles = [NSMutableArray array];
+    NSMutableArray *keys = [NSMutableArray array];
     for (NSValue *value in styles) {
         FTCoreTextStyle style;
         [value getValue:&style];
         
-        NSLog(@"style name : %@", style.name);
-        
         if ([style.name isEqualToString:@"_default"]) {
             _defaultStyle = style;
         }
-        else {
+        else if ([keys containsObject:style.name]){
+            int index = [keys indexOfObject:style.name];
+            [mutStyles replaceObjectAtIndex:index withObject:value];
+        }
+        else{
             [mutStyles addObject:value];
+            [keys addObject:style.name];
         }
 
     }
