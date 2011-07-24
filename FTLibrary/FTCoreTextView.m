@@ -86,6 +86,7 @@
         _text = [[NSString alloc] init];
         _markers = [[NSMutableArray alloc] init];
         _processedString = [[NSMutableString alloc] init];
+        _styles = [[NSArray alloc] init];
         [self setBackgroundColor:[UIColor clearColor]];
     }
     return self;
@@ -102,12 +103,12 @@
     
     if (!_processedString || [_processedString length] == 0) return;
     
-    NSLog(@"def style : %@", _defaultStyle.name);
     
-    if (!_defaultStyle.name) {
+    if (!_defaultStyle.name || [_defaultStyle.name length] == 0) {
         _defaultStyle.name = @"_default";
         _defaultStyle.font = [UIFont systemFontOfSize:14];
         _defaultStyle.color= [UIColor blackColor];
+        NSLog(@"FTCoreTextView: _default style not found!");
     }
     
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_processedString];
@@ -210,21 +211,32 @@
 }
 
 - (void)addStyle:(FTCoreTextStyle)style {
-    
-    if ([style.name isEqualToString:@"_default"]) {
-        _defaultStyle = style;
-        [self setNeedsDisplay];
-        return;
-    }
-    
     NSMutableArray *array = [NSMutableArray arrayWithArray:_styles];
+    NSValue *value = [NSValue valueWithBytes:&style objCType:@encode(FTCoreTextStyle)];
+    if ([array containsObject:value]) [array removeObject:value];
     [array addObject:[NSValue value:&style withObjCType:@encode(FTCoreTextStyle)]];
     [self setStyles:array];
 }
 
 - (void)setStyles:(NSArray *)styles {
+    
+    NSMutableArray *mutStyles = [NSMutableArray array];
+    for (NSValue *value in styles) {
+        FTCoreTextStyle style;
+        [value getValue:&style];
+        
+        NSLog(@"style name : %@", style.name);
+        
+        if ([style.name isEqualToString:@"_default"]) {
+            _defaultStyle = style;
+        }
+        else {
+            [mutStyles addObject:value];
+        }
+
+    }
     [_styles release];
-    _styles = [styles retain];
+    _styles = [(NSArray *)mutStyles retain];
     [self setNeedsDisplay];
 }
 
