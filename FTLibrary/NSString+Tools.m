@@ -11,6 +11,8 @@
 
 @implementation NSString (Tools)
 
+//NSLog(@"%.4d",3); will display 0003 / 4 is the number of characters
+
 + (NSString *)stringFromNumber:(int)number withCharacterSizeLength:(int)numberOfChars {
     NSString *no = [NSString stringWithFormat:@"%d", number];
     int len = [no length];
