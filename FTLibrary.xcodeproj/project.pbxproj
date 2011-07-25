@@ -114,6 +114,12 @@
 		4C6F5F3213C1B5E400EECED4 /* FTProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F5F3013C1B5E400EECED4 /* FTProject.m */; };
 		4C6F5F4F13C45CA100EECED4 /* FTAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */; };
 		4C6F5F5013C45CA100EECED4 /* FTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F5F4E13C45CA100EECED4 /* FTAppDelegate.m */; };
+		4C6F969013DD8F66000BF403 /* FTMemTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F968E13DD8F66000BF403 /* FTMemTools.h */; };
+		4C6F969113DD8F66000BF403 /* FTMemTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F968F13DD8F66000BF403 /* FTMemTools.m */; };
+		4C6F969713DD8FA1000BF403 /* FTDebugMemoryLabelView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F969513DD8FA1000BF403 /* FTDebugMemoryLabelView.h */; };
+		4C6F969813DD8FA1000BF403 /* FTDebugMemoryLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F969613DD8FA1000BF403 /* FTDebugMemoryLabelView.m */; };
+		4C6F969C13DD8FBA000BF403 /* FTImageSpinView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F969A13DD8FBA000BF403 /* FTImageSpinView.h */; };
+		4C6F969D13DD8FBA000BF403 /* FTImageSpinView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F969B13DD8FBA000BF403 /* FTImageSpinView.m */; };
 		4C72E6C413BA1A6E003EB741 /* FTProjectInitialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C72E6C213BA1A6E003EB741 /* FTProjectInitialization.h */; };
 		4C72E6C513BA1A6E003EB741 /* FTProjectInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */; };
 		4C72E6C613BA1A6E003EB741 /* FTProjectInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */; };
@@ -472,6 +478,12 @@
 		4C6F5F3013C1B5E400EECED4 /* FTProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProject.m; sourceTree = "<group>"; };
 		4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAppDelegate.h; sourceTree = "<group>"; };
 		4C6F5F4E13C45CA100EECED4 /* FTAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAppDelegate.m; sourceTree = "<group>"; };
+		4C6F968E13DD8F66000BF403 /* FTMemTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMemTools.h; sourceTree = "<group>"; };
+		4C6F968F13DD8F66000BF403 /* FTMemTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMemTools.m; sourceTree = "<group>"; };
+		4C6F969513DD8FA1000BF403 /* FTDebugMemoryLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDebugMemoryLabelView.h; sourceTree = "<group>"; };
+		4C6F969613DD8FA1000BF403 /* FTDebugMemoryLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDebugMemoryLabelView.m; sourceTree = "<group>"; };
+		4C6F969A13DD8FBA000BF403 /* FTImageSpinView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTImageSpinView.h; sourceTree = "<group>"; };
+		4C6F969B13DD8FBA000BF403 /* FTImageSpinView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTImageSpinView.m; sourceTree = "<group>"; };
 		4C72E6C213BA1A6E003EB741 /* FTProjectInitialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProjectInitialization.h; sourceTree = "<group>"; };
 		4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProjectInitialization.m; sourceTree = "<group>"; };
 		4C72E6C713BA1AC6003EB741 /* FTTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTracking.h; sourceTree = "<group>"; };
@@ -946,6 +958,7 @@
 		4C57611D13C5E7570049371F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4C6F969413DD8F8B000BF403 /* Debug */,
 				6834BE2B13D9B2F000781018 /* Labels */,
 				68DD054C13D97F27004C02C8 /* TextView */,
 				4CCD128313D8524C0004EF5D /* Drag & Drop */,
@@ -1039,6 +1052,33 @@
 				4C6F5F4E13C45CA100EECED4 /* FTAppDelegate.m */,
 			);
 			name = "App delegate";
+			sourceTree = "<group>";
+		};
+		4C6F969313DD8F69000BF403 /* Memory tools */ = {
+			isa = PBXGroup;
+			children = (
+				4C6F968E13DD8F66000BF403 /* FTMemTools.h */,
+				4C6F968F13DD8F66000BF403 /* FTMemTools.m */,
+			);
+			name = "Memory tools";
+			sourceTree = "<group>";
+		};
+		4C6F969413DD8F8B000BF403 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				4C6F969513DD8FA1000BF403 /* FTDebugMemoryLabelView.h */,
+				4C6F969613DD8FA1000BF403 /* FTDebugMemoryLabelView.m */,
+			);
+			name = Debug;
+			sourceTree = "<group>";
+		};
+		4C6F969913DD8FAA000BF403 /* Image spin */ = {
+			isa = PBXGroup;
+			children = (
+				4C6F969A13DD8FBA000BF403 /* FTImageSpinView.h */,
+				4C6F969B13DD8FBA000BF403 /* FTImageSpinView.m */,
+			);
+			name = "Image spin";
 			sourceTree = "<group>";
 		};
 		4C72E6C013BA1A39003EB741 /* Project initialization */ = {
@@ -1272,14 +1312,15 @@
 		4C85BC9913BB5D0700CB7FCA /* System */ = {
 			isa = PBXGroup;
 			children = (
-				4CCD127213D851C90004EF5D /* FTSystem.h */,
-				4CCD127313D851C90004EF5D /* FTSystem.m */,
 				4C5760E613C5CAA00049371F /* Debugging */,
 				4C6F5F4C13C45C7200EECED4 /* App delegate */,
 				4C40309D13BEA27D00E6A4A2 /* Localizations */,
 				4C0365C913BA08DE00E8FA09 /* Filesystem */,
 				4C85BC8A13BB18A000CB7FCA /* Errors */,
 				4C85BC9813BB5CFD00CB7FCA /* Kill switch */,
+				4C6F969313DD8F69000BF403 /* Memory tools */,
+				4CCD127213D851C90004EF5D /* FTSystem.h */,
+				4CCD127313D851C90004EF5D /* FTSystem.m */,
 			);
 			name = System;
 			sourceTree = "<group>";
@@ -1429,6 +1470,7 @@
 		4CCD123F13D84E8D0004EF5D /* Image views */ = {
 			isa = PBXGroup;
 			children = (
+				4C6F969913DD8FAA000BF403 /* Image spin */,
 				4CCD123213D84E550004EF5D /* FTImageView.h */,
 				4CCD123313D84E550004EF5D /* FTImageView.m */,
 			);
@@ -1703,6 +1745,9 @@
 				4CCD128613D852590004EF5D /* FTDragDropMenuView.h in Headers */,
 				68DD055413D98063004C02C8 /* FTCoreTextView.h in Headers */,
 				6834BE2913D9B2EA00781018 /* FTLabel.h in Headers */,
+				4C6F969013DD8F66000BF403 /* FTMemTools.h in Headers */,
+				4C6F969713DD8FA1000BF403 /* FTDebugMemoryLabelView.h in Headers */,
+				4C6F969C13DD8FBA000BF403 /* FTImageSpinView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1929,6 +1974,9 @@
 				4CCD128713D852590004EF5D /* FTDragDropMenuView.m in Sources */,
 				68DD055513D98063004C02C8 /* FTCoreTextView.m in Sources */,
 				6834BE2A13D9B2EA00781018 /* FTLabel.m in Sources */,
+				4C6F969113DD8F66000BF403 /* FTMemTools.m in Sources */,
+				4C6F969813DD8FA1000BF403 /* FTDebugMemoryLabelView.m in Sources */,
+				4C6F969D13DD8FBA000BF403 /* FTImageSpinView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
