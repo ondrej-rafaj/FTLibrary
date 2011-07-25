@@ -116,11 +116,11 @@
 }
 
 - (void)setDelegate:(id<UITableViewDelegate>)delegate {
-	// Do nothing
-	NSLog(@"Use setHorizontalDelegate: instead!");
-	//abort();
+	if (delegate != self && delegate != nil) {
+		NSLog(@"Use setHorizontalDelegate: instead!");
+		abort();
+	}
 }
-
 
 - (id<FTHorizontalTableViewDataSource>)dataSource {
 	return _horizontalTableDataSource;
