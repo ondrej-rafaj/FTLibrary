@@ -7,48 +7,61 @@
 //
 
 #import "FTLabel.h"
+#import "UILabel+DynamicHeight.h"
 
 
 @implementation FTLabel
 
-- (id)initWithFrame:(CGRect)frame
-{
+
+#pragma Initialization
+
+- (void)doInit {
+	[self setBackgroundColor:[UIColor clearColor]];
+	[self setLineBreakMode:UILineBreakModeWordWrap];
+}
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        [self doInit];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self doInit];
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-        [self setBackgroundColor:[UIColor clearColor]];
+        [self doInit];
     }
     return self;
 }
 
 - (id)initWithFrame:(CGRect)frame font:(UIFont *)font andText:(NSString *)text {
     CGSize textSize = [text sizeWithFont:font constrainedToSize:CGSizeMake(frame.size.width, CGFLOAT_MAX)];
-    frame.size.height = textSize.height;
-    
+	frame.size.height = textSize.height;
     self = [self initWithFrame:frame];
     if (self) {
-        [self setFont:font];
-        [self setText:text];
-        
-        [self setLineBreakMode:UILineBreakModeWordWrap];
-        [self setNumberOfLines:0];
-        
+        [self doInit];
+		[self setNumberOfLines:0];
+		[self setFont:font];
+		[self setText:text];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
+#pragma mark Memory management
 
-- (void)dealloc
-{
+- (void)dealloc {
     [super dealloc];
 }
+
 
 @end

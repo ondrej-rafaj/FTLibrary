@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import "ft"
+#import "FTLabel.h"
+
 
 @interface FTDebugMemoryLabelView : UIView {
 	
 }
+
 
 @end
