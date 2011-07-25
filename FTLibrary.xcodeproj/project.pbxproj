@@ -120,6 +120,7 @@
 		4C6F969813DD8FA1000BF403 /* FTDebugMemoryLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F969613DD8FA1000BF403 /* FTDebugMemoryLabelView.m */; };
 		4C6F969C13DD8FBA000BF403 /* FTImageSpinView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F969A13DD8FBA000BF403 /* FTImageSpinView.h */; };
 		4C6F969D13DD8FBA000BF403 /* FTImageSpinView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F969B13DD8FBA000BF403 /* FTImageSpinView.m */; };
+		4C6F969F13DD9A11000BF403 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C6F969E13DD9A11000BF403 /* CoreText.framework */; };
 		4C72E6C413BA1A6E003EB741 /* FTProjectInitialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C72E6C213BA1A6E003EB741 /* FTProjectInitialization.h */; };
 		4C72E6C513BA1A6E003EB741 /* FTProjectInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */; };
 		4C72E6C613BA1A6E003EB741 /* FTProjectInitialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */; };
@@ -484,6 +485,7 @@
 		4C6F969613DD8FA1000BF403 /* FTDebugMemoryLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDebugMemoryLabelView.m; sourceTree = "<group>"; };
 		4C6F969A13DD8FBA000BF403 /* FTImageSpinView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTImageSpinView.h; sourceTree = "<group>"; };
 		4C6F969B13DD8FBA000BF403 /* FTImageSpinView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTImageSpinView.m; sourceTree = "<group>"; };
+		4C6F969E13DD9A11000BF403 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		4C72E6C213BA1A6E003EB741 /* FTProjectInitialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProjectInitialization.h; sourceTree = "<group>"; };
 		4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProjectInitialization.m; sourceTree = "<group>"; };
 		4C72E6C713BA1AC6003EB741 /* FTTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTracking.h; sourceTree = "<group>"; };
@@ -697,6 +699,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C6F969F13DD9A11000BF403 /* CoreText.framework in Frameworks */,
 				4C85BC2213BA4B5000CB7FCA /* AddressBook.framework in Frameworks */,
 				4C85BC2313BA4B5000CB7FCA /* AddressBookUI.framework in Frameworks */,
 				4C85BC2413BA4B5000CB7FCA /* AVFoundation.framework in Frameworks */,
@@ -765,6 +768,7 @@
 				4C85BC1613BA4B5000CB7FCA /* CoreGraphics.framework */,
 				4C85BC1713BA4B5000CB7FCA /* CoreLocation.framework */,
 				4C85BC1813BA4B5000CB7FCA /* CoreMedia.framework */,
+				4C6F969E13DD9A11000BF403 /* CoreText.framework */,
 				4C85BC1913BA4B5000CB7FCA /* libxml2.dylib */,
 				4C85BC1A13BA4B5000CB7FCA /* libz.dylib */,
 				4C85BC1B13BA4B5000CB7FCA /* MapKit.framework */,

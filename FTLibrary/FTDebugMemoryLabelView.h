@@ -7,12 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FTLabel.h"
 
 
 @interface FTDebugMemoryLabelView : UIView {
 	
+	UILabel *label;
+	
+	NSTimer *timer;
+	
 }
+
++ (id)start;
+
++ (id)startIfDebug;
+
++ (void)startWithView:(UIView *)view;
+
+//+ (void)startWithWindow:(UIWindow *)window;
 
 
 @end
