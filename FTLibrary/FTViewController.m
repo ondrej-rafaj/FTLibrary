@@ -10,6 +10,8 @@
 #import "FTAppDelegate.h"
 #import "FTLang.h"
 #import "FTSystem.h"
+#import "FTProject.h"
+#import "FTDebugMemoryLabelView.h"
 
 
 @implementation FTViewController
@@ -102,6 +104,13 @@
 	[super viewWillDisappear:animated];
 	if (loadingProgressView) {
 		//[loadingProgressView hide:YES];
+	}
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	if ([FTProject memoryDebugging]) {
+		[FTDebugMemoryLabelView startWithView:self.view];
 	}
 }
 

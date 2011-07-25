@@ -11,8 +11,9 @@
 #import "FTLang.h"
 
 
-#define kFTProjectInitializationFunctionalityKey				@"FTProjectInitializationFunctionalityKey"
-#define kFTProjectInitializationDebuggingKey					@"FTProjectInitializationDebuggingKey"
+#define kFTProjectInitializationFunctionalityKey						@"FTProjectInitializationFunctionalityKey"
+#define kFTProjectInitializationDebuggingKey							@"FTProjectInitializationDebuggingKey"
+#define kFTProjectInitializationMemoryDebuggingKey						@"FTProjectInitializationMemoryDebuggingKey"
 
 
 @implementation FTProjectInitialization
@@ -95,6 +96,15 @@
 
 + (BOOL)debugging {
 	return [[NSUserDefaults standardUserDefaults] boolForKey:kFTProjectInitializationDebuggingKey];
+}
+
++ (void)enableMemoryDebugging:(BOOL)debugging {
+	[[NSUserDefaults standardUserDefaults] setBool:debugging forKey:kFTProjectInitializationMemoryDebuggingKey];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
++ (BOOL)memoryDebugging {
+	return [[NSUserDefaults standardUserDefaults] boolForKey:kFTProjectInitializationMemoryDebuggingKey];
 }
 
 #pragma mark Memory management

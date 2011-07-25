@@ -45,7 +45,6 @@
 - (void)update {
 	float mem = (float)[FTMemTools getAvailableMemoryInKb];
 	[label setText:[NSString stringWithFormat:@"FM: %.2f Mb", (mem / 1024.0f)]];
-	NSLog(@"Debug: %@", NSStringFromCGRect(self.frame));
 }
 
 #pragma settings

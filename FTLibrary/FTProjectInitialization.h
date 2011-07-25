@@ -41,5 +41,9 @@ typedef enum {
 
 + (BOOL)debugging;
 
++ (void)enableMemoryDebugging:(BOOL)debugging;
+
++ (BOOL)memoryDebugging;
+
 
 @end
