@@ -27,11 +27,17 @@
 
 // TODO: finish me for landscape, portrait, iPhone & iPad :)
 - (CGRect)fullscreenRect {
-	CGFloat height =	480;	// full height
-	if (YES) height -=	20;		// status bar
-	if (YES) height -=	44;		// navigation bar
-	if (NO) height -=	49;		// tab bar
-	return CGRectMake(0, 0, 320, height);
+	if ([FTSystem isPhoneSize]) {
+		CGFloat height =	480;	// full height
+		if (YES) height -=	20;		// status bar
+		if (YES) height -=	44;		// navigation bar
+		if (NO) height -=	49;		// tab bar
+		return CGRectMake(0, 0, 320, height);
+	}
+	else {
+		if (isLandscape) return CGRectMake(0, 0, 1024, 748);
+		else return CGRectMake(0, 0, 768, 1004);
+	}
 }
 
 #pragma mark Initialization
@@ -70,6 +76,7 @@
     [backgroundView release];
 	[table release];
 	[data release];
+	[debugLabel release];
     [super dealloc];
 }
 
@@ -84,6 +91,7 @@
 }
 
 - (void)doLayoutAllElements {
+	[backgroundView setFrame:[self fullscreenRect]];	
 	[self doLayoutSubviews];
 }
 
@@ -110,7 +118,8 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	if ([FTProject memoryDebugging]) {
-		[FTDebugMemoryLabelView startWithView:self.view];
+		if (!debugLabel) debugLabel = [FTDebugMemoryLabelView startWithView:self.view];
+		[self.view bringSubviewToFront:debugLabel];
 	}
 }
 
@@ -185,7 +194,7 @@
         backgroundView = nil;
     }
     
-    backgroundView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    backgroundView = [[UIImageView alloc] initWithFrame:[self fullscreenRect]];
     [backgroundView setImage:img];
     [self.view addSubview:backgroundView];
     [self.view sendSubviewToBack:backgroundView];

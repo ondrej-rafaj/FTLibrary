@@ -24,6 +24,8 @@
 	
 	FTProgressView *loadingProgressView;
 	
+	UIView *debugLabel;
+	
 }
 
 @property (nonatomic, retain) UITableView *table;

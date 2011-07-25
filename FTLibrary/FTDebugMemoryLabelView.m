@@ -61,19 +61,21 @@
 	[timer invalidate];
 }
 
-+ (id)start {
++ (FTDebugMemoryLabelView *)start {
 	FTDebugMemoryLabelView *v = [[FTDebugMemoryLabelView alloc] init];
 	[v startUpdating];
 	return [v autorelease];
 }
 
-+ (id)startIfDebug {
++ (FTDebugMemoryLabelView *)startIfDebug {
 	if ([FTProject debugging]) return [self start];
 	else return nil;
 }
 
-+ (void)startWithView:(UIView *)view {
-	[view addSubview:[self start]];
++ (FTDebugMemoryLabelView *)startWithView:(UIView *)view {
+	FTDebugMemoryLabelView *debug = [self start];
+	[view addSubview:debug];
+	return debug;
 }
 
 + (void)startWithWindow:(UIWindow *)window {

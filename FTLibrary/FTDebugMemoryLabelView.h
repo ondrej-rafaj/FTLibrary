@@ -17,11 +17,11 @@
 	
 }
 
-+ (id)start;
++ (FTDebugMemoryLabelView *)start;
 
-+ (id)startIfDebug;
++ (FTDebugMemoryLabelView *)startIfDebug;
 
-+ (void)startWithView:(UIView *)view;
++ (FTDebugMemoryLabelView *)startWithView:(UIView *)view;
 
 //+ (void)startWithWindow:(UIWindow *)window;
 
