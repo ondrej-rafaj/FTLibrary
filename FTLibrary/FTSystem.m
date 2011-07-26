@@ -12,6 +12,7 @@
 @implementation FTSystem
 
 static FTSystemDeviceType cachedDeviceType;
+static float systemVersion = -1;
 
 + (FTSystemDeviceType)deviceType {
 	if (cachedDeviceType) return cachedDeviceType;
@@ -83,6 +84,17 @@ static FTSystemDeviceType cachedDeviceType;
 		}
 	}
 	return s;
+}
+
++ (float)systemNumber
+{
+	if (systemVersion == -1)
+	{
+		NSString *version = [[UIDevice currentDevice] systemVersion];
+		systemVersion = [version floatValue];
+	}
+	
+	return systemVersion;
 }
 
 @end

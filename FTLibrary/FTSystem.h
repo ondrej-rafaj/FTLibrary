@@ -46,5 +46,6 @@ FTSystemDeviceType;
 
 + (CGSize)screenSize;
 
++ (float)systemNumber;
 
 @end
