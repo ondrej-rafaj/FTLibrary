@@ -16,7 +16,7 @@
 
 + (CGFloat)getFrom:(CGFloat)value {
 	//NSLog(@"From value:%f to: %f", value, (value / 255));
-	return (value / 255);
+	return (value / 255.f);
 }
 
 + (UIColor *)colorWithRealRed:(CGFloat)red green:(CGFloat)green blue:(CGFloat)blue alpha:(CGFloat)alpha {
