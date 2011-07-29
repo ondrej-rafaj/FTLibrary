@@ -255,7 +255,6 @@
 
 - (void)dealloc
 {
-    
     [_text release];
     [_styles release];
     [_markers release];
