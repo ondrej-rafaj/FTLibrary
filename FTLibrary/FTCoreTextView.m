@@ -229,6 +229,8 @@
     for (NSValue *value in styles) {
         FTCoreTextStyle style;
         [value getValue:&style];
+        [style.color retain];
+        [style.font retain];
         
         if ([style.name isEqualToString:@"_default"]) {
             _defaultStyle = style;
