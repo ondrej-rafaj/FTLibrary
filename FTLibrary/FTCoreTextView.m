@@ -9,6 +9,7 @@
 #import "FTCoreTextView.h"
 #import <QuartzCore/QuartzCore.h>
 #import <CoreText/CoreText.h>
+#import "RegexKitLite.h"
 
 @implementation FTCoreTextView
 
@@ -24,6 +25,15 @@
     
     if (!_text || [_text length] == 0) return;
     _processedString = (NSMutableString *)_text;
+    
+    /*
+    NSString *regexStr = @"<(.*?)>";
+    while (YES) {
+        
+        NSRange *rangeStart = [_processedString stringByMatching:regexStr capture:1];
+        if (rangeStart.lo)
+    }
+    */
     
     for (NSValue *styleV in _styles) {
         
