@@ -9,7 +9,6 @@
 #import "FTCoreTextView.h"
 #import <QuartzCore/QuartzCore.h>
 #import <CoreText/CoreText.h>
-#import "RegexKitLite.h"
 
 @implementation FTCoreTextView
 

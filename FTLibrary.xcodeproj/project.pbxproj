@@ -368,8 +368,6 @@
 		4CCD128613D852590004EF5D /* FTDragDropMenuView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCD128413D852590004EF5D /* FTDragDropMenuView.h */; };
 		4CCD128713D852590004EF5D /* FTDragDropMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD128513D852590004EF5D /* FTDragDropMenuView.m */; };
 		4CCD128813D852590004EF5D /* FTDragDropMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD128513D852590004EF5D /* FTDragDropMenuView.m */; };
-		6826E72713E7174600EF1A6E /* RegexKitLite.h in Headers */ = {isa = PBXBuildFile; fileRef = 6826E72513E7174600EF1A6E /* RegexKitLite.h */; };
-		6826E72813E7174600EF1A6E /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6826E72613E7174600EF1A6E /* RegexKitLite.m */; };
 		6834BE2913D9B2EA00781018 /* FTLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6834BE2713D9B2EA00781018 /* FTLabel.h */; };
 		6834BE2A13D9B2EA00781018 /* FTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6834BE2813D9B2EA00781018 /* FTLabel.m */; };
 		6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */; };
@@ -680,8 +678,6 @@
 		4CCD127E13D8521C0004EF5D /* FTRemoteInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTRemoteInfoView.m; sourceTree = "<group>"; };
 		4CCD128413D852590004EF5D /* FTDragDropMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDragDropMenuView.h; sourceTree = "<group>"; };
 		4CCD128513D852590004EF5D /* FTDragDropMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDragDropMenuView.m; sourceTree = "<group>"; };
-		6826E72513E7174600EF1A6E /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
-		6826E72613E7174600EF1A6E /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		6834BE2713D9B2EA00781018 /* FTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLabel.h; sourceTree = "<group>"; };
 		6834BE2813D9B2EA00781018 /* FTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLabel.m; sourceTree = "<group>"; };
 		6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGooglePlaceRequest.h; path = FTLibrary/FTGooglePlaceRequest.h; sourceTree = SOURCE_ROOT; };
@@ -1105,7 +1101,6 @@
 		4C85BB0413BA4AFD00CB7FCA /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
-				6826E72413E7174600EF1A6E /* RegexKitLite */,
 				4CB6E22513D5D59E002FEC0A /* ZipArchive */,
 				4C85BC3913BA4E5D00CB7FCA /* Facebook */,
 				4C85BC3313BA4CF200CB7FCA /* Reachability */,
@@ -1581,15 +1576,6 @@
 			name = "Drag & Drop";
 			sourceTree = "<group>";
 		};
-		6826E72413E7174600EF1A6E /* RegexKitLite */ = {
-			isa = PBXGroup;
-			children = (
-				6826E72513E7174600EF1A6E /* RegexKitLite.h */,
-				6826E72613E7174600EF1A6E /* RegexKitLite.m */,
-			);
-			path = RegexKitLite;
-			sourceTree = "<group>";
-		};
 		6834BE2B13D9B2F000781018 /* Labels */ = {
 			isa = PBXGroup;
 			children = (
@@ -1766,7 +1752,6 @@
 				4C6F969013DD8F66000BF403 /* FTMemTools.h in Headers */,
 				4C6F969713DD8FA1000BF403 /* FTDebugMemoryLabelView.h in Headers */,
 				4C6F969C13DD8FBA000BF403 /* FTImageSpinView.h in Headers */,
-				6826E72713E7174600EF1A6E /* RegexKitLite.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1996,7 +1981,6 @@
 				4C6F969113DD8F66000BF403 /* FTMemTools.m in Sources */,
 				4C6F969813DD8FA1000BF403 /* FTDebugMemoryLabelView.m in Sources */,
 				4C6F969D13DD8FBA000BF403 /* FTImageSpinView.m in Sources */,
-				6826E72813E7174600EF1A6E /* RegexKitLite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
