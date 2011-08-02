@@ -15,6 +15,7 @@
 
 typedef struct {
     NSString *name;
+    NSString *appendedCharacter;
     UIFont *font;
     UIColor *color;
     BOOL isUnderLined;
@@ -22,7 +23,7 @@ typedef struct {
 
 @interface FTCoreTextView : UIView {
     NSString *_text;
-    NSArray *_styles;
+    NSMutableDictionary *_styles;
     @private
     NSMutableArray *_markers;
     FTCoreTextStyle _defaultStyle;
@@ -32,7 +33,7 @@ typedef struct {
 }
 
 @property (nonatomic, retain) NSString *text;
-@property (nonatomic, retain) NSArray *styles;
+@property (nonatomic, retain) NSMutableDictionary *styles;
 @property (nonatomic, retain) NSMutableArray *markers;
 @property (nonatomic, assign) FTCoreTextStyle defaultStyle;
 @property (nonatomic, retain) NSMutableString *processedString;
