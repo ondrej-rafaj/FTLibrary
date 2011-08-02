@@ -9,6 +9,7 @@
 #import "FTCoreTextView.h"
 #import <QuartzCore/QuartzCore.h>
 #import <CoreText/CoreText.h>
+#import <regex.h>
 
 @implementation FTCoreTextView
 
@@ -20,75 +21,80 @@
 @synthesize path = _path;
 
 
+
 - (void)processText {
     
     if (!_text || [_text length] == 0) return;
     _processedString = (NSMutableString *)_text;
+    FTCoreTextStyle style;
+    [[self.styles objectForKey:@"_default"] getValue:&style];
+    self.defaultStyle = style;
     
-    /*
-    NSString *regexStr = @"<(.*?)>";
+    NSString *regEx = @"<[a-zA-Z0-9]*( /){0,1}>";
+       
     while (YES) {
+        int length;
+        NSRange rangeStart;
+        NSRange rangeActive;
+        NSValue *styleV;
         
-        NSRange *rangeStart = [_processedString stringByMatching:regexStr capture:1];
-        if (rangeStart.lo)
-    }
-    */
-    
-    for (NSValue *styleV in _styles) {
         
-        FTCoreTextStyle style;
+        rangeStart = [_processedString rangeOfString:regEx options:NSRegularExpressionSearch];
+        if (rangeStart.location == NSNotFound) return;
+        NSString *key = [_processedString substringWithRange:NSMakeRange(rangeStart.location + 1, rangeStart.length - 2)];
+       
+        NSString *autoCloseKey = [key stringByReplacingOccurrencesOfString:@" /" withString:@""];
+        BOOL isAutoClose = (![key isEqualToString:autoCloseKey]);
+        
+        styleV = [self.styles objectForKey:(isAutoClose)? autoCloseKey : key];
+
         [styleV getValue:&style];
         
-        NSLog(@"Processing Tag: %@", style.name);
+        if (isAutoClose) {
+            NSString *append = @"";
+            if (styleV != nil) {
+                [styleV getValue:&style];
+                append = style.appendedCharacter;
+            }
+            [_processedString replaceCharactersInRange:rangeStart withString:append];
+            
+            rangeActive = NSMakeRange(rangeStart.location, [append length]);
+        }
+        else {
+            [_processedString replaceCharactersInRange:rangeStart withString:@""];
+            NSRange rangeEnd = [_processedString rangeOfString:[NSString stringWithFormat:@"</%@>", key]];
+            [_processedString replaceCharactersInRange:rangeEnd withString:@""];
+            
+            length = rangeEnd.location - rangeStart.location;
+            rangeActive = NSMakeRange(rangeStart.location, length);
+            
+        }
         
-        while (YES) {
-            int length;
-            NSRange rangeStart;
-            NSRange rangeActive;
-            
-            NSRange underscoreRange = [style.name rangeOfString:@"_"];
-            BOOL isSpecial = (underscoreRange.location == 0 && underscoreRange.length == 1);
-            if (isSpecial){
-                if ([style.name isEqualToString:@"_bullet"]) {
-
-                     rangeStart = [_processedString rangeOfString:[NSString stringWithFormat:@"<bullet />", style.name]];
-                    if ((rangeStart.length == 0) || (rangeStart.location >= [_processedString length])) {
-                        break;
-                    }
-                    [_processedString replaceCharactersInRange:rangeStart withString:@"•"];
-                    rangeActive = rangeActive = NSMakeRange(rangeStart.location, 1);
-                    
-                }
-            }
-            else {
-                NSRange rangeStart = [_processedString rangeOfString:[NSString stringWithFormat:@"<%@>", style.name]];
-                if ((rangeStart.length == 0) || (rangeStart.location >= [_processedString length])) {
-                    break;
-                }
-                [_processedString replaceCharactersInRange:rangeStart withString:@""];
-                NSRange rangeEnd = [_processedString rangeOfString:[NSString stringWithFormat:@"</%@>", style.name]];
-                [_processedString replaceCharactersInRange:rangeEnd withString:@""];
-                
-                length = rangeEnd.location - rangeStart.location;
-                rangeActive = NSMakeRange(rangeStart.location, length);
-            }
-            
-            
+        if (styleV == nil) {
+            NSLog(@"Definition of style [%@] not found!", key);
+            continue;
+        }
+        else {
             NSValue *rangeValue = [NSValue valueWithRange:rangeActive];
             NSDictionary *dict = [NSDictionary 
                                   dictionaryWithObjects:[NSArray arrayWithObjects:rangeValue, styleV, nil]                                                     
                                   forKeys:[NSArray arrayWithObjects:@"range", @"style", nil]];
             rangeValue = nil;
-            [_markers addObject:dict]; 
+            [_markers addObject:dict];            
         }
-      
+        
+ 
     }
     
-    //search for undefined markers!
-    
-    
 }
-
++ (NSString *)stripTagsforString:(NSString *)string {
+    FTCoreTextView *instance = [[FTCoreTextView alloc] initWithFrame:CGRectZero];
+    [instance setText:string];
+    [instance processText];
+    NSString *result = [NSString stringWithString:instance.processedString];
+    [instance release];
+    return result;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -98,7 +104,7 @@
         _text = [[NSString alloc] init];
         _markers = [[NSMutableArray alloc] init];
         _processedString = [[NSMutableString alloc] init];
-        _styles = [[NSArray alloc] init];
+        _styles = [[NSMutableDictionary alloc] init];
         [self setBackgroundColor:[UIColor clearColor]];
     }
     return self;
@@ -223,39 +229,25 @@
 }
 
 - (void)addStyle:(FTCoreTextStyle)style {
-    NSMutableArray *array = [NSMutableArray arrayWithArray:_styles];
-
+    [style.color retain];
+    [style.font retain];
     NSValue *value = [NSValue valueWithBytes:&style objCType:@encode(FTCoreTextStyle)];
-    if ([array containsObject:value]) [array removeObject:value];
-    [array addObject:[NSValue value:&style withObjCType:@encode(FTCoreTextStyle)]];
-    [self setStyles:array];
+    [self.styles setValue:value forKey:style.name];
+    [self setNeedsDisplay];
 }
 
-- (void)setStyles:(NSArray *)styles {
-    
-    NSMutableArray *mutStyles = [NSMutableArray array];
-    NSMutableArray *keys = [NSMutableArray array];
-    for (NSValue *value in styles) {
+- (void)setStyles:(NSDictionary *)styles {
+    NSArray *allKeys = [styles allKeys];
+    for (NSString *key in allKeys) {
+        NSValue *value = [styles objectForKey:key];
         FTCoreTextStyle style;
         [value getValue:&style];
         [style.color retain];
         [style.font retain];
-        
-        if ([style.name isEqualToString:@"_default"]) {
-            _defaultStyle = style;
-        }
-        else if ([keys containsObject:style.name]){
-            int index = [keys indexOfObject:style.name];
-            [mutStyles replaceObjectAtIndex:index withObject:value];
-        }
-        else{
-            [mutStyles addObject:value];
-            [keys addObject:style.name];
-        }
-
     }
+    
     [_styles release];
-    _styles = [(NSArray *)mutStyles retain];
+    _styles = [[NSMutableDictionary dictionaryWithDictionary:styles] retain];
     [self setNeedsDisplay];
 }
 
