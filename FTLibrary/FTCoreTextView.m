@@ -82,8 +82,6 @@
             rangeValue = nil;
             [_markers addObject:dict];            
         }
-        
- 
     }
     
 }

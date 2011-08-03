@@ -48,4 +48,7 @@ FTSystemDeviceType;
 
 + (float)systemNumber;
 
++ (BOOL) isInternetAvailable;
+
+
 @end

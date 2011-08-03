@@ -97,4 +97,12 @@ static float systemVersion = -1;
 	return systemVersion;
 }
 
++ (BOOL) isInternetAvailable
+{
+#warning Change way to check internet connection
+    NSError *error = nil;
+    NSString *result = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.google.com"] encoding:NSUTF8StringEncoding error:&error];
+    return (error == nil && ![result isEqualToString:@""]);
+}
+
 @end
