@@ -168,7 +168,6 @@
                        range:aRange];
         
         
-        NSLog(@"just applied attribute %@ from %d to %d", style.name, aRange.location, aRange.length);
         
     }
     
