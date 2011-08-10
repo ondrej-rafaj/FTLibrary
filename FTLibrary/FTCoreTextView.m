@@ -11,6 +11,7 @@
 #import <CoreText/CoreText.h>
 #import <regex.h>
 
+
 @implementation FTCoreTextView
 
 @synthesize text = _text;
@@ -26,8 +27,7 @@
     
     if (!_text || [_text length] == 0) return;
     _processedString = (NSMutableString *)_text;
-    FTCoreTextStyle style;
-    [[self.styles objectForKey:@"_default"] getValue:&style];
+    FTCoreTextStyle *style = [self.styles objectForKey:@"_default"];
     self.defaultStyle = style;
     
     NSString *regEx = @"<[a-zA-Z0-9]*( /){0,1}>";
@@ -36,7 +36,7 @@
         int length;
         NSRange rangeStart;
         NSRange rangeActive;
-        NSValue *styleV;
+        FTCoreTextStyle *style;
         
         
         rangeStart = [_processedString rangeOfString:regEx options:NSRegularExpressionSearch];
@@ -46,38 +46,36 @@
         NSString *autoCloseKey = [key stringByReplacingOccurrencesOfString:@" /" withString:@""];
         BOOL isAutoClose = (![key isEqualToString:autoCloseKey]);
         
-        styleV = [self.styles objectForKey:(isAutoClose)? autoCloseKey : key];
+        style = [self.styles objectForKey:(isAutoClose)? autoCloseKey : key];
 
-        [styleV getValue:&style];
+        
+        NSString *append = @"";
+        if (style != nil) {
+            append = style.appendedCharacter;
+        }
         
         if (isAutoClose) {
-            NSString *append = @"";
-            if (styleV != nil) {
-                [styleV getValue:&style];
-                append = style.appendedCharacter;
-            }
             [_processedString replaceCharactersInRange:rangeStart withString:append];
-            
             rangeActive = NSMakeRange(rangeStart.location, [append length]);
         }
         else {
             [_processedString replaceCharactersInRange:rangeStart withString:@""];
             NSRange rangeEnd = [_processedString rangeOfString:[NSString stringWithFormat:@"</%@>", key]];
-            [_processedString replaceCharactersInRange:rangeEnd withString:@""];
+            [_processedString replaceCharactersInRange:rangeEnd withString:append];
             
             length = rangeEnd.location - rangeStart.location;
             rangeActive = NSMakeRange(rangeStart.location, length);
             
         }
         
-        if (styleV == nil) {
+        if (style == nil) {
             NSLog(@"Definition of style [%@] not found!", key);
             continue;
         }
         else {
             NSValue *rangeValue = [NSValue valueWithRange:rangeActive];
             NSDictionary *dict = [NSDictionary 
-                                  dictionaryWithObjects:[NSArray arrayWithObjects:rangeValue, styleV, nil]                                                     
+                                  dictionaryWithObjects:[NSArray arrayWithObjects:rangeValue, style, nil]                                                     
                                   forKeys:[NSArray arrayWithObjects:@"range", @"style", nil]];
             rangeValue = nil;
             [_markers addObject:dict];            
@@ -149,8 +147,7 @@
     
     for (NSDictionary *dict in _markers) {
         NSRange aRange = [(NSValue *)[dict objectForKey:@"range"] rangeValue];
-        FTCoreTextStyle style;
-        [[dict objectForKey:@"style"] getValue:&style];
+        FTCoreTextStyle *style = [dict objectForKey:@"style"];
         if ((aRange.location + aRange.length) > [_text length] ) continue;
         
         
@@ -225,24 +222,12 @@
     [self setNeedsDisplay];
 }
 
-- (void)addStyle:(FTCoreTextStyle)style {
-    [style.color retain];
-    [style.font retain];
-    NSValue *value = [NSValue valueWithBytes:&style objCType:@encode(FTCoreTextStyle)];
-    [self.styles setValue:value forKey:style.name];
+- (void)addStyle:(FTCoreTextStyle *)style {
+    [self.styles setValue:style forKey:style.name];
     [self setNeedsDisplay];
 }
 
 - (void)setStyles:(NSDictionary *)styles {
-    NSArray *allKeys = [styles allKeys];
-    for (NSString *key in allKeys) {
-        NSValue *value = [styles objectForKey:key];
-        FTCoreTextStyle style;
-        [value getValue:&style];
-        [style.color retain];
-        [style.font retain];
-    }
-    
     [_styles release];
     _styles = [[NSMutableDictionary dictionaryWithDictionary:styles] retain];
     [self setNeedsDisplay];

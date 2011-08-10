@@ -382,6 +382,8 @@
 		68DF4E2F13CEF9D200B67940 /* FTDataPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DF4E2713CEF9D200B67940 /* FTDataPlist.m */; };
 		68DF4E3013CEF9D200B67940 /* FTDataXml.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DF4E2813CEF9D200B67940 /* FTDataXml.h */; };
 		68DF4E3113CEF9D200B67940 /* FTDataXml.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DF4E2913CEF9D200B67940 /* FTDataXml.m */; };
+		68EB261413F2F1AB006DB33C /* FTCoreTextStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 68EB261213F2F1AB006DB33C /* FTCoreTextStyle.h */; };
+		68EB261513F2F1AB006DB33C /* FTCoreTextStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB261313F2F1AB006DB33C /* FTCoreTextStyle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -692,6 +694,8 @@
 		68DF4E2713CEF9D200B67940 /* FTDataPlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTDataPlist.m; path = FTLibrary/FTDataPlist.m; sourceTree = SOURCE_ROOT; };
 		68DF4E2813CEF9D200B67940 /* FTDataXml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTDataXml.h; path = FTLibrary/FTDataXml.h; sourceTree = SOURCE_ROOT; };
 		68DF4E2913CEF9D200B67940 /* FTDataXml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTDataXml.m; path = FTLibrary/FTDataXml.m; sourceTree = SOURCE_ROOT; };
+		68EB261213F2F1AB006DB33C /* FTCoreTextStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCoreTextStyle.h; sourceTree = "<group>"; };
+		68EB261313F2F1AB006DB33C /* FTCoreTextStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCoreTextStyle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1599,6 +1603,8 @@
 		68DD054C13D97F27004C02C8 /* TextView */ = {
 			isa = PBXGroup;
 			children = (
+				68EB261213F2F1AB006DB33C /* FTCoreTextStyle.h */,
+				68EB261313F2F1AB006DB33C /* FTCoreTextStyle.m */,
 				68DD055213D98063004C02C8 /* FTCoreTextView.h */,
 				68DD055313D98063004C02C8 /* FTCoreTextView.m */,
 			);
@@ -1752,6 +1758,7 @@
 				4C6F969013DD8F66000BF403 /* FTMemTools.h in Headers */,
 				4C6F969713DD8FA1000BF403 /* FTDebugMemoryLabelView.h in Headers */,
 				4C6F969C13DD8FBA000BF403 /* FTImageSpinView.h in Headers */,
+				68EB261413F2F1AB006DB33C /* FTCoreTextStyle.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1981,6 +1988,7 @@
 				4C6F969113DD8F66000BF403 /* FTMemTools.m in Sources */,
 				4C6F969813DD8FA1000BF403 /* FTDebugMemoryLabelView.m in Sources */,
 				4C6F969D13DD8FBA000BF403 /* FTImageSpinView.m in Sources */,
+				68EB261513F2F1AB006DB33C /* FTCoreTextStyle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

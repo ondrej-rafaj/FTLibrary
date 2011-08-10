@@ -12,21 +12,15 @@
  
 
 #import <UIKit/UIKit.h>
+#import "FTCoreTextStyle.h"
 
-typedef struct {
-    NSString *name;
-    NSString *appendedCharacter;
-    UIFont *font;
-    UIColor *color;
-    BOOL isUnderLined;
-} FTCoreTextStyle;
 
 @interface FTCoreTextView : UIView {
     NSString *_text;
     NSMutableDictionary *_styles;
     @private
     NSMutableArray *_markers;
-    FTCoreTextStyle _defaultStyle;
+    FTCoreTextStyle *_defaultStyle;
     NSMutableString *_processedString;
     CGPathRef _path;
     
@@ -35,12 +29,12 @@ typedef struct {
 @property (nonatomic, retain) NSString *text;
 @property (nonatomic, retain) NSMutableDictionary *styles;
 @property (nonatomic, retain) NSMutableArray *markers;
-@property (nonatomic, assign) FTCoreTextStyle defaultStyle;
+@property (nonatomic, assign) FTCoreTextStyle *defaultStyle;
 @property (nonatomic, retain) NSMutableString *processedString;
 @property (nonatomic, assign) CGPathRef path;
 
 - (id)initWithFrame:(CGRect)frame;
-- (void)addStyle:(FTCoreTextStyle)style;
+- (void)addStyle:(FTCoreTextStyle *)style;
 + (NSString *)stripTagsforString:(NSString *)string;
 
 @end
