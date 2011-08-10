@@ -50,7 +50,7 @@
 
         
         NSString *append = @"";
-        if (style != nil) {
+        if (style != nil && style.appendedCharacter) {
             append = style.appendedCharacter;
         }
         
