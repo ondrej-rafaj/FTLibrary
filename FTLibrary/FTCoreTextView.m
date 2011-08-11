@@ -21,7 +21,25 @@
 @synthesize processedString = _processedString;
 @synthesize path = _path;
 
-
+- (NSMutableArray *)divideTextInPages:(NSString *)string {
+    NSMutableArray *result = [NSMutableArray array];
+    int prevStart = 0;
+    while (YES) {
+        NSRange rangeStart = [string rangeOfString:@"<_page/>"];
+        if (rangeStart.location != NSNotFound) {
+            NSString *page = [string substringWithRange:NSMakeRange(prevStart, rangeStart.location)];
+            [result addObject:page];
+            string = [string stringByReplacingCharactersInRange:rangeStart withString:@""];
+            prevStart = rangeStart.location;
+        }
+        else {
+            NSString *page = [string substringWithRange:NSMakeRange(prevStart, (string.length - prevStart))];
+            [result addObject:page];
+            break;
+        }
+    }
+    return result;
+}
 
 - (void)processText {
     
@@ -90,6 +108,12 @@
     NSString *result = [NSString stringWithString:instance.processedString];
     [instance release];
     return result;
+}
+
++ (NSArray *)pagesFromText:(NSString *)string {
+    FTCoreTextView *instance = [[FTCoreTextView alloc] initWithFrame:CGRectZero];
+    NSArray *result = [instance divideTextInPages:string];
+    return (NSArray *)result;
 }
 
 - (id)initWithFrame:(CGRect)frame
