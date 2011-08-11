@@ -29,4 +29,7 @@
 @property (nonatomic) int pageIndex;
 
 
+- (void)enableIndexLabel;
+
+
 @end

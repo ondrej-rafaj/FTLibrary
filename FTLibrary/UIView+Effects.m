@@ -24,6 +24,10 @@
     [self addShadowWithOffset:2.0f withColor:[UIColor blackColor] andOpacity:0.4f];
 }
 
+- (void)addRedShadow {
+    [self addShadowWithOffset:2.0f withColor:[UIColor redColor] andOpacity:0.8f];
+}
+
 - (UIImage *)captureImage {
 	UIGraphicsBeginImageContext(self.bounds.size);
 	[self.layer renderInContext:UIGraphicsGetCurrentContext()];

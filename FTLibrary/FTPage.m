@@ -26,6 +26,19 @@
 	return self;
 }
 
+#pragma mark Debug settings
+
+- (void)enableIndexLabel {
+	UILabel *label = [[UILabel alloc] initWithFrame:self.bounds];
+	[label setBackgroundColor:[UIColor clearColor]];
+	[label setFont:[UIFont boldSystemFontOfSize:40]];
+	[label setTextColor:[UIColor blackColor]];
+	[label setTextAlignment:UITextAlignmentCenter];
+	[label setText:[NSString stringWithFormat:@"Ix: %d", pageIndex]];
+	[self addSubview:label];
+	[label release];
+}
+
 #pragma mark Memory management
 
 - (void)dealloc {

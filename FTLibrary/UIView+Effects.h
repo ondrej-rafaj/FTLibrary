@@ -13,7 +13,7 @@
 @interface UIView (Effects)
 
 - (void)addShadowWithOffset:(CGFloat)offset withColor:(UIColor *)color andOpacity:(CGFloat)opacity;
-
+- (void)addRedShadow;
 - (void)addShadow;
 
 - (UIImage *)captureImage;
