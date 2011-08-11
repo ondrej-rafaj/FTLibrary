@@ -227,7 +227,7 @@
     [self setNeedsDisplay];
 }
 
-- (void)setStyles:(NSDictionary *)styles {
+- (void)setStyles:(NSMutableDictionary *)styles {
     [_styles release];
     _styles = [[NSMutableDictionary dictionaryWithDictionary:styles] retain];
     [self setNeedsDisplay];
