@@ -27,6 +27,11 @@
 
 // TODO: finish me for landscape, portrait, iPhone & iPad :)
 - (CGRect)fullscreenRect {
+	
+	
+	
+	
+	
 	if ([FTSystem isPhoneSize]) {
 		CGFloat height =	480;	// full height
 		if (YES) height -=	20;		// status bar

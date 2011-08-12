@@ -14,6 +14,7 @@
 static FTSystemDeviceType cachedDeviceType;
 static float systemVersion = -1;
 
+
 + (FTSystemDeviceType)deviceType {
 	if (cachedDeviceType) return cachedDeviceType;
 	NSString *dt = [UIDevice currentDevice].model;
@@ -66,24 +67,27 @@ static float systemVersion = -1;
 }
 
 + (CGSize)screenSize {
-	CGSize s;
-	if ([self isPhoneSize]) {
-		if (UIInterfaceOrientationIsLandscape([self interfaceOrientation])) {
-			s = CGSizeMake(480, 320);
-		}
-		else {
-			s = CGSizeMake(320, 480);
-		}
-	}
-	else {
-		if (UIInterfaceOrientationIsLandscape([self interfaceOrientation])) {
-			s = CGSizeMake(1024, 768);
-		}
-		else {
-			s = CGSizeMake(768, 1024);
-		}
-	}
-	return s;
+	return [[UIScreen mainScreen] bounds].size;
+//	NSLog(@"Screen size: %@", NSStringFromCGSize([[UIScreen mainScreen] bounds].size));
+//	CGSize s;
+//	if ([self isPhoneSize]) {
+//		
+//		if (UIInterfaceOrientationIsLandscape([self interfaceOrientation])) {
+//			s = CGSizeMake(480, 320);
+//		}
+//		else {
+//			s = CGSizeMake(320, 480);
+//		}
+//	}
+//	else {
+//		if (UIInterfaceOrientationIsLandscape([self interfaceOrientation])) {
+//			s = CGSizeMake(1024, 768);
+//		}
+//		else {
+//			s = CGSizeMake(768, 1024);
+//		}
+//	}
+//	return s;
 }
 
 + (float)systemNumber
