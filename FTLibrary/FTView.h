@@ -11,6 +11,16 @@
 #import "UIView+Effects.h"
 
 
-@interface FTView : UIView
+@interface FTView : UIView {
+	
+	UIImageView *backgroundImage;
+	
+}
+
+@property (nonatomic, retain) UIImageView *backgroundImage;
+
+
+- (void)enableBackgroundImage:(UIImage *)image;
+
 
 @end

@@ -39,6 +39,10 @@
 	[self setFrame:frame];
 }
 
+- (CGFloat)bottomPosition {
+	return ([self height] + [self yPosition]);
+}
+
 - (void)setSize:(CGSize)size {
 	CGRect frame = [self frame];
 	frame.size.width = round(size.width);

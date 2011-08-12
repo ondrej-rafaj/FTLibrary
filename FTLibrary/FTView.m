@@ -10,5 +10,24 @@
 
 @implementation FTView
 
+@synthesize backgroundImage;
+
+
+#pragma mark Background
+
+- (void)enableBackgroundImage:(UIImage *)image {
+	backgroundImage = [[UIImageView alloc] initWithFrame:self.bounds];
+	[backgroundImage setImage:image];
+	[self addSubview:backgroundImage];
+	[self sendSubviewToBack:backgroundImage];
+}
+
+#pragma mark Memory management
+
+- (void)dealloc {
+	[backgroundImage release];
+	[super dealloc];
+}
+
 
 @end
