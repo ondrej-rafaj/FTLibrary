@@ -114,6 +114,10 @@
 		4C6F5F3213C1B5E400EECED4 /* FTProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F5F3013C1B5E400EECED4 /* FTProject.m */; };
 		4C6F5F4F13C45CA100EECED4 /* FTAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */; };
 		4C6F5F5013C45CA100EECED4 /* FTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F5F4E13C45CA100EECED4 /* FTAppDelegate.m */; };
+		4C6F8F5E13F87527004A4FB2 /* FTView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F8F5C13F87527004A4FB2 /* FTView.h */; };
+		4C6F8F5F13F87527004A4FB2 /* FTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F8F5D13F87527004A4FB2 /* FTView.m */; };
+		4C6F8F6213F87530004A4FB2 /* FTAutoLineView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F8F6013F87530004A4FB2 /* FTAutoLineView.h */; };
+		4C6F8F6313F87530004A4FB2 /* FTAutoLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F8F6113F87530004A4FB2 /* FTAutoLineView.m */; };
 		4C6F969013DD8F66000BF403 /* FTMemTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F968E13DD8F66000BF403 /* FTMemTools.h */; };
 		4C6F969113DD8F66000BF403 /* FTMemTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F968F13DD8F66000BF403 /* FTMemTools.m */; };
 		4C6F969713DD8FA1000BF403 /* FTDebugMemoryLabelView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F969513DD8FA1000BF403 /* FTDebugMemoryLabelView.h */; };
@@ -481,6 +485,10 @@
 		4C6F5F3013C1B5E400EECED4 /* FTProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProject.m; sourceTree = "<group>"; };
 		4C6F5F4D13C45CA100EECED4 /* FTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAppDelegate.h; sourceTree = "<group>"; };
 		4C6F5F4E13C45CA100EECED4 /* FTAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAppDelegate.m; sourceTree = "<group>"; };
+		4C6F8F5C13F87527004A4FB2 /* FTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTView.h; sourceTree = "<group>"; };
+		4C6F8F5D13F87527004A4FB2 /* FTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTView.m; sourceTree = "<group>"; };
+		4C6F8F6013F87530004A4FB2 /* FTAutoLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAutoLineView.h; sourceTree = "<group>"; };
+		4C6F8F6113F87530004A4FB2 /* FTAutoLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAutoLineView.m; sourceTree = "<group>"; };
 		4C6F968E13DD8F66000BF403 /* FTMemTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMemTools.h; sourceTree = "<group>"; };
 		4C6F968F13DD8F66000BF403 /* FTMemTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMemTools.m; sourceTree = "<group>"; };
 		4C6F969513DD8FA1000BF403 /* FTDebugMemoryLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDebugMemoryLabelView.h; sourceTree = "<group>"; };
@@ -966,6 +974,8 @@
 		4C57611D13C5E7570049371F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4C6F8F5B13F87502004A4FB2 /* Basic view */,
+				4C6F8F5913F874F3004A4FB2 /* Autoline */,
 				4C6F969413DD8F8B000BF403 /* Debug */,
 				6834BE2B13D9B2F000781018 /* Labels */,
 				68DD054C13D97F27004C02C8 /* TextView */,
@@ -1060,6 +1070,24 @@
 				4C6F5F4E13C45CA100EECED4 /* FTAppDelegate.m */,
 			);
 			name = "App delegate";
+			sourceTree = "<group>";
+		};
+		4C6F8F5913F874F3004A4FB2 /* Autoline */ = {
+			isa = PBXGroup;
+			children = (
+				4C6F8F6013F87530004A4FB2 /* FTAutoLineView.h */,
+				4C6F8F6113F87530004A4FB2 /* FTAutoLineView.m */,
+			);
+			name = Autoline;
+			sourceTree = "<group>";
+		};
+		4C6F8F5B13F87502004A4FB2 /* Basic view */ = {
+			isa = PBXGroup;
+			children = (
+				4C6F8F5C13F87527004A4FB2 /* FTView.h */,
+				4C6F8F5D13F87527004A4FB2 /* FTView.m */,
+			);
+			name = "Basic view";
 			sourceTree = "<group>";
 		};
 		4C6F969313DD8F69000BF403 /* Memory tools */ = {
@@ -1759,6 +1787,8 @@
 				4C6F969713DD8FA1000BF403 /* FTDebugMemoryLabelView.h in Headers */,
 				4C6F969C13DD8FBA000BF403 /* FTImageSpinView.h in Headers */,
 				68EB261413F2F1AB006DB33C /* FTCoreTextStyle.h in Headers */,
+				4C6F8F5E13F87527004A4FB2 /* FTView.h in Headers */,
+				4C6F8F6213F87530004A4FB2 /* FTAutoLineView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1989,6 +2019,8 @@
 				4C6F969813DD8FA1000BF403 /* FTDebugMemoryLabelView.m in Sources */,
 				4C6F969D13DD8FBA000BF403 /* FTImageSpinView.m in Sources */,
 				68EB261513F2F1AB006DB33C /* FTCoreTextStyle.m in Sources */,
+				4C6F8F5F13F87527004A4FB2 /* FTView.m in Sources */,
+				4C6F8F6313F87530004A4FB2 /* FTAutoLineView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
