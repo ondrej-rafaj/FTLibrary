@@ -44,6 +44,7 @@ typedef struct {
     FTSystemKillSwitchVersions versions;    
     FTSystemKillSwitchMessage *message;
     BOOL isDebugActive;
+    BOOL isApplicationLocked;
     
     id <FTSystemKillSwitchDelegate> delegate;
 	
@@ -56,6 +57,7 @@ typedef struct {
 @property (nonatomic, assign) FTSystemKillSwitchVersions versions;
 @property (nonatomic, assign) FTSystemKillSwitchMessage *message;
 @property (nonatomic, assign) BOOL isDebugActive;
+@property (nonatomic, assign) BOOL isApplicationLocked;
 @property (nonatomic, assign) id <FTSystemKillSwitchDelegate> delegate;
 
 
@@ -63,7 +65,8 @@ typedef struct {
 - (void)killSwitchApp; 
 + (float)currentAppVersion;
 + (void)setCurrentAppVersion:(float)currentVersion;
-+ (BOOL)isAppEnabled;
++ (BOOL)isApplicationLocked;
++ (NSInteger)alertViewTag;
 
 
 
@@ -79,5 +82,6 @@ typedef struct {
 - (UIView *)viewForAppKillSwitchWithMessage:(FTSystemKillSwitchMessage *)message;
 - (float)appVersion;
 - (CGFloat)killSwitchViewShadow;
+- (void)killSwitchDidFinish;
 
 @end

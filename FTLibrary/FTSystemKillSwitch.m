@@ -10,11 +10,15 @@
 #import "FTDataJson.h"
 #import "FTAppDelegate.h"
 #import "UIView+Layout.h"
+#import "FTSystem.h"
 
 #define kFTSystemKillSwitchHash                 @"FTSystemKillSwitchHash"
 #define kFTSystemKillSwitchVersions             @"FTSystemKillSwitchVersions"
 
 #define kFTSystemKillSwitchAbortNotification    @"FTSystemKillSwitchAbortNotification"
+#define kFTSystemKillSwitchIsApplicationLocked  @"FTSystemKillSwitchIsApplicationLocked"
+
+#define kFTSystemKillSwitchAlertTag             862
 
 
 @implementation FTSystemKillSwitchMessage
@@ -49,11 +53,12 @@
 @synthesize versions;
 @synthesize message;
 @synthesize isDebugActive;
+@synthesize isApplicationLocked;
 @synthesize delegate;
 
 
 
-#pragma mark Data;
+#pragma mark getter setter;
 
 - (NSString *)hash {
     return [[NSUserDefaults standardUserDefaults] stringForKey:kFTSystemKillSwitchHash];
@@ -81,30 +86,63 @@
     [[NSUserDefaults standardUserDefaults] setObject:ver forKey:kFTSystemKillSwitchVersions];
 }
 
++ (BOOL)isApplicationLocked {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kFTSystemKillSwitchIsApplicationLocked];
+}
+
+- (BOOL)isApplicationLocked {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kFTSystemKillSwitchIsApplicationLocked];
+}
+
+- (void)setIsApplicationLocked:(BOOL)isAnApplicationLocked {
+    [[NSUserDefaults standardUserDefaults] setBool:isAnApplicationLocked forKey:kFTSystemKillSwitchIsApplicationLocked]; 
+}
+
+
++ (NSInteger)alertViewTag {
+    return kFTSystemKillSwitchAlertTag;
+}
+
+#pragma mark get data
+
 - (void)getData {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    NSString *type = (isDebugActive)? @"staging" : @"live";
-    NSString *request = [NSString stringWithFormat:@"%@-%@.json", url, type]; //http://new.fuerteint.com/_files/calpol_testing/killswitch/live.json
-    NSDictionary *dictionaryData = [FTDataJson jsonDataFromUrl:request];
-    if (isDebugActive) {
-        versions.staging = [[dictionaryData objectForKey:@"version"] floatValue];
-        versions.live = 0.0;
-    }
-    else {
-        versions.live = [[dictionaryData objectForKey:@"version"] floatValue];
-        versions.staging = 0.0;
-    }
-    
-    NSDictionary *data = [dictionaryData objectForKey:@"data"];
-    versions.minimum = [[data objectForKey:@"minversion"] floatValue];
+
+    BOOL internetAvailable = [FTSystem isInternetAvailable];
     
     message = [[FTSystemKillSwitchMessage alloc] init];
-    message.title = [data objectForKey:@"title"];
-    message.message = [data objectForKey:@"message"];
-    message.web = [NSURL URLWithString:[data objectForKey:@"web"]];
-    message.appStore = [NSURL URLWithString:[data objectForKey:@"appstore"]];
+    if (!internetAvailable) {
+        if (self.isApplicationLocked) {
+            message.title = @"Application locked";
+            message.message = @"Internet Connetion is required in order to unlock the application";
+            message.web = nil;
+            message.appStore = [NSURL URLWithString:@"http://www.wellbakedapp.com"];            
+        }
+    }
+    else {
+        NSString *type = (isDebugActive)? @"staging" : @"live";
+        NSString *request = [NSString stringWithFormat:@"%@-%@.json", url, type]; //http://new.fuerteint.com/_files/calpol_testing/killswitch/live.json
+        NSDictionary *dictionaryData = [FTDataJson jsonDataFromUrl:request];
+        
+        if (isDebugActive) {
+            versions.staging = [[dictionaryData objectForKey:@"version"] floatValue];
+            versions.live = 0.0;
+        }
+        else {
+            versions.live = [[dictionaryData objectForKey:@"version"] floatValue];
+            versions.staging = 0.0;
+        }
+        
+        NSDictionary *data = [dictionaryData objectForKey:@"data"];
+        versions.minimum = [[data objectForKey:@"minversion"] floatValue];
+        
+        message.title = [data objectForKey:@"title"];
+        message.message = [data objectForKey:@"message"];
+        message.web = [NSURL URLWithString:[data objectForKey:@"web"]];
+        message.appStore = [NSURL URLWithString:[data objectForKey:@"appstore"]];
     
+    }
     [self performSelectorOnMainThread:@selector(foreGroundResult) withObject:nil waitUntilDone:NO];
     
     [pool drain];
@@ -120,16 +158,29 @@
         [shadow setAlpha:blockerShadow];
     }
     
+    for (UIView *view in appWindow.subviews) {
+        if ([view isEqual:alertView]) {
+            [view removeFromSuperview];
+            NSLog(@"alertView found and removed");
+        }
+    }
     
     //check version
-    if (versions.current < versions.minimum) {
-
+    
+    if (versions.current < versions.minimum || versions.minimum == 0) {
+        //remove other alertView
+        
+        [self setIsApplicationLocked:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:kFTSystemKillSwitchAbortNotification object:nil];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(killSwitchDidFinish)]) {
+            [self.delegate killSwitchDidFinish];
+        }
+        alertView = nil;
         //show view on window
         if(appWindow) {
             [shadow setHidden:NO];
             [appWindow addSubview:shadow];
-            alertView = nil;
+            
             if ([[self delegate] respondsToSelector:@selector(viewForAppKillSwitchWithMessage:)]) {
                 alertView = [[self delegate] viewForAppKillSwitchWithMessage:message];
             }
@@ -137,21 +188,19 @@
                 float w = appWindow.bounds.size.width - 40;
                 float h =  appWindow.bounds.size.height - 40;
                 alertView = [[UIView alloc] initWithFrame:CGRectMake(20, 20, w, h)];
+                [alertView autorelease];
             }
-
+            
+            [alertView setTag:kFTSystemKillSwitchAlertTag];
             [appWindow addSubview:alertView];
             [alertView centerInSuperView];
                 
         }
     }
     else {
+        [self setIsApplicationLocked:NO];
         [shadow setHidden:YES];
-        for (UIView *view in appWindow.subviews) {
-            if ([view isEqual:alertView]) {
-                [view removeFromSuperview];
-                NSLog(@"alertView found and removed");
-            }
-        }
+        
     }
 }
 
@@ -200,10 +249,6 @@
 
 + (NSInteger)remoteAllowedAppVersion {
 	return 1;
-}
-
-+ (BOOL)isAppEnabled {
-	return YES;
 }
 
 
