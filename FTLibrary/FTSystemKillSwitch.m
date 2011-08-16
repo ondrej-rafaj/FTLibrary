@@ -40,6 +40,21 @@
 
 @end
 
+
+
+@implementation FTSystemKillSwitchVersions
+
+@synthesize minimum;
+@synthesize live;
+@synthesize staging;
+@synthesize current;
+
+@end
+
+
+
+
+
 @interface FTSystemKillSwitch(Private)
 -(void)foreGroundResult;
 @end
@@ -68,21 +83,23 @@
      [[NSUserDefaults standardUserDefaults] setObject:aHash forKey:kFTSystemKillSwitchHash];
 }
 
-- (FTSystemKillSwitchVersions)versions {
+- (FTSystemKillSwitchVersions *)storedVersions {
     
     NSDictionary *resutls = [[NSUserDefaults standardUserDefaults] dictionaryForKey:kFTSystemKillSwitchVersions];
-    FTSystemKillSwitchVersions ver;
+    FTSystemKillSwitchVersions *ver = [[FTSystemKillSwitchVersions alloc] init];
     ver.live = [[resutls objectForKey:@"live"] floatValue];
     ver.minimum = [[resutls objectForKey:@"minimum"] floatValue];
     ver.staging = [[resutls objectForKey:@"staging"] floatValue];
     
-    return ver;
+    return [ver autorelease];
 }
 
-- (void)setVersions:(FTSystemKillSwitchVersions)someVersions {
-    NSDictionary *ver = [NSDictionary 
-                         dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithFloat:someVersions.live], [NSNumber numberWithFloat:someVersions.minimum], [NSNumber numberWithFloat:someVersions.staging], nil] 
-                         forKeys:[NSArray arrayWithObjects:@"live", @"minimum", @"staging", nil]];
+- (void)setStoredVersions:(FTSystemKillSwitchVersions *)someVersions {
+    NSMutableDictionary *ver = [NSMutableDictionary dictionary];
+    NSLog(@"live : %f", someVersions.live);
+    [ver setObject:[NSNumber numberWithFloat:someVersions.live] forKey:@"live"];
+    [ver setObject:[NSNumber numberWithFloat:someVersions.minimum] forKey:@"minimum"];
+    [ver setObject:[NSNumber numberWithFloat:someVersions.staging] forKey:@"staging"];
     [[NSUserDefaults standardUserDefaults] setObject:ver forKey:kFTSystemKillSwitchVersions];
 }
 
@@ -126,16 +143,16 @@
         NSDictionary *dictionaryData = [FTDataJson jsonDataFromUrl:request];
         
         if (isDebugActive) {
-            versions.staging = [[dictionaryData objectForKey:@"version"] floatValue];
-            versions.live = 0.0;
+            self.versions.staging = [[dictionaryData objectForKey:@"version"] floatValue];
+            self.versions.live = 0.0;
         }
         else {
-            versions.live = [[dictionaryData objectForKey:@"version"] floatValue];
-            versions.staging = 0.0;
+            self.versions.live = [[dictionaryData objectForKey:@"version"] floatValue];
+            self.versions.staging = 0.0;
         }
         
         NSDictionary *data = [dictionaryData objectForKey:@"data"];
-        versions.minimum = [[data objectForKey:@"minversion"] floatValue];
+        self.versions.minimum = [[data objectForKey:@"minversion"] floatValue];
         
         message.title = [data objectForKey:@"title"];
         message.message = [data objectForKey:@"message"];
@@ -167,7 +184,7 @@
     
     //check version
     
-    if (versions.current < versions.minimum || versions.minimum == 0) {
+    if ((self.versions.current < self.versions.minimum || self.versions.minimum == 0 ) && ![message.title isEqualToString:@""]) {
         //remove other alertView
         
         [self setIsApplicationLocked:YES];
@@ -202,6 +219,7 @@
         [shadow setHidden:YES];
         
     }
+    [self setStoredVersions:self.versions];
 }
 
 
@@ -217,6 +235,7 @@
 #endif
 		appWindow = [FTAppDelegate window];
 		blockerShadow = 0.6;
+        self.versions = [self storedVersions];
         
         
 	}
@@ -224,7 +243,7 @@
 }
 
 - (void)killSwitchApp {
-    versions.current = [FTSystemKillSwitch currentAppVersion];
+    self.versions.current = [FTSystemKillSwitch currentAppVersion];
     [self performSelectorInBackground:@selector(getData) withObject:nil];
 }
 
@@ -239,10 +258,10 @@
 
 + (void)setCurrentAppVersion:(float)current {
     FTSystemKillSwitch *ks = [[FTSystemKillSwitch alloc] init];
-    FTSystemKillSwitchVersions ver = [ks versions];
+    FTSystemKillSwitchVersions *ver = [ks versions];
     
     
-	ver.current = current;
+	[ver setCurrent:current];
     [ks setVersions:ver];
     [ks release];
 }
@@ -259,6 +278,8 @@
     [url release];
     [appWindow release];
     [hash release];
+    [message release];
+    [versions release];
     delegate = nil;
 	[super dealloc];
 }

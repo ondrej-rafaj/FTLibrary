@@ -26,12 +26,19 @@
 @end
 
 
-typedef struct {
+@interface FTSystemKillSwitchVersions : NSObject {
     float minimum;
     float live;
     float staging;
     float current;
-}FTSystemKillSwitchVersions;
+}
+
+@property (nonatomic, assign) float minimum;
+@property (nonatomic, assign) float live;
+@property (nonatomic, assign) float staging;
+@property (nonatomic, assign) float current;
+
+@end
 
 
 @protocol FTSystemKillSwitchDelegate;
@@ -41,7 +48,7 @@ typedef struct {
 	UIWindow *appWindow;
     CGFloat blockerShadow;
     NSString *hash;
-    FTSystemKillSwitchVersions versions;    
+    FTSystemKillSwitchVersions *versions;    
     FTSystemKillSwitchMessage *message;
     BOOL isDebugActive;
     BOOL isApplicationLocked;
@@ -54,8 +61,8 @@ typedef struct {
 @property (nonatomic, retain) IBOutlet UIWindow *appWindow;
 @property (nonatomic, assign) CGFloat blockerShadow;
 @property (nonatomic, retain) NSString *hash;
-@property (nonatomic, assign) FTSystemKillSwitchVersions versions;
-@property (nonatomic, assign) FTSystemKillSwitchMessage *message;
+@property (nonatomic, retain) FTSystemKillSwitchVersions *versions;
+@property (nonatomic, retain) FTSystemKillSwitchMessage *message;
 @property (nonatomic, assign) BOOL isDebugActive;
 @property (nonatomic, assign) BOOL isApplicationLocked;
 @property (nonatomic, assign) id <FTSystemKillSwitchDelegate> delegate;
