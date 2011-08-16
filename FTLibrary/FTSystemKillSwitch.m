@@ -85,7 +85,7 @@
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     NSString *type = (isDebugActive)? @"staging" : @"live";
-    NSString *request = [NSString stringWithFormat:@"%@/killswitch/%@.json", url, type]; //http://new.fuerteint.com/_files/calpol_testing/killswitch/live.json
+    NSString *request = [NSString stringWithFormat:@"%@/module-killswitch/%@.json", url, type]; //http://new.fuerteint.com/_files/calpol_testing/killswitch/live.json
     NSDictionary *dictionaryData = [FTDataJson jsonDataFromUrl:request];
     if (isDebugActive) {
         versions.staging = [[dictionaryData objectForKey:@"version"] floatValue];
