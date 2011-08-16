@@ -7,6 +7,7 @@
 //
 
 #import "FTSystem.h"
+#import "Reachability.h"
 
 
 @implementation FTSystem
@@ -103,10 +104,9 @@ static float systemVersion = -1;
 
 + (BOOL) isInternetAvailable
 {
-//#warning Change way to check internet connection
-    NSError *error = nil;
-    NSString *result = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://www.google.com"] encoding:NSUTF8StringEncoding error:&error];
-    return (error == nil && ![result isEqualToString:@""]);
+    Reachability *reachability=[Reachability reachabilityForInternetConnection];
+    BOOL isConnected = ([reachability isReachable]);
+    return isConnected;
 }
 
 @end
