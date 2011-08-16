@@ -60,21 +60,17 @@
 }
 
 - (void)enableKillSwitchWith:(id<FTSystemKillSwitchDelegate>)del window:(UIWindow *)window andUrl:(NSString *)url {
-    static BOOL execute = YES;
-    if (!execute) return;
-    
-	self.killSwitch = [[FTSystemKillSwitch alloc] initWithAppURL:url];
+    self.killSwitch = [[FTSystemKillSwitch alloc] initWithAppURL:url];
     [self.killSwitch setDelegate:del];
     [self.killSwitch setAppWindow:window];
     [self.killSwitch killSwitchApp];
-    execute = NO;
 }
 
 #pragma mark KillSwitch delegate & data source methods
 
 
 - (void)appKillSwitch:(FTSystemKillSwitch *)killSwitch shouldDisableApp:(BOOL)disable {
-	NSLog(@"App disabled looser :)");
+	NSLog(@"App disabled.");
 }
 
 - (CGFloat)killSwitchViewShadow {

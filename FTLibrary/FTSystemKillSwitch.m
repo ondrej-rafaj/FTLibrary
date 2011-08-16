@@ -85,7 +85,7 @@
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     NSString *type = (isDebugActive)? @"staging" : @"live";
-    NSString *request = [NSString stringWithFormat:@"%@/module-killswitch/%@.json", url, type]; //http://new.fuerteint.com/_files/calpol_testing/killswitch/live.json
+    NSString *request = [NSString stringWithFormat:@"%@-%@.json", url, type]; //http://new.fuerteint.com/_files/calpol_testing/killswitch/live.json
     NSDictionary *dictionaryData = [FTDataJson jsonDataFromUrl:request];
     if (isDebugActive) {
         versions.staging = [[dictionaryData objectForKey:@"version"] floatValue];
@@ -112,6 +112,14 @@
 }
 
 - (void)foreGroundResult {
+    static UIView *alertView;
+    static UIView *shadow;
+    if (!shadow) {
+        shadow = [[UIView alloc] initWithFrame:appWindow.bounds];
+        [shadow setBackgroundColor:[UIColor blackColor]];
+        [shadow setAlpha:blockerShadow];
+    }
+    
     
     //check version
     if (versions.current < versions.minimum) {
@@ -119,16 +127,11 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kFTSystemKillSwitchAbortNotification object:nil];
         //show view on window
         if(appWindow) {
-            UIView *shadow = [[UIView alloc] initWithFrame:appWindow.bounds];
-            [shadow setBackgroundColor:[UIColor blackColor]];
-            [shadow setAlpha:blockerShadow];
+            [shadow setHidden:NO];
             [appWindow addSubview:shadow];
-            [shadow release];
-            
-            UIView *alertView;
+            alertView = nil;
             if ([[self delegate] respondsToSelector:@selector(viewForAppKillSwitchWithMessage:)]) {
                 alertView = [[self delegate] viewForAppKillSwitchWithMessage:message];
-                [alertView retain];
             }
             else {
                 float w = appWindow.bounds.size.width - 40;
@@ -138,8 +141,16 @@
 
             [appWindow addSubview:alertView];
             [alertView centerInSuperView];
-            [alertView release];
                 
+        }
+    }
+    else {
+        [shadow setHidden:YES];
+        for (UIView *view in appWindow.subviews) {
+            if ([view isEqual:alertView]) {
+                [view removeFromSuperview];
+                NSLog(@"alertView found and removed");
+            }
         }
     }
 }
@@ -152,6 +163,9 @@
 	if (self) {
         url = [aUrl retain];
         isDebugActive = NO;
+#ifdef DEBUG
+        isDebugActive = YES;
+#endif
 		appWindow = [FTAppDelegate window];
 		blockerShadow = 0.6;
         
@@ -161,8 +175,7 @@
 }
 
 - (void)killSwitchApp {
-        versions.current = [FTSystemKillSwitch currentAppVersion];
-    
+    versions.current = [FTSystemKillSwitch currentAppVersion];
     [self performSelectorInBackground:@selector(getData) withObject:nil];
 }
 
