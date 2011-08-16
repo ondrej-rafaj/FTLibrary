@@ -143,6 +143,10 @@
 		4C6F8F9F13F87C1B004A4FB2 /* NSIndexSet+AQIsSetContiguous.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F8F8813F87C1B004A4FB2 /* NSIndexSet+AQIsSetContiguous.m */; };
 		4C6F8FA013F87C1B004A4FB2 /* UIColor+AQGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F8F8913F87C1B004A4FB2 /* UIColor+AQGridView.h */; };
 		4C6F8FA113F87C1B004A4FB2 /* UIColor+AQGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F8F8A13F87C1B004A4FB2 /* UIColor+AQGridView.m */; };
+		4C6F900313F9921E004A4FB2 /* FTDragAndDropCanvasView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F900113F9921E004A4FB2 /* FTDragAndDropCanvasView.h */; };
+		4C6F900413F9921E004A4FB2 /* FTDragAndDropCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F900213F9921E004A4FB2 /* FTDragAndDropCanvasView.m */; };
+		4C6F900813F9922D004A4FB2 /* FTDragAndDropView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F900613F9922D004A4FB2 /* FTDragAndDropView.h */; };
+		4C6F900913F9922D004A4FB2 /* FTDragAndDropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F900713F9922D004A4FB2 /* FTDragAndDropView.m */; };
 		4C6F969013DD8F66000BF403 /* FTMemTools.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F968E13DD8F66000BF403 /* FTMemTools.h */; };
 		4C6F969113DD8F66000BF403 /* FTMemTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F968F13DD8F66000BF403 /* FTMemTools.m */; };
 		4C6F969713DD8FA1000BF403 /* FTDebugMemoryLabelView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F969513DD8FA1000BF403 /* FTDebugMemoryLabelView.h */; };
@@ -539,6 +543,10 @@
 		4C6F8F8813F87C1B004A4FB2 /* NSIndexSet+AQIsSetContiguous.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexSet+AQIsSetContiguous.m"; sourceTree = "<group>"; };
 		4C6F8F8913F87C1B004A4FB2 /* UIColor+AQGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AQGridView.h"; sourceTree = "<group>"; };
 		4C6F8F8A13F87C1B004A4FB2 /* UIColor+AQGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AQGridView.m"; sourceTree = "<group>"; };
+		4C6F900113F9921E004A4FB2 /* FTDragAndDropCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDragAndDropCanvasView.h; sourceTree = "<group>"; };
+		4C6F900213F9921E004A4FB2 /* FTDragAndDropCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDragAndDropCanvasView.m; sourceTree = "<group>"; };
+		4C6F900613F9922D004A4FB2 /* FTDragAndDropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDragAndDropView.h; sourceTree = "<group>"; };
+		4C6F900713F9922D004A4FB2 /* FTDragAndDropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDragAndDropView.m; sourceTree = "<group>"; };
 		4C6F968E13DD8F66000BF403 /* FTMemTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMemTools.h; sourceTree = "<group>"; };
 		4C6F968F13DD8F66000BF403 /* FTMemTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMemTools.m; sourceTree = "<group>"; };
 		4C6F969513DD8FA1000BF403 /* FTDebugMemoryLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDebugMemoryLabelView.h; sourceTree = "<group>"; };
@@ -1180,6 +1188,34 @@
 			path = GridView;
 			sourceTree = "<group>";
 		};
+		4C6F8FFE13F991EE004A4FB2 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				4CCD128413D852590004EF5D /* FTDragDropMenuView.h */,
+				4CCD128513D852590004EF5D /* FTDragDropMenuView.m */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		4C6F900013F99205004A4FB2 /* Stickies */ = {
+			isa = PBXGroup;
+			children = (
+				4C6F900513F99221004A4FB2 /* Elements */,
+				4C6F900113F9921E004A4FB2 /* FTDragAndDropCanvasView.h */,
+				4C6F900213F9921E004A4FB2 /* FTDragAndDropCanvasView.m */,
+			);
+			name = Stickies;
+			sourceTree = "<group>";
+		};
+		4C6F900513F99221004A4FB2 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				4C6F900613F9922D004A4FB2 /* FTDragAndDropView.h */,
+				4C6F900713F9922D004A4FB2 /* FTDragAndDropView.m */,
+			);
+			name = Elements;
+			sourceTree = "<group>";
+		};
 		4C6F969313DD8F69000BF403 /* Memory tools */ = {
 			isa = PBXGroup;
 			children = (
@@ -1694,8 +1730,8 @@
 		4CCD128313D8524C0004EF5D /* Drag & Drop */ = {
 			isa = PBXGroup;
 			children = (
-				4CCD128413D852590004EF5D /* FTDragDropMenuView.h */,
-				4CCD128513D852590004EF5D /* FTDragDropMenuView.m */,
+				4C6F900013F99205004A4FB2 /* Stickies */,
+				4C6F8FFE13F991EE004A4FB2 /* Menu */,
 			);
 			name = "Drag & Drop";
 			sourceTree = "<group>";
@@ -1902,6 +1938,8 @@
 				4C6F8F9C13F87C1B004A4FB2 /* NSIndexSet+AQIndexesOutsideSet.h in Headers */,
 				4C6F8F9E13F87C1B004A4FB2 /* NSIndexSet+AQIsSetContiguous.h in Headers */,
 				4C6F8FA013F87C1B004A4FB2 /* UIColor+AQGridView.h in Headers */,
+				4C6F900313F9921E004A4FB2 /* FTDragAndDropCanvasView.h in Headers */,
+				4C6F900813F9922D004A4FB2 /* FTDragAndDropView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2145,6 +2183,8 @@
 				4C6F8F9D13F87C1B004A4FB2 /* NSIndexSet+AQIndexesOutsideSet.m in Sources */,
 				4C6F8F9F13F87C1B004A4FB2 /* NSIndexSet+AQIsSetContiguous.m in Sources */,
 				4C6F8FA113F87C1B004A4FB2 /* UIColor+AQGridView.m in Sources */,
+				4C6F900413F9921E004A4FB2 /* FTDragAndDropCanvasView.m in Sources */,
+				4C6F900913F9922D004A4FB2 /* FTDragAndDropView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
