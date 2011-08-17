@@ -82,6 +82,8 @@
 		4C03667313BA0D6000E8FA09 /* FTViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C03667113BA0D6000E8FA09 /* FTViewController.h */; };
 		4C03667413BA0D6000E8FA09 /* FTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03667213BA0D6000E8FA09 /* FTViewController.m */; };
 		4C03667513BA0D6600E8FA09 /* FTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03667213BA0D6000E8FA09 /* FTViewController.m */; };
+		4C34B44D13FC097A005EAE4F /* UIAlertView+Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C34B44B13FC097A005EAE4F /* UIAlertView+Tools.h */; };
+		4C34B44E13FC097A005EAE4F /* UIAlertView+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C34B44C13FC097A005EAE4F /* UIAlertView+Tools.m */; };
 		4C4030A113BEA2A000E6A4A2 /* FTLang.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C40309F13BEA2A000E6A4A2 /* FTLang.h */; };
 		4C4030A213BEA2A000E6A4A2 /* FTLang.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4030A013BEA2A000E6A4A2 /* FTLang.m */; };
 		4C4A0CFA13D0CC9300D6581A /* FTEditableElementView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4A0CF213D0CC9300D6581A /* FTEditableElementView.h */; };
@@ -486,6 +488,8 @@
 		4C03666913BA0C1100E8FA09 /* FTImageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTImageService.m; sourceTree = "<group>"; };
 		4C03667113BA0D6000E8FA09 /* FTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTViewController.h; sourceTree = "<group>"; };
 		4C03667213BA0D6000E8FA09 /* FTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTViewController.m; sourceTree = "<group>"; };
+		4C34B44B13FC097A005EAE4F /* UIAlertView+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Tools.h"; sourceTree = "<group>"; };
+		4C34B44C13FC097A005EAE4F /* UIAlertView+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Tools.m"; sourceTree = "<group>"; };
 		4C40309F13BEA2A000E6A4A2 /* FTLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLang.h; sourceTree = "<group>"; };
 		4C4030A013BEA2A000E6A4A2 /* FTLang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLang.m; sourceTree = "<group>"; };
 		4C4A0CF213D0CC9300D6581A /* FTEditableElementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTEditableElementView.h; sourceTree = "<group>"; };
@@ -973,6 +977,8 @@
 				4C03663213BA0B3000E8FA09 /* UIView+Layout.m */,
 				4C03663313BA0B3000E8FA09 /* UIViewController+Utilities.h */,
 				4C03663413BA0B3000E8FA09 /* UIViewController+Utilities.m */,
+				4C34B44B13FC097A005EAE4F /* UIAlertView+Tools.h */,
+				4C34B44C13FC097A005EAE4F /* UIAlertView+Tools.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1940,6 +1946,7 @@
 				4C6F8FA013F87C1B004A4FB2 /* UIColor+AQGridView.h in Headers */,
 				4C6F900313F9921E004A4FB2 /* FTDragAndDropCanvasView.h in Headers */,
 				4C6F900813F9922D004A4FB2 /* FTDragAndDropView.h in Headers */,
+				4C34B44D13FC097A005EAE4F /* UIAlertView+Tools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2185,6 +2192,7 @@
 				4C6F8FA113F87C1B004A4FB2 /* UIColor+AQGridView.m in Sources */,
 				4C6F900413F9921E004A4FB2 /* FTDragAndDropCanvasView.m in Sources */,
 				4C6F900913F9922D004A4FB2 /* FTDragAndDropView.m in Sources */,
+				4C34B44E13FC097A005EAE4F /* UIAlertView+Tools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,4 +22,11 @@
     return no;
 }
 
+- (NSString *)stringByAppendingUrlPathComponent:(NSString *)component {
+	NSURL *url  = [NSURL URLWithString:self];
+	NSString *newPath = [[url path] stringByAppendingPathComponent:component];
+    return [[[[NSURL alloc] initWithScheme:[url scheme] host:[url host] path:newPath] autorelease] absoluteString];
+}
+
+
 @end

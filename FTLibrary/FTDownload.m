@@ -151,7 +151,7 @@
     downloadRequest = nil;
     status = FTDownloadStatusFailed;
     [self fireDownloadStatusDelegateMethod];
-	NSLog(@"Request status code: %@", request);
+	NSLog(@"Request status code: %d", request.responseStatusCode);
 	NSLog(@"Request error: %@", request.error.localizedDescription);
 }
 

@@ -13,5 +13,7 @@
 
 + (NSString *)stringFromNumber:(int)number withCharacterSizeLength:(int)numberOfChars;
 
+- (NSString *)stringByAppendingUrlPathComponent:(NSString *)component;
+
 
 @end
