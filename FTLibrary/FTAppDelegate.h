@@ -10,15 +10,13 @@
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
 
-@interface FTAppDelegate : NSObject {
-    NSManagedObjectContext *managedObjectContext_;
-    NSManagedObjectModel *managedObjectModel_;
-    NSPersistentStoreCoordinator *persistentStoreCoordinator_;
+@interface FTAppDelegate : NSObject <UIApplicationDelegate> {
+    NSString *_languageURL;
+    NSDictionary *_languages;
 }
 
-@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, retain) NSString *languageURL;
+@property (nonatomic, retain) NSDictionary *languages;
 
 
 + (id)delegate;
