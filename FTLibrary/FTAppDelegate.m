@@ -7,6 +7,7 @@
 //
 
 #import "FTAppDelegate.h"
+#import "FTLanguageManager.h"
 
 
 @implementation FTAppDelegate
@@ -25,6 +26,5 @@
 + (UIWindow *)window {
 	return [self windowFromSelector:@selector(window)];
 }
-
 
 @end

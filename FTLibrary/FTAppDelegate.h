@@ -7,11 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
 
-@interface FTAppDelegate : NSObject
-
-
+@interface FTAppDelegate : NSObject <UIApplicationDelegate> 
 + (id)delegate;
 
 + (UIWindow *)windowFromSelector:(SEL)selector;
