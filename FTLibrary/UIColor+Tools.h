@@ -18,6 +18,8 @@
 
 + (UIColor *)randomColor;
 
++ (UIColor *)randomColorWithAlpha:(CGFloat)alpha;
+
 + (UIColor *)colorWithHexString:(NSString *)stringToConvert;
 
 

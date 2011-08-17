@@ -13,5 +13,6 @@
 
 - (NSArray *)reversedArray;
 
++ (id)arrayByOrderingSet:(NSSet *)set byKey:(NSString *)key ascending:(BOOL)ascending;
 
 @end

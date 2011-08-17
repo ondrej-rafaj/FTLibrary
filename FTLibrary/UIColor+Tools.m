@@ -34,6 +34,13 @@
 	return [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
 }
 
++ (UIColor *)randomColorWithAlpha:(CGFloat)alpha {
+	CGFloat red =  (CGFloat)random() / (CGFloat)RAND_MAX;
+	CGFloat blue = (CGFloat)random() / (CGFloat)RAND_MAX;
+	CGFloat green = (CGFloat)random() / (CGFloat)RAND_MAX;
+	return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+}
+
 + (UIColor *)colorWithHexString: (NSString *)stringToConvert{
 	NSString *cString = [[stringToConvert stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
 	
