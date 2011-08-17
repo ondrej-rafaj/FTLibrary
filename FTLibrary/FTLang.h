@@ -10,12 +10,16 @@
 #import "FTLanguageManager.h"
 
 
-#define FTLocalizedString(key, comment)			[FTLang get:(key) comment:(comment)]
-#define FTLangGet(key)							[FTLang get:(key)]
+#define FTLocalizedString(key, comment)			[FTLanguageManager get:(key) comment:(comment)]
+#define FTLangGet(key)							[FTLanguageManager get:(key)]
 
 
 @interface FTLang : FTLanguageManager
 
-+ (void)loadLocalTranslations;
++ (void)loadLocalTranslations __deprecated;
+
++ (NSString *)get:(NSString *)key __deprecated;
+
++ (NSString *)get:(NSString *)key comment:(NSString *)comment __deprecated;
 
 @end

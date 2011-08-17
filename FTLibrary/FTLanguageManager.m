@@ -67,8 +67,7 @@ static NSString *translationsURL;
     //operation
     BOOL isDefault = NO;
     if (!urlString || [urlString isEqualToString:@""]) urlString = translationsURL;
-    NSError *error = nil;
-    NSString *string = [NSString stringWithContentsOfURL:[NSURL URLWithString:urlString] encoding:NSUTF8StringEncoding error:&error];
+
     NSDictionary *dataString = [FTDataJson jsonDataFromUrl:urlString];
     NSArray *allLangs = [dataString objectForKey:@"data"];
     
@@ -78,19 +77,20 @@ static NSString *translationsURL;
         if ([translations objectForKey:key] &&[[[translations objectForKey:key] objectForKey:@"url"] isEqualToString:url]) continue;
         NSDictionary *thisLangData = [FTDataJson jsonDataFromUrl:url];
         NSDictionary *data = [thisLangData objectForKey:@"data"];
-        if (data) continue;
+        if (!data) continue;
         
         FTLanguage *language = [[FTLanguage alloc] init];
         language.key = key;
         language.url = url;
         language.data = data;
         [translations setObject:language forKey:key];
+        NSLog(@"%d translations found for Language %@", [data count], key);
         
         if (!isDefault && [key isEqualToString:@"en"]) isDefault = YES;
     }
     
     if (!isDefault) {
-        [FTError handleErrorWithString:@"Default language EN not found on wellBacked app"];
+        //[FTError handleErrorWithString:@"Default language EN not found on wellBacked app"];
     }
 
 }
