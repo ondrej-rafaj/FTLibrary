@@ -10,15 +10,7 @@
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
 
-@interface FTAppDelegate : NSObject <UIApplicationDelegate> {
-    NSString *_languageURL;
-    NSDictionary *_languages;
-}
-
-@property (nonatomic, retain) NSString *languageURL;
-@property (nonatomic, retain) NSDictionary *languages;
-
-
+@interface FTAppDelegate : NSObject <UIApplicationDelegate> 
 + (id)delegate;
 
 + (UIWindow *)windowFromSelector:(SEL)selector;

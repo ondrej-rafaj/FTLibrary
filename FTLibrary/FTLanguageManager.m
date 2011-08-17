@@ -67,7 +67,10 @@ static NSString *translationsURL;
     //operation
     BOOL isDefault = NO;
     if (!urlString || [urlString isEqualToString:@""]) urlString = translationsURL;
-    NSArray *allLangs = [[FTDataJson jsonDataFromUrl:urlString] objectForKey:@"data"];
+    NSError *error = nil;
+    NSString *string = [NSString stringWithContentsOfURL:[NSURL URLWithString:urlString] encoding:NSUTF8StringEncoding error:&error];
+    NSDictionary *dataString = [FTDataJson jsonDataFromUrl:urlString];
+    NSArray *allLangs = [dataString objectForKey:@"data"];
     
     for (NSDictionary *dict in allLangs) {
         NSString *key = [[dict allKeys] objectAtIndex:0];

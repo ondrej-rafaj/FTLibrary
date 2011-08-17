@@ -7,33 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FTLanguageManager.h"
 
 
 #define FTLocalizedString(key, comment)			[FTLang get:(key) comment:(comment)]
 #define FTLangGet(key)							[FTLang get:(key)]
 
 
-@interface FTLang : NSObject
-
-+ (void)initializeWithBaseUrl:(NSString *)baseUrl;
-
-+ (void)prepareWithUrl:(NSString *)url;
-
-+ (NSString *)get:(NSString *)key comment:(NSString *)comment;
-
-+ (NSString *)get:(NSString *)key;
-
-+ (NSString *)currentLangVersion;
-
-+ (void)update;
-
-+ (BOOL)needsUpdate;
-
-+ (void)submitMissingTranslations;
-
-+ (void)clean;
+@interface FTLang : FTLanguageManager
 
 + (void)loadLocalTranslations;
-
 
 @end

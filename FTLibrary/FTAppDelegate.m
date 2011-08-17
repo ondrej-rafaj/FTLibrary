@@ -7,14 +7,10 @@
 //
 
 #import "FTAppDelegate.h"
-#import "FTLang.h"
+#import "FTLanguageManager.h"
 
 
 @implementation FTAppDelegate
-
-@synthesize languageURL = _languageURL;
-@synthesize languages = _languages;
-
 
 + (id)delegate {
 	return [[UIApplication sharedApplication] delegate];
@@ -29,20 +25,6 @@
 
 + (UIWindow *)window {
 	return [self windowFromSelector:@selector(window)];
-}
-
-#pragma mark set languages
-
-- (NSString *)languageURL {
-    return @"";
-}
-
-- (NSDictionary *)languages {
-    if (!_languages) {
-        _languages = [FTLang importLanguagesFromURL:(NSString *)[self languageURL]];
-        [_languages retain];
-    }
-    return _languages;
 }
 
 @end
