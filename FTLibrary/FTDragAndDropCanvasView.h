@@ -37,6 +37,8 @@ typedef enum {
     
     UIImageView *backgroundImageView;
     
+	UIView	* stickersContainerView;
+	
     FTDragAndDropView *activeElement;
     
     id <FTDragAndDropCanvasViewDelegate> delegate;
@@ -56,5 +58,6 @@ typedef enum {
 
 - (void)layoutElements:(BOOL)animated;
 
+- (void)willAnimateToInterfaceOrientation:(UIInterfaceOrientation)newOrientation;
 
 @end
