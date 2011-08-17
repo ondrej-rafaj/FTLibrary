@@ -7,9 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
 
-@interface FTAppDelegate : NSObject
+@interface FTAppDelegate : NSObject {
+    NSManagedObjectContext *managedObjectContext_;
+    NSManagedObjectModel *managedObjectModel_;
+    NSPersistentStoreCoordinator *persistentStoreCoordinator_;
+}
+
+@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 
 + (id)delegate;
