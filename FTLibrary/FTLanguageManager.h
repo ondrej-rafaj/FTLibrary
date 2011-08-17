@@ -22,6 +22,8 @@
 
 @interface FTLanguageManager : NSObject
 
++ (void)initializeWithURL:(NSString *)url andDefaultLanguage:(NSString *)language;
+
 + (void)setTranslationsURL:(NSString *)url;
 + (void)setDefaultLanguage:(NSString *)lang;
 + (void)importLanguagesFromURL:(NSString *)urlString;

@@ -15,6 +15,10 @@
 
 @implementation FTLang
 
+/*!
+ * @deprecated Use [FTLanguaguageManager initializeWithURL: andDefaultLanguage:] instead
+ */
+
 + (void)loadLocalTranslations {
     //
 }
