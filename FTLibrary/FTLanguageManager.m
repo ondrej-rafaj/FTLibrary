@@ -11,6 +11,9 @@
 #import "FTData.h"
 #import "FTDataJson.h"
 #import "FTFilesystem.h"
+#import "Reachability.h"
+#import "FTSystem.h"
+#import "SBJsonWriter.h"
 
 
 #pragma mark FTLanguage
@@ -37,15 +40,21 @@
 static NSMutableDictionary *translations;
 static NSMutableArray *missingTranslations;
 static NSString *defaultLanguage;
-static NSString *translationsURL;
+static NSString *remoteURL;
+static NSString *localeURL;
 
 @implementation FTLanguageManager
 
 
++ (void)setLocaleURL:(NSString *)url {
+    if (localeURL) [localeURL release];
+    NSURL *dirURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    localeURL = [[NSString alloc] initWithFormat:@"%@/%@", [dirURL path], url];
+}
 
-+ (void)setTranslationsURL:(NSString *)url {
-    if (translationsURL) [translationsURL release];
-    translationsURL = [url retain];
++ (void)setRemoteURL:(NSString *)url {
+    if (remoteURL) [remoteURL release];
+    remoteURL = [url retain];
 }
 
 + (void)setDefaultLanguage:(NSString *)lang {
@@ -53,9 +62,11 @@ static NSString *translationsURL;
     defaultLanguage = [lang retain];
 }
 
-+ (void)initializeWithURL:(NSString *)url andDefaultLanguage:(NSString *)language {
-    [self setTranslationsURL:url];
++ (void)initializeWithLocalURL:(NSString *)locale remoteURL:(NSString *)remote andDefaultLanguage:(NSString *)language {
+    [self setLocaleURL:locale];
+    [self setRemoteURL:remote];
     [self setDefaultLanguage:language];
+    [NSThread detachNewThreadSelector:@selector(importLanguages) toTarget:self withObject:nil];
 }
 
 #pragma mark Reporting
@@ -65,40 +76,88 @@ static NSString *translationsURL;
 	[missingTranslations addObject:key];
 }
 
-+ (void)importLanguagesFromURL:(NSString *)urlString {
++ (void)importLanguages {
     //setup translation
     if (!translations) {
         translations = [[NSMutableDictionary alloc] init];
     }
     
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
     //operation
     BOOL isDefault = NO;
-    if (!urlString || [urlString isEqualToString:@""]) urlString = translationsURL;
+    BOOL hasInternet = [FTSystem isInternetAvailable];
+    NSArray *allLangs;
 
-    NSDictionary *dataString = [FTDataJson jsonDataFromUrl:urlString];
-    NSArray *allLangs = [dataString objectForKey:@"data"];
+    NSError *error = nil;
     
-    for (NSDictionary *dict in allLangs) {
-        NSString *key = [[dict allKeys] objectAtIndex:0];
-        NSString *url = [[allLangs objectAtIndex:0] objectForKey:key];
-        if ([translations objectForKey:key] &&[[[translations objectForKey:key] objectForKey:@"url"] isEqualToString:url]) continue;
-        NSDictionary *thisLangData = [FTDataJson jsonDataFromUrl:url];
-        NSDictionary *data = [thisLangData objectForKey:@"data"];
-        if (!data) continue;
+    if (hasInternet) {
+        NSMutableDictionary *backUpData = [NSMutableDictionary dictionary];
+        NSDictionary *dataDictionary = [FTDataJson jsonDataFromUrl:remoteURL];
+        allLangs = [dataDictionary objectForKey:@"data"];
         
-        FTLanguage *language = [[FTLanguage alloc] init];
-        language.key = key;
-        language.url = url;
-        language.data = data;
-        [translations setObject:language forKey:key];
-        NSLog(@"%d translations found for Language %@", [data count], key);
+        for (NSDictionary *dict in allLangs) {
+            NSString *key = [[dict allKeys] objectAtIndex:0];
+            NSString *url = [[allLangs objectAtIndex:0] objectForKey:key];
+            if ([translations objectForKey:key] &&[[[translations objectForKey:key] objectForKey:@"url"] isEqualToString:url]) continue;
+            NSDictionary *thisLangData = [FTDataJson jsonDataFromUrl:url];
+            NSDictionary *data = [thisLangData objectForKey:@"data"];
+            if (!data) continue;
+            
+            FTLanguage *language = [[FTLanguage alloc] init];
+            language.key = key;
+            language.url = url;
+            language.data = data;
+            [translations setObject:language forKey:key];
+            [backUpData setObject:data forKey:key];
+            NSLog(@"%d translations found for Language %@", [data count], key);
+            
+            if (!isDefault && [key isEqualToString:@"en"]) isDefault = YES;
+        }
         
-        if (!isDefault && [key isEqualToString:@"en"]) isDefault = YES;
+        //write to file for locale!
+        
+        SBJsonWriter *writer = [[SBJsonWriter alloc] init];
+        NSString *dataString = [writer stringWithObject:backUpData error:&error];
+        if (error) [FTError handleError:error];
+        [dataString writeToFile:localeURL atomically:YES encoding:NSUTF8StringEncoding error:&error];
+        //[dataString writeToURL:[NSURL URLWithString:localeURL] atomically:YES encoding:NSUTF8StringEncoding error:&error];
+        if (error) [FTError handleError:error];
     }
+    else {
+        NSString *dataString = [NSString stringWithContentsOfFile:localeURL encoding:NSUTF8StringEncoding error:&error];
+        allLangs = [FTDataJson jsonDataFromString:dataString];
+        
+        for (NSDictionary *dict in allLangs) {
+            NSString *key = [[dict allKeys] objectAtIndex:0];
+            NSString *url = [[allLangs objectAtIndex:0] objectForKey:key];
+            if ([translations objectForKey:key] &&[[[translations objectForKey:key] objectForKey:@"url"] isEqualToString:url]) continue;
+            NSDictionary *thisLangData = [FTDataJson jsonDataFromUrl:url];
+            NSDictionary *data = [thisLangData objectForKey:@"data"];
+            if (!data) continue;
+            
+            FTLanguage *language = [[FTLanguage alloc] init];
+            language.key = key;
+            language.url = url;
+            language.data = data;
+            [translations setObject:language forKey:key];
+            NSLog(@"%d translations found for Language %@", [data count], key);
+            
+            if (!isDefault && [key isEqualToString:@"en"]) isDefault = YES;
+        }
+        
+    }
+
+
+    
+
     
     if (!isDefault) {
-        //[FTError handleErrorWithString:@"Default language EN not found on wellBacked app"];
+        [FTError handleErrorWithString:@"Default language EN not found on wellBacked app"];
     }
+    
+    [pool drain];
+    
 
 }
 

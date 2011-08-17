@@ -22,11 +22,13 @@
 
 @interface FTLanguageManager : NSObject
 
-+ (void)initializeWithURL:(NSString *)url andDefaultLanguage:(NSString *)language;
++ (void)initializeWithLocalURL:(NSString *)localeUrl remoteURL:(NSString *)remoteUrl andDefaultLanguage:(NSString *)language;
 
-+ (void)setTranslationsURL:(NSString *)url;
++ (void)setLocaleURL:(NSString *)url;
++ (void)setRemoteURL:(NSString *)url;
 + (void)setDefaultLanguage:(NSString *)lang;
-+ (void)importLanguagesFromURL:(NSString *)urlString;
+
++ (void)importLanguages;
 + (NSString *)get:(NSString *)key comment:(NSString *)comment;
 + (NSString *)get:(NSString *)key;
 
