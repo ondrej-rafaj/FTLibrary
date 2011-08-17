@@ -107,6 +107,7 @@
     [d setValue:NSStringFromCGRect(self.frame) forKey:@"frame"];
     [d setValue:NSStringFromCGSize(imageView.image.size) forKey:@"imageSize"];
     [d setValue:imagePath forKey:@"imagePath"];
+    [d setValue:@"huuuuuu" forKey:@"newProperty"];
     [self setElementData:(NSDictionary *)d];
     [d release];
     return elementData;

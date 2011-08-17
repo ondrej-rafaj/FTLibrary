@@ -72,6 +72,7 @@
         [urlPath retain];
     }
     downloadRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlPath]];
+	NSLog(@"Download request: %@", downloadRequest.url.relativeString);
     if (isCachingEnabled) {
 		[downloadRequest setCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
 		[downloadRequest setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
@@ -150,6 +151,8 @@
     downloadRequest = nil;
     status = FTDownloadStatusFailed;
     [self fireDownloadStatusDelegateMethod];
+	NSLog(@"Request status code: %@", request);
+	NSLog(@"Request error: %@", request.error.localizedDescription);
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
