@@ -37,7 +37,7 @@ typedef enum {
     
     UIImageView *backgroundImageView;
     
-	UIView	* stickersContainerView;
+	UIView	*stickersContainerView;
 	
     FTDragAndDropView *activeElement;
     

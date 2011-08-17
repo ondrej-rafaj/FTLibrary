@@ -12,7 +12,7 @@
 #define degreesToRadians(__ANGLE__) (M_PI * (__ANGLE__) / 180.0)
 #define radiansToDegrees(__ANGLE__) (180.0 * (__ANGLE__) / M_PI)
 
-#define kFTDragAndDropCanvasViewMinScale            0.7f
+#define kFTDragAndDropCanvasViewMinScale            0.55f
 #define kFTDragAndDropCanvasViewMaxScale            1.0f
 #define kFTDragAndDropCanvasViewSpeed               0.75f
 
@@ -118,7 +118,7 @@
 - (void)didDoubleTapElement:(UITapGestureRecognizer *)recognizer {
     FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
     [self handleTap:recognizer];
-    [self bringSubviewToFront:v];
+    [stickersContainerView bringSubviewToFront:v];
     [self didEditElement:v];
 }
 
@@ -174,14 +174,21 @@
         CGFloat newScale = 1 -  (v.lastScale - [recognizer scale]) * (kFTDragAndDropCanvasViewSpeed);
         newScale = MIN(newScale, kFTDragAndDropCanvasViewMaxScale / currentScale);   
         newScale = MAX(newScale, kFTDragAndDropCanvasViewMinScale / currentScale);
+		CGAffineTransform savedTransform = v.transform;
+		CGFloat actualScale = [[v.layer valueForKeyPath:@"transform.scale.x"] floatValue];
+
         v.transform = CGAffineTransformScale([v transform], newScale, newScale);
+		if ([[v.layer valueForKeyPath:@"transform.scale.x"] floatValue] < kFTDragAndDropCanvasViewMinScale)
+		{
+			CGFloat scaleToMinimum = kFTDragAndDropCanvasViewMinScale / actualScale;
+			v.transform = CGAffineTransformScale(savedTransform, scaleToMinimum, scaleToMinimum);
+		}
+
         v.lastScale = [recognizer scale];
-        NSLog(@"Scale value: %f - %f", currentScale, newScale);
     }
     if([recognizer state] == UIGestureRecognizerStateEnded) {
-        currentScale = [[v.layer valueForKeyPath:@"transform.scale"] floatValue];
+        currentScale = [[v.layer valueForKeyPath:@"transform.scale.x"] floatValue];
         v.realScaleValue = currentScale;
-        NSLog(@"Real scale value: %f", v.realScaleValue);
  		[self didEditElement:v];
 	}
 }
@@ -284,12 +291,12 @@
         // Scale
         CGFloat newScale = [[d objectForKey:@"scale"] floatValue];
         if (newScale < kFTDragAndDropCanvasViewMinScale) newScale = kFTDragAndDropCanvasViewMinScale;
-        v.transform = CGAffineTransformScale(v.transform, newScale, newScale);
+		CGAffineTransform scaleTransformation = CGAffineTransformMakeScale(newScale, newScale);
 
         // Rotation
         CGFloat rv = [[d objectForKey:@"rotation"] floatValue];
-        CGAffineTransform newTransform = CGAffineTransformRotate(v.transform, degreesToRadians(rv));
-        [v setTransform:newTransform];
+        CGAffineTransform rotationTransformation = CGAffineTransformMakeRotation(degreesToRadians(rv));
+        [v setTransform:CGAffineTransformConcat(scaleTransformation, rotationTransformation)];
         [v setRealRotationValue:rv];
 
     }
