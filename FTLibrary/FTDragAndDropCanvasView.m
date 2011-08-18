@@ -12,8 +12,8 @@
 #define degreesToRadians(__ANGLE__) (M_PI * (__ANGLE__) / 180.0)
 #define radiansToDegrees(__ANGLE__) (180.0 * (__ANGLE__) / M_PI)
 
-#define kFTDragAndDropCanvasViewMinScale            0.55f
-#define kFTDragAndDropCanvasViewMaxScale            1.0f
+#define kFTDragAndDropCanvasViewMinScale            0.55f * interfaceRotationFactor
+#define kFTDragAndDropCanvasViewMaxScale            1.0f * interfaceRotationFactor
 #define kFTDragAndDropCanvasViewSpeed               0.75f
 
 
@@ -21,6 +21,8 @@
 
 - (void)activateElement:(FTDragAndDropView *)element;
 - (void)deleteElement:(FTDragAndDropView *)element;
+- (void)configureElement:(FTDragAndDropView *)element;
+- (void)didEditElement:(FTDragAndDropView *)element;
 
 @end
 
@@ -30,69 +32,58 @@
 @synthesize backgroundImageView;
 @synthesize delegate;
 
-
-#pragma mark Initialization
-
-- (void)doInit {
-    elements = [[NSMutableArray alloc] init];
-    backgroundImageView = [[UIImageView alloc] init];	
-    [self addSubview:backgroundImageView];
-	
-	UIImage *deleteImage = [UIImage imageNamed:@"DD_canvas-delete.png"];
-	UIImage *highlightedDeleteImage = [UIImage imageNamed:@"DD_canvas-delet-highlighted.png"];
-	deleteImageView = [[UIImageView alloc] initWithImage:deleteImage highlightedImage:highlightedDeleteImage];
-	deleteImageView.hidden = YES;
-	[self addSubview:deleteImageView];
-	
-	stickersContainerView = [[UIView alloc] init];
-	stickersContainerView.clipsToBounds = YES;
-	[self addSubview:stickersContainerView];
-	
-}
+#pragma mark Object lifecycle
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setBackgroundColor:[UIColor clearColor]];
-        [self doInit];
+		
+		animatedLayout = NO;
+		elements = [[NSMutableArray alloc] init];
+		
+		self.backgroundColor = [UIColor clearColor];
+		
+		backgroundImageView = [[UIImageView alloc] init];
+		[self addSubview:backgroundImageView];
+		
+		UIImage *deleteImage = [UIImage imageNamed:@"DD_canvas-delete.png"];
+		UIImage *highlightedDeleteImage = [UIImage imageNamed:@"DD_canvas-delet-highlighted.png"];
+		deleteImageView = [[UIImageView alloc] initWithImage:deleteImage highlightedImage:highlightedDeleteImage];
+		deleteImageView.hidden = YES;
+		[self addSubview:deleteImageView];
+		
+		stickersContainerView = [[UIView alloc] init];
+		stickersContainerView.clipsToBounds = YES;
+		[self addSubview:stickersContainerView];		
     }
     return self;
 }
 
+- (void)dealloc {
+    [elements release];
+    [backgroundImageView release];
+	[stickersContainerView release];
+	[deleteImagePath release];
+	[deleteImageView release];
+    [super dealloc];
+}
+
+#pragma mark - View lifecycle
+
 - (void)layoutSubviews
-{
-	CGSize imageSize = backgroundImageView.image.size;
-	CGFloat horizontalRatio = self.bounds.size.width / imageSize.width;
-    CGFloat verticalRatio = self.bounds.size.height / imageSize.height;
-    CGFloat ratio = MIN(horizontalRatio, verticalRatio);
-	
-    CGSize newImageSize = CGSizeMake(imageSize.width * ratio, imageSize.height * ratio);
-    CGRect r = CGRectMake((self.bounds.size.width - newImageSize.width)/2, (self.bounds.size.height - newImageSize.height)/2, newImageSize.width, newImageSize.height);
-	
+{	
 	if (self.bounds.size.height / self.bounds.size.width < 1) {
 		//landscape
 		interfaceRotationFactor = 1;
+		[backgroundImageView setFrame:CGRectIntegral(backgroundImageRectLandscape)];
+		[stickersContainerView setFrame:CGRectIntegral(backgroundImageRectLandscape)];
 	}
 	else {
 		//portrait
-		interfaceRotationFactor = 3/4;
+		interfaceRotationFactor = backgroundImageRectPortrait.size.width / backgroundImageRectLandscape.size.width;
+		[backgroundImageView setFrame:CGRectIntegral(backgroundImageRectPortrait)];
+		[stickersContainerView setFrame:CGRectIntegral(backgroundImageRectPortrait)];
 	}
-	
-	if (!CGRectIsEmpty(backgroundImageView.frame)) {
-		CGRect previousFrame = backgroundImageView.frame;
-		CGFloat scalingDueToRotation = r.size.width / previousFrame.size.width;
-		
-		for (FTDragAndDropView *element in elements) {
-						
-			element.transform = CGAffineTransformScale(element.transform, scalingDueToRotation, scalingDueToRotation);
-			element.interfaceRotationScaling = interfaceRotationFactor;
-			
-			CGPoint newCenter = CGPointMake(element.center.x * scalingDueToRotation, element.center.y * scalingDueToRotation);
-			element.center = newCenter;
-		}
-	}
-    [backgroundImageView setFrame:CGRectIntegral(r)];
-	[stickersContainerView setFrame:CGRectIntegral(r)];
 	
 	CGRect deleteImageViewRect = deleteImageView.frame;
 	deleteImageViewRect.origin = CGPointMake(backgroundImageView.frame.origin.x + 35, ceilf((CGRectGetHeight(self.bounds) - deleteImageViewRect.size.height) / 2));
@@ -100,12 +91,30 @@
 	
 	[deleteImagePath release];
 	deleteImagePath = [[UIBezierPath bezierPathWithOvalInRect:deleteImageViewRect] retain];
+		
+	if (animatedLayout) {
+		[UIView beginAnimations:nil context:nil];
+		[UIView setAnimationDuration:0.6];
+	}
+	for (FTDragAndDropView *element in elements) {
+		
+		element.center = CGPointMake(element.positionX * interfaceRotationFactor, element.positionY * interfaceRotationFactor);
+		CGAffineTransform rotation = CGAffineTransformMakeRotation(element.rotationValue);
+		CGAffineTransform scaling = CGAffineTransformMakeScale(element.scaleValue * interfaceRotationFactor, element.scaleValue * interfaceRotationFactor);
+		element.transform = CGAffineTransformConcat(rotation, scaling);
+	}
+	if (animatedLayout) {
+		animatedLayout = NO;
+		[UIView commitAnimations];
+	}
 }
+
+#pragma mark - Class level methods
 
 - (UIImage *)imageWithSize:(CGSize)desiredSize
 {
 	CGSize imageSize = backgroundImageView.image.size;
-
+	
 	CGFloat horizontalRatio = desiredSize.width / imageSize.width;
     CGFloat verticalRatio = desiredSize.height /imageSize.height;
     CGFloat ratio = MIN(horizontalRatio, verticalRatio);
@@ -120,19 +129,19 @@
 	//the reference size is in landscape
 	CGFloat horizontalRatio2 = newImageSize.width / 1024;
     CGFloat verticalRatio2 = newImageSize.height / 768;
-    CGFloat newScaling = MIN(horizontalRatio2, verticalRatio2);
-
+    CGFloat newScaling = MAX(horizontalRatio2, verticalRatio2);
+	
 	for (FTDragAndDropView *element in elements) {
-
-		CGPoint newCenter = CGPointMake(ceilf(element.center.x * newScaling), ceilf(element.center.y * newScaling));
-
+		
+		CGPoint newCenter = CGPointMake(ceilf(element.positionX * newScaling), ceilf(element.positionY * newScaling));
+		
 		CGContextSaveGState(context);
 		CGContextTranslateCTM(context, newCenter.x, newCenter.y);
-		CGFloat scaleValue = element.realScaleValue;
+		CGFloat scaleValue = element.scaleValue * newScaling;
 		CGContextScaleCTM(context, scaleValue, scaleValue);
-		CGFloat rotationValue = element.realRotationValue;
-		CGContextRotateCTM(context, degreesToRadians(rotationValue));
-
+		CGFloat rotationValue = element.rotationValue;
+		CGContextRotateCTM(context, rotationValue);
+		
 		UIImage *imageToDraw = element.imageView.image;
 		[imageToDraw drawAtPoint:CGPointMake(-ceilf(imageToDraw.size.width / 2), -ceilf(imageToDraw.size.height / 2))];
 		
@@ -143,176 +152,55 @@
 	UIGraphicsEndImageContext();
 	
 	return returnedImage;
+	return nil;
 }
 
-#pragma mark Using elements
+- (void)setBackgroundImage:(UIImage *)backgroundImage
+{
+	[backgroundImageView setImage:backgroundImage];
+	CGSize imageSize = backgroundImage.size;
+	//landscape
+	CGFloat horizontalRatio = 1024 / imageSize.width;
+    CGFloat verticalRatio = 768 / imageSize.height;
+    CGFloat ratio = MIN(horizontalRatio, verticalRatio);
+    CGSize newImageSize = CGSizeMake(imageSize.width * ratio, imageSize.height * ratio);
+    backgroundImageRectLandscape = CGRectMake((1024 - newImageSize.width)/2, (768 - newImageSize.height)/2, newImageSize.width, newImageSize.height);
+	backgroundImageRectLandscape = CGRectIntegral(backgroundImageRectLandscape);
 
-- (void)didEditElement:(FTDragAndDropView *)element {
-    if ([delegate respondsToSelector:@selector(finishedEditingElement:withData:)]) {
-        [delegate finishedEditingElement:element withData:[element getInfo]];
-    }
-}
-
-- (void)disableActiveElement {
-    if (activeElement) {
-        [activeElement setAlpha:1];
-        [activeElement release];
-        activeElement = nil;
-    }
-}
-
-- (void)highlightActiveElement {
-    [UIView beginAnimations:nil context:nil];
-    for (FTDragAndDropView *e in elements) {
-        if (e != activeElement) {
-            [e setAlpha:1.0f];
-        }
-    }
-    [activeElement setAlpha:0.85f];
-    [UIView commitAnimations];
-}
-
-#pragma mark Gesture delegate methods
-
-- (void)handleTap:(UITapGestureRecognizer *)tap {
-    if (tap.view != activeElement) [self activateElement:(FTDragAndDropView *)tap.view];
-    else [self disableActiveElement];
-}
-
-- (void)handleLongTouch:(UILongPressGestureRecognizer *)tap {
-
-	FTDragAndDropView *v = (FTDragAndDropView *)tap.view;
-	if (tap.state == UIGestureRecognizerStateBegan) {
-		deleteImageView.hidden = NO;
-	}
-	else if (tap.state == UIGestureRecognizerStateEnded) {
-		if (!v.isDragged)
-			deleteImageView.hidden = YES;
-		deleteImageView.highlighted = NO;
-	}
-}
-
-- (void)didTapElement:(UITapGestureRecognizer *)recognizer {
-    [self handleTap:recognizer];
-}
-
-- (void)didDoubleTapElement:(UITapGestureRecognizer *)recognizer {
-    FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
-    [self handleTap:recognizer];
-    [stickersContainerView bringSubviewToFront:v];
-    [self didEditElement:v];
-}
-
-- (void)rotateView:(UIRotationGestureRecognizer *)recognizer {
-    FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
-    //[self activateElement:v];
-    if([(UIRotationGestureRecognizer*)recognizer state] == UIGestureRecognizerStateEnded) {
-        [v setLastRotation:0.0f];
-        v.realRotationValue += radiansToDegrees([recognizer rotation]);
-        [self didEditElement:v];
-        return;
-    }
-    CGFloat rotation = 0.0 - (v.lastRotation - [recognizer rotation]);
-    CGAffineTransform newTransform = CGAffineTransformRotate(v.transform, rotation);
-    [v setTransform:newTransform];
-    [v setLastRotation:[recognizer rotation]];
-}
-
-- (void)moveView:(UIPanGestureRecognizer *)recognizer {
-    FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
-    [self activateElement:v];
-	//[self bringSubviewToFront:v];
+	//portrait
+	horizontalRatio = 768 / imageSize.width;
+    verticalRatio = 1024 / imageSize.height;
+    ratio = MIN(horizontalRatio, verticalRatio);
+    newImageSize = CGSizeMake(imageSize.width * ratio, imageSize.height * ratio);
+    backgroundImageRectPortrait = CGRectMake((768 - newImageSize.width)/2, (1024 - newImageSize.height)/2, newImageSize.width, newImageSize.height);
+	backgroundImageRectPortrait = CGRectIntegral(backgroundImageRectPortrait);
 	
-	
-	CGPoint translatedPoint = [recognizer translationInView:stickersContainerView];
-	if([recognizer state] == UIGestureRecognizerStateBegan) {
-		v.dragged = YES;
-		v.positionX = [v center].x;
-		v.positionY = [v center].y;
-	}
-	translatedPoint = CGPointMake(v.positionX + translatedPoint.x, v.positionY + translatedPoint.y);
-	
-	CGRect newElementFrame;
-	newElementFrame.size = v.bounds.size;
-	newElementFrame.origin = CGPointMake(translatedPoint.x - newElementFrame.size.width / 2, translatedPoint.y - newElementFrame.size.height / 2);
-	CGRect minimumInsideRectangle = CGRectInset(newElementFrame, 0.2 * newElementFrame.size.width, 0.2 * newElementFrame.size.height);
-
-	if (!CGRectIsNull(CGRectIntersection(minimumInsideRectangle, stickersContainerView.bounds))) {
-		[v setCenter:translatedPoint];
-	}
-	
-	CGPoint locationInSelf = [recognizer locationInView:self];
-	BOOL shouldDelete = NO;
-	
-	if (!deleteImageView.hidden && [deleteImagePath containsPoint:locationInSelf]) {
-		deleteImageView.highlighted = YES;
-		shouldDelete = YES;
-	}
-	else {
-		deleteImageView.highlighted = NO;		
-	}
-	
-	if([recognizer state] == UIGestureRecognizerStateEnded) {
-		v.positionX = [v center].x;
-		v.positionY = [v center].y;
-		[self didEditElement:v];
-		deleteImageView.hidden = YES;
-		deleteImageView.highlighted = NO;
-
-		v.dragged = NO;
-		if (shouldDelete) {
-			[self deleteElement:v];
-		}
-	}
+	[self setNeedsLayout];
 }
 
-- (void)resizeView:(UIPinchGestureRecognizer *)recognizer    {
-    FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
-    //[self activateElement:v];
-    if([recognizer state] == UIGestureRecognizerStateBegan) {
-        v.lastScale = [recognizer scale];
-    }
-    CGFloat currentScale = [[v.layer valueForKeyPath:@"transform.scale"] floatValue];
-    if ([recognizer state] == UIGestureRecognizerStateBegan || [recognizer state] == UIGestureRecognizerStateChanged) {
-        CGFloat newScale = 1 -  (v.lastScale - [recognizer scale]) * (kFTDragAndDropCanvasViewSpeed);
-        newScale = MIN(newScale, kFTDragAndDropCanvasViewMaxScale / currentScale);   
-        newScale = MAX(newScale, kFTDragAndDropCanvasViewMinScale / currentScale);
-		CGAffineTransform savedTransform = v.transform;
-		CGFloat actualScale = [[v.layer valueForKeyPath:@"transform.scale.x"] floatValue];
+#pragma mark - Add/Remove Elements
 
-        v.transform = CGAffineTransformScale([v transform], newScale, newScale);
-		if ([[v.layer valueForKeyPath:@"transform.scale.x"] floatValue] < kFTDragAndDropCanvasViewMinScale)
-		{
-			CGFloat scaleToMinimum = kFTDragAndDropCanvasViewMinScale / actualScale;
-			v.transform = CGAffineTransformScale(savedTransform, scaleToMinimum, scaleToMinimum);
-		}
-
-        v.lastScale = [recognizer scale];
-    }
-    if([recognizer state] == UIGestureRecognizerStateEnded) {
-        currentScale = [[v.layer valueForKeyPath:@"transform.scale.x"] floatValue];
-        v.realScaleValue = currentScale;
- 		[self didEditElement:v];
-	}
+- (void)addElementWithData:(NSDictionary *)data
+{
+    FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImageData:data];
+    [self configureElement:element];
+    [element release];
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
+- (void)addElementWithPath:(NSString *)imagePath
+{
+    FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImagePath:imagePath];
+	element.positionX = self.bounds.size.width / 2;
+	element.positionY = self.bounds.size.height / 2;
+	[delegate createdElement:element withData:element.elementData];
+	
+	[self didEditElement:element];
+    [self configureElement:element];
+    [element release];
 }
 
-#pragma mark Elements
-
-- (void)activateElement:(FTDragAndDropView *)element {
-    if (element != activeElement) {
-        [activeElement release];
-        activeElement = element;
-        [activeElement retain];
-        [self highlightActiveElement];
-    }
-}
-
-- (void)configureElement:(FTDragAndDropView *)element {
-
+- (void)configureElement:(FTDragAndDropView *)element
+{
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didDoubleTapElement:)];
     [tap2 setNumberOfTapsRequired:2];
     [tap2 setNumberOfTouchesRequired:1];
@@ -350,99 +238,200 @@
     [pin release];
     
     [elements addObject:element];
-    [element setCenter:CGPointMake(stickersContainerView.frame.size.width / 2, stickersContainerView.frame.size.height / 2)];
+    [element setCenter:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2)];
     [stickersContainerView addSubview:element];
     [self activateElement:element];
 }
 
-- (void)addElementFromData:(NSDictionary *)data {
-    FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImageData:data];
-    [self configureElement:element];
-    [element release];
-}
-
-- (void)addElementFromPath:(NSString *)imagePath {
-    FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImagePath:imagePath];
-    [self configureElement:element];
-    if ([delegate respondsToSelector:@selector(createdElement:withData:)]) {
-        [delegate createdElement:element withData:[element getInfo]];
-    }
-    [element release];
-}
-
-- (void)setBackgroundImage:(UIImage *)backgroundImage {
-	[backgroundImageView setImage:backgroundImage];
-	[self layoutSubviews];
-}
-
-- (void)removeActiveElement {
-    if (activeElement) {
-        [activeElement removeFromSuperview];
-        [elements removeObject:activeElement];
-        [activeElement release];
-        activeElement = nil;
-    }
-}
-
-- (void)layoutElements:(BOOL)animated {
-    if (animated) {
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.6];
-    }
-    
-    for (FTDragAndDropView *v in elements) {
-        NSDictionary *d = v.elementData;
-        
-        // Position
-        CGPoint p = CGPointFromString([d objectForKey:@"center"]);
-        [v setCenter:p];
-        
-        // Scale
-        CGFloat newScale = [[d objectForKey:@"scale"] floatValue];
-        if (newScale < kFTDragAndDropCanvasViewMinScale) newScale = kFTDragAndDropCanvasViewMinScale;
-		CGAffineTransform scaleTransformation = CGAffineTransformMakeScale(newScale, newScale);
-
-        // Rotation
-        CGFloat rv = [[d objectForKey:@"rotation"] floatValue];
-        CGAffineTransform rotationTransformation = CGAffineTransformMakeRotation(degreesToRadians(rv));
-        [v setTransform:CGAffineTransformConcat(scaleTransformation, rotationTransformation)];
-        [v setRealRotationValue:rv];
-
-    }
-    
-    if (animated) [UIView commitAnimations];
-}
-
-#pragma mark Controls delegate methods
-
-- (void)deleteElementClicked:(UIButton *)sender {
-    if ([delegate respondsToSelector:@selector(deletedElement:withIndex:)]) {
-        [delegate deletedElement:nil withIndex:0];
-    }
-}
-
-#pragma mark Element delegate methods
-
-- (void)deleteElement:(FTDragAndDropView *)element {
+- (void)deleteElement:(FTDragAndDropView *)element
+{
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(removeActiveElement)];
     [element setAlpha:0];
     [UIView commitAnimations];
-	if ([delegate respondsToSelector:@selector(deletedElement:withIndex:)]) {
-        [delegate deletedElement:element withIndex:0];
+}
+
+- (void)highlightActiveElement
+{
+    [UIView beginAnimations:nil context:nil];
+    for (FTDragAndDropView *e in elements) {
+        if (e != activeElement) {
+            [e setAlpha:1.0f];
+        }
+    }
+    [activeElement setAlpha:0.85f];
+    [UIView commitAnimations];
+}
+
+- (void)layoutElements:(BOOL)animated
+{
+	animatedLayout = animated;
+	[self setNeedsLayout];
+}
+
+#pragma mark - Use Elements
+
+- (void)activateElement:(FTDragAndDropView *)element
+{
+    if (element != activeElement) {
+        activeElement = element;
+        [self highlightActiveElement];
     }
 }
 
-#pragma mark Memory management
+- (void)disableActiveElement
+{
+    if (activeElement) {
+        [activeElement setAlpha:1];
+        activeElement = nil;
+    }
+}
 
-- (void)dealloc {
-    [elements release];
-    [backgroundImageView release];
-	[stickersContainerView release];
-	[deleteImagePath release];
-	[deleteImageView release];
-    [super dealloc];
+- (void)removeActiveElement
+{
+    if (activeElement) {
+        [activeElement removeFromSuperview];
+        [elements removeObject:activeElement];
+        activeElement = nil;
+    }
+}
+
+- (void)didEditElement:(FTDragAndDropView *)element
+{
+    if ([delegate respondsToSelector:@selector(finishedEditingElement:withData:)]) {
+        [delegate finishedEditingElement:element withData:[element getInfo]];
+    }
+}
+
+#pragma mark Gesture delegate methods
+
+- (void)handleTap:(UITapGestureRecognizer *)tap {
+    if (tap.view != activeElement) [self activateElement:(FTDragAndDropView *)tap.view];
+    else [self disableActiveElement];
+}
+
+- (void)handleLongTouch:(UILongPressGestureRecognizer *)tap {
+
+	FTDragAndDropView *v = (FTDragAndDropView *)tap.view;
+	if (tap.state == UIGestureRecognizerStateBegan) {
+		deleteImageView.hidden = NO;
+	}
+	else if (tap.state == UIGestureRecognizerStateEnded) {
+		if (!v.isDragged)
+			deleteImageView.hidden = YES;
+		deleteImageView.highlighted = NO;
+	}
+}
+
+- (void)didTapElement:(UITapGestureRecognizer *)recognizer {
+    [self handleTap:recognizer];
+}
+
+- (void)didDoubleTapElement:(UITapGestureRecognizer *)recognizer {
+    FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
+    [self handleTap:recognizer];
+    [stickersContainerView bringSubviewToFront:v];
+    [self didEditElement:v];
+}
+
+static CGFloat tempRotation = 0;
+- (void)rotateView:(UIRotationGestureRecognizer *)recognizer {
+    FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
+
+	if([(UIRotationGestureRecognizer*)recognizer state] == UIGestureRecognizerStateEnded) {
+		tempRotation = 0;
+		v.rotationValue += [recognizer rotation];
+		[self didEditElement:v];
+		return;
+	}
+	CGFloat rotation = 0.0 - (tempRotation - [recognizer rotation]);
+	v.transform = CGAffineTransformRotate(v.transform, rotation);
+	
+	tempRotation = [recognizer rotation];
+}
+
+- (void)moveView:(UIPanGestureRecognizer *)recognizer {
+	
+	FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
+    [self activateElement:v];
+	
+	if([recognizer state] == UIGestureRecognizerStateBegan) {
+		v.dragged = YES;
+	}
+	CGPoint translatedPoint = [recognizer translationInView:stickersContainerView];
+	translatedPoint = CGPointMake(v.positionX * interfaceRotationFactor + translatedPoint.x, v.positionY * interfaceRotationFactor + translatedPoint.y);
+	
+	CGRect newElementFrame;
+	newElementFrame.size = v.bounds.size;
+	newElementFrame.origin = CGPointMake(translatedPoint.x - newElementFrame.size.width / 2, translatedPoint.y - newElementFrame.size.height / 2);
+	CGRect minimumInsideRectangle = CGRectInset(newElementFrame, 0.2 * newElementFrame.size.width, 0.2 * newElementFrame.size.height);
+
+	if (!CGRectIsNull(CGRectIntersection(minimumInsideRectangle, stickersContainerView.bounds))) {
+		[v setCenter:translatedPoint];
+	}
+	
+	CGPoint locationInSelf = [recognizer locationInView:self];
+	BOOL shouldDelete = NO;
+	
+	if (!deleteImageView.hidden && [deleteImagePath containsPoint:locationInSelf]) {
+		deleteImageView.highlighted = YES;
+		shouldDelete = YES;
+	}
+	else {
+		deleteImageView.highlighted = NO;		
+	}
+	
+	if ([recognizer state] == UIGestureRecognizerStateEnded) {
+		v.positionX = [v center].x / interfaceRotationFactor;
+		v.positionY = [v center].y / interfaceRotationFactor;
+		[self didEditElement:v];
+		deleteImageView.hidden = YES;
+		deleteImageView.highlighted = NO;
+
+		v.dragged = NO;
+		if (shouldDelete) {
+			[self deleteElement:v];
+		}
+	}
+}
+
+- (void)resizeView:(UIPinchGestureRecognizer *)recognizer    {
+	FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
+
+	CGFloat currentScale = [[v.layer valueForKeyPath:@"transform.scale"] floatValue];
+	if ([recognizer state] == UIGestureRecognizerStateBegan || [recognizer state] == UIGestureRecognizerStateChanged) {
+		CGFloat newScale = 1 -  (v.scaleValue * interfaceRotationFactor - [recognizer scale]) * (kFTDragAndDropCanvasViewSpeed);
+		newScale = MIN(newScale, kFTDragAndDropCanvasViewMaxScale / currentScale);   
+		newScale = MAX(newScale, kFTDragAndDropCanvasViewMinScale / currentScale);
+		CGAffineTransform savedTransform = v.transform;
+		CGFloat actualScale = [[v.layer valueForKeyPath:@"transform.scale.x"] floatValue];
+		
+		v.transform = CGAffineTransformScale([v transform], newScale, newScale);
+		if ([[v.layer valueForKeyPath:@"transform.scale.x"] floatValue] < kFTDragAndDropCanvasViewMinScale)
+		{
+			CGFloat scaleToMinimum = kFTDragAndDropCanvasViewMinScale / actualScale;
+			v.transform = CGAffineTransformScale(savedTransform, scaleToMinimum, scaleToMinimum);
+		}
+		else if ([[v.layer valueForKeyPath:@"transform.scale.x"] floatValue] > kFTDragAndDropCanvasViewMaxScale)
+		{
+			CGFloat scaleToMaximum = kFTDragAndDropCanvasViewMaxScale / actualScale;
+			v.transform = CGAffineTransformScale(savedTransform, scaleToMaximum, scaleToMaximum);
+		}
+		
+		v.scaleValue = [recognizer scale] / interfaceRotationFactor;
+	}
+	if([recognizer state] == UIGestureRecognizerStateEnded) {
+		currentScale = [[v.layer valueForKeyPath:@"transform.scale.x"] floatValue];
+		v.scaleValue = currentScale / interfaceRotationFactor;
+		[self didEditElement:v];
+	}
+}
+
+#pragma mark - Gestur Recognizer delegate method
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
 }
 
 @end

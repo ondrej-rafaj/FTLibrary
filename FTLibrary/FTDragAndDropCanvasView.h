@@ -9,60 +9,50 @@
 #import <UIKit/UIKit.h>
 #import "FTDragAndDropView.h"
 
-
 typedef enum {
-    
     FTDragAndDropCanvasViewStatusMoving,
     FTDragAndDropCanvasViewStatusRotating
-    
 } FTDragAndDropCanvasViewStatus;
 
 
 @class FTDragAndDropCanvasView;
+@protocol FTDragAndDropCanvasViewDelegate;
+
+@interface FTDragAndDropCanvasView : UIView <UIGestureRecognizerDelegate> {
+    
+	id <FTDragAndDropCanvasViewDelegate> delegate;
+
+    NSMutableArray		*elements;
+	FTDragAndDropView	*activeElement;
+	UIBezierPath		*deleteImagePath;
+
+	UIImageView			*deleteImageView;
+    UIImageView			*backgroundImageView;
+	UIView				*stickersContainerView;
+	CGFloat				interfaceRotationFactor;
+	
+	CGRect				backgroundImageRectLandscape;
+	CGRect				backgroundImageRectPortrait;
+	
+	BOOL				animatedLayout;
+}
+
+@property (nonatomic, assign) id <FTDragAndDropCanvasViewDelegate> delegate;
+@property (nonatomic, retain) UIImageView *backgroundImageView;
+
+- (void)setBackgroundImage:(UIImage *)backgroundImage;
+- (void)addElementWithPath:(NSString *)imagePath;
+- (void)addElementWithData:(NSDictionary *)data;
+- (void)layoutElements:(BOOL)animated;
+
+- (UIImage *)imageWithSize:(CGSize)imageSize;
+
+@end
 
 @protocol FTDragAndDropCanvasViewDelegate <NSObject>
 
 - (void)finishedEditingElement:(FTDragAndDropView *)element withData:(NSDictionary *)data;
-
-- (void)deletedElement:(FTDragAndDropView *)element withIndex:(int)index;
-
+- (void)deleteElement:(FTDragAndDropView *)element withData:(NSDictionary *)data;
 - (void)createdElement:(FTDragAndDropView *)element withData:(NSDictionary *)data;
-
-@end
-
-
-@interface FTDragAndDropCanvasView : UIView <UIGestureRecognizerDelegate> {
-    
-    NSMutableArray *elements;
-    
-    UIImageView *backgroundImageView;
-    
-	UIView	*stickersContainerView;
-	
-    FTDragAndDropView *activeElement;
-    
-    id <FTDragAndDropCanvasViewDelegate> delegate;
-    
-	UIBezierPath *deleteImagePath;
-	
-	UIImageView *deleteImageView;
-	
-	CGFloat interfaceRotationFactor;
-}
-
-@property (nonatomic, retain) UIImageView *backgroundImageView;
-
-@property (nonatomic, assign) id <FTDragAndDropCanvasViewDelegate> delegate;
-
-
-- (void)setBackgroundImage:(UIImage *)backgroundImage;
-
-- (void)addElementFromPath:(NSString *)imagePath;
-
-- (void)addElementFromData:(NSDictionary *)data;
-
-- (void)layoutElements:(BOOL)animated;
-
-- (UIImage *)imageWithSize:(CGSize)imageSize;
 
 @end

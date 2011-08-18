@@ -13,114 +13,97 @@
 #define kFTDragAndDropViewButtonSize                0
 #define kFTDragAndDropViewButtonSpace               0
 
+@interface FTDragAndDropView ()
+
+- (NSDictionary *)defaultImageDataDictionnaryWithImagePath:(NSString *)imagePath;
+
+@end
 
 @implementation FTDragAndDropView
 
-@synthesize imageView;
-@synthesize lastRotation;
-@synthesize lastScale;
-@synthesize imagePath;
-@synthesize elementData;
-@synthesize interfaceRotationScaling;
-@synthesize positionX;
-@synthesize positionY;
-@synthesize dragged;
+@synthesize rotationValue = _rotationValue;
+@synthesize scaleValue = _scaleValue;
+@synthesize imageView = _imageView;
+@synthesize imagePath = _imagePath;
+@synthesize elementData = _elementData;
+@synthesize positionX = _positionX;
+@synthesize positionY = _positionY;
+@synthesize dragged = _dragged;
 
-@synthesize realRotationValue;
-@synthesize realScaleValue;
+#pragma mark - private methods
+
+- (NSDictionary *)defaultImageDataDictionnaryWithImagePath:(NSString *)imagePath
+{
+	return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:0], @"rotationValue",
+			[NSNumber numberWithFloat:1], @"scaleValue",
+			[NSNumber numberWithFloat:0], @"positionX",
+			[NSNumber numberWithFloat:0], @"positionY",
+			imagePath, @"imagePath",
+			nil];
+}
 
 #pragma mark Initialization
 
 - (id)initWithImagePath:(NSString *)path {
-    UIImage *image = [UIImage imageWithContentsOfFile:path];
-    if (image == nil) return nil;
-    CGRect r = CGRectMake(0, 0, image.size.width, (image.size.height + (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace)));
-    self = [super initWithFrame:r];
-    if (self) {		
-        [self setElementData:[NSDictionary dictionary]];
-        
-        // Setting basic parameters
-        [self setImagePath:path];
-        [self setLastScale:1.0f];
-        [self setLastRotation:0.0f];
-        [self setRealScaleValue:1.0f];
-        [self setRealRotationValue:0.0f];
-		[self setInterfaceRotationScaling:1];
-		dragged = NO;
+	
+	NSDictionary *imageData = [self defaultImageDataDictionnaryWithImagePath:path];
+	
+	self = [self initWithImageData:imageData];
+	if (self) {
 		
-        // Creating image view
-        imageView = [[UIImageView alloc] initWithImage:image];
-        r.origin.y += (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace);
-        r.size.height -= (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace);
-        [imageView setFrame:r];
-        [imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [self addSubview:imageView];
-        
-    }
-    return self;
+	}
+	return self;
 }
 
 - (id)initWithImageData:(NSDictionary *)data {
+	
     UIImage *image = [UIImage imageWithContentsOfFile:[data objectForKey:@"imagePath"]];
     if (image == nil) return nil;
     CGRect r = CGRectMake(0, 0, image.size.width, (image.size.height + (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace)));
     self = [super initWithFrame:r];
     if (self) {
         
-        //[self setBackgroundColor:[UIColor randomColor]];
-        [self setElementData:data];
-        [self setImagePath:[data objectForKey:@"imagePath"]];
-        [self setLastScale:1.0f];
-        [self setLastRotation:0.0f];
-		[self setRealScaleValue:[[data objectForKey:@"scale"] floatValue]];
-		[self setRealRotationValue:[[data objectForKey:@"rotation"] floatValue]];
-		[self setInterfaceRotationScaling:1];
-		dragged = NO;
-		
-        imageView = [[UIImageView alloc] initWithImage:image];
+		self.elementData = data;
+		self.backgroundColor = [UIColor clearColor];
+		//self.elementData = data;
+        self.imagePath = [data objectForKey:@"imagePath"];
+        
+		_rotationValue = [[data objectForKey:@"rotationValue"] floatValue];
+		_scaleValue = [[data objectForKey:@"scaleValue"] floatValue];
+		_positionX = [[data objectForKey:@"positionX"] floatValue];
+		_positionY = [[data objectForKey:@"positionY"] floatValue];
+
+		_dragged = NO;
+       		
+        _imageView = [[UIImageView alloc] initWithImage:image];
         r.origin.y += (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace);
         r.size.height -= (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace);
-        [imageView setFrame:r];
-        [imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [self addSubview:imageView];
-        
+        [_imageView setFrame:r];
+        [_imageView setContentMode:UIViewContentModeScaleAspectFit];
+        [self addSubview:_imageView];
     }
     return self;
-}
-
-#pragma mark Settings
-
-- (void)setPosition:(CGPoint)position {
-    [self setCenter:position];
-}
-
-- (void)setFrame:(CGRect)frame {
-    [super setFrame:frame];
 }
 
 #pragma mark Data
 
 - (NSDictionary *)getInfo {
-    NSMutableDictionary *d = [[NSMutableDictionary alloc] initWithDictionary:elementData];
-    [d setValue:[NSString stringWithFormat:@"%f", realRotationValue] forKey:@"rotation"];
-    [d setValue:[NSString stringWithFormat:@"%f", realScaleValue] forKey:@"scale"];
 
-    [d setValue:NSStringFromCGPoint(self.center) forKey:@"center"];
-    [d setValue:NSStringFromCGRect(self.frame) forKey:@"frame"];
-    [d setValue:NSStringFromCGSize(imageView.image.size) forKey:@"imageSize"];
-    [d setValue:imagePath forKey:@"imagePath"];
-
-    [self setElementData:(NSDictionary *)d];
-    [d release];
-    return elementData;
+	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:_elementData];
+	[dict setValue:[NSNumber numberWithFloat:_scaleValue] forKey:@"scaleValue"];
+	[dict setValue:[NSNumber numberWithFloat:_rotationValue] forKey:@"rotationValue"];
+	[dict setValue:[NSNumber numberWithFloat:_positionX] forKey:@"positionX"];
+	[dict setValue:[NSNumber numberWithFloat:_positionY] forKey:@"positionY"];
+	[dict setValue:_imagePath forKey:@"imagePath"];
+	self.elementData = dict;
+	return _elementData;
 }
 
 #pragma mark Memory management
 
 - (void)dealloc {
-    [imageView release];
-    [imagePath release];
-    [elementData release];
+    [_imageView release];
+    [_imagePath release];
     [super dealloc];
 }
 
