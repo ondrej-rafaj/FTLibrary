@@ -429,6 +429,9 @@
     [UIView setAnimationDidStopSelector:@selector(removeActiveElement)];
     [element setAlpha:0];
     [UIView commitAnimations];
+	if ([delegate respondsToSelector:@selector(deletedElement:withIndex:)]) {
+        [delegate deletedElement:element withIndex:0];
+    }
 }
 
 #pragma mark Memory management
