@@ -44,6 +44,7 @@
 	[self addSubview:deleteImageView];
 	
 	stickersContainerView = [[UIView alloc] init];
+	stickersContainerView.clipsToBounds = YES;
 	[self addSubview:stickersContainerView];
 	
 }
@@ -88,6 +89,11 @@
 	
 	[deleteImagePath release];
 	deleteImagePath = [[UIBezierPath bezierPathWithOvalInRect:deleteImageViewRect] retain];
+}
+
+- (UIImage *)imageWithSize:(CGSize)imageSize
+{
+	return backgroundImageView.image;
 }
 
 #pragma mark Using elements

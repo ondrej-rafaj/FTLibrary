@@ -61,4 +61,6 @@ typedef enum {
 
 - (void)layoutElements:(BOOL)animated;
 
+- (UIImage *)imageWithSize:(CGSize)imageSize;
+
 @end
