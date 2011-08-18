@@ -184,11 +184,9 @@
 		[v setCenter:translatedPoint];
 	}
 	
-	BOOL shouldDelete = NO;
 	CGPoint locationInSelf = [recognizer locationInView:self];
 	if (!deleteImageView.hidden && [deleteImagePath containsPoint:locationInSelf]) {
 		deleteImageView.highlighted = YES;
-		shouldDelete = YES;
 	}
 	else {
 		deleteImageView.highlighted = NO;		
@@ -199,7 +197,7 @@
 		v.positionY = [v center].y;
 		[self didEditElement:v];
 		
-		if (shouldDelete) {
+		if (deleteImageView.highlighted) {
 			[self deleteElement:v];
 		}
 	}
