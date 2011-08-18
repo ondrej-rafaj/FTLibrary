@@ -43,6 +43,9 @@ typedef enum {
     
     id <FTDragAndDropCanvasViewDelegate> delegate;
     
+	UIBezierPath *deleteImagePath;
+	
+	UIImageView *deleteImageView;
 }
 
 @property (nonatomic, retain) UIImageView *backgroundImageView;
@@ -57,7 +60,5 @@ typedef enum {
 - (void)addElementFromData:(NSDictionary *)data;
 
 - (void)layoutElements:(BOOL)animated;
-
-- (void)willAnimateToInterfaceOrientation:(UIInterfaceOrientation)newOrientation;
 
 @end

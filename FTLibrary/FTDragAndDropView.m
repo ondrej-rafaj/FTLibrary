@@ -22,7 +22,6 @@
 @synthesize imagePath;
 @synthesize elementData;
 @synthesize interfaceRotationScaling;
-
 @synthesize positionX;
 @synthesize positionY;
 
@@ -69,7 +68,6 @@
     if (self) {
         
         //[self setBackgroundColor:[UIColor randomColor]];
-        
         [self setElementData:data];
         [self setImagePath:[data objectForKey:@"imagePath"]];
         [self setLastScale:1.0f];
