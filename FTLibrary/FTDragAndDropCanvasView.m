@@ -95,7 +95,7 @@
 	[stickersContainerView setFrame:CGRectIntegral(r)];
 	
 	CGRect deleteImageViewRect = deleteImageView.frame;
-	deleteImageViewRect.origin = CGPointMake(50, ceilf((CGRectGetHeight(self.bounds) - deleteImageViewRect.size.height) / 2));
+	deleteImageViewRect.origin = CGPointMake(backgroundImageView.frame.origin.x + 35, ceilf((CGRectGetHeight(self.bounds) - deleteImageViewRect.size.height) / 2));
 	deleteImageView.frame = deleteImageViewRect;
 	
 	[deleteImagePath release];
@@ -186,7 +186,8 @@
 		deleteImageView.hidden = NO;
 	}
 	else if (tap.state == UIGestureRecognizerStateEnded) {
-		deleteImageView.hidden = YES;
+		if (!v.isDragged)
+			deleteImageView.hidden = YES;
 		deleteImageView.highlighted = NO;
 	}
 }
@@ -225,6 +226,7 @@
 	
 	CGPoint translatedPoint = [recognizer translationInView:stickersContainerView];
 	if([recognizer state] == UIGestureRecognizerStateBegan) {
+		v.dragged = YES;
 		v.positionX = [v center].x;
 		v.positionY = [v center].y;
 	}
@@ -240,8 +242,11 @@
 	}
 	
 	CGPoint locationInSelf = [recognizer locationInView:self];
+	BOOL shouldDelete = NO;
+	
 	if (!deleteImageView.hidden && [deleteImagePath containsPoint:locationInSelf]) {
 		deleteImageView.highlighted = YES;
+		shouldDelete = YES;
 	}
 	else {
 		deleteImageView.highlighted = NO;		
@@ -251,8 +256,11 @@
 		v.positionX = [v center].x;
 		v.positionY = [v center].y;
 		[self didEditElement:v];
-		
-		if (deleteImageView.highlighted) {
+		deleteImageView.hidden = YES;
+		deleteImageView.highlighted = NO;
+
+		v.dragged = NO;
+		if (shouldDelete) {
 			[self deleteElement:v];
 		}
 	}

@@ -28,8 +28,10 @@
     CGFloat realRotationValue;
     CGFloat realScaleValue;
 	
+	BOOL dragged;
 }
 
+@property (nonatomic, getter = isDragged) BOOL dragged;
 @property (nonatomic, retain) UIImageView *imageView;
 @property (nonatomic) CGFloat lastRotation;
 

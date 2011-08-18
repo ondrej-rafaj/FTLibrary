@@ -24,7 +24,7 @@
 @synthesize interfaceRotationScaling;
 @synthesize positionX;
 @synthesize positionY;
-
+@synthesize dragged;
 
 @synthesize realRotationValue;
 @synthesize realScaleValue;
@@ -46,6 +46,7 @@
         [self setRealScaleValue:1.0f];
         [self setRealRotationValue:0.0f];
 		[self setInterfaceRotationScaling:1];
+		dragged = NO;
 		
         // Creating image view
         imageView = [[UIImageView alloc] initWithImage:image];
@@ -74,7 +75,8 @@
 		[self setRealScaleValue:[[data objectForKey:@"scale"] floatValue]];
 		[self setRealRotationValue:[[data objectForKey:@"rotation"] floatValue]];
 		[self setInterfaceRotationScaling:1];
-
+		dragged = NO;
+		
         imageView = [[UIImageView alloc] initWithImage:image];
         r.origin.y += (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace);
         r.size.height -= (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace);
