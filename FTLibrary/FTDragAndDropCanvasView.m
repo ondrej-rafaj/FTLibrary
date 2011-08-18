@@ -7,6 +7,7 @@
 //
 
 #import "FTDragAndDropCanvasView.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define degreesToRadians(__ANGLE__) (M_PI * (__ANGLE__) / 180.0)
 #define radiansToDegrees(__ANGLE__) (180.0 * (__ANGLE__) / M_PI)
@@ -44,6 +45,7 @@
 	[self addSubview:deleteImageView];
 	
 	stickersContainerView = [[UIView alloc] init];
+	stickersContainerView.clipsToBounds = YES;
 	[self addSubview:stickersContainerView];
 	
 }
@@ -88,6 +90,47 @@
 	
 	[deleteImagePath release];
 	deleteImagePath = [[UIBezierPath bezierPathWithOvalInRect:deleteImageViewRect] retain];
+}
+
+- (UIImage *)imageWithSize:(CGSize)desiredSize
+{
+	CGSize imageSize = backgroundImageView.image.size;
+
+	CGFloat horizontalRatio = desiredSize.width / imageSize.width;
+    CGFloat verticalRatio = desiredSize.height /imageSize.height;
+    CGFloat ratio = MIN(horizontalRatio, verticalRatio);
+	
+    CGSize newImageSize = CGSizeMake(imageSize.width * ratio, imageSize.height * ratio);
+	
+	UIGraphicsBeginImageContextWithOptions(newImageSize, YES, 0.0);
+	CGContextRef context = UIGraphicsGetCurrentContext();	
+	
+	[backgroundImageView.image drawInRect:CGRectMake(0, 0, newImageSize.width, newImageSize.height)];
+	
+	CGFloat newScaling = newImageSize.width / stickersContainerView.bounds.size.width;
+
+	for (FTDragAndDropView *element in elements) {
+
+		NSLog(@"%@",element);
+		CGPoint newCenter = CGPointMake(ceilf(element.center.x * newScaling), ceilf(element.center.y * newScaling));
+
+		CGContextSaveGState(context);
+		CGContextTranslateCTM(context, newCenter.x, newCenter.y);
+		CGFloat scaleValue = element.realScaleValue;
+		CGContextScaleCTM(context, scaleValue, scaleValue);
+		CGFloat rotationValue = element.realRotationValue;
+		CGContextRotateCTM(context, degreesToRadians(rotationValue));
+
+		UIImage *imageToDraw = element.imageView.image;
+		[imageToDraw drawAtPoint:CGPointMake(-ceilf(imageToDraw.size.width / 2), -ceilf(imageToDraw.size.height / 2))];
+		
+		CGContextRestoreGState(context);
+	}
+	
+	UIImage *returnedImage = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	
+	return returnedImage;
 }
 
 #pragma mark Using elements

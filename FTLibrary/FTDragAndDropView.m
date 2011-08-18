@@ -72,6 +72,8 @@
         [self setImagePath:[data objectForKey:@"imagePath"]];
         [self setLastScale:1.0f];
         [self setLastRotation:0.0f];
+		[self setRealScaleValue:[[data objectForKey:@"scale"] floatValue]];
+		[self setRealRotationValue:[[data objectForKey:@"rotation"] floatValue]];
 		[self setInterfaceRotationScaling:1];
 		
         imageView = [[UIImageView alloc] initWithImage:image];
