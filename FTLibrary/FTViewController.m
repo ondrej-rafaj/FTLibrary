@@ -191,6 +191,13 @@
 #pragma mark Custom setting background
 
 - (void)setBackgroundWithImageName:(NSString *)imageName {
+	if (imageName == nil) {
+		if (backgroundView) {
+			[backgroundView removeFromSuperview];
+			backgroundView = nil;
+		}
+	}
+	
     UIImage *img = [UIImage imageNamed:imageName];
     if (!img) return;
     

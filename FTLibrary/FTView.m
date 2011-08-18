@@ -17,6 +17,7 @@
 
 - (void)enableBackgroundImage:(UIImage *)image {
 	backgroundImage = [[UIImageView alloc] initWithFrame:self.bounds];
+	[backgroundImage setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	[backgroundImage setImage:image];
 	[self addSubview:backgroundImage];
 	[self sendSubviewToBack:backgroundImage];
