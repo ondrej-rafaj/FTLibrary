@@ -7,6 +7,7 @@
 //
 
 #import "FTDragAndDropCanvasView.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define degreesToRadians(__ANGLE__) (M_PI * (__ANGLE__) / 180.0)
 #define radiansToDegrees(__ANGLE__) (180.0 * (__ANGLE__) / M_PI)
@@ -93,7 +94,25 @@
 
 - (UIImage *)imageWithSize:(CGSize)imageSize
 {
-	return backgroundImageView.image;
+	CGFloat horizontalRatio = self.bounds.size.width / imageSize.width;
+    CGFloat verticalRatio = self.bounds.size.height / imageSize.height;
+    CGFloat ratio = MIN(horizontalRatio, verticalRatio);
+	
+    CGSize newImageSize = CGSizeMake(imageSize.width * ratio, imageSize.height * ratio);
+	
+	UIGraphicsBeginImageContextWithOptions(newImageSize, YES, 0.0);
+	CGContextRef context = UIGraphicsGetCurrentContext();	
+	
+	[backgroundImageView.image drawInRect:CGRectMake(0, 0, newImageSize.width, newImageSize.height)];
+	
+	for (FTDragAndDropView *element in elements) {
+		[element.layer renderInContext:context];
+	}
+	
+	UIImage *returnedImage = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	
+	return returnedImage;
 }
 
 #pragma mark Using elements
