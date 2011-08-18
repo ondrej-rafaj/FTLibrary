@@ -24,6 +24,7 @@
 @synthesize url;
 @synthesize data;
 
+
 - (void)dealloc {
     
     [key release], key = nil;
@@ -87,11 +88,12 @@ static NSString *localeURL;
     //operation
     BOOL isDefault = NO;
     BOOL hasInternet = [FTSystem isInternetAvailable];
-    NSArray *allLangs;
+    
 
     NSError *error = nil;
     
     if (hasInternet) {
+        NSArray *allLangs;
         NSMutableDictionary *backUpData = [NSMutableDictionary dictionary];
         NSDictionary *dataDictionary = [FTDataJson jsonDataFromUrl:remoteURL];
         allLangs = [dataDictionary objectForKey:@"data"];
@@ -99,7 +101,6 @@ static NSString *localeURL;
         for (NSDictionary *dict in allLangs) {
             NSString *key = [[dict allKeys] objectAtIndex:0];
             NSString *url = [[allLangs objectAtIndex:0] objectForKey:key];
-            if ([translations objectForKey:key] &&[[[translations objectForKey:key] objectForKey:@"url"] isEqualToString:url]) continue;
             NSDictionary *thisLangData = [FTDataJson jsonDataFromUrl:url];
             NSDictionary *data = [thisLangData objectForKey:@"data"];
             if (!data) continue;
@@ -112,7 +113,7 @@ static NSString *localeURL;
             [backUpData setObject:data forKey:key];
             NSLog(@"%d translations found for Language %@", [data count], key);
             
-            if (!isDefault && [key isEqualToString:@"en"]) isDefault = YES;
+            if (!isDefault && defaultLanguage && [key isEqualToString:defaultLanguage]) isDefault = YES;
         }
         
         //write to file for locale!
@@ -123,35 +124,31 @@ static NSString *localeURL;
         [dataString writeToFile:localeURL atomically:YES encoding:NSUTF8StringEncoding error:&error];
         //[dataString writeToURL:[NSURL URLWithString:localeURL] atomically:YES encoding:NSUTF8StringEncoding error:&error];
         if (error) [FTError handleError:error];
+        
+        
     }
     else {
+        NSDictionary *allLangs;
         NSString *dataString = [NSString stringWithContentsOfFile:localeURL encoding:NSUTF8StringEncoding error:&error];
         allLangs = [FTDataJson jsonDataFromString:dataString];
         
-        for (NSDictionary *dict in allLangs) {
-            NSString *key = [[dict allKeys] objectAtIndex:0];
-            NSString *url = [[allLangs objectAtIndex:0] objectForKey:key];
-            if ([translations objectForKey:key] &&[[[translations objectForKey:key] objectForKey:@"url"] isEqualToString:url]) continue;
-            NSDictionary *thisLangData = [FTDataJson jsonDataFromUrl:url];
-            NSDictionary *data = [thisLangData objectForKey:@"data"];
-            if (!data) continue;
+        NSArray *allLangStrings = [allLangs allKeys];
+        
+        for (NSString *key in allLangStrings) {
+            NSDictionary *data = [allLangs objectForKey:key];
             
             FTLanguage *language = [[FTLanguage alloc] init];
             language.key = key;
-            language.url = url;
+            language.url = nil;
             language.data = data;
             [translations setObject:language forKey:key];
-            NSLog(@"%d translations found for Language %@", [data count], key);
+            NSLog(@"%d translations found for Language %@ (backup)", [data count], key);
             
-            if (!isDefault && [key isEqualToString:@"en"]) isDefault = YES;
+            if (!isDefault && defaultLanguage && [key isEqualToString:defaultLanguage]) isDefault = YES;
         }
         
     }
 
-
-    
-
-    
     if (!isDefault) {
         [FTError handleErrorWithString:@"Default language EN not found on wellBacked app"];
     }
@@ -171,7 +168,7 @@ static NSString *localeURL;
         [FTError handleErrorWithString:[NSString stringWithFormat:@"No translation for language :%@ at key: %@", defaultLanguage, key]];
         [self reportMissingTranslation:key andComment:comment];
     }
-    return ret;
+    return (ret)? ret : [NSString stringWithFormat:@"[%@]", key];
 }
 
 + (NSString *)get:(NSString *)key {
