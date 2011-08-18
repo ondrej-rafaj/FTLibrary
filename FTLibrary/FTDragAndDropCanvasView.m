@@ -8,7 +8,6 @@
 
 #import "FTDragAndDropCanvasView.h"
 
-
 #define degreesToRadians(__ANGLE__) (M_PI * (__ANGLE__) / 180.0)
 #define radiansToDegrees(__ANGLE__) (180.0 * (__ANGLE__) / M_PI)
 
@@ -20,6 +19,7 @@
 @interface FTDragAndDropCanvasView (Private)
 
 - (void)activateElement:(FTDragAndDropView *)element;
+- (void)deleteElement:(FTDragAndDropView *)element;
 
 @end
 
@@ -37,15 +37,21 @@
     backgroundImageView = [[UIImageView alloc] init];	
     [self addSubview:backgroundImageView];
 	
+	UIImage *deleteImage = [UIImage imageNamed:@"DD_canvas-delete.png"];
+	UIImage *highlightedDeleteImage = [UIImage imageNamed:@"DD_canvas-delet-highlighted.png"];
+	deleteImageView = [[UIImageView alloc] initWithImage:deleteImage highlightedImage:highlightedDeleteImage];
+	deleteImageView.hidden = YES;
+	[self addSubview:deleteImageView];
+	
 	stickersContainerView = [[UIView alloc] init];
 	[self addSubview:stickersContainerView];
-
+	
 }
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setBackgroundColor:[UIColor blackColor]];
+        [self setBackgroundColor:[UIColor clearColor]];
         [self doInit];
     }
     return self;
@@ -75,6 +81,13 @@
 	}
     [backgroundImageView setFrame:CGRectIntegral(r)];
 	[stickersContainerView setFrame:CGRectIntegral(r)];
+	
+	CGRect deleteImageViewRect = deleteImageView.frame;
+	deleteImageViewRect.origin = CGPointMake(50, ceilf((CGRectGetHeight(self.bounds) - deleteImageViewRect.size.height) / 2));
+	deleteImageView.frame = deleteImageViewRect;
+	
+	[deleteImagePath release];
+	deleteImagePath = [[UIBezierPath bezierPathWithOvalInRect:deleteImageViewRect] retain];
 }
 
 #pragma mark Using elements
@@ -111,6 +124,18 @@
     else [self disableActiveElement];
 }
 
+- (void)handleLongTouch:(UILongPressGestureRecognizer *)tap {
+
+	FTDragAndDropView *v = (FTDragAndDropView *)tap.view;
+	if (tap.state == UIGestureRecognizerStateBegan) {
+		deleteImageView.hidden = NO;
+	}
+	else if (tap.state == UIGestureRecognizerStateEnded) {
+		deleteImageView.hidden = YES;
+		deleteImageView.highlighted = NO;
+	}
+}
+
 - (void)didTapElement:(UITapGestureRecognizer *)recognizer {
     [self handleTap:recognizer];
 }
@@ -139,9 +164,11 @@
 
 - (void)moveView:(UIPanGestureRecognizer *)recognizer {
     FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
-    //[self activateElement:v];
+    [self activateElement:v];
 	//[self bringSubviewToFront:v];
-	CGPoint translatedPoint = [recognizer translationInView:self];
+	
+	
+	CGPoint translatedPoint = [recognizer translationInView:stickersContainerView];
 	if([recognizer state] == UIGestureRecognizerStateBegan) {
 		v.positionX = [v center].x;
 		v.positionY = [v center].y;
@@ -155,10 +182,23 @@
 
 	if (!CGRectIsNull(CGRectIntersection(minimumInsideRectangle, stickersContainerView.bounds))) {
 		[v setCenter:translatedPoint];
-		if([recognizer state] == UIGestureRecognizerStateEnded) {
-			v.positionX = [v center].x;
-			v.positionY = [v center].y;
-			[self didEditElement:v];
+	}
+	
+	CGPoint locationInSelf = [recognizer locationInView:self];
+	if (!deleteImageView.hidden && [deleteImagePath containsPoint:locationInSelf]) {
+		deleteImageView.highlighted = YES;
+	}
+	else {
+		deleteImageView.highlighted = NO;		
+	}
+	
+	if([recognizer state] == UIGestureRecognizerStateEnded) {
+		v.positionX = [v center].x;
+		v.positionY = [v center].y;
+		[self didEditElement:v];
+		
+		if (deleteImageView.highlighted) {
+			[self deleteElement:v];
 		}
 	}
 }
@@ -234,7 +274,13 @@
     [pan setMaximumNumberOfTouches:1];
     [element addGestureRecognizer:pan];
     [pan release];
-    
+	
+	UILongPressGestureRecognizer *longTouch = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongTouch:)];
+	[longTouch setDelegate:self];
+	longTouch.minimumPressDuration = 1;
+	[element addGestureRecognizer:longTouch];
+	[longTouch release];
+	
     UIPinchGestureRecognizer *pin = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(resizeView:)];
     [rot setDelegate:self];
     [element addGestureRecognizer:pin];
@@ -328,6 +374,8 @@
     [elements release];
     [backgroundImageView release];
 	[stickersContainerView release];
+	[deleteImagePath release];
+	[deleteImageView release];
     [super dealloc];
 }
 

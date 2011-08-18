@@ -27,7 +27,6 @@
     // Real return values
     CGFloat realRotationValue;
     CGFloat realScaleValue;
-    
 }
 
 @property (nonatomic, retain) UIImageView *imageView;
