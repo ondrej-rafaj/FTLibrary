@@ -10,9 +10,6 @@
 #import "FTLanguageManager.h"
 
 
-#define FTLocalizedString(key, comment)			[FTLanguageManager get:(key) comment:(comment)]
-#define FTLangGet(key)							[FTLanguageManager get:(key)]
-
 
 @interface FTLang : FTLanguageManager
 

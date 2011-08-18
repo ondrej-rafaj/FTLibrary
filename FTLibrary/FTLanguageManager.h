@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#define FTLocalizedString(key, comment)			[FTLanguageManager get:(key) comment:(comment)]
+#define FTLangGet(key)							[FTLanguageManager get:(key)] 
+
 @interface FTLanguage : NSObject {
     NSString *key;
     NSString *url;

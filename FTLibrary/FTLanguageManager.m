@@ -67,7 +67,11 @@ static NSString *localeURL;
     [self setLocaleURL:locale];
     [self setRemoteURL:remote];
     [self setDefaultLanguage:language];
-    [NSThread detachNewThreadSelector:@selector(importLanguages) toTarget:self withObject:nil];
+    [self importLanguages];
+    
+    // TODO: import local lang in main thread, then search for internet in background
+    // Not using background thread because app will request empy data otherwise
+    // [NSThread detachNewThreadSelector:@selector(importLanguages) toTarget:self withObject:nil];
 }
 
 #pragma mark Reporting
@@ -83,7 +87,7 @@ static NSString *localeURL;
         translations = [[NSMutableDictionary alloc] init];
     }
     
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     //operation
     BOOL isDefault = NO;
@@ -153,13 +157,14 @@ static NSString *localeURL;
         [FTError handleErrorWithString:@"Default language EN not found on wellBacked app"];
     }
     
-    [pool drain];
+    //[pool drain];
     
 
 }
 
 
 + (NSString *)get:(NSString *)key comment:(NSString *)comment {
+    NSLog(@"request for : %@", key);
 	if (!translations) return key;
     if (!defaultLanguage) defaultLanguage = @"en";
     FTLanguage *language = [translations objectForKey:defaultLanguage]; 
