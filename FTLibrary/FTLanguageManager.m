@@ -164,8 +164,7 @@ static NSString *localeURL;
 
 
 + (NSString *)get:(NSString *)key comment:(NSString *)comment {
-    NSLog(@"request for : %@", key);
-	if (!translations) return key;
+	if (!translations) return [NSString stringWithFormat:@"[%@]", key];
     if (!defaultLanguage) defaultLanguage = @"en";
     FTLanguage *language = [translations objectForKey:defaultLanguage]; 
     NSString *ret = [language.data objectForKey:key];
@@ -173,6 +172,7 @@ static NSString *localeURL;
         [FTError handleErrorWithString:[NSString stringWithFormat:@"No translation for language :%@ at key: %@", defaultLanguage, key]];
         [self reportMissingTranslation:key andComment:comment];
     }
+    if (!ret) NSLog(@"Missing Translation for %@", key);
     return (ret)? ret : [NSString stringWithFormat:@"[%@]", key];
 }
 
