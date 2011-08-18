@@ -92,10 +92,12 @@
 	deleteImagePath = [[UIBezierPath bezierPathWithOvalInRect:deleteImageViewRect] retain];
 }
 
-- (UIImage *)imageWithSize:(CGSize)imageSize
+- (UIImage *)imageWithSize:(CGSize)desiredSize
 {
-	CGFloat horizontalRatio = self.bounds.size.width / imageSize.width;
-    CGFloat verticalRatio = self.bounds.size.height / imageSize.height;
+	CGSize imageSize = backgroundImageView.image.size;
+
+	CGFloat horizontalRatio = desiredSize.width / imageSize.width;
+    CGFloat verticalRatio = desiredSize.height /imageSize.height;
     CGFloat ratio = MIN(horizontalRatio, verticalRatio);
 	
     CGSize newImageSize = CGSizeMake(imageSize.width * ratio, imageSize.height * ratio);
@@ -105,8 +107,24 @@
 	
 	[backgroundImageView.image drawInRect:CGRectMake(0, 0, newImageSize.width, newImageSize.height)];
 	
+	CGFloat newScaling = newImageSize.width / stickersContainerView.bounds.size.width;
+
 	for (FTDragAndDropView *element in elements) {
-		[element.layer renderInContext:context];
+
+		NSLog(@"%@",element);
+		CGPoint newCenter = CGPointMake(ceilf(element.center.x * newScaling), ceilf(element.center.y * newScaling));
+
+		CGContextSaveGState(context);
+		CGContextTranslateCTM(context, newCenter.x, newCenter.y);
+		CGFloat scaleValue = element.realScaleValue;
+		CGContextScaleCTM(context, scaleValue, scaleValue);
+		CGFloat rotationValue = element.realRotationValue;
+		CGContextRotateCTM(context, degreesToRadians(rotationValue));
+
+		UIImage *imageToDraw = element.imageView.image;
+		[imageToDraw drawAtPoint:CGPointMake(-ceilf(imageToDraw.size.width / 2), -ceilf(imageToDraw.size.height / 2))];
+		
+		CGContextRestoreGState(context);
 	}
 	
 	UIImage *returnedImage = UIGraphicsGetImageFromCurrentImageContext();
