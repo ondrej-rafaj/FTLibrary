@@ -35,5 +35,7 @@
 + (NSString *)get:(NSString *)key comment:(NSString *)comment;
 + (NSString *)get:(NSString *)key;
 
++ (void)submitMissingTranslationReport;
+
 
 @end

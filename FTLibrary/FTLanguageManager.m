@@ -14,6 +14,7 @@
 #import "Reachability.h"
 #import "FTSystem.h"
 #import "SBJsonWriter.h"
+#import "ASIFormDataRequest.h"
 
 
 #pragma mark FTLanguage
@@ -43,6 +44,7 @@ static NSMutableArray *missingTranslations;
 static NSString *defaultLanguage;
 static NSString *remoteURL;
 static NSString *localeURL;
+static NSString *appID;
 
 @implementation FTLanguageManager
 
@@ -76,9 +78,34 @@ static NSString *localeURL;
 
 #pragma mark Reporting
 
++ (void)submitMissingTranslationReport {
+    if (missingTranslations && [missingTranslations count] > 0) {
+        //prepare report
+        NSMutableString *report = [NSMutableString string];
+        if (!appID) appID = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+        [report appendFormat:@"WellBakedApp report:\nApp ID : %@\nDate: %@\n", appID, [[NSDate date] description]];
+        [report appendFormat:@"list of missing translations:\n"];
+        for (NSString *key in missingTranslations) {
+            [report appendFormat:@"- %@\n", key];
+        }
+        
+        //send report
+        NSURL *url = [NSURL URLWithString:@"http://new.fuerteint.com/_files/well_baked_reports/wellbakedreport.php"];
+        ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:url];
+        
+        [request setPostValue:appID forKey:@"app_id"];
+        [request setPostValue:report forKey:@"report"];
+        [request startSynchronous];
+
+        NSLog(@"response: %@ with error: %@",[request responseString], [[request error] description]);        
+    }
+    
+}
+
 + (void)reportMissingTranslation:(NSString *)key andComment:(NSString *)comment {
 	if (!missingTranslations) missingTranslations = [[NSMutableArray alloc] init];
-	[missingTranslations addObject:key];
+    if (![missingTranslations containsObject:key]) [missingTranslations addObject:key];
+    NSLog(@"Missing Translation for %@", key);
 }
 
 + (void)importLanguages {
@@ -168,11 +195,10 @@ static NSString *localeURL;
     if (!defaultLanguage) defaultLanguage = @"en";
     FTLanguage *language = [translations objectForKey:defaultLanguage]; 
     NSString *ret = [language.data objectForKey:key];
-    if (!ret && [FTProject debugging] && NO) {
-        [FTError handleErrorWithString:[NSString stringWithFormat:@"No translation for language :%@ at key: %@", defaultLanguage, key]];
+    if (!ret) {
+        if ([FTProject debugging]) [FTError handleErrorWithString:[NSString stringWithFormat:@"No translation for language :%@ at key: %@", defaultLanguage, key]];
         [self reportMissingTranslation:key andComment:comment];
     }
-    if (!ret) NSLog(@"Missing Translation for %@", key);
     return (ret)? ret : [NSString stringWithFormat:@"[%@]", key];
 }
 
