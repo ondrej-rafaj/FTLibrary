@@ -12,7 +12,7 @@
 #define degreesToRadians(__ANGLE__) (M_PI * (__ANGLE__) / 180.0)
 #define radiansToDegrees(__ANGLE__) (180.0 * (__ANGLE__) / M_PI)
 
-#define kFTDragAndDropCanvasViewMinScale            0.7f
+#define kFTDragAndDropCanvasViewMinScale            0.55f
 #define kFTDragAndDropCanvasViewMaxScale            1.0f
 #define kFTDragAndDropCanvasViewSpeed               0.75f
 
@@ -34,17 +34,47 @@
 
 - (void)doInit {
     elements = [[NSMutableArray alloc] init];
-    backgroundImageView = [[UIImageView alloc] init];
+    backgroundImageView = [[UIImageView alloc] init];	
     [self addSubview:backgroundImageView];
+	
+	stickersContainerView = [[UIView alloc] init];
+	[self addSubview:stickersContainerView];
+
 }
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setBackgroundColor:[UIColor lightGrayColor]];
+        [self setBackgroundColor:[UIColor blackColor]];
         [self doInit];
     }
     return self;
+}
+
+- (void)layoutSubviews
+{
+	CGSize imageSize = backgroundImageView.image.size;
+	CGFloat horizontalRatio = self.bounds.size.width / imageSize.width;
+    CGFloat verticalRatio = self.bounds.size.height / imageSize.height;
+    CGFloat ratio = MIN(horizontalRatio, verticalRatio);
+	
+    CGSize newImageSize = CGSizeMake(imageSize.width * ratio, imageSize.height * ratio);
+    CGRect r = CGRectMake((self.bounds.size.width - newImageSize.width)/2, (self.bounds.size.height - newImageSize.height)/2, newImageSize.width, newImageSize.height);
+	if (!CGRectIsEmpty(backgroundImageView.frame)) {
+		CGRect previousFrame = backgroundImageView.frame;
+		CGFloat scalingDueToRotation = r.size.width / previousFrame.size.width;
+		for (FTDragAndDropView *element in elements) {
+						
+			element.transform = CGAffineTransformScale(element.transform, scalingDueToRotation, scalingDueToRotation);
+			
+			element.interfaceRotationScaling = scalingDueToRotation;
+			
+			CGPoint newCenter = CGPointMake(element.center.x * scalingDueToRotation, element.center.y * scalingDueToRotation);
+			element.center = newCenter;
+		}
+	}
+    [backgroundImageView setFrame:CGRectIntegral(r)];
+	[stickersContainerView setFrame:CGRectIntegral(r)];
 }
 
 #pragma mark Using elements
@@ -88,7 +118,7 @@
 - (void)didDoubleTapElement:(UITapGestureRecognizer *)recognizer {
     FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
     [self handleTap:recognizer];
-    [self bringSubviewToFront:v];
+    [stickersContainerView bringSubviewToFront:v];
     [self didEditElement:v];
 }
 
@@ -117,11 +147,19 @@
 		v.positionY = [v center].y;
 	}
 	translatedPoint = CGPointMake(v.positionX + translatedPoint.x, v.positionY + translatedPoint.y);
-	[v setCenter:translatedPoint];
-    if([recognizer state] == UIGestureRecognizerStateEnded) {
-		v.positionX = [v center].x;
-		v.positionY = [v center].y;
-        [self didEditElement:v];
+	
+	CGRect newElementFrame;
+	newElementFrame.size = v.bounds.size;
+	newElementFrame.origin = CGPointMake(translatedPoint.x - newElementFrame.size.width / 2, translatedPoint.y - newElementFrame.size.height / 2);
+	CGRect minimumInsideRectangle = CGRectInset(newElementFrame, 0.2 * newElementFrame.size.width, 0.2 * newElementFrame.size.height);
+
+	if (!CGRectIsNull(CGRectIntersection(minimumInsideRectangle, stickersContainerView.bounds))) {
+		[v setCenter:translatedPoint];
+		if([recognizer state] == UIGestureRecognizerStateEnded) {
+			v.positionX = [v center].x;
+			v.positionY = [v center].y;
+			[self didEditElement:v];
+		}
 	}
 }
 
@@ -136,14 +174,21 @@
         CGFloat newScale = 1 -  (v.lastScale - [recognizer scale]) * (kFTDragAndDropCanvasViewSpeed);
         newScale = MIN(newScale, kFTDragAndDropCanvasViewMaxScale / currentScale);   
         newScale = MAX(newScale, kFTDragAndDropCanvasViewMinScale / currentScale);
+		CGAffineTransform savedTransform = v.transform;
+		CGFloat actualScale = [[v.layer valueForKeyPath:@"transform.scale.x"] floatValue];
+
         v.transform = CGAffineTransformScale([v transform], newScale, newScale);
+		if ([[v.layer valueForKeyPath:@"transform.scale.x"] floatValue] < kFTDragAndDropCanvasViewMinScale)
+		{
+			CGFloat scaleToMinimum = kFTDragAndDropCanvasViewMinScale / actualScale;
+			v.transform = CGAffineTransformScale(savedTransform, scaleToMinimum, scaleToMinimum);
+		}
+
         v.lastScale = [recognizer scale];
-        NSLog(@"Scale value: %f - %f", currentScale, newScale);
     }
     if([recognizer state] == UIGestureRecognizerStateEnded) {
-        currentScale = [[v.layer valueForKeyPath:@"transform.scale"] floatValue];
+        currentScale = [[v.layer valueForKeyPath:@"transform.scale.x"] floatValue];
         v.realScaleValue = currentScale;
-        NSLog(@"Real scale value: %f", v.realScaleValue);
  		[self didEditElement:v];
 	}
 }
@@ -164,6 +209,7 @@
 }
 
 - (void)configureElement:(FTDragAndDropView *)element {
+
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didDoubleTapElement:)];
     [tap2 setNumberOfTapsRequired:2];
     [tap2 setNumberOfTouchesRequired:1];
@@ -195,8 +241,8 @@
     [pin release];
     
     [elements addObject:element];
-    [element setCenter:self.center];
-    [self addSubview:element];
+    [element setCenter:CGPointMake(stickersContainerView.frame.size.width / 2, stickersContainerView.frame.size.height / 2)];
+    [stickersContainerView addSubview:element];
     [self activateElement:element];
 }
 
@@ -216,9 +262,8 @@
 }
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage {
-    CGRect r = CGRectMake(0, 0, backgroundImage.size.width, backgroundImage.size.height);
-    [backgroundImageView setFrame:r];
-    [backgroundImageView setImage:backgroundImage];
+	[backgroundImageView setImage:backgroundImage];
+	[self layoutSubviews];
 }
 
 - (void)removeActiveElement {
@@ -246,12 +291,12 @@
         // Scale
         CGFloat newScale = [[d objectForKey:@"scale"] floatValue];
         if (newScale < kFTDragAndDropCanvasViewMinScale) newScale = kFTDragAndDropCanvasViewMinScale;
-        v.transform = CGAffineTransformScale(v.transform, newScale, newScale);
+		CGAffineTransform scaleTransformation = CGAffineTransformMakeScale(newScale, newScale);
 
         // Rotation
         CGFloat rv = [[d objectForKey:@"rotation"] floatValue];
-        CGAffineTransform newTransform = CGAffineTransformRotate(v.transform, degreesToRadians(rv));
-        [v setTransform:newTransform];
+        CGAffineTransform rotationTransformation = CGAffineTransformMakeRotation(degreesToRadians(rv));
+        [v setTransform:CGAffineTransformConcat(scaleTransformation, rotationTransformation)];
         [v setRealRotationValue:rv];
 
     }
@@ -282,6 +327,7 @@
 - (void)dealloc {
     [elements release];
     [backgroundImageView release];
+	[stickersContainerView release];
     [super dealloc];
 }
 

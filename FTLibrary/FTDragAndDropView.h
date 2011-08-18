@@ -15,7 +15,8 @@
     
     CGFloat lastRotation;
     CGFloat lastScale;
-    
+    CGFloat interfaceRotationScaling;
+	
     NSString *imagePath;
     
     NSDictionary *elementData;
@@ -33,6 +34,7 @@
 
 @property (nonatomic) CGFloat lastRotation;
 @property (nonatomic) CGFloat lastScale;
+@property (nonatomic) CGFloat interfaceRotationScaling;
 
 @property (nonatomic, retain) NSString *imagePath;
 
@@ -52,6 +54,5 @@
 - (void)setPosition:(CGPoint)position;
 
 - (NSDictionary *)getInfo;
-
 
 @end

@@ -102,9 +102,9 @@ static float systemVersion = -1;
 	return systemVersion;
 }
 
-+ (BOOL) isInternetAvailable
++ (BOOL)isInternetAvailable
 {
-    Reachability *reachability=[Reachability reachabilityForInternetConnection];
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
     BOOL isConnected = ([reachability isReachable]);
     return isConnected;
 }
