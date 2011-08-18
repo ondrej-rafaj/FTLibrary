@@ -107,7 +107,7 @@ static NSString *localeURL;
             NSString *url = [[allLangs objectAtIndex:0] objectForKey:key];
             NSDictionary *thisLangData = [FTDataJson jsonDataFromUrl:url];
             NSDictionary *data = [thisLangData objectForKey:@"data"];
-            if (!data) continue;
+            if (!data || [data count] == 0) continue;
             
             FTLanguage *language = [[FTLanguage alloc] init];
             language.key = key;
