@@ -19,6 +19,7 @@
 - (void)setHeight:(double)height;
 
 - (CGFloat)bottomPosition;
+- (CGFloat)rightPosition;
 
 - (CGSize)size;
 - (void)setSize:(CGSize)size;

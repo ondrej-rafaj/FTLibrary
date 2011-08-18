@@ -43,6 +43,10 @@
 	return ([self height] + [self yPosition]);
 }
 
+- (CGFloat)rightPosition {
+	return ([self width] + [self xPosition]);
+}
+
 - (void)setSize:(CGSize)size {
 	CGRect frame = [self frame];
 	frame.size.width = round(size.width);
