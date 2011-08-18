@@ -46,6 +46,8 @@ typedef enum {
 	UIBezierPath *deleteImagePath;
 	
 	UIImageView *deleteImageView;
+	
+	CGFloat interfaceRotationFactor;
 }
 
 @property (nonatomic, retain) UIImageView *backgroundImageView;

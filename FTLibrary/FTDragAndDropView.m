@@ -26,7 +26,6 @@
 @synthesize positionY;
 
 
-
 @synthesize realRotationValue;
 @synthesize realScaleValue;
 
@@ -75,7 +74,7 @@
 		[self setRealScaleValue:[[data objectForKey:@"scale"] floatValue]];
 		[self setRealRotationValue:[[data objectForKey:@"rotation"] floatValue]];
 		[self setInterfaceRotationScaling:1];
-		
+
         imageView = [[UIImageView alloc] initWithImage:image];
         r.origin.y += (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace);
         r.size.height -= (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace);

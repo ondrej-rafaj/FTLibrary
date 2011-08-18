@@ -68,14 +68,24 @@
 	
     CGSize newImageSize = CGSizeMake(imageSize.width * ratio, imageSize.height * ratio);
     CGRect r = CGRectMake((self.bounds.size.width - newImageSize.width)/2, (self.bounds.size.height - newImageSize.height)/2, newImageSize.width, newImageSize.height);
+	
+	if (self.bounds.size.height / self.bounds.size.width < 1) {
+		//landscape
+		interfaceRotationFactor = 1;
+	}
+	else {
+		//portrait
+		interfaceRotationFactor = 3/4;
+	}
+	
 	if (!CGRectIsEmpty(backgroundImageView.frame)) {
 		CGRect previousFrame = backgroundImageView.frame;
 		CGFloat scalingDueToRotation = r.size.width / previousFrame.size.width;
+		
 		for (FTDragAndDropView *element in elements) {
 						
 			element.transform = CGAffineTransformScale(element.transform, scalingDueToRotation, scalingDueToRotation);
-			
-			element.interfaceRotationScaling = scalingDueToRotation;
+			element.interfaceRotationScaling = interfaceRotationFactor;
 			
 			CGPoint newCenter = CGPointMake(element.center.x * scalingDueToRotation, element.center.y * scalingDueToRotation);
 			element.center = newCenter;
@@ -107,11 +117,13 @@
 	
 	[backgroundImageView.image drawInRect:CGRectMake(0, 0, newImageSize.width, newImageSize.height)];
 	
-	CGFloat newScaling = newImageSize.width / stickersContainerView.bounds.size.width;
+	//the reference size is in landscape
+	CGFloat horizontalRatio2 = newImageSize.width / 1024;
+    CGFloat verticalRatio2 = newImageSize.height / 768;
+    CGFloat newScaling = MIN(horizontalRatio2, verticalRatio2);
 
 	for (FTDragAndDropView *element in elements) {
 
-		NSLog(@"%@",element);
 		CGPoint newCenter = CGPointMake(ceilf(element.center.x * newScaling), ceilf(element.center.y * newScaling));
 
 		CGContextSaveGState(context);

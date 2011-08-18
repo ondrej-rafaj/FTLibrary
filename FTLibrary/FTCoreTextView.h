@@ -13,7 +13,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FTCoreTextStyle.h"
-
+#import <CoreText/CoreText.h>
 
 @interface FTCoreTextView : UIView {
     NSString *_text;
@@ -23,7 +23,7 @@
     FTCoreTextStyle *_defaultStyle;
     NSMutableString *_processedString;
     CGPathRef _path;
-    
+    CTFramesetterRef _framesetter;
 }
 
 @property (nonatomic, retain) NSString *text;
@@ -37,5 +37,7 @@
 - (void)addStyle:(FTCoreTextStyle *)style;
 + (NSString *)stripTagsforString:(NSString *)string;
 + (NSArray *)pagesFromText:(NSString *)string;
+
+- (CGSize)suggestedSizeConstrainedToSize:(CGSize)size;
 
 @end
