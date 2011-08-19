@@ -11,12 +11,16 @@
 
 @implementation FTSounds
 
+@synthesize delegate;
+@synthesize isPlaying;
+
 #pragma mark Initialization
 
 - (id)init {
 	self = [super init];
 	if (self) {
 		playerArray = [[NSMutableArray alloc] init];
+        self.isPlaying = NO;
 	}
 	return self;
 }
@@ -31,6 +35,7 @@
         [ap release];
     }
     [arr release];
+    self.isPlaying = NO;
 }
 
 - (void)doPlaySound:(NSString *)soundName {
@@ -43,6 +48,7 @@
 	else {
 		[playerArray addObject:audioPlayer];
 		[audioPlayer play];
+        self.isPlaying = YES;
 	}
 	[pool drain];
 }
@@ -62,6 +68,7 @@
 - (void)dealloc {
 	[self stopAllSounds];
 	[playerArray release];
+    delegate = nil;
     [super dealloc];
 }
 
@@ -70,6 +77,10 @@
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
 	[playerArray removeObject:player];
 	[player release];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(soundDidFinishPlay)]) {
+        [self.delegate soundDidFinishPlay];
+    }
+    self.isPlaying = NO;
 }
 
 

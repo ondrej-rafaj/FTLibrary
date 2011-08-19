@@ -132,6 +132,7 @@ static NSString *appID;
         
         for (NSDictionary *dict in allLangs) {
             NSString *key = [[dict allKeys] objectAtIndex:0];
+            if ([[backUpData allKeys] containsObject:key]) continue;
             NSString *url = [[allLangs objectAtIndex:0] objectForKey:key];
             NSDictionary *thisLangData = [FTDataJson jsonDataFromUrl:url];
             NSDictionary *data = [thisLangData objectForKey:@"data"];
