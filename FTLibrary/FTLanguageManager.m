@@ -70,6 +70,7 @@ static NSString *appID;
     [self setRemoteURL:remote];
     [self setDefaultLanguage:language];
     [self importLanguages];
+    if (missingTranslations) [missingTranslations removeAllObjects];
     
     // TODO: import local lang in main thread, then search for internet in background
     // Not using background thread because app will request empy data otherwise
