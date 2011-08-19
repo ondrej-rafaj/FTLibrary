@@ -11,46 +11,35 @@
 
 @interface FTDragAndDropView : UIView {
     
-    UIImageView *imageView;
+    UIImageView *_imageView;
     
-    CGFloat lastRotation;
-    CGFloat lastScale;
-    CGFloat interfaceRotationScaling;
+    CGFloat _rotationValue;
+    CGFloat _scaleValue;
+	CGFloat _positionX;
+	CGFloat _positionY;
 	
-    NSString *imagePath;
-    
-    NSDictionary *elementData;
-    
-    CGFloat positionX;
-	CGFloat positionY;
-    
-    // Real return values
-    CGFloat realRotationValue;
-    CGFloat realScaleValue;
+    NSString *_imagePath;
+    NSDictionary *_elementData;
+	
+	BOOL _dragged;
 }
 
 @property (nonatomic, retain) UIImageView *imageView;
 
-@property (nonatomic) CGFloat lastRotation;
-@property (nonatomic) CGFloat lastScale;
-@property (nonatomic) CGFloat interfaceRotationScaling;
-
-@property (nonatomic, retain) NSString *imagePath;
-
-@property (nonatomic, retain) NSDictionary *elementData;
-
+@property (nonatomic) CGFloat rotationValue;
+@property (nonatomic) CGFloat scaleValue;
 @property (nonatomic) CGFloat positionX;
 @property (nonatomic) CGFloat positionY;
 
-@property (nonatomic) CGFloat realRotationValue;
-@property (nonatomic) CGFloat realScaleValue;
+@property (nonatomic, retain) NSString *imagePath;
+@property (nonatomic, retain) NSDictionary *elementData;
+
+@property (nonatomic, getter = isDragged) BOOL dragged;
 
 
 - (id)initWithImagePath:(NSString *)path;
 
 - (id)initWithImageData:(NSDictionary *)data;
-
-- (void)setPosition:(CGPoint)position;
 
 - (NSDictionary *)getInfo;
 

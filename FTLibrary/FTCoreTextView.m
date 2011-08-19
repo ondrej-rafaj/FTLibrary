@@ -8,9 +8,13 @@
 
 #import "FTCoreTextView.h"
 #import <QuartzCore/QuartzCore.h>
-#import <CoreText/CoreText.h>
 #import <regex.h>
 
+@interface FTCoreTextView ()
+
+- (void)updateFramesetterIfNeeded;
+
+@end
 
 @implementation FTCoreTextView
 
@@ -20,6 +24,31 @@
 @synthesize defaultStyle = _defaultStyle;
 @synthesize processedString = _processedString;
 @synthesize path = _path;
+
+- (void)updateFramesetterIfNeeded
+{
+//	if ([_text length] > 0) {
+//		<#statements#>
+//	}
+//	else {
+//		if (_framesetter != NULL) {
+//			CFRelease(_framesetter);
+//			_framesetter = NULL;
+//		}
+//	}
+}
+
+- (CGSize)suggestedSizeConstrainedToSize:(CGSize)size
+{
+	[self updateFramesetterIfNeeded];
+	
+	if (_framesetter == NULL) {
+		return CGSizeZero;
+	}
+	CGSize suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(_framesetter, CFRangeMake(0, 0), NULL, size, NULL);
+	suggestedSize = CGSizeMake(ceilf(suggestedSize.width), ceilf(suggestedSize.height));
+    return suggestedSize;
+}
 
 - (NSMutableArray *)divideTextInPages:(NSString *)string {
     NSMutableArray *result = [NSMutableArray array];
@@ -121,6 +150,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+		_framesetter = NULL;
         _text = [[NSString alloc] init];
         _markers = [[NSMutableArray alloc] init];
         _processedString = [[NSMutableString alloc] init];
