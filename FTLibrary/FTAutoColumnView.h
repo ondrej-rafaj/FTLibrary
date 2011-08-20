@@ -1,8 +1,8 @@
 //
-//  FTAutoLineView.h
+//  FTAutoColumnView.h
 //  FTLibrary
 //
-//  Created by Ondrej Rafaj on 02/05/2011.
+//  Created by Ondrej Rafaj on 19/08/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
 //
 
@@ -10,8 +10,8 @@
 #import "FTView.h"
 
 
-@interface FTAutoLineView : FTView {
-    
+@interface FTAutoColumnView : FTView {
+	
 	BOOL enableSideSpace;
 	
 }

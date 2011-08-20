@@ -1,15 +1,15 @@
 //
-//  FTAutoLineView.m
+//  FTAutoColumnView.m
 //  FTLibrary
 //
-//  Created by Ondrej Rafaj on 02/05/2011.
+//  Created by Ondrej Rafaj on 19/08/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
 //
 
-#import "FTAutoLineView.h"
+#import "FTAutoColumnView.h"
 
 
-@implementation FTAutoLineView
+@implementation FTAutoColumnView
 
 @synthesize enableSideSpace;
 
@@ -39,16 +39,16 @@
 #pragma mark Settings
 
 - (void)layoutElements {
-	CGFloat elementsWidth = 0;
+	CGFloat elementsHeight = 0;
 	for (UIView *v in self.subviews) {
-		elementsWidth += [v width];
+		elementsHeight += [v height];
 	}
 	int add = (enableSideSpace) ? 1 : -1;
-	CGFloat step = (([self width] - elementsWidth) / ([self.subviews count] + add));
-	CGFloat xPos = (enableSideSpace) ? step : 0;
+	CGFloat step = (([self height] - elementsHeight) / ([self.subviews count] + add));
+	CGFloat yPos = (enableSideSpace) ? step : 0;
 	for (UIView *v in self.subviews) {
-		[v positionAtX:xPos];
-		xPos += (step + [v width]);
+		[v positionAtY:yPos];
+		yPos += (step + [v height]);
 	}
 }
 

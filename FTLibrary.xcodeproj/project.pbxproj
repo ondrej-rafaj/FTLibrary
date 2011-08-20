@@ -401,6 +401,10 @@
 		4CCD128613D852590004EF5D /* FTDragDropMenuView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCD128413D852590004EF5D /* FTDragDropMenuView.h */; };
 		4CCD128713D852590004EF5D /* FTDragDropMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD128513D852590004EF5D /* FTDragDropMenuView.m */; };
 		4CCD128813D852590004EF5D /* FTDragDropMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD128513D852590004EF5D /* FTDragDropMenuView.m */; };
+		4CD94A3013FDBBB200BD6C06 /* UIAlertView+Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD94A2E13FDBBB200BD6C06 /* UIAlertView+Tools.h */; };
+		4CD94A3113FDBBB200BD6C06 /* UIAlertView+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD94A2F13FDBBB200BD6C06 /* UIAlertView+Tools.m */; };
+		4CD94A3813FE5E4900BD6C06 /* FTAutoColumnView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD94A3613FE5E4900BD6C06 /* FTAutoColumnView.h */; };
+		4CD94A3913FE5E4900BD6C06 /* FTAutoColumnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD94A3713FE5E4900BD6C06 /* FTAutoColumnView.m */; };
 		6834BE2913D9B2EA00781018 /* FTLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6834BE2713D9B2EA00781018 /* FTLabel.h */; };
 		6834BE2A13D9B2EA00781018 /* FTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6834BE2813D9B2EA00781018 /* FTLabel.m */; };
 		68437FAB13FC08540072C4B9 /* FTLanguageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 68437FA913FC08530072C4B9 /* FTLanguageManager.h */; };
@@ -749,6 +753,10 @@
 		4CCD127E13D8521C0004EF5D /* FTRemoteInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTRemoteInfoView.m; sourceTree = "<group>"; };
 		4CCD128413D852590004EF5D /* FTDragDropMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDragDropMenuView.h; sourceTree = "<group>"; };
 		4CCD128513D852590004EF5D /* FTDragDropMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDragDropMenuView.m; sourceTree = "<group>"; };
+		4CD94A2E13FDBBB200BD6C06 /* UIAlertView+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Tools.h"; sourceTree = "<group>"; };
+		4CD94A2F13FDBBB200BD6C06 /* UIAlertView+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Tools.m"; sourceTree = "<group>"; };
+		4CD94A3613FE5E4900BD6C06 /* FTAutoColumnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAutoColumnView.h; sourceTree = "<group>"; };
+		4CD94A3713FE5E4900BD6C06 /* FTAutoColumnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAutoColumnView.m; sourceTree = "<group>"; };
 		6834BE2713D9B2EA00781018 /* FTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLabel.h; sourceTree = "<group>"; };
 		6834BE2813D9B2EA00781018 /* FTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLabel.m; sourceTree = "<group>"; };
 		68437FA913FC08530072C4B9 /* FTLanguageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLanguageManager.h; sourceTree = "<group>"; };
@@ -930,6 +938,8 @@
 		4C03661213BA0B1F00E8FA09 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				4CD94A2E13FDBBB200BD6C06 /* UIAlertView+Tools.h */,
+				4CD94A2F13FDBBB200BD6C06 /* UIAlertView+Tools.m */,
 				4CB6E20013D5D496002FEC0A /* NSData+Encryption.h */,
 				4CB6E20113D5D496002FEC0A /* NSData+Encryption.m */,
 				4CB6E20413D5D497002FEC0A /* NSDate+ISO8601.h */,
@@ -1143,6 +1153,8 @@
 			children = (
 				4C6F8F6013F87530004A4FB2 /* FTAutoLineView.h */,
 				4C6F8F6113F87530004A4FB2 /* FTAutoLineView.m */,
+				4CD94A3613FE5E4900BD6C06 /* FTAutoColumnView.h */,
+				4CD94A3713FE5E4900BD6C06 /* FTAutoColumnView.m */,
 			);
 			name = Autoline;
 			sourceTree = "<group>";
@@ -1948,6 +1960,8 @@
 				4C6F900313F9921E004A4FB2 /* FTDragAndDropCanvasView.h in Headers */,
 				4C6F900813F9922D004A4FB2 /* FTDragAndDropView.h in Headers */,
 				68437FAB13FC08540072C4B9 /* FTLanguageManager.h in Headers */,
+				4CD94A3013FDBBB200BD6C06 /* UIAlertView+Tools.h in Headers */,
+				4CD94A3813FE5E4900BD6C06 /* FTAutoColumnView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2194,6 +2208,8 @@
 				4C6F900413F9921E004A4FB2 /* FTDragAndDropCanvasView.m in Sources */,
 				4C6F900913F9922D004A4FB2 /* FTDragAndDropView.m in Sources */,
 				68437FAC13FC08540072C4B9 /* FTLanguageManager.m in Sources */,
+				4CD94A3113FDBBB200BD6C06 /* UIAlertView+Tools.m in Sources */,
+				4CD94A3913FE5E4900BD6C06 /* FTAutoColumnView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
