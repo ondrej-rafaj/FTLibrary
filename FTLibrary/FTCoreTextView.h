@@ -19,11 +19,12 @@
     NSString *_text;
     NSMutableDictionary *_styles;
     @private
-    NSMutableArray *_markers;
-    FTCoreTextStyle *_defaultStyle;
-    NSMutableString *_processedString;
-    CGPathRef _path;
-    CTFramesetterRef _framesetter;
+    NSMutableArray		*_markers;
+    FTCoreTextStyle		*_defaultStyle;
+    NSMutableString		*_processedString;
+    CGPathRef			_path;
+    CTFramesetterRef	_framesetter;
+	BOOL				_changesMade;
 }
 
 @property (nonatomic, retain) NSString *text;

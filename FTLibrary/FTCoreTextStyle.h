@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface FTCoreTextStyle : NSObject {
+@interface FTCoreTextStyle : NSObject <NSCopying> {
     NSString *name;
     NSString *appendedCharacter;
     UIFont *font;

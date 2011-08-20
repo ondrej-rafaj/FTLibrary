@@ -13,6 +13,7 @@
 @interface FTCoreTextView ()
 
 - (void)updateFramesetterIfNeeded;
+- (void)processText;
 
 @end
 
@@ -27,21 +28,72 @@
 
 - (void)updateFramesetterIfNeeded
 {
-//	if ([_text length] > 0) {
-//		<#statements#>
-//	}
-//	else {
-//		if (_framesetter != NULL) {
-//			CFRelease(_framesetter);
-//			_framesetter = NULL;
-//		}
-//	}
+    if (_changesMade) {
+		_changesMade = NO;
+		[self processText];
+		
+		if (!_processedString || [_processedString length] == 0) {
+			if (_framesetter) {
+				CFRelease(_framesetter);
+				_framesetter = NULL;
+			}
+			return;
+		}
+		
+		if (!_defaultStyle.name || [_defaultStyle.name length] == 0) {
+			_defaultStyle.name = @"_default";
+			_defaultStyle.font = [UIFont systemFontOfSize:14];
+			_defaultStyle.color= [UIColor blackColor];
+			NSLog(@"FTCoreTextView: _default style not found!");
+		}
+		
+		NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_processedString];
+		
+		//set default attributeds
+		
+		[string addAttribute:(id)kCTForegroundColorAttributeName
+					   value:(id)_defaultStyle.color.CGColor
+					   range:NSMakeRange(0, [_text length])];
+		
+		CTFontRef ctFont = CTFontCreateWithName((CFStringRef)_defaultStyle.font.fontName, 
+												_defaultStyle.font.pointSize, 
+												NULL);
+		
+		[string addAttribute:(id)kCTFontAttributeName
+					   value:(id)ctFont
+					   range:NSMakeRange(0, [_text length])];
+		
+		//set markers attributes
+		for (NSDictionary *dict in _markers) {
+			NSRange aRange = [(NSValue *)[dict objectForKey:@"range"] rangeValue];
+			FTCoreTextStyle *style = [dict objectForKey:@"style"];
+			if ((aRange.location + aRange.length) > [_text length] ) continue;
+			
+			
+			
+			[string addAttribute:(id)kCTForegroundColorAttributeName
+						   value:(id)style.color.CGColor
+						   range:aRange];
+			ctFont = nil;
+			ctFont = CTFontCreateWithName((CFStringRef)style.font.fontName, 
+										  style.font.pointSize, 
+										  NULL);
+			
+			[string addAttribute:(id)kCTFontAttributeName
+						   value:(id)ctFont
+						   range:aRange];
+		}
+		CFRelease(ctFont);
+		// layout master
+		if (_framesetter != NULL)
+			CFRelease(_framesetter);
+		_framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string);
+	}
 }
 
 - (CGSize)suggestedSizeConstrainedToSize:(CGSize)size
 {
 	[self updateFramesetterIfNeeded];
-	
 	if (_framesetter == NULL) {
 		return CGSizeZero;
 	}
@@ -165,70 +217,8 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    // Drawing code
-    
-    [self processText];
-    
-    if (!_processedString || [_processedString length] == 0) return;
-    
-    
-    if (!_defaultStyle.name || [_defaultStyle.name length] == 0) {
-        _defaultStyle.name = @"_default";
-        _defaultStyle.font = [UIFont systemFontOfSize:14];
-        _defaultStyle.color= [UIColor blackColor];
-        NSLog(@"FTCoreTextView: _default style not found!");
-    }
-    
-	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_processedString];
-    
-    //set default attributeds
-    
-	[string addAttribute:(id)kCTForegroundColorAttributeName
-                   value:(id)_defaultStyle.color.CGColor
-                   range:NSMakeRange(0, [_text length])];
-    
-    CTFontRef ctFont = CTFontCreateWithName((CFStringRef)_defaultStyle.font.fontName, 
-                                            _defaultStyle.font.pointSize, 
-                                            NULL);
-    
-    [string addAttribute:(id)kCTFontAttributeName
-                   value:(id)ctFont
-                   range:NSMakeRange(0, [_text length])];
-    
-    
-    
-    //set markers attributes
-    
-    for (NSDictionary *dict in _markers) {
-        NSRange aRange = [(NSValue *)[dict objectForKey:@"range"] rangeValue];
-        FTCoreTextStyle *style = [dict objectForKey:@"style"];
-        if ((aRange.location + aRange.length) > [_text length] ) continue;
-        
-        
-        
-        [string addAttribute:(id)kCTForegroundColorAttributeName
-                       value:(id)style.color.CGColor
-                       range:aRange];
-        ctFont = nil;
-        ctFont = CTFontCreateWithName((CFStringRef)style.font.fontName, 
-                                                style.font.pointSize, 
-                                                NULL);
-        
-        [string addAttribute:(id)kCTFontAttributeName
-                       value:(id)ctFont
-                       range:aRange];
-        
-        
-        
-    }
-    
-    CFRelease(ctFont);
-    
-    
-	// layout master
-	CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string);
-    
-    
+	[self updateFramesetterIfNeeded];
+	
 	// left column form
 	CGMutablePathRef mainPath = CGPathCreateMutable();
    	
@@ -245,7 +235,7 @@
 
     
 	// left column frame
-	CTFrameRef drawFrame = CTFramesetterCreateFrame(framesetter, 
+	CTFrameRef drawFrame = CTFramesetterCreateFrame(_framesetter, 
                                                     CFRangeMake(0, 0),
                                                     mainPath, NULL);
     
@@ -263,8 +253,6 @@
 	// cleanup
 	CFRelease(drawFrame);
 	CGPathRelease(mainPath);
-	CFRelease(framesetter);
-	[string release];
 }
 
 #pragma mark --
@@ -273,27 +261,32 @@
 - (void)setText:(NSString *)text {
     [_text release];
     _text = [[text mutableCopy] retain];
-    [self setNeedsDisplay];
+	_changesMade = YES;
+    if ([self superview]) [self setNeedsDisplay];
 }
 
 - (void)addStyle:(FTCoreTextStyle *)style {
     [self.styles setValue:style forKey:style.name];
-    [self setNeedsDisplay];
+	_changesMade = YES;
+    if ([self superview]) [self setNeedsDisplay];
 }
 
 - (void)setStyles:(NSMutableDictionary *)styles {
     [_styles release];
     _styles = [[NSMutableDictionary dictionaryWithDictionary:styles] retain];
-    [self setNeedsDisplay];
+	_changesMade = YES;
+    if ([self superview]) [self setNeedsDisplay];
 }
 
 - (void)setPath:(CGPathRef)path {
     _path = path;
-    [self setNeedsDisplay];
+	_changesMade = YES;
+    if ([self superview]) [self setNeedsDisplay];
 }
 
 - (void)dealloc
 {
+	if (_framesetter) CFRelease(_framesetter);
     [_text release];
     [_styles release];
     [_markers release];

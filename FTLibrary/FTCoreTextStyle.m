@@ -16,6 +16,18 @@
 @synthesize color;
 @synthesize isUnderLined;
 
+- (id)copyWithZone:(NSZone *)zone
+{
+	FTCoreTextStyle *style = [[FTCoreTextStyle alloc] init];
+	style.name = [[self.name copy] autorelease];
+	style.appendedCharacter = [[self.appendedCharacter copy] autorelease];
+	style.font = [UIFont fontWithName:self.font.fontName size:self.font.pointSize];
+	const CGFloat *components = CGColorGetComponents(color.CGColor);
+	style.color = [UIColor colorWithRed:components[0] green:components[1] blue:components[2] alpha:components[3]];
+	style.isUnderLined = self.isUnderLined;
+	return style;
+}
+
 - (void)dealloc {
     
     [name release], name = nil;
