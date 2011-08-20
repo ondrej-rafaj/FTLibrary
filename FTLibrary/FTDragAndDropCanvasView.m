@@ -12,7 +12,7 @@
 #define degreesToRadians(__ANGLE__) (M_PI * (__ANGLE__) / 180.0)
 #define radiansToDegrees(__ANGLE__) (180.0 * (__ANGLE__) / M_PI)
 
-#define kFTDragAndDropCanvasViewMinScale            0.55f * interfaceRotationFactor
+#define kFTDragAndDropCanvasViewMinScale            0.35f * interfaceRotationFactor
 #define kFTDragAndDropCanvasViewMaxScale            1.0f * interfaceRotationFactor
 #define kFTDragAndDropCanvasViewSpeed               0.75f
 
@@ -68,7 +68,7 @@
     [super dealloc];
 }
 
-#pragma mark - View lifecycle
+#pragma mark View lifecycle
 
 - (void)layoutSubviews
 {	
@@ -109,7 +109,7 @@
 	}
 }
 
-#pragma mark - Class level methods
+#pragma mark Class level methods
 
 - (UIImage *)imageWithSize:(CGSize)desiredSize
 {
@@ -178,7 +178,7 @@
 	[self setNeedsLayout];
 }
 
-#pragma mark - Add/Remove Elements
+#pragma mark Add/Remove Elements
 
 - (void)addElementWithData:(NSDictionary *)data
 {
@@ -270,7 +270,7 @@
 	[self setNeedsLayout];
 }
 
-#pragma mark - Use Elements
+#pragma mark Use Elements
 
 - (void)activateElement:(FTDragAndDropView *)element
 {
@@ -428,7 +428,7 @@ static CGFloat tempRotation = 0;
 	}
 }
 
-#pragma mark - Gestur Recognizer delegate method
+#pragma mark Gestur Recognizer delegate method
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;

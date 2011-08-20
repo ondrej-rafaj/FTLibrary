@@ -10,8 +10,10 @@
 #import "FTDragAndDropView.h"
 
 typedef enum {
+	
     FTDragAndDropCanvasViewStatusMoving,
     FTDragAndDropCanvasViewStatusRotating
+	
 } FTDragAndDropCanvasViewStatus;
 
 
