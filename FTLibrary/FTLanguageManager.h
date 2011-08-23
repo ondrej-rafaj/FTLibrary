@@ -1,6 +1,6 @@
 //
 //  FTLanguageManager.h
-//  Calpol
+//  FTLibrary
 //
 //  Created by Fuerte International on 17/08/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
@@ -12,9 +12,11 @@
 #define FTLangGet(key)							[FTLanguageManager get:(key)] 
 
 @interface FTLanguage : NSObject {
+	
     NSString *key;
     NSString *url;
     NSDictionary *data;
+	
 }
 
 @property (nonatomic, retain) NSString *key;

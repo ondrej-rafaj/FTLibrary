@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4C03655213BA023A00E8FA09 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C03655113BA023A00E8FA09 /* Foundation.framework */; };
-		4C03655D13BA023A00E8FA09 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C03655C13BA023A00E8FA09 /* UIKit.framework */; };
 		4C03655E13BA023A00E8FA09 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C03655113BA023A00E8FA09 /* Foundation.framework */; };
 		4C03656013BA023A00E8FA09 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C03655F13BA023A00E8FA09 /* CoreGraphics.framework */; };
 		4C03656313BA023A00E8FA09 /* libFTLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C03654E13BA023A00E8FA09 /* libFTLibrary.a */; };
@@ -273,7 +272,6 @@
 		4C85BC2413BA4B5000CB7FCA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C85BC1313BA4B5000CB7FCA /* AVFoundation.framework */; };
 		4C85BC2513BA4B5000CB7FCA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C85BC1413BA4B5000CB7FCA /* CFNetwork.framework */; };
 		4C85BC2613BA4B5000CB7FCA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C85BC1513BA4B5000CB7FCA /* CoreData.framework */; };
-		4C85BC2713BA4B5000CB7FCA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C85BC1613BA4B5000CB7FCA /* CoreGraphics.framework */; };
 		4C85BC2813BA4B5000CB7FCA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C85BC1713BA4B5000CB7FCA /* CoreLocation.framework */; };
 		4C85BC2913BA4B5000CB7FCA /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C85BC1813BA4B5000CB7FCA /* CoreMedia.framework */; };
 		4C85BC2A13BA4B5000CB7FCA /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C85BC1913BA4B5000CB7FCA /* libxml2.dylib */; };
@@ -405,6 +403,9 @@
 		4CD94A3113FDBBB200BD6C06 /* UIAlertView+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD94A2F13FDBBB200BD6C06 /* UIAlertView+Tools.m */; };
 		4CD94A3813FE5E4900BD6C06 /* FTAutoColumnView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD94A3613FE5E4900BD6C06 /* FTAutoColumnView.h */; };
 		4CD94A3913FE5E4900BD6C06 /* FTAutoColumnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD94A3713FE5E4900BD6C06 /* FTAutoColumnView.m */; };
+		4CD94A5E14024B0500BD6C06 /* FTFacebook.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD94A5C14024B0500BD6C06 /* FTFacebook.h */; };
+		4CD94A5F14024B0500BD6C06 /* FTFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD94A5D14024B0500BD6C06 /* FTFacebook.m */; };
+		4CEB1BFE1403B33400B70C98 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1BFD1403B33400B70C98 /* UIKit.framework */; };
 		6834BE2913D9B2EA00781018 /* FTLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6834BE2713D9B2EA00781018 /* FTLabel.h */; };
 		6834BE2A13D9B2EA00781018 /* FTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6834BE2813D9B2EA00781018 /* FTLabel.m */; };
 		68437FAB13FC08540072C4B9 /* FTLanguageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 68437FA913FC08530072C4B9 /* FTLanguageManager.h */; };
@@ -441,7 +442,6 @@
 		4C03655113BA023A00E8FA09 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4C03655513BA023A00E8FA09 /* FTLibrary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FTLibrary-Prefix.pch"; sourceTree = "<group>"; };
 		4C03655B13BA023A00E8FA09 /* FTLibraryTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FTLibraryTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4C03655C13BA023A00E8FA09 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4C03655F13BA023A00E8FA09 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4C03656613BA023A00E8FA09 /* FTLibraryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FTLibraryTests-Info.plist"; sourceTree = "<group>"; };
 		4C03656813BA023A00E8FA09 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -644,7 +644,6 @@
 		4C85BC1313BA4B5000CB7FCA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		4C85BC1413BA4B5000CB7FCA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		4C85BC1513BA4B5000CB7FCA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		4C85BC1613BA4B5000CB7FCA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4C85BC1713BA4B5000CB7FCA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		4C85BC1813BA4B5000CB7FCA /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		4C85BC1913BA4B5000CB7FCA /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -757,6 +756,11 @@
 		4CD94A2F13FDBBB200BD6C06 /* UIAlertView+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Tools.m"; sourceTree = "<group>"; };
 		4CD94A3613FE5E4900BD6C06 /* FTAutoColumnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAutoColumnView.h; sourceTree = "<group>"; };
 		4CD94A3713FE5E4900BD6C06 /* FTAutoColumnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAutoColumnView.m; sourceTree = "<group>"; };
+		4CD94A5C14024B0500BD6C06 /* FTFacebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFacebook.h; sourceTree = "<group>"; };
+		4CD94A5D14024B0500BD6C06 /* FTFacebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFacebook.m; sourceTree = "<group>"; };
+		4CEB1BFD1403B33400B70C98 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		4CEB1BFF1403B34700B70C98 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4CEB1C001403B36400B70C98 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6834BE2713D9B2EA00781018 /* FTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLabel.h; sourceTree = "<group>"; };
 		6834BE2813D9B2EA00781018 /* FTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLabel.m; sourceTree = "<group>"; };
 		68437FA913FC08530072C4B9 /* FTLanguageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLanguageManager.h; sourceTree = "<group>"; };
@@ -782,13 +786,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C03655213BA023A00E8FA09 /* Foundation.framework in Frameworks */,
+				4CEB1BFE1403B33400B70C98 /* UIKit.framework in Frameworks */,
 				4C6F969F13DD9A11000BF403 /* CoreText.framework in Frameworks */,
 				4C85BC2213BA4B5000CB7FCA /* AddressBook.framework in Frameworks */,
 				4C85BC2313BA4B5000CB7FCA /* AddressBookUI.framework in Frameworks */,
 				4C85BC2413BA4B5000CB7FCA /* AVFoundation.framework in Frameworks */,
 				4C85BC2513BA4B5000CB7FCA /* CFNetwork.framework in Frameworks */,
 				4C85BC2613BA4B5000CB7FCA /* CoreData.framework in Frameworks */,
-				4C85BC2713BA4B5000CB7FCA /* CoreGraphics.framework in Frameworks */,
 				4C85BC2813BA4B5000CB7FCA /* CoreLocation.framework in Frameworks */,
 				4C85BC2913BA4B5000CB7FCA /* CoreMedia.framework in Frameworks */,
 				4C85BC2A13BA4B5000CB7FCA /* libxml2.dylib in Frameworks */,
@@ -800,7 +805,6 @@
 				4C85BC3013BA4B5000CB7FCA /* OpenAL.framework in Frameworks */,
 				4C85BC3113BA4B5000CB7FCA /* QuartzCore.framework in Frameworks */,
 				4C85BC3213BA4B5000CB7FCA /* SystemConfiguration.framework in Frameworks */,
-				4C03655213BA023A00E8FA09 /* Foundation.framework in Frameworks */,
 				4C85BBE913BA4AFD00CB7FCA /* libFlurry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -809,7 +813,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C03655D13BA023A00E8FA09 /* UIKit.framework in Frameworks */,
 				4C03655E13BA023A00E8FA09 /* Foundation.framework in Frameworks */,
 				4C03656013BA023A00E8FA09 /* CoreGraphics.framework in Frameworks */,
 				4C03656313BA023A00E8FA09 /* libFTLibrary.a in Frameworks */,
@@ -843,17 +846,18 @@
 			isa = PBXGroup;
 			children = (
 				4C85BB5A13BA4AFD00CB7FCA /* libFlurry.a */,
+				4C85BC1A13BA4B5000CB7FCA /* libz.dylib */,
+				4C85BC1913BA4B5000CB7FCA /* libxml2.dylib */,
+				4CEB1BFD1403B33400B70C98 /* UIKit.framework */,
 				4C85BC1113BA4B5000CB7FCA /* AddressBook.framework */,
 				4C85BC1213BA4B5000CB7FCA /* AddressBookUI.framework */,
 				4C85BC1313BA4B5000CB7FCA /* AVFoundation.framework */,
 				4C85BC1413BA4B5000CB7FCA /* CFNetwork.framework */,
 				4C85BC1513BA4B5000CB7FCA /* CoreData.framework */,
-				4C85BC1613BA4B5000CB7FCA /* CoreGraphics.framework */,
 				4C85BC1713BA4B5000CB7FCA /* CoreLocation.framework */,
 				4C85BC1813BA4B5000CB7FCA /* CoreMedia.framework */,
 				4C6F969E13DD9A11000BF403 /* CoreText.framework */,
-				4C85BC1913BA4B5000CB7FCA /* libxml2.dylib */,
-				4C85BC1A13BA4B5000CB7FCA /* libz.dylib */,
+				4C03655113BA023A00E8FA09 /* Foundation.framework */,
 				4C85BC1B13BA4B5000CB7FCA /* MapKit.framework */,
 				4C85BC1C13BA4B5000CB7FCA /* MediaPlayer.framework */,
 				4C85BC1D13BA4B5000CB7FCA /* MessageUI.framework */,
@@ -861,9 +865,9 @@
 				4C85BC1F13BA4B5000CB7FCA /* OpenAL.framework */,
 				4C85BC2013BA4B5000CB7FCA /* QuartzCore.framework */,
 				4C85BC2113BA4B5000CB7FCA /* SystemConfiguration.framework */,
-				4C03655113BA023A00E8FA09 /* Foundation.framework */,
-				4C03655C13BA023A00E8FA09 /* UIKit.framework */,
 				4C03655F13BA023A00E8FA09 /* CoreGraphics.framework */,
+				4CEB1C001403B36400B70C98 /* Foundation.framework */,
+				4CEB1BFF1403B34700B70C98 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1412,6 +1416,8 @@
 		4C85BC3913BA4E5D00CB7FCA /* Facebook */ = {
 			isa = PBXGroup;
 			children = (
+				4CD94A5C14024B0500BD6C06 /* FTFacebook.h */,
+				4CD94A5D14024B0500BD6C06 /* FTFacebook.m */,
 				4C85BC3A13BA4E5D00CB7FCA /* Facebook.h */,
 				4C85BC3B13BA4E5D00CB7FCA /* Facebook.m */,
 				4C85BC3C13BA4E5D00CB7FCA /* FBConnect.h */,
@@ -1962,6 +1968,7 @@
 				68437FAB13FC08540072C4B9 /* FTLanguageManager.h in Headers */,
 				4CD94A3013FDBBB200BD6C06 /* UIAlertView+Tools.h in Headers */,
 				4CD94A3813FE5E4900BD6C06 /* FTAutoColumnView.h in Headers */,
+				4CD94A5E14024B0500BD6C06 /* FTFacebook.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2210,6 +2217,7 @@
 				68437FAC13FC08540072C4B9 /* FTLanguageManager.m in Sources */,
 				4CD94A3113FDBBB200BD6C06 /* UIAlertView+Tools.m in Sources */,
 				4CD94A3913FE5E4900BD6C06 /* FTAutoColumnView.m in Sources */,
+				4CD94A5F14024B0500BD6C06 /* FTFacebook.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
