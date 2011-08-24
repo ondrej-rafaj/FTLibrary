@@ -185,10 +185,6 @@ static NSString *appID;
     if (!isDefault) {
         [FTError handleErrorWithString:@"Default language EN not found on wellBacked app"];
     }
-    
-    //[pool drain];
-    
-
 }
 
 

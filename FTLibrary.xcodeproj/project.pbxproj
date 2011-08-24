@@ -305,6 +305,8 @@
 		4C85BC8F13BB18BB00CB7FCA /* FTError.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC8C13BB18BB00CB7FCA /* FTError.m */; };
 		4C85BC9C13BB5D4000CB7FCA /* FTSystemKillSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */; };
 		4C85BC9D13BB5D4000CB7FCA /* FTSystemKillSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */; };
+		4C8AD6081404F5960078DE52 /* FTFullWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C8AD6061404F5960078DE52 /* FTFullWebViewController.h */; };
+		4C8AD6091404F5960078DE52 /* FTFullWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8AD6071404F5960078DE52 /* FTFullWebViewController.m */; };
 		4C95CECE13D740E100190E64 /* FTWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C95CECC13D740E100190E64 /* FTWebViewController.h */; };
 		4C95CECF13D740E100190E64 /* FTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C95CECD13D740E100190E64 /* FTWebViewController.m */; };
 		4CB6E1F913D5D37C002FEC0A /* FTSimpleDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */; };
@@ -671,6 +673,8 @@
 		4C85BC8C13BB18BB00CB7FCA /* FTError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTError.m; sourceTree = "<group>"; };
 		4C85BC9A13BB5D4000CB7FCA /* FTSystemKillSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSystemKillSwitch.h; sourceTree = "<group>"; };
 		4C85BC9B13BB5D4000CB7FCA /* FTSystemKillSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSystemKillSwitch.m; sourceTree = "<group>"; };
+		4C8AD6061404F5960078DE52 /* FTFullWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFullWebViewController.h; sourceTree = "<group>"; };
+		4C8AD6071404F5960078DE52 /* FTFullWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFullWebViewController.m; sourceTree = "<group>"; };
 		4C95CECC13D740E100190E64 /* FTWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTWebViewController.h; sourceTree = "<group>"; };
 		4C95CECD13D740E100190E64 /* FTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTWebViewController.m; sourceTree = "<group>"; };
 		4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTSimpleDB.h; path = FTLibrary/FTSimpleDB.h; sourceTree = SOURCE_ROOT; };
@@ -1514,11 +1518,29 @@
 			name = System;
 			sourceTree = "<group>";
 		};
-		4C95CECA13D740B700190E64 /* Web controller */ = {
+		4C8AD6031404F5610078DE52 /* Full controlls */ = {
+			isa = PBXGroup;
+			children = (
+				4C8AD6061404F5960078DE52 /* FTFullWebViewController.h */,
+				4C8AD6071404F5960078DE52 /* FTFullWebViewController.m */,
+			);
+			name = "Full controlls";
+			sourceTree = "<group>";
+		};
+		4C8AD6051404F56D0078DE52 /* Basic */ = {
 			isa = PBXGroup;
 			children = (
 				4C95CECC13D740E100190E64 /* FTWebViewController.h */,
 				4C95CECD13D740E100190E64 /* FTWebViewController.m */,
+			);
+			name = Basic;
+			sourceTree = "<group>";
+		};
+		4C95CECA13D740B700190E64 /* Web controller */ = {
+			isa = PBXGroup;
+			children = (
+				4C8AD6051404F56D0078DE52 /* Basic */,
+				4C8AD6031404F5610078DE52 /* Full controlls */,
 			);
 			name = "Web controller";
 			sourceTree = "<group>";
@@ -1969,6 +1991,7 @@
 				4CD94A3013FDBBB200BD6C06 /* UIAlertView+Tools.h in Headers */,
 				4CD94A3813FE5E4900BD6C06 /* FTAutoColumnView.h in Headers */,
 				4CD94A5E14024B0500BD6C06 /* FTFacebook.h in Headers */,
+				4C8AD6081404F5960078DE52 /* FTFullWebViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2218,6 +2241,7 @@
 				4CD94A3113FDBBB200BD6C06 /* UIAlertView+Tools.m in Sources */,
 				4CD94A3913FE5E4900BD6C06 /* FTAutoColumnView.m in Sources */,
 				4CD94A5F14024B0500BD6C06 /* FTFacebook.m in Sources */,
+				4C8AD6091404F5960078DE52 /* FTFullWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

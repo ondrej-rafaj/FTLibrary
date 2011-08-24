@@ -10,11 +10,22 @@
 #import "FTViewController.h"
 
 
+typedef enum {
+	
+	FTWebViewControllerDataMethodPost,
+	FTWebViewControllerDataMethodGet
+	
+} FTWebViewControllerDataMethod;
+
+
 @interface FTWebViewController : FTViewController <UIWebViewDelegate> {
 	
 	UIWebView *webView;
 	
 	BOOL enablePreloading;
+	
+	FTWebViewControllerDataMethod dataMethod;
+	BOOL submitDataEverytime;
 	
 }
 
@@ -22,6 +33,11 @@
 
 @property (nonatomic) BOOL enablePreloading;
 
+@property (nonatomic) FTWebViewControllerDataMethod dataMethod;
+@property (nonatomic) BOOL submitDataEverytime;
+
+
+- (void)loadUrlFromString:(NSString *)url withData:(NSArray *)data usingDataMethod:(FTWebViewControllerDataMethod)method;
 
 - (void)loadUrlFromString:(NSString *)url;
 
