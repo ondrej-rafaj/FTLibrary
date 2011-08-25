@@ -88,6 +88,7 @@
 		if (_framesetter != NULL)
 			CFRelease(_framesetter);
 		_framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string);
+		[string release];
 	}
 }
 
@@ -194,6 +195,7 @@
 + (NSArray *)pagesFromText:(NSString *)string {
     FTCoreTextView *instance = [[FTCoreTextView alloc] initWithFrame:CGRectZero];
     NSArray *result = [instance divideTextInPages:string];
+	[instance release];
     return (NSArray *)result;
 }
 
