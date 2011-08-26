@@ -1,6 +1,6 @@
 //
 //  FTLanguageManager.m
-//  Calpol
+//  FTLibrary
 //
 //  Created by Fuerte International on 17/08/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
@@ -185,15 +185,11 @@ static NSString *appID;
     if (!isDefault) {
         [FTError handleErrorWithString:@"Default language EN not found on wellBacked app"];
     }
-    
-    //[pool drain];
-    
-
 }
 
 
 + (NSString *)get:(NSString *)key comment:(NSString *)comment {
-	if (!translations) return [NSString stringWithFormat:@"%@", key];
+	if (!translations) return [NSString stringWithFormat:@"[%@]", key];
     if (!defaultLanguage) defaultLanguage = @"en";
     FTLanguage *language = [translations objectForKey:defaultLanguage]; 
     NSString *ret = [language.data objectForKey:key];
@@ -201,7 +197,7 @@ static NSString *appID;
         if ([FTProject debugging]) [FTError handleErrorWithString:[NSString stringWithFormat:@"No translation for language :%@ at key: %@", defaultLanguage, key]];
         [self reportMissingTranslation:key andComment:comment];
     }
-    return (ret)? ret : [NSString stringWithFormat:@"%@", key];
+    return (ret)? ret : [NSString stringWithFormat:@"[%@]", key];
 }
 
 + (NSString *)get:(NSString *)key {

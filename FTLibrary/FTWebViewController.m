@@ -14,12 +14,15 @@
 
 @synthesize webView;
 @synthesize enablePreloading;
+@synthesize dataMethod;
+@synthesize submitDataEverytime;
 
 
 #pragma mark Initialization
 
 - (void)initializingSequence {
-	enablePreloading = YES;
+	[self setEnablePreloading:YES];
+	[self setSubmitDataEverytime:YES];
 }
 
 #pragma mark Memory managemnt
@@ -48,6 +51,12 @@
 }
 
 #pragma mark Web loading
+
+- (void)loadUrlFromString:(NSString *)url withData:(NSArray *)data usingDataMethod:(FTWebViewControllerDataMethod)method {
+	[self setDataMethod:method];
+	url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+}
 
 - (void)loadUrlFromString:(NSString *)url {
 	url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
