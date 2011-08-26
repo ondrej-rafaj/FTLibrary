@@ -2,7 +2,7 @@
 //  CPCoreTextView.m
 //  FTLibrary
 //
-//  Created by Francesco on 20/07/2011.
+//  Created by Francesco Freezone <cescofry@gmail.com> on 20/07/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
 //
 
@@ -74,6 +74,7 @@
 			[string addAttribute:(id)kCTForegroundColorAttributeName
 						   value:(id)style.color.CGColor
 						   range:aRange];
+            
 			ctFont = nil;
 			ctFont = CTFontCreateWithName((CFStringRef)style.font.fontName, 
 										  style.font.pointSize, 
@@ -82,6 +83,19 @@
 			[string addAttribute:(id)kCTFontAttributeName
 						   value:(id)ctFont
 						   range:aRange];
+            
+            
+            CTTextAlignment alignment = (style.alignment)? style.alignment : kCTLeftTextAlignment;
+            
+            CTParagraphStyleSetting settings[] = {
+                {kCTParagraphStyleSpecifierAlignment, sizeof(alignment), &alignment},
+            };
+            CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings, sizeof(settings) / sizeof(settings[0]));
+            [string addAttribute:(id)kCTParagraphStyleAttributeName
+                           value:(id)paragraphStyle 
+                           range:aRange];
+            
+            
 		}
 		CFRelease(ctFont);
 		// layout master
@@ -90,6 +104,11 @@
 		_framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string);
 	}
 }
+
+/*!
+ * @abstract get the supposed size of the drawn text
+ *
+ */
 
 - (CGSize)suggestedSizeConstrainedToSize:(CGSize)size
 {
@@ -101,6 +120,12 @@
 	suggestedSize = CGSizeMake(ceilf(suggestedSize.width), ceilf(suggestedSize.height));
     return suggestedSize;
 }
+
+
+/*!
+ * @abstract divide the text in different pages according to the tags <_page/> found
+ *
+ */
 
 - (NSMutableArray *)divideTextInPages:(NSString *)string {
     NSMutableArray *result = [NSMutableArray array];
@@ -121,6 +146,12 @@
     }
     return result;
 }
+
+
+/*!
+ * @abstract process the text before drawing.
+ *
+ */
 
 - (void)processText {
     
@@ -182,6 +213,12 @@
     }
     
 }
+
+/*!
+ * @abstract Remove all the tags and return a clean text to be used in case Core Text is not supported (iOS 4.0 on)
+ *
+ */
+
 + (NSString *)stripTagsforString:(NSString *)string {
     FTCoreTextView *instance = [[FTCoreTextView alloc] initWithFrame:CGRectZero];
     [instance setText:string];
@@ -190,6 +227,12 @@
     [instance release];
     return result;
 }
+
+
+/*!
+ * @abstract divide the text in different pages according to the tags <_page/> found
+ *
+ */
 
 + (NSArray *)pagesFromText:(NSString *)string {
     FTCoreTextView *instance = [[FTCoreTextView alloc] initWithFrame:CGRectZero];
@@ -213,13 +256,16 @@
 }
 
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
+
+/*!
+ * @abstract draw the actual coretext on the context
+ *
+ */
+
 - (void)drawRect:(CGRect)rect
 {
 	[self updateFramesetterIfNeeded];
 	
-	// left column form
 	CGMutablePathRef mainPath = CGPathCreateMutable();
    	
     if (!_path) {
@@ -234,12 +280,11 @@
     
 
     
-	// left column frame
 	CTFrameRef drawFrame = CTFramesetterCreateFrame(_framesetter, 
                                                     CFRangeMake(0, 0),
                                                     mainPath, NULL);
     
-    // flip the coordinate system
+    // flip coordinate system
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	CGContextSetTextMatrix(context, CGAffineTransformIdentity);
 	CGContextTranslateCTM(context, 0, self.bounds.size.height);
@@ -254,6 +299,8 @@
 	CFRelease(drawFrame);
 	CGPathRelease(mainPath);
 }
+
+
 
 #pragma mark --
 #pragma mark custom setters
@@ -279,7 +326,7 @@
 }
 
 - (void)setPath:(CGPathRef)path {
-    _path = path;
+    _path = CGPathRetain(path);
 	_changesMade = YES;
     if ([self superview]) [self setNeedsDisplay];
 }
