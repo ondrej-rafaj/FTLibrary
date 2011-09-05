@@ -57,15 +57,16 @@
     NSMutableString *components = [NSMutableString string];
     [components appendFormat:@"?location=%f,%f",location.latitude, location.longitude];
     [components appendFormat:@"&radius=%d", radius];
-    if (types && [types count] > 0) {
-        [components appendFormat:@"&types=%@", [types componentsJoinedByString:@"|"]];
-    }
     [components appendFormat:@"&language=%@", language];
     if (![name isEqualToString:@""]) {
         [components appendFormat:@"&name=%@", name];
     }
     [components appendFormat:@"&sensor=%@", (sensor)? @"true" : @"false"];
     [components appendFormat:@"&key=%@", APIKey];
+    
+    if (types && [types count] > 0) {
+        [components appendFormat:@"&types=%@", [types componentsJoinedByString:@"%7C"]];
+    }
     
     NSString *format = (output == FTGooglePlaceRequestOutputJSON)? @"json" : @"xml";
     NSString *urlString = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/search/%@%@", format, components];
