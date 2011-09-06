@@ -17,6 +17,7 @@
     UIColor *color;
     BOOL isUnderLined;
     CTTextAlignment alignment;
+    NSString *URLStringReplacement;
 }
 
 @property (nonatomic, retain) NSString *name;
@@ -25,5 +26,7 @@
 @property (nonatomic, retain) UIColor *color;
 @property (nonatomic, assign, getter=isUnderLined) BOOL isUnderLined;
 @property (nonatomic, assign) CTTextAlignment alignment;
+@property (nonatomic, retain) NSString *URLStringReplacement;
+
 
 @end

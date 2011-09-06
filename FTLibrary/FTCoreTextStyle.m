@@ -16,6 +16,7 @@
 @synthesize color;
 @synthesize isUnderLined;
 @synthesize alignment;
+@synthesize URLStringReplacement;
 
 
 - (id)copyWithZone:(NSZone *)zone
@@ -28,6 +29,7 @@
 	style.color = [UIColor colorWithRed:components[0] green:components[1] blue:components[2] alpha:components[3]];
 	style.isUnderLined = self.isUnderLined;
     style.alignment = self.alignment;
+    style.URLStringReplacement = self.URLStringReplacement;
 	return style;
 }
 
@@ -37,6 +39,7 @@
     [appendedCharacter release], appendedCharacter = nil;
     [font release], font = nil;
     [color release], color = nil;
+    [URLStringReplacement release], URLStringReplacement = nil;
     [super dealloc];
 }
 

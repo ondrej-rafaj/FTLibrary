@@ -25,6 +25,92 @@
 @synthesize defaultStyle = _defaultStyle;
 @synthesize processedString = _processedString;
 @synthesize path = _path;
+@synthesize context = _context;
+@synthesize uRLs = _URLs;
+@synthesize delegate = _delegate;
+
+
+
+- (NSDictionary *)dataForPoint:(CGPoint)point {
+	CGMutablePathRef mainPath = CGPathCreateMutable();
+    if (!_path) {
+        CGPathAddRect(mainPath, NULL, 
+                      CGRectMake(0, 0, 
+                                 self.bounds.size.width,
+                                 self.bounds.size.height));  
+    }
+    else {
+        CGPathAddPath(mainPath, NULL, _path);
+    }
+    
+    
+    float inverter = [self suggestedSizeConstrainedToSize:self.frame.size].height;
+
+    CTFrameRef ctframe = CTFramesetterCreateFrame(_framesetter, CFRangeMake(0, 0), mainPath, NULL);
+    
+    CGPathRelease(mainPath);
+    
+    NSString *strippedString = [FTCoreTextView stripTagsforString:self.text];
+    
+    CFArrayRef lines = CTFrameGetLines(ctframe);
+    CFIndex lineCount = CFArrayGetCount(lines);
+    CGPoint origins[lineCount];
+    
+    if (lineCount == 0) return nil;
+    
+    CTFrameGetLineOrigins(ctframe, CFRangeMake(0, 0), origins);
+    
+    inverter = origins[0].y;
+    
+    for(CFIndex idx = 0; idx < lineCount; idx++)
+    {
+        CTLineRef line = CFArrayGetValueAtIndex(lines, idx);
+        CGRect lineBounds = CTLineGetImageBounds(line, self.context);
+        if (CGRectIsEmpty(lineBounds)) continue;
+        lineBounds.origin.y = ( inverter - origins[idx].y);
+        
+        CFRange cfrange = CTLineGetStringRange(line);
+        NSRange range = NSMakeRange(cfrange.location, cfrange.length);
+        NSString *selectedText = [strippedString substringWithRange:range];
+
+        
+        if (CGRectContainsPoint(lineBounds, point)) {
+            NSURL *url = [self.uRLs objectForKey:[NSNumber numberWithInt:range.location]];
+            NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+            [dict setObject:selectedText forKey:@"text"];
+            [dict setObject:[NSValue valueWithCGRect:lineBounds] forKey:@"frame"];
+            if (url) [dict setObject:url forKey:@"url"];
+            
+            /*
+            UILabel *lbl = [[UILabel alloc] initWithFrame:lineBounds];
+            [lbl setText:selectedText];
+            [lbl setFont:[UIFont systemFontOfSize:14]];
+            [lbl setBackgroundColor:[UIColor redColor]];
+            [self addSubview:lbl];
+            [lbl release];
+            */
+            
+            return dict;
+        }
+        
+       
+        /*
+        for (id runObj in (NSArray *)CTLineGetGlyphRuns(line)) {
+            CTRunRef run = (CTRunRef)runObj;
+            CGRect runBounds = CTRunGetImageBounds(run, self.context, CFRangeMake(0, 0));
+            
+            CFRange cfrange = CTRunGetStringRange(run);
+            NSRange range = NSMakeRange(cfrange.location, cfrange.length);
+            NSString *selectedText = [strippedString substringWithRange:range];
+            
+            NSLog(@"RUN: %@", NSStringFromCGRect(runBounds));
+            
+        }
+         */
+    }
+    
+    return nil;
+}
 
 - (void)updateFramesetterIfNeeded
 {
@@ -98,12 +184,12 @@
             
 		}
 		CFRelease(ctFont);
-		// layout master
-		if (_framesetter != NULL)
-			CFRelease(_framesetter);
+		// layout master 
+		if (_framesetter != NULL) CFRelease(_framesetter);
 		_framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string);
 		[string release];
-	}
+        
+    }
 }
 
 /*!
@@ -162,6 +248,8 @@
     self.defaultStyle = style;
     
     NSString *regEx = @"<[a-zA-Z0-9]*( /){0,1}>";
+    
+    [self.uRLs removeAllObjects];
        
     while (YES) {
         int length;
@@ -183,6 +271,18 @@
         NSString *append = @"";
         if (style != nil && style.appendedCharacter) {
             append = style.appendedCharacter;
+        }
+        
+        BOOL isURL = (style && style.URLStringReplacement);
+        if (isURL) {
+            //replace active string with url text
+            NSRange closeTagRange = [_processedString rangeOfString:[NSString stringWithFormat:@"</%@>", key]];
+            NSRange urlRange = NSMakeRange((rangeStart.location + rangeStart.length), (closeTagRange.location - (rangeStart.location + rangeStart.length)));
+            NSString *urlString = [_processedString substringWithRange:urlRange];
+            [_processedString replaceCharactersInRange:urlRange withString:style.URLStringReplacement];
+            NSURL *url = [NSURL URLWithString:urlString];
+            [self.uRLs setObject:url forKey:[NSNumber numberWithInt:rangeStart.location]];
+            
         }
         
         if (isAutoClose) {
@@ -252,7 +352,10 @@
         _markers = [[NSMutableArray alloc] init];
         _processedString = [[NSMutableString alloc] init];
         _styles = [[NSMutableDictionary alloc] init];
+        _URLs = [[NSMutableDictionary alloc] init];
         [self setBackgroundColor:[UIColor clearColor]];
+        
+        [self setUserInteractionEnabled:YES];
     }
     return self;
 }
@@ -287,13 +390,17 @@
                                                     mainPath, NULL);
     
     // flip coordinate system
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-	CGContextTranslateCTM(context, 0, self.bounds.size.height);
-	CGContextScaleCTM(context, 1.0, -1.0);
-    
+    if (self.context) {
+        CGContextRelease(_context);
+    }
+    _context = UIGraphicsGetCurrentContext();
+    CGContextClearRect(self.context, self.frame);
+	CGContextSetTextMatrix(self.context, CGAffineTransformIdentity);
+	CGContextTranslateCTM(self.context, 0, self.bounds.size.height);
+	CGContextScaleCTM(self.context, 1.0, -1.0);
 	// draw
-	CTFrameDraw(drawFrame, context);
+	CTFrameDraw(drawFrame, self.context);
+    CGContextSaveGState(self.context);
     
     
     
@@ -340,7 +447,21 @@
     [_styles release];
     [_markers release];
     [_processedString release];
+    CGContextRelease(_context);
+    [_URLs release], _URLs = nil;
+    _delegate = nil;
     [super dealloc];
+}
+
+#pragma mark touches
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    CGPoint point = [(UITouch *)[touches anyObject] locationInView:self];
+    NSDictionary *data = [self dataForPoint:point];
+    
+    if (data && self.delegate && [self.delegate respondsToSelector:@selector(touchedData:inCoreTextView:)]) {
+        [self.delegate touchedData:data inCoreTextView:self];
+    }
 }
 
 @end
