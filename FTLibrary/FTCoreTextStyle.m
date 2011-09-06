@@ -10,6 +10,7 @@
 
 @implementation FTCoreTextStyle
 
+
 @synthesize name;
 @synthesize appendedCharacter;
 @synthesize font;
@@ -17,7 +18,31 @@
 @synthesize isUnderLined;
 @synthesize alignment;
 @synthesize URLStringReplacement;
+@synthesize maxLineHeight;
+@synthesize spaceBetweenParagraphs;
 
+CTFontRef CTFontCreateFromUIFont(UIFont *font);
+CTFontRef CTFontCreateFromUIFont(UIFont *font)
+{
+    CTFontRef ctFont = CTFontCreateWithName((CFStringRef)font.fontName, 
+                                            font.pointSize, 
+                                            NULL);
+    return ctFont;
+}
+
+- (id)init
+{
+	self = [super init];
+	if (self) {
+		self.name = @"style";
+		self.appendedCharacter = @"";
+		self.color = [UIColor blackColor];
+		self.isUnderLined = NO;
+		self.alignment = kCTLeftTextAlignment;
+		self.font = [UIFont systemFontOfSize:12];
+	}
+	return self;
+}
 
 - (id)copyWithZone:(NSZone *)zone
 {
@@ -30,6 +55,7 @@
 	style.isUnderLined = self.isUnderLined;
     style.alignment = self.alignment;
     style.URLStringReplacement = self.URLStringReplacement;
+	style.maxLineHeight = self.maxLineHeight;
 	return style;
 }
 

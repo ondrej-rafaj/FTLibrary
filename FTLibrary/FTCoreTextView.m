@@ -137,9 +137,11 @@
 		
 		//set default attributeds
 		
+		NSRange stringRange = NSMakeRange(0, [_text length]);
+		
 		[string addAttribute:(id)kCTForegroundColorAttributeName
 					   value:(id)_defaultStyle.color.CGColor
-					   range:NSMakeRange(0, [_text length])];
+					   range:stringRange];
 		
 		CTFontRef ctFont = CTFontCreateWithName((CFStringRef)_defaultStyle.font.fontName, 
 												_defaultStyle.font.pointSize, 
@@ -147,7 +149,21 @@
 		
 		[string addAttribute:(id)kCTFontAttributeName
 					   value:(id)ctFont
-					   range:NSMakeRange(0, [_text length])];
+					   range:stringRange];
+		
+		CTTextAlignment alignment = (_defaultStyle.alignment)? _defaultStyle.alignment : kCTLeftTextAlignment;
+		CGFloat maxLineHeight = _defaultStyle.maxLineHeight;
+		CGFloat paragraphSpaceBefore = _defaultStyle.spaceBetweenParagraphs;
+		
+		CTParagraphStyleSetting settings[] = {
+			{kCTParagraphStyleSpecifierAlignment, sizeof(alignment), &alignment},
+			{kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &maxLineHeight},
+			{kCTParagraphStyleSpecifierParagraphSpacing, sizeof(CGFloat), &paragraphSpaceBefore}
+		};
+		CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings, 3);
+		[string addAttribute:(id)kCTParagraphStyleAttributeName
+					   value:(id)paragraphStyle 
+					   range:stringRange];
 		
 		//set markers attributes
 		for (NSDictionary *dict in _markers) {
@@ -172,11 +188,15 @@
             
             
             CTTextAlignment alignment = (style.alignment)? style.alignment : kCTLeftTextAlignment;
-            
+            CGFloat maxLineHeight = style.maxLineHeight;
+			CGFloat paragraphSpaceBefore = style.spaceBetweenParagraphs;
+			
             CTParagraphStyleSetting settings[] = {
                 {kCTParagraphStyleSpecifierAlignment, sizeof(alignment), &alignment},
+				{kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &maxLineHeight},
+				{kCTParagraphStyleSpecifierParagraphSpacing, sizeof(CGFloat), &paragraphSpaceBefore}
             };
-            CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings, sizeof(settings) / sizeof(settings[0]));
+            CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings, 3);
             [string addAttribute:(id)kCTParagraphStyleAttributeName
                            value:(id)paragraphStyle 
                            range:aRange];
