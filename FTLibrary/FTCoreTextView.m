@@ -410,9 +410,6 @@
                                                     mainPath, NULL);
     
     // flip coordinate system
-    if (self.context) {
-        CGContextRelease(_context);
-    }
     _context = UIGraphicsGetCurrentContext();
     CGContextClearRect(self.context, self.frame);
 	CGContextSetTextMatrix(self.context, CGAffineTransformIdentity);
@@ -467,7 +464,6 @@
     [_styles release];
     [_markers release];
     [_processedString release];
-    CGContextRelease(_context);
     [_URLs release], _URLs = nil;
     _delegate = nil;
     [super dealloc];

@@ -21,15 +21,6 @@
 @synthesize maxLineHeight;
 @synthesize spaceBetweenParagraphs;
 
-CTFontRef CTFontCreateFromUIFont(UIFont *font);
-CTFontRef CTFontCreateFromUIFont(UIFont *font)
-{
-    CTFontRef ctFont = CTFontCreateWithName((CFStringRef)font.fontName, 
-                                            font.pointSize, 
-                                            NULL);
-    return ctFont;
-}
-
 - (id)init
 {
 	self = [super init];
@@ -56,6 +47,7 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
     style.alignment = self.alignment;
     style.URLStringReplacement = self.URLStringReplacement;
 	style.maxLineHeight = self.maxLineHeight;
+	style.spaceBetweenParagraphs = self.spaceBetweenParagraphs;
 	return style;
 }
 
