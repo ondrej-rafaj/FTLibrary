@@ -25,7 +25,7 @@
 {
 	self = [super init];
 	if (self) {
-		self.name = @"style";
+		self.name = @"_default";
 		self.appendedCharacter = @"";
 		self.color = [UIColor blackColor];
 		self.isUnderLined = NO;

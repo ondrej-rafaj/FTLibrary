@@ -374,7 +374,7 @@
         _styles = [[NSMutableDictionary alloc] init];
         _URLs = [[NSMutableDictionary alloc] init];
         [self setBackgroundColor:[UIColor clearColor]];
-        
+        self.contentMode = UIViewContentModeRedraw;
         [self setUserInteractionEnabled:YES];
     }
     return self;
