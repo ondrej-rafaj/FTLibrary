@@ -44,6 +44,7 @@
 
 - (id)initWithFrame:(CGRect)frame;
 - (void)addStyle:(FTCoreTextStyle *)style;
+- (void)addStyles:(NSArray *)styles;
 + (NSString *)stripTagsforString:(NSString *)string;
 + (NSArray *)pagesFromText:(NSString *)string;
 

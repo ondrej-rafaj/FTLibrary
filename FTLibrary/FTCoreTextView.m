@@ -275,7 +275,7 @@
         int length;
         NSRange rangeStart;
         NSRange rangeActive;
-        FTCoreTextStyle *style;
+        FTCoreTextStyle *style = nil;
         
         
         rangeStart = [_processedString rangeOfString:regEx options:NSRegularExpressionSearch];
@@ -440,6 +440,15 @@
 
 - (void)addStyle:(FTCoreTextStyle *)style {
     [self.styles setValue:style forKey:style.name];
+	_changesMade = YES;
+    if ([self superview]) [self setNeedsDisplay];
+}
+
+- (void)addStyles:(NSArray *)styles
+{
+	for (FTCoreTextStyle *style in styles) {
+		[self.styles setValue:style forKey:style.name];
+	}
 	_changesMade = YES;
     if ([self superview]) [self setNeedsDisplay];
 }
