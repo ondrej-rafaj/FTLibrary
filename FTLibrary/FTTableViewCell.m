@@ -27,7 +27,8 @@
 	cellImageView = [[FTImageView alloc] init];
 	[cellImageView setBackgroundColor:[UIColor whiteColor]];
 	[self addSubview:cellImageView];
-	[self setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+	[cellImageView setFrame:self.imageView.frame];
+	[self setAutoresizingMask:self.imageView.autoresizingMask];
 }
 
 - (id)init {

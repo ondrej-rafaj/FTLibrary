@@ -240,6 +240,9 @@
 }
 
 - (void)enableLoadingProgressViewWithTitle:(NSString *)title withAnimationStyle:(FTProgressViewAnimation)animation showWhileExecuting:(SEL)method onTarget:(id)target withObject:(id)object animated:(BOOL)animated {
+	if (loadingProgressView) {
+		loadingProgressView = nil;
+	}
 	if (!loadingProgressView) {
 		loadingProgressView = [[FTProgressView alloc] initWithView:self.view];
 		[self configureLoadingProgressView];
@@ -262,6 +265,7 @@
 	if (loadingProgressView) {
 		[loadingProgressView hide:YES];
 	}
+	self.loadingProgressView = nil;
 }
 
 #pragma mark Translations
