@@ -15,7 +15,7 @@
 #import "FTSystem.h"
 #import "SBJsonWriter.h"
 #import "ASIFormDataRequest.h"
-
+#import "FTFilesystemPaths.h"
 
 #pragma mark FTLanguage
 
@@ -51,7 +51,7 @@ static NSString *appID;
 
 + (void)setLocaleURL:(NSString *)url {
     if (localeURL) [localeURL release];
-    NSURL *dirURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSURL *dirURL = [NSURL fileURLWithPath:[FTFilesystemPaths getDocumentsDirectoryPath]];
     localeURL = [[NSString alloc] initWithFormat:@"%@/%@", [dirURL path], url];
 }
 
@@ -73,7 +73,7 @@ static NSString *appID;
     if (missingTranslations) [missingTranslations removeAllObjects];
     
     // TODO: import local lang in main thread, then search for internet in background
-    // Not using background thread because app will request empy data otherwise
+    // Not using background thread because app will request empty data otherwise
     // [NSThread detachNewThreadSelector:@selector(importLanguages) toTarget:self withObject:nil];
 }
 
