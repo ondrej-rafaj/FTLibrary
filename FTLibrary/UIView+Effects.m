@@ -36,5 +36,27 @@
 	return viewImage;
 }
 
+- (void)shakeViewWithOffset:(CGFloat)offset withCycleDuration:(NSTimeInterval)duration andRepeatCount:(int)repeatCount {
+	CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+	[animation setDuration:duration];
+	[animation setRepeatCount:repeatCount];
+	[animation setAutoreverses:YES];
+	[animation setFromValue:[NSValue valueWithCGPoint:CGPointMake([self center].x - offset, [self center].y)]];
+	[animation setToValue:[NSValue valueWithCGPoint:CGPointMake([self center].x + offset, [self center].y)]];
+	[[self layer] addAnimation:animation forKey:@"position"];
+}
+
+- (void)shakeViewWithOffset:(CGFloat)offset andRepeatCount:(int)repeatCount {
+	[self shakeViewWithOffset:offset withCycleDuration:0.05 andRepeatCount:repeatCount];
+}
+
+- (void)shakeViewWithOffset:(CGFloat)offset {
+	[self shakeViewWithOffset:offset andRepeatCount:8];
+}
+
+- (void)shakeView {
+	[self shakeViewWithOffset:8.0f];
+}
+
 
 @end

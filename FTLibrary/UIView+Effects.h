@@ -18,5 +18,10 @@
 
 - (UIImage *)captureImage;
 
+- (void)shakeViewWithOffset:(CGFloat)offset withCycleDuration:(NSTimeInterval)duration andRepeatCount:(int)repeatCount;
+- (void)shakeViewWithOffset:(CGFloat)offset andRepeatCount:(int)repeatCount;
+- (void)shakeViewWithOffset:(CGFloat)offset;
+- (void)shakeView;
+
 
 @end
