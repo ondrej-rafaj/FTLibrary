@@ -266,6 +266,9 @@
     _processedString = (NSMutableString *)_text;
     FTCoreTextStyle *style = [self.styles objectForKey:@"_default"];
     self.defaultStyle = style;
+	if (_defaultStyle == nil) {
+		_defaultStyle = [FTCoreTextStyle new];
+	}
     
     NSString *regEx = @"<[a-zA-Z0-9]*( /){0,1}>";
     
@@ -362,25 +365,50 @@
     return (NSArray *)result;
 }
 
-- (id)initWithFrame:(CGRect)frame
+
+#pragma mark Initialization
+
+- (void)doInit {
+	// Initialization code
+	_framesetter = NULL;
+	_text = [[NSString alloc] init];
+	_markers = [[NSMutableArray alloc] init];
+	_processedString = [[NSMutableString alloc] init];
+	_styles = [[NSMutableDictionary alloc] init];
+	_URLs = [[NSMutableDictionary alloc] init];
+	[self setBackgroundColor:[UIColor clearColor]];
+	self.contentMode = UIViewContentModeRedraw;
+	[self setUserInteractionEnabled:YES];
+}
+
+- (id)init
 {
-    self = [super initWithFrame:frame];
+    self = [super init];
     if (self) {
-        // Initialization code
-		_framesetter = NULL;
-        _text = [[NSString alloc] init];
-        _markers = [[NSMutableArray alloc] init];
-        _processedString = [[NSMutableString alloc] init];
-        _styles = [[NSMutableDictionary alloc] init];
-        _URLs = [[NSMutableDictionary alloc] init];
-        [self setBackgroundColor:[UIColor clearColor]];
-        self.contentMode = UIViewContentModeRedraw;
-        [self setUserInteractionEnabled:YES];
+        [self doInit];
     }
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self doInit];
+    }
+    return self;
+}
 
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self doInit];
+    }
+    return self;
+}
+
+#pragma mark Draw rect
 
 /*!
  * @abstract draw the actual coretext on the context
