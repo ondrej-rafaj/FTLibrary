@@ -501,6 +501,7 @@
     [_styles release];
     [_markers release];
     [_processedString release];
+	[_defaultStyle release];
     [_URLs release], _URLs = nil;
     _delegate = nil;
     [super dealloc];

@@ -34,7 +34,7 @@
 @property (nonatomic, retain) NSString *text;
 @property (nonatomic, retain) NSMutableDictionary *styles;
 @property (nonatomic, retain) NSMutableArray *markers;
-@property (nonatomic, assign) FTCoreTextStyle *defaultStyle;
+@property (nonatomic, retain) FTCoreTextStyle *defaultStyle;
 @property (nonatomic, retain) NSMutableString *processedString;
 @property (nonatomic, assign) CGPathRef path;
 @property (nonatomic, assign) CGContextRef context;
