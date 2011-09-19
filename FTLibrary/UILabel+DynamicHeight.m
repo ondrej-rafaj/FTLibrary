@@ -11,7 +11,7 @@
 @implementation UILabel (DynamicHeight)
 
 + (double) getSizeWithText:(NSString *)text andWidth:(double)width forFont:(UIFont *)font {
-	CGSize maximumSize = CGSizeMake(width, 9999);	
+	CGSize maximumSize = CGSizeMake(width, MAXFLOAT);	
 	CGSize dynamicSize = [text sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
 	return dynamicSize.height;	
 }

@@ -18,6 +18,8 @@
 
 - (void)imageView:(FTImageView *)imgView didFinishLoadingImage:(UIImage *)image;
 
+- (void)imageView:(FTImageView *)imgView didFinishLoadingImageFromInternet:(UIImage *)image;
+
 - (void)imageViewDidFailLoadingImage:(FTImageView *)imgView withError:(NSError *)error;
 
 - (void)imageViewDidStartLoadingImage:(FTImageView *)imgView;

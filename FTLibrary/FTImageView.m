@@ -187,10 +187,12 @@
 	
 	NSData *data;
 	NSString *path = [[FTFilesystemPaths getImagesDirectoryPath] stringByAppendingPathComponent:[FTText getSafeText:url]];
+	BOOL isLoadingFromUrl = NO;
 	@synchronized(self) {
 		if (![FTFilesystemIO isFile:path]) {
 			data = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
 			[data writeToFile:path atomically:YES];
+			isLoadingFromUrl = YES;
 		}
 		else {
 			data = [NSData dataWithContentsOfFile:path];
@@ -199,6 +201,11 @@
 	UIImage *img = [UIImage imageWithData:data];
 	[self performSelectorOnMainThread:@selector(setImage:) withObject:img waitUntilDone:NO];
 	
+	if (isLoadingFromUrl) {
+		if ([delegate respondsToSelector:@selector(imageView:didFinishLoadingImageFromInternet:)]) {
+			[delegate imageView:self didFinishLoadingImageFromInternet:img];
+		}
+	}
 	if ([delegate respondsToSelector:@selector(imageView:didFinishLoadingImage:)]) {
 		[delegate imageView:self didFinishLoadingImage:img];
 	}

@@ -55,6 +55,8 @@ void _FTLog(Class <LOGGING> klass, const char *file, int lineNumber, const char 
 	[key release];
 	return result;
 }
-#endif
 
 @end
+
+#endif
+
