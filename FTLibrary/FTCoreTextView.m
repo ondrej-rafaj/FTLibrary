@@ -150,7 +150,8 @@
 		[string addAttribute:(id)kCTFontAttributeName
 					   value:(id)ctFont
 					   range:stringRange];
-		
+		CFRelease(ctFont);
+
 		CTTextAlignment alignment = (_defaultStyle.alignment)? _defaultStyle.alignment : kCTLeftTextAlignment;
 		CGFloat maxLineHeight = _defaultStyle.maxLineHeight;
 		CGFloat paragraphSpaceBefore = _defaultStyle.spaceBetweenParagraphs;
@@ -164,6 +165,7 @@
 		[string addAttribute:(id)kCTParagraphStyleAttributeName
 					   value:(id)paragraphStyle 
 					   range:stringRange];
+		CFRelease(paragraphStyle);
 		
 		//set markers attributes
 		for (NSDictionary *dict in _markers) {
@@ -171,21 +173,18 @@
 			FTCoreTextStyle *style = [dict objectForKey:@"style"];
 			if ((aRange.location + aRange.length) > [_text length] ) continue;
 			
-			
-			
 			[string addAttribute:(id)kCTForegroundColorAttributeName
 						   value:(id)style.color.CGColor
 						   range:aRange];
             
-			ctFont = nil;
-			ctFont = CTFontCreateWithName((CFStringRef)style.font.fontName, 
+			CTFontRef setCTFont = CTFontCreateWithName((CFStringRef)style.font.fontName, 
 										  style.font.pointSize, 
 										  NULL);
 			
 			[string addAttribute:(id)kCTFontAttributeName
-						   value:(id)ctFont
+						   value:(id)setCTFont
 						   range:aRange];
-            
+            CFRelease(setCTFont);
             
             CTTextAlignment alignment = (style.alignment)? style.alignment : kCTLeftTextAlignment;
             CGFloat maxLineHeight = style.maxLineHeight;
@@ -200,15 +199,12 @@
             [string addAttribute:(id)kCTParagraphStyleAttributeName
                            value:(id)paragraphStyle 
                            range:aRange];
-            
-            
+			CFRelease(paragraphStyle);
 		}
-		CFRelease(ctFont);
 		// layout master 
 		if (_framesetter != NULL) CFRelease(_framesetter);
 		_framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)string);
 		[string release];
-        
     }
 }
 
@@ -335,7 +331,6 @@
             [_markers addObject:dict];            
         }
     }
-    
 }
 
 /*!
