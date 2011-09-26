@@ -1,0 +1,43 @@
+//
+//  UIImage+Tools.m
+//  FTLibrary
+//
+//  Created by Ondrej Rafaj on 26/09/2011.
+//  Copyright (c) 2011 Fuerte International. All rights reserved.
+//
+
+#import "UIImage+Tools.h"
+
+@implementation UIImage (Tools)
+
++ (UIColor *)alphaPatternImageColorWithSguareSide:(CGFloat)side withColor1:(UIColor *)color1 andColor2:(UIColor *)color2 {
+	CGFloat screenScale = [UIScreen mainScreen].scale;
+	CGFloat ds = (side * 2);
+	UIGraphicsBeginImageContextWithOptions(CGSizeMake(ds, ds), 1, screenScale);
+	
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	
+	[color2 setFill];
+	CGContextFillRect(context, CGRectMake(0, 0, ds, ds));
+	
+	[color1 setFill];
+	CGContextFillRect(context, CGRectMake(0, 0, side, side));
+	CGContextFillRect(context, CGRectMake(side, side, side, side));
+	
+	UIImage *patternImage = UIGraphicsGetImageFromCurrentImageContext();
+	
+	UIGraphicsEndImageContext();
+	return patternImage;
+}
+
++ (UIColor *)alphaPatternImageColorWithSguareSide:(CGFloat)side {
+	CGFloat c = 245;
+	return [self alphaPatternImageColorWithSguareSide:side withColor1:[UIColor colorWithRealRed:c green:c blue:c alpha:1] andColor2:[UIColor whiteColor]];
+}
+
++ (UIColor *)alphaPatternImageColor {
+	return [self alphaPatternImageColorWithSguareSide:12];
+}
+
+
+@end

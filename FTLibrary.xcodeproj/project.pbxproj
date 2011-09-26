@@ -93,6 +93,8 @@
 		4C4A0CFF13D0CC9300D6581A /* FTEditableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A0CF713D0CC9300D6581A /* FTEditableLabel.m */; };
 		4C4A0D0013D0CC9300D6581A /* FTGoogleGeocodeRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4A0CF813D0CC9300D6581A /* FTGoogleGeocodeRequest.h */; };
 		4C4A0D0113D0CC9300D6581A /* FTGoogleGeocodeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4A0CF913D0CC9300D6581A /* FTGoogleGeocodeRequest.m */; };
+		4C4AFA881430E54400140BC3 /* UIImage+Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4AFA861430E54400140BC3 /* UIImage+Tools.h */; };
+		4C4AFA891430E54400140BC3 /* UIImage+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4AFA871430E54400140BC3 /* UIImage+Tools.m */; };
 		4C5760F213C5CDBD0049371F /* FTLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C5760F013C5CDBD0049371F /* FTLog.h */; };
 		4C5760F313C5CDBD0049371F /* FTLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5760F113C5CDBD0049371F /* FTLog.m */; };
 		4C5760F413C5CDBD0049371F /* FTLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5760F113C5CDBD0049371F /* FTLog.m */; };
@@ -509,6 +511,8 @@
 		4C4A0CF713D0CC9300D6581A /* FTEditableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTEditableLabel.m; sourceTree = "<group>"; };
 		4C4A0CF813D0CC9300D6581A /* FTGoogleGeocodeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGoogleGeocodeRequest.h; path = ../FTLibrary/FTGoogleGeocodeRequest.h; sourceTree = "<group>"; };
 		4C4A0CF913D0CC9300D6581A /* FTGoogleGeocodeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGoogleGeocodeRequest.m; path = ../FTLibrary/FTGoogleGeocodeRequest.m; sourceTree = "<group>"; };
+		4C4AFA861430E54400140BC3 /* UIImage+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Tools.h"; sourceTree = "<group>"; };
+		4C4AFA871430E54400140BC3 /* UIImage+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tools.m"; sourceTree = "<group>"; };
 		4C5760F013C5CDBD0049371F /* FTLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLog.h; sourceTree = "<group>"; };
 		4C5760F113C5CDBD0049371F /* FTLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLog.m; sourceTree = "<group>"; };
 		4C57611F13C5E7770049371F /* FTProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProgressView.h; sourceTree = "<group>"; };
@@ -978,6 +982,8 @@
 				4C03661813BA0B3000E8FA09 /* NSString+Tools.m */,
 				4C03661D13BA0B3000E8FA09 /* UIColor+Tools.h */,
 				4C03661E13BA0B3000E8FA09 /* UIColor+Tools.m */,
+				4C4AFA861430E54400140BC3 /* UIImage+Tools.h */,
+				4C4AFA871430E54400140BC3 /* UIImage+Tools.m */,
 				4C03661F13BA0B3000E8FA09 /* UIImage+Alpha.h */,
 				4C03662013BA0B3000E8FA09 /* UIImage+Alpha.m */,
 				4C03662113BA0B3000E8FA09 /* UIImage+Resize.h */,
@@ -2007,6 +2013,7 @@
 				4CD94A5E14024B0500BD6C06 /* FTFacebook.h in Headers */,
 				4C8AD6081404F5960078DE52 /* FTFullWebViewController.h in Headers */,
 				4C2D2160143075B8002818EA /* FTCardView.h in Headers */,
+				4C4AFA881430E54400140BC3 /* UIImage+Tools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2258,6 +2265,7 @@
 				4CD94A5F14024B0500BD6C06 /* FTFacebook.m in Sources */,
 				4C8AD6091404F5960078DE52 /* FTFullWebViewController.m in Sources */,
 				4C2D2161143075B8002818EA /* FTCardView.m in Sources */,
+				4C4AFA891430E54400140BC3 /* UIImage+Tools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

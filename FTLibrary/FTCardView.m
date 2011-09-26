@@ -75,7 +75,7 @@
 	
 	// Create the card view
 	cardView = [[UIView alloc] init];
-	[cardView setBackgroundColor:[UIColor alphaPatternImageColor]];
+	[cardView setBackgroundColor:[UIColor whiteColor]];
 	[self addSubview:cardView];
 	
 	// Create content view

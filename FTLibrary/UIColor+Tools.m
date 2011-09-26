@@ -7,6 +7,7 @@
 //
 
 #import "UIColor+Tools.h"
+#import "UIImage+Tools.h"
 
 
 #define DEFAULT_VOID_COLOR					[UIColor blackColor]
@@ -77,23 +78,7 @@
 }
 
 + (UIColor *)alphaPatternImageColorWithSguareSide:(CGFloat)side withColor1:(UIColor *)color1 andColor2:(UIColor *)color2 {
-	CGFloat screenScale = [UIScreen mainScreen].scale;
-	CGFloat ds = (side * 2);
-	UIGraphicsBeginImageContextWithOptions(CGSizeMake(ds, ds), 1, screenScale);
-	
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	
-	[color2 setFill];
-	CGContextFillRect(context, CGRectMake(0, 0, ds, ds));
-	
-	[color1 setFill];
-	CGContextFillRect(context, CGRectMake(0, 0, side, side));
-	CGContextFillRect(context, CGRectMake(side, side, side, side));
-	
-	UIImage *patternImage = UIGraphicsGetImageFromCurrentImageContext();
-	
-	UIGraphicsEndImageContext();
-	
+	UIImage *patternImage = [UIImage alphaPatternImageWithSguareSide:side withColor1:color1 andColor2:color2];
 	return [UIColor colorWithPatternImage:patternImage];
 }
 
