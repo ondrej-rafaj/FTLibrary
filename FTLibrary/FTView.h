@@ -7,18 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FTImageView.h"
 #import "UIView+Layout.h"
 #import "UIView+Effects.h"
 
 
 @interface FTView : UIView {
 	
-	UIImageView *backgroundImage;
+	FTImageView *backgroundImage;
 	
 }
 
-@property (nonatomic, retain) UIImageView *backgroundImage;
+@property (nonatomic, retain) FTImageView *backgroundImage;
 
+
+- (void)initializeView;
 
 - (void)enableBackgroundImage:(UIImage *)image;
 

@@ -27,17 +27,14 @@
 
 // TODO: finish me for landscape, portrait, iPhone & iPad :)
 - (CGRect)fullscreenRect {
-	
-	
-	
-	
-	
 	if ([FTSystem isPhoneSize]) {
-		CGFloat height =	480;	// full height
-		if (YES) height -=	20;		// status bar
-		if (YES) height -=	44;		// navigation bar
-		if (NO) height -=	49;		// tab bar
-		return CGRectMake(0, 0, 320, height);
+//		CGFloat height =	480;	// full height
+//		if (YES) height -=	20;		// status bar
+//		if (YES) height -=	44;		// navigation bar
+//		if (NO) height -=	49;		// tab bar
+//		return CGRectMake(0, 0, 320, height);
+		if (isLandscape) return CGRectMake(0, 0, 480, 300);
+		else return CGRectMake(0, 0, 320, 480);		
 	}
 	else {
 		if (isLandscape) return CGRectMake(0, 0, 1024, 748);

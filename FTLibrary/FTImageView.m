@@ -116,42 +116,6 @@
 	[UIView commitAnimations];
 }
 
-//- (void)enableProgressLoadingView:(BOOL)enable {
-//	if (enable) {
-//		if (!progressLoadingView) {
-//			progressLoadingView = [[UIProgressView alloc] initWithFrame:CGRectMake(10, ([self height] - 25), ([self width] - 20), 15)];
-//			[activityIndicator setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth];
-//			[progressLoadingView setAlpha:0];
-//			[self addSubview:progressLoadingView];
-//			if (imageRequest) {
-//				if ([imageRequest isExecuting]) {
-//					[imageRequest setDownloadProgressDelegate:progressLoadingView];
-//				}
-//			}
-//			[self enableLoadingElements:YES];
-//		}
-//	}
-//	else {
-//		if (progressLoadingView) {
-//			[UIView animateWithDuration:0.3
-//							 animations:^{
-//								 [progressLoadingView setAlpha:0];
-//							 }
-//							 completion:^(BOOL finished) {
-//								 if (imageRequest) {
-//									 if ([imageRequest isExecuting]) {
-//										 [imageRequest setDownloadProgressDelegate:nil];
-//									 }
-//								 }
-//								 [progressLoadingView removeFromSuperview];
-//								 [progressLoadingView release];
-//								 progressLoadingView = nil;
-//							 }
-//			 ];
-//		}
-//	}
-//}
-
 - (void)enableActivityIndicator:(BOOL)enable {
 	if (enable) {
 		if (!activityIndicator) {

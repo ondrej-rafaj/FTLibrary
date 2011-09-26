@@ -43,7 +43,7 @@
 	UILabel *debugLabel;
 	
 	NSString *imageUrl;
-    
+	
 }
 
 @property (nonatomic, retain) UIImageView *overlayImage;
@@ -57,7 +57,6 @@
 @property (nonatomic, readonly) BOOL debugMode;
 
 @property (nonatomic, readonly) NSString *imageUrl;
-
 
 - (id)initWithFrameWithRandomColor:(CGRect)frame;
 - (void)setRandomColorBackground;

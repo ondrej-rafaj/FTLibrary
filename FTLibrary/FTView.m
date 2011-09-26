@@ -7,16 +7,48 @@
 //
 
 #import "FTView.h"
+#import "UIColor+Tools.h"
+
 
 @implementation FTView
 
 @synthesize backgroundImage;
 
 
+#pragma mark Initialization
+
+- (void)initializeView {
+	
+}
+
+- (id)init {
+	self = [super init];
+	if (self) {
+		[self initializeView];
+	}
+	return self;
+}
+
+- (id)initWithFrame:(CGRect)frame {
+	self = [super initWithFrame:frame];
+	if (self) {
+		[self initializeView];
+	}
+	return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+	self = [super initWithCoder:aDecoder];
+	if (self) {
+		[self initializeView];
+	}
+	return self;
+}
+
 #pragma mark Background
 
 - (void)enableBackgroundImage:(UIImage *)image {
-	backgroundImage = [[UIImageView alloc] initWithFrame:self.bounds];
+	backgroundImage = [[FTImageView alloc] initWithFrame:self.bounds];
 	[backgroundImage setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	[backgroundImage setImage:image];
 	[self addSubview:backgroundImage];

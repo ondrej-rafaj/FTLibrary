@@ -30,7 +30,10 @@ typedef enum {
 	FTImageView *contentViewImage;
 	UIView *contentViewOvelay;
 	
+	// Styles
 	FTCardViewStyle _style;
+	CGFloat _borderThickness;
+	CGFloat _contentMargin;
 	
 }
 
@@ -43,6 +46,11 @@ typedef enum {
 @property (nonatomic, retain) UIView *contentViewOvelay;
 
 @property (nonatomic) FTCardViewStyle style;
+@property (nonatomic) CGFloat borderThickness;
+@property (nonatomic) CGFloat contentMargin;
+
+
+- (void)toggleContentViewOverlay:(BOOL)animated;
 
 
 @end

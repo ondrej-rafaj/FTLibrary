@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FTView.h"
 #import "FTPageDelegate.h"
 #import "FTPageLocation.h"
 
 
-@interface FTPage : UIView {
+@interface FTPage : FTView {
 	
 	FTPageLocation *location;
 	
