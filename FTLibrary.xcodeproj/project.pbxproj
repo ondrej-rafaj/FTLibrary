@@ -81,6 +81,8 @@
 		4C03667313BA0D6000E8FA09 /* FTViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C03667113BA0D6000E8FA09 /* FTViewController.h */; };
 		4C03667413BA0D6000E8FA09 /* FTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03667213BA0D6000E8FA09 /* FTViewController.m */; };
 		4C03667513BA0D6600E8FA09 /* FTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03667213BA0D6000E8FA09 /* FTViewController.m */; };
+		4C2D2160143075B8002818EA /* FTCardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C2D215E143075B8002818EA /* FTCardView.h */; };
+		4C2D2161143075B8002818EA /* FTCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2D215F143075B8002818EA /* FTCardView.m */; };
 		4C4030A113BEA2A000E6A4A2 /* FTLang.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C40309F13BEA2A000E6A4A2 /* FTLang.h */; };
 		4C4030A213BEA2A000E6A4A2 /* FTLang.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4030A013BEA2A000E6A4A2 /* FTLang.m */; };
 		4C4A0CFA13D0CC9300D6581A /* FTEditableElementView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C4A0CF213D0CC9300D6581A /* FTEditableElementView.h */; };
@@ -495,6 +497,8 @@
 		4C03666913BA0C1100E8FA09 /* FTImageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTImageService.m; sourceTree = "<group>"; };
 		4C03667113BA0D6000E8FA09 /* FTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTViewController.h; sourceTree = "<group>"; };
 		4C03667213BA0D6000E8FA09 /* FTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTViewController.m; sourceTree = "<group>"; };
+		4C2D215E143075B8002818EA /* FTCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCardView.h; sourceTree = "<group>"; };
+		4C2D215F143075B8002818EA /* FTCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCardView.m; sourceTree = "<group>"; };
 		4C40309F13BEA2A000E6A4A2 /* FTLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLang.h; sourceTree = "<group>"; };
 		4C4030A013BEA2A000E6A4A2 /* FTLang.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLang.m; sourceTree = "<group>"; };
 		4C4A0CF213D0CC9300D6581A /* FTEditableElementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTEditableElementView.h; sourceTree = "<group>"; };
@@ -1021,6 +1025,15 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		4C2D215D14307597002818EA /* Card view */ = {
+			isa = PBXGroup;
+			children = (
+				4C2D215E143075B8002818EA /* FTCardView.h */,
+				4C2D215F143075B8002818EA /* FTCardView.m */,
+			);
+			name = "Card view";
+			sourceTree = "<group>";
+		};
 		4C40309D13BEA27D00E6A4A2 /* Localizations */ = {
 			isa = PBXGroup;
 			children = (
@@ -1057,8 +1070,9 @@
 		4C57611D13C5E7570049371F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4C6F8F6A13F87686004A4FB2 /* Grid view */,
 				4C6F8F5B13F87502004A4FB2 /* Basic view */,
+				4C2D215D14307597002818EA /* Card view */,
+				4C6F8F6A13F87686004A4FB2 /* Grid view */,
 				4C6F8F5913F874F3004A4FB2 /* Autoline */,
 				4C6F969413DD8F8B000BF403 /* Debug */,
 				6834BE2B13D9B2F000781018 /* Labels */,
@@ -1992,6 +2006,7 @@
 				4CD94A3813FE5E4900BD6C06 /* FTAutoColumnView.h in Headers */,
 				4CD94A5E14024B0500BD6C06 /* FTFacebook.h in Headers */,
 				4C8AD6081404F5960078DE52 /* FTFullWebViewController.h in Headers */,
+				4C2D2160143075B8002818EA /* FTCardView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2242,6 +2257,7 @@
 				4CD94A3913FE5E4900BD6C06 /* FTAutoColumnView.m in Sources */,
 				4CD94A5F14024B0500BD6C06 /* FTFacebook.m in Sources */,
 				4C8AD6091404F5960078DE52 /* FTFullWebViewController.m in Sources */,
+				4C2D2161143075B8002818EA /* FTCardView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

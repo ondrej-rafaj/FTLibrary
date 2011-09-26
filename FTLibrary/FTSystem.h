@@ -44,6 +44,7 @@ FTSystemDeviceType;
 
 + (UIInterfaceOrientation)interfaceOrientation;
 
++ (CGRect)screenRect;
 + (CGSize)screenSize;
 
 + (float)systemNumber;
