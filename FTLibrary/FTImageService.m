@@ -27,7 +27,7 @@
 	return instance;
 }
 
-- (id) init {
+- (id)init {
 	self = [super init];
 	
 	if(self != nil) {
@@ -38,18 +38,18 @@
 	return self;	
 }
 
-- (void) dealloc {
+- (void)dealloc {
 	[imageCache release];
 	[urlImageCache release];
 	[super dealloc];
 }
 
-- (void) freeMemory {
+- (void)freeMemory {
 	[imageCache removeAllObjects];
 	[urlImageCache removeAllObjects];
 }
 
-- (UIImage *) loadImage:(NSString *)imageName {
+- (UIImage *)loadImage:(NSString *)imageName {
 	UIImage *cachedImage = [imageCache objectForKey:imageName];
 	
 	if (cachedImage == nil)	{
@@ -64,7 +64,7 @@
 	return cachedImage;
 }
 
-- (UIImage *) loadImageFromUrl:(NSString *)url withImageDate:(NSDate *)imageDate {	
+- (UIImage *)loadImageFromUrl:(NSString *)url withImageDate:(NSDate *)imageDate {	
 	[imageDate retain];
 	
 	NSMutableDictionary *cachedImageData = [urlImageCache objectForKey:url];
@@ -103,7 +103,7 @@
 	return cachedImage;
 }
 
-- (UIImage *) getColouredImage:(NSString *)baseName withColour:(UIColor *)colour {
+- (UIImage *)getColouredImage:(NSString *)baseName withColour:(UIColor *)colour {
 	NSString *imageName = [[NSString alloc] initWithFormat:@"%@.png", baseName];
 	NSString *maskName = [[NSString alloc] initWithFormat:@"%@_Mask.png", baseName];		
 	
@@ -124,7 +124,7 @@
 	return image;
 }
 
-- (UIImageView *) layerImageView:(UIImageView *)imageView withImage:(NSString *)imageName {
+- (UIImageView *)layerImageView:(UIImageView *)imageView withImage:(NSString *)imageName {
 	UIImage *layerImage = [self loadImage:imageName];
 	UIImageView *layerView = [[UIImageView alloc] initWithImage:layerImage];
 	[layerView positionAtX:imageView.width - layerView.width];

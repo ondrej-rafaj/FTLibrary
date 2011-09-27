@@ -19,6 +19,7 @@
 @synthesize delegate;
 @synthesize activityIndicator;
 @synthesize progressLoadingView;
+@synthesize useAsiHTTPRequest;
 @synthesize debugMode;
 @synthesize imageUrl;
 
@@ -199,38 +200,52 @@
 		[self updateDebugInfo:@"Loading from cache"];
 		return;
 	}
-	else [self updateDebugInfo:@"Loading url from web"];
-	[NSThread detachNewThreadSelector:@selector(loadImageFromUrlOnBackground:) toTarget:self withObject:url];
+	else {
+		if (!useAsiHTTPRequest) {
+			[self updateDebugInfo:@"Loading url from web"];
+			[NSThread detachNewThreadSelector:@selector(loadImageFromUrlOnBackground:) toTarget:self withObject:url];
+		}
+		else {
+			imageRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
+			[imageRequest setDelegate:self];
+			[imageRequest startAsynchronous];
+		}
+	}
 }
 
-//#pragma mark ASIHTTPRequest delegate methods
-//
-//- (void)requestFinished:(ASIHTTPRequest *)request {
-//	[self updateDebugInfo:@"Request successful"];
-//	[self enableLoadingElements:NO];
-//	UIImage *img = [UIImage imageWithData:[request responseData]];
-//	[self performSelectorOnMainThread:@selector(setImage:) withObject:img waitUntilDone:NO];
-//	
-//	if ([delegate respondsToSelector:@selector(imageView:didFinishLoadingImage:)]) {
-//		[delegate imageView:self didFinishLoadingImage:img];
-//	}
-//}
-//
-//- (void)requestFailed:(ASIHTTPRequest *)request {
-//	[self updateDebugInfo:@"Request failed"];
-//	[self enableLoadingElements:NO];
-//	if ([delegate respondsToSelector:@selector(imageViewDidFailLoadingImage:withError:)]) {
-//		[delegate imageViewDidFailLoadingImage:self withError:[request error]];
-//	}
-//}
-//
-//- (void)requestStarted:(ASIHTTPRequest *)request {
-//	[self updateDebugInfo:@"Request started"];
-//	[self enableLoadingElements:YES];
-//	if ([delegate respondsToSelector:@selector(imageViewDidStartLoadingImage:)]) {
-//		[delegate imageViewDidStartLoadingImage:self];
-//	}
-//}
+#pragma mark ASIHTTPRequest delegate methods
+
+- (void)requestFinished:(ASIHTTPRequest *)request {
+	[self updateDebugInfo:@"Request successful"];
+	[self enableLoadingElements:NO];
+	UIImage *img = [UIImage imageWithData:[request responseData]];
+	NSString *path = [[FTFilesystemPaths getImagesDirectoryPath] stringByAppendingPathComponent:[FTText getSafeText:request.url.absoluteString]];
+	[[request responseData] writeToFile:path atomically:YES];
+	[self performSelectorOnMainThread:@selector(setImage:) withObject:img waitUntilDone:NO];
+	
+	if ([delegate respondsToSelector:@selector(imageView:didFinishLoadingImageFromInternet:)]) {
+		[delegate imageView:self didFinishLoadingImageFromInternet:img];
+	}
+	if ([delegate respondsToSelector:@selector(imageView:didFinishLoadingImage:)]) {
+		[delegate imageView:self didFinishLoadingImage:img];
+	}
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request {
+	[self updateDebugInfo:@"Request failed"];
+	[self enableLoadingElements:NO];
+	if ([delegate respondsToSelector:@selector(imageViewDidFailLoadingImage:withError:)]) {
+		[delegate imageViewDidFailLoadingImage:self withError:[request error]];
+	}
+}
+
+- (void)requestStarted:(ASIHTTPRequest *)request {
+	[self updateDebugInfo:@"Request started"];
+	[self enableLoadingElements:YES];
+	if ([delegate respondsToSelector:@selector(imageViewDidStartLoadingImage:)]) {
+		[delegate imageViewDidStartLoadingImage:self];
+	}
+}
 
 #pragma mark Memory management
 
@@ -238,8 +253,9 @@
     [overlayImage release];
 	[activityIndicator release];
 	[progressLoadingView release];
-//	if ([imageRequest isExecuting]) [imageRequest cancel];
-//	[imageRequest release];
+	[imageRequest cancel];
+	[imageRequest setDelegate:nil];
+	[imageRequest release];
 	[debugLabel release];
 	[imageUrl release];
     [super dealloc];

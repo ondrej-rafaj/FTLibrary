@@ -412,6 +412,12 @@
 		4CD94A5E14024B0500BD6C06 /* FTFacebook.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD94A5C14024B0500BD6C06 /* FTFacebook.h */; };
 		4CD94A5F14024B0500BD6C06 /* FTFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD94A5D14024B0500BD6C06 /* FTFacebook.m */; };
 		4CEB1BFE1403B33400B70C98 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1BFD1403B33400B70C98 /* UIKit.framework */; };
+		4CFEAD8614321FE000EDD9A8 /* FTAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CFEAD8414321FE000EDD9A8 /* FTAlertView.h */; };
+		4CFEAD8714321FE000EDD9A8 /* FTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEAD8514321FE000EDD9A8 /* FTAlertView.m */; };
+		4CFEAD8D1432279A00EDD9A8 /* FTCachedImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CFEAD891432279900EDD9A8 /* FTCachedImageLoader.h */; };
+		4CFEAD8E1432279A00EDD9A8 /* FTCachedImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEAD8A1432279A00EDD9A8 /* FTCachedImageLoader.m */; };
+		4CFEAD8F1432279A00EDD9A8 /* FTDiskCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CFEAD8B1432279A00EDD9A8 /* FTDiskCache.h */; };
+		4CFEAD901432279A00EDD9A8 /* FTDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEAD8C1432279A00EDD9A8 /* FTDiskCache.m */; };
 		6834BE2913D9B2EA00781018 /* FTLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6834BE2713D9B2EA00781018 /* FTLabel.h */; };
 		6834BE2A13D9B2EA00781018 /* FTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6834BE2813D9B2EA00781018 /* FTLabel.m */; };
 		68437FAB13FC08540072C4B9 /* FTLanguageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 68437FA913FC08530072C4B9 /* FTLanguageManager.h */; };
@@ -773,6 +779,12 @@
 		4CEB1BFD1403B33400B70C98 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4CEB1BFF1403B34700B70C98 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4CEB1C001403B36400B70C98 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		4CFEAD8414321FE000EDD9A8 /* FTAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAlertView.h; sourceTree = "<group>"; };
+		4CFEAD8514321FE000EDD9A8 /* FTAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAlertView.m; sourceTree = "<group>"; };
+		4CFEAD891432279900EDD9A8 /* FTCachedImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCachedImageLoader.h; sourceTree = "<group>"; };
+		4CFEAD8A1432279A00EDD9A8 /* FTCachedImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCachedImageLoader.m; sourceTree = "<group>"; };
+		4CFEAD8B1432279A00EDD9A8 /* FTDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDiskCache.h; sourceTree = "<group>"; };
+		4CFEAD8C1432279A00EDD9A8 /* FTDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDiskCache.m; sourceTree = "<group>"; };
 		6834BE2713D9B2EA00781018 /* FTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLabel.h; sourceTree = "<group>"; };
 		6834BE2813D9B2EA00781018 /* FTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLabel.m; sourceTree = "<group>"; };
 		68437FA913FC08530072C4B9 /* FTLanguageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLanguageManager.h; sourceTree = "<group>"; };
@@ -1137,6 +1149,8 @@
 		4C5761A413CAE9130049371F /* Alert view */ = {
 			isa = PBXGroup;
 			children = (
+				4CFEAD8414321FE000EDD9A8 /* FTAlertView.h */,
+				4CFEAD8514321FE000EDD9A8 /* FTAlertView.m */,
 			);
 			name = "Alert view";
 			sourceTree = "<group>";
@@ -1472,8 +1486,8 @@
 		4C85BC7613BB156A00CB7FCA /* Caching */ = {
 			isa = PBXGroup;
 			children = (
-				4CB6E24613D5D672002FEC0A /* FTCacheService.h */,
-				4CB6E24713D5D672002FEC0A /* FTCacheService.m */,
+				4CFEAD911432279E00EDD9A8 /* Basic */,
+				4CFEAD92143227AA00EDD9A8 /* Operation queue */,
 			);
 			name = Caching;
 			path = ../Thirdparty;
@@ -1803,6 +1817,26 @@
 			name = "Drag & Drop";
 			sourceTree = "<group>";
 		};
+		4CFEAD911432279E00EDD9A8 /* Basic */ = {
+			isa = PBXGroup;
+			children = (
+				4CB6E24613D5D672002FEC0A /* FTCacheService.h */,
+				4CB6E24713D5D672002FEC0A /* FTCacheService.m */,
+			);
+			name = Basic;
+			sourceTree = "<group>";
+		};
+		4CFEAD92143227AA00EDD9A8 /* Operation queue */ = {
+			isa = PBXGroup;
+			children = (
+				4CFEAD891432279900EDD9A8 /* FTCachedImageLoader.h */,
+				4CFEAD8A1432279A00EDD9A8 /* FTCachedImageLoader.m */,
+				4CFEAD8B1432279A00EDD9A8 /* FTDiskCache.h */,
+				4CFEAD8C1432279A00EDD9A8 /* FTDiskCache.m */,
+			);
+			name = "Operation queue";
+			sourceTree = "<group>";
+		};
 		6834BE2B13D9B2F000781018 /* Labels */ = {
 			isa = PBXGroup;
 			children = (
@@ -2014,6 +2048,9 @@
 				4C8AD6081404F5960078DE52 /* FTFullWebViewController.h in Headers */,
 				4C2D2160143075B8002818EA /* FTCardView.h in Headers */,
 				4C4AFA881430E54400140BC3 /* UIImage+Tools.h in Headers */,
+				4CFEAD8614321FE000EDD9A8 /* FTAlertView.h in Headers */,
+				4CFEAD8D1432279A00EDD9A8 /* FTCachedImageLoader.h in Headers */,
+				4CFEAD8F1432279A00EDD9A8 /* FTDiskCache.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2266,6 +2303,9 @@
 				4C8AD6091404F5960078DE52 /* FTFullWebViewController.m in Sources */,
 				4C2D2161143075B8002818EA /* FTCardView.m in Sources */,
 				4C4AFA891430E54400140BC3 /* UIImage+Tools.m in Sources */,
+				4CFEAD8714321FE000EDD9A8 /* FTAlertView.m in Sources */,
+				4CFEAD8E1432279A00EDD9A8 /* FTCachedImageLoader.m in Sources */,
+				4CFEAD901432279A00EDD9A8 /* FTDiskCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

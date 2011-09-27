@@ -7,12 +7,13 @@
 //
 
 #import "UIImage+Tools.h"
+#import "FTSystem.h"
 #import "UIColor+Tools.h"
 
 @implementation UIImage (Tools)
 
 + (UIImage *)alphaPatternImageWithSguareSide:(CGFloat)side withColor1:(UIColor *)color1 andColor2:(UIColor *)color2 {
-	if (YES) side = (side * 2);
+	if ([FTSystem isRetina]) side = (side * 2);
 	CGFloat screenScale = [UIScreen mainScreen].scale;
 	CGFloat ds = (side * 2);
 	UIGraphicsBeginImageContextWithOptions(CGSizeMake(ds, ds), 1, screenScale);

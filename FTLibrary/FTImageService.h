@@ -10,18 +10,20 @@
 
 
 @interface FTImageService : NSObject {
+	
 	NSMutableDictionary *imageCache;
-	NSMutableDictionary *urlImageCache;	
+	NSMutableDictionary *urlImageCache;
+	
 }
 
-+ (FTImageService *) instance;
++ (FTImageService *)instance;
 
-- (void) freeMemory;
+- (void)freeMemory;
 
-- (UIImage *) loadImage:(NSString *)imageName;
-- (UIImage *) loadImageFromUrl:(NSString *)url withImageDate:(NSDate *)imageDate;
+- (UIImage *)loadImage:(NSString *)imageName;
+- (UIImage *)loadImageFromUrl:(NSString *)url withImageDate:(NSDate *)imageDate;
 
-- (UIImage *) getColouredImage:(NSString *)baseName withColour:(UIColor *)colour;
+- (UIImage *)getColouredImage:(NSString *)baseName withColour:(UIColor *)colour;
 
 - (UIImageView *)layerImageView:(UIImageView *)imageView withImage:(NSString *)imageName;
 

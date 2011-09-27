@@ -171,6 +171,7 @@
 		[preloader setAlpha:1];
 		[UIView commitAnimations];
 	}
+	[contentViewImage setUseAsiHTTPRequest:YES];
 	[contentViewImage loadImageFromUrl:url];
 }
 
