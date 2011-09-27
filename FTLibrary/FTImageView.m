@@ -183,6 +183,11 @@
 	[pool release];
 }
 
+- (BOOL)isCacheFileForUrl:(NSString *)url {
+	NSString *path = [[FTFilesystemPaths getImagesDirectoryPath] stringByAppendingPathComponent:[FTText getSafeText:url]];
+	return ([FTFilesystemIO isFile:path]);
+}
+
 - (void)loadImageFromUrl:(NSString *)url {
 	[imageUrl release];
 	imageUrl = url;

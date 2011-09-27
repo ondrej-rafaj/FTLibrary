@@ -7,10 +7,12 @@
 //
 
 #import "UIImage+Tools.h"
+#import "UIColor+Tools.h"
 
 @implementation UIImage (Tools)
 
-+ (UIColor *)alphaPatternImageColorWithSguareSide:(CGFloat)side withColor1:(UIColor *)color1 andColor2:(UIColor *)color2 {
++ (UIImage *)alphaPatternImageWithSguareSide:(CGFloat)side withColor1:(UIColor *)color1 andColor2:(UIColor *)color2 {
+	if (YES) side = (side * 2);
 	CGFloat screenScale = [UIScreen mainScreen].scale;
 	CGFloat ds = (side * 2);
 	UIGraphicsBeginImageContextWithOptions(CGSizeMake(ds, ds), 1, screenScale);
@@ -30,13 +32,13 @@
 	return patternImage;
 }
 
-+ (UIColor *)alphaPatternImageColorWithSguareSide:(CGFloat)side {
++ (UIImage *)alphaPatternImageWithSguareSide:(CGFloat)side {
 	CGFloat c = 245;
-	return [self alphaPatternImageColorWithSguareSide:side withColor1:[UIColor colorWithRealRed:c green:c blue:c alpha:1] andColor2:[UIColor whiteColor]];
+	return [self alphaPatternImageWithSguareSide:side withColor1:[UIColor colorWithRealRed:c green:c blue:c alpha:1] andColor2:[UIColor whiteColor]];
 }
 
-+ (UIColor *)alphaPatternImageColor {
-	return [self alphaPatternImageColorWithSguareSide:12];
++ (UIImage *)alphaPatternImage {
+	return [self alphaPatternImageWithSguareSide:12];
 }
 
 

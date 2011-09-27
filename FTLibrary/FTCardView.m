@@ -18,6 +18,7 @@
 @synthesize cardViewOverlay;
 @synthesize contentView;
 @synthesize contentViewImage;
+@synthesize preloader;
 @synthesize contentViewOvelay;
 
 
@@ -66,7 +67,7 @@
 	[self setBackgroundColor:[UIColor whiteColor]];
 	
 	_borderThickness = 1;
-	_contentMargin = 12;
+	_contentMargin = 6;
 	
 	// Create the border line view
 	border = [[UIView alloc] init];
@@ -80,13 +81,12 @@
 	
 	// Create content view
 	contentView = [[UIView alloc] init];
-	[contentView setBackgroundColor:[UIColor clearColor]];
+	[contentView setBackgroundColor:[UIColor alphaPatternImageColor]];
 	[self addSubview:contentView];
 	
 	// Image view in content view
 	contentViewImage = [[FTImageView alloc] init];
 	[contentViewImage setBackgroundColor:[UIColor groupTableViewBackgroundColor]];
-	//[contentViewImage setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	[contentView addSubview:contentViewImage];
 	
 	// Creating content view overlay
@@ -98,6 +98,33 @@
 	
 	// Layout all elements
 	[self layoutViews];
+}
+
+#pragma mark Overlay views aimations
+
+- (void)finishOverlayAnimation {
+	[contentViewOvelay setHidden:YES];
+}
+
+- (void)toggleContentViewOverlay:(BOOL)animated {
+	BOOL overlayOn = ![contentViewOvelay isHidden];
+	if (!overlayOn) {
+		[contentViewOvelay setAlpha:0];
+		[contentViewOvelay setHidden:NO];
+	}
+	if (animated) [UIView beginAnimations:nil context:nil];
+	if (overlayOn) {
+		if (animated) {
+			[UIView setAnimationDelegate:self];
+			[UIView setAnimationDidStopSelector:@selector(finishOverlayAnimation)];
+		}
+		else [self finishOverlayAnimation];
+		[contentViewOvelay setAlpha:0];
+	}
+	else {
+		[contentViewOvelay setAlpha:1];
+	}
+	if (animated) [UIView commitAnimations];
 }
 
 #pragma mark Settings
@@ -129,10 +156,42 @@
 	return _contentMargin;
 }
 
-- (void)toggleContentViewOverlay:(BOOL)animated {
-	if (animated) [UIView beginAnimations:nil context:nil];
+- (void)loadImageOnTheBackground:(NSString *)url withActivityIndicator:(BOOL)indicator {
+	[contentViewImage setDelegate:self];
 	
-	if (animated) [UIView commitAnimations];
+	//if (indicator && ![contentViewImage isCacheFileForUrl:url]) {
+	if (indicator && ![contentViewImage isCacheFileForUrl:url]) {
+		preloader = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+		[preloader startAnimating];
+		[preloader setAlpha:0];
+		[contentViewImage addSubview:preloader];
+		[preloader centerInSuperView];
+		
+		[UIView beginAnimations:nil context:nil];
+		[preloader setAlpha:1];
+		[UIView commitAnimations];
+	}
+	[contentViewImage loadImageFromUrl:url];
+}
+
+- (void)loadImageOnTheBackground:(NSString *)url {
+	[self loadImageOnTheBackground:url withActivityIndicator:NO];
+}
+
+#pragma mark Image view delegate methods
+
+- (void)imageView:(FTImageView *)imgView didFinishLoadingImage:(UIImage *)image {
+	if (preloader) {
+		
+		[UIView animateWithDuration:0.3 animations:^{
+			[preloader setAlpha:0];
+		}
+						 completion:^(BOOL finished) {
+							 [preloader removeFromSuperview];
+							 [preloader release];
+							 preloader = nil;
+						 }];
+	}
 }
 
 #pragma mark Memory management

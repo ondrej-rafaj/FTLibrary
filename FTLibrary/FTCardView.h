@@ -20,7 +20,7 @@ typedef enum {
 } FTCardViewStyle;
 
 
-@interface FTCardView : FTView {
+@interface FTCardView : FTView <FTImageViewDelegate> {
 	
 	UIView *shadow;
 	UIView *border;
@@ -28,6 +28,7 @@ typedef enum {
 	UIView *cardViewOverlay;
 	UIView *contentView;
 	FTImageView *contentViewImage;
+	UIActivityIndicatorView *preloader;
 	UIView *contentViewOvelay;
 	
 	// Styles
@@ -43,6 +44,7 @@ typedef enum {
 @property (nonatomic, retain) UIView *cardViewOverlay;
 @property (nonatomic, retain) UIView *contentView;
 @property (nonatomic, retain) FTImageView *contentViewImage;
+@property (nonatomic, retain) UIActivityIndicatorView *preloader;
 @property (nonatomic, retain) UIView *contentViewOvelay;
 
 @property (nonatomic) FTCardViewStyle style;
@@ -51,6 +53,10 @@ typedef enum {
 
 
 - (void)toggleContentViewOverlay:(BOOL)animated;
+
+- (void)loadImageOnTheBackground:(NSString *)url withActivityIndicator:(BOOL)indicator;
+
+- (void)loadImageOnTheBackground:(NSString *)url;
 
 
 @end

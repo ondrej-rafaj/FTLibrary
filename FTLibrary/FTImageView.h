@@ -63,6 +63,8 @@
 
 - (void)doFlashWithColor:(UIColor *)color;
 
+- (BOOL)isCacheFileForUrl:(NSString *)url;
+
 - (void)loadImageFromUrl:(NSString *)url;
 
 //- (void)enableProgressLoadingView:(BOOL)enable;
