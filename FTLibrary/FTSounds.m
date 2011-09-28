@@ -40,8 +40,16 @@
 
 - (void)doPlaySound:(NSString *)soundName {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	NSURL *url = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:soundName ofType:@"mp3"]];
-	NSError *error;
+	
+    NSString *extension = @"mp3";
+    NSRange extRange = [soundName rangeOfString:@"."];
+    if (extRange.location != NSNotFound) {
+        extension = [soundName substringWithRange:NSMakeRange(extRange.location + 1, (soundName.length - extRange.location - 1))];
+        soundName = [soundName substringWithRange:NSMakeRange(0, extRange.location)];
+    }
+	NSURL *url = [[NSBundle mainBundle] URLForResource:soundName withExtension:extension];
+    
+    NSError *error;
 	AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
 	[audioPlayer setDelegate:self];
 	if (audioPlayer == nil) NSLog(@"Audio player error: %@", [error description]);
