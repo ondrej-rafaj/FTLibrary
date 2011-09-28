@@ -250,6 +250,7 @@
 #pragma mark Memory management
 
 - (void)dealloc {
+	[self setDelegate:nil];
     [overlayImage release];
 	[activityIndicator release];
 	[progressLoadingView release];

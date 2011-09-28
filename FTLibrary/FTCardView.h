@@ -20,8 +20,20 @@ typedef enum {
 } FTCardViewStyle;
 
 
+@class FTCardView;
+
+@protocol FTCardViewDelegate <NSObject>
+
+@optional
+
+- (void)cardView:(FTCardView *)view didTapWithNumberOfTouches:(NSInteger)touches;
+
+@end
+
+
 @interface FTCardView : FTView <FTImageViewDelegate> {
 	
+	UIView *mainView;
 	UIView *shadow;
 	UIView *border;
 	UIView *cardView;
@@ -36,8 +48,11 @@ typedef enum {
 	CGFloat _borderThickness;
 	CGFloat _contentMargin;
 	
+	id <FTCardViewDelegate> delegate;
+	
 }
 
+@property (nonatomic, retain) UIView *mainView;
 @property (nonatomic, retain) UIView *shadow;
 @property (nonatomic, retain) UIView *border;
 @property (nonatomic, retain) UIView *cardView;
@@ -50,6 +65,8 @@ typedef enum {
 @property (nonatomic) FTCardViewStyle style;
 @property (nonatomic) CGFloat borderThickness;
 @property (nonatomic) CGFloat contentMargin;
+
+@property (nonatomic, assign) id <FTCardViewDelegate> delegate;
 
 
 - (void)toggleContentViewOverlay:(BOOL)animated;

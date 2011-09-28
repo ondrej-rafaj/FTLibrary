@@ -12,6 +12,7 @@
 
 @implementation FTCardView
 
+@synthesize mainView;
 @synthesize shadow;
 @synthesize border;
 @synthesize cardView;
@@ -20,6 +21,7 @@
 @synthesize contentViewImage;
 @synthesize preloader;
 @synthesize contentViewOvelay;
+@synthesize delegate;
 
 
 #pragma mark Positioning
@@ -51,6 +53,7 @@
 
 - (void)layoutViews {
 	if (_style != FTCardViewStyleCustom) {
+		[mainView setFrame:[self frameForBorder]];
 		[border setFrame:[self frameForBorder]];
 		[cardView setFrame:[self frameForCardView]];
 		[contentView setFrame:[self frameForContentView]];
@@ -64,25 +67,30 @@
 #pragma mark Initialization
 
 - (void)initializeView {
-	[self setBackgroundColor:[UIColor whiteColor]];
+	[self setBackgroundColor:[UIColor clearColor]];
 	
 	_borderThickness = 1;
 	_contentMargin = 6;
 	
+	// Create main view
+	mainView = [[UIView alloc] init];
+	[mainView setBackgroundColor:[UIColor clearColor]];
+	[self addSubview:mainView];
+	
 	// Create the border line view
 	border = [[UIView alloc] init];
 	[border setBackgroundColor:[UIColor lightGrayColor]];
-	[self addSubview:border];
+	[mainView addSubview:border];
 	
 	// Create the card view
 	cardView = [[UIView alloc] init];
 	[cardView setBackgroundColor:[UIColor whiteColor]];
-	[self addSubview:cardView];
+	[border addSubview:cardView];
 	
 	// Create content view
 	contentView = [[UIView alloc] init];
 	[contentView setBackgroundColor:[UIColor alphaPatternImageColor]];
-	[self addSubview:contentView];
+	[border addSubview:contentView];
 	
 	// Image view in content view
 	contentViewImage = [[FTImageView alloc] init];
@@ -195,9 +203,22 @@
 	}
 }
 
+#pragma mark Touch events
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	int t = ((UITouch *)[touches anyObject]).tapCount;
+	if (t > 0) {
+		if ([delegate respondsToSelector:@selector(cardView:didTapWithNumberOfTouches:)]) {
+			[delegate cardView:self didTapWithNumberOfTouches:t];
+		}
+	}
+	[super touchesEnded:touches withEvent:event];
+}
+
 #pragma mark Memory management
 
 - (void)dealloc {
+	[mainView release];
 	[shadow release];
 	[border release];
 	[cardView release];
