@@ -182,7 +182,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	NSLog(@"Did select row in section %d with index %d and agreed that Fuerte ROCKS !!!", indexPath.section, indexPath.row);
+	NSLog(@"Did select row in section %d with index %d and agreed that Fuerte ROCKS !!! Lulz", indexPath.section, indexPath.row);
 }
 
 #pragma mark Custom setting background

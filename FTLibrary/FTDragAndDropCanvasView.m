@@ -119,7 +119,7 @@
     CGFloat verticalRatio = desiredSize.height /imageSize.height;
     CGFloat ratio = MIN(horizontalRatio, verticalRatio);
 	
-    CGSize newImageSize = CGSizeMake(imageSize.width * ratio, imageSize.height * ratio);
+    CGSize newImageSize = CGSizeMake(roundf(imageSize.width * ratio), roundf(imageSize.height * ratio));
 	
 	UIGraphicsBeginImageContextWithOptions(newImageSize, YES, 0.0);
 	CGContextRef context = UIGraphicsGetCurrentContext();	
@@ -152,7 +152,6 @@
 	UIGraphicsEndImageContext();
 	
 	return returnedImage;
-	return nil;
 }
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage
