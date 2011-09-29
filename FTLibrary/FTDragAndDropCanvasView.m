@@ -291,7 +291,10 @@
 {
     if (activeElement) {
         [activeElement removeFromSuperview];
-        [elements removeObject:activeElement];
+		if ([delegate respondsToSelector:@selector(deleteElement:withData:)]) {
+			[delegate deleteElement:activeElement withData:[activeElement getInfo]];
+		}
+		[elements removeObject:activeElement];
         activeElement = nil;
     }
 }
@@ -314,11 +317,15 @@
 
 	FTDragAndDropView *v = (FTDragAndDropView *)tap.view;
 	if (tap.state == UIGestureRecognizerStateBegan) {
-		deleteImageView.hidden = NO;
+		[deleteImageView setAlpha:0];
+		[deleteImageView setHidden:NO];
+		
+		[UIView beginAnimations:nil context:nil];
+		[deleteImageView setAlpha:1];
+		[UIView commitAnimations];		
 	}
 	else if (tap.state == UIGestureRecognizerStateEnded) {
-		if (!v.isDragged)
-			deleteImageView.hidden = YES;
+		if (!v.isDragged) [deleteImageView setHidden:YES];
 		deleteImageView.highlighted = NO;
 	}
 }

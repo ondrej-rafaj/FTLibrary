@@ -40,6 +40,9 @@ FTSystemDeviceType;
 + (BOOL)isPhoneSize;
 + (BOOL)isTabletSize;
 
++ (BOOL)isPhoneIdiom;
++ (BOOL)isTabletIdiom;
+
 + (BOOL)isRetina;
 
 + (UIInterfaceOrientation)interfaceOrientation;

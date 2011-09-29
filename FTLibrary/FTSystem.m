@@ -59,6 +59,14 @@ static float systemVersion = -1;
 	return ([self deviceType] == FTSystemDeviceTypeiPad);
 }
 
++ (BOOL)isPhoneIdiom {
+	return ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone);
+}
+
++ (BOOL)isTabletIdiom {
+	return ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad);
+}
+
 + (BOOL)isRetina {
 	return ([[UIScreen mainScreen] respondsToSelector:@selector(scale)] == YES && [[UIScreen mainScreen] scale] == 2.00);
 }
