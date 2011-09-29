@@ -106,6 +106,8 @@ static NSMutableDictionary *_facebookParams;
     }
 }
 
+#pragma mark Twitter login
+
 - (void)OAuthTwitterController:(SA_OAuthTwitterController *)controller authenticatedWithUsername:(NSString *)username {
     if ([self.twitterDelegate respondsToSelector:@selector(twitterDidLoginSuccesfully:error:)]) {
         [self.twitterDelegate twitterDidLoginSuccesfully:YES error:nil];
@@ -114,7 +116,7 @@ static NSMutableDictionary *_facebookParams;
 }
 
 - (void)OAuthTwitterControllerFailed:(SA_OAuthTwitterController *)controller {
-    NSError *error = [NSError errorWithDomain:@"com.fuerteint.FTShare" code:400 userInfo:[NSDictionary dictionaryWithObject:@"Couldn't share with facebook" forKey:@"description"]];
+    NSError *error = [NSError errorWithDomain:@"com.fuerteint.FTShare" code:400 userInfo:[NSDictionary dictionaryWithObject:@"Couldn't share with twitter" forKey:@"description"]];
     if ([self.twitterDelegate respondsToSelector:@selector(twitterDidLoginSuccesfully:error:)]) {
         [self.twitterDelegate twitterDidLoginSuccesfully:NO error:error];
     }
@@ -140,33 +142,54 @@ static NSMutableDictionary *_facebookParams;
 - (void)shareViaFacebook:(NSDictionary *)data {
     _facebookParams = [data mutableCopy];
     if (![self.facebook isSessionValid]) {
-        [self.facebook authorize:nil];
+        [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", nil]];
     }
     else {
         [self.facebook dialog:@"feed" andParams:_facebookParams andDelegate:self];
     }
 }
 
+#pragma mark Facebook dialog
+
 - (void)dialogDidComplete:(FBDialog *)dialog {
-	
+	if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPostSuccesfully:error:)]) {
+        [self.facebookDelegate facebookDidPostSuccesfully:YES error:nil];
+    }
 }
+- (void)dialogDidNotComplete:(FBDialog *)dialog {
+    NSDictionary *dict = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects:@"Couldn't post with facebook", nil]
+                                                     forKeys:[NSArray arrayWithObjects:@"description", nil]];
+    NSError *error= [NSError errorWithDomain:@"com.fuerte.FTShare" code:400 userInfo:dict];
+    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPostSuccesfully:error:)]) {
+        [self.facebookDelegate facebookDidPostSuccesfully:NO error:error];
+    }
+}
+
+#pragma mark Facebook login
 
 - (void)fbDidLogin {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[self.facebook accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[self.facebook expirationDate] forKey:@"FBExpirationDateKey"];
-    [defaults synchronize];	
+    [defaults synchronize];
+	
+    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidLoginSuccesfully:error:)]) {
+        [self.facebookDelegate facebookDidLoginSuccesfully:YES error:nil];
+    }
+    
     if (_facebookParams) {
         [self.facebook dialog:@"feed" andParams:_facebookParams andDelegate:self];
-    }
-    else {
-        //delegate did login
     }
     
 }
 
 -(void)fbDidNotLogin:(BOOL)cancelled {
-    //delegate did login
+    NSDictionary *dict = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects:@"Couldn't login with facebook", [NSNumber numberWithBool:cancelled], nil]
+                                                     forKeys:[NSArray arrayWithObjects:@"description", @"cancelled", nil]];
+    NSError *error= [NSError errorWithDomain:@"com.fuerte.FTShare" code:400 userInfo:dict];
+    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidLoginSuccesfully:error:)]) {
+        [self.facebookDelegate facebookDidLoginSuccesfully:NO error:error];
+    }
 }
 
 @end

@@ -50,7 +50,7 @@
 - (void)twitterDidPostSuccesfully:(BOOL)success error:(NSError *)error;
 @end
 
-@protocol FTFacebookDelegate <NSObject>
+@protocol FTShareFacebookDelegate <NSObject>
 - (void)facebookLoginDialogController:(UIViewController *)controller;
 - (void)facebookDidLoginSuccesfully:(BOOL)success error:(NSError *)error;
 - (void)facebookDidPostSuccesfully:(BOOL)success error:(NSError *)error;

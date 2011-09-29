@@ -921,6 +921,7 @@
 		A59283C21434BD360000E770 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		A59283C51434BD850000E770 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
 		A59283C61434BD850000E770 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		A59285741434CCF00000E770 /* FTShareURLType.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = FTShareURLType.plist; path = ../../IKEA_settings/FTShareURLType.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2003,6 +2004,7 @@
 		A56A62C714336034000C666B /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				A59285741434CCF00000E770 /* FTShareURLType.plist */,
 				A56A62CC1433606E000C666B /* FTShare.h */,
 				A56A62CD1433606E000C666B /* FTShare.m */,
 			);
