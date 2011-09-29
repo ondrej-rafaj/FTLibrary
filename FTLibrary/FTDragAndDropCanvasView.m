@@ -46,15 +46,16 @@
 		backgroundImageView = [[UIImageView alloc] init];
 		[self addSubview:backgroundImageView];
 		
+		stickersContainerView = [[UIView alloc] init];
+		stickersContainerView.clipsToBounds = YES;
+		[self addSubview:stickersContainerView];	
+		
 		UIImage *deleteImage = [UIImage imageNamed:@"DD_canvas-delete.png"];
 		UIImage *highlightedDeleteImage = [UIImage imageNamed:@"DD_canvas-delet-highlighted.png"];
 		deleteImageView = [[UIImageView alloc] initWithImage:deleteImage highlightedImage:highlightedDeleteImage];
 		deleteImageView.hidden = YES;
 		[self addSubview:deleteImageView];
-		
-		stickersContainerView = [[UIView alloc] init];
-		stickersContainerView.clipsToBounds = YES;
-		[self addSubview:stickersContainerView];		
+		[self bringSubviewToFront:deleteImageView];
     }
     return self;
 }
@@ -248,7 +249,7 @@
 {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(removeActiveElement)];
+    [UIView setAnimationDidStopSelector:@selector(removeElementToDelete)];
     [element setAlpha:0];
     [UIView commitAnimations];
 }
@@ -278,6 +279,7 @@
     if (element != activeElement) {
         activeElement = element;
         [self highlightActiveElement];
+
     }
 }
 
@@ -289,20 +291,21 @@
     }
 }
 
-- (void)removeActiveElement
+- (void)removeElementToDelete
 {
-    if (activeElement) {
-        [activeElement removeFromSuperview];
+    if (elementToDelete) {
+        [elementToDelete removeFromSuperview];
 		if ([delegate respondsToSelector:@selector(deleteElement:withData:)]) {
-			[delegate deleteElement:activeElement withData:[activeElement getInfo]];
+			[delegate deleteElement:elementToDelete withData:[elementToDelete getInfo]];
 		}
-		[elements removeObject:activeElement];
-        activeElement = nil;
+		[elements removeObject:elementToDelete];
+        elementToDelete = nil;
     }
 }
 
 - (void)didEditElement:(FTDragAndDropView *)element
 {
+	[self disableActiveElement];
     if ([delegate respondsToSelector:@selector(finishedEditingElement:withData:)]) {
         [delegate finishedEditingElement:element withData:[element getInfo]];
     }
@@ -399,6 +402,7 @@ static CGFloat tempRotation = 0;
 
 		v.dragged = NO;
 		if (shouldDelete) {
+			elementToDelete = v;
 			[self deleteElement:v];
 		}
 	}

@@ -26,6 +26,7 @@ typedef enum {
 
     NSMutableArray		*elements;
 	FTDragAndDropView	*activeElement;
+	FTDragAndDropView	*elementToDelete;
 	UIBezierPath		*deleteImagePath;
 
 	UIImageView			*deleteImageView;
