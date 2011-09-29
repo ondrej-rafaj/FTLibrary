@@ -15,7 +15,7 @@
  */
 
 #import "FBRequest.h"
-#import "SBJson.h"
+#import "JSON.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // global
@@ -180,7 +180,7 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
   NSString* responseString = [[[NSString alloc] initWithData:data
                                                     encoding:NSUTF8StringEncoding]
                               autorelease];
-  SBJsonParser *jsonParser = [[[SBJsonParser alloc] init] autorelease];
+  SBJsonParser *jsonParser = [[SBJsonParser new] autorelease];
   if ([responseString isEqualToString:@"true"]) {
     return [NSDictionary dictionaryWithObject:@"true" forKey:@"result"];
   } else if ([responseString isEqualToString:@"false"]) {

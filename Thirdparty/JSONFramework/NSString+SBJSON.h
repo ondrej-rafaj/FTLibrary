@@ -1,5 +1,5 @@
 /*
- Copyright (C) 2011 Stig Brautaset. All rights reserved.
+ Copyright (C) 2009 Stig Brautaset. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -27,25 +27,32 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "SBJsonStreamParserAccumulator.h"
+#import <Foundation/Foundation.h>
 
-@implementation SBJsonStreamParserAccumulator
+/**
+ @brief Adds JSON parsing methods to NSString
+ 
+This is a category on NSString that adds methods for parsing the target string.
+*/
+@interface NSString (NSString_SBJSON)
 
-@synthesize value;
 
-- (void)dealloc {
-    [value release];
-    [super dealloc];
-}
+/**
+ @brief Returns the object represented in the receiver, or nil on error. 
+ 
+ Returns a a scalar object represented by the string's JSON fragment representation.
+ 
+ @deprecated Given we bill ourselves as a "strict" JSON library, this method should be removed.
+ */
+- (id)JSONFragmentValue __deprecated; 
 
-#pragma mark SBJsonStreamParserAdapterDelegate
+/**
+ @brief Returns the NSDictionary or NSArray represented by the current string's JSON representation.
+ 
+ Returns the dictionary or array represented in the receiver, or nil on error.
 
-- (void)parser:(SBJsonStreamParser*)parser foundArray:(NSArray *)array {
-	value = [array retain];
-}
-
-- (void)parser:(SBJsonStreamParser*)parser foundObject:(NSDictionary *)dict {
-	value = [dict retain];
-}
+ Returns the NSDictionary or NSArray represented by the current string's JSON representation.
+ */
+- (id)JSONValue;
 
 @end

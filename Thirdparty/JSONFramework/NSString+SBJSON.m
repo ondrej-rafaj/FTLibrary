@@ -1,5 +1,5 @@
 /*
- Copyright (C) 2011 Stig Brautaset. All rights reserved.
+ Copyright (C) 2007-2009 Stig Brautaset. All rights reserved.
  
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -27,25 +27,29 @@
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "SBJsonStreamParserAccumulator.h"
+#import "NSString+SBJSON.h"
+#import "SBJsonParser.h"
 
-@implementation SBJsonStreamParserAccumulator
+@implementation NSString (NSString_SBJSON)
 
-@synthesize value;
-
-- (void)dealloc {
-    [value release];
-    [super dealloc];
+- (id)JSONFragmentValue
+{
+    SBJsonParser *jsonParser = [SBJsonParser new];    
+    id repr = [jsonParser fragmentWithString:self];    
+    if (!repr)
+        NSLog(@"-JSONFragmentValue failed. Error trace is: %@", [jsonParser error]);
+    [jsonParser release];
+    return repr;
 }
 
-#pragma mark SBJsonStreamParserAdapterDelegate
-
-- (void)parser:(SBJsonStreamParser*)parser foundArray:(NSArray *)array {
-	value = [array retain];
-}
-
-- (void)parser:(SBJsonStreamParser*)parser foundObject:(NSDictionary *)dict {
-	value = [dict retain];
+- (id)JSONValue
+{
+    SBJsonParser *jsonParser = [SBJsonParser new];
+    id repr = [jsonParser objectWithString:self];
+    if (!repr)
+        NSLog(@"-JSONValue failed. Error trace is: %@", [jsonParser error]);
+    [jsonParser release];
+    return repr;
 }
 
 @end

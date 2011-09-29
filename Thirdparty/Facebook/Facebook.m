@@ -47,7 +47,7 @@ static NSString* kSDKVersion = @"2";
          expirationDate = _expirationDate,
         sessionDelegate = _sessionDelegate,
             permissions = _permissions,
-             localAppId = _localAppId;
+        urlSchemeSuffix = _urlSchemeSuffix;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ static NSString* kSDKVersion = @"2";
   [_fbDialog release];
   [_appId release];
   [_permissions release];
-  [_localAppId release];
+  [_urlSchemeSuffix release];
   [super dealloc];
 }
 
@@ -123,7 +123,7 @@ static NSString* kSDKVersion = @"2";
 - (NSString *)getOwnBaseUrl {
   return [NSString stringWithFormat:@"fb%@%@://authorize",
           _appId,
-          _localAppId ? _localAppId : @""];
+          _urlSchemeSuffix ? _urlSchemeSuffix : @""];
 }
 
 /**
@@ -136,7 +136,7 @@ static NSString* kSDKVersion = @"2";
                                  @"user_agent", @"type",
                                  kRedirectURL, @"redirect_uri",
                                  @"touch", @"display",
-                                 kSDKVersion, @"sdk",
+                                 kSDK, @"sdk",
                                  nil];
 
   NSString *loginDialogURL = [kDialogBaseURL stringByAppendingString:kLogin];
@@ -146,8 +146,8 @@ static NSString* kSDKVersion = @"2";
     [params setValue:scope forKey:@"scope"];
   }
 
-  if (_localAppId) {
-    [params setValue:_localAppId forKey:@"local_client_id"];
+  if (_urlSchemeSuffix) {
+    [params setValue:_urlSchemeSuffix forKey:@"local_client_id"];
   }
   
   // If the device is running a version of iOS that supports multitasking,
@@ -162,7 +162,7 @@ static NSString* kSDKVersion = @"2";
   if ([device respondsToSelector:@selector(isMultitaskingSupported)] && [device isMultitaskingSupported]) {
     if (tryFBAppAuth) {
       NSString *scheme = kFBAppAuthURLScheme;
-      if (_localAppId) {
+      if (_urlSchemeSuffix) {
         scheme = [scheme stringByAppendingString:@"2"];
       }
       NSString *urlPrefix = [NSString stringWithFormat:@"%@://%@", scheme, kFBAppAuthURLPath];
@@ -213,7 +213,7 @@ static NSString* kSDKVersion = @"2";
 
 - (void)authorize:(NSArray *)permissions {
   [self authorize:permissions
-       localAppId:nil];
+       urlSchemeSuffix:nil];
 }
 
 /**
@@ -244,29 +244,29 @@ static NSString* kSDKVersion = @"2";
  * @param delegate
  *            Callback interface for notifying the calling application when
  *            the user has logged in.
- * @param localAppId
- *            localAppId is a string of lowercase letters that is
+ * @param urlSchemeSuffix
+ *            urlSchemeSuffix is a string of lowercase letters that is
  *            appended to the base URL scheme used for SSO. For example,
- *            if your facebook ID is "350685531728" and you set localAppId to
+ *            if your facebook ID is "350685531728" and you set urlSchemeSuffix to
  *            "abcd", the Facebook app will expect your application to bind to
  *            the following URL scheme: "fb350685531728abcd".
  *            This is useful if your have multiple iOS applications that
  *            share a single Facebook application id (for example, if you
  *            have a free and a paid version on the same app) and you want
  *            to use SSO with both apps. Giving both apps different
- *            localAppId values will allow the Facebook app to disambiguate
+ *            urlSchemeSuffix values will allow the Facebook app to disambiguate
  *            their URL schemes and always redirect the user back to the
  *            correct app, even if both the free and the app is installed
  *            on the device.
- *            localAppId is supported on version 3.4.1 and above of the Facebook
+ *            urlSchemeSuffix is supported on version 3.4.1 and above of the Facebook
  *            app. If the user has an older version of the Facebook app
- *            installed and your app uses localAppId parameter, the SDK will
+ *            installed and your app uses urlSchemeSuffix parameter, the SDK will
  *            proceed as if the Facebook app isn't installed on the device
  *            and redirect the user to Safari.
  */
 - (void)authorize:(NSArray *)permissions
-       localAppId:(NSString *)localAppId {
-  self.localAppId = localAppId;
+       urlSchemeSuffix:(NSString *)urlSchemeSuffix {
+  self.urlSchemeSuffix = urlSchemeSuffix;
   self.permissions = permissions;
 
   [self authorizeWithFBAppAuth:YES safariAuth:YES];
@@ -353,11 +353,10 @@ static NSString* kSDKVersion = @"2";
 
 /**
  * Invalidate the current user session by removing the access token in
- * memory, clearing the browser cookie, and calling auth.expireSession
- * through the API.
+ * memory and clearing the browser cookie.
  *
  * Note that this method dosen't unauthorize the application --
- * it just invalidates the access token. To unauthorize the application,
+ * it just removes the access token. To unauthorize the application,
  * the user must remove the app in the app settings page under the privacy
  * settings screen on facebook.com.
  *
@@ -368,13 +367,6 @@ static NSString* kSDKVersion = @"2";
 - (void)logout:(id<FBSessionDelegate>)delegate {
 
   self.sessionDelegate = delegate;
-
-  NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
-  [self requestWithMethodName:@"auth.expireSession"
-                    andParams:params andHttpMethod:@"GET"
-                  andDelegate:nil];
-
-  [params release];
   [_accessToken release];
   _accessToken = nil;
   [_expirationDate release];

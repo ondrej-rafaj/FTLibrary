@@ -13,29 +13,49 @@
 #import "SA_OAuthTwitterController.h"
 
 
-@protocol FTShareDelegate;
-@interface FTShare : NSObject <MFMailComposeViewControllerDelegate, SA_OAuthTwitterControllerDelegate, SA_OAuthTwitterEngineDelegate, FBSessionDelegate> {
+@protocol FTShareTwitterDelegate;
+@protocol FTShareFacebookDelegate;
+@protocol FTShareMailDelegate;
+
+@interface FTShare : NSObject <MFMailComposeViewControllerDelegate, SA_OAuthTwitterControllerDelegate, SA_OAuthTwitterEngineDelegate, FBSessionDelegate, FBDialogDelegate> {
     Facebook *_facebook;
     SA_OAuthTwitterEngine *_twitter;
-    id<FTShareDelegate> _delegate;
+    id<FTShareTwitterDelegate> _twitterDelegate;
+    id<FTShareFacebookDelegate> _facebookDelegate;
+    id<FTShareMailDelegate> _mailDelegate;
     id _referencedController;
 }
 
 @property (nonatomic, retain) Facebook *facebook;
 @property (nonatomic, retain) SA_OAuthTwitterEngine *twitter;
-@property (nonatomic, assign) id<FTShareDelegate> delegate;
+@property (nonatomic, assign) id<FTShareTwitterDelegate> twitterDelegate;
+@property (nonatomic, assign) id<FTShareFacebookDelegate> facebookDelegate;
+@property (nonatomic, assign) id<FTShareMailDelegate> mailDelegate;
+
 @property (nonatomic, assign) id referencedController;
 
 - (id)initWithReferencedController:(id)controller;
 
-- (void)setUpTwitterWithConsumerKey:(NSString *)consumerKey secret:(NSString *)secret andAppID:(NSString *)appID;
+- (void)setUpTwitterWithConsumerKey:(NSString *)consumerKey secret:(NSString *)secret appID:(NSString *)appID andDelegate:(id<FTShareTwitterDelegate>)delegate;
 - (void)shareViaTwitter:(NSDictionary *)data;
 
-- (void)setUpFacebookWithAccessToken:(NSString *)token andAppID:(NSString *)appID;
-
+- (void)setUpFacebookWithAppID:(NSString *)appID andDelegate:(id<FTShareFacebookDelegate>)delegate;
+- (void)shareViaFacebook:(NSDictionary *)data;
 
 @end
 
-@protocol FTShareDelegate <NSObject>
+@protocol FTShareTwitterDelegate <NSObject>
 - (void)twitterLoginDialogController:(UIViewController *)controller;
+- (void)twitterDidLoginSuccesfully:(BOOL)success error:(NSError *)error;
+- (void)twitterDidPostSuccesfully:(BOOL)success error:(NSError *)error;
+@end
+
+@protocol FTFacebookDelegate <NSObject>
+- (void)facebookLoginDialogController:(UIViewController *)controller;
+- (void)facebookDidLoginSuccesfully:(BOOL)success error:(NSError *)error;
+- (void)facebookDidPostSuccesfully:(BOOL)success error:(NSError *)error;
+@end
+
+@protocol FTShareMailDelegate <NSObject>
+
 @end
