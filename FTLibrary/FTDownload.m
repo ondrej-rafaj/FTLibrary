@@ -131,9 +131,11 @@
 #pragma mark Request delegate methods
 
 - (void)fireDownloadStatusDelegateMethod {
-    if ([delegate respondsToSelector:@selector(downloadStatusChanged:forObject:)]) {
-        [delegate downloadStatusChanged:status forObject:self];
-    }
+	if (delegate) {
+		if ([delegate respondsToSelector:@selector(downloadStatusChanged:forObject:)]) {
+			[delegate downloadStatusChanged:status forObject:self];
+		}
+	}
 }
 
 - (void)requestStarted:(ASIHTTPRequest *)request {
