@@ -142,7 +142,7 @@ static NSMutableDictionary *_facebookParams;
 - (void)shareViaFacebook:(NSDictionary *)data {
     _facebookParams = [data mutableCopy];
     if (![self.facebook isSessionValid]) {
-        [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", nil]];
+        [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"publish_actions", nil]];
     }
     else {
         [self.facebook dialog:@"feed" andParams:_facebookParams andDelegate:self];
@@ -191,5 +191,6 @@ static NSMutableDictionary *_facebookParams;
         [self.facebookDelegate facebookDidLoginSuccesfully:NO error:error];
     }
 }
+
 
 @end

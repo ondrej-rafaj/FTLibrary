@@ -8,6 +8,7 @@
 
 #import "FTAppDelegate.h"
 #import "FTLanguageManager.h"
+#import "Facebook.h"
 
 
 @implementation FTAppDelegate
@@ -25,6 +26,11 @@
 
 + (UIWindow *)window {
 	return [self windowFromSelector:@selector(window)];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    Facebook *facebook = [[Facebook alloc] init];
+    return  [facebook handleOpenURL:url];
 }
 
 @end
