@@ -286,7 +286,10 @@
 - (void)disableActiveElement
 {
     if (activeElement) {
+		[UIView beginAnimations:nil context:nil];
         [activeElement setAlpha:1];
+		[UIView commitAnimations];
+		
         activeElement = nil;
     }
 }
@@ -319,8 +322,8 @@
 }
 
 - (void)handleLongTouch:(UILongPressGestureRecognizer *)tap {
-
 	FTDragAndDropView *v = (FTDragAndDropView *)tap.view;
+	[self activateElement:v];
 	if (tap.state == UIGestureRecognizerStateBegan) {
 		[deleteImageView setAlpha:0];
 		[deleteImageView setHidden:NO];
@@ -332,6 +335,7 @@
 	else if (tap.state == UIGestureRecognizerStateEnded) {
 		if (!v.isDragged) [deleteImageView setHidden:YES];
 		deleteImageView.highlighted = NO;
+		[self disableActiveElement];
 	}
 }
 
@@ -347,13 +351,16 @@
 }
 
 static CGFloat tempRotation = 0;
+
 - (void)rotateView:(UIRotationGestureRecognizer *)recognizer {
     FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
-
+	[self activateElement:v];
+	
 	if([(UIRotationGestureRecognizer*)recognizer state] == UIGestureRecognizerStateEnded) {
 		tempRotation = 0;
 		v.rotationValue += [recognizer rotation];
 		[self didEditElement:v];
+		[self disableActiveElement];
 		return;
 	}
 	CGFloat rotation = 0.0 - (tempRotation - [recognizer rotation]);
@@ -405,12 +412,14 @@ static CGFloat tempRotation = 0;
 			elementToDelete = v;
 			[self deleteElement:v];
 		}
+		[self disableActiveElement];
 	}
 }
 
 - (void)resizeView:(UIPinchGestureRecognizer *)recognizer    {
 	FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
-
+	[self activateElement:v];
+	
 	CGFloat currentScale = [[v.layer valueForKeyPath:@"transform.scale"] floatValue];
 	if ([recognizer state] == UIGestureRecognizerStateBegan || [recognizer state] == UIGestureRecognizerStateChanged) {
 		CGFloat newScale = 1 -  (v.scaleValue * interfaceRotationFactor - [recognizer scale]) * (kFTDragAndDropCanvasViewSpeed);
@@ -437,6 +446,7 @@ static CGFloat tempRotation = 0;
 		currentScale = [[v.layer valueForKeyPath:@"transform.scale.x"] floatValue];
 		v.scaleValue = currentScale / interfaceRotationFactor;
 		[self didEditElement:v];
+		[self disableActiveElement];
 	}
 }
 

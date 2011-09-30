@@ -411,6 +411,8 @@
 		4CD94A3913FE5E4900BD6C06 /* FTAutoColumnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD94A3713FE5E4900BD6C06 /* FTAutoColumnView.m */; };
 		4CD94A5E14024B0500BD6C06 /* FTFacebook.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD94A5C14024B0500BD6C06 /* FTFacebook.h */; };
 		4CD94A5F14024B0500BD6C06 /* FTFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD94A5D14024B0500BD6C06 /* FTFacebook.m */; };
+		4CE77EDF1435D34500A5AEDA /* FTVerticalSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE77EDD1435D34500A5AEDA /* FTVerticalSlider.h */; };
+		4CE77EE01435D34500A5AEDA /* FTVerticalSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE77EDE1435D34500A5AEDA /* FTVerticalSlider.m */; };
 		4CEB1BFE1403B33400B70C98 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1BFD1403B33400B70C98 /* UIKit.framework */; };
 		4CFEAD8614321FE000EDD9A8 /* FTAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CFEAD8414321FE000EDD9A8 /* FTAlertView.h */; };
 		4CFEAD8714321FE000EDD9A8 /* FTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEAD8514321FE000EDD9A8 /* FTAlertView.m */; };
@@ -491,9 +493,6 @@
 		A56A63421433617B000C666B /* SA_OAuthTwitterEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = A56A630D1433617B000C666B /* SA_OAuthTwitterEngine.h */; };
 		A56A63431433617B000C666B /* SA_OAuthTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = A56A630E1433617B000C666B /* SA_OAuthTwitterEngine.m */; };
 		A56A634B1433679B000C666B /* libOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A56A634A1433679B000C666B /* libOAuth.a */; };
-		A59283C31434BD360000E770 /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A59283C21434BD360000E770 /* JSON.h */; };
-		A59283C71434BD850000E770 /* NSString+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A59283C51434BD850000E770 /* NSString+SBJSON.h */; };
-		A59283C81434BD850000E770 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A59283C61434BD850000E770 /* NSString+SBJSON.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -833,6 +832,8 @@
 		4CD94A3713FE5E4900BD6C06 /* FTAutoColumnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAutoColumnView.m; sourceTree = "<group>"; };
 		4CD94A5C14024B0500BD6C06 /* FTFacebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFacebook.h; sourceTree = "<group>"; };
 		4CD94A5D14024B0500BD6C06 /* FTFacebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFacebook.m; sourceTree = "<group>"; };
+		4CE77EDD1435D34500A5AEDA /* FTVerticalSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTVerticalSlider.h; sourceTree = "<group>"; };
+		4CE77EDE1435D34500A5AEDA /* FTVerticalSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTVerticalSlider.m; sourceTree = "<group>"; };
 		4CEB1BFD1403B33400B70C98 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4CEB1BFF1403B34700B70C98 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4CEB1C001403B36400B70C98 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -918,10 +919,6 @@
 		A56A630E1433617B000C666B /* SA_OAuthTwitterEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SA_OAuthTwitterEngine.m; sourceTree = "<group>"; };
 		A56A630F1433617B000C666B /* twitter_load.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_load.png; sourceTree = "<group>"; };
 		A56A634A1433679B000C666B /* libOAuth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOAuth.a; path = "Thirdparty/Twitter+OAuth/Libraries & Headers/libOAuth.a"; sourceTree = "<group>"; };
-		A59283C21434BD360000E770 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
-		A59283C51434BD850000E770 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
-		A59283C61434BD850000E770 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
-		A59285741434CCF00000E770 /* FTShareURLType.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = FTShareURLType.plist; path = ../../IKEA_settings/FTShareURLType.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1164,6 +1161,14 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		4C0ED2211435D2AF005C8D2E /* Sliders */ = {
+			isa = PBXGroup;
+			children = (
+				4CE77EDB1435D32800A5AEDA /* Vertical slider */,
+			);
+			name = Sliders;
+			sourceTree = "<group>";
+		};
 		4C2D215D14307597002818EA /* Card view */ = {
 			isa = PBXGroup;
 			children = (
@@ -1214,6 +1219,7 @@
 				4C6F8F6A13F87686004A4FB2 /* Grid view */,
 				4C6F8F5913F874F3004A4FB2 /* Autoline */,
 				4C6F969413DD8F8B000BF403 /* Debug */,
+				4C0ED2211435D2AF005C8D2E /* Sliders */,
 				6834BE2B13D9B2F000781018 /* Labels */,
 				68DD054C13D97F27004C02C8 /* TextView */,
 				4CCD128313D8524C0004EF5D /* Drag & Drop */,
@@ -1535,9 +1541,6 @@
 		4C85BB5B13BA4AFD00CB7FCA /* JSONFramework */ = {
 			isa = PBXGroup;
 			children = (
-				A59283C51434BD850000E770 /* NSString+SBJSON.h */,
-				A59283C61434BD850000E770 /* NSString+SBJSON.m */,
-				A59283C21434BD360000E770 /* JSON.h */,
 				4C85BB5C13BA4AFD00CB7FCA /* NSObject+SBJson.h */,
 				4C85BB5D13BA4AFD00CB7FCA /* NSObject+SBJson.m */,
 				4C85BB5E13BA4AFD00CB7FCA /* SBJson.h */,
@@ -1943,6 +1946,15 @@
 			name = "Drag & Drop";
 			sourceTree = "<group>";
 		};
+		4CE77EDB1435D32800A5AEDA /* Vertical slider */ = {
+			isa = PBXGroup;
+			children = (
+				4CE77EDD1435D34500A5AEDA /* FTVerticalSlider.h */,
+				4CE77EDE1435D34500A5AEDA /* FTVerticalSlider.m */,
+			);
+			name = "Vertical slider";
+			sourceTree = "<group>";
+		};
 		4CFEAD911432279E00EDD9A8 /* Basic */ = {
 			isa = PBXGroup;
 			children = (
@@ -2004,7 +2016,6 @@
 		A56A62C714336034000C666B /* Share */ = {
 			isa = PBXGroup;
 			children = (
-				A59285741434CCF00000E770 /* FTShareURLType.plist */,
 				A56A62CC1433606E000C666B /* FTShare.h */,
 				A56A62CD1433606E000C666B /* FTShare.m */,
 			);
@@ -2317,8 +2328,7 @@
 				A56A633E1433617B000C666B /* NSString+UUID.h in Headers */,
 				A56A63401433617B000C666B /* SA_OAuthTwitterController.h in Headers */,
 				A56A63421433617B000C666B /* SA_OAuthTwitterEngine.h in Headers */,
-				A59283C31434BD360000E770 /* JSON.h in Headers */,
-				A59283C71434BD850000E770 /* NSString+SBJSON.h in Headers */,
+				4CE77EDF1435D34500A5AEDA /* FTVerticalSlider.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2591,7 +2601,7 @@
 				A56A633F1433617B000C666B /* NSString+UUID.m in Sources */,
 				A56A63411433617B000C666B /* SA_OAuthTwitterController.m in Sources */,
 				A56A63431433617B000C666B /* SA_OAuthTwitterEngine.m in Sources */,
-				A59283C81434BD850000E770 /* NSString+SBJSON.m in Sources */,
+				4CE77EE01435D34500A5AEDA /* FTVerticalSlider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
