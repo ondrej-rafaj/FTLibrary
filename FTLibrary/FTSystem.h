@@ -52,6 +52,7 @@ FTSystemDeviceType;
 
 + (float)systemNumber;
 
++ (BOOL)isInternetPingAvailable;
 + (BOOL)isInternetAvailable;
 
 

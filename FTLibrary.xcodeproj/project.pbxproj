@@ -416,6 +416,8 @@
 		4CE77EF11435E7C900A5AEDA /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE77EEE1435E7C900A5AEDA /* JSON.h */; };
 		4CE77EF21435E7C900A5AEDA /* NSString+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE77EEF1435E7C900A5AEDA /* NSString+SBJSON.h */; };
 		4CE77EF31435E7C900A5AEDA /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE77EF01435E7C900A5AEDA /* NSString+SBJSON.m */; };
+		4CE77EFA1435FC4700A5AEDA /* FTPhotoEditingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE77EF81435FC4700A5AEDA /* FTPhotoEditingView.h */; };
+		4CE77EFB1435FC4700A5AEDA /* FTPhotoEditingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE77EF91435FC4700A5AEDA /* FTPhotoEditingView.m */; };
 		4CEB1BFE1403B33400B70C98 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1BFD1403B33400B70C98 /* UIKit.framework */; };
 		4CFEAD8614321FE000EDD9A8 /* FTAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CFEAD8414321FE000EDD9A8 /* FTAlertView.h */; };
 		4CFEAD8714321FE000EDD9A8 /* FTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEAD8514321FE000EDD9A8 /* FTAlertView.m */; };
@@ -840,6 +842,8 @@
 		4CE77EEE1435E7C900A5AEDA /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		4CE77EEF1435E7C900A5AEDA /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
 		4CE77EF01435E7C900A5AEDA /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		4CE77EF81435FC4700A5AEDA /* FTPhotoEditingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPhotoEditingView.h; sourceTree = "<group>"; };
+		4CE77EF91435FC4700A5AEDA /* FTPhotoEditingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPhotoEditingView.m; sourceTree = "<group>"; };
 		4CEB1BFD1403B33400B70C98 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4CEB1BFF1403B34700B70C98 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4CEB1C001403B36400B70C98 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1221,6 +1225,7 @@
 			isa = PBXGroup;
 			children = (
 				4C6F8F5B13F87502004A4FB2 /* Basic view */,
+				4CE77EF71435FBF500A5AEDA /* Photo editing */,
 				4C2D215D14307597002818EA /* Card view */,
 				4C6F8F6A13F87686004A4FB2 /* Grid view */,
 				4C6F8F5913F874F3004A4FB2 /* Autoline */,
@@ -1964,6 +1969,15 @@
 			name = "Vertical slider";
 			sourceTree = "<group>";
 		};
+		4CE77EF71435FBF500A5AEDA /* Photo editing */ = {
+			isa = PBXGroup;
+			children = (
+				4CE77EF81435FC4700A5AEDA /* FTPhotoEditingView.h */,
+				4CE77EF91435FC4700A5AEDA /* FTPhotoEditingView.m */,
+			);
+			name = "Photo editing";
+			sourceTree = "<group>";
+		};
 		4CFEAD911432279E00EDD9A8 /* Basic */ = {
 			isa = PBXGroup;
 			children = (
@@ -2340,6 +2354,7 @@
 				4CE77EDF1435D34500A5AEDA /* FTVerticalSlider.h in Headers */,
 				4CE77EF11435E7C900A5AEDA /* JSON.h in Headers */,
 				4CE77EF21435E7C900A5AEDA /* NSString+SBJSON.h in Headers */,
+				4CE77EFA1435FC4700A5AEDA /* FTPhotoEditingView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2614,6 +2629,7 @@
 				A56A63431433617B000C666B /* SA_OAuthTwitterEngine.m in Sources */,
 				4CE77EE01435D34500A5AEDA /* FTVerticalSlider.m in Sources */,
 				4CE77EF31435E7C900A5AEDA /* NSString+SBJSON.m in Sources */,
+				4CE77EFB1435FC4700A5AEDA /* FTPhotoEditingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

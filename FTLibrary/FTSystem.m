@@ -121,4 +121,10 @@ static float systemVersion = -1;
     return isConnected;
 }
 
++ (BOOL)isInternetPingAvailable {
+    Reachability *reachability = [Reachability reachabilityWithHostName:@"http://www.google.com"];
+    BOOL isConnected = ([reachability isReachable]);
+    return isConnected;
+}
+
 @end
