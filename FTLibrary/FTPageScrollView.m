@@ -94,8 +94,6 @@
 #pragma mark Settings
 
 - (void)setInitialPage:(FTPage *)aPage withDelegate:(id <FTPageScrollViewDelegate>)aDelegate {
-	
-	NSLog(@"Size: %@", NSStringFromCGSize([aPage frame].size));
 	pageScrollDelegate = aDelegate;
 	enabled = NO;
 
@@ -114,7 +112,6 @@
 - (void)setPage:(FTPage *)aPage pageCount:(NSInteger)pageCount animate:(BOOL)animate {
 	if (!aPage) return;
 	if (pageSetInProgress) { 
-		NSLog(@"Page set when scroll in progress, updating.");
 		[self addSubview:aPage];
 		[aPage setFrame:pendingPage.frame];
 		[pendingPage removeFromSuperview];
@@ -226,7 +223,7 @@
 	// TODO: Position pages without auto-resizing options
 	NSArray *arr = self.subviews;
 	for(FTPage *page in arr) {
-		NSLog(@"Stranka: %@", NSStringFromCGRect(page.frame));
+		//NSLog(@"Stranka: %@", NSStringFromCGRect(page.frame));
 	}
 	
 	CGSize size = self.contentSize;

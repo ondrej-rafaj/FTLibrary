@@ -120,7 +120,6 @@
 - (void)request:(ASIHTTPRequest *)request didReceiveBytes:(long long)bytes {
     bytesDownloaded += bytes;
     [self fireProgressDelegateMethods];
-    NSLog(@"didReceiveBytes: %lld", bytes);
 }
 
 - (void)request:(ASIHTTPRequest *)request incrementDownloadSizeBy:(long long)newLength {
