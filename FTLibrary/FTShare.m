@@ -29,7 +29,11 @@ static NSMutableDictionary *_facebookParams;
         [self setReferencedController:controller];
         _twitterParams = nil;
         _facebookParams = nil;
-
+        
+        //FTShareFBDidLoginNotification
+        NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+        [notificationCenter addObserver:self selector:@selector(fbDidLogin) name:@"FTShareFBDidLoginNotification" object:nil];
+        [notificationCenter addObserver:self selector:@selector(fbDidNotLogin:) name:@"FTShareFBDidNotLoginNotification" object:nil];
     }
     
     return self;
@@ -132,6 +136,9 @@ static NSMutableDictionary *_facebookParams;
     self.facebookDelegate = delegate;
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:appID forKey:@"FTShareFBAppID"];
+    [defaults synchronize];
+    
 	if ([defaults objectForKey:@"FBAccessTokenKey"] 
         && [defaults objectForKey:@"FBExpirationDateKey"]) {
         self.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
@@ -142,7 +149,7 @@ static NSMutableDictionary *_facebookParams;
 - (void)shareViaFacebook:(NSDictionary *)data {
     _facebookParams = [data mutableCopy];
     if (![self.facebook isSessionValid]) {
-        [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"publish_actions", nil]];
+        [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", @"offline_access", nil]];
     }
     else {
         [self.facebook dialog:@"feed" andParams:_facebookParams andDelegate:self];
@@ -191,6 +198,9 @@ static NSMutableDictionary *_facebookParams;
         [self.facebookDelegate facebookDidLoginSuccesfully:NO error:error];
     }
 }
+
+#pragma mark --
+#pragma mark notification
 
 
 @end

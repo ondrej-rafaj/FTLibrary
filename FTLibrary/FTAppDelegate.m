@@ -8,7 +8,6 @@
 
 #import "FTAppDelegate.h"
 #import "FTLanguageManager.h"
-#import "Facebook.h"
 
 
 @implementation FTAppDelegate
@@ -29,8 +28,25 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    Facebook *facebook = [[Facebook alloc] init];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *appID = [defaults objectForKey:@"FTShareFBAppID"];
+    
+    Facebook *facebook = [[Facebook alloc] initWithAppId:appID andDelegate:self];
     return  [facebook handleOpenURL:url];
+}
+
+#pragma mark delegate
+
+- (void)fbDidLogin {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"FTShareFBDidLoginNotification" object:nil];
+}
+
+- (void)fbDidNotLogin:(BOOL)cancelled {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"FTShareFBDidNotLoginNotification" object:nil];
+}
+
+- (void)fbDidLogout {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"FTShareFBDidLogoutNotification" object:nil];
 }
 
 @end

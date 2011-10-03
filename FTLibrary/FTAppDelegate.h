@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
+#import "Facebook.h"
+#import "FTShare.h"
 
-@interface FTAppDelegate : NSObject <UIApplicationDelegate> 
+@interface FTAppDelegate : NSObject <UIApplicationDelegate, FBSessionDelegate> 
+
 + (id)delegate;
 
 + (UIWindow *)windowFromSelector:(SEL)selector;
