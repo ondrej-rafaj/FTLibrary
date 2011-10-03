@@ -929,12 +929,10 @@
 		A56A630E1433617B000C666B /* SA_OAuthTwitterEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SA_OAuthTwitterEngine.m; sourceTree = "<group>"; };
 		A56A630F1433617B000C666B /* twitter_load.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_load.png; sourceTree = "<group>"; };
 		A56A634A1433679B000C666B /* libOAuth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOAuth.a; path = "Thirdparty/Twitter+OAuth/Libraries & Headers/libOAuth.a"; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		A59283C21434BD360000E770 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		A59283C51434BD850000E770 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
 		A59283C61434BD850000E770 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
-=======
->>>>>>> df863290e7820f6b6a5b42130a548eac50344ee6
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
