@@ -28,6 +28,7 @@
     CTFramesetterRef	_framesetter;
 	BOOL				_changesMade;
     NSMutableDictionary *_URLs;
+    NSMutableDictionary *_images;
     id<FTCoreTextViewDelegate> _delegate;
 }
 
@@ -39,6 +40,7 @@
 @property (nonatomic, assign) CGPathRef path;
 @property (nonatomic, assign) CGContextRef context;
 @property (nonatomic, retain) NSMutableDictionary *uRLs;
+@property (nonatomic, retain) NSMutableDictionary *images;
 @property (nonatomic, assign) id<FTCoreTextViewDelegate> delegate;
 
 
