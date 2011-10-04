@@ -242,7 +242,7 @@
     [elements addObject:element];
     [element setCenter:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2)];
     [stickersContainerView addSubview:element];
-    [self activateElement:element];
+    //[self activateElement:element];
 }
 
 - (void)deleteElement:(FTDragAndDropView *)element
@@ -306,8 +306,7 @@
     }
 }
 
-- (void)didEditElement:(FTDragAndDropView *)element
-{
+- (void)didEditElement:(FTDragAndDropView *)element {
 	[self disableActiveElement];
     if ([delegate respondsToSelector:@selector(finishedEditingElement:withData:)]) {
         [delegate finishedEditingElement:element withData:[element getInfo]];
@@ -340,12 +339,11 @@
 }
 
 - (void)didTapElement:(UITapGestureRecognizer *)recognizer {
-    [self handleTap:recognizer];
+    
 }
 
 - (void)didDoubleTapElement:(UITapGestureRecognizer *)recognizer {
     FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
-    [self handleTap:recognizer];
     [stickersContainerView bringSubviewToFront:v];
     [self didEditElement:v];
 }
