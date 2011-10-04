@@ -44,6 +44,21 @@ static NSMutableDictionary *_facebookParams;
     [super dealloc];
 }
 
+- (void)showActionSheetWithtitle:(NSString *)title andOptions:(FTShareOptions)options {
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] 
+                                  initWithTitle:title 
+                                  delegate:self 
+                                  cancelButtonTitle:@"Cancel" 
+                                  destructiveButtonTitle:nil 
+                                  otherButtonTitles:nil];
+    if (options & FTShareOptionsMail) [actionSheet addButtonWithTitle:@"Mail"];
+    if (options & FTShareOptionsFacebook) [actionSheet addButtonWithTitle:@"Facebook"];
+    if (options & FTShareOptionsTwitter) [actionSheet addButtonWithTitle:@"Twitter"];
+    
+    [actionSheet showInView:[(UIViewController *)self.referencedController view]];
+}
+
 
 //
 //Twitter
@@ -155,22 +170,18 @@ static NSMutableDictionary *_facebookParams;
         [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", nil]];
     }
     else {
-        [self.facebook dialog:@"feed" andParams:_facebookParams andDelegate:self];
+        UIImage *img = [_facebookParams objectForKey:@"uploadPicture"];
+        if (img && [img isKindOfClass:[UIImage class]]) {
+            [self.facebook requestWithGraphPath:@"me/photos" andParams:_facebookParams andHttpMethod:@"POST" andDelegate:self];
+        }
+        else {
+            [self.facebook dialog:@"feed" andParams:_facebookParams andDelegate:self]; 
+        }
+        
         [_facebookParams removeAllObjects];
     }
 }
 
-- (void)facebookUploadImage:(UIImage *)image withData:(NSDictionary *)data {
-    _facebookParams = [data mutableCopy];
-    [_facebookParams setObject:image forKey:@"picture"];
-    if (![self.facebook isSessionValid]) {
-        [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", @"offline_access", nil]];
-    }
-    else {
-        [self.facebook requestWithGraphPath:@"me/photos" andParams:_facebookParams andHttpMethod:@"POST" andDelegate:self];
-        [_facebookParams removeAllObjects];
-    }
-}
 
 #pragma mark Facebook dialog
 
@@ -205,14 +216,7 @@ static NSMutableDictionary *_facebookParams;
     }
     
     if (_facebookParams) {
-        UIImage *img = [_facebookParams objectForKey:@"picture"];
-        if (img) {
-            [self facebookUploadImage:img withData:_facebookParams];
-        }
-        else {
-            [self shareViaFacebook:_facebookParams];
-        }
-        
+        [self shareViaFacebook:_facebookParams];
     }
     
 }
@@ -237,6 +241,33 @@ static NSMutableDictionary *_facebookParams;
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
     if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPostSuccesfully:error:)]) {
         [self.facebookDelegate facebookDidPostSuccesfully:NO error:error];
+    }
+}
+
+#pragma mark --
+#pragma mark UIActionSheet
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *btnText = [actionSheet buttonTitleAtIndex:buttonIndex];
+    if ([btnText isEqualToString:@"Mail"]) {
+        //implement mail
+    }
+    else  if ([btnText isEqualToString:@"Facebook"]) {
+        //implement FAcebook
+        if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookShareData)]) {
+            NSDictionary *data = [self.facebookDelegate facebookShareData];
+            if (!data) return;
+            [self shareViaFacebook:data];
+        }
+    }
+    else  if ([btnText isEqualToString:@"Twitter"]) {
+        //implement Twitter
+        if (self.twitterDelegate && [self.twitterDelegate respondsToSelector:@selector(twitterMessage)]) {
+            NSString *message = [self.twitterDelegate twitterMessage];
+            if (!message) return;
+            NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:message, @"message", nil];
+            [self shareViaTwitter:data];
+        }
     }
 }
 
