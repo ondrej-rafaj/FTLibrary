@@ -54,8 +54,7 @@
 		UIImage *highlightedDeleteImage = [UIImage imageNamed:@"DD_canvas-delet-highlighted.png"];
 		deleteImageView = [[UIImageView alloc] initWithImage:deleteImage highlightedImage:highlightedDeleteImage];
 		deleteImageView.hidden = YES;
-		[self addSubview:deleteImageView];
-		[self bringSubviewToFront:deleteImageView];
+		[stickersContainerView addSubview:deleteImageView];
     }
     return self;
 }
@@ -87,11 +86,11 @@
 	}
 	
 	CGRect deleteImageViewRect = deleteImageView.frame;
-	deleteImageViewRect.origin = CGPointMake(backgroundImageView.frame.origin.x + 35, ceilf((CGRectGetHeight(self.bounds) - deleteImageViewRect.size.height) / 2));
+	deleteImageViewRect.origin = CGPointMake(35, ceilf((CGRectGetHeight(self.bounds) - deleteImageViewRect.size.height) / 2));
 	deleteImageView.frame = deleteImageViewRect;
 	
 	[deleteImagePath release];
-	deleteImagePath = [[UIBezierPath bezierPathWithOvalInRect:deleteImageViewRect] retain];
+	deleteImagePath = [[UIBezierPath bezierPathWithOvalInRect:[stickersContainerView convertRect:deleteImageViewRect toView:self]] retain];
 		
 	if (animatedLayout) {
 		[UIView beginAnimations:nil context:nil];
@@ -150,7 +149,6 @@
 	}
 	
 	UIImage *returnedImage = UIGraphicsGetImageFromCurrentImageContext();
-	[UIImagePNGRepresentation(returnedImage) writeToFile:@"/Users/baldoph/Desktop/image.png" atomically:NO];
 
 	UIGraphicsEndImageContext();
 	
@@ -279,7 +277,6 @@
     if (element != activeElement) {
         activeElement = element;
         [self highlightActiveElement];
-
     }
 }
 
@@ -329,7 +326,11 @@
 		
 		[UIView beginAnimations:nil context:nil];
 		[deleteImageView setAlpha:1];
-		[UIView commitAnimations];		
+		[UIView commitAnimations];			
+		
+		[stickersContainerView bringSubviewToFront:deleteImageView];
+		
+		[stickersContainerView bringSubviewToFront:v];
 	}
 	else if (tap.state == UIGestureRecognizerStateEnded) {
 		if (!v.isDragged) [deleteImageView setHidden:YES];
@@ -345,6 +346,8 @@
 - (void)didDoubleTapElement:(UITapGestureRecognizer *)recognizer {
     FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
     [stickersContainerView bringSubviewToFront:v];
+	[elements removeObject:v];
+	[elements addObject:v];
     [self didEditElement:v];
 }
 
@@ -410,6 +413,11 @@ static CGFloat tempRotation = 0;
 			elementToDelete = v;
 			[self deleteElement:v];
 		}
+		else {
+			NSInteger viewHierachyIndex = [elements indexOfObject:v];
+			[stickersContainerView insertSubview:v atIndex:viewHierachyIndex]; 
+		}
+
 		[self disableActiveElement];
 	}
 }
