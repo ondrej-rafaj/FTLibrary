@@ -75,7 +75,7 @@
  @return NSArray File and folder list
  */
 + (NSArray *)getListAll:(NSString *)path {
-	NSMutableArray *fileArray = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *fileArray = [NSMutableArray array];
 	NSFileManager *manager = [NSFileManager defaultManager];
     NSArray *fileList = [manager contentsOfDirectoryAtPath:path error:nil];
 	for (NSString *file in fileList){
@@ -92,7 +92,7 @@
  @return NSArray File list
  */
 + (NSArray *)getListFiles:(NSString *)path {
-	NSMutableArray *fileArray = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *fileArray = [NSMutableArray array];
 	NSArray *fileList = [self getListAll:path];
 	for (NSString *file in fileList){
         if (![file isEqualToString:@"~"] ) if ([self isFile:[NSString stringWithFormat:@"%@%@", path, file]]) [fileArray addObject:file];
@@ -108,7 +108,7 @@
  @return NSArray Folder list
  */
 + (NSArray *)getListFolders:(NSString *)path {
-	NSMutableArray *fileArray = [[[NSMutableArray alloc] init] autorelease];
+	NSMutableArray *fileArray = [NSMutableArray array];
 	NSArray *fileList = [self getListAll:path];
 	for (NSString *file in fileList){
         if (![file isEqualToString:@"~"] ) if ([self isFolder:[NSString stringWithFormat:@"%@%@", path, file]]) [fileArray addObject:file];
