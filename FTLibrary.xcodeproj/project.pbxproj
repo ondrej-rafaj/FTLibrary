@@ -425,6 +425,8 @@
 		4CFEAD8E1432279A00EDD9A8 /* FTCachedImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEAD8A1432279A00EDD9A8 /* FTCachedImageLoader.m */; };
 		4CFEAD8F1432279A00EDD9A8 /* FTDiskCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CFEAD8B1432279A00EDD9A8 /* FTDiskCache.h */; };
 		4CFEAD901432279A00EDD9A8 /* FTDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEAD8C1432279A00EDD9A8 /* FTDiskCache.m */; };
+		68134788143B29F700CC309C /* FTShareDataObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 68134786143B29F700CC309C /* FTShareDataObjects.h */; };
+		68134789143B29F700CC309C /* FTShareDataObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 68134787143B29F700CC309C /* FTShareDataObjects.m */; };
 		6834BE2913D9B2EA00781018 /* FTLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6834BE2713D9B2EA00781018 /* FTLabel.h */; };
 		6834BE2A13D9B2EA00781018 /* FTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6834BE2813D9B2EA00781018 /* FTLabel.m */; };
 		68437FAB13FC08540072C4B9 /* FTLanguageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 68437FA913FC08530072C4B9 /* FTLanguageManager.h */; };
@@ -853,6 +855,8 @@
 		4CFEAD8A1432279A00EDD9A8 /* FTCachedImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCachedImageLoader.m; sourceTree = "<group>"; };
 		4CFEAD8B1432279A00EDD9A8 /* FTDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDiskCache.h; sourceTree = "<group>"; };
 		4CFEAD8C1432279A00EDD9A8 /* FTDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDiskCache.m; sourceTree = "<group>"; };
+		68134786143B29F700CC309C /* FTShareDataObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTShareDataObjects.h; sourceTree = "<group>"; };
+		68134787143B29F700CC309C /* FTShareDataObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTShareDataObjects.m; sourceTree = "<group>"; };
 		6834BE2713D9B2EA00781018 /* FTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLabel.h; sourceTree = "<group>"; };
 		6834BE2813D9B2EA00781018 /* FTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLabel.m; sourceTree = "<group>"; };
 		68437FA913FC08530072C4B9 /* FTLanguageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLanguageManager.h; sourceTree = "<group>"; };
@@ -929,10 +933,6 @@
 		A56A630E1433617B000C666B /* SA_OAuthTwitterEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SA_OAuthTwitterEngine.m; sourceTree = "<group>"; };
 		A56A630F1433617B000C666B /* twitter_load.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_load.png; sourceTree = "<group>"; };
 		A56A634A1433679B000C666B /* libOAuth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOAuth.a; path = "Thirdparty/Twitter+OAuth/Libraries & Headers/libOAuth.a"; sourceTree = "<group>"; };
-		A59283C21434BD360000E770 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
-		A59283C51434BD850000E770 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
-		A59283C61434BD850000E770 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2043,6 +2043,8 @@
 		A56A62C714336034000C666B /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				68134786143B29F700CC309C /* FTShareDataObjects.h */,
+				68134787143B29F700CC309C /* FTShareDataObjects.m */,
 				A56A62CC1433606E000C666B /* FTShare.h */,
 				A56A62CD1433606E000C666B /* FTShare.m */,
 			);
@@ -2359,6 +2361,7 @@
 				4CE77EF11435E7C900A5AEDA /* JSON.h in Headers */,
 				4CE77EF21435E7C900A5AEDA /* NSString+SBJSON.h in Headers */,
 				4CE77EFA1435FC4700A5AEDA /* FTPhotoEditingView.h in Headers */,
+				68134788143B29F700CC309C /* FTShareDataObjects.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2634,6 +2637,7 @@
 				4CE77EE01435D34500A5AEDA /* FTVerticalSlider.m in Sources */,
 				4CE77EF31435E7C900A5AEDA /* NSString+SBJSON.m in Sources */,
 				4CE77EFB1435FC4700A5AEDA /* FTPhotoEditingView.m in Sources */,
+				68134789143B29F700CC309C /* FTShareDataObjects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <MessageUI/MessageUI.h>
+#import "FTShareDataObjects.h"
 #import "FBConnect.h"
 #import "SA_OAuthTwitterEngine.h"
 #import "SA_OAuthTwitterController.h"
@@ -46,30 +47,30 @@ typedef NSUInteger FTShareOptions;
 - (void)showActionSheetWithtitle:(NSString *)title andOptions:(FTShareOptions)options;
 
 - (void)setUpTwitterWithConsumerKey:(NSString *)consumerKey secret:(NSString *)secret appID:(NSString *)appID andDelegate:(id<FTShareTwitterDelegate>)delegate;
-- (void)shareViaTwitter:(NSDictionary *)data;
+- (void)shareViaTwitter:(FTShareTwitterData *)data;
 
 - (void)setUpFacebookWithAppID:(NSString *)appID andDelegate:(id<FTShareFacebookDelegate>)delegate;
-- (void)shareViaFacebook:(NSDictionary *)data;
+- (void)shareViaFacebook:(FTShareFacebookData *)data;
 
-- (void)shareViaMail:(NSDictionary *)data;
+- (void)shareViaMail:(FTShareMailData *)data;
 
 @end
 
 @protocol FTShareTwitterDelegate <NSObject>
-- (NSString *)twitterMessage;
+- (FTShareTwitterData *)twitterData;
 - (void)twitterLoginDialogController:(UIViewController *)controller;
 - (void)twitterDidLoginSuccesfully:(BOOL)success error:(NSError *)error;
 - (void)twitterDidPostSuccesfully:(BOOL)success error:(NSError *)error;
 @end
 
 @protocol FTShareFacebookDelegate <NSObject>
-- (NSDictionary *)facebookShareData;
+- (FTShareFacebookData *)facebookShareData;
 - (void)facebookLoginDialogController:(UIViewController *)controller;
 - (void)facebookDidLoginSuccesfully:(BOOL)success error:(NSError *)error;
 - (void)facebookDidPostSuccesfully:(BOOL)success error:(NSError *)error;
 @end
 
 @protocol FTShareMailDelegate <NSObject>
-- (NSDictionary *)mailShareData;
+- (FTShareMailData *)mailShareData;
 - (void)mailSentSuccesfully:(BOOL)success;
 @end

@@ -18,8 +18,8 @@
 
 @synthesize referencedController = _referencedController;
 
-static NSDictionary *_twitterParams;
-static NSMutableDictionary *_facebookParams;
+static FTShareTwitterData *_twitterParams;
+static FTShareFacebookData *_facebookParams;
 
 - (id)initWithReferencedController:(id)controller
 {
@@ -76,7 +76,7 @@ static NSMutableDictionary *_facebookParams;
     //APP id not set yet
 }
 
-- (void)shareViaTwitter:(NSDictionary *)data {
+- (void)shareViaTwitter:(FTShareTwitterData *)data {
     _twitterParams = nil;
     _twitterParams = data;
     if(![self.twitter isAuthorized]){  
@@ -87,7 +87,7 @@ static NSMutableDictionary *_facebookParams;
         }
     }
     else {
-        [self.twitter sendUpdate:[_twitterParams objectForKey:@"message"]];
+        [self.twitter sendUpdate:_twitterParams.message];
     }
 }
 
@@ -164,21 +164,20 @@ static NSMutableDictionary *_facebookParams;
 	}
 }
 
-- (void)shareViaFacebook:(NSDictionary *)data {
-    _facebookParams = [data mutableCopy];
+- (void)shareViaFacebook:(FTShareFacebookData *)data {
+    _facebookParams = nil;
+    _facebookParams = data;
     if (![self.facebook isSessionValid]) {
         [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", nil]];
     }
     else {
-        UIImage *img = [_facebookParams objectForKey:@"uploadPicture"];
+        UIImage *img = _facebookParams.uploadImage;
         if (img && [img isKindOfClass:[UIImage class]]) {
-            [self.facebook requestWithGraphPath:@"me/photos" andParams:_facebookParams andHttpMethod:@"POST" andDelegate:self];
+            [self.facebook requestWithGraphPath:@"me/photos" andParams:[_facebookParams dictionaryFromParams] andHttpMethod:@"POST" andDelegate:self];
         }
         else {
-            [self.facebook dialog:@"feed" andParams:_facebookParams andDelegate:self]; 
+            [self.facebook dialog:@"feed" andParams:[_facebookParams dictionaryFromParams] andDelegate:self]; 
         }
-        
-        [_facebookParams removeAllObjects];
     }
 }
 
@@ -246,18 +245,31 @@ static NSMutableDictionary *_facebookParams;
 
 #pragma mark --
 #pragma mark Mail
-- (void)shareViaMail:(NSDictionary *)data {
+- (void)shareViaMail:(FTShareMailData *)data {
     
 
 	MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init]; 
 	mc.mailComposeDelegate = self;  
 	
-	[mc setSubject:[data objectForKey:@"subject"]];  
+	[mc setSubject:data.subject];  
 	
-	[mc setMessageBody:[data objectForKey:@"plainBody"] isHTML:NO];   
-	[mc setMessageBody:[data objectForKey:@"htmlBody"] isHTML:YES];  
+	[mc setMessageBody:data.plainBody isHTML:NO];
+    if (data.htmlBody && [data.htmlBody length] > 0) {
+        [mc setMessageBody:data.htmlBody isHTML:YES];
+    }
 	
-	[mc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];  
+    if (data.attachments && [data.attachments count] > 0) {
+        for (NSDictionary *dict in data.attachments) {
+            NSData *data = [dict objectForKey:@"data"];
+            NSString *type = [dict objectForKey:@"type"];
+            NSString *name = [dict objectForKey:@"name"];
+            [mc addAttachmentData:data mimeType:type fileName:name];
+        }
+    }
+	
+	[mc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    
+    
 
 	if(mc) [self.referencedController presentModalViewController:mc animated:YES];
 	[mc release];  
@@ -301,7 +313,7 @@ static NSMutableDictionary *_facebookParams;
     if ([btnText isEqualToString:@"Mail"]) {
         //implement mail
         if (self.mailDelegate && [self.mailDelegate respondsToSelector:@selector(mailShareData)]) {
-            NSDictionary *data = [self.mailDelegate mailShareData];
+            FTShareMailData *data = [self.mailDelegate mailShareData];
             if (!data) return;
             [self shareViaMail:data];
         }
@@ -309,17 +321,15 @@ static NSMutableDictionary *_facebookParams;
     else  if ([btnText isEqualToString:@"Facebook"]) {
         //implement FAcebook
         if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookShareData)]) {
-            NSDictionary *data = [self.facebookDelegate facebookShareData];
+            FTShareFacebookData *data = [self.facebookDelegate facebookShareData];
             if (!data) return;
             [self shareViaFacebook:data];
         }
     }
     else  if ([btnText isEqualToString:@"Twitter"]) {
         //implement Twitter
-        if (self.twitterDelegate && [self.twitterDelegate respondsToSelector:@selector(twitterMessage)]) {
-            NSString *message = [self.twitterDelegate twitterMessage];
-            if (!message) return;
-            NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:message, @"message", nil];
+        if (self.twitterDelegate && [self.twitterDelegate respondsToSelector:@selector(twitterData)]) {
+            FTShareTwitterData *data = [self.twitterDelegate twitterData];
             [self shareViaTwitter:data];
         }
     }
