@@ -123,31 +123,31 @@
     CGSize newImageSize = CGSizeMake(roundf(imageSize.width * ratio), roundf(imageSize.height * ratio));
 	
 	UIGraphicsBeginImageContextWithOptions(newImageSize, YES, 0.0);
-	//CGContextRef context = UIGraphicsGetCurrentContext();	
+	CGContextRef context = UIGraphicsGetCurrentContext();	
 	
 	[backgroundImageView.image drawInRect:CGRectMake(0, 0, newImageSize.width, newImageSize.height)];
 	
 	//the reference size is in landscape
-	//CGFloat horizontalRatio2 = newImageSize.width / 1024;
-    //CGFloat verticalRatio2 = newImageSize.height / 768;
-    //CGFloat newScaling = MAX(horizontalRatio2, verticalRatio2);
+	CGFloat horizontalRatio2 = newImageSize.width / 1024;
+    CGFloat verticalRatio2 = newImageSize.height / 768;
+    CGFloat newScaling = MAX(horizontalRatio2, verticalRatio2);
 	
-//	for (FTDragAndDropView *element in elements) {
-//		
-//		CGPoint newCenter = CGPointMake(ceilf(element.positionX * newScaling), ceilf(element.positionY * newScaling));
-//		
-//		CGContextSaveGState(context);
-//		CGContextTranslateCTM(context, newCenter.x, newCenter.y);
-//		CGFloat scaleValue = element.scaleValue * newScaling;
-//		CGContextScaleCTM(context, scaleValue, scaleValue);
-//		CGFloat rotationValue = element.rotationValue;
-//		CGContextRotateCTM(context, rotationValue);
-//		
-//		UIImage *imageToDraw = element.imageView.image;
-//		[imageToDraw drawAtPoint:CGPointMake(-roundf((imageToDraw.size.width / 2)), -roundf((imageToDraw.size.height / 2)))];
-//		
-//		CGContextRestoreGState(context);
-//	}
+	for (FTDragAndDropView *element in elements) {
+		
+		CGPoint newCenter = CGPointMake(ceilf(element.positionX * newScaling), ceilf(element.positionY * newScaling));
+		
+		CGContextSaveGState(context);
+		CGContextTranslateCTM(context, newCenter.x, newCenter.y);
+		CGFloat scaleValue = element.scaleValue * newScaling;
+		CGContextScaleCTM(context, scaleValue, scaleValue);
+		CGFloat rotationValue = element.rotationValue;
+		CGContextRotateCTM(context, rotationValue);
+		
+		UIImage *imageToDraw = element.imageView.image;
+		[imageToDraw drawAtPoint:CGPointMake(-roundf((imageToDraw.size.width / 2)), -roundf((imageToDraw.size.height / 2)))];
+		
+		CGContextRestoreGState(context);
+	}
 	
 	UIImage *returnedImage = UIGraphicsGetImageFromCurrentImageContext();
 	[UIImagePNGRepresentation(returnedImage) writeToFile:@"/Users/baldoph/Desktop/image.png" atomically:NO];
