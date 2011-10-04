@@ -12,6 +12,8 @@
 
 @implementation FTAppDelegate
 
+@synthesize share;
+
 + (id)delegate {
 	return [[UIApplication sharedApplication] delegate];
 }
@@ -28,25 +30,10 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *appID = [defaults objectForKey:@"FTShareFBAppID"];
-    
-    Facebook *facebook = [[Facebook alloc] initWithAppId:appID andDelegate:self];
-    return  [facebook handleOpenURL:url];
-}
-
-#pragma mark delegate
-
-- (void)fbDidLogin {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"FTShareFBDidLoginNotification" object:nil];
-}
-
-- (void)fbDidNotLogin:(BOOL)cancelled {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"FTShareFBDidNotLoginNotification" object:nil];
-}
-
-- (void)fbDidLogout {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"FTShareFBDidLogoutNotification" object:nil];
+    if (self.share.facebook) {
+        return [self.share.facebook handleOpenURL:url];
+    }
+    return YES;
 }
 
 @end

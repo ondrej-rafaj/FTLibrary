@@ -12,7 +12,9 @@
 #import "Facebook.h"
 #import "FTShare.h"
 
-@interface FTAppDelegate : NSObject <UIApplicationDelegate, FBSessionDelegate> 
+@interface FTAppDelegate : NSObject <UIApplicationDelegate> 
+
+@property (nonatomic, retain) FTShare *share;
 
 + (id)delegate;
 

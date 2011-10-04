@@ -29,11 +29,7 @@ static NSMutableDictionary *_facebookParams;
         [self setReferencedController:controller];
         _twitterParams = nil;
         _facebookParams = nil;
-        
-        //FTShareFBDidLoginNotification
-        NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-        [notificationCenter addObserver:self selector:@selector(fbDidLogin) name:@"FTShareFBDidLoginNotification" object:nil];
-        [notificationCenter addObserver:self selector:@selector(fbDidNotLogin:) name:@"FTShareFBDidNotLoginNotification" object:nil];
+
     }
     
     return self;
@@ -47,6 +43,11 @@ static NSMutableDictionary *_facebookParams;
     _referencedController = nil;
     [super dealloc];
 }
+
+
+//
+//Twitter
+//
 
 #pragma mark --
 #pragma mark Twitter
@@ -126,7 +127,9 @@ static NSMutableDictionary *_facebookParams;
     }
 }
 
-
+//
+//Facebook
+//
 
 #pragma mark --
 #pragma mark Facebook
@@ -149,10 +152,23 @@ static NSMutableDictionary *_facebookParams;
 - (void)shareViaFacebook:(NSDictionary *)data {
     _facebookParams = [data mutableCopy];
     if (![self.facebook isSessionValid]) {
-        [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", @"offline_access", nil]];
+        [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", nil]];
     }
     else {
         [self.facebook dialog:@"feed" andParams:_facebookParams andDelegate:self];
+        [_facebookParams removeAllObjects];
+    }
+}
+
+- (void)facebookUploadImage:(UIImage *)image withData:(NSDictionary *)data {
+    _facebookParams = [data mutableCopy];
+    [_facebookParams setObject:image forKey:@"picture"];
+    if (![self.facebook isSessionValid]) {
+        [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", @"offline_access", nil]];
+    }
+    else {
+        [self.facebook requestWithGraphPath:@"me/photos" andParams:_facebookParams andHttpMethod:@"POST" andDelegate:self];
+        [_facebookParams removeAllObjects];
     }
 }
 
@@ -176,16 +192,27 @@ static NSMutableDictionary *_facebookParams;
 
 - (void)fbDidLogin {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     [defaults setObject:[self.facebook accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[self.facebook expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
+    
+    NSLog(@"%@ %@", self.facebook.accessToken, self.facebook.expirationDate.description);
+    
 	
     if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidLoginSuccesfully:error:)]) {
         [self.facebookDelegate facebookDidLoginSuccesfully:YES error:nil];
     }
     
     if (_facebookParams) {
-        [self.facebook dialog:@"feed" andParams:_facebookParams andDelegate:self];
+        UIImage *img = [_facebookParams objectForKey:@"picture"];
+        if (img) {
+            [self facebookUploadImage:img withData:_facebookParams];
+        }
+        else {
+            [self shareViaFacebook:_facebookParams];
+        }
+        
     }
     
 }
@@ -199,8 +226,19 @@ static NSMutableDictionary *_facebookParams;
     }
 }
 
-#pragma mark --
-#pragma mark notification
+#pragma mark FAcebook REquest delegate
+
+- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
+    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPostSuccesfully:error:)]) {
+        [self.facebookDelegate facebookDidPostSuccesfully:YES error:nil];
+    }
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPostSuccesfully:error:)]) {
+        [self.facebookDelegate facebookDidPostSuccesfully:NO error:error];
+    }
+}
 
 
 @end

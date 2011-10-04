@@ -17,7 +17,7 @@
 @protocol FTShareFacebookDelegate;
 @protocol FTShareMailDelegate;
 
-@interface FTShare : NSObject <MFMailComposeViewControllerDelegate, SA_OAuthTwitterControllerDelegate, SA_OAuthTwitterEngineDelegate, FBSessionDelegate, FBDialogDelegate> {
+@interface FTShare : NSObject <MFMailComposeViewControllerDelegate, SA_OAuthTwitterControllerDelegate, SA_OAuthTwitterEngineDelegate, FBRequestDelegate, FBSessionDelegate, FBDialogDelegate> {
     Facebook *_facebook;
     SA_OAuthTwitterEngine *_twitter;
     id<FTShareTwitterDelegate> _twitterDelegate;
@@ -41,6 +41,7 @@
 
 - (void)setUpFacebookWithAppID:(NSString *)appID andDelegate:(id<FTShareFacebookDelegate>)delegate;
 - (void)shareViaFacebook:(NSDictionary *)data;
+- (void)facebookUploadImage:(UIImage *)image withData:(NSDictionary *)data;
 
 @end
 
