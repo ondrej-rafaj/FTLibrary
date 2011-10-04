@@ -245,12 +245,66 @@ static NSMutableDictionary *_facebookParams;
 }
 
 #pragma mark --
+#pragma mark Mail
+- (void)shareViaMail:(NSDictionary *)data {
+    
+
+	MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init]; 
+	mc.mailComposeDelegate = self;  
+	
+	[mc setSubject:[data objectForKey:@"subject"]];  
+	
+	[mc setMessageBody:[data objectForKey:@"plainBody"] isHTML:NO];   
+	[mc setMessageBody:[data objectForKey:@"htmlBody"] isHTML:YES];  
+	
+	[mc setModalTransitionStyle:UIModalTransitionStyleCoverVertical];  
+
+	if(mc) [self.referencedController presentModalViewController:mc animated:YES];
+	[mc release];  
+}
+
+
+#pragma mark MAil controller delegates
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    BOOL success = NO;
+    
+	switch (result) {  
+		case MFMailComposeResultCancelled:  
+			success = NO; 
+			break;  
+		case MFMailComposeResultSaved:  
+			success = NO;
+			break;  
+		case MFMailComposeResultSent:  
+			success = YES; 
+			break;  
+		case MFMailComposeResultFailed:  
+			success = NO; 
+			break;  
+		default:  
+			break;  
+	}
+    
+    if (self.mailDelegate && [self.mailDelegate respondsToSelector:@selector(mailSentSuccesfully:)]) {
+        [self.mailDelegate mailSentSuccesfully:success];
+    }
+    [controller dismissModalViewControllerAnimated:YES];
+
+}
+ 
+
+#pragma mark --
 #pragma mark UIActionSheet
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString *btnText = [actionSheet buttonTitleAtIndex:buttonIndex];
     if ([btnText isEqualToString:@"Mail"]) {
         //implement mail
+        if (self.mailDelegate && [self.mailDelegate respondsToSelector:@selector(mailShareData)]) {
+            NSDictionary *data = [self.mailDelegate mailShareData];
+            if (!data) return;
+            [self shareViaMail:data];
+        }
     }
     else  if ([btnText isEqualToString:@"Facebook"]) {
         //implement FAcebook
