@@ -14,6 +14,14 @@
 
 @synthesize share;
 
+- (id)init {
+    self = [super init];
+    if (self) {
+        share = [[FTShare alloc] initWithReferencedController:nil];
+    }
+    return self;
+}
+
 + (id)delegate {
 	return [[UIApplication sharedApplication] delegate];
 }
