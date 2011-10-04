@@ -299,7 +299,6 @@ static FTShareFacebookData *_facebookParams;
         [self.mailDelegate mailSent:result];
     }
     [controller dismissModalViewControllerAnimated:YES];
-
 }
  
 
