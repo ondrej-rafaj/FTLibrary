@@ -3,7 +3,7 @@
 //  IKEA_settings
 //
 //  Created by Francesco on 04/10/2011.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Fuerte International. All rights reserved.
 //
 
 #import "FTShareDataObjects.h"
@@ -15,7 +15,9 @@
 @synthesize message = _message;
 
 - (BOOL)isRequestValid {
-    return (self.message && [self.message length] > 0);
+    BOOL valid = (self.message && [self.message length] > 0);
+    if (!valid) NSLog(@"Twitter request seams not valid");
+    return valid;
 }
 
 - (void)dealloc {
@@ -41,7 +43,11 @@
 
 
 - (BOOL)isRequestValid {
-    return (self.message && [self.message length] > 0);
+    BOOL isValidMessage = (self.message && [self.message length] > 0);
+    BOOL isValidImage = (!self.uploadImage || (self.uploadImage && !CGSizeEqualToSize(self.uploadImage.size, CGSizeZero)));
+    BOOL valid = (isValidMessage && isValidImage);
+    if (!valid) NSLog(@"Facebook request seams not valid");
+    return valid;
 }
 
 - (NSMutableDictionary *)dictionaryFromParams {
@@ -82,14 +88,19 @@
 - (id)init {
     self = [super init];
     if (self) {
-        _attachments = [NSMutableArray array];
+        _attachments = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
 
 - (BOOL)isRequestValid {
-    return YES;
+    BOOL isValidSubject = (self.subject && ([self.subject length] > 0));
+    BOOL isPlain = (self.plainBody && ([self.plainBody length] > 0));
+    BOOL isHtml = (self.htmlBody && ([self.htmlBody length] > 0));
+    BOOL valid = (isValidSubject && ((isHtml && isPlain) || isPlain));
+    if (!valid) NSLog(@"Mail requst eams not valid");
+    return valid;
 }
 
 - (void)addAttachmentWithObject:(NSData *)data type:(NSString *)type andName:(NSString *)name {

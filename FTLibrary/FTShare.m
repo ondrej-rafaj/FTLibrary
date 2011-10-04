@@ -3,7 +3,7 @@
 //  IKEA_settings
 //
 //  Created by cescofry on 28/09/2011.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Fuerte International. All rights reserved.
 //
 
 #import "FTShare.h"
@@ -44,6 +44,10 @@ static FTShareFacebookData *_facebookParams;
     [super dealloc];
 }
 
+/**
+ * Use this method, then implement the delegates
+ */
+
 - (void)showActionSheetWithtitle:(NSString *)title andOptions:(FTShareOptions)options {
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] 
@@ -60,9 +64,11 @@ static FTShareFacebookData *_facebookParams;
 }
 
 
-//
-//Twitter
-//
+/**
+ *
+ * Twitter Section
+ *
+ */
 
 #pragma mark --
 #pragma mark Twitter
@@ -87,6 +93,7 @@ static FTShareFacebookData *_facebookParams;
         }
     }
     else {
+        if (![_twitterParams isRequestValid]) return;
         [self.twitter sendUpdate:_twitterParams.message];
     }
 }
@@ -142,9 +149,11 @@ static FTShareFacebookData *_facebookParams;
     }
 }
 
-//
-//Facebook
-//
+/**
+ *
+ * Facebook Section
+ *
+ */
 
 #pragma mark --
 #pragma mark Facebook
@@ -171,6 +180,7 @@ static FTShareFacebookData *_facebookParams;
         [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", nil]];
     }
     else {
+        if (![_facebookParams isRequestValid]) return;
         UIImage *img = _facebookParams.uploadImage;
         if (img && [img isKindOfClass:[UIImage class]]) {
             [self.facebook requestWithGraphPath:@"me/photos" andParams:[_facebookParams dictionaryFromParams] andHttpMethod:@"POST" andDelegate:self];
@@ -243,10 +253,16 @@ static FTShareFacebookData *_facebookParams;
     }
 }
 
+/**
+ *
+ * Mail Section
+ *
+ */
+
 #pragma mark --
 #pragma mark Mail
 - (void)shareViaMail:(FTShareMailData *)data {
-    
+    if (![data isRequestValid]) return;
 
 	MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init]; 
 	mc.mailComposeDelegate = self;  

@@ -3,7 +3,7 @@
 //  IKEA_settings
 //
 //  Created by Francesco on 04/10/2011.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Fuerte International. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -16,6 +16,8 @@
 }
 
 @property (nonatomic, retain) NSString *message;
+
+- (BOOL)isRequestValid;
 
 @end
 
@@ -38,6 +40,7 @@
 @property (nonatomic, retain) UIImage *uploadImage;
 
 - (NSMutableDictionary *)dictionaryFromParams;
+- (BOOL)isRequestValid;
 
 @end
 
@@ -55,5 +58,6 @@
 @property (nonatomic, readonly, retain) NSMutableArray *attachments;
 
 - (void)addAttachmentWithObject:(id)obj type:(NSString *)type andName:(NSString *)name;
+- (BOOL)isRequestValid;
 
 @end
