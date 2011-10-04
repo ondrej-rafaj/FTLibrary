@@ -59,18 +59,18 @@ typedef NSUInteger FTShareOptions;
 @protocol FTShareTwitterDelegate <NSObject>
 - (FTShareTwitterData *)twitterData;
 - (void)twitterLoginDialogController:(UIViewController *)controller;
-- (void)twitterDidLoginSuccesfully:(BOOL)success error:(NSError *)error;
-- (void)twitterDidPostSuccesfully:(BOOL)success error:(NSError *)error;
+- (void)twitterDidLogin:(NSError *)error;
+- (void)twitterDidPost:(NSError *)error;
 @end
 
 @protocol FTShareFacebookDelegate <NSObject>
 - (FTShareFacebookData *)facebookShareData;
 - (void)facebookLoginDialogController:(UIViewController *)controller;
-- (void)facebookDidLoginSuccesfully:(BOOL)success error:(NSError *)error;
-- (void)facebookDidPostSuccesfully:(BOOL)success error:(NSError *)error;
+- (void)facebookDidLogin:(NSError *)error;
+- (void)facebookDidPost:(NSError *)error;
 @end
 
 @protocol FTShareMailDelegate <NSObject>
 - (FTShareMailData *)mailShareData;
-- (void)mailSentSuccesfully:(BOOL)success;
+- (void)mailSent:(MFMailComposeResult)result;
 @end

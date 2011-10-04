@@ -114,31 +114,31 @@ static FTShareFacebookData *_facebookParams;
 #pragma mark TwitterEngineDelegate  
 - (void) requestSucceeded: (NSString *) requestIdentifier {  
     NSLog(@"Request %@ succeeded", requestIdentifier); 
-    if ([self.twitterDelegate respondsToSelector:@selector(twitterDidPostSuccesfully:error:)]) {
-        [self.twitterDelegate twitterDidPostSuccesfully:YES error:nil];
+    if ([self.twitterDelegate respondsToSelector:@selector(twitterDidPost:)]) {
+        [self.twitterDelegate twitterDidPost:nil];
     }
 }  
 
 - (void) requestFailed: (NSString *) requestIdentifier withError: (NSError *) error {  
     NSLog(@"Request %@ failed with error: %@", requestIdentifier, error);
-    if ([self.twitterDelegate respondsToSelector:@selector(twitterDidPostSuccesfully:error:)]) {
-        [self.twitterDelegate twitterDidPostSuccesfully:NO error:error];
+    if ([self.twitterDelegate respondsToSelector:@selector(twitterDidPost:)]) {
+        [self.twitterDelegate twitterDidPost:error];
     }
 }
 
 #pragma mark Twitter login
 
 - (void)OAuthTwitterController:(SA_OAuthTwitterController *)controller authenticatedWithUsername:(NSString *)username {
-    if ([self.twitterDelegate respondsToSelector:@selector(twitterDidLoginSuccesfully:error:)]) {
-        [self.twitterDelegate twitterDidLoginSuccesfully:YES error:nil];
+    if ([self.twitterDelegate respondsToSelector:@selector(twitterDidLogin:)]) {
+        [self.twitterDelegate twitterDidLogin:nil];
     }
     [self shareViaTwitter:_twitterParams];
 }
 
 - (void)OAuthTwitterControllerFailed:(SA_OAuthTwitterController *)controller {
     NSError *error = [NSError errorWithDomain:@"com.fuerteint.FTShare" code:400 userInfo:[NSDictionary dictionaryWithObject:@"Couldn't share with twitter" forKey:@"description"]];
-    if ([self.twitterDelegate respondsToSelector:@selector(twitterDidLoginSuccesfully:error:)]) {
-        [self.twitterDelegate twitterDidLoginSuccesfully:NO error:error];
+    if ([self.twitterDelegate respondsToSelector:@selector(twitterDidLogin:)]) {
+        [self.twitterDelegate twitterDidLogin:error];
     }
 }
 
@@ -185,16 +185,16 @@ static FTShareFacebookData *_facebookParams;
 #pragma mark Facebook dialog
 
 - (void)dialogDidComplete:(FBDialog *)dialog {
-	if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPostSuccesfully:error:)]) {
-        [self.facebookDelegate facebookDidPostSuccesfully:YES error:nil];
+	if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPost:)]) {
+        [self.facebookDelegate facebookDidPost:nil];
     }
 }
 - (void)dialogDidNotComplete:(FBDialog *)dialog {
     NSDictionary *dict = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects:@"Couldn't post with facebook", nil]
                                                      forKeys:[NSArray arrayWithObjects:@"description", nil]];
     NSError *error= [NSError errorWithDomain:@"com.fuerte.FTShare" code:400 userInfo:dict];
-    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPostSuccesfully:error:)]) {
-        [self.facebookDelegate facebookDidPostSuccesfully:NO error:error];
+    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPost:)]) {
+        [self.facebookDelegate facebookDidPost:error];
     }
 }
 
@@ -210,8 +210,8 @@ static FTShareFacebookData *_facebookParams;
     NSLog(@"%@ %@", self.facebook.accessToken, self.facebook.expirationDate.description);
     
 	
-    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidLoginSuccesfully:error:)]) {
-        [self.facebookDelegate facebookDidLoginSuccesfully:YES error:nil];
+    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidLogin:)]) {
+        [self.facebookDelegate facebookDidLogin:nil];
     }
     
     if (_facebookParams) {
@@ -224,22 +224,22 @@ static FTShareFacebookData *_facebookParams;
     NSDictionary *dict = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects:@"Couldn't login with facebook", [NSNumber numberWithBool:cancelled], nil]
                                                      forKeys:[NSArray arrayWithObjects:@"description", @"cancelled", nil]];
     NSError *error= [NSError errorWithDomain:@"com.fuerte.FTShare" code:400 userInfo:dict];
-    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidLoginSuccesfully:error:)]) {
-        [self.facebookDelegate facebookDidLoginSuccesfully:NO error:error];
+    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidLogin:)]) {
+        [self.facebookDelegate facebookDidLogin:error];
     }
 }
 
 #pragma mark FAcebook REquest delegate
 
 - (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
-    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPostSuccesfully:error:)]) {
-        [self.facebookDelegate facebookDidPostSuccesfully:YES error:nil];
+    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPost:)]) {
+        [self.facebookDelegate facebookDidPost:nil];
     }
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPostSuccesfully:error:)]) {
-        [self.facebookDelegate facebookDidPostSuccesfully:NO error:error];
+    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPost:)]) {
+        [self.facebookDelegate facebookDidPost:error];
     }
 }
 
@@ -276,29 +276,11 @@ static FTShareFacebookData *_facebookParams;
 }
 
 
-#pragma mark MAil controller delegates
+#pragma mark Mail controller delegates
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    BOOL success = NO;
-    
-	switch (result) {  
-		case MFMailComposeResultCancelled:  
-			success = NO; 
-			break;  
-		case MFMailComposeResultSaved:  
-			success = NO;
-			break;  
-		case MFMailComposeResultSent:  
-			success = YES; 
-			break;  
-		case MFMailComposeResultFailed:  
-			success = NO; 
-			break;  
-		default:  
-			break;  
-	}
-    
-    if (self.mailDelegate && [self.mailDelegate respondsToSelector:@selector(mailSentSuccesfully:)]) {
-        [self.mailDelegate mailSentSuccesfully:success];
+   
+    if (self.mailDelegate && [self.mailDelegate respondsToSelector:@selector(mailSent:)]) {
+        [self.mailDelegate mailSent:result];
     }
     [controller dismissModalViewControllerAnimated:YES];
 
