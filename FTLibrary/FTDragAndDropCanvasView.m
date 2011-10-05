@@ -270,6 +270,22 @@
 	[self setNeedsLayout];
 }
 
+- (void)finishRemovingElements {
+	for (FTDragAndDropView *e in elements) {
+        [e removeFromSuperview];
+    }
+}
+
+- (void)removeAllElements {
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(finishRemovingElements)];
+    for (FTDragAndDropView *e in elements) {
+        [e setAlpha:0];
+    }
+    [UIView commitAnimations];
+}
+
 #pragma mark Use Elements
 
 - (void)activateElement:(FTDragAndDropView *)element

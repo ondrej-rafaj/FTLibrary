@@ -50,6 +50,8 @@ typedef enum {
 
 - (UIImage *)imageWithSize:(CGSize)imageSize;
 
+- (void)removeAllElements;
+
 @end
 
 @protocol FTDragAndDropCanvasViewDelegate <NSObject>
