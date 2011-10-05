@@ -77,7 +77,7 @@
 #pragma mark Twitter
 
 // setting up twitter engine
-- (void)setUpTwitterWithConsumerKey:(NSString *)consumerKey secret:(NSString *)secret appID:(NSString *)appID andDelegate:(id<FTShareTwitterDelegate>)delegate {
+- (void)setUpTwitterWithConsumerKey:(NSString *)consumerKey secret:(NSString *)secret andDelegate:(id<FTShareTwitterDelegate>)delegate {
     _twitter = [[SA_OAuthTwitterEngine alloc] initOAuthWithDelegate:self];
     self.twitterDelegate = delegate;
     self.twitter.consumerKey = consumerKey;  

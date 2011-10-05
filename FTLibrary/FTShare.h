@@ -57,7 +57,7 @@ typedef NSUInteger FTShareOptions;
 - (id)initWithReferencedController:(id)controller;
 - (void)showActionSheetWithtitle:(NSString *)title andOptions:(FTShareOptions)options;
 
-- (void)setUpTwitterWithConsumerKey:(NSString *)consumerKey secret:(NSString *)secret appID:(NSString *)appID andDelegate:(id<FTShareTwitterDelegate>)delegate;
+- (void)setUpTwitterWithConsumerKey:(NSString *)consumerKey secret:(NSString *)secret andDelegate:(id<FTShareTwitterDelegate>)delegate;
 - (void)shareViaTwitter:(FTShareTwitterData *)data;
 
 - (void)setUpFacebookWithAppID:(NSString *)appID andDelegate:(id<FTShareFacebookDelegate>)delegate;
