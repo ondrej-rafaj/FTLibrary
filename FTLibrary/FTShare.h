@@ -39,6 +39,8 @@ typedef NSUInteger FTShareOptions;
     id<FTShareFacebookDelegate> _facebookDelegate;
     id<FTShareMailDelegate> _mailDelegate;
     id _referencedController;
+    FTShareFacebookData *_facebookParams;
+    FTShareTwitterData *_twitterParams;
     
 }
 
@@ -49,6 +51,8 @@ typedef NSUInteger FTShareOptions;
 @property (nonatomic, assign) id<FTShareMailDelegate> mailDelegate;
 
 @property (nonatomic, assign) id referencedController;
+@property (nonatomic, retain) FTShareFacebookData *facebookParams;
+@property (nonatomic, retain) FTShareTwitterData *twitterParams;
 
 - (id)initWithReferencedController:(id)controller;
 - (void)showActionSheetWithtitle:(NSString *)title andOptions:(FTShareOptions)options;

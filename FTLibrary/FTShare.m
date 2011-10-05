@@ -17,9 +17,9 @@
 @synthesize mailDelegate = _mailDelegate;
 
 @synthesize referencedController = _referencedController;
+@synthesize facebookParams = _facebookParams;
+@synthesize twitterParams = _twitterParams;
 
-static FTShareTwitterData *_twitterParams;
-static FTShareFacebookData *_facebookParams;
 
 - (id)initWithReferencedController:(id)controller
 {
@@ -41,6 +41,8 @@ static FTShareFacebookData *_facebookParams;
     _facebookDelegate = nil;
     _mailDelegate = nil;
     _referencedController = nil;
+    [_facebookParams release], _facebookParams = nil;
+    [_twitterParams release], _twitterParams = nil;
     [super dealloc];
 }
 
@@ -61,6 +63,7 @@ static FTShareFacebookData *_facebookParams;
     if (options & FTShareOptionsTwitter) [actionSheet addButtonWithTitle:@"Twitter"];
     
     [actionSheet showInView:[(UIViewController *)self.referencedController view]];
+    [actionSheet release];
 }
 
 
@@ -83,8 +86,8 @@ static FTShareFacebookData *_facebookParams;
 }
 
 - (void)shareViaTwitter:(FTShareTwitterData *)data {
-    _twitterParams = nil;
-    _twitterParams = data;
+    self.twitterParams = nil;
+    self.twitterParams = data;
     if(![self.twitter isAuthorized]){  
         UIViewController *controller = [SA_OAuthTwitterController controllerToEnterCredentialsWithTwitterEngine:self.twitter delegate:self];  
         
@@ -94,7 +97,7 @@ static FTShareFacebookData *_facebookParams;
     }
     else {
         if (![_twitterParams isRequestValid]) return;
-        [self.twitter sendUpdate:_twitterParams.message];
+        [self.twitter sendUpdate:self.twitterParams.message];
     }
 }
 
@@ -139,7 +142,7 @@ static FTShareFacebookData *_facebookParams;
     if ([self.twitterDelegate respondsToSelector:@selector(twitterDidLogin:)]) {
         [self.twitterDelegate twitterDidLogin:nil];
     }
-    [self shareViaTwitter:_twitterParams];
+    [self shareViaTwitter:self.twitterParams];
 }
 
 - (void)OAuthTwitterControllerFailed:(SA_OAuthTwitterController *)controller {
@@ -174,19 +177,19 @@ static FTShareFacebookData *_facebookParams;
 }
 
 - (void)shareViaFacebook:(FTShareFacebookData *)data {
-    _facebookParams = nil;
-    _facebookParams = data;
+    self.facebookParams = nil;
+    self.facebookParams = data;
     if (![self.facebook isSessionValid]) {
         [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", nil]];
     }
     else {
-        if (![_facebookParams isRequestValid]) return;
-        UIImage *img = _facebookParams.uploadImage;
+        if (![self.facebookParams isRequestValid]) return;
+        UIImage *img = self.facebookParams.uploadImage;
         if (img && [img isKindOfClass:[UIImage class]]) {
-            [self.facebook requestWithGraphPath:@"me/photos" andParams:[_facebookParams dictionaryFromParams] andHttpMethod:@"POST" andDelegate:self];
+            [self.facebook requestWithGraphPath:@"me/photos" andParams:[self.facebookParams dictionaryFromParams] andHttpMethod:@"POST" andDelegate:self];
         }
         else {
-            [self.facebook dialog:@"feed" andParams:[_facebookParams dictionaryFromParams] andDelegate:self]; 
+            [self.facebook dialog:@"feed" andParams:[self.facebookParams dictionaryFromParams] andDelegate:self]; 
         }
     }
 }
@@ -224,8 +227,8 @@ static FTShareFacebookData *_facebookParams;
         [self.facebookDelegate facebookDidLogin:nil];
     }
     
-    if (_facebookParams) {
-        [self shareViaFacebook:_facebookParams];
+    if (self.facebookParams) {
+        [self shareViaFacebook:self.facebookParams];
     }
     
 }
