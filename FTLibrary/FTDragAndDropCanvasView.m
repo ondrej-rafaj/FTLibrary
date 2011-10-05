@@ -12,7 +12,7 @@
 #define degreesToRadians(__ANGLE__) (M_PI * (__ANGLE__) / 180.0)
 #define radiansToDegrees(__ANGLE__) (180.0 * (__ANGLE__) / M_PI)
 
-#define kFTDragAndDropCanvasViewMinScale            0.35f * interfaceRotationFactor
+#define kFTDragAndDropCanvasViewMinScale            0.15f * interfaceRotationFactor
 #define kFTDragAndDropCanvasViewMaxScale            1.0f * interfaceRotationFactor
 #define kFTDragAndDropCanvasViewSpeed               0.75f
 
