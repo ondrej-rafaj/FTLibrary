@@ -82,11 +82,11 @@
     self.twitterDelegate = delegate;
     self.twitter.consumerKey = consumerKey;  
     self.twitter.consumerSecret = secret;
-    //APP id not set yet
+    [self.twitter clearAccessToken];
+    self.twitterParams = nil;
 }
 
 - (void)shareViaTwitter:(FTShareTwitterData *)data {
-    self.twitterParams = nil;
     self.twitterParams = data;
     if(![self.twitter isAuthorized]){  
         UIViewController *controller = [SA_OAuthTwitterController controllerToEnterCredentialsWithTwitterEngine:self.twitter delegate:self];  
@@ -96,7 +96,7 @@
         }
     }
     else {
-        if (![_twitterParams isRequestValid]) return;
+        if (![self.twitterParams isRequestValid]) return;
         [self.twitter sendUpdate:self.twitterParams.message];
     }
 }
@@ -174,10 +174,10 @@
         self.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
         self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
 	}
+    self.facebookParams = nil;
 }
 
 - (void)shareViaFacebook:(FTShareFacebookData *)data {
-    self.facebookParams = nil;
     self.facebookParams = data;
     if (![self.facebook isSessionValid]) {
         [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", nil]];
