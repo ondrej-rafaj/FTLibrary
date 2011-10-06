@@ -45,7 +45,7 @@
 - (BOOL)isRequestValid {
     BOOL isValidMessage = (self.message && [self.message length] > 0);
     BOOL isValidImage = (!self.uploadImage || (self.uploadImage && !CGSizeEqualToSize(self.uploadImage.size, CGSizeZero)));
-    BOOL valid = (isValidMessage && isValidImage);
+    BOOL valid = (isValidMessage || isValidImage);
     if (!valid) NSLog(@"Facebook request seams not valid");
     return valid;
 }
