@@ -9,9 +9,13 @@
 #import "FTVideoViewController.h"
 
 
+
 @implementation FTVideoViewController
 
-@synthesize videoView;
+@synthesize url = _url;
+@synthesize player = _player;
+
+static UIStatusBarStyle originalStatusBarStyle;
 
 #pragma mark Initialization
 
@@ -23,18 +27,11 @@
     return self;
 }
 
-- (id)initWithVideoBundleFile:(NSString *)fileName {
+- (id)initWithVideoUrl:(NSURL *)url {
     self = [super init];
     if (self) {
         // Custom initialization
-    }
-    return self;
-}
-
-- (id)initWithVideoUrl:(NSString *)url {
-    self = [super init];
-    if (self) {
-        // Custom initialization
+        self.url = url;
     }
     return self;
 }
@@ -43,6 +40,7 @@
     self = [super init];
     if (self) {
         // Custom initialization
+        self.url = [NSURL URLWithString:filePath];
     }
     return self;
 }
@@ -50,7 +48,8 @@
 #pragma mark Memory management
 
 - (void)dealloc {
-    [videoView release];
+    [_url release], _url = nil;
+    [_player release], _player = nil;
     [super dealloc];
 }
 
@@ -64,14 +63,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.player = [[MPMoviePlayerController alloc] initWithContentURL:self.url];
+    [self.player.view setFrame:self.view.bounds];
+    [self.player setFullscreen:YES];
+    [self.player prepareToPlay];
+    [self.view addSubview:self.player.view];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    originalStatusBarStyle = [[UIApplication sharedApplication] statusBarStyle];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    [self.player play];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.player stop];
+    [[UIApplication sharedApplication] setStatusBarStyle:originalStatusBarStyle];
 }
 
 

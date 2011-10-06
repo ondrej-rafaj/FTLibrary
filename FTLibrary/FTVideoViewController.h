@@ -9,21 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "FTViewController.h"
 //#import "FTMediaVideoView.h"
-
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface FTVideoViewController : FTViewController {
-    
-    UIView *videoView;
+    NSURL *_url;
+    MPMoviePlayerController *_player;
     
 }
 
-@property (nonatomic, retain) UIView *videoView;
+@property (nonatomic, retain) NSURL *url;
+@property (nonatomic, retain) MPMoviePlayerController *player;
 
 
-- (id)initWithVideoBundleFile:(NSString *)fileName;
-
-- (id)initWithVideoUrl:(NSString *)url;
-
+- (id)initWithVideoUrl:(NSURL *)url;
 - (id)initWithVideoPath:(NSString *)filePath;
 
 
