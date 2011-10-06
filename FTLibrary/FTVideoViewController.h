@@ -11,19 +11,25 @@
 //#import "FTMediaVideoView.h"
 #import <MediaPlayer/MediaPlayer.h>
 
+@protocol FTVideoViewControllerDelegate;
 @interface FTVideoViewController : FTViewController {
     NSURL *_url;
     MPMoviePlayerController *_player;
-    
+    id<FTVideoViewControllerDelegate> _delegate;
 }
 
 @property (nonatomic, retain) NSURL *url;
 @property (nonatomic, retain) MPMoviePlayerController *player;
-
+@property (nonatomic, assign) id<FTVideoViewControllerDelegate> delegate;
 
 - (id)initWithVideoUrl:(NSURL *)url;
 - (id)initWithVideoPath:(NSString *)filePath;
 
 
+@end
+
+@protocol FTVideoViewControllerDelegate <NSObject>
+@optional
+- (void)videoPlayerDidStop:(FTViewController *)videoController;
 
 @end

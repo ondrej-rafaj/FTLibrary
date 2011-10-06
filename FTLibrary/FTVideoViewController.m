@@ -14,8 +14,18 @@
 
 @synthesize url = _url;
 @synthesize player = _player;
+@synthesize delegate = _delegate;
 
 static UIStatusBarStyle originalStatusBarStyle;
+
+#pragma mark MPMoviePlayer notifications
+
+- (void)videoDidStop:(NSNotification *)notification {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(videoPlayerDidStop:)]) {
+        [self.delegate videoPlayerDidStop:self];
+    }
+}
+
 
 #pragma mark Initialization
 
@@ -50,6 +60,7 @@ static UIStatusBarStyle originalStatusBarStyle;
 - (void)dealloc {
     [_url release], _url = nil;
     [_player release], _player = nil;
+    _delegate = nil;
     [super dealloc];
 }
 
@@ -68,6 +79,10 @@ static UIStatusBarStyle originalStatusBarStyle;
     [self.player setFullscreen:YES];
     [self.player prepareToPlay];
     [self.view addSubview:self.player.view];
+    
+    //set notifications
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self selector:@selector(videoDidStop:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.player];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -79,7 +94,7 @@ static UIStatusBarStyle originalStatusBarStyle;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self.player play];
+    //[self.player play];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -87,7 +102,7 @@ static UIStatusBarStyle originalStatusBarStyle;
     
     [self.player stop];
     [[UIApplication sharedApplication] setStatusBarStyle:originalStatusBarStyle];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:self.player];
 }
-
 
 @end
