@@ -28,6 +28,7 @@
 @synthesize elementData = _elementData;
 @synthesize positionX = _positionX;
 @synthesize positionY = _positionY;
+@synthesize imageOrientation = _imageOrientation;
 @synthesize dragged = _dragged;
 
 #pragma mark - private methods
@@ -38,27 +39,34 @@
 			[NSNumber numberWithFloat:1], @"scaleValue",
 			[NSNumber numberWithFloat:0], @"positionX",
 			[NSNumber numberWithFloat:0], @"positionY",
+			[NSNumber numberWithInt:UIImageOrientationUp], @"imageOrientation",
 			imagePath, @"imagePath",
 			nil];
 }
 
 #pragma mark Initialization
 
-- (id)initWithImagePath:(NSString *)path {
-	
+- (id)initWithImagePath:(NSString *)path reversed:(BOOL)reversed {
 	NSDictionary *imageData = [self defaultImageDataDictionnaryWithImagePath:path];
-	
-	self = [self initWithImageData:imageData];
+	self = [self initWithImageData:imageData reversed:reversed];
 	if (self) {
 		
 	}
 	return self;
 }
 
-- (id)initWithImageData:(NSDictionary *)data {
-	
+- (id)initWithImagePath:(NSString *)path {
+	return [self initWithImagePath:path reversed:NO];
+}
+
+- (id)initWithImageData:(NSDictionary *)data reversed:(BOOL)reversed {
     UIImage *image = [UIImage imageWithContentsOfFile:[data objectForKey:@"imagePath"]];
     if (image == nil) return nil;
+	if (reversed || (UIImageOrientation)[[data objectForKey:@"imageOrientation"] intValue] == UIImageOrientationUpMirrored) {
+		imageOrientation = UIImageOrientationUpMirrored;
+		image = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationUpMirrored]; 
+	}
+	else imageOrientation = image.imageOrientation;
     CGRect r = CGRectMake(0, 0, image.size.width, (image.size.height + (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace)));
     self = [super initWithFrame:r];
     if (self) {
@@ -72,9 +80,10 @@
 		_scaleValue = [[data objectForKey:@"scaleValue"] floatValue];
 		_positionX = [[data objectForKey:@"positionX"] floatValue];
 		_positionY = [[data objectForKey:@"positionY"] floatValue];
-
+		//imageOrientation = (UIImageOrientation)[[data objectForKey:@"imageOrientation"] intValue];
+		
 		_dragged = NO;
-       		
+		
         _imageView = [[UIImageView alloc] initWithImage:image];
         r.origin.y += (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace);
         r.size.height -= (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace);
@@ -85,15 +94,19 @@
     return self;
 }
 
+- (id)initWithImageData:(NSDictionary *)data {
+    return [self initWithImageData:data reversed:NO];
+}
+
 #pragma mark Data
 
 - (NSDictionary *)getInfo {
-
 	NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:_elementData];
 	[dict setValue:[NSNumber numberWithFloat:_scaleValue] forKey:@"scaleValue"];
 	[dict setValue:[NSNumber numberWithFloat:_rotationValue] forKey:@"rotationValue"];
 	[dict setValue:[NSNumber numberWithFloat:_positionX] forKey:@"positionX"];
 	[dict setValue:[NSNumber numberWithFloat:_positionY] forKey:@"positionY"];
+	[dict setValue:[NSNumber numberWithInt:imageOrientation] forKey:@"imageOrientation"];
 	[dict setValue:_imagePath forKey:@"imagePath"];
 	self.elementData = dict;
 	return _elementData;

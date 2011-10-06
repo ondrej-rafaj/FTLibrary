@@ -8,6 +8,8 @@
 
 #import "FTDragAndDropCanvasView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UIView+Layout.h"
+
 
 #define degreesToRadians(__ANGLE__) (M_PI * (__ANGLE__) / 180.0)
 #define radiansToDegrees(__ANGLE__) (180.0 * (__ANGLE__) / M_PI)
@@ -31,6 +33,7 @@
 
 @synthesize backgroundImageView;
 @synthesize delegate;
+
 
 #pragma mark Object lifecycle
 
@@ -85,12 +88,15 @@
 		[stickersContainerView setFrame:CGRectIntegral(backgroundImageRectPortrait)];
 	}
 	
-	CGRect deleteImageViewRect = deleteImageView.frame;
-	deleteImageViewRect.origin = CGPointMake(35, ceilf((CGRectGetHeight(self.bounds) - deleteImageViewRect.size.height) / 2));
-	deleteImageView.frame = deleteImageViewRect;
+//	CGRect deleteImageViewRect = deleteImageView.frame;
+//	deleteImageViewRect.origin = CGPointMake(35, ceilf((CGRectGetHeight(self.bounds) - deleteImageViewRect.size.height) / 2));
+//	deleteImageView.frame = deleteImageViewRect;
+	
+	[deleteImageView centerInSuperView];
+	[deleteImageView positionAtX:30];
 	
 	[deleteImagePath release];
-	deleteImagePath = [[UIBezierPath bezierPathWithOvalInRect:[stickersContainerView convertRect:deleteImageViewRect toView:self]] retain];
+	deleteImagePath = [[UIBezierPath bezierPathWithOvalInRect:[stickersContainerView convertRect:deleteImageView.frame toView:self]] retain];
 		
 	if (animatedLayout) {
 		[UIView beginAnimations:nil context:nil];
@@ -180,16 +186,21 @@
 
 #pragma mark Add/Remove Elements
 
-- (void)addElementWithData:(NSDictionary *)data
+- (void)addElementWithData:(NSDictionary *)data reversed:(BOOL)reversed
 {
-    FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImageData:data];
+    FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImageData:data reversed:reversed];
     [self configureElement:element];
     [element release];
 }
 
-- (void)addElementWithPath:(NSString *)imagePath
+- (void)addElementWithData:(NSDictionary *)data
 {
-    FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImagePath:imagePath];
+    [self addElementWithData:data reversed:NO];
+}
+
+- (void)addElementWithPath:(NSString *)imagePath reversed:(BOOL)reversed
+{
+    FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImagePath:imagePath reversed:reversed];
 	element.positionX = self.bounds.size.width / 2;
 	element.positionY = self.bounds.size.height / 2;
 	[delegate createdElement:element withData:element.elementData];
@@ -197,6 +208,11 @@
 	[self didEditElement:element];
     [self configureElement:element];
     [element release];
+}
+
+- (void)addElementWithPath:(NSString *)imagePath
+{
+    [self addElementWithPath:imagePath reversed:NO];
 }
 
 - (void)configureElement:(FTDragAndDropView *)element
