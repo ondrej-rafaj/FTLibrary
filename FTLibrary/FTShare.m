@@ -55,12 +55,25 @@
     UIActionSheet *actionSheet = [[UIActionSheet alloc] 
                                   initWithTitle:title 
                                   delegate:self 
-                                  cancelButtonTitle:@"Cancel" 
+                                  cancelButtonTitle:nil 
                                   destructiveButtonTitle:nil 
                                   otherButtonTitles:nil];
-    if (options & FTShareOptionsMail) [actionSheet addButtonWithTitle:@"Mail"];
-    if (options & FTShareOptionsFacebook) [actionSheet addButtonWithTitle:@"Facebook"];
-    if (options & FTShareOptionsTwitter) [actionSheet addButtonWithTitle:@"Twitter"];
+    int index = 0;
+    if (options & FTShareOptionsMail) {
+        [actionSheet addButtonWithTitle:@"Mail"];
+        index++;
+    }
+    if (options & FTShareOptionsFacebook){
+        [actionSheet addButtonWithTitle:@"Facebook"];
+        index++;
+    } 
+    if (options & FTShareOptionsTwitter){
+        [actionSheet addButtonWithTitle:@"Twitter"];
+        index++;
+    }
+    
+    [actionSheet addButtonWithTitle:@"Cancel"];
+    [actionSheet setCancelButtonIndex:index];
     
     [actionSheet showInView:[(UIViewController *)self.referencedController view]];
     [actionSheet release];
