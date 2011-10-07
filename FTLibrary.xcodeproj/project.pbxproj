@@ -434,7 +434,6 @@
 		68437FAD13FC08540072C4B9 /* FTLanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68437FAA13FC08540072C4B9 /* FTLanguageManager.m */; };
 		6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */; };
 		6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */; };
-		68D604A4143F0C7900C3C84E /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D604A0143F0C7900C3C84E /* libTestFlight.a */; };
 		68D604A5143F0C7900C3C84E /* TestFlight.h in Headers */ = {isa = PBXBuildFile; fileRef = 68D604A3143F0C7900C3C84E /* TestFlight.h */; };
 		68DD055413D98063004C02C8 /* FTCoreTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DD055213D98063004C02C8 /* FTCoreTextView.h */; };
 		68DD055513D98063004C02C8 /* FTCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DD055313D98063004C02C8 /* FTCoreTextView.m */; };
@@ -865,7 +864,6 @@
 		68437FAA13FC08540072C4B9 /* FTLanguageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLanguageManager.m; sourceTree = "<group>"; };
 		6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGooglePlaceRequest.h; path = FTLibrary/FTGooglePlaceRequest.h; sourceTree = SOURCE_ROOT; };
 		6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGooglePlaceRequest.m; path = FTLibrary/FTGooglePlaceRequest.m; sourceTree = SOURCE_ROOT; };
-		68D604A0143F0C7900C3C84E /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		68D604A1143F0C7900C3C84E /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		68D604A2143F0C7900C3C84E /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
 		68D604A3143F0C7900C3C84E /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
@@ -967,7 +965,6 @@
 				4C85BC3113BA4B5000CB7FCA /* QuartzCore.framework in Frameworks */,
 				4C85BC3213BA4B5000CB7FCA /* SystemConfiguration.framework in Frameworks */,
 				4C85BBE913BA4AFD00CB7FCA /* libFlurry.a in Frameworks */,
-				68D604A4143F0C7900C3C84E /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2040,7 +2037,6 @@
 		68D6049F143F0C7900C3C84E /* TestFlight */ = {
 			isa = PBXGroup;
 			children = (
-				68D604A0143F0C7900C3C84E /* libTestFlight.a */,
 				68D604A1143F0C7900C3C84E /* README.txt */,
 				68D604A2143F0C7900C3C84E /* release_notes.txt */,
 				68D604A3143F0C7900C3C84E /* TestFlight.h */,
@@ -2776,8 +2772,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
-					"$(ARCHS_STANDARD_32_BIT)",
 					armv6,
+					armv7,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -2799,8 +2795,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
-					"$(ARCHS_STANDARD_32_BIT)",
 					armv6,
+					armv7,
 				);
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -2819,6 +2815,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				DSTROOT = /tmp/FTLibrary.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FTLibrary/FTLibrary-Prefix.pch";
@@ -2840,6 +2840,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				DSTROOT = /tmp/FTLibrary.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FTLibrary/FTLibrary-Prefix.pch";
