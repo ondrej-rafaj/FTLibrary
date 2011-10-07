@@ -88,10 +88,6 @@
 		[stickersContainerView setFrame:CGRectIntegral(backgroundImageRectPortrait)];
 	}
 	
-//	CGRect deleteImageViewRect = deleteImageView.frame;
-//	deleteImageViewRect.origin = CGPointMake(35, ceilf((CGRectGetHeight(self.bounds) - deleteImageViewRect.size.height) / 2));
-//	deleteImageView.frame = deleteImageViewRect;
-	
 	[deleteImageView centerInSuperView];
 	[deleteImageView positionAtX:30];
 	
@@ -103,7 +99,6 @@
 		[UIView setAnimationDuration:0.6];
 	}
 	for (FTDragAndDropView *element in elements) {
-		
 		element.center = CGPointMake(element.positionX * interfaceRotationFactor, element.positionY * interfaceRotationFactor);
 		CGAffineTransform rotation = CGAffineTransformMakeRotation(element.rotationValue);
 		CGAffineTransform scaling = CGAffineTransformMakeScale(element.scaleValue * interfaceRotationFactor, element.scaleValue * interfaceRotationFactor);
@@ -138,9 +133,7 @@
     CGFloat newScaling = MAX(horizontalRatio2, verticalRatio2);
 	
 	for (FTDragAndDropView *element in elements) {
-		
 		CGPoint newCenter = CGPointMake(ceilf(element.positionX * newScaling), ceilf(element.positionY * newScaling));
-		
 		CGContextSaveGState(context);
 		CGContextTranslateCTM(context, newCenter.x, newCenter.y);
 		CGFloat scaleValue = element.scaleValue * newScaling;
