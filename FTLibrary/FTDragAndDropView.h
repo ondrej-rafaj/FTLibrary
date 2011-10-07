@@ -18,6 +18,8 @@
 	CGFloat _positionX;
 	CGFloat _positionY;
 	
+	UIImageOrientation imageOrientation;
+	
     NSString *_imagePath;
     NSDictionary *_elementData;
 	
@@ -31,16 +33,21 @@
 @property (nonatomic) CGFloat positionX;
 @property (nonatomic) CGFloat positionY;
 
+@property (nonatomic) UIImageOrientation imageOrientation;
+
 @property (nonatomic, retain) NSString *imagePath;
 @property (nonatomic, retain) NSDictionary *elementData;
 
 @property (nonatomic, getter = isDragged) BOOL dragged;
 
 
+- (id)initWithImagePath:(NSString *)path reversed:(BOOL)reversed;
 - (id)initWithImagePath:(NSString *)path;
 
+- (id)initWithImageData:(NSDictionary *)data reversed:(BOOL)reversed;
 - (id)initWithImageData:(NSDictionary *)data;
 
 - (NSDictionary *)getInfo;
+
 
 @end
