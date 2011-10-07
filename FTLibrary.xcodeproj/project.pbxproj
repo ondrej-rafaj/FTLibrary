@@ -434,6 +434,8 @@
 		68437FAD13FC08540072C4B9 /* FTLanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68437FAA13FC08540072C4B9 /* FTLanguageManager.m */; };
 		6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */; };
 		6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */; };
+		68D604A4143F0C7900C3C84E /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D604A0143F0C7900C3C84E /* libTestFlight.a */; };
+		68D604A5143F0C7900C3C84E /* TestFlight.h in Headers */ = {isa = PBXBuildFile; fileRef = 68D604A3143F0C7900C3C84E /* TestFlight.h */; };
 		68DD055413D98063004C02C8 /* FTCoreTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DD055213D98063004C02C8 /* FTCoreTextView.h */; };
 		68DD055513D98063004C02C8 /* FTCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DD055313D98063004C02C8 /* FTCoreTextView.m */; };
 		68DF4E2A13CEF9D200B67940 /* FTData.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DF4E2213CEF9D200B67940 /* FTData.h */; };
@@ -863,6 +865,10 @@
 		68437FAA13FC08540072C4B9 /* FTLanguageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLanguageManager.m; sourceTree = "<group>"; };
 		6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGooglePlaceRequest.h; path = FTLibrary/FTGooglePlaceRequest.h; sourceTree = SOURCE_ROOT; };
 		6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGooglePlaceRequest.m; path = FTLibrary/FTGooglePlaceRequest.m; sourceTree = SOURCE_ROOT; };
+		68D604A0143F0C7900C3C84E /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		68D604A1143F0C7900C3C84E /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		68D604A2143F0C7900C3C84E /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
+		68D604A3143F0C7900C3C84E /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		68DD055213D98063004C02C8 /* FTCoreTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCoreTextView.h; sourceTree = "<group>"; };
 		68DD055313D98063004C02C8 /* FTCoreTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCoreTextView.m; sourceTree = "<group>"; };
 		68DF4E2213CEF9D200B67940 /* FTData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTData.h; path = FTLibrary/FTData.h; sourceTree = SOURCE_ROOT; };
@@ -961,6 +967,7 @@
 				4C85BC3113BA4B5000CB7FCA /* QuartzCore.framework in Frameworks */,
 				4C85BC3213BA4B5000CB7FCA /* SystemConfiguration.framework in Frameworks */,
 				4C85BBE913BA4AFD00CB7FCA /* libFlurry.a in Frameworks */,
+				68D604A4143F0C7900C3C84E /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1462,6 +1469,7 @@
 		4C85BB0413BA4AFD00CB7FCA /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				68D6049F143F0C7900C3C84E /* TestFlight */,
 				A56A62D41433617B000C666B /* Twitter+OAuth */,
 				4C6F8F7313F87C1B004A4FB2 /* GridView */,
 				4CB6E22513D5D59E002FEC0A /* ZipArchive */,
@@ -2029,6 +2037,17 @@
 			name = "Wellbaked app";
 			sourceTree = "<group>";
 		};
+		68D6049F143F0C7900C3C84E /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				68D604A0143F0C7900C3C84E /* libTestFlight.a */,
+				68D604A1143F0C7900C3C84E /* README.txt */,
+				68D604A2143F0C7900C3C84E /* release_notes.txt */,
+				68D604A3143F0C7900C3C84E /* TestFlight.h */,
+			);
+			path = TestFlight;
+			sourceTree = "<group>";
+		};
 		68DD054C13D97F27004C02C8 /* TextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2362,6 +2381,7 @@
 				4CE77EF21435E7C900A5AEDA /* NSString+SBJSON.h in Headers */,
 				4CE77EFA1435FC4700A5AEDA /* FTPhotoEditingView.h in Headers */,
 				68134788143B29F700CC309C /* FTShareDataObjects.h in Headers */,
+				68D604A5143F0C7900C3C84E /* TestFlight.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2808,6 +2828,7 @@
 					"\"$(SRCROOT)/Thirdparty/Flurry\"",
 					"\"$(SRCROOT)/Thirdparty/Twitter+OAuth/Libraries & Headers\"",
 					"$(SRCROOT)/Thirdparty/**",
+					"\"$(SRCROOT)/Thirdparty/TestFlight\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2828,6 +2849,7 @@
 					"\"$(SRCROOT)/Thirdparty/Flurry\"",
 					"\"$(SRCROOT)/Thirdparty/Twitter+OAuth/Libraries & Headers\"",
 					"$(SRCROOT)/Thirdparty/**",
+					"\"$(SRCROOT)/Thirdparty/TestFlight\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
