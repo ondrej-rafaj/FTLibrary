@@ -15,6 +15,7 @@
 @synthesize url = _url;
 @synthesize player = _player;
 @synthesize delegate = _delegate;
+@synthesize shouldRotate = _shouldRotate;
 
 static UIStatusBarStyle originalStatusBarStyle;
 
@@ -33,6 +34,7 @@ static UIStatusBarStyle originalStatusBarStyle;
     self = [super init];
     if (self) {
         // Custom initialization
+        self.shouldRotate = YES;
     }
     return self;
 }
@@ -103,6 +105,10 @@ static UIStatusBarStyle originalStatusBarStyle;
     [self.player stop];
     [[UIApplication sharedApplication] setStatusBarStyle:originalStatusBarStyle];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:self.player];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return self.shouldRotate;
 }
 
 @end

@@ -105,6 +105,7 @@
         UIViewController *controller = [SA_OAuthTwitterController controllerToEnterCredentialsWithTwitterEngine:self.twitter delegate:self];  
         
         if (controller && self.referencedController){  
+            [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
             [(UIViewController *)self.referencedController presentModalViewController:controller animated:YES];
         }
     }

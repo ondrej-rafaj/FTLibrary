@@ -16,11 +16,13 @@
     NSURL *_url;
     MPMoviePlayerController *_player;
     id<FTVideoViewControllerDelegate> _delegate;
+    BOOL _shouldRotate;
 }
 
 @property (nonatomic, retain) NSURL *url;
 @property (nonatomic, retain) MPMoviePlayerController *player;
 @property (nonatomic, assign) id<FTVideoViewControllerDelegate> delegate;
+@property (nonatomic, assign, getter=isShouldRotate) BOOL shouldRotate;
 
 - (id)initWithVideoUrl:(NSURL *)url;
 - (id)initWithVideoPath:(NSString *)filePath;
