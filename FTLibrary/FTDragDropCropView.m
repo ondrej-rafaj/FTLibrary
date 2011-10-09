@@ -76,25 +76,25 @@
 }
 
 - (void)createAllElements {
-    ddTopLeft = [[FTDragDropCropElementView alloc] initWithImage:[UIImage imageNamed:@"photo_adjust_01.png"]];
+    ddTopLeft = [[FTDragDropCropElementView alloc] initWithImage:[UIImage imageNamed:@"DD_photo_adjust_01.png"]];
     [ddTopLeft setCenter:CGPointMake(kFTDragDropCropViewInitialSpace, kFTDragDropCropViewInitialSpace)];
     [ddTopLeft addGestureRecognizer:[self getNewRecognizer]];
 	[ddTopLeft setHidden:!_isCropEnabled];
     [self addSubview:ddTopLeft];
     
-    ddTopRight = [[FTDragDropCropElementView alloc] initWithImage:[UIImage imageNamed:@"photo_adjust_02.png"]];
+    ddTopRight = [[FTDragDropCropElementView alloc] initWithImage:[UIImage imageNamed:@"DD_photo_adjust_02.png"]];
     [ddTopRight setCenter:CGPointMake((self.frame.size.width - kFTDragDropCropViewInitialSpace), kFTDragDropCropViewInitialSpace)];
     [ddTopRight addGestureRecognizer:[self getNewRecognizer]];
 	[ddTopRight setHidden:!_isCropEnabled];
     [self addSubview:ddTopRight];
     
-    ddBottomLeft = [[FTDragDropCropElementView alloc] initWithImage:[UIImage imageNamed:@"photo_adjust_02.png"]];
+    ddBottomLeft = [[FTDragDropCropElementView alloc] initWithImage:[UIImage imageNamed:@"DD_photo_adjust_02.png"]];
     [ddBottomLeft setCenter:CGPointMake(kFTDragDropCropViewInitialSpace, (self.frame.size.height - kFTDragDropCropViewInitialSpace))];
     [ddBottomLeft addGestureRecognizer:[self getNewRecognizer]];
 	[ddBottomLeft setHidden:!_isCropEnabled];
     [self addSubview:ddBottomLeft];
     
-    ddBottomRight = [[FTDragDropCropElementView alloc] initWithImage:[UIImage imageNamed:@"photo_adjust_01.png"]];
+    ddBottomRight = [[FTDragDropCropElementView alloc] initWithImage:[UIImage imageNamed:@"DD_photo_adjust_01.png"]];
     [ddBottomRight setCenter:CGPointMake((self.frame.size.width - kFTDragDropCropViewInitialSpace), (self.frame.size.height - kFTDragDropCropViewInitialSpace))];
     [ddBottomRight addGestureRecognizer:[self getNewRecognizer]];
 	[ddBottomRight setHidden:!_isCropEnabled];
