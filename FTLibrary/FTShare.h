@@ -33,13 +33,15 @@ typedef NSUInteger FTShareOptions;
 @protocol FTShareMailDelegate;
 
 @interface FTShare : NSObject <MFMailComposeViewControllerDelegate, SA_OAuthTwitterControllerDelegate, SA_OAuthTwitterEngineDelegate, FBRequestDelegate, FBSessionDelegate, FBDialogDelegate, MFMailComposeViewControllerDelegate, UIActionSheetDelegate> {
-    Facebook *_facebook;
+    
+	Facebook *_facebook;
     SA_OAuthTwitterEngine *_twitter;
-    id<FTShareTwitterDelegate> _twitterDelegate;
-    id<FTShareFacebookDelegate> _facebookDelegate;
-    id<FTShareMailDelegate> _mailDelegate;
+    id <FTShareTwitterDelegate> _twitterDelegate;
+    id <FTShareFacebookDelegate> _facebookDelegate;
+    id <FTShareMailDelegate> _mailDelegate;
     id _referencedController;
     FTShareFacebookData *_facebookParams;
+    FTShareFacebookGetData *_facebookGetParams;
     FTShareTwitterData *_twitterParams;
     
 }
@@ -52,7 +54,9 @@ typedef NSUInteger FTShareOptions;
 
 @property (nonatomic, assign) id referencedController;
 @property (nonatomic, retain) FTShareFacebookData *facebookParams;
+@property (nonatomic, retain) FTShareFacebookGetData *facebookGetParams;
 @property (nonatomic, retain) FTShareTwitterData *twitterParams;
+
 
 - (id)initWithReferencedController:(id)controller;
 - (void)showActionSheetWithtitle:(NSString *)title andOptions:(FTShareOptions)options;
@@ -62,29 +66,54 @@ typedef NSUInteger FTShareOptions;
 
 - (void)setUpFacebookWithAppID:(NSString *)appID andDelegate:(id<FTShareFacebookDelegate>)delegate;
 - (void)shareViaFacebook:(FTShareFacebookData *)data;
+- (void)getFacebookData:(FTShareFacebookGetData *)data;
 
 - (void)shareViaMail:(FTShareMailData *)data;
 
 @end
 
+
 @protocol FTShareTwitterDelegate <NSObject>
+
 @optional
+
 - (FTShareTwitterData *)twitterData;
 - (void)twitterLoginDialogController:(UIViewController *)controller;
 - (void)twitterDidLogin:(NSError *)error;
 - (void)twitterDidPost:(NSError *)error;
+
 @end
 
+
 @protocol FTShareFacebookDelegate <NSObject>
+
 @optional
+
 - (FTShareFacebookData *)facebookShareData;
 - (void)facebookLoginDialogController:(UIViewController *)controller;
 - (void)facebookDidLogin:(NSError *)error;
 - (void)facebookDidPost:(NSError *)error;
+
 @end
 
-@protocol FTShareMailDelegate <NSObject>
+
+@protocol FTShareFacebookGetDelegate <NSObject>
+
 @optional
+
+- (FTShareFacebookData *)facebookShareData;
+- (void)facebookLoginDialogController:(UIViewController *)controller;
+- (void)facebookDidLogin:(NSError *)error;
+- (void)facebookDidPost:(NSError *)error;
+
+@end
+
+
+@protocol FTShareMailDelegate <NSObject>
+
+@optional
+
 - (FTShareMailData *)mailShareData;
 - (void)mailSent:(MFMailComposeResult)result;
+
 @end

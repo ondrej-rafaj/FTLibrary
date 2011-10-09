@@ -7,6 +7,8 @@
 //
 
 #import "FTShare.h"
+#import "FTLang.h"
+
 
 @implementation FTShare
 
@@ -18,8 +20,11 @@
 
 @synthesize referencedController = _referencedController;
 @synthesize facebookParams = _facebookParams;
+@synthesize facebookGetParams = _facebookGetParams;
 @synthesize twitterParams = _twitterParams;
 
+
+#pragma mark Initialization
 
 - (id)initWithReferencedController:(id)controller
 {
@@ -29,11 +34,14 @@
         [self setReferencedController:controller];
         _twitterParams = nil;
         _facebookParams = nil;
-
+		_facebookGetParams = nil;
     }
     
     return self;
 }
+
+#pragma mark Memory management
+
 - (void)dealloc {
     [_facebook release], _facebook = nil;
     [_twitter release], _twitter = nil;
@@ -42,6 +50,7 @@
     _mailDelegate = nil;
     _referencedController = nil;
     [_facebookParams release], _facebookParams = nil;
+	[_facebookGetParams release], _facebookGetParams = nil;
     [_twitterParams release], _twitterParams = nil;
     [super dealloc];
 }
@@ -194,7 +203,7 @@
 - (void)shareViaFacebook:(FTShareFacebookData *)data {
     self.facebookParams = data;
     if (![self.facebook isSessionValid]) {
-        [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", nil]];
+        [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", @"read_friendlists", @"read_insights", nil]];
     }
     else {
         if (![self.facebookParams isRequestValid]) return;
@@ -208,6 +217,16 @@
     }
 }
 
+- (void)getFacebookData:(FTShareFacebookGetData *)data {
+	self.facebookGetParams = data;
+	if (![self.facebook isSessionValid]) {
+        [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", @"read_friendlists", @"read_insights", nil]];
+    }
+    else {
+        if (![self.facebookParams isRequestValid]) return;
+        [self.facebook requestWithGraphPath:@"me/photos" andParams:[self.facebookGetParams dictionaryFromParams] andHttpMethod:@"POST" andDelegate:self];
+	}
+}
 
 #pragma mark Facebook dialog
 
@@ -217,7 +236,7 @@
     }
 }
 - (void)dialogDidNotComplete:(FBDialog *)dialog {
-    NSDictionary *dict = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects:@"Couldn't post with facebook", nil]
+    NSDictionary *dict = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects:FTLangGet(@"Unknown error occured"), nil]
                                                      forKeys:[NSArray arrayWithObjects:@"description", nil]];
     NSError *error= [NSError errorWithDomain:@"com.fuerte.FTShare" code:400 userInfo:dict];
     if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPost:)]) {

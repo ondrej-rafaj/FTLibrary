@@ -44,6 +44,31 @@
 
 @end
 
+
+
+typedef enum {
+	
+	FTShareFacebookGetDataReadTypeMePhotos,
+	FTShareFacebookGetDataReadTypeMeFriends
+	
+} FTShareFacebookGetDataReadType;
+
+@interface FTShareFacebookGetData : NSObject {
+    
+	NSString *_message;
+	
+	FTShareFacebookGetDataReadType readType;
+    
+}
+
+@property (nonatomic, retain) NSString *message;
+@property (nonatomic) FTShareFacebookGetDataReadType readType;
+
+- (NSMutableDictionary *)dictionaryFromParams;
+- (BOOL)isRequestValid;
+
+@end
+
 @interface FTShareMailData : NSObject {
     NSString *_subject;
     NSString *_plainBody;

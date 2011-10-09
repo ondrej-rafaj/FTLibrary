@@ -411,6 +411,11 @@
 		4CD94A3913FE5E4900BD6C06 /* FTAutoColumnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD94A3713FE5E4900BD6C06 /* FTAutoColumnView.m */; };
 		4CD94A5E14024B0500BD6C06 /* FTFacebook.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD94A5C14024B0500BD6C06 /* FTFacebook.h */; };
 		4CD94A5F14024B0500BD6C06 /* FTFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD94A5D14024B0500BD6C06 /* FTFacebook.m */; };
+		4CE0967C1440D83200B31E11 /* FTDragDropCropElementView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE096781440D83200B31E11 /* FTDragDropCropElementView.h */; };
+		4CE0967D1440D83200B31E11 /* FTDragDropCropElementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE096791440D83200B31E11 /* FTDragDropCropElementView.m */; };
+		4CE0967E1440D83200B31E11 /* FTDragDropCropView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE0967A1440D83200B31E11 /* FTDragDropCropView.h */; };
+		4CE0967F1440D83200B31E11 /* FTDragDropCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE0967B1440D83200B31E11 /* FTDragDropCropView.m */; };
+		4CE096811440D8BF00B31E11 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE096801440D8BF00B31E11 /* libTestFlight.a */; };
 		4CE77EDF1435D34500A5AEDA /* FTVerticalSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE77EDD1435D34500A5AEDA /* FTVerticalSlider.h */; };
 		4CE77EE01435D34500A5AEDA /* FTVerticalSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE77EDE1435D34500A5AEDA /* FTVerticalSlider.m */; };
 		4CE77EF11435E7C900A5AEDA /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE77EEE1435E7C900A5AEDA /* JSON.h */; };
@@ -840,6 +845,11 @@
 		4CD94A3713FE5E4900BD6C06 /* FTAutoColumnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAutoColumnView.m; sourceTree = "<group>"; };
 		4CD94A5C14024B0500BD6C06 /* FTFacebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFacebook.h; sourceTree = "<group>"; };
 		4CD94A5D14024B0500BD6C06 /* FTFacebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFacebook.m; sourceTree = "<group>"; };
+		4CE096781440D83200B31E11 /* FTDragDropCropElementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDragDropCropElementView.h; sourceTree = "<group>"; };
+		4CE096791440D83200B31E11 /* FTDragDropCropElementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDragDropCropElementView.m; sourceTree = "<group>"; };
+		4CE0967A1440D83200B31E11 /* FTDragDropCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDragDropCropView.h; sourceTree = "<group>"; };
+		4CE0967B1440D83200B31E11 /* FTDragDropCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDragDropCropView.m; sourceTree = "<group>"; };
+		4CE096801440D8BF00B31E11 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		4CE77EDD1435D34500A5AEDA /* FTVerticalSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTVerticalSlider.h; sourceTree = "<group>"; };
 		4CE77EDE1435D34500A5AEDA /* FTVerticalSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTVerticalSlider.m; sourceTree = "<group>"; };
 		4CE77EEE1435E7C900A5AEDA /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
@@ -965,6 +975,7 @@
 				4C85BC3113BA4B5000CB7FCA /* QuartzCore.framework in Frameworks */,
 				4C85BC3213BA4B5000CB7FCA /* SystemConfiguration.framework in Frameworks */,
 				4C85BBE913BA4AFD00CB7FCA /* libFlurry.a in Frameworks */,
+				4CE096811440D8BF00B31E11 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1004,6 +1015,7 @@
 		4C03655013BA023A00E8FA09 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CE096801440D8BF00B31E11 /* libTestFlight.a */,
 				A56A634A1433679B000C666B /* libOAuth.a */,
 				4C85BB5A13BA4AFD00CB7FCA /* libFlurry.a */,
 				4C85BC1A13BA4B5000CB7FCA /* libz.dylib */,
@@ -1969,6 +1981,17 @@
 			name = "Drag & Drop";
 			sourceTree = "<group>";
 		};
+		4CE096761440D7FA00B31E11 /* Photo edit view */ = {
+			isa = PBXGroup;
+			children = (
+				4CE096781440D83200B31E11 /* FTDragDropCropElementView.h */,
+				4CE096791440D83200B31E11 /* FTDragDropCropElementView.m */,
+				4CE0967A1440D83200B31E11 /* FTDragDropCropView.h */,
+				4CE0967B1440D83200B31E11 /* FTDragDropCropView.m */,
+			);
+			name = "Photo edit view";
+			sourceTree = "<group>";
+		};
 		4CE77EDB1435D32800A5AEDA /* Vertical slider */ = {
 			isa = PBXGroup;
 			children = (
@@ -1981,6 +2004,7 @@
 		4CE77EF71435FBF500A5AEDA /* Photo editing */ = {
 			isa = PBXGroup;
 			children = (
+				4CE096761440D7FA00B31E11 /* Photo edit view */,
 				4CE77EF81435FC4700A5AEDA /* FTPhotoEditingView.h */,
 				4CE77EF91435FC4700A5AEDA /* FTPhotoEditingView.m */,
 			);
@@ -2378,6 +2402,8 @@
 				4CE77EFA1435FC4700A5AEDA /* FTPhotoEditingView.h in Headers */,
 				68134788143B29F700CC309C /* FTShareDataObjects.h in Headers */,
 				68D604A5143F0C7900C3C84E /* TestFlight.h in Headers */,
+				4CE0967C1440D83200B31E11 /* FTDragDropCropElementView.h in Headers */,
+				4CE0967E1440D83200B31E11 /* FTDragDropCropView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2654,6 +2680,8 @@
 				4CE77EF31435E7C900A5AEDA /* NSString+SBJSON.m in Sources */,
 				4CE77EFB1435FC4700A5AEDA /* FTPhotoEditingView.m in Sources */,
 				68134789143B29F700CC309C /* FTShareDataObjects.m in Sources */,
+				4CE0967D1440D83200B31E11 /* FTDragDropCropElementView.m in Sources */,
+				4CE0967F1440D83200B31E11 /* FTDragDropCropView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2829,6 +2857,7 @@
 					"\"$(SRCROOT)/Thirdparty/Twitter+OAuth/Libraries & Headers\"",
 					"$(SRCROOT)/Thirdparty/**",
 					"\"$(SRCROOT)/Thirdparty/TestFlight\"",
+					"\"$(SRCROOT)\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2854,6 +2883,7 @@
 					"\"$(SRCROOT)/Thirdparty/Twitter+OAuth/Libraries & Headers\"",
 					"$(SRCROOT)/Thirdparty/**",
 					"\"$(SRCROOT)/Thirdparty/TestFlight\"",
+					"\"$(SRCROOT)\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
