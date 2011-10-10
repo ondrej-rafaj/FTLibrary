@@ -54,6 +54,7 @@
 + (NSArray *)pagesFromText:(NSString *)string;
 
 - (CGSize)suggestedSizeConstrainedToSize:(CGSize)size;
+- (void)fitToSuggestedHeight;
 
 @end
 

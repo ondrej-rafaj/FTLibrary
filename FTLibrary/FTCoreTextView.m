@@ -225,6 +225,13 @@
     return suggestedSize;
 }
 
+- (void)fitToSuggestedHeight
+{
+	CGSize suggestedSize = [self suggestedSizeConstrainedToSize:CGSizeMake(CGRectGetWidth(self.frame), MAXFLOAT)];
+	CGRect viewFrame = self.frame;
+	viewFrame.size.height = suggestedSize.height;
+	self.frame = viewFrame;
+}
 
 /*!
  * @abstract divide the text in different pages according to the tags <_page/> found
