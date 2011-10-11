@@ -33,6 +33,8 @@ typedef enum {
 
 + (void)enableFlurryWithApiKey:(NSString *)apiKey;
 
++ (void)setUsedFunctionality:(FTProjectInitializationFunctionType)functionality;
+
 + (BOOL)isUsing:(FTProjectInitializationFunctionType)functionality;
 
 - (void)enableKillSwitchWith:(id<FTSystemKillSwitchDelegate>)del window:(UIWindow *)window andUrl:(NSString *)url;

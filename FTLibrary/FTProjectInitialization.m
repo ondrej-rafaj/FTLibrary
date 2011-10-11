@@ -7,7 +7,7 @@
 //
 
 #import "FTProjectInitialization.h"
-#import "FlurryAPI.h"
+#import "FlurryAnalytics.h"
 #import "FTLang.h"
 
 
@@ -32,7 +32,7 @@
 }
 
 + (void)initialize {
-    
+	
 }
 
 + (void)resume {
@@ -46,16 +46,16 @@
 }
 
 + (void)setUsedFunctionality:(FTProjectInitializationFunctionType)functionality {
-	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:[self functionalityKey:functionality]];
+	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:(NSString *)[self functionalityKey:functionality]];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (BOOL)isUsing:(FTProjectInitializationFunctionType)functionality {
-	return [[NSUserDefaults standardUserDefaults] boolForKey:[self functionalityKey:functionality]];
+	return [[NSUserDefaults standardUserDefaults] boolForKey:(NSString *)[self functionalityKey:functionality]];
 }
 
 + (void)enableFlurryWithApiKey:(NSString *)apiKey {
-	[FlurryAPI startSession:apiKey];
+	[FlurryAnalytics startSession:apiKey];
 	[self setUsedFunctionality:FTProjectInitializationFunctionTypeTrackingFlurry];
 }
 

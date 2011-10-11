@@ -47,6 +47,8 @@
 - (id)initWithImageData:(NSDictionary *)data reversed:(BOOL)reversed;
 - (id)initWithImageData:(NSDictionary *)data;
 
+- (id)initWithImage:(UIImage *)image;
+
 - (NSDictionary *)getInfo;
 
 
