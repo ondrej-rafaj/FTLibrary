@@ -7,6 +7,7 @@
 //
 
 #import "FTDragAndDropView.h"
+#import "FTFilesystem.h"
 #import "UIColor+Tools.h"
 
 
@@ -31,7 +32,20 @@
 @synthesize imageOrientation = _imageOrientation;
 @synthesize dragged = _dragged;
 
-#pragma mark - private methods
+
+#pragma mark Custom elements persistent data
+
+- (NSString *)newFilename {
+	static NSString *key = @"FTDragAndDropViewCustomFilenameKey";
+	int i = [[NSUserDefaults standardUserDefaults] integerForKey:key];
+	i++;
+	[[NSUserDefaults standardUserDefaults] setInteger:i forKey:key];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	NSString *file = [NSString stringWithFormat:@"custom-image-%d.png", i];
+	return file;
+}
+
+#pragma mark Private methods
 
 - (NSDictionary *)defaultImageDataDictionnaryWithImagePath:(NSString *)imagePath
 {
@@ -46,6 +60,29 @@
 
 #pragma mark Initialization
 
+- (void)prepareViewWithData:(NSDictionary *)data andImage:(UIImage *)image {
+	self.elementData = data;
+	self.backgroundColor = [UIColor clearColor];
+	//self.elementData = data;
+	self.imagePath = [data objectForKey:@"imagePath"];
+	
+	_rotationValue = [[data objectForKey:@"rotationValue"] floatValue];
+	_scaleValue = [[data objectForKey:@"scaleValue"] floatValue];
+	_positionX = [[data objectForKey:@"positionX"] floatValue];
+	_positionY = [[data objectForKey:@"positionY"] floatValue];
+	//imageOrientation = (UIImageOrientation)[[data objectForKey:@"imageOrientation"] intValue];
+	
+	_dragged = NO;
+	
+	_imageView = [[UIImageView alloc] initWithImage:image];
+	CGRect r = self.bounds;
+	r.origin.y += (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace);
+	r.size.height -= (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace);
+	[_imageView setFrame:r];
+	[_imageView setContentMode:UIViewContentModeScaleAspectFit];
+	[self addSubview:_imageView];
+}
+
 - (id)initWithImagePath:(NSString *)path reversed:(BOOL)reversed {
 	NSDictionary *imageData = [self defaultImageDataDictionnaryWithImagePath:path];
 	self = [self initWithImageData:imageData reversed:reversed];
@@ -53,6 +90,21 @@
 		
 	}
 	return self;
+}
+
+- (id)initWithImage:(UIImage *)image {
+	NSString *path = [[FTFilesystemPaths getFilesDirectoryPath] stringByAppendingPathComponent:@"custom-images"];
+	if (![FTFilesystemIO isFolder:path]) [FTFilesystemIO makeFolderPath:path];
+	NSString *filePath = [path stringByAppendingPathComponent:[self newFilename]];
+	NSData *imageData = UIImagePNGRepresentation(image);
+	[imageData writeToFile:filePath atomically:YES];
+	NSDictionary *data = [self defaultImageDataDictionnaryWithImagePath:filePath];
+    CGRect r = CGRectMake(0, 0, image.size.width, (image.size.height + (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace)));
+    self = [super initWithFrame:r];
+    if (self) {
+        [self prepareViewWithData:data andImage:image];
+    }
+    return self;
 }
 
 - (id)initWithImagePath:(NSString *)path {
@@ -70,26 +122,7 @@
     CGRect r = CGRectMake(0, 0, image.size.width, (image.size.height + (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace)));
     self = [super initWithFrame:r];
     if (self) {
-        
-		self.elementData = data;
-		self.backgroundColor = [UIColor clearColor];
-		//self.elementData = data;
-        self.imagePath = [data objectForKey:@"imagePath"];
-        
-		_rotationValue = [[data objectForKey:@"rotationValue"] floatValue];
-		_scaleValue = [[data objectForKey:@"scaleValue"] floatValue];
-		_positionX = [[data objectForKey:@"positionX"] floatValue];
-		_positionY = [[data objectForKey:@"positionY"] floatValue];
-		//imageOrientation = (UIImageOrientation)[[data objectForKey:@"imageOrientation"] intValue];
-		
-		_dragged = NO;
-		
-        _imageView = [[UIImageView alloc] initWithImage:image];
-        r.origin.y += (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace);
-        r.size.height -= (kFTDragAndDropViewButtonSize + kFTDragAndDropViewButtonSpace);
-        [_imageView setFrame:r];
-        [_imageView setContentMode:UIViewContentModeScaleAspectFit];
-        [self addSubview:_imageView];
+        [self prepareViewWithData:data andImage:image];
     }
     return self;
 }

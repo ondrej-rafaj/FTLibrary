@@ -48,6 +48,7 @@ typedef enum {
 - (void)addElementWithPath:(NSString *)imagePath;
 - (void)addElementWithData:(NSDictionary *)data reversed:(BOOL)reversed;
 - (void)addElementWithData:(NSDictionary *)data;
+- (void)addElementWithImage:(UIImage *)image;
 - (void)layoutElements:(BOOL)animated;
 
 - (UIImage *)imageWithSize:(CGSize)imageSize;

@@ -105,7 +105,7 @@
 			_defaultStyle.color= [UIColor blackColor];
 			NSLog(@"FTCoreTextView: _default style not found!");
 		}
-		
+
 		NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_processedString];
 		
 		//set default attributeds
@@ -249,6 +249,15 @@
 		_defaultStyle = [FTCoreTextStyle new];
 	}
     
+	if (![_styles objectForKey:@"_link"]) {
+		//we add a default style for links
+		FTCoreTextStyle *linksStyle = [_defaultStyle copy];
+		linksStyle.color = [UIColor blueColor];
+		linksStyle.name = @"_link";
+		[_styles setValue:linksStyle forKey:linksStyle.name];
+		[linksStyle release];
+	}
+	
     NSString *regEx = @"<[_a-zA-Z0-9]*( /){0,1}>";
     
     [self.uRLs removeAllObjects];

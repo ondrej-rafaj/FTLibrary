@@ -181,6 +181,7 @@
 
 - (void)addElementWithData:(NSDictionary *)data reversed:(BOOL)reversed
 {
+	NSLog(@"Add with data: %@", data);
     FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImageData:data reversed:reversed];
     [self configureElement:element];
     [element release];
@@ -208,8 +209,19 @@
     [self addElementWithPath:imagePath reversed:NO];
 }
 
+- (void)addElementWithImage:(UIImage *)image {
+	FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImage:image];
+	element.positionX = self.bounds.size.width / 2;
+	element.positionY = self.bounds.size.height / 2;
+	[delegate createdElement:element withData:element.elementData];
+	[self didEditElement:element];
+    [self configureElement:element];
+    [element release];
+}
+
 - (void)configureElement:(FTDragAndDropView *)element
 {
+	if (!element) return;
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didDoubleTapElement:)];
     [tap2 setNumberOfTapsRequired:2];
     [tap2 setNumberOfTouchesRequired:1];

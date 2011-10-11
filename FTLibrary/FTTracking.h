@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FlurryAPI.h"
+#import "FlurryAnalytics.h"
 
 
 @interface FTTracking : NSObject
 
 
-- (void)logEvent:(NSString *)event;
++ (void)logEvent:(NSString *)event withParameters:(NSDictionary *)params;
++ (void)logEvent:(NSString *)event;
 
 
 @end
