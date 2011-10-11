@@ -57,6 +57,14 @@
     return self;
 }
 
+- (void)rightAnchorToX:(CGFloat)x {
+    if (!self.superview) return;
+
+    CGRect frame = self.frame;
+    frame.origin.x = x - frame.size.width;
+    [self setFrame:frame];
+}
+
 #pragma mark Memory management
 
 - (void)dealloc {

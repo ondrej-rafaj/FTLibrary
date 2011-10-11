@@ -14,5 +14,6 @@
 }
 
 - (id)initWithFrame:(CGRect)frame font:(UIFont *)font andText:(NSString *)text;
+- (void)rightAnchorToX:(CGFloat)x;
 
 @end

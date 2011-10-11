@@ -9,7 +9,6 @@
 #import "FTShare.h"
 #import "FTLang.h"
 
-
 @implementation FTShare
 
 @synthesize facebook = _facebook;
@@ -170,6 +169,13 @@
 
 - (void)OAuthTwitterControllerFailed:(SA_OAuthTwitterController *)controller {
     NSError *error = [NSError errorWithDomain:@"com.fuerteint.FTShare" code:400 userInfo:[NSDictionary dictionaryWithObject:@"Couldn't share with twitter" forKey:@"description"]];
+    if ([self.twitterDelegate respondsToSelector:@selector(twitterDidLogin:)]) {
+        [self.twitterDelegate twitterDidLogin:error];
+    }
+}
+
+- (void)OAuthTwitterControllerCanceled:(SA_OAuthTwitterController *)controller {
+    NSError *error = [NSError errorWithDomain:@"com.fuerteint.FTShare" code:400 userInfo:[NSDictionary dictionaryWithObject:@"Twitter Controller Canceled" forKey:@"description"]];
     if ([self.twitterDelegate respondsToSelector:@selector(twitterDidLogin:)]) {
         [self.twitterDelegate twitterDidLogin:error];
     }
