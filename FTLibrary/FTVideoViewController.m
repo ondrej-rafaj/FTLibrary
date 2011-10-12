@@ -76,7 +76,11 @@ static UIStatusBarStyle originalStatusBarStyle;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.player = [[MPMoviePlayerController alloc] initWithContentURL:self.url];
+	
+	MPMoviePlayerController *aPlayer = [[MPMoviePlayerController alloc] initWithContentURL:self.url];
+    self.player = aPlayer;
+	[aPlayer release];
+	
     [self.player.view setFrame:self.view.bounds];
     [self.player setFullscreen:YES];
     [self.player prepareToPlay];

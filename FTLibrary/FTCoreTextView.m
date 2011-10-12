@@ -20,7 +20,6 @@
 @implementation FTCoreTextView
 
 @synthesize text = _text;
-@synthesize styles = _styles;
 @synthesize markers = _markers;
 @synthesize defaultStyle = _defaultStyle;
 @synthesize processedString = _processedString;
@@ -70,7 +69,7 @@
 			
 			CFIndex index = CTLineGetStringIndexForPosition(line, point);
 			NSArray *urlsKeys = [_URLs allKeys];
-			NSLog(@"%@", _URLs);
+
 			for (NSString *key in urlsKeys) {
 				NSRange range = NSRangeFromString(key);
 				if (index >= range.location && index < range.location + range.length) {
@@ -200,6 +199,11 @@
     return suggestedSize;
 }
 
+/*!
+ * @abstract handy method to fit to the suggested height in one call
+ *
+ */
+
 - (void)fitToSuggestedHeight
 {
 	CGSize suggestedSize = [self suggestedSizeConstrainedToSize:CGSizeMake(CGRectGetWidth(self.frame), MAXFLOAT)];
@@ -292,8 +296,8 @@
             NSRange urlRange = NSMakeRange((rangeStart.location + rangeStart.length), (closeTagRange.location - (rangeStart.location + rangeStart.length)));
             NSString *allUrlString = [_processedString substringWithRange:urlRange];
             NSRange pipeRange = [allUrlString rangeOfString:@"|"];
-            NSString *urlString;
-            NSString *replacementString;
+            NSString *urlString = nil;
+            NSString *replacementString = nil;
             if (pipeRange.location != NSNotFound) {
                 urlString = [allUrlString substringWithRange:NSMakeRange(0, pipeRange.location)];
                 replacementString = [allUrlString stringByReplacingCharactersInRange:NSMakeRange(0, (pipeRange.location + 1)) withString:@""];
@@ -570,9 +574,15 @@
     if ([self superview]) [self setNeedsDisplay];
 }
 
-- (void)setStyles:(NSMutableDictionary *)styles {
-    [_styles release];
-    _styles = [[NSMutableDictionary dictionaryWithDictionary:styles] retain];
+- (NSDictionary *)styles
+{
+	return [[_styles copy] autorelease];
+}
+
+- (void)setStyles:(NSDictionary *)styles
+{
+	[_styles release];
+    _styles = [styles mutableCopy];
 	_changesMade = YES;
     if ([self superview]) [self setNeedsDisplay];
 }
