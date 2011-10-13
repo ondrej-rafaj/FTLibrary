@@ -32,8 +32,12 @@
         // Initialization code here.
         [self setReferencedController:controller];
         _twitterParams = nil;
+        _twitterDelegate = nil;
+        
         _facebookParams = nil;
+        _facebookGetParams = nil;
 		_facebookGetParams = nil;
+        _facebookDelegate = nil;
     }
     
     return self;
@@ -149,6 +153,10 @@
     if ([self.twitterDelegate respondsToSelector:@selector(twitterDidPost:)]) {
         [self.twitterDelegate twitterDidPost:nil];
     }
+    
+    self.twitter = nil;
+    self.twitterDelegate = nil;
+    self.twitterDelegate = nil;
 }  
 
 - (void) requestFailed: (NSString *) requestIdentifier withError: (NSError *) error {  
@@ -156,6 +164,10 @@
     if ([self.twitterDelegate respondsToSelector:@selector(twitterDidPost:)]) {
         [self.twitterDelegate twitterDidPost:error];
     }
+    
+    self.twitter = nil;
+    self.twitterDelegate = nil;
+    self.twitterDelegate = nil;
 }
 
 #pragma mark Twitter login
@@ -172,6 +184,10 @@
     if ([self.twitterDelegate respondsToSelector:@selector(twitterDidLogin:)]) {
         [self.twitterDelegate twitterDidLogin:error];
     }
+    
+    self.twitter = nil;
+    self.twitterDelegate = nil;
+    self.twitterDelegate = nil;
 }
 
 - (void)OAuthTwitterControllerCanceled:(SA_OAuthTwitterController *)controller {
@@ -179,6 +195,10 @@
     if ([self.twitterDelegate respondsToSelector:@selector(twitterDidLogin:)]) {
         [self.twitterDelegate twitterDidLogin:error];
     }
+    
+    self.twitter = nil;
+    self.twitterDelegate = nil;
+    self.twitterDelegate = nil;
 }
 
 /**
@@ -240,7 +260,12 @@
 	if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPost:)]) {
         [self.facebookDelegate facebookDidPost:nil];
     }
+    
+    self.facebook = nil;
+    self.facebookDelegate = nil;
+    self.facebookParams = nil;
 }
+
 - (void)dialogDidNotComplete:(FBDialog *)dialog {
     NSDictionary *dict = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects:FTLangGet(@"Unknown error occured"), nil]
                                                      forKeys:[NSArray arrayWithObjects:@"description", nil]];
@@ -248,6 +273,10 @@
     if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPost:)]) {
         [self.facebookDelegate facebookDidPost:error];
     }
+    
+    self.facebook = nil;
+    self.facebookDelegate = nil;
+    self.facebookParams = nil;
 }
 
 #pragma mark Facebook login
@@ -279,6 +308,10 @@
     if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidLogin:)]) {
         [self.facebookDelegate facebookDidLogin:error];
     }
+    
+    self.facebook = nil;
+    self.facebookDelegate = nil;
+    self.facebookParams = nil;
 }
 
 #pragma mark FAcebook REquest delegate

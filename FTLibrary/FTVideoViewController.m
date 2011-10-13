@@ -108,7 +108,14 @@ static UIStatusBarStyle originalStatusBarStyle;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-    return self.shouldRotate;
+    if (self.shouldRotate) {
+        return YES;
+    }
+    else {
+        UIInterfaceOrientation orientation = (UIInterfaceOrientation)[[UIDevice currentDevice] orientation];
+        if (UIInterfaceOrientationIsLandscape(orientation)) return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+        else return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+    }
 }
 
 @end
