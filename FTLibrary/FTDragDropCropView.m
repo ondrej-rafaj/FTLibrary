@@ -283,14 +283,16 @@
 		CGFloat w = [self convertPixelValue:([self posTopRightPoint].x - [self posTopLeftPoint].x)];
 		CGFloat h = [self convertPixelValue:([self posBottomLeftPoint].y - [self posTopLeftPoint].y)];
 		NSLog(@"Current resized orientation: %d", _originalImage.imageOrientation);
+		NSLog(@"Original image Size %@",NSStringFromCGSize(_originalImage.size));
 		if (_originalImage.imageOrientation == UIImageOrientationLeft) {
-			cropRect = CGRectMake(x, y, h, w);
+			cropRect = CGRectMake(x, _originalImage.size.height - h - y, h, w);
 		}
 		else if (_originalImage.imageOrientation == UIImageOrientationRight) {
 			cropRect = CGRectMake(y, x, h, w);
 		}
 		else if (_originalImage.imageOrientation == UIImageOrientationDown) {
-			cropRect = CGRectMake((_originalImage.size.width - x), y, w, h);
+			cropRect = CGRectMake(_originalImage.size.width - w - x,
+								  _originalImage.size.height - h - y, w, h);
 		}
 		else {
 			cropRect = CGRectMake(x, y, w, h);
