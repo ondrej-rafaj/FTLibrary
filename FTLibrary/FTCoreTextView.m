@@ -247,7 +247,7 @@
     
     if (!_text || [_text length] == 0) return;
     _processedString = (NSMutableString *)_text;
-    FTCoreTextStyle *style = [self.styles objectForKey:@"_default"];
+    FTCoreTextStyle *style = [_styles objectForKey:@"_default"];
     self.defaultStyle = style;
 	if (_defaultStyle == nil) {
 		_defaultStyle = [FTCoreTextStyle new];
@@ -281,7 +281,7 @@
         NSString *autoCloseKey = [key stringByReplacingOccurrencesOfString:@" /" withString:@""];
         BOOL isAutoClose = (![key isEqualToString:autoCloseKey]);
         
-        style = [self.styles objectForKey:(isAutoClose)? autoCloseKey : key];
+        style = [_styles objectForKey:(isAutoClose)? autoCloseKey : key];
 
         
         NSString *append = @"";
@@ -408,7 +408,7 @@
         
         if ([keys containsObject:checkKey]) {
             
-            CTTextAlignment alignment = [(FTCoreTextStyle *)[self.styles objectForKey:@"_image"] alignment];
+            CTTextAlignment alignment = [(FTCoreTextStyle *)[_styles objectForKey:@"_image"] alignment];
             
             UIImage *img = [self.images objectForKey:checkKey];
             if (img) {
@@ -560,7 +560,7 @@
 }
 
 - (void)addStyle:(FTCoreTextStyle *)style {
-    [self.styles setValue:style forKey:style.name];
+    [_styles setValue:style forKey:style.name];
 	_changesMade = YES;
     if ([self superview]) [self setNeedsDisplay];
 }
@@ -568,7 +568,7 @@
 - (void)addStyles:(NSArray *)styles
 {
 	for (FTCoreTextStyle *style in styles) {
-		[self.styles setValue:style forKey:style.name];
+		[_styles setValue:style forKey:style.name];
 	}
 	_changesMade = YES;
     if ([self superview]) [self setNeedsDisplay];
