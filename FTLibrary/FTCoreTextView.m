@@ -574,11 +574,18 @@
     if ([self superview]) [self setNeedsDisplay];
 }
 
+- (NSArray *)stylesArray
+{
+	return [_styles allValues];
+}
+
+//only here to assure compatibility with previous versions
 - (NSDictionary *)styles
 {
 	return [[_styles copy] autorelease];
 }
 
+//only here to assure compatibility with previous versions
 - (void)setStyles:(NSDictionary *)styles
 {
 	[_styles release];
