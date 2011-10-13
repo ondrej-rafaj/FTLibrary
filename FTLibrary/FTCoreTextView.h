@@ -51,9 +51,6 @@
 - (void)addStyle:(FTCoreTextStyle *)style;
 - (void)addStyles:(NSArray *)styles;
 
-- (NSDictionary *)styles;
-- (void)setStyles:(NSDictionary *)styles;
-
 + (NSString *)stripTagsforString:(NSString *)string;
 + (NSArray *)pagesFromText:(NSString *)string;
 
