@@ -148,8 +148,9 @@
 	}
 	
 	UIImage *returnedImage = UIGraphicsGetImageFromCurrentImageContext();
-
+	
 	UIGraphicsEndImageContext();
+	CGContextRelease(context);
 	
 	return returnedImage;
 }
