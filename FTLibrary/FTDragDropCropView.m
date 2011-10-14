@@ -284,16 +284,28 @@
 		CGFloat h = [self convertPixelValue:([self posBottomLeftPoint].y - [self posTopLeftPoint].y)];
 		NSLog(@"Current resized orientation: %d", _originalImage.imageOrientation);
 		NSLog(@"Original image Size %@",NSStringFromCGSize(_originalImage.size));
-		if (_originalImage.imageOrientation == UIImageOrientationLeft) {
-			cropRect = CGRectMake(x, _originalImage.size.height - h - y, h, w);
+		UIImageOrientation o = _originalImage.imageOrientation;
+		if (o == UIImageOrientationLeft) {
+			cropRect = CGRectMake(x, (_originalImage.size.height - h - y), h, w);
 		}
-		else if (_originalImage.imageOrientation == UIImageOrientationRight) {
+		else if (o == UIImageOrientationRight) {
 			cropRect = CGRectMake(y, x, h, w);
 		}
-		else if (_originalImage.imageOrientation == UIImageOrientationDown) {
-			cropRect = CGRectMake(_originalImage.size.width - w - x,
-								  _originalImage.size.height - h - y, w, h);
+		else if (o == UIImageOrientationDown) {
+			cropRect = CGRectMake((_originalImage.size.width - w - x), (_originalImage.size.height - h - y), w, h);
 		}
+//		else if (o == UIImageOrientationDownMirrored) {
+//			cropRect = CGRectMake((_originalImage.size.width - w - x), y, w, h);
+//		}
+//		else if (o == UIImageOrientationUpMirrored) {
+//			cropRect = CGRectMake((_originalImage.size.width - w - x), y, w, h);
+//		}
+//		else if (o == UIImageOrientationLeftMirrored) {
+//			cropRect = CGRectMake((_originalImage.size.width - w - x), y, w, h);
+//		}
+//		else if (o == UIImageOrientationRightMirrored) {
+//			cropRect = CGRectMake((_originalImage.size.width - w - x), y, w, h);
+//		}
 		else {
 			cropRect = CGRectMake(x, y, w, h);
 		}
