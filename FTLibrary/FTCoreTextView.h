@@ -7,8 +7,8 @@
 //
 
 //     Special markers:
-//     _default: It is the default applyed to the whole text. MArkups is not needed on the text
-//     _page: Divide the text in pages. REspond to markup <_page/>
+//     _default: It is the default applied to the whole text. Markups is not needed on the text
+//     _page: Divide the text in pages. Respond to markup <_page/>
 //     _bullet: define styles for bullets. Respond to Markups <bullets />
 //     _image: define style for images. Respond to markup <_image>imageNameOnBundle.extension</_image>
 //     _link: define style for links. Respond to markup <_link>link_target|link name</_link>
@@ -21,8 +21,8 @@
 @protocol FTCoreTextViewDelegate;
 @interface FTCoreTextView : UIView {
     NSString *_text;
-    NSMutableDictionary *_styles;
     @private
+	NSMutableDictionary *_styles;
     NSMutableArray		*_markers;
     FTCoreTextStyle		*_defaultStyle;
     NSMutableString		*_processedString;
@@ -36,7 +36,6 @@
 }
 
 @property (nonatomic, retain) NSString *text;
-@property (nonatomic, retain) NSMutableDictionary *styles;
 @property (nonatomic, retain) NSMutableArray *markers;
 @property (nonatomic, retain) FTCoreTextStyle *defaultStyle;
 @property (nonatomic, retain) NSMutableString *processedString;
@@ -48,8 +47,12 @@
 
 
 - (id)initWithFrame:(CGRect)frame;
+
 - (void)addStyle:(FTCoreTextStyle *)style;
 - (void)addStyles:(NSArray *)styles;
+
+- (NSArray *)stylesArray;
+
 + (NSString *)stripTagsforString:(NSString *)string;
 + (NSArray *)pagesFromText:(NSString *)string;
 

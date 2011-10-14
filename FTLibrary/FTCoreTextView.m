@@ -20,7 +20,6 @@
 @implementation FTCoreTextView
 
 @synthesize text = _text;
-@synthesize styles = _styles;
 @synthesize markers = _markers;
 @synthesize defaultStyle = _defaultStyle;
 @synthesize processedString = _processedString;
@@ -70,7 +69,7 @@
 			
 			CFIndex index = CTLineGetStringIndexForPosition(line, point);
 			NSArray *urlsKeys = [_URLs allKeys];
-			NSLog(@"%@", _URLs);
+
 			for (NSString *key in urlsKeys) {
 				NSRange range = NSRangeFromString(key);
 				if (index >= range.location && index < range.location + range.length) {
@@ -200,6 +199,11 @@
     return suggestedSize;
 }
 
+/*!
+ * @abstract handy method to fit to the suggested height in one call
+ *
+ */
+
 - (void)fitToSuggestedHeight
 {
 	CGSize suggestedSize = [self suggestedSizeConstrainedToSize:CGSizeMake(CGRectGetWidth(self.frame), MAXFLOAT)];
@@ -243,7 +247,7 @@
     
     if (!_text || [_text length] == 0) return;
     _processedString = (NSMutableString *)_text;
-    FTCoreTextStyle *style = [self.styles objectForKey:@"_default"];
+    FTCoreTextStyle *style = [_styles objectForKey:@"_default"];
     self.defaultStyle = style;
 	if (_defaultStyle == nil) {
 		_defaultStyle = [FTCoreTextStyle new];
@@ -277,7 +281,7 @@
         NSString *autoCloseKey = [key stringByReplacingOccurrencesOfString:@" /" withString:@""];
         BOOL isAutoClose = (![key isEqualToString:autoCloseKey]);
         
-        style = [self.styles objectForKey:(isAutoClose)? autoCloseKey : key];
+        style = [_styles objectForKey:(isAutoClose)? autoCloseKey : key];
 
         
         NSString *append = @"";
@@ -292,8 +296,8 @@
             NSRange urlRange = NSMakeRange((rangeStart.location + rangeStart.length), (closeTagRange.location - (rangeStart.location + rangeStart.length)));
             NSString *allUrlString = [_processedString substringWithRange:urlRange];
             NSRange pipeRange = [allUrlString rangeOfString:@"|"];
-            NSString *urlString;
-            NSString *replacementString;
+            NSString *urlString = nil;
+            NSString *replacementString = nil;
             if (pipeRange.location != NSNotFound) {
                 urlString = [allUrlString substringWithRange:NSMakeRange(0, pipeRange.location)];
                 replacementString = [allUrlString stringByReplacingCharactersInRange:NSMakeRange(0, (pipeRange.location + 1)) withString:@""];
@@ -404,7 +408,7 @@
         
         if ([keys containsObject:checkKey]) {
             
-            CTTextAlignment alignment = [(FTCoreTextStyle *)[self.styles objectForKey:@"_image"] alignment];
+            CTTextAlignment alignment = [(FTCoreTextStyle *)[_styles objectForKey:@"_image"] alignment];
             
             UIImage *img = [self.images objectForKey:checkKey];
             if (img) {
@@ -556,7 +560,7 @@
 }
 
 - (void)addStyle:(FTCoreTextStyle *)style {
-    [self.styles setValue:style forKey:style.name];
+    [_styles setValue:style forKey:style.name];
 	_changesMade = YES;
     if ([self superview]) [self setNeedsDisplay];
 }
@@ -564,15 +568,28 @@
 - (void)addStyles:(NSArray *)styles
 {
 	for (FTCoreTextStyle *style in styles) {
-		[self.styles setValue:style forKey:style.name];
+		[_styles setValue:style forKey:style.name];
 	}
 	_changesMade = YES;
     if ([self superview]) [self setNeedsDisplay];
 }
 
-- (void)setStyles:(NSMutableDictionary *)styles {
-    [_styles release];
-    _styles = [[NSMutableDictionary dictionaryWithDictionary:styles] retain];
+- (NSArray *)stylesArray
+{
+	return [_styles allValues];
+}
+
+//only here to assure compatibility with previous versions
+- (NSDictionary *)styles
+{
+	return [[_styles copy] autorelease];
+}
+
+//only here to assure compatibility with previous versions
+- (void)setStyles:(NSDictionary *)styles
+{
+	[_styles release];
+    _styles = [styles mutableCopy];
 	_changesMade = YES;
     if ([self superview]) [self setNeedsDisplay];
 }

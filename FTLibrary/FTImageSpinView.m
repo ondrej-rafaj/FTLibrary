@@ -196,7 +196,7 @@
 #pragma mark ScrolView delegate methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)sv {
-	NSDate *start;
+	NSDate *start = nil;
 	BOOL changeImage = NO;
 	if (debugMode) {
 		start = [NSDate date];
