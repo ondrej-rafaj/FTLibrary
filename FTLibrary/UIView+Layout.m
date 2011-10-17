@@ -138,6 +138,19 @@
 	[self positionAtX:xPos andY:yPos];	
 }
 
+- (void)makeMarginInSuperViewWithTopMargin:(CGFloat)topMargin andSideMArgin:(CGFloat)sideMargin {
+	CGRect r = self.superview.bounds;
+	r.origin.x = sideMargin;
+	r.origin.y = topMargin;
+	r.size.width -= (sideMargin * 2);
+	r.size.height -= (topMargin * 2);
+	[self setFrame:r];
+}
+
+- (void)makeMarginInSuperView:(CGFloat)margin {
+	[self makeMarginInSuperViewWithTopMargin:margin andSideMArgin:margin];
+}
+
 - (void)bringToFront {
 	[self.superview bringSubviewToFront:self];	
 }
@@ -146,21 +159,15 @@
 	[self.superview sendSubviewToBack:self];	
 }
 
-//ZF
-
 - (void)centerAtX{
     double xPos = round((self.superview.frame.size.width - self.frame.size.width) / 2.0);
     [self positionAtX:xPos];
 }
 
-
-
 - (void)centerAtXQuarter{
     double xPos = round((self.superview.frame.size.width / 4) - (self.frame.size.width / 2));
     [self positionAtX:xPos];    
 }
-
-
 
 - (void)centerAtX3Quarter{
     [self centerAtXQuarter];
