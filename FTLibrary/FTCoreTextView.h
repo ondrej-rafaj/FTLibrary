@@ -48,6 +48,9 @@
 
 - (id)initWithFrame:(CGRect)frame;
 
+- (void)setStyles:(NSDictionary *)styles __deprecated;
+
+
 - (void)addStyle:(FTCoreTextStyle *)style;
 - (void)addStyles:(NSArray *)styles;
 
