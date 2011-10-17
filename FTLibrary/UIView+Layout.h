@@ -48,6 +48,7 @@
 - (void)centerAtXQuarter;
 - (void)centerAtX3Quarter;
 
+- (void)makeMarginInSuperViewWithTopMargin:(CGFloat)topMargin leftMargin:(CGFloat)leftMargin rightMargin:(CGFloat)rightMargin andBottomMargin:(CGFloat)bottomMargin;
 - (void)makeMarginInSuperViewWithTopMargin:(CGFloat)topMargin andSideMArgin:(CGFloat)sideMargin;
 - (void)makeMarginInSuperView:(CGFloat)margin;
 

@@ -138,13 +138,17 @@
 	[self positionAtX:xPos andY:yPos];	
 }
 
-- (void)makeMarginInSuperViewWithTopMargin:(CGFloat)topMargin andSideMArgin:(CGFloat)sideMargin {
+- (void)makeMarginInSuperViewWithTopMargin:(CGFloat)topMargin leftMargin:(CGFloat)leftMargin rightMargin:(CGFloat)rightMargin andBottomMargin:(CGFloat)bottomMargin {
 	CGRect r = self.superview.bounds;
-	r.origin.x = sideMargin;
+	r.origin.x = leftMargin;
 	r.origin.y = topMargin;
-	r.size.width -= (sideMargin * 2);
-	r.size.height -= (topMargin * 2);
+	r.size.width -= (leftMargin + rightMargin);
+	r.size.height -= (topMargin + bottomMargin);
 	[self setFrame:r];
+}
+
+- (void)makeMarginInSuperViewWithTopMargin:(CGFloat)topMargin andSideMArgin:(CGFloat)sideMargin {
+	[self makeMarginInSuperViewWithTopMargin:topMargin leftMargin:sideMargin rightMargin:sideMargin andBottomMargin:topMargin];
 }
 
 - (void)makeMarginInSuperView:(CGFloat)margin {
