@@ -189,7 +189,10 @@ static NSString *appID;
 
 
 + (NSString *)get:(NSString *)key comment:(NSString *)comment {
-	if (!translations) return [NSString stringWithFormat:@"[%@]", key];
+	if (!translations) {
+		if (![FTProjectInitialization debugging]) return key;
+		else return [NSString stringWithFormat:@"[%@]", key];
+	}
     if (!defaultLanguage) defaultLanguage = @"en";
     FTLanguage *language = [translations objectForKey:defaultLanguage]; 
     NSString *ret = [language.data objectForKey:key];
@@ -197,7 +200,11 @@ static NSString *appID;
         if ([FTProject debugging]) [FTError handleErrorWithString:[NSString stringWithFormat:@"No translation for language :%@ at key: %@", defaultLanguage, key]];
         [self reportMissingTranslation:key andComment:comment];
     }
-    return (ret)? ret : [NSString stringWithFormat:@"[%@]", key];
+	if (ret) return ret;
+	else {
+		if (![FTProjectInitialization debugging]) return key;
+		else return [NSString stringWithFormat:@"[%@]", key];
+	}
 }
 
 + (NSString *)get:(NSString *)key {

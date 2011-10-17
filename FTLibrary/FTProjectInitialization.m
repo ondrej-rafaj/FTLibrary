@@ -79,7 +79,7 @@
 
 - (UIView *)viewForAppKillSwitch:(FTSystemKillSwitch *)killSwitch {
 	UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 250, 60)];
-	[lbl setText:[FTLanguageManager get:@"Application is unavailable at the moment. Sorry for any inconvenience caused"]];
+	[lbl setText:FTLangGet(@"Application is unavailable at the moment. Sorry for any inconvenience caused")];
 	return lbl;
 }
 
