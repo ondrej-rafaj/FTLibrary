@@ -178,11 +178,37 @@
 	[self setNeedsLayout];
 }
 
+#pragma mark Animations
+
+- (void)randomizeElementPosition:(FTDragAndDropView *)element animated:(BOOL)animated {
+	CGPoint p = element.center;
+	
+	int max = ((int)([self width] - (2 * [element width])) + [element width]);
+	NSLog(@"Max value (x): %d", max);
+	p.x = (arc4random() % max);
+	
+	if (p.x < 0 || p.x > [self width]) p.x = self.bounds.size.width / 2;
+	
+	max = ((int)([self height] - (2 * [element height])) + [element height]);
+	NSLog(@"Max value (y): %d", max);
+	p.y = (arc4random() % max);
+	
+	if (p.y < 0 || p.y > [self height]) p.y = self.bounds.size.width / 2;
+	
+	NSLog(@"New random center: %@", NSStringFromCGPoint(p));
+	
+	if (animated) [UIView beginAnimations:nil context:nil];
+	[element setCenter:p];
+	//element.rotationValue += ;
+	if (animated) [UIView commitAnimations];
+	[self didEditElement:element];
+}
+
 #pragma mark Add/Remove Elements
 
 - (void)addElementWithData:(NSDictionary *)data reversed:(BOOL)reversed
 {
-	NSLog(@"Add with data: %@", data);
+	//NSLog(@"Add with data: %@", data);
     FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImageData:data reversed:reversed];
     [self configureElement:element];
     [element release];
@@ -196,12 +222,14 @@
 - (void)addElementWithPath:(NSString *)imagePath withRandomPosition:(BOOL)randomPosition reversed:(BOOL)reversed
 {
     FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImagePath:imagePath reversed:reversed];
-	element.positionX = self.bounds.size.width / 2;
-	element.positionY = self.bounds.size.height / 2;
-	[delegate createdElement:element withData:element.elementData];
-	
+	element.positionX = (self.bounds.size.width / 2);
+	element.positionY = (self.bounds.size.height / 2);
+	if ([delegate respondsToSelector:@selector(createdElement:withData:)]) {
+		[delegate createdElement:element withData:element.elementData];
+	}
 	[self didEditElement:element];
     [self configureElement:element];
+	[self randomizeElementPosition:element animated:YES];
     [element release];
 }
 
@@ -210,8 +238,9 @@
     FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImagePath:imagePath reversed:reversed];
 	element.positionX = self.bounds.size.width / 2;
 	element.positionY = self.bounds.size.height / 2;
-	[delegate createdElement:element withData:element.elementData];
-	
+	if ([delegate respondsToSelector:@selector(createdElement:withData:)]) {
+		[delegate createdElement:element withData:element.elementData];
+	}
 	[self didEditElement:element];
     [self configureElement:element];
     [element release];
@@ -226,7 +255,9 @@
 	FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImage:image];
 	element.positionX = self.bounds.size.width / 2;
 	element.positionY = self.bounds.size.height / 2;
-	[delegate createdElement:element withData:element.elementData];
+	if ([delegate respondsToSelector:@selector(createdElement:withData:)]) {
+		[delegate createdElement:element withData:element.elementData];
+	}
 	[self didEditElement:element];
     [self configureElement:element];
     [element release];
@@ -412,7 +443,6 @@ static CGFloat tempRotation = 0;
 		tempRotation = 0;
 		v.rotationValue += [recognizer rotation];
 		[self didEditElement:v];
-		[self disableActiveElement];
 		return;
 	}
 	CGFloat rotation = 0.0 - (tempRotation - [recognizer rotation]);
