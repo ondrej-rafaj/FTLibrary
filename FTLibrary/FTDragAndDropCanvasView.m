@@ -193,6 +193,18 @@
     [self addElementWithData:data reversed:NO];
 }
 
+- (void)addElementWithPath:(NSString *)imagePath withRandomPosition:(BOOL)randomPosition reversed:(BOOL)reversed
+{
+    FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImagePath:imagePath reversed:reversed];
+	element.positionX = self.bounds.size.width / 2;
+	element.positionY = self.bounds.size.height / 2;
+	[delegate createdElement:element withData:element.elementData];
+	
+	[self didEditElement:element];
+    [self configureElement:element];
+    [element release];
+}
+
 - (void)addElementWithPath:(NSString *)imagePath reversed:(BOOL)reversed
 {
     FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImagePath:imagePath reversed:reversed];
@@ -306,6 +318,7 @@
         [e setAlpha:0];
     }
     [UIView commitAnimations];
+	[elements removeAllObjects];
 }
 
 #pragma mark Use Elements

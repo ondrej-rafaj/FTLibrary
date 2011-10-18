@@ -44,6 +44,7 @@ typedef enum {
 @property (nonatomic, retain) UIImageView *backgroundImageView;
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage;
+- (void)addElementWithPath:(NSString *)imagePath withRandomPosition:(BOOL)randomPosition reversed:(BOOL)reversed;
 - (void)addElementWithPath:(NSString *)imagePath reversed:(BOOL)reversed;
 - (void)addElementWithPath:(NSString *)imagePath;
 - (void)addElementWithData:(NSDictionary *)data reversed:(BOOL)reversed;
