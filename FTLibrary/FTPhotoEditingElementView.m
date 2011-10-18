@@ -1,15 +1,15 @@
 //
-//  FTDragDropCropElementView.m
+//  FTPhotoEditingElementView.m
 //  Regaine
 //
 //  Created by Ondrej Rafaj on 11/04/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
 //
 
-#import "FTDragDropCropElementView.h"
+#import "FTPhotoEditingElementView.h"
 
 
-@implementation FTDragDropCropElementView
+@implementation FTPhotoEditingElementView
 
 @synthesize positionX;
 @synthesize positionY;

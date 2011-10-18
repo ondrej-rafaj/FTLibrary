@@ -1,51 +1,57 @@
 //
 //  FTPhotoEditingView.h
-//  FTLibrary
+//  xProgress.com
 //
-//  Created by Ondrej Rafaj on 30/09/2011.
-//  Copyright (c) 2011 Fuerte International. All rights reserved.
+//  Created by Ondrej Rafaj on 11/04/2011.
+//  Copyright 2011 Fuerte International. All rights reserved.
 //
 
-#import "FTView.h"
+#import <UIKit/UIKit.h>
+#import "FTPhotoEditingElementView.h"
 
 
-typedef enum {
-	
-	FTPhotoEditingViewCropLineStyleFull,
-	FTPhotoEditingViewCropLineStyleDashed
-	
-} FTPhotoEditingViewCropLineStyle;
+@class FTPhotoEditingView;
+
+@protocol FTPhotoEditingViewDelegate <NSObject>
+
+- (void)cropView:(FTPhotoEditingView *)view didMoveDDCTopLeft:(CGPoint)tl topRight:(CGPoint)tr bottomLeft:(CGPoint)bl bottomRight:(CGPoint)br;
+
+@end
 
 
-@interface FTPhotoEditingView : FTView <UIScrollViewDelegate> {
+@interface FTPhotoEditingView : UIView {
+    
+    FTPhotoEditingElementView *ddTopLeft;
+    FTPhotoEditingElementView *ddTopRight;
+    FTPhotoEditingElementView *ddBottomLeft;
+    FTPhotoEditingElementView *ddBottomRight;
+    
+    id <FTPhotoEditingViewDelegate> delegate;
 	
-	UIScrollView *zoomView;
-	UIImageView *imageView;
+	UIImage *_originalImage;
+    UIImage *_resizedImage;
+    CGSize _originalImageSize;
 	
-	FTPhotoEditingViewCropLineStyle _cropLineStyle;
-	
-	BOOL _croppingEnabled;
-	UIImage *_topLeftCroppingImage;
-	UIImage *_topRightCroppingImage;
-	UIImage *_bottomLeftCroppingImage;
-	UIImage *_bottomRightCroppingImage;
-	BOOL _croppingMaskEnabled;
-	
-	BOOL _zoomEnabled;
-	CGFloat _maxZoomScale;
+	BOOL _isBlackAndWhite;
+	BOOL _isCropEnabled;
 	
 }
 
+@property (nonatomic, assign) id <FTPhotoEditingViewDelegate> delegate;
+
+- (void)manualUpdate;
+
 - (void)setImage:(UIImage *)image;
+
+- (void)resetCropZone;
+
+- (void)toggleBlackAndWhite;
+- (BOOL)isBlackAndWhite;
+
+- (void)toggleCropImage;
+- (BOOL)isCroppingEnabled;
+
 - (UIImage *)image;
-
-- (void)enableCropping:(BOOL)enabled withTopLeftCornerButton:(UIImage *)topLeft withTopRight:(UIImage *)topRight withBottomLeft:(UIImage *)bottomLeft andBottomRight:(UIImage *)bottomRight;
-- (void)enableCropping:(BOOL)enabled withCornerButtons:(UIImage *)buttonImage;
-- (void)enableCropping:(BOOL)enabled;
-- (void)enableCroppingMask:(BOOL)enabled;
-
-- (void)enableZoom:(BOOL)enabled withMaxZoomScale:(CGFloat)maxZoomScale;
-- (void)enableZoom:(BOOL)enabled;
 
 
 @end
