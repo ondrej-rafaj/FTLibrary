@@ -310,6 +310,8 @@
 		4C8AD6091404F5960078DE52 /* FTFullWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8AD6071404F5960078DE52 /* FTFullWebViewController.m */; };
 		4C95CECE13D740E100190E64 /* FTWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C95CECC13D740E100190E64 /* FTWebViewController.h */; };
 		4C95CECF13D740E100190E64 /* FTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C95CECD13D740E100190E64 /* FTWebViewController.m */; };
+		4CA29DE9144D7F13002F38BD /* FTBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA29DE7144D7F13002F38BD /* FTBarButtonItem.h */; };
+		4CA29DEA144D7F13002F38BD /* FTBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA29DE8144D7F13002F38BD /* FTBarButtonItem.m */; };
 		4CB6E1F913D5D37C002FEC0A /* FTSimpleDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */; };
 		4CB6E1FA13D5D37C002FEC0A /* FTSimpleDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E1F813D5D37C002FEC0A /* FTSimpleDB.m */; };
 		4CB6E1FB13D5D37C002FEC0A /* FTSimpleDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E1F813D5D37C002FEC0A /* FTSimpleDB.m */; };
@@ -410,10 +412,10 @@
 		4CD94A3913FE5E4900BD6C06 /* FTAutoColumnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD94A3713FE5E4900BD6C06 /* FTAutoColumnView.m */; };
 		4CD94A5E14024B0500BD6C06 /* FTFacebook.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD94A5C14024B0500BD6C06 /* FTFacebook.h */; };
 		4CD94A5F14024B0500BD6C06 /* FTFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD94A5D14024B0500BD6C06 /* FTFacebook.m */; };
-		4CE0967C1440D83200B31E11 /* FTDragDropCropElementView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE096781440D83200B31E11 /* FTDragDropCropElementView.h */; };
-		4CE0967D1440D83200B31E11 /* FTDragDropCropElementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE096791440D83200B31E11 /* FTDragDropCropElementView.m */; };
-		4CE0967E1440D83200B31E11 /* FTDragDropCropView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE0967A1440D83200B31E11 /* FTDragDropCropView.h */; };
-		4CE0967F1440D83200B31E11 /* FTDragDropCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE0967B1440D83200B31E11 /* FTDragDropCropView.m */; };
+		4CE0967C1440D83200B31E11 /* FTPhotoEditingElementView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE096781440D83200B31E11 /* FTPhotoEditingElementView.h */; };
+		4CE0967D1440D83200B31E11 /* FTPhotoEditingElementView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE096791440D83200B31E11 /* FTPhotoEditingElementView.m */; };
+		4CE0967E1440D83200B31E11 /* FTPhotoEditingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE0967A1440D83200B31E11 /* FTPhotoEditingView.h */; };
+		4CE0967F1440D83200B31E11 /* FTPhotoEditingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE0967B1440D83200B31E11 /* FTPhotoEditingView.m */; };
 		4CE096811440D8BF00B31E11 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE096801440D8BF00B31E11 /* libTestFlight.a */; };
 		4CE096941442111A00B31E11 /* FlurryAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE096921442111A00B31E11 /* FlurryAnalytics.h */; };
 		4CE096951442111A00B31E11 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE096931442111A00B31E11 /* libFlurryAnalytics.a */; };
@@ -422,8 +424,6 @@
 		4CE77EF11435E7C900A5AEDA /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE77EEE1435E7C900A5AEDA /* JSON.h */; };
 		4CE77EF21435E7C900A5AEDA /* NSString+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE77EEF1435E7C900A5AEDA /* NSString+SBJSON.h */; };
 		4CE77EF31435E7C900A5AEDA /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE77EF01435E7C900A5AEDA /* NSString+SBJSON.m */; };
-		4CE77EFA1435FC4700A5AEDA /* FTPhotoEditingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE77EF81435FC4700A5AEDA /* FTPhotoEditingView.h */; };
-		4CE77EFB1435FC4700A5AEDA /* FTPhotoEditingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE77EF91435FC4700A5AEDA /* FTPhotoEditingView.m */; };
 		4CEB1BFE1403B33400B70C98 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1BFD1403B33400B70C98 /* UIKit.framework */; };
 		4CFEAD8614321FE000EDD9A8 /* FTAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CFEAD8414321FE000EDD9A8 /* FTAlertView.h */; };
 		4CFEAD8714321FE000EDD9A8 /* FTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEAD8514321FE000EDD9A8 /* FTAlertView.m */; };
@@ -759,6 +759,8 @@
 		4C8AD6071404F5960078DE52 /* FTFullWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFullWebViewController.m; sourceTree = "<group>"; };
 		4C95CECC13D740E100190E64 /* FTWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTWebViewController.h; sourceTree = "<group>"; };
 		4C95CECD13D740E100190E64 /* FTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTWebViewController.m; sourceTree = "<group>"; };
+		4CA29DE7144D7F13002F38BD /* FTBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBarButtonItem.h; sourceTree = "<group>"; };
+		4CA29DE8144D7F13002F38BD /* FTBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTBarButtonItem.m; sourceTree = "<group>"; };
 		4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTSimpleDB.h; path = FTLibrary/FTSimpleDB.h; sourceTree = SOURCE_ROOT; };
 		4CB6E1F813D5D37C002FEC0A /* FTSimpleDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTSimpleDB.m; path = FTLibrary/FTSimpleDB.m; sourceTree = SOURCE_ROOT; };
 		4CB6E1FC13D5D442002FEC0A /* UIScrollView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Layout.h"; sourceTree = "<group>"; };
@@ -846,10 +848,10 @@
 		4CD94A3713FE5E4900BD6C06 /* FTAutoColumnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAutoColumnView.m; sourceTree = "<group>"; };
 		4CD94A5C14024B0500BD6C06 /* FTFacebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFacebook.h; sourceTree = "<group>"; };
 		4CD94A5D14024B0500BD6C06 /* FTFacebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFacebook.m; sourceTree = "<group>"; };
-		4CE096781440D83200B31E11 /* FTDragDropCropElementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDragDropCropElementView.h; sourceTree = "<group>"; };
-		4CE096791440D83200B31E11 /* FTDragDropCropElementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDragDropCropElementView.m; sourceTree = "<group>"; };
-		4CE0967A1440D83200B31E11 /* FTDragDropCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDragDropCropView.h; sourceTree = "<group>"; };
-		4CE0967B1440D83200B31E11 /* FTDragDropCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDragDropCropView.m; sourceTree = "<group>"; };
+		4CE096781440D83200B31E11 /* FTPhotoEditingElementView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPhotoEditingElementView.h; sourceTree = "<group>"; };
+		4CE096791440D83200B31E11 /* FTPhotoEditingElementView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPhotoEditingElementView.m; sourceTree = "<group>"; };
+		4CE0967A1440D83200B31E11 /* FTPhotoEditingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPhotoEditingView.h; sourceTree = "<group>"; };
+		4CE0967B1440D83200B31E11 /* FTPhotoEditingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPhotoEditingView.m; sourceTree = "<group>"; };
 		4CE096801440D8BF00B31E11 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		4CE096921442111A00B31E11 /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
 		4CE096931442111A00B31E11 /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurryAnalytics.a; path = Thirdparty/Flurry/libFlurryAnalytics.a; sourceTree = "<group>"; };
@@ -858,8 +860,6 @@
 		4CE77EEE1435E7C900A5AEDA /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		4CE77EEF1435E7C900A5AEDA /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
 		4CE77EF01435E7C900A5AEDA /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
-		4CE77EF81435FC4700A5AEDA /* FTPhotoEditingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPhotoEditingView.h; sourceTree = "<group>"; };
-		4CE77EF91435FC4700A5AEDA /* FTPhotoEditingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPhotoEditingView.m; sourceTree = "<group>"; };
 		4CEB1BFD1403B33400B70C98 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4CEB1BFF1403B34700B70C98 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4CEB1C001403B36400B70C98 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1255,6 +1255,7 @@
 		4C57611D13C5E7570049371F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4CA29DE4144D7EF3002F38BD /* Buttons */,
 				4C6F8F5B13F87502004A4FB2 /* Basic view */,
 				4CCF855514424E80007F1043 /* Finger drawing */,
 				4CE77EF71435FBF500A5AEDA /* Photo editing */,
@@ -1753,6 +1754,23 @@
 			name = "Web controller";
 			sourceTree = "<group>";
 		};
+		4CA29DE4144D7EF3002F38BD /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				4CA29DE6144D7EFE002F38BD /* UIBarButtonItem */,
+			);
+			name = Buttons;
+			sourceTree = "<group>";
+		};
+		4CA29DE6144D7EFE002F38BD /* UIBarButtonItem */ = {
+			isa = PBXGroup;
+			children = (
+				4CA29DE7144D7F13002F38BD /* FTBarButtonItem.h */,
+				4CA29DE8144D7F13002F38BD /* FTBarButtonItem.m */,
+			);
+			name = UIBarButtonItem;
+			sourceTree = "<group>";
+		};
 		4CB6E1CB13D5A392002FEC0A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -2004,10 +2022,10 @@
 		4CE096761440D7FA00B31E11 /* Photo edit view */ = {
 			isa = PBXGroup;
 			children = (
-				4CE096781440D83200B31E11 /* FTDragDropCropElementView.h */,
-				4CE096791440D83200B31E11 /* FTDragDropCropElementView.m */,
-				4CE0967A1440D83200B31E11 /* FTDragDropCropView.h */,
-				4CE0967B1440D83200B31E11 /* FTDragDropCropView.m */,
+				4CE096781440D83200B31E11 /* FTPhotoEditingElementView.h */,
+				4CE096791440D83200B31E11 /* FTPhotoEditingElementView.m */,
+				4CE0967A1440D83200B31E11 /* FTPhotoEditingView.h */,
+				4CE0967B1440D83200B31E11 /* FTPhotoEditingView.m */,
 			);
 			name = "Photo edit view";
 			sourceTree = "<group>";
@@ -2025,8 +2043,6 @@
 			isa = PBXGroup;
 			children = (
 				4CE096761440D7FA00B31E11 /* Photo edit view */,
-				4CE77EF81435FC4700A5AEDA /* FTPhotoEditingView.h */,
-				4CE77EF91435FC4700A5AEDA /* FTPhotoEditingView.m */,
 			);
 			name = "Photo editing";
 			sourceTree = "<group>";
@@ -2418,13 +2434,13 @@
 				4CE77EDF1435D34500A5AEDA /* FTVerticalSlider.h in Headers */,
 				4CE77EF11435E7C900A5AEDA /* JSON.h in Headers */,
 				4CE77EF21435E7C900A5AEDA /* NSString+SBJSON.h in Headers */,
-				4CE77EFA1435FC4700A5AEDA /* FTPhotoEditingView.h in Headers */,
 				68134788143B29F700CC309C /* FTShareDataObjects.h in Headers */,
 				68D604A5143F0C7900C3C84E /* TestFlight.h in Headers */,
-				4CE0967C1440D83200B31E11 /* FTDragDropCropElementView.h in Headers */,
-				4CE0967E1440D83200B31E11 /* FTDragDropCropView.h in Headers */,
+				4CE0967C1440D83200B31E11 /* FTPhotoEditingElementView.h in Headers */,
+				4CE0967E1440D83200B31E11 /* FTPhotoEditingView.h in Headers */,
 				4CE096941442111A00B31E11 /* FlurryAnalytics.h in Headers */,
 				4CCF855914424E9F007F1043 /* FTFingerDrawingView.h in Headers */,
+				4CA29DE9144D7F13002F38BD /* FTBarButtonItem.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2699,11 +2715,11 @@
 				A56A63431433617B000C666B /* SA_OAuthTwitterEngine.m in Sources */,
 				4CE77EE01435D34500A5AEDA /* FTVerticalSlider.m in Sources */,
 				4CE77EF31435E7C900A5AEDA /* NSString+SBJSON.m in Sources */,
-				4CE77EFB1435FC4700A5AEDA /* FTPhotoEditingView.m in Sources */,
 				68134789143B29F700CC309C /* FTShareDataObjects.m in Sources */,
-				4CE0967D1440D83200B31E11 /* FTDragDropCropElementView.m in Sources */,
-				4CE0967F1440D83200B31E11 /* FTDragDropCropView.m in Sources */,
+				4CE0967D1440D83200B31E11 /* FTPhotoEditingElementView.m in Sources */,
+				4CE0967F1440D83200B31E11 /* FTPhotoEditingView.m in Sources */,
 				4CCF855A14424E9F007F1043 /* FTFingerDrawingView.m in Sources */,
+				4CA29DEA144D7F13002F38BD /* FTBarButtonItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
