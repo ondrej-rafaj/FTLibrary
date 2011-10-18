@@ -61,6 +61,7 @@ typedef enum {
 @protocol FTDragAndDropCanvasViewDelegate <NSObject>
 
 - (void)finishedEditingElement:(FTDragAndDropView *)element withData:(NSDictionary *)data;
+- (void)sentElementToTheFront:(FTDragAndDropView *)element withData:(NSArray *)data;
 - (void)deleteElement:(FTDragAndDropView *)element withData:(NSDictionary *)data;
 - (void)createdElement:(FTDragAndDropView *)element withData:(NSDictionary *)data;
 

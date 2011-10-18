@@ -182,24 +182,39 @@
 
 - (void)randomizeElementPosition:(FTDragAndDropView *)element animated:(BOOL)animated {
 	CGPoint p = element.center;
-	
-	int max = ((int)([self width] - (2 * [element width])) + [element width]);
-	NSLog(@"Max value (x): %d", max);
-	p.x = (arc4random() % max);
-	
-	if (p.x < 0 || p.x > [self width]) p.x = self.bounds.size.width / 2;
-	
-	max = ((int)([self height] - (2 * [element height])) + [element height]);
-	NSLog(@"Max value (y): %d", max);
-	p.y = (arc4random() % max);
-	
-	if (p.y < 0 || p.y > [self height]) p.y = self.bounds.size.width / 2;
-	
-	NSLog(@"New random center: %@", NSStringFromCGPoint(p));
+	UIView *workingView = self.backgroundImageView;
 	
 	if (animated) [UIView beginAnimations:nil context:nil];
+	
+	// Rotation
+	int degrees = ((arc4random() % 60) - 30);
+	CGFloat rotation = degreesToRadians(degrees);
+	element.transform = CGAffineTransformRotate(element.transform, rotation);
+	element.rotationValue += rotation;
+	
+	// Scale
+	int max = 70.0f;
+	CGFloat min = (kFTDragAndDropCanvasViewMinScale * max);
+	CGFloat scale = (((float)(arc4random() % (int)(max - min)) + min) / max);
+	NSLog(@"New scale: %f", scale);
+	if (scale < kFTDragAndDropCanvasViewMinScale) scale = kFTDragAndDropCanvasViewMinScale;
+	element.transform = CGAffineTransformScale(element.transform, scale, scale);
+	element.scaleValue = scale;
+	
+	// Position
+	max = (int)([workingView width] - (2 * [element width]));
+	NSLog(@"Max value (x): %d", max);
+	p.x = ((arc4random() % max) + [element width]);
+	if (p.x < 0 || p.x > [workingView width]) p.x = workingView.bounds.size.width / 2;
+	max = (int)([workingView height] - (2 * [element height]));
+	NSLog(@"Max value (y): %d", max);
+	p.y = ((arc4random() % max) + [element height]);
+	if (p.y < 0 || p.y > [workingView height]) p.y = workingView.bounds.size.height / 2;
+	NSLog(@"New random center: %@", NSStringFromCGPoint(p));
+	element.positionX = p.x;
+	element.positionY = p.y;
 	[element setCenter:p];
-	//element.rotationValue += ;
+	
 	if (animated) [UIView commitAnimations];
 	[self didEditElement:element];
 }
@@ -208,7 +223,6 @@
 
 - (void)addElementWithData:(NSDictionary *)data reversed:(BOOL)reversed
 {
-	//NSLog(@"Add with data: %@", data);
     FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImageData:data reversed:reversed];
     [self configureElement:element];
     [element release];
@@ -224,12 +238,12 @@
     FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImagePath:imagePath reversed:reversed];
 	element.positionX = (self.bounds.size.width / 2);
 	element.positionY = (self.bounds.size.height / 2);
+	[self randomizeElementPosition:element animated:YES];
 	if ([delegate respondsToSelector:@selector(createdElement:withData:)]) {
 		[delegate createdElement:element withData:element.elementData];
 	}
 	[self didEditElement:element];
     [self configureElement:element];
-	[self randomizeElementPosition:element animated:YES];
     [element release];
 }
 
@@ -430,7 +444,13 @@
     [stickersContainerView bringSubviewToFront:v];
 	[elements removeObject:v];
 	[elements addObject:v];
-    [self didEditElement:v];
+    if ([delegate respondsToSelector:@selector(sentElementToTheFront:withData:)]) {
+		NSMutableArray *arr = [NSMutableArray array];
+		for (FTDragAndDropView *v in elements) {
+			[arr addObject:[v getInfo]];
+		}
+		[delegate sentElementToTheFront:v withData:arr];
+	}
 }
 
 static CGFloat tempRotation = 0;
