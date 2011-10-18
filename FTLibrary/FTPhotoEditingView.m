@@ -235,14 +235,19 @@
 	_originalImage = image;
 	[_originalImage retain];
 	
-	// Resized image that fits the iew
-	image = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:self.bounds.size interpolationQuality:kCGInterpolationMedium];
+	// Resized image that fits the view
+	CGSize s = self.bounds.size;
+	//s.height -= 64;
+	image = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:s interpolationQuality:kCGInterpolationMedium];
 	
 	// Image effects for thumbs
 	if (_isBlackAndWhite) image = [UIImage convertTo8bppGrayscaleFromImage:image];
 	
 	_resizedImage = image;
 	[_resizedImage retain];
+	
+	NSLog(@"Resized frame: %@", NSStringFromCGRect(self.frame));
+	NSLog(@"Resized size: %@", NSStringFromCGSize(image.size));
 	
 	// Setting up the view
 	[self setSize:image.size];
