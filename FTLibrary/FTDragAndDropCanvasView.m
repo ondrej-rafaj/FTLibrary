@@ -129,7 +129,7 @@
 	
 	//the reference size is in landscape
 	CGFloat horizontalRatio2 = newImageSize.width / 1024;
-    CGFloat verticalRatio2 = newImageSize.height / 768;
+    CGFloat verticalRatio2 = newImageSize.height / 748;
     CGFloat newScaling = MAX(horizontalRatio2, verticalRatio2);
 	
 	for (FTDragAndDropView *element in elements) {
@@ -161,10 +161,10 @@
 	CGSize imageSize = backgroundImage.size;
 	//landscape
 	CGFloat horizontalRatio = 1024 / imageSize.width;
-    CGFloat verticalRatio = 768 / imageSize.height;
+    CGFloat verticalRatio = 748 / imageSize.height;
     CGFloat ratio = MIN(horizontalRatio, verticalRatio);
     CGSize newImageSize = CGSizeMake(imageSize.width * ratio, imageSize.height * ratio);
-    backgroundImageRectLandscape = CGRectMake((1024 - newImageSize.width)/2, (768 - newImageSize.height)/2, newImageSize.width, newImageSize.height);
+    backgroundImageRectLandscape = CGRectMake((1024 - newImageSize.width)/2, (748 - newImageSize.height)/2, newImageSize.width, newImageSize.height);
 	backgroundImageRectLandscape = CGRectIntegral(backgroundImageRectLandscape);
 
 	//portrait
@@ -201,8 +201,11 @@
 	element.transform = CGAffineTransformScale(element.transform, scale, scale);
 	element.scaleValue = scale;
 	
-	// Position
-	max = (int)([workingView width] - (2 * [element width]));
+    // Position
+	CGSize maxSize = CGSizeMake((workingView.size.width - element.size.width), (workingView.size.height - element.size.height));
+    p = CGPointMake(((rand()% (int)maxSize.width) + (element.size.width / 2)), ((rand()% (int)maxSize.height) + (element.size.height / 2)));
+    /*
+    max = (int)([workingView width] - (2 * [element width]));
 	NSLog(@"Max value (x): %d", max);
 	p.x = ((arc4random() % max) + [element width]);
 	if (p.x < 0 || p.x > [workingView width]) p.x = workingView.bounds.size.width / 2;
@@ -210,7 +213,10 @@
 	NSLog(@"Max value (y): %d", max);
 	p.y = ((arc4random() % max) + [element height]);
 	if (p.y < 0 || p.y > [workingView height]) p.y = workingView.bounds.size.height / 2;
-	NSLog(@"New random center: %@", NSStringFromCGPoint(p));
+	//*/
+    
+    
+    NSLog(@"New random center: %@", NSStringFromCGPoint(p));
 	element.positionX = p.x;
 	element.positionY = p.y;
 	[element setCenter:p];
@@ -238,12 +244,13 @@
     FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImagePath:imagePath reversed:reversed];
 	element.positionX = (self.bounds.size.width / 2);
 	element.positionY = (self.bounds.size.height / 2);
+    [self configureElement:element];
 	[self randomizeElementPosition:element animated:YES];
 	if ([delegate respondsToSelector:@selector(createdElement:withData:)]) {
 		[delegate createdElement:element withData:element.elementData];
 	}
 	[self didEditElement:element];
-    [self configureElement:element];
+    
     [element release];
 }
 
