@@ -69,7 +69,7 @@
 			
 			CFIndex index = CTLineGetStringIndexForPosition(line, point);
 			NSArray *urlsKeys = [_URLs allKeys];
-
+			
 			for (NSString *key in urlsKeys) {
 				NSRange range = NSRangeFromString(key);
 				if (index >= range.location && index < range.location + range.length) {
@@ -104,7 +104,7 @@
 			_defaultStyle.color= [UIColor blackColor];
 			NSLog(@"FTCoreTextView: _default style not found!");
 		}
-
+		
 		NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_processedString];
 		
 		//set default attributeds
@@ -123,22 +123,23 @@
 					   value:(id)ctFont
 					   range:stringRange];
 		CFRelease(ctFont);
-
+		
 		CTTextAlignment alignment = (_defaultStyle.alignment)? _defaultStyle.alignment : kCTLeftTextAlignment;
 		CGFloat maxLineHeight = _defaultStyle.maxLineHeight;
 		CGFloat paragraphSpaceBefore = _defaultStyle.spaceBetweenParagraphs;
+		CGFloat leftMargin = _defaultStyle.paragraphBodyLeftMargin;
 		
 		CTParagraphStyleSetting settings[] = {
 			{kCTParagraphStyleSpecifierAlignment, sizeof(alignment), &alignment},
 			{kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &maxLineHeight},
-			{kCTParagraphStyleSpecifierParagraphSpacing, sizeof(CGFloat), &paragraphSpaceBefore}
+			{kCTParagraphStyleSpecifierParagraphSpacing, sizeof(CGFloat), &paragraphSpaceBefore},
+			{kCTParagraphStyleSpecifierHeadIndent, sizeof(CGFloat), &leftMargin},
 		};
-		CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings, 3);
+		CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings, 4);
 		[string addAttribute:(id)kCTParagraphStyleAttributeName
 					   value:(id)paragraphStyle 
 					   range:stringRange];
 		CFRelease(paragraphStyle);
-
 		
 		//set markers attributes
 		for (NSDictionary *dict in _markers) {
@@ -151,8 +152,8 @@
 						   range:aRange];
             
 			CTFontRef setCTFont = CTFontCreateWithName((CFStringRef)style.font.fontName, 
-										  style.font.pointSize, 
-										  NULL);
+													   style.font.pointSize, 
+													   NULL);
 			
 			[string addAttribute:(id)kCTFontAttributeName
 						   value:(id)setCTFont
@@ -162,17 +163,27 @@
             CTTextAlignment alignment = (style.alignment)? style.alignment : kCTLeftTextAlignment;
             CGFloat maxLineHeight = style.maxLineHeight;
 			CGFloat paragraphSpaceBefore = style.spaceBetweenParagraphs;
+			CGFloat leftMargin = style.paragraphBodyLeftMargin;
+			
+			CFIndex numberOfSettings = ([style.name isEqualToString:@"_bullet"]) ? 5 : 4;
+			CTTextTabRef tabArray[] = { CTTextTabCreate(0, style.bulletInset, NULL) };
+			
+			CFArrayRef tabStops = CFArrayCreate( kCFAllocatorDefault, (const void**) tabArray, 1, &kCFTypeArrayCallBacks );
+			CFRelease(tabArray[0]);
 			
             CTParagraphStyleSetting settings[] = {
                 {kCTParagraphStyleSpecifierAlignment, sizeof(alignment), &alignment},
 				{kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &maxLineHeight},
-				{kCTParagraphStyleSpecifierParagraphSpacing, sizeof(CGFloat), &paragraphSpaceBefore}
+				{kCTParagraphStyleSpecifierParagraphSpacing, sizeof(CGFloat), &paragraphSpaceBefore},
+				{kCTParagraphStyleSpecifierHeadIndent, sizeof(CGFloat), &leftMargin},
+				{kCTParagraphStyleSpecifierTabStops, sizeof(CFArrayRef), &tabStops}
             };
-            CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings, 3);
+            CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings, numberOfSettings);
             [string addAttribute:(id)kCTParagraphStyleAttributeName
                            value:(id)paragraphStyle 
                            range:aRange];
 			CFRelease(paragraphStyle);
+			CFRelease(tabStops);
             
 		}
 		// layout master 
@@ -262,11 +273,16 @@
 		[linksStyle release];
 	}
 	
+	FTCoreTextStyle *bulletStyle = [_styles objectForKey:@"_bullet"];
+	if (bulletStyle) {
+		bulletStyle.appendedCharacter = [NSString stringWithFormat:@"%@\t", bulletStyle.appendedCharacter];
+	}
+	
     NSString *regEx = @"<[_a-zA-Z0-9]*( /){0,1}>";
     
     [self.uRLs removeAllObjects];
     [self.images removeAllObjects];
-       
+	
     while (YES) {
         int length;
         NSRange rangeStart;
@@ -277,12 +293,11 @@
         rangeStart = [_processedString rangeOfString:regEx options:NSRegularExpressionSearch];
         if (rangeStart.location == NSNotFound) return;
         NSString *key = [_processedString substringWithRange:NSMakeRange(rangeStart.location + 1, rangeStart.length - 2)];
-       
+		
         NSString *autoCloseKey = [key stringByReplacingOccurrencesOfString:@" /" withString:@""];
         BOOL isAutoClose = (![key isEqualToString:autoCloseKey]);
         
         style = [_styles objectForKey:(isAutoClose)? autoCloseKey : key];
-
         
         NSString *append = @"";
         if (style != nil && style.appendedCharacter) {
@@ -320,7 +335,7 @@
             NSRange imageRange = NSMakeRange((rangeStart.location + rangeStart.length), (closeTagRange.location - (rangeStart.location + rangeStart.length)));
             NSString *imageString = [_processedString substringWithRange:imageRange];
             UIImage *img = [UIImage imageNamed:imageString];
-
+			
             if (img) {
                 int skipLine = floorf(img.size.height / style.font.lineHeight);
                 NSMutableString *lines = [NSMutableString string];
@@ -331,12 +346,31 @@
                 [_processedString replaceCharactersInRange:imageRange withString:lines];
                 [self.images setObject:img forKey:[NSNumber numberWithInt:rangeStart.location]];
             }
- 
+			
         }
         
         if (isAutoClose) {
             [_processedString replaceCharactersInRange:rangeStart withString:append];
             rangeActive = NSMakeRange(rangeStart.location, [append length]);
+			
+			if ([style.name isEqualToString:@"_bullet"]) {
+				FTCoreTextStyle *bulletParagraphStyle = [_defaultStyle copy];
+				bulletParagraphStyle.name = @"_bulletStyle";
+				bulletParagraphStyle.paragraphBodyLeftMargin = style.bulletInset;
+				
+				NSRange remainingStringRange = NSMakeRange(rangeActive.location + 1, [_text length] - rangeActive.location - 1);
+				NSRange nextReturnLineRange = [_text rangeOfString:@"\n" options:0 range:remainingStringRange];
+				
+				NSRange bulletStyleRange = (nextReturnLineRange.length == 0) ? remainingStringRange : NSMakeRange(remainingStringRange.location, nextReturnLineRange.location - remainingStringRange.location);
+				
+				NSValue *rangeValue = [NSValue valueWithRange:bulletStyleRange];
+				NSDictionary *dict = [NSDictionary 
+									  dictionaryWithObjects:[NSArray arrayWithObjects:rangeValue, bulletParagraphStyle, nil]                                                     
+									  forKeys:[NSArray arrayWithObjects:@"range", @"style", nil]];
+				[bulletParagraphStyle release];
+				rangeValue = nil;
+				[_markers addObject:dict];  
+			}
         }
         else {
             [_processedString replaceCharactersInRange:rangeStart withString:@""];
@@ -385,7 +419,7 @@
     CTFrameRef ctframe = CTFramesetterCreateFrame(_framesetter, CFRangeMake(0, 0), mainPath, NULL);
     
     CGPathRelease(mainPath);
-
+	
     
     CFArrayRef lines = CTFrameGetLines(ctframe);
     CFIndex lineCount = CFArrayGetCount(lines);
@@ -418,12 +452,12 @@
                 
                 CGRect frame = CGRectMake(x, lineBounds.origin.y, img.size.width, img.size.height);
                 [img drawInRect:frame];
-
+				
             }
         }
         
     }
-
+	
 }
 
 /*!
@@ -520,7 +554,7 @@
         CGPathAddPath(mainPath, NULL, _path);
     }
     
-
+	
     
 	CTFrameRef drawFrame = CTFramesetterCreateFrame(_framesetter, 
                                                     CFRangeMake(0, 0),
@@ -540,11 +574,11 @@
 	// draw
 	CTFrameDraw(drawFrame, self.context);
     CGContextSaveGState(self.context);
-
+	
 	// cleanup
 	CFRelease(drawFrame);
 	CGPathRelease(mainPath);
-
+	
 }
 
 
