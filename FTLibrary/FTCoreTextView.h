@@ -16,7 +16,6 @@
 
 #import <UIKit/UIKit.h>
 #import "FTCoreTextStyle.h"
-#import <CoreText/CoreText.h>
 
 @protocol FTCoreTextViewDelegate;
 @interface FTCoreTextView : UIView {
@@ -28,7 +27,6 @@
     NSMutableString		*_processedString;
     CGPathRef			_path;
     CGContextRef        _context;
-    CTFramesetterRef	_framesetter;
 	BOOL				_changesMade;
     NSMutableDictionary *_URLs;
     NSMutableDictionary *_images;
