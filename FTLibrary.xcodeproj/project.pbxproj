@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C01A662145770F200C1D01D /* FTPhotoHoldingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C01A660145770F200C1D01D /* FTPhotoHoldingView.h */; };
+		4C01A663145770F200C1D01D /* FTPhotoHoldingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C01A661145770F200C1D01D /* FTPhotoHoldingView.m */; };
+		4C01A6661457710800C1D01D /* FTPhotoCompositionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C01A6641457710800C1D01D /* FTPhotoCompositionView.h */; };
+		4C01A6671457710800C1D01D /* FTPhotoCompositionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C01A6651457710800C1D01D /* FTPhotoCompositionView.m */; };
+		4C01A66C1457716300C1D01D /* FTPhotoCompositionTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C01A66A1457716300C1D01D /* FTPhotoCompositionTemplate.h */; };
+		4C01A66D1457716300C1D01D /* FTPhotoCompositionTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C01A66B1457716300C1D01D /* FTPhotoCompositionTemplate.m */; };
 		4C03655213BA023A00E8FA09 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C03655113BA023A00E8FA09 /* Foundation.framework */; };
 		4C03655E13BA023A00E8FA09 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C03655113BA023A00E8FA09 /* Foundation.framework */; };
 		4C03656013BA023A00E8FA09 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C03655F13BA023A00E8FA09 /* CoreGraphics.framework */; };
@@ -520,6 +526,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C01A660145770F200C1D01D /* FTPhotoHoldingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPhotoHoldingView.h; sourceTree = "<group>"; };
+		4C01A661145770F200C1D01D /* FTPhotoHoldingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPhotoHoldingView.m; sourceTree = "<group>"; };
+		4C01A6641457710800C1D01D /* FTPhotoCompositionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPhotoCompositionView.h; sourceTree = "<group>"; };
+		4C01A6651457710800C1D01D /* FTPhotoCompositionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPhotoCompositionView.m; sourceTree = "<group>"; };
+		4C01A66A1457716300C1D01D /* FTPhotoCompositionTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPhotoCompositionTemplate.h; sourceTree = "<group>"; };
+		4C01A66B1457716300C1D01D /* FTPhotoCompositionTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPhotoCompositionTemplate.m; sourceTree = "<group>"; };
 		4C03654E13BA023A00E8FA09 /* libFTLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFTLibrary.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C03655113BA023A00E8FA09 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4C03655513BA023A00E8FA09 /* FTLibrary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FTLibrary-Prefix.pch"; sourceTree = "<group>"; };
@@ -995,6 +1007,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C01A65D1457709D00C1D01D /* Photo composition view */ = {
+			isa = PBXGroup;
+			children = (
+				4C01A6691457713200C1D01D /* Templates */,
+				4C01A6641457710800C1D01D /* FTPhotoCompositionView.h */,
+				4C01A6651457710800C1D01D /* FTPhotoCompositionView.m */,
+			);
+			name = "Photo composition view";
+			sourceTree = "<group>";
+		};
+		4C01A65F145770AD00C1D01D /* Photo holding view */ = {
+			isa = PBXGroup;
+			children = (
+				4C01A660145770F200C1D01D /* FTPhotoHoldingView.h */,
+				4C01A661145770F200C1D01D /* FTPhotoHoldingView.m */,
+			);
+			name = "Photo holding view";
+			sourceTree = "<group>";
+		};
+		4C01A6681457711100C1D01D /* Photo book */ = {
+			isa = PBXGroup;
+			children = (
+				4C01A65F145770AD00C1D01D /* Photo holding view */,
+				4C01A65D1457709D00C1D01D /* Photo composition view */,
+			);
+			name = "Photo book";
+			sourceTree = "<group>";
+		};
+		4C01A6691457713200C1D01D /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				4C01A66E1457717600C1D01D /* Basic template */,
+			);
+			name = Templates;
+			sourceTree = "<group>";
+		};
+		4C01A66E1457717600C1D01D /* Basic template */ = {
+			isa = PBXGroup;
+			children = (
+				4C01A66A1457716300C1D01D /* FTPhotoCompositionTemplate.h */,
+				4C01A66B1457716300C1D01D /* FTPhotoCompositionTemplate.m */,
+			);
+			name = "Basic template";
+			sourceTree = "<group>";
+		};
 		4C03654313BA023A00E8FA09 = {
 			isa = PBXGroup;
 			children = (
@@ -2042,6 +2099,7 @@
 		4CE77EF71435FBF500A5AEDA /* Photo editing */ = {
 			isa = PBXGroup;
 			children = (
+				4C01A6681457711100C1D01D /* Photo book */,
 				4CE096761440D7FA00B31E11 /* Photo edit view */,
 			);
 			name = "Photo editing";
@@ -2441,6 +2499,9 @@
 				4CE096941442111A00B31E11 /* FlurryAnalytics.h in Headers */,
 				4CCF855914424E9F007F1043 /* FTFingerDrawingView.h in Headers */,
 				4CA29DE9144D7F13002F38BD /* FTBarButtonItem.h in Headers */,
+				4C01A662145770F200C1D01D /* FTPhotoHoldingView.h in Headers */,
+				4C01A6661457710800C1D01D /* FTPhotoCompositionView.h in Headers */,
+				4C01A66C1457716300C1D01D /* FTPhotoCompositionTemplate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2720,6 +2781,9 @@
 				4CE0967F1440D83200B31E11 /* FTPhotoEditingView.m in Sources */,
 				4CCF855A14424E9F007F1043 /* FTFingerDrawingView.m in Sources */,
 				4CA29DEA144D7F13002F38BD /* FTBarButtonItem.m in Sources */,
+				4C01A663145770F200C1D01D /* FTPhotoHoldingView.m in Sources */,
+				4C01A6671457710800C1D01D /* FTPhotoCompositionView.m in Sources */,
+				4C01A66D1457716300C1D01D /* FTPhotoCompositionTemplate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
