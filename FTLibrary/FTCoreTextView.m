@@ -577,7 +577,7 @@ typedef enum {
 						}
 						
 						if ([currentSupernode.style.appendedCharacter length] > 0) {
-							[processedString insertString:currentSupernode.style.appendedCharacter atIndex:currentSupernode.styleRange.length + currentSupernode.styleRange.length];
+							[processedString insertString:currentSupernode.style.appendedCharacter atIndex:currentSupernode.styleRange.location + currentSupernode.styleRange.length];
 							NSRange newStyleRange = currentSupernode.styleRange;
 							newStyleRange.length += [currentSupernode.style.appendedCharacter length];
 							currentSupernode.styleRange = newStyleRange;							
