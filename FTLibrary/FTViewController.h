@@ -25,6 +25,10 @@
 	FTProgressView *loadingProgressView;
 	
 	UIView *debugLabel;
+    
+    BOOL compareDesign;
+    
+    UIImageView *compareDesignView;
 	
 }
 
@@ -37,6 +41,10 @@
 @property (nonatomic) BOOL isLandscape;
 
 @property (nonatomic, retain) FTProgressView *loadingProgressView;
+
+@property (nonatomic, assign, getter=isCompareDesign) BOOL compareDesign;
+
+@property (nonatomic, retain) IBOutlet UIImageView *compareDesignView;
 
 
 // Initialization

@@ -7,14 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FTCoreTextView.h"
 
 
 @interface FTLabel : UILabel {
-    
+    float _leading;
 }
+
+@property (nonatomic, assign) float leading;
 
 - (void)rightAnchorToX:(CGFloat)x;
 - (id)initWithFrame:(CGRect)frame font:(UIFont *)font andText:(NSString *)text;
+
++ (CTTextAlignment)CTTextAlignmentFromUITextAlignment:(UITextAlignment)alignment;
 
 
 @end

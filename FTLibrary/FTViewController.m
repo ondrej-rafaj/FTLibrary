@@ -6,6 +6,8 @@
 //  Copyright 2011 Fuerte International. All rights reserved.
 //
 
+#import <objc/runtime.h>
+#import <QuartzCore/QuartzCore.h>
 #import "FTViewController.h"
 #import "FTAppDelegate.h"
 #import "FTLang.h"
@@ -21,6 +23,8 @@
 @synthesize backgroundView;
 @synthesize isLandscape;
 @synthesize loadingProgressView;
+@synthesize compareDesign;
+@synthesize compareDesignView;
 
 
 #pragma mark Positioning
@@ -52,6 +56,7 @@
 	self = [super init];
 	if (self) {
 		[self initializingSequence];
+        self.compareDesign = NO;
 	}
 	return self;
 }
@@ -79,6 +84,7 @@
 	[table release];
 	[data release];
 	[debugLabel release];
+    [compareDesignView release], compareDesignView = nil;
     [super dealloc];
 }
 
@@ -263,6 +269,32 @@
 		[loadingProgressView hide:YES];
 	}
 	self.loadingProgressView = nil;
+}
+
+#pragma mark comapare Design custom setter
+
+- (void)setCompareDesign:(BOOL)acompareDesign {
+    compareDesign = acompareDesign;
+    if (compareDesign) {
+        if (!self.compareDesignView) {
+            compareDesignView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+            [self.view addSubview:self.compareDesignView];
+            [self.compareDesignView setAlpha:0.4];
+        }
+        const char* classChar = class_getName([self class]);
+        NSString *imgName = [NSString stringWithFormat:@"%s.png", classChar];
+        
+        UIImage *img = [UIImage imageNamed:imgName];
+        if (img) {
+            [self.compareDesignView setFrame:CGRectMake(0, 0, img.size.width, img.size.height)];
+            [self.compareDesignView setImage:img];
+            [self.compareDesignView.layer setZPosition:0];
+            NSLog(@"Load Design Comparison %@", imgName);
+        }
+        else {
+            NSLog(@"Image for class %@ not found!", imgName);
+        }
+    }
 }
 
 #pragma mark Translations

@@ -8,9 +8,12 @@
 
 #import "FTLabel.h"
 #import "UILabel+DynamicHeight.h"
+#import "FTCoreTextView.h"
 
 
 @implementation FTLabel
+
+@synthesize leading = _leading;
 
 
 - (void)rightAnchorToX:(CGFloat)x {
@@ -26,6 +29,7 @@
 - (void)doInit {
 	[self setBackgroundColor:[UIColor clearColor]];
 	[self setLineBreakMode:UILineBreakModeWordWrap];
+    self.leading = -1;
 }
 
 - (id)init {
@@ -65,11 +69,51 @@
     return self;
 }
 
+#pragma mark leading setters
+
+- (float)leading {
+    if (_leading > 0) return _leading;
+    else return self.font.leading;
+}
+
+- (void)drawRect:(CGRect)rect {
+    if (self.leading > 0) {
+        FTCoreTextView *ctview = [[FTCoreTextView alloc] initWithFrame:CGRectMake(30, 161, 180, 50)];
+        [ctview setText:self.text];
+        
+        FTCoreTextStyle *defaultS = [[FTCoreTextStyle alloc] init];
+        [defaultS setName:@"_default"];
+        [defaultS setFont:self.font];
+        [defaultS setColor:self.textColor];
+        [defaultS setAlignment:[FTLabel CTTextAlignmentFromUITextAlignment:self.textAlignment]];
+        [defaultS setMaxLineHeight:self.leading];
+        [ctview addStyle:defaultS];
+    }
+    else {
+        [super drawRect:rect];
+    }
+}
+
 
 #pragma mark Memory management
 
 - (void)dealloc {
     [super dealloc];
+}
+
+
+#pragma mark Alignment converter
++ (CTTextAlignment)CTTextAlignmentFromUITextAlignment:(UITextAlignment)alignment {
+    switch (alignment) {
+        case UITextAlignmentLeft:
+            return kCTLeftTextAlignment;
+        case UITextAlignmentCenter: 
+            return kCTCenterTextAlignment;
+        case UITextAlignmentRight: 
+            return kCTRightTextAlignment;
+        default: 
+            return kCTNaturalTextAlignment;
+    }
 }
 
 
