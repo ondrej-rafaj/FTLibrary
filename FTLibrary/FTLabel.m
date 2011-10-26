@@ -10,7 +10,10 @@
 #import "UILabel+DynamicHeight.h"
 #import "FTCoreTextView.h"
 
-
+@interface FTLabel ()
++ (FTCoreTextAlignement)FTCoreTextAlignementFromUITextAlignment:(UITextAlignment)alignment;
+@end
+	
 @implementation FTLabel
 
 @synthesize leading = _leading;
@@ -104,7 +107,7 @@
         [defaultS setName:@"_default"];
         [defaultS setFont:self.font];
         [defaultS setColor:self.textColor];
-        [defaultS setAlignment:[FTLabel CTTextAlignmentFromUITextAlignment:self.textAlignment]];
+        [defaultS setTextAlignment:[FTLabel FTCoreTextAlignementFromUITextAlignment:self.textAlignment]];
 #warning FTCoretext does not implement bigger leading of the font leading yet
         [defaultS setMaxLineHeight:self.leading];
         [ctview addStyle:defaultS];
@@ -127,16 +130,16 @@
 
 
 #pragma mark Alignment converter
-+ (CTTextAlignment)CTTextAlignmentFromUITextAlignment:(UITextAlignment)alignment {
++ (FTCoreTextAlignement)FTCoreTextAlignementFromUITextAlignment:(UITextAlignment)alignment {
     switch (alignment) {
         case UITextAlignmentLeft:
-            return kCTLeftTextAlignment;
+            return FTCoreTextAlignementLeft;
         case UITextAlignmentCenter: 
-            return kCTCenterTextAlignment;
+            return FTCoreTextAlignementCenter;
         case UITextAlignmentRight: 
-            return kCTRightTextAlignment;
+            return FTCoreTextAlignementRight;
         default: 
-            return kCTNaturalTextAlignment;
+            return FTCoreTextAlignementLeft;
     }
 }
 
