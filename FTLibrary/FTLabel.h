@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FTCoreTextView.h"
+
 
 @interface FTLabel : UILabel {
     CGFloat _leading;
@@ -16,6 +18,5 @@
 
 - (void)rightAnchorToX:(CGFloat)x;
 - (id)initWithFrame:(CGRect)frame font:(UIFont *)font andText:(NSString *)text;
-
 
 @end

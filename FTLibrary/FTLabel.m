@@ -97,20 +97,38 @@
 - (void)drawRect:(CGRect)rect {
     
     if (_leading > 0) {
-        NSLog(@"leading : %.1f for color [%@]", self.leading, self.text);
-        
-        
+           
         FTCoreTextView *ctview = [[FTCoreTextView alloc] initWithFrame:self.bounds];
-        [ctview setText:self.text];
+        
+        float leadingDiff = self.leading - self.font.leading;
+        
+        NSLog(@"LEADING custom : %.1f font: %.1f", self.leading, self.font.leading);
         
         FTCoreTextStyle *defaultS = [[FTCoreTextStyle alloc] init];
         [defaultS setName:@"_default"];
         [defaultS setFont:self.font];
         [defaultS setColor:self.textColor];
         [defaultS setTextAlignment:[FTLabel FTCoreTextAlignementFromUITextAlignment:self.textAlignment]];
-#warning FTCoretext does not implement bigger leading of the font leading yet
-        [defaultS setMaxLineHeight:self.leading];
+        if (leadingDiff > 0)[defaultS setLeading:leadingDiff];
+        else [defaultS setMaxLineHeight:self.leading];
+        [defaultS setLeading:self.leading];
         [ctview addStyle:defaultS];
+        [defaultS release];
+        
+        FTCoreTextStyle *preStyle = [[FTCoreTextStyle alloc] init];
+        [preStyle setName:@"__pre"];
+        [preStyle setFont:[UIFont systemFontOfSize:10]];
+        [preStyle setColor:[UIColor clearColor]];
+        [preStyle setMaxLineHeight:leadingDiff];
+        [ctview addStyle:preStyle];
+        [preStyle release];
+        
+        NSString *theText = self.text;
+        if (leadingDiff < 0) {
+            theText = [NSString stringWithFormat:@"<__pre>\n</__pre>%@", self.text];
+        }
+        [ctview setText: theText];
+        
         [self addSubview:ctview];
     }
     else {
