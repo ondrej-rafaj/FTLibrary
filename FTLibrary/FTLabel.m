@@ -29,7 +29,7 @@
 - (void)doInit {
 	[self setBackgroundColor:[UIColor clearColor]];
 	[self setLineBreakMode:UILineBreakModeWordWrap];
-    self.leading = -1;
+    [self setLeading:0];
 }
 
 - (id)init {
@@ -71,14 +71,33 @@
 
 #pragma mark leading setters
 
-- (float)leading {
+- (CGFloat)leading {
     if (_leading > 0) return _leading;
     else return self.font.leading;
 }
 
+- (void)setLeading:(CGFloat)leading {
+    _leading = leading;
+    if (_leading > 0) {
+        [self setNeedsDisplay];
+    }
+    
+}
+
+- (void)setText:(NSString *)text {
+    [super setText:text];
+    [self setNeedsDisplay];
+}
+
+#pragma mark drawrect
+///*
 - (void)drawRect:(CGRect)rect {
-    if (self.leading > 0) {
-        FTCoreTextView *ctview = [[FTCoreTextView alloc] initWithFrame:CGRectMake(30, 161, 180, 50)];
+    
+    if (_leading > 0) {
+        NSLog(@"leading : %.1f for color [%@]", self.leading, self.text);
+        
+        
+        FTCoreTextView *ctview = [[FTCoreTextView alloc] initWithFrame:self.bounds];
         [ctview setText:self.text];
         
         FTCoreTextStyle *defaultS = [[FTCoreTextStyle alloc] init];
@@ -86,14 +105,19 @@
         [defaultS setFont:self.font];
         [defaultS setColor:self.textColor];
         [defaultS setAlignment:[FTLabel CTTextAlignmentFromUITextAlignment:self.textAlignment]];
+#warning FTCoretext does not implement bigger leading of the font leading yet
         [defaultS setMaxLineHeight:self.leading];
         [ctview addStyle:defaultS];
+        [self addSubview:ctview];
     }
     else {
-        [super drawRect:rect];
+       [super drawRect:rect]; 
     }
-}
+    
 
+    
+}
+//*/
 
 #pragma mark Memory management
 

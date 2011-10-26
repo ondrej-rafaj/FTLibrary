@@ -11,10 +11,10 @@
 
 
 @interface FTLabel : UILabel {
-    float _leading;
+    CGFloat _leading;
 }
 
-@property (nonatomic, assign) float leading;
+@property (nonatomic, assign) CGFloat leading;
 
 - (void)rightAnchorToX:(CGFloat)x;
 - (id)initWithFrame:(CGRect)frame font:(UIFont *)font andText:(NSString *)text;
