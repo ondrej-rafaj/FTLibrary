@@ -1,6 +1,6 @@
 //
 //  FTCoreTextStyle.h
-//  Deloitte
+//  FTCoreText
 //
 //  Created by Francesco Freezone <cescofry@gmail.com> on 20/07/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
@@ -48,9 +48,14 @@ typedef uint8_t FTCoreTextAlignement;
     UIColor			*_color;
     BOOL			_underlined;
     FTCoreTextAlignement _textAlignment;
-	CGFloat			_maxLineHeight;
 	UIEdgeInsets	_paragraphInset;
 	BOOL			_applyParagraphStyling;
+	CGFloat			_leading;
+	
+	//for _bullet styles only
+	NSString		*_bulletCharacter;
+	UIFont			*_bulletFont;
+	UIColor			*_bulletColor;
 }
 
 @property (nonatomic, retain) NSString			*name;
@@ -59,10 +64,18 @@ typedef uint8_t FTCoreTextAlignement;
 @property (nonatomic, retain) UIColor			*color;
 @property (nonatomic, assign, getter=isUnderLined) BOOL underlined;
 @property (nonatomic, assign) FTCoreTextAlignement textAlignment;
-@property (nonatomic, assign) CGFloat			maxLineHeight;
 @property (nonatomic, assign) UIEdgeInsets		paragraphInset;
+@property (nonatomic, retain) NSString			*bulletCharacter;
+@property (nonatomic, retain) UIFont			*bulletFont;
+@property (nonatomic, retain) UIColor			*bulletColor;
+@property (nonatomic, assign) CGFloat			leading;
+@property (nonatomic, assign) CGFloat			maxLineHeight;
 
 //if NO, the paragraph styling of the enclosing style is used. Default is YES.
 @property (nonatomic, assign) BOOL applyParagraphStyling;
 
+//deprecated
+@property (nonatomic, assign) __deprecated CGFloat spaceBetweenParagraphs;
+
 @end
+
