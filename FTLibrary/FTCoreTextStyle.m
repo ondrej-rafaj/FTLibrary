@@ -23,6 +23,7 @@
 @synthesize bulletColor = _bulletColor;
 @synthesize leading = _leading;
 @synthesize maxLineHeight = _maxLineHeight;
+@synthesize minLineHeight = _minLineHeight;
 @synthesize spaceBetweenParagraphs = _spaceBetweenParagraphs;
 
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
@@ -39,6 +40,7 @@
 		self.underlined = NO;
 		self.textAlignment = FTCoreTextAlignementLeft;
 		self.maxLineHeight = 0;
+		self.minLineHeight = 0;
 		self.paragraphInset = UIEdgeInsetsZero;
 		self.applyParagraphStyling = YES;
 		self.leading = 0;
@@ -85,6 +87,7 @@
 	style.underlined = self.isUnderLined;
     style.textAlignment = self.textAlignment;
 	style.maxLineHeight = self.maxLineHeight;
+	style.minLineHeight = self.minLineHeight;
 	style.paragraphInset = self.paragraphInset;
 	style.applyParagraphStyling = self.applyParagraphStyling;
 	style.leading = self.leading;

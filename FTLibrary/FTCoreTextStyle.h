@@ -43,10 +43,10 @@ typedef uint8_t FTCoreTextAlignement;
 
 @interface FTCoreTextStyle : NSObject <NSCopying> {
     NSString		*_name;
-    NSString		*_appendedCharacter;
     UIFont			*_font;
     UIColor			*_color;
     BOOL			_underlined;
+	NSString		*_appendedCharacter;
     FTCoreTextAlignement _textAlignment;
 	UIEdgeInsets	_paragraphInset;
 	BOOL			_applyParagraphStyling;
@@ -70,6 +70,7 @@ typedef uint8_t FTCoreTextAlignement;
 @property (nonatomic, retain) UIColor			*bulletColor;
 @property (nonatomic, assign) CGFloat			leading;
 @property (nonatomic, assign) CGFloat			maxLineHeight;
+@property (nonatomic, assign) CGFloat			minLineHeight;
 
 //if NO, the paragraph styling of the enclosing style is used. Default is YES.
 @property (nonatomic, assign) BOOL applyParagraphStyling;

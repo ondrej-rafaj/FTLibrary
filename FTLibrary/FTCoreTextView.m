@@ -11,6 +11,8 @@
 #import <regex.h>
 #import <CoreText/CoreText.h>
 
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
 NSString * const FTCoreTextTagDefault = @"_default";
 NSString * const FTCoreTextTagImage = @"_image";
 NSString * const FTCoreTextTagBullet = @"_bullet";
@@ -34,11 +36,18 @@ typedef enum {
 @property (nonatomic, assign) BOOL				isLink;
 @property (nonatomic, assign) BOOL				isImage;
 @property (nonatomic, assign) BOOL				isBullet;
-@property (nonatomic, assign) NSString			*imageName;
+@property (nonatomic, retain) NSString			*imageName;
 
 - (NSString *)descriptionOfTree;
 - (NSString *)descriptionToRoot;
 - (void)addSubnode:(FTCoreTextNode *)node;
+- (void)adjustStylesAndSubstylesRangesByRange:(NSRange)insertedRange;
+- (void)insertSubnode:(FTCoreTextNode *)subnode atIndex:(NSUInteger)index;
+- (void)insertSubnode:(FTCoreTextNode *)subnode beforeNode:(FTCoreTextNode *)node;
+- (FTCoreTextNode *)previousNode;
+- (FTCoreTextNode *)nextNode;
+- (NSUInteger)nodeIndex;
+- (FTCoreTextNode *)subnodeAtIndex:(NSUInteger)index;
 
 @end
 
@@ -65,9 +74,31 @@ typedef enum {
 
 - (void)addSubnode:(FTCoreTextNode *)node
 {
-	node.supernode = self;
+	[self insertSubnode:node atIndex:[_subnodes count]];
+}
+
+- (void)insertSubnode:(FTCoreTextNode *)subnode atIndex:(NSUInteger)index
+{
+	subnode.supernode = self;
+	
 	NSMutableArray *subnodes = (NSMutableArray *)self.subnodes;
-	[subnodes addObject:node];
+	if (index <= [_subnodes count]) {
+		[subnodes insertObject:subnode atIndex:index];
+	}
+	else {
+		[subnodes addObject:subnode];
+	}
+}
+
+- (void)insertSubnode:(FTCoreTextNode *)subnode beforeNode:(FTCoreTextNode *)node
+{
+	NSInteger existingNodeIndex = [_subnodes indexOfObject:node];
+	if (existingNodeIndex == NSNotFound) {
+		[self addSubnode:subnode];
+	}
+	else {
+		[self insertSubnode:subnode atIndex:existingNodeIndex];
+	}
 }
 
 - (NSInteger)numberOfParents
@@ -141,6 +172,49 @@ typedef enum {
 	return returnedArray;
 }
 
+- (void)adjustStylesAndSubstylesRangesByRange:(NSRange)insertedRange
+{
+	NSRange range = self.styleRange;
+	if (range.length + range.location > insertedRange.location) {
+		range.location += insertedRange.length;
+	}
+	self.styleRange = range;
+	
+	for (FTCoreTextNode *node in _subnodes) {
+		[node adjustStylesAndSubstylesRangesByRange:insertedRange];
+	}
+}
+
+- (NSUInteger)nodeIndex
+{
+	return [_supernode.subnodes indexOfObject:self];
+}
+
+- (FTCoreTextNode *)subnodeAtIndex:(NSUInteger)index
+{
+	if (index < [_subnodes count]) {
+		return [_subnodes objectAtIndex:index];
+	}
+	return nil;
+}
+
+- (FTCoreTextNode *)previousNode
+{
+	NSUInteger index = [self nodeIndex];
+	if (index != NSNotFound) {
+		return [_supernode subnodeAtIndex:index - 1];
+	}
+	return nil;
+}
+
+- (FTCoreTextNode *)nextNode
+{
+	NSUInteger index = [self nodeIndex];
+	if (index != NSNotFound) {
+		return [_supernode subnodeAtIndex:index + 1];
+	}
+	return nil;	
+}
 
 - (void)dealloc
 {
@@ -249,6 +323,7 @@ typedef enum {
 	
 	CTTextAlignment alignment = style.textAlignment;
 	CGFloat maxLineHeight = style.maxLineHeight;
+	CGFloat minLineHeight = style.minLineHeight;
 	CGFloat paragraphLeading = style.leading;
 	
 	CGFloat paragraphSpacingBefore = style.paragraphInset.top;
@@ -257,12 +332,16 @@ typedef enum {
 	CGFloat paragraphHeadIntent = style.paragraphInset.left;
 	CGFloat paragraphTailIntent = style.paragraphInset.right;
 	
-	CFIndex numberOfSettings = 8;
+	//if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
+	paragraphSpacingBefore = 0;
+	//}
+	
+	CFIndex numberOfSettings = 9;
 	CGFloat tabSpacing = 28.f;
 	
 	BOOL applyParagraphStyling = style.applyParagraphStyling;
 	
-	if ([style.name isEqualToString:@"_bullet"]) {
+	if ([style.name isEqualToString:FTCoreTextTagBullet]) {
 		applyParagraphStyling = YES;
 	}
 	else if ([style.name isEqualToString:@"_FTBulletStyle"]) {
@@ -273,6 +352,9 @@ typedef enum {
 		paragraphSpacingAfter = 0;
 		paragraphFirstLineHeadIntent = 0;
 		paragraphTailIntent = 0;
+	}
+	else if ([style.name hasPrefix:@"_FTTopSpacingStyle"]) {
+		[*attributedString removeAttribute:(id)kCTParagraphStyleAttributeName range:styleRange];
 	}
 	
 	if (applyParagraphStyling) {
@@ -285,6 +367,7 @@ typedef enum {
 		CTParagraphStyleSetting settings[] = {
 			{kCTParagraphStyleSpecifierAlignment, sizeof(alignment), &alignment},
 			{kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &maxLineHeight},
+			{kCTParagraphStyleSpecifierMinimumLineHeight, sizeof(CGFloat), &minLineHeight},
 			{kCTParagraphStyleSpecifierParagraphSpacingBefore, sizeof(CGFloat), &paragraphSpacingBefore},
 			{kCTParagraphStyleSpecifierParagraphSpacing, sizeof(CGFloat), &paragraphSpacingAfter},
 			{kCTParagraphStyleSpecifierFirstLineHeadIndent, sizeof(CGFloat), &paragraphFirstLineHeadIntent},
@@ -394,16 +477,16 @@ typedef enum {
 {    
     if (!_text || [_text length] == 0) return;
 	
-	FTCoreTextStyle *defaultStyle = [[_styles objectForKey:@"_default"] retain];
+	FTCoreTextStyle *defaultStyle = [[_styles objectForKey:FTCoreTextTagDefault] retain];
 	if (defaultStyle == nil) {
 		defaultStyle = [FTCoreTextStyle new];
 		[self addStyle:defaultStyle];
 	}
-	if (![_styles objectForKey:@"_link"]) {
+	if (![_styles objectForKey:FTCoreTextTagLink]) {
 		//we add a default style for links
 		FTCoreTextStyle *linksStyle = [defaultStyle copy];
 		linksStyle.color = [UIColor blueColor];
-		linksStyle.name = @"_link";
+		linksStyle.name = FTCoreTextTagLink;
 		[_styles setValue:linksStyle forKey:linksStyle.name];
 		[linksStyle release];
 	}
@@ -480,14 +563,10 @@ typedef enum {
 						newNode.isLink = YES;
 					}
 					else if ([tagName isEqualToString:FTCoreTextTagBullet]) {
-						NSRange lastNewLineRange = [processedString rangeOfString:@"\n[ ]*<_bullet>" options:NSRegularExpressionSearch range:NSMakeRange(0, tagRange.location + [@"<_bullet>" length])];
+						newNode.isBullet = YES;
 						
 						NSString *appendedString = [NSString stringWithFormat:@"%@\t", newNode.style.bulletCharacter];
 						
-						if (lastNewLineRange.location == NSNotFound && tagRange.location > 0) {
-							
-							appendedString = [NSString stringWithFormat:@"\n%@", appendedString];
-						}
 						[processedString insertString:appendedString atIndex:tagRange.location + tagRange.length];
 						
 						//bullet styling
@@ -523,7 +602,7 @@ typedef enum {
 					break;
 				case FTCoreTextTagClose:
 				{
-					if ([currentSupernode.style.name isEqualToString:tagName]) {
+					if ([currentSupernode.style.name isEqualToString:FTCoreTextTagDefault] || [currentSupernode.style.name isEqualToString:tagName]) {
 						currentSupernode.isClosed = YES;
 						
 						if (currentSupernode.isLink) {
@@ -581,6 +660,29 @@ typedef enum {
 							NSRange newStyleRange = currentSupernode.styleRange;
 							newStyleRange.length += [currentSupernode.style.appendedCharacter length];
 							currentSupernode.styleRange = newStyleRange;							
+						}
+						
+						if (style.paragraphInset.top > 0) {
+							if (![style.name isEqualToString:FTCoreTextTagBullet] ||  [[currentSupernode previousNode].style.name isEqualToString:FTCoreTextTagBullet]) {
+								
+								//fix: add a new line for each new line and set its height to 'top' value
+								[processedString insertString:@"\n" atIndex:currentSupernode.startLocation];
+								NSRange topSpacingStyleRange = NSMakeRange(currentSupernode.startLocation, [@"\n" length]);
+								FTCoreTextStyle *topSpacingStyle = [[FTCoreTextStyle alloc] init];
+								topSpacingStyle.name = [NSString stringWithFormat:@"_FTTopSpacingStyle_%@", currentSupernode.style.name];
+								topSpacingStyle.minLineHeight = currentSupernode.style.paragraphInset.top;
+								topSpacingStyle.maxLineHeight = currentSupernode.style.paragraphInset.top;
+								FTCoreTextNode *topSpacingNode = [[FTCoreTextNode alloc] init];
+								topSpacingNode.style = topSpacingStyle;
+								[topSpacingStyle release];
+								
+								topSpacingNode.styleRange = topSpacingStyleRange;
+								
+								[currentSupernode.supernode insertSubnode:topSpacingNode beforeNode:currentSupernode];
+								[topSpacingNode release];
+								
+								[currentSupernode adjustStylesAndSubstylesRangesByRange:topSpacingStyleRange];
+							}
 						}
 						
 						remainingRange.location = currentSupernode.styleRange.location + currentSupernode.styleRange.length;
@@ -664,7 +766,7 @@ typedef enum {
 				if (alignment == kCTCenterTextAlignment) x = ((self.frame.size.width - img.size.width) / 2);
 				
 				CGRect frame = CGRectMake(x, lineFrame.origin.y, img.size.width, img.size.height);
-				[img drawInRect:frame];
+				[img drawInRect:CGRectIntegral(frame)];
 			}
 			
 			NSInteger imageNodeIndex = [_images indexOfObject:imageNode];
@@ -676,6 +778,7 @@ typedef enum {
 			}
 		}
 	}
+	CFRelease(ctframe);
 }
 
 /*!
@@ -886,4 +989,11 @@ typedef enum {
     }
 }
 
+@end
+
+@implementation NSString (FTCoreText)
+- (NSString *)stringByAppendingTagName:(NSString *)tagName
+{
+	return [NSString stringWithFormat:@"<%@>%@</%@>", tagName, self, tagName];
+}
 @end

@@ -9,10 +9,13 @@
 //     Special markers:
 //     _default: It is the default applied to the whole text. Markups is not needed on the text
 //     _page: Divide the text in pages. Respond to markup <_page/>
-//     _bullet: define styles for bullets. Respond to Markups <bullets />
+//     _bullet: define styles for bullets.
 //     _image: define style for images. Respond to markup <_image>imageNameOnBundle.extension</_image>
 //     _link: define style for links. Respond to markup <_link>link_target|link name</_link>
 
+/*
+ The source text has to contain every new line sequence '\n' required.
+ */
 
 #import <UIKit/UIKit.h>
 #import "FTCoreTextStyle.h"
@@ -67,4 +70,9 @@ extern NSString * const FTCoreTextTagLink;
 @optional
 - (void)touchedData:(NSDictionary *)data inCoreTextView:(FTCoreTextView *)textView;
 
+@end
+
+@interface NSString (FTCoreText)
+//for a given 'string' and 'tag' return '<tag>string</tag>'
+- (NSString *)stringByAppendingTagName:(NSString *)tagName;
 @end
