@@ -16,7 +16,7 @@
 
 @property (nonatomic, retain) FTShare *share;
 
-+ (id)delegate;
++ (FTAppDelegate *)delegate;
 
 + (UIWindow *)windowFromSelector:(SEL)selector;
 

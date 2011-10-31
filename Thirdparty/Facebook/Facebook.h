@@ -54,22 +54,24 @@
 
 - (void)logout:(id<FBSessionDelegate>)delegate;
 
-- (FBRequest*)requestWithParams:(NSMutableDictionary *)params
+- (FBRequest *)requestWithParams:(NSMutableDictionary *)params
                     andDelegate:(id <FBRequestDelegate>)delegate;
 
-- (FBRequest*)requestWithMethodName:(NSString *)methodName
+- (FBRequest *)requestWithMethodName:(NSString *)methodName
                           andParams:(NSMutableDictionary *)params
                       andHttpMethod:(NSString *)httpMethod
                         andDelegate:(id <FBRequestDelegate>)delegate;
 
-- (FBRequest*)requestWithGraphPath:(NSString *)graphPath
+- (FBRequest *)requestWithGraphPath:(NSString *)graphPath
                        andDelegate:(id <FBRequestDelegate>)delegate;
 
-- (FBRequest*)requestWithGraphPath:(NSString *)graphPath
+- (FBRequest *)requestWithGraphPath:(NSString *)graphPath
                          andParams:(NSMutableDictionary *)params
                        andDelegate:(id <FBRequestDelegate>)delegate;
 
-- (FBRequest*)requestWithGraphPath:(NSString *)graphPath
+- (NSString *)urlWithGraphPath:(NSString *)graphPath andParams:(NSMutableDictionary *)params;
+
+- (FBRequest *)requestWithGraphPath:(NSString *)graphPath
                          andParams:(NSMutableDictionary *)params
                      andHttpMethod:(NSString *)httpMethod
                        andDelegate:(id <FBRequestDelegate>)delegate;

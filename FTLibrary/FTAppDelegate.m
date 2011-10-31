@@ -22,8 +22,8 @@
     return self;
 }
 
-+ (id)delegate {
-	return [[UIApplication sharedApplication] delegate];
++ (FTAppDelegate *)delegate {
+	return (FTAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 + (UIWindow *)windowFromSelector:(SEL)selector {
@@ -37,11 +37,21 @@
 	return [self windowFromSelector:@selector(window)];
 }
 
+// For 4.2+ support
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     if (self.share.facebook) {
         return [self.share.facebook handleOpenURL:url];
     }
     return YES;
 }
+
+// Pre 4.2 support
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    if (self.share.facebook) {
+        return [self.share.facebook handleOpenURL:url];
+    }
+    return YES;
+}
+
 
 @end

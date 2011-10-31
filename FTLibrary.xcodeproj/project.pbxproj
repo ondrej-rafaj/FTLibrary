@@ -87,6 +87,14 @@
 		4C03667313BA0D6000E8FA09 /* FTViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C03667113BA0D6000E8FA09 /* FTViewController.h */; };
 		4C03667413BA0D6000E8FA09 /* FTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03667213BA0D6000E8FA09 /* FTViewController.m */; };
 		4C03667513BA0D6600E8FA09 /* FTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C03667213BA0D6000E8FA09 /* FTViewController.m */; };
+		4C1315F4145EA51E00971E44 /* FTFacebookFriendsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C1315F2145EA51E00971E44 /* FTFacebookFriendsViewController.h */; };
+		4C1315F5145EA51E00971E44 /* FTFacebookFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1315F3145EA51E00971E44 /* FTFacebookFriendsViewController.m */; };
+		4C1315FF145EA5D600971E44 /* FTFacebookViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C1315FD145EA5D600971E44 /* FTFacebookViewController.h */; };
+		4C131600145EA5D600971E44 /* FTFacebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1315FE145EA5D600971E44 /* FTFacebookViewController.m */; };
+		4C131603145EA5F900971E44 /* FTFacebookGalleriesViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C131601145EA5F900971E44 /* FTFacebookGalleriesViewController.h */; };
+		4C131604145EA5F900971E44 /* FTFacebookGalleriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C131602145EA5F900971E44 /* FTFacebookGalleriesViewController.m */; };
+		4C131607145EA61D00971E44 /* FTFacebookPhotosViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C131605145EA61D00971E44 /* FTFacebookPhotosViewController.h */; };
+		4C131608145EA61D00971E44 /* FTFacebookPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C131606145EA61D00971E44 /* FTFacebookPhotosViewController.m */; };
 		4C2D2160143075B8002818EA /* FTCardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C2D215E143075B8002818EA /* FTCardView.h */; };
 		4C2D2161143075B8002818EA /* FTCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2D215F143075B8002818EA /* FTCardView.m */; };
 		4C4030A113BEA2A000E6A4A2 /* FTLang.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C40309F13BEA2A000E6A4A2 /* FTLang.h */; };
@@ -587,6 +595,14 @@
 		4C03666913BA0C1100E8FA09 /* FTImageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTImageService.m; sourceTree = "<group>"; };
 		4C03667113BA0D6000E8FA09 /* FTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTViewController.h; sourceTree = "<group>"; };
 		4C03667213BA0D6000E8FA09 /* FTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTViewController.m; sourceTree = "<group>"; };
+		4C1315F2145EA51E00971E44 /* FTFacebookFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFacebookFriendsViewController.h; sourceTree = "<group>"; };
+		4C1315F3145EA51E00971E44 /* FTFacebookFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFacebookFriendsViewController.m; sourceTree = "<group>"; };
+		4C1315FD145EA5D600971E44 /* FTFacebookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFacebookViewController.h; sourceTree = "<group>"; };
+		4C1315FE145EA5D600971E44 /* FTFacebookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFacebookViewController.m; sourceTree = "<group>"; };
+		4C131601145EA5F900971E44 /* FTFacebookGalleriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFacebookGalleriesViewController.h; sourceTree = "<group>"; };
+		4C131602145EA5F900971E44 /* FTFacebookGalleriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFacebookGalleriesViewController.m; sourceTree = "<group>"; };
+		4C131605145EA61D00971E44 /* FTFacebookPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFacebookPhotosViewController.h; sourceTree = "<group>"; };
+		4C131606145EA61D00971E44 /* FTFacebookPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFacebookPhotosViewController.m; sourceTree = "<group>"; };
 		4C2D215E143075B8002818EA /* FTCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCardView.h; sourceTree = "<group>"; };
 		4C2D215F143075B8002818EA /* FTCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCardView.m; sourceTree = "<group>"; };
 		4C40309F13BEA2A000E6A4A2 /* FTLang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLang.h; sourceTree = "<group>"; };
@@ -1241,6 +1257,7 @@
 		4C03667013BA0D4300E8FA09 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4C1315F0145EA50100971E44 /* Facebook */,
 				4CCD127713D851E40004EF5D /* Settings view controller */,
 				4CCD122C13D84D290004EF5D /* Media controllers */,
 				4C95CECA13D740B700190E64 /* Web controller */,
@@ -1256,6 +1273,45 @@
 				4CE77EDB1435D32800A5AEDA /* Vertical slider */,
 			);
 			name = Sliders;
+			sourceTree = "<group>";
+		};
+		4C1315F0145EA50100971E44 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				4C1315FD145EA5D600971E44 /* FTFacebookViewController.h */,
+				4C1315FE145EA5D600971E44 /* FTFacebookViewController.m */,
+				4C1315F8145EA57D00971E44 /* Photos */,
+				4C1315F7145EA57100971E44 /* Galleries */,
+				4C1315F6145EA56200971E44 /* Friends */,
+			);
+			name = Facebook;
+			sourceTree = "<group>";
+		};
+		4C1315F6145EA56200971E44 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				4C1315F2145EA51E00971E44 /* FTFacebookFriendsViewController.h */,
+				4C1315F3145EA51E00971E44 /* FTFacebookFriendsViewController.m */,
+			);
+			name = Friends;
+			sourceTree = "<group>";
+		};
+		4C1315F7145EA57100971E44 /* Galleries */ = {
+			isa = PBXGroup;
+			children = (
+				4C131601145EA5F900971E44 /* FTFacebookGalleriesViewController.h */,
+				4C131602145EA5F900971E44 /* FTFacebookGalleriesViewController.m */,
+			);
+			name = Galleries;
+			sourceTree = "<group>";
+		};
+		4C1315F8145EA57D00971E44 /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				4C131605145EA61D00971E44 /* FTFacebookPhotosViewController.h */,
+				4C131606145EA61D00971E44 /* FTFacebookPhotosViewController.m */,
+			);
+			name = Photos;
 			sourceTree = "<group>";
 		};
 		4C199BBE1444386F002CC572 /* Tracking */ = {
@@ -2502,6 +2558,10 @@
 				4C01A662145770F200C1D01D /* FTPhotoHoldingView.h in Headers */,
 				4C01A6661457710800C1D01D /* FTPhotoCompositionView.h in Headers */,
 				4C01A66C1457716300C1D01D /* FTPhotoCompositionTemplate.h in Headers */,
+				4C1315F4145EA51E00971E44 /* FTFacebookFriendsViewController.h in Headers */,
+				4C1315FF145EA5D600971E44 /* FTFacebookViewController.h in Headers */,
+				4C131603145EA5F900971E44 /* FTFacebookGalleriesViewController.h in Headers */,
+				4C131607145EA61D00971E44 /* FTFacebookPhotosViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2784,6 +2844,10 @@
 				4C01A663145770F200C1D01D /* FTPhotoHoldingView.m in Sources */,
 				4C01A6671457710800C1D01D /* FTPhotoCompositionView.m in Sources */,
 				4C01A66D1457716300C1D01D /* FTPhotoCompositionTemplate.m in Sources */,
+				4C1315F5145EA51E00971E44 /* FTFacebookFriendsViewController.m in Sources */,
+				4C131600145EA5D600971E44 /* FTFacebookViewController.m in Sources */,
+				4C131604145EA5F900971E44 /* FTFacebookGalleriesViewController.m in Sources */,
+				4C131608145EA61D00971E44 /* FTFacebookPhotosViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

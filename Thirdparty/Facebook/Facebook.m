@@ -6,7 +6,7 @@
  * You may obtain a copy of the License at
  *
  *    http://www.apache.org/licenses/LICENSE-2.0
-
+ 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -44,10 +44,10 @@ static NSString* kSDKVersion = @"2";
 @implementation Facebook
 
 @synthesize accessToken = _accessToken,
-         expirationDate = _expirationDate,
-        sessionDelegate = _sessionDelegate,
-            permissions = _permissions,
-        urlSchemeSuffix = _urlSchemeSuffix;
+expirationDate = _expirationDate,
+sessionDelegate = _sessionDelegate,
+permissions = _permissions,
+urlSchemeSuffix = _urlSchemeSuffix;
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,29 +58,29 @@ static NSString* kSDKVersion = @"2";
  * Initialize the Facebook object with application ID.
  */
 - (id)initWithAppId:(NSString *)appId
-           andDelegate:(id<FBSessionDelegate>)delegate {
-  self = [super init];
-  if (self) {
-    [_appId release];
-    _appId = [appId copy];
-    self.sessionDelegate = delegate;
-  }
-  return self;
+		andDelegate:(id<FBSessionDelegate>)delegate {
+	self = [super init];
+	if (self) {
+		[_appId release];
+		_appId = [appId copy];
+		self.sessionDelegate = delegate;
+	}
+	return self;
 }
 
 /**
  * Override NSObject : free the space
  */
 - (void)dealloc {
-  [_accessToken release];
-  [_expirationDate release];
-  [_request release];
-  [_loginDialog release];
-  [_fbDialog release];
-  [_appId release];
-  [_permissions release];
-  [_urlSchemeSuffix release];
-  [super dealloc];
+	[_accessToken release];
+	[_expirationDate release];
+	[_request release];
+	[_loginDialog release];
+	[_fbDialog release];
+	[_appId release];
+	[_permissions release];
+	[_urlSchemeSuffix release];
+	[super dealloc];
 }
 
 /**
@@ -100,30 +100,30 @@ static NSString* kSDKVersion = @"2";
                params:(NSMutableDictionary *)params
            httpMethod:(NSString *)httpMethod
              delegate:(id<FBRequestDelegate>)delegate {
-
-  [params setValue:@"json" forKey:@"format"];
-  [params setValue:kSDK forKey:@"sdk"];
-  [params setValue:kSDKVersion forKey:@"sdk_version"];
-  if ([self isSessionValid]) {
-    [params setValue:self.accessToken forKey:@"access_token"];
-  }
-
-  [_request release];
-  _request = [[FBRequest getRequestWithParams:params
-                                   httpMethod:httpMethod
-                                     delegate:delegate
-                                   requestURL:url] retain];
-  [_request connect];
-  return _request;
+	
+	[params setValue:@"json" forKey:@"format"];
+	[params setValue:kSDK forKey:@"sdk"];
+	[params setValue:kSDKVersion forKey:@"sdk_version"];
+	if ([self isSessionValid]) {
+		[params setValue:self.accessToken forKey:@"access_token"];
+	}
+	
+	[_request release];
+	_request = [[FBRequest getRequestWithParams:params
+									 httpMethod:httpMethod
+									   delegate:delegate
+									 requestURL:url] retain];
+	[_request connect];
+	return _request;
 }
 
 /**
  * A private function for getting the app's base url.
  */
 - (NSString *)getOwnBaseUrl {
-  return [NSString stringWithFormat:@"fb%@%@://authorize",
-          _appId,
-          _urlSchemeSuffix ? _urlSchemeSuffix : @""];
+	return [NSString stringWithFormat:@"fb%@%@://authorize",
+			_appId,
+			_urlSchemeSuffix ? _urlSchemeSuffix : @""];
 }
 
 /**
@@ -131,63 +131,63 @@ static NSString* kSDKVersion = @"2";
  */
 - (void)authorizeWithFBAppAuth:(BOOL)tryFBAppAuth
                     safariAuth:(BOOL)trySafariAuth {
-  NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                 _appId, @"client_id",
-                                 @"user_agent", @"type",
-                                 kRedirectURL, @"redirect_uri",
-                                 @"touch", @"display",
-                                 kSDK, @"sdk",
-                                 nil];
-
-  NSString *loginDialogURL = [kDialogBaseURL stringByAppendingString:kLogin];
-
-  if (_permissions != nil) {
-    NSString* scope = [_permissions componentsJoinedByString:@","];
-    [params setValue:scope forKey:@"scope"];
-  }
-
-  if (_urlSchemeSuffix) {
-    [params setValue:_urlSchemeSuffix forKey:@"local_client_id"];
-  }
-  
-  // If the device is running a version of iOS that supports multitasking,
-  // try to obtain the access token from the Facebook app installed
-  // on the device.
-  // If the Facebook app isn't installed or it doesn't support
-  // the fbauth:// URL scheme, fall back on Safari for obtaining the access token.
-  // This minimizes the chance that the user will have to enter his or
-  // her credentials in order to authorize the application.
-  BOOL didOpenOtherApp = NO;
-  UIDevice *device = [UIDevice currentDevice];
-  if ([device respondsToSelector:@selector(isMultitaskingSupported)] && [device isMultitaskingSupported]) {
-    if (tryFBAppAuth) {
-      NSString *scheme = kFBAppAuthURLScheme;
-      if (_urlSchemeSuffix) {
-        scheme = [scheme stringByAppendingString:@"2"];
-      }
-      NSString *urlPrefix = [NSString stringWithFormat:@"%@://%@", scheme, kFBAppAuthURLPath];
-      NSString *fbAppUrl = [FBRequest serializeURL:urlPrefix params:params];
-      didOpenOtherApp = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:fbAppUrl]];
-    }
-
-    if (trySafariAuth && !didOpenOtherApp) {
-      NSString *nextUrl = [self getOwnBaseUrl];
-      [params setValue:nextUrl forKey:@"redirect_uri"];
-
-      NSString *fbAppUrl = [FBRequest serializeURL:loginDialogURL params:params];
-      didOpenOtherApp = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:fbAppUrl]];
-    }
-  }
-
-  // If single sign-on failed, open an inline login dialog. This will require the user to
-  // enter his or her credentials.
-  if (!didOpenOtherApp) {
-    [_loginDialog release];
-    _loginDialog = [[FBLoginDialog alloc] initWithURL:loginDialogURL
-                                          loginParams:params
-                                             delegate:self];
-    [_loginDialog show];
-  }
+	NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+								   _appId, @"client_id",
+								   @"user_agent", @"type",
+								   kRedirectURL, @"redirect_uri",
+								   @"touch", @"display",
+								   kSDK, @"sdk",
+								   nil];
+	
+	NSString *loginDialogURL = [kDialogBaseURL stringByAppendingString:kLogin];
+	
+	if (_permissions != nil) {
+		NSString* scope = [_permissions componentsJoinedByString:@","];
+		[params setValue:scope forKey:@"scope"];
+	}
+	
+	if (_urlSchemeSuffix) {
+		[params setValue:_urlSchemeSuffix forKey:@"local_client_id"];
+	}
+	
+	// If the device is running a version of iOS that supports multitasking,
+	// try to obtain the access token from the Facebook app installed
+	// on the device.
+	// If the Facebook app isn't installed or it doesn't support
+	// the fbauth:// URL scheme, fall back on Safari for obtaining the access token.
+	// This minimizes the chance that the user will have to enter his or
+	// her credentials in order to authorize the application.
+	BOOL didOpenOtherApp = NO;
+	UIDevice *device = [UIDevice currentDevice];
+	if ([device respondsToSelector:@selector(isMultitaskingSupported)] && [device isMultitaskingSupported]) {
+		if (tryFBAppAuth) {
+			NSString *scheme = kFBAppAuthURLScheme;
+			if (_urlSchemeSuffix) {
+				scheme = [scheme stringByAppendingString:@"2"];
+			}
+			NSString *urlPrefix = [NSString stringWithFormat:@"%@://%@", scheme, kFBAppAuthURLPath];
+			NSString *fbAppUrl = [FBRequest serializeURL:urlPrefix params:params];
+			didOpenOtherApp = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:fbAppUrl]];
+		}
+		
+		if (trySafariAuth && !didOpenOtherApp) {
+			NSString *nextUrl = [self getOwnBaseUrl];
+			[params setValue:nextUrl forKey:@"redirect_uri"];
+			
+			NSString *fbAppUrl = [FBRequest serializeURL:loginDialogURL params:params];
+			didOpenOtherApp = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:fbAppUrl]];
+		}
+	}
+	
+	// If single sign-on failed, open an inline login dialog. This will require the user to
+	// enter his or her credentials.
+	if (!didOpenOtherApp) {
+		[_loginDialog release];
+		_loginDialog = [[FBLoginDialog alloc] initWithURL:loginDialogURL
+											  loginParams:params
+												 delegate:self];
+		[_loginDialog show];
+	}
 }
 
 /**
@@ -199,12 +199,12 @@ static NSString* kSDKVersion = @"2";
 	for (NSString *pair in pairs) {
 		NSArray *kv = [pair componentsSeparatedByString:@"="];
 		NSString *val =
-    [[kv objectAtIndex:1]
-     stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
+		[[kv objectAtIndex:1]
+		 stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		
 		[params setObject:val forKey:[kv objectAtIndex:0]];
 	}
-  return params;
+	return params;
 }
 
 
@@ -212,8 +212,8 @@ static NSString* kSDKVersion = @"2";
 //public
 
 - (void)authorize:(NSArray *)permissions {
-  [self authorize:permissions
-       urlSchemeSuffix:nil];
+	[self authorize:permissions
+	urlSchemeSuffix:nil];
 }
 
 /**
@@ -265,11 +265,11 @@ static NSString* kSDKVersion = @"2";
  *            and redirect the user to Safari.
  */
 - (void)authorize:(NSArray *)permissions
-       urlSchemeSuffix:(NSString *)urlSchemeSuffix {
-  self.urlSchemeSuffix = urlSchemeSuffix;
-  self.permissions = permissions;
-
-  [self authorizeWithFBAppAuth:YES safariAuth:YES];
+  urlSchemeSuffix:(NSString *)urlSchemeSuffix {
+	self.urlSchemeSuffix = urlSchemeSuffix;
+	self.permissions = permissions;
+	
+	[self authorizeWithFBAppAuth:YES safariAuth:YES];
 }
 
 /**
@@ -290,65 +290,65 @@ static NSString* kSDKVersion = @"2";
  *   by SDK, NO otherwise.
  */
 - (BOOL)handleOpenURL:(NSURL *)url {
-  // If the URL's structure doesn't match the structure used for Facebook authorization, abort.
-  if (![[url absoluteString] hasPrefix:[self getOwnBaseUrl]]) {
-    return NO;
-  }
-
-  NSString *query = [url fragment];
-
-  // Version 3.2.3 of the Facebook app encodes the parameters in the query but
-  // version 3.3 and above encode the parameters in the fragment. To support
-  // both versions of the Facebook app, we try to parse the query if
-  // the fragment is missing.
-  if (!query) {
-    query = [url query];
-  }
-
-  NSDictionary *params = [self parseURLParams:query];
-  NSString *accessToken = [params valueForKey:@"access_token"];
-
-  // If the URL doesn't contain the access token, an error has occurred.
-  if (!accessToken) {
-    NSString *errorReason = [params valueForKey:@"error"];
-
-    // If the error response indicates that we should try again using Safari, open
-    // the authorization dialog in Safari.
-    if (errorReason && [errorReason isEqualToString:@"service_disabled_use_browser"]) {
-      [self authorizeWithFBAppAuth:NO safariAuth:YES];
-      return YES;
-    }
-
-    // If the error response indicates that we should try the authorization flow
-    // in an inline dialog, do that.
-    if (errorReason && [errorReason isEqualToString:@"service_disabled"]) {
-      [self authorizeWithFBAppAuth:NO safariAuth:NO];
-      return YES;
-    }
-
-    // The facebook app may return an error_code parameter in case it
-    // encounters a UIWebViewDelegate error. This should not be treated
-    // as a cancel.
-    NSString *errorCode = [params valueForKey:@"error_code"];
-
-    BOOL userDidCancel =
-      !errorCode && (!errorReason || [errorReason isEqualToString:@"access_denied"]);
-    [self fbDialogNotLogin:userDidCancel];
-    return YES;
-  }
-
-  // We have an access token, so parse the expiration date.
-  NSString *expTime = [params valueForKey:@"expires_in"];
-  NSDate *expirationDate = [NSDate distantFuture];
-  if (expTime != nil) {
-    int expVal = [expTime intValue];
-    if (expVal != 0) {
-      expirationDate = [NSDate dateWithTimeIntervalSinceNow:expVal];
-    }
-  }
-
-  [self fbDialogLogin:accessToken expirationDate:expirationDate];
-  return YES;
+	// If the URL's structure doesn't match the structure used for Facebook authorization, abort.
+	if (![[url absoluteString] hasPrefix:[self getOwnBaseUrl]]) {
+		return NO;
+	}
+	
+	NSString *query = [url fragment];
+	
+	// Version 3.2.3 of the Facebook app encodes the parameters in the query but
+	// version 3.3 and above encode the parameters in the fragment. To support
+	// both versions of the Facebook app, we try to parse the query if
+	// the fragment is missing.
+	if (!query) {
+		query = [url query];
+	}
+	
+	NSDictionary *params = [self parseURLParams:query];
+	NSString *accessToken = [params valueForKey:@"access_token"];
+	
+	// If the URL doesn't contain the access token, an error has occurred.
+	if (!accessToken) {
+		NSString *errorReason = [params valueForKey:@"error"];
+		
+		// If the error response indicates that we should try again using Safari, open
+		// the authorization dialog in Safari.
+		if (errorReason && [errorReason isEqualToString:@"service_disabled_use_browser"]) {
+			[self authorizeWithFBAppAuth:NO safariAuth:YES];
+			return YES;
+		}
+		
+		// If the error response indicates that we should try the authorization flow
+		// in an inline dialog, do that.
+		if (errorReason && [errorReason isEqualToString:@"service_disabled"]) {
+			[self authorizeWithFBAppAuth:NO safariAuth:NO];
+			return YES;
+		}
+		
+		// The facebook app may return an error_code parameter in case it
+		// encounters a UIWebViewDelegate error. This should not be treated
+		// as a cancel.
+		NSString *errorCode = [params valueForKey:@"error_code"];
+		
+		BOOL userDidCancel =
+		!errorCode && (!errorReason || [errorReason isEqualToString:@"access_denied"]);
+		[self fbDialogNotLogin:userDidCancel];
+		return YES;
+	}
+	
+	// We have an access token, so parse the expiration date.
+	NSString *expTime = [params valueForKey:@"expires_in"];
+	NSDate *expirationDate = [NSDate distantFuture];
+	if (expTime != nil) {
+		int expVal = [expTime intValue];
+		if (expVal != 0) {
+			expirationDate = [NSDate dateWithTimeIntervalSinceNow:expVal];
+		}
+	}
+	
+	[self fbDialogLogin:accessToken expirationDate:expirationDate];
+	return YES;
 }
 
 /**
@@ -365,24 +365,24 @@ static NSString* kSDKVersion = @"2";
  *            the application has logged out
  */
 - (void)logout:(id<FBSessionDelegate>)delegate {
-
-  self.sessionDelegate = delegate;
-  [_accessToken release];
-  _accessToken = nil;
-  [_expirationDate release];
-  _expirationDate = nil;
-
-  NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-  NSArray* facebookCookies = [cookies cookiesForURL:
-    [NSURL URLWithString:@"http://login.facebook.com"]];
-
-  for (NSHTTPCookie* cookie in facebookCookies) {
-    [cookies deleteCookie:cookie];
-  }
-
-  if ([self.sessionDelegate respondsToSelector:@selector(fbDidLogout)]) {
-    [_sessionDelegate fbDidLogout];
-  }
+	
+	self.sessionDelegate = delegate;
+	[_accessToken release];
+	_accessToken = nil;
+	[_expirationDate release];
+	_expirationDate = nil;
+	
+	NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+	NSArray* facebookCookies = [cookies cookiesForURL:
+								[NSURL URLWithString:@"http://login.facebook.com"]];
+	
+	for (NSHTTPCookie* cookie in facebookCookies) {
+		[cookies deleteCookie:cookie];
+	}
+	
+	if ([self.sessionDelegate respondsToSelector:@selector(fbDidLogout)]) {
+		[_sessionDelegate fbDidLogout];
+	}
 }
 
 /**
@@ -403,18 +403,18 @@ static NSString* kSDKVersion = @"2";
  */
 - (FBRequest*)requestWithParams:(NSMutableDictionary *)params
                     andDelegate:(id <FBRequestDelegate>)delegate {
-  if ([params objectForKey:@"method"] == nil) {
-    NSLog(@"API Method must be specified");
-    return nil;
-  }
-
-  NSString * methodName = [params objectForKey:@"method"];
-  [params removeObjectForKey:@"method"];
-
-  return [self requestWithMethodName:methodName
-                           andParams:params
-                       andHttpMethod:@"GET"
-                         andDelegate:delegate];
+	if ([params objectForKey:@"method"] == nil) {
+		NSLog(@"API Method must be specified");
+		return nil;
+	}
+	
+	NSString * methodName = [params objectForKey:@"method"];
+	[params removeObjectForKey:@"method"];
+	
+	return [self requestWithMethodName:methodName
+							 andParams:params
+						 andHttpMethod:@"GET"
+						   andDelegate:delegate];
 }
 
 /**
@@ -440,14 +440,14 @@ static NSString* kSDKVersion = @"2";
  *            Returns a pointer to the FBRequest object.
  */
 - (FBRequest*)requestWithMethodName:(NSString *)methodName
-                    andParams:(NSMutableDictionary *)params
-                andHttpMethod:(NSString *)httpMethod
-                  andDelegate:(id <FBRequestDelegate>)delegate {
-  NSString * fullURL = [kRestserverBaseURL stringByAppendingString:methodName];
-  return [self openUrl:fullURL
-                params:params
-            httpMethod:httpMethod
-              delegate:delegate];
+						  andParams:(NSMutableDictionary *)params
+					  andHttpMethod:(NSString *)httpMethod
+						andDelegate:(id <FBRequestDelegate>)delegate {
+	NSString * fullURL = [kRestserverBaseURL stringByAppendingString:methodName];
+	return [self openUrl:fullURL
+				  params:params
+			  httpMethod:httpMethod
+				delegate:delegate];
 }
 
 /**
@@ -466,12 +466,12 @@ static NSString* kSDKVersion = @"2";
  *            Returns a pointer to the FBRequest object.
  */
 - (FBRequest*)requestWithGraphPath:(NSString *)graphPath
-                 andDelegate:(id <FBRequestDelegate>)delegate {
-
-  return [self requestWithGraphPath:graphPath
-                          andParams:[NSMutableDictionary dictionary]
-                      andHttpMethod:@"GET"
-                        andDelegate:delegate];
+					   andDelegate:(id <FBRequestDelegate>)delegate {
+	
+	return [self requestWithGraphPath:graphPath
+							andParams:[NSMutableDictionary dictionary]
+						andHttpMethod:@"GET"
+						  andDelegate:delegate];
 }
 
 /**
@@ -497,13 +497,26 @@ static NSString* kSDKVersion = @"2";
  *            Returns a pointer to the FBRequest object.
  */
 - (FBRequest*)requestWithGraphPath:(NSString *)graphPath
-                   andParams:(NSMutableDictionary *)params
-                 andDelegate:(id <FBRequestDelegate>)delegate {
+						 andParams:(NSMutableDictionary *)params
+					   andDelegate:(id <FBRequestDelegate>)delegate {
+	
+	return [self requestWithGraphPath:graphPath
+							andParams:params
+						andHttpMethod:@"GET"
+						  andDelegate:delegate];
+}
 
-  return [self requestWithGraphPath:graphPath
-                          andParams:params
-                      andHttpMethod:@"GET"
-                        andDelegate:delegate];
+- (NSString *)urlWithGraphPath:(NSString *)graphPath andParams:(NSMutableDictionary *)params {
+	NSString *fullURL = [kGraphBaseURL stringByAppendingString:graphPath];
+	[params setValue:@"json" forKey:@"format"];
+	[params setValue:kSDK forKey:@"sdk"];
+	[params setValue:kSDKVersion forKey:@"sdk_version"];
+	if ([self isSessionValid]) {
+		[params setValue:self.accessToken forKey:@"access_token"];
+	}
+	NSString *url = [FBRequest serializeURL:fullURL params:params httpMethod:@"GET"];
+	NSLog(@"Facebook url: %@", url);
+	return url;
 }
 
 /**
@@ -536,15 +549,15 @@ static NSString* kSDKVersion = @"2";
  *            Returns a pointer to the FBRequest object.
  */
 - (FBRequest*)requestWithGraphPath:(NSString *)graphPath
-                   andParams:(NSMutableDictionary *)params
-               andHttpMethod:(NSString *)httpMethod
-                 andDelegate:(id <FBRequestDelegate>)delegate {
-
-  NSString * fullURL = [kGraphBaseURL stringByAppendingString:graphPath];
-  return [self openUrl:fullURL
-                params:params
-            httpMethod:httpMethod
-              delegate:delegate];
+						 andParams:(NSMutableDictionary *)params
+					 andHttpMethod:(NSString *)httpMethod
+					   andDelegate:(id <FBRequestDelegate>)delegate {
+	
+	NSString * fullURL = [kGraphBaseURL stringByAppendingString:graphPath];
+	return [self openUrl:fullURL
+				  params:params
+			  httpMethod:httpMethod
+				delegate:delegate];
 }
 
 /**
@@ -559,8 +572,8 @@ static NSString* kSDKVersion = @"2";
  */
 - (void)dialog:(NSString *)action
    andDelegate:(id<FBDialogDelegate>)delegate {
-  NSMutableDictionary * params = [NSMutableDictionary dictionary];
-  [self dialog:action andParams:params andDelegate:delegate];
+	NSMutableDictionary * params = [NSMutableDictionary dictionary];
+	[self dialog:action andParams:params andDelegate:delegate];
 }
 
 /**
@@ -578,36 +591,36 @@ static NSString* kSDKVersion = @"2";
 - (void)dialog:(NSString *)action
      andParams:(NSMutableDictionary *)params
    andDelegate:(id <FBDialogDelegate>)delegate {
-
-  [_fbDialog release];
-
-  NSString *dialogURL = [kDialogBaseURL stringByAppendingString:action];
-  [params setObject:@"touch" forKey:@"display"];
-  [params setObject:kSDKVersion forKey:@"sdk"];
-  [params setObject:kRedirectURL forKey:@"redirect_uri"];
-
-  if (action == kLogin) {
-    [params setObject:@"user_agent" forKey:@"type"];
-    _fbDialog = [[FBLoginDialog alloc] initWithURL:dialogURL loginParams:params delegate:self];
-  } else {
-    [params setObject:_appId forKey:@"app_id"];
-    if ([self isSessionValid]) {
-      [params setValue:[self.accessToken stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
-                forKey:@"access_token"];
-    }
-    _fbDialog = [[FBDialog alloc] initWithURL:dialogURL params:params delegate:delegate];
-  }
-
-  [_fbDialog show];
+	
+	[_fbDialog release];
+	
+	NSString *dialogURL = [kDialogBaseURL stringByAppendingString:action];
+	[params setObject:@"touch" forKey:@"display"];
+	[params setObject:kSDKVersion forKey:@"sdk"];
+	[params setObject:kRedirectURL forKey:@"redirect_uri"];
+	
+	if (action == kLogin) {
+		[params setObject:@"user_agent" forKey:@"type"];
+		_fbDialog = [[FBLoginDialog alloc] initWithURL:dialogURL loginParams:params delegate:self];
+	} else {
+		[params setObject:_appId forKey:@"app_id"];
+		if ([self isSessionValid]) {
+			[params setValue:[self.accessToken stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
+					  forKey:@"access_token"];
+		}
+		_fbDialog = [[FBDialog alloc] initWithURL:dialogURL params:params delegate:delegate];
+	}
+	
+	[_fbDialog show];
 }
 
 /**
  * @return boolean - whether this object has an non-expired session token
  */
 - (BOOL)isSessionValid {
-  return (self.accessToken != nil && self.expirationDate != nil
-           && NSOrderedDescending == [self.expirationDate compare:[NSDate date]]);
-
+	return (self.accessToken != nil && self.expirationDate != nil
+			&& NSOrderedDescending == [self.expirationDate compare:[NSDate date]]);
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -617,21 +630,21 @@ static NSString* kSDKVersion = @"2";
  * Set the authToken and expirationDate after login succeed
  */
 - (void)fbDialogLogin:(NSString *)token expirationDate:(NSDate *)expirationDate {
-  self.accessToken = token;
-  self.expirationDate = expirationDate;
-  if ([self.sessionDelegate respondsToSelector:@selector(fbDidLogin)]) {
-    [_sessionDelegate fbDidLogin];
-  }
-
+	self.accessToken = token;
+	self.expirationDate = expirationDate;
+	if ([self.sessionDelegate respondsToSelector:@selector(fbDidLogin)]) {
+		[_sessionDelegate fbDidLogin];
+	}
+	
 }
 
 /**
  * Did not login call the not login delegate
  */
 - (void)fbDialogNotLogin:(BOOL)cancelled {
-  if ([self.sessionDelegate respondsToSelector:@selector(fbDidNotLogin:)]) {
-    [_sessionDelegate fbDidNotLogin:cancelled];
-  }
+	if ([self.sessionDelegate respondsToSelector:@selector(fbDidNotLogin:)]) {
+		[_sessionDelegate fbDidNotLogin:cancelled];
+	}
 }
 
 
@@ -643,7 +656,7 @@ static NSString* kSDKVersion = @"2";
  * Handle the auth.ExpireSession api call failure
  */
 - (void)request:(FBRequest*)request didFailWithError:(NSError*)error{
-  NSLog(@"Failed to expire the session");
+	NSLog(@"Failed to expire the session");
 }
 
 @end

@@ -226,10 +226,15 @@
     self.facebookParams = nil;
 }
 
+- (void)facebookLogin {
+	[self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", @"read_friendlists", @"read_insights", @"user_birthday", 
+							  @"user_about_me", nil]];
+}
+
 - (void)shareViaFacebook:(FTShareFacebookData *)data {
     self.facebookParams = data;
     if (![self.facebook isSessionValid]) {
-        [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", @"read_friendlists", @"read_insights", nil]];
+        [self facebookLogin];
     }
     else {
         if (![self.facebookParams isRequestValid]) return;
@@ -243,14 +248,14 @@
     }
 }
 
-- (void)getFacebookData:(FTShareFacebookGetData *)data {
+- (void)getFacebookData:(FTShareFacebookGetData *)data withDelegate:(id <FBRequestDelegate>)delegate {
 	self.facebookGetParams = data;
 	if (![self.facebook isSessionValid]) {
-        [self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", @"read_friendlists", @"read_insights", nil]];
+        [self facebookLogin];
     }
     else {
-        if (![self.facebookParams isRequestValid]) return;
-        [self.facebook requestWithGraphPath:@"me/photos" andParams:[self.facebookGetParams dictionaryFromParams] andHttpMethod:@"POST" andDelegate:self];
+        //if (![self.facebookParams isRequestValid]) return;
+        [self.facebook requestWithGraphPath:@"me/friends" andParams:[self.facebookGetParams dictionaryFromParams] andHttpMethod:@"POST" andDelegate:self];
 	}
 }
 
@@ -314,15 +319,21 @@
     self.facebookParams = nil;
 }
 
-#pragma mark FAcebook REquest delegate
+#pragma mark Facebook request delegate
+
+- (void)request:(FBRequest *)request didLoad:(id)result {
+	NSLog(@"FB Result: %@", result);
+}
 
 - (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
+	NSLog(@"FB Result: %@", response);
     if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPost:)]) {
         [self.facebookDelegate facebookDidPost:nil];
     }
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+	NSLog(@"FB Result: %@", error);
     if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPost:)]) {
         [self.facebookDelegate facebookDidPost:error];
     }

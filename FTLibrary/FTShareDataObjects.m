@@ -99,7 +99,7 @@
 
 - (NSMutableDictionary *)dictionaryFromParams {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    if (self.message) [dict setObject:self.message forKey:@"message"];
+    //if (self.message) [dict setObject:self.message forKey:@"message"];
     return dict;
 }
 
