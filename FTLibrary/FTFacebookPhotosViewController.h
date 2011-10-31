@@ -8,6 +8,13 @@
 
 #import "FTFacebookViewController.h"
 
-@interface FTFacebookPhotosViewController : FTFacebookViewController
+@interface FTFacebookPhotosViewController : FTFacebookViewController {
+	
+	NSString *albumId;
+	
+}
+
+@property (nonatomic, retain) NSString *albumId;
+
 
 @end

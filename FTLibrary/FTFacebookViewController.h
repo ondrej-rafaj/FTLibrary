@@ -10,15 +10,34 @@
 #import "Facebook.h"
 #import "FTAppDelegate.h"
 #import "FTShare.h"
+#import "FTLang.h"
+
+
+@class FTFacebookViewController;
+
+@protocol FTFacebookViewControllerDelegate <NSObject>
+
+@optional
+
+- (void)facebookViewController:(FTFacebookViewController *)controller didSelectPicture:(NSString *)url withData:(NSDictionary *)data;
+
+@end
 
 
 @interface FTFacebookViewController : FTViewController <UITableViewDelegate, UITableViewDataSource, FTShareFacebookDelegate> {
 	
 	Facebook *_facebook;
 	
+	id <FTFacebookViewControllerDelegate> delegate;
+	
 }
 
+@property (nonatomic, assign) id <FTFacebookViewControllerDelegate> delegate;
+
+
 - (Facebook *)facebook;
+
+- (void)authorize;
 
 - (void)reloadData;
 

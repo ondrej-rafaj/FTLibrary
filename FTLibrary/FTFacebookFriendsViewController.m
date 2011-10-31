@@ -9,6 +9,7 @@
 #import "FTFacebookFriendsViewController.h"
 #import "FTLang.h"
 #import "FTDataJson.h"
+#import "FTFilesystem.h"
 
 
 @implementation FTFacebookFriendsViewController
@@ -20,41 +21,57 @@
 	Facebook *fb = [super facebook];
 	if (![fb isSessionValid]) {
 		NSLog(@"Invalid session!!!!");
-		[fb authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", @"read_friendlists", @"read_insights", @"user_birthday", @"user_about_me", nil]];
+		[super authorize];
 	}
 	else {
 		NSLog(@"Session is valid!!! :)");
+		NSString *url = [fb urlWithGraphPath:@"me/friends" andParams:[NSMutableDictionary dictionary]];
+		
+		NSMutableArray *arr;
+		NSString *cacheFile = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:@"friendsList.cache"];
+		if (![FTFilesystemIO isFile:cacheFile]) {
+			arr = [NSMutableArray arrayWithArray:[[FTDataJson jsonDataFromUrl:url] objectForKey:@"data"]];
+			if ([arr count] > 0) [arr writeToFile:cacheFile atomically:YES];
+		}
+		else {
+			arr = [NSMutableArray arrayWithContentsOfFile:cacheFile];
+		}
+		
+		// Creating index sections
+		sections = [[NSMutableDictionary alloc] init];
+		BOOL found;
+		for (NSDictionary *friend in arr) {
+			NSString *c = [[friend objectForKey:@"name"] substringToIndex:1];
+			found = NO;
+			for (NSString *str in [sections allKeys]) {
+				if ([str isEqualToString:c]) {
+					found = YES;
+				}
+			}
+			if (!found) {
+				[sections setValue:[NSMutableArray array] forKey:c];
+			}
+		}
+		
+		[sections setValue:[NSMutableArray array] forKey:@"-"];
+		NSMutableDictionary *me = [NSMutableDictionary dictionary];
+		[me setValue:@"me" forKey:@"id"];
+		[me setValue:@"Ondrej Rafaj (me)" forKey:@"name"];
+		[[sections objectForKey:@"-"] addObject:me];
+		
+		// Adding friends to appropriate sections
+		for (NSDictionary *friend in arr) {
+			[[sections objectForKey:[[friend objectForKey:@"name"] substringToIndex:1]] addObject:friend];
+		}
+		
+		// Sorting sections
+		for (NSString *key in [sections allKeys]) {
+			[[sections objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+		}
+		
+		[table reloadData];
+		NSLog(@"TableSize: %@", NSStringFromCGRect(self.table.frame));
 	}
-	
-	NSString *url = [fb urlWithGraphPath:@"me/friends" andParams:[NSMutableDictionary dictionary]];
-	NSMutableArray *arr = [NSMutableArray arrayWithArray:[[FTDataJson jsonDataFromUrl:url] objectForKey:@"data"]];
-	
-	// Creating index sections
-	BOOL found;
-    for (NSDictionary *friend in arr) {
-        NSString *c = [[friend objectForKey:@"name"] substringToIndex:1];
-        found = NO;
-        for (NSString *str in [sections allKeys]) {
-            if ([str isEqualToString:c]) {
-                found = YES;
-            }
-        }
-        if (!found) {
-            [sections setValue:[[NSMutableArray alloc] init] forKey:c];
-        }
-    }
-	
-	// Adding friends to appropriate sections
-	for (NSDictionary *friend in arr) {
-        [[sections objectForKey:[[friend objectForKey:@"name"] substringToIndex:1]] addObject:friend];
-    }
-	
-	// Sorting sections
-	for (NSString *key in [sections allKeys]) {
-        [[sections objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
-    }
-	
-	[table reloadData];
 }
 
 - (NSDictionary *)dictionaryForFriendAtIndexPath:(NSIndexPath *)indexPath {
@@ -74,6 +91,10 @@
     [super viewDidLoad];
 	
 	[super createTableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -122,28 +143,7 @@
 }
 
 - (void)request:(FBRequest *)request didLoad:(id)result {
-	
 	NSLog(@"Facebook result: %@", result);
-	
-//	if(data == nil) {
-//		NSArray* users = result;
-//		data = [[NSArray alloc] initWithArray: users];
-//		for(NSInteger i=0 ;i < [users count]; i++) {
-//			NSDictionary *user = [users objectAtIndex:i];
-//			NSString *uid = [user objectForKey:@"uid"];
-//			NSString *fql = [NSString stringWithFormat:@"select name from user where uid == %@", uid];
-//			
-//			NSDictionary *params = [NSDictionary dictionaryWithObject:fql forKey:@"query"];
-//			[[FBRequest requestWithDelegate:self] call:@"facebook.fql.query" params:params];
-//			[FBRequest getRequestWithParams:params httpMethod:@"POST" delegate:self requestURL:<#(NSString *)#>
-//		}
-//	}
-//	else {
-//		NSArray* users = result;
-//		NSDictionary* user = [users objectAtIndex:0];
-//		NSString* name = [user objectForKey:@"name"];
-//		txtView.text=[NSString localizedStringWithFormat:@"%@%@,\n",txtView.text,name];
-//	}
 }
 
 - (void)facebookDidPost:(NSError *)error {

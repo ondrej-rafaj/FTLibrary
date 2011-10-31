@@ -10,6 +10,8 @@
 
 @implementation FTFacebookViewController
 
+@synthesize delegate;
+
 
 #pragma mark Facebook stuff
 
@@ -19,10 +21,21 @@
 	return ad.share.facebook;
 }
 
+- (void)authorize {
+	[[self facebook] authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", @"read_friendlists", @"read_insights", @"user_birthday", @"user_about_me", @"friends_photos", nil]];
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	[self.view setFrame:CGRectMake(0, 0, 320, 460)];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	if (table) [table setFrame:CGRectMake(0, 0, 320, 416)];
+	[self.view setFrame:CGRectMake(0, 0, 320, 460)];
 }
 
 #pragma mark Loading data
