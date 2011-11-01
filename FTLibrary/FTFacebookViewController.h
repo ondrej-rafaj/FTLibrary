@@ -24,7 +24,7 @@
 @end
 
 
-@interface FTFacebookViewController : FTViewController <UITableViewDelegate, UITableViewDataSource, FTShareFacebookDelegate> {
+@interface FTFacebookViewController : FTViewController <FTShareFacebookDelegate> {
 	
 	Facebook *_facebook;
 	
@@ -40,6 +40,8 @@
 - (void)authorize;
 
 - (void)reloadData;
+
+- (void)noInternetConnection;
 
 
 

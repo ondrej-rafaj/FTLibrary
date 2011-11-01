@@ -7,6 +7,7 @@
 //
 
 #import "FTFacebookViewController.h"
+#import "UIView+Layout.h"
 
 @implementation FTFacebookViewController
 
@@ -25,6 +26,12 @@
 	[[self facebook] authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", @"read_friendlists", @"read_insights", @"user_birthday", @"user_about_me", @"friends_photos", nil]];
 }
 
+#pragma mark Warn about no internet connection
+
+- (void)noInternetConnection {
+	
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
@@ -34,9 +41,17 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-	if (table) [table setFrame:CGRectMake(0, 0, 320, 416)];
-	[self.view setFrame:CGRectMake(0, 0, 320, 460)];
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	
+	NSLog(@"Final view size: %@", NSStringFromCGRect(self.view.frame));
+	[table setAutoresizingMask:UIViewAutoresizingNone];
+	[table setFrame:self.view.bounds];
+	[table setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
+}
+
 
 #pragma mark Loading data
 

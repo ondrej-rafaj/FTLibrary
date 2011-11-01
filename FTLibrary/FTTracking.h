@@ -16,5 +16,7 @@
 + (void)logEvent:(NSString *)event withParameters:(NSDictionary *)params;
 + (void)logEvent:(NSString *)event;
 
++ (void)logFacebookUserInfo:(NSDictionary *)info;
+
 
 @end

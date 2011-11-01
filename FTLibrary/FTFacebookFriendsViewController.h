@@ -8,9 +8,13 @@
 
 #import "FTFacebookViewController.h"
 
-@interface FTFacebookFriendsViewController : FTFacebookViewController {
+@interface FTFacebookFriendsViewController : FTFacebookViewController <UISearchBarDelegate> {
 	
 	NSMutableDictionary *sections;
+	
+	BOOL isSearching;
+	
+	NSMutableArray *searchArray;
 	
 }
 

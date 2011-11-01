@@ -10,6 +10,9 @@
 #import "FTLang.h"
 #import "FTDataJson.h"
 #import "FTFilesystem.h"
+#import "FTSystem.h"
+#import "FTTracking.h"
+#import "UIColor+Tools.h"
 
 
 @implementation FTFacebookFriendsViewController
@@ -18,70 +21,97 @@
 #pragma mark Data handling
 
 - (void)reloadData {
-	Facebook *fb = [super facebook];
-	if (![fb isSessionValid]) {
-		NSLog(@"Invalid session!!!!");
-		[super authorize];
-	}
-	else {
-		NSLog(@"Session is valid!!! :)");
-		NSString *url = [fb urlWithGraphPath:@"me/friends" andParams:[NSMutableDictionary dictionary]];
-		
-		NSMutableArray *arr;
-		NSString *cacheFile = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:@"friendsList.cache"];
-		if (![FTFilesystemIO isFile:cacheFile]) {
-			arr = [NSMutableArray arrayWithArray:[[FTDataJson jsonDataFromUrl:url] objectForKey:@"data"]];
-			if ([arr count] > 0) [arr writeToFile:cacheFile atomically:YES];
+	if ([FTSystem isInternetAvailable]) {
+		Facebook *fb = [super facebook];
+		if (![fb isSessionValid]) {
+			NSLog(@"Invalid session!!!!");
+			[super authorize];
 		}
 		else {
-			arr = [NSMutableArray arrayWithContentsOfFile:cacheFile];
-		}
-		
-		// Creating index sections
-		sections = [[NSMutableDictionary alloc] init];
-		BOOL found;
-		for (NSDictionary *friend in arr) {
-			NSString *c = [[friend objectForKey:@"name"] substringToIndex:1];
-			found = NO;
-			for (NSString *str in [sections allKeys]) {
-				if ([str isEqualToString:c]) {
-					found = YES;
+			NSLog(@"Session is valid!!! :)");
+			NSString *url = [fb urlWithGraphPath:@"me/friends" andParams:[NSMutableDictionary dictionary]];
+			
+			NSMutableArray *arr;
+			NSString *cacheFile = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:@"friendsList.cache"];
+			if (![FTFilesystemIO isFile:cacheFile]) {
+				arr = [NSMutableArray arrayWithArray:[[FTDataJson jsonDataFromUrl:url] objectForKey:@"data"]];
+				if ([arr count] > 0) [arr writeToFile:cacheFile atomically:YES];
+			}
+			else {
+				arr = [NSMutableArray arrayWithContentsOfFile:cacheFile];
+			}
+			
+			[super setData:arr];
+			
+			cacheFile = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:@"friendsSortedArray.cache"];
+			if (![FTFilesystemIO isFile:cacheFile]) {
+				
+				// Creating index sections
+				sections = [[NSMutableDictionary alloc] init];
+				BOOL found;
+				for (NSDictionary *friend in arr) {
+					NSString *c = [[friend objectForKey:@"name"] substringToIndex:1];
+					found = NO;
+					for (NSString *str in [sections allKeys]) {
+						if ([str isEqualToString:c]) {
+							found = YES;
+						}
+					}
+					if (!found) {
+						[sections setValue:[NSMutableArray array] forKey:c];
+					}
 				}
+				
+				// Getting informations about myself
+				url = [fb urlWithGraphPath:@"me" andParams:[NSMutableDictionary dictionary]];
+				NSDictionary *info = [FTDataJson jsonDataFromUrl:url];
+				
+				// Flurry
+				[FTTracking logFacebookUserInfo:info];
+				
+				// Setting informations about myself
+				[sections setValue:[NSMutableArray array] forKey:@"{search}"];
+				NSMutableDictionary *me = [NSMutableDictionary dictionary];
+				[me setValue:[info objectForKey:@"id"] forKey:@"id"];
+				[me setValue:[NSString stringWithFormat:@"%@ (%@)", [info objectForKey:@"name"], FTLangGet(@"me")] forKey:@"name"];
+				[[sections objectForKey:@"{search}"] addObject:me];
+				
+				// Adding friends to appropriate sections
+				for (NSDictionary *friend in arr) {
+					[[sections objectForKey:[[friend objectForKey:@"name"] substringToIndex:1]] addObject:friend];
+				}
+				
+				// Sorting sections
+				for (NSString *key in [sections allKeys]) {
+					[[sections objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+				}
+				[sections writeToFile:cacheFile atomically:YES];
 			}
-			if (!found) {
-				[sections setValue:[NSMutableArray array] forKey:c];
+			else {
+				sections = [NSMutableArray arrayWithContentsOfFile:cacheFile];
 			}
+			
+			[table reloadData];
+			NSLog(@"TableSize: %@", NSStringFromCGRect(self.table.frame));
 		}
-		
-		[sections setValue:[NSMutableArray array] forKey:@"-"];
-		NSMutableDictionary *me = [NSMutableDictionary dictionary];
-		[me setValue:@"me" forKey:@"id"];
-		[me setValue:@"Ondrej Rafaj (me)" forKey:@"name"];
-		[[sections objectForKey:@"-"] addObject:me];
-		
-		// Adding friends to appropriate sections
-		for (NSDictionary *friend in arr) {
-			[[sections objectForKey:[[friend objectForKey:@"name"] substringToIndex:1]] addObject:friend];
-		}
-		
-		// Sorting sections
-		for (NSString *key in [sections allKeys]) {
-			[[sections objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
-		}
-		
-		[table reloadData];
-		NSLog(@"TableSize: %@", NSStringFromCGRect(self.table.frame));
+	}
+	else {
+		[self enableLoadingProgressViewInWindowWithTitle:FTLangGet(@"No internet connection") andAnimationStyle:FTProgressViewAnimationFade];
+		[NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(disableLoadingProgressView) userInfo:nil repeats:NO];
+		[self noInternetConnection];
 	}
 }
 
 - (NSDictionary *)dictionaryForFriendAtIndexPath:(NSIndexPath *)indexPath {
-	return (NSDictionary *)[[sections valueForKey:[[[sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+	if (!isSearching) return (NSDictionary *)[[sections valueForKey:[[[sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+	else return [searchArray objectAtIndex:indexPath.row];
 }
 
 #pragma mark Memory management
 
 - (void)dealloc {
 	[sections release];
+	[searchArray release];
 	[super dealloc];
 }
 
@@ -91,6 +121,7 @@
     [super viewDidLoad];
 	
 	[super createTableView];
+	[table setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -104,6 +135,23 @@
 }
 
 #pragma mark Tableview delegate & data source methods
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	if (section == 0) {
+		UISearchBar *bar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 33)];
+		[bar setDelegate:self];
+		[bar setTintColor:[UIColor colorWithHexString:@"EDEFF4"]];
+		[bar setBarStyle:UIBarStyleDefault];
+		[bar setPlaceholder:FTLangGet(@"Search friends")];
+		return bar;
+	}
+	else return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	if (section == 0) return 44;
+	else return 16;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	static NSString *ci = @"FTFacebookFriendCell";
@@ -121,19 +169,23 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[sections allKeys] count];
+    if (!isSearching) return [[sections allKeys] count];
+	else return 1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [[[sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
+    if (!isSearching) return [[[sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section];
+	else return nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[sections valueForKey:[[[sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
+    if (!isSearching) return [[sections valueForKey:[[[sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] objectAtIndex:section]] count];
+	else return [searchArray count];
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return [[sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    if (!isSearching) return [[sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+	return nil;
 }
 
 #pragma mark Data delegate methods
@@ -152,6 +204,10 @@
 
 - (void)facebookDidLogin:(NSError *)error {
 	NSLog(@"facebookDidLogin:");
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+	isSearching = YES;
 }
 
 
