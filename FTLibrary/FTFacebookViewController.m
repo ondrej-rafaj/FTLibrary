@@ -23,7 +23,20 @@
 }
 
 - (void)authorize {
-	[[self facebook] authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", @"read_friendlists", @"read_insights", @"user_birthday", @"user_about_me", @"friends_photos", nil]];
+	[[self facebook] authorize:[NSArray arrayWithObjects:
+								@"publish_stream",
+								@"read_stream",
+								@"read_friendlists",
+								@"read_insights",
+								@"user_birthday",
+								@"friends_birthday",
+								@"user_about_me",
+								@"friends_about_me",
+								@"user_photos",
+								@"friends_photos",
+								@"user_videos",
+								@"friends_videos",
+								nil]];
 }
 
 #pragma mark Warn about no internet connection

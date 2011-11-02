@@ -32,18 +32,17 @@
 
 @implementation NSString (NSString_SBJSON)
 
-- (id)JSONFragmentValue
-{
-    SBJsonParser *jsonParser = [SBJsonParser new];    
-    id repr = [jsonParser fragmentWithString:self];    
-    if (!repr)
-        NSLog(@"-JSONFragmentValue failed. Error trace is: %@", [jsonParser error]);
-    [jsonParser release];
-    return repr;
+- (id)JSONFragmentValue {
+//    SBJsonParser *jsonParser = [SBJsonParser new];    
+//    id repr = [jsonParser fragmentWithString:self];    
+//    if (!repr)
+//        NSLog(@"-JSONFragmentValue failed. Error trace is: %@", [jsonParser error]);
+//    [jsonParser release];
+//    return repr;
+	return nil;
 }
 
-- (id)JSONValue
-{
+- (id)JSONValue {
     SBJsonParser *jsonParser = [SBJsonParser new];
     id repr = [jsonParser objectWithString:self];
     if (!repr)
