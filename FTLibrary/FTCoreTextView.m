@@ -27,7 +27,7 @@ typedef enum {
 
 @interface FTCoreTextNode : NSObject
 
-@property (nonatomic, retain) FTCoreTextNode	*supernode;
+@property (nonatomic, assign) FTCoreTextNode	*supernode;
 @property (nonatomic, retain) NSArray			*subnodes;
 @property (nonatomic, retain) FTCoreTextStyle	*style;
 @property (nonatomic, assign) NSRange			styleRange;
@@ -218,7 +218,6 @@ typedef enum {
 
 - (void)dealloc
 {
-	[_supernode release];
 	[_subnodes release];
 	[_style release];
 	[_imageName release];
@@ -236,6 +235,7 @@ typedef enum {
 
 - (void)updateFramesetterIfNeeded;
 - (void)processText;
+CTFontRef CTFontCreateFromUIFont(UIFont *font);
 
 @end
 
@@ -251,6 +251,13 @@ typedef enum {
 @synthesize framesetter = _framesetter;
 @synthesize rootNode = _rootNode;
 
+CTFontRef CTFontCreateFromUIFont(UIFont *font)
+{
+    CTFontRef ctFont = CTFontCreateWithName((CFStringRef)font.fontName, 
+                                            font.pointSize, 
+                                            NULL);
+    return ctFont;
+}
 
 - (NSDictionary *)dataForPoint:(CGPoint)point
 {
@@ -312,9 +319,7 @@ typedef enum {
 							  value:(id)style.color.CGColor
 							  range:styleRange];
 	
-	CTFontRef ctFont = CTFontCreateWithName((CFStringRef)style.font.fontName, 
-											style.font.pointSize, 
-											NULL);
+	CTFontRef ctFont = CTFontCreateFromUIFont(style.font);
 	
 	[*attributedString addAttribute:(id)kCTFontAttributeName
 							  value:(id)ctFont
