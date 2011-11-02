@@ -1378,8 +1378,8 @@
 		4C57611D13C5E7570049371F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4CA29DE4144D7EF3002F38BD /* Buttons */,
 				4C6F8F5B13F87502004A4FB2 /* Basic view */,
+				4CA29DE4144D7EF3002F38BD /* Buttons */,
 				4CCF855514424E80007F1043 /* Finger drawing */,
 				4CE77EF71435FBF500A5AEDA /* Photo editing */,
 				4C2D215D14307597002818EA /* Card view */,
