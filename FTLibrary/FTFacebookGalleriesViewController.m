@@ -19,32 +19,33 @@
 
 #pragma mark Data handling
 
+- (void)startDownloadingDataForCurrentPage {
+	NSString *url = [[super facebook] urlWithGraphPath:[NSString stringWithFormat:@"%@/albums", userId] andParams:[NSMutableDictionary dictionary]];
+	[super downloadDataFromUrl:url];
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request {
+	NSDictionary *d = [request.responseString JSONValue];
+	NSMutableArray *arr = [NSMutableArray arrayWithContentsOfFile:[d objectForKey:@"data"]];
+	
+	NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"updated_time" ascending:NO];
+	[arr sortUsingDescriptors:[NSArray arrayWithObjects:descriptor,nil]];
+	NSMutableArray *clean = [NSMutableArray arrayWithArray:arr];
+	for (NSDictionary *d in arr) {
+		NSLog(@"Dic: %@", d);
+		if ([[d objectForKey:@"count"] intValue] <= 0) [clean removeObject:d];
+	}
+	//if ([arr count] > 0) [clean writeToFile:cacheFile atomically:YES];
+	[super setData:[clean copy]];
+	[table reloadData];
+}
+
 - (void)reloadData {
-	Facebook *fb = [super facebook];
-	if (![fb isSessionValid]) {
-		NSLog(@"Invalid session!!!!");
-		[super authorize];
-	}
-	else {
-		NSLog(@"Session is valid!!! :)");
-		NSString *url = [fb urlWithGraphPath:[NSString stringWithFormat:@"%@/albums", userId] andParams:[NSMutableDictionary dictionary]];
-		
-		NSMutableArray *arr;
-		NSString *fileName = [FTText getSafeText:url];
-		NSString *cacheFile = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:fileName];
-		if (![FTFilesystemIO isFile:cacheFile]) {
-			arr = [NSMutableArray arrayWithArray:[[FTDataJson jsonDataFromUrl:url] objectForKey:@"data"]];
-			NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"updated_time" ascending:NO];
-			[arr sortUsingDescriptors:[NSArray arrayWithObjects:descriptor,nil]];
-			if ([arr count] > 0) [arr writeToFile:cacheFile atomically:YES];
-			[super setData:[arr copy]];
-		}
-		else {
-			arr = [NSMutableArray arrayWithContentsOfFile:cacheFile];
-			[super setData:arr];
-		}
-		[table reloadData];
-	}
+	//	NSString *cacheFile = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:@"friendsList.cache"];
+	//	[FTFilesystemIO deleteFile:cacheFile];
+	//	cacheFile = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:@"friendsSortedArray.cache"];
+	//	[FTFilesystemIO deleteFile:cacheFile];
+	[self startDownloadingDataForCurrentPage];
 }
 
 #pragma mark Memory management
@@ -89,23 +90,23 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark Data delegate methods
-
-- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
-	NSLog(@"Facebook response: %@", response);
-}
-
-- (void)request:(FBRequest *)request didLoad:(id)result {
-	NSLog(@"Facebook result: %@", result);
-}
-
-- (void)facebookDidPost:(NSError *)error {
-	NSLog(@"facebookDidPost:");
-}
-
-- (void)facebookDidLogin:(NSError *)error {
-	NSLog(@"facebookDidLogin:");
-}
+//#pragma mark Data delegate methods
+//
+//- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
+//	NSLog(@"Facebook response: %@", response);
+//}
+//
+//- (void)request:(FBRequest *)request didLoad:(id)result {
+//	NSLog(@"Facebook result: %@", result);
+//}
+//
+//- (void)facebookDidPost:(NSError *)error {
+//	NSLog(@"facebookDidPost:");
+//}
+//
+//- (void)facebookDidLogin:(NSError *)error {
+//	NSLog(@"facebookDidLogin:");
+//}
 
 
 @end

@@ -39,10 +39,6 @@
 	NSString *textValue;
 	if (scrollView == hours && timeFormat == FTScrollableClockViewTimeFormat12H) {
 		if (value > 12) value -= 12;
-		//textValue = [NSString stringWithFormat:@"%@%d", ((value < 10) ? @"0" : @""), value];
-	}
-	else {
-		
 	}
 	textValue = [NSString stringWithFormat:@"%@%d", ((value < 10) ? @"0" : @""), value];
 	[label setText:textValue];
@@ -137,9 +133,7 @@
 		if (_currentTime.minutes != page) valueChanged = YES;
 		[_currentTime setMinutes:page];
 	}
-	
 	if (valueChanged) {
-		NSLog(@"%@", self);
 		if ([delegate respondsToSelector:@selector(scrollableClockView:didChangeTime:)]) {
 			[delegate scrollableClockView:self didChangeTime:_currentTime];
 		}

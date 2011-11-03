@@ -8,13 +8,15 @@
 
 #import "FTFacebookViewController.h"
 
-@interface FTFacebookFriendsViewController : FTFacebookViewController <UISearchBarDelegate> {
+
+@interface FTFacebookFriendsViewController : FTFacebookViewController <UISearchBarDelegate, UIScrollViewDelegate> {
 	
 	NSMutableDictionary *sections;
 	
 	BOOL isSearching;
 	
 	NSMutableArray *searchArray;
+	int lastSearchCharCount;
 	
 }
 

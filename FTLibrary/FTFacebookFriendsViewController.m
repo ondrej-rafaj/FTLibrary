@@ -12,6 +12,7 @@
 #import "FTFilesystem.h"
 #import "FTSystem.h"
 #import "FTTracking.h"
+#import "UIView+Layout.h"
 #import "UIColor+Tools.h"
 
 
@@ -20,86 +21,79 @@
 
 #pragma mark Data handling
 
+- (void)startDownloadingDataForCurrentPage {
+	NSString *url = [[super facebook] urlWithGraphPath:@"me/friends" andParams:[NSMutableDictionary dictionary]];
+	[super downloadDataFromUrl:url];
+}
+
+- (void)getMeInfo {
+	// Getting informations about myself
+	NSString *url = [[super facebook] urlWithGraphPath:@"me" andParams:[NSMutableDictionary dictionary]];
+	NSDictionary *info = [FTDataJson jsonDataFromUrl:url];
+	
+	// Flurry
+	[FTTracking logFacebookUserInfo:info];
+	
+	// Setting informations about myself
+	[sections setValue:[NSMutableArray array] forKey:@"{search}"];
+	NSMutableDictionary *me = [NSMutableDictionary dictionary];
+	[me setValue:[info objectForKey:@"id"] forKey:@"id"];
+	[me setValue:[NSString stringWithFormat:@"%@ (%@)", [info objectForKey:@"name"], FTLangGet(@"me")] forKey:@"name"];
+	[[sections objectForKey:@"{search}"] addObject:me];
+	
+	// Adding friends to appropriate sections
+	NSMutableArray *arr;
+	for (NSDictionary *friend in arr) {
+		[[sections objectForKey:[[friend objectForKey:@"name"] substringToIndex:1]] addObject:friend];
+	}
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request {
+	NSData *responseData = [request responseData];
+	NSString *response = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+	
+	NSLog(@"response: %@", response);
+	
+	NSLog(@"responseHeaders: %@", request.responseHeaders);
+	NSLog(@"responseStatusCode: %d", request.responseStatusCode);
+	NSLog(@"responseData: %@", request.responseData);
+	NSLog(@"responseStatusMessage: %@", request.responseStatusMessage);
+	NSLog(@"response url: %@", request.url.absoluteString);
+	
+	
+	NSDictionary *d = [request.responseString JSONValue];
+	NSMutableArray *arr = [NSMutableArray arrayWithContentsOfFile:[d objectForKey:@"data"]];
+	[super setData:arr];
+	
+	// Creating index sections
+	sections = [[NSMutableDictionary alloc] init];
+	BOOL found;
+	for (NSDictionary *friend in arr) {
+		NSString *c = [[friend objectForKey:@"name"] substringToIndex:1];
+		found = NO;
+		for (NSString *str in [sections allKeys]) {
+			if ([str isEqualToString:c]) {
+				found = YES;
+			}
+		}
+		if (!found) {
+			[sections setValue:[NSMutableArray array] forKey:c];
+		}
+	}
+	
+	// Sorting sections
+	for (NSString *key in [sections allKeys]) {
+		[[sections objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+	}
+	[table reloadData];
+}
+
 - (void)reloadData {
-	if ([FTSystem isInternetAvailable]) {
-		Facebook *fb = [super facebook];
-		if (![fb isSessionValid]) {
-			NSLog(@"Invalid session!!!!");
-			[super authorize];
-		}
-		else {
-			NSLog(@"Session is valid!!! :)");
-			NSString *url = [fb urlWithGraphPath:@"me/friends" andParams:[NSMutableDictionary dictionary]];
-			
-			NSMutableArray *arr;
-			NSString *cacheFile = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:@"friendsList.cache"];
-			if (![FTFilesystemIO isFile:cacheFile]) {
-				arr = [NSMutableArray arrayWithArray:[[FTDataJson jsonDataFromUrl:url] objectForKey:@"data"]];
-				if ([arr count] > 0) [arr writeToFile:cacheFile atomically:YES];
-			}
-			else {
-				arr = [NSMutableArray arrayWithContentsOfFile:cacheFile];
-			}
-			
-			[super setData:arr];
-			
-			cacheFile = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:@"friendsSortedArray.cache"];
-			if (![FTFilesystemIO isFile:cacheFile]) {
-				
-				// Creating index sections
-				sections = [[NSMutableDictionary alloc] init];
-				BOOL found;
-				for (NSDictionary *friend in arr) {
-					NSString *c = [[friend objectForKey:@"name"] substringToIndex:1];
-					found = NO;
-					for (NSString *str in [sections allKeys]) {
-						if ([str isEqualToString:c]) {
-							found = YES;
-						}
-					}
-					if (!found) {
-						[sections setValue:[NSMutableArray array] forKey:c];
-					}
-				}
-				
-				// Getting informations about myself
-				url = [fb urlWithGraphPath:@"me" andParams:[NSMutableDictionary dictionary]];
-				NSDictionary *info = [FTDataJson jsonDataFromUrl:url];
-				
-				// Flurry
-				[FTTracking logFacebookUserInfo:info];
-				
-				// Setting informations about myself
-				[sections setValue:[NSMutableArray array] forKey:@"{search}"];
-				NSMutableDictionary *me = [NSMutableDictionary dictionary];
-				[me setValue:[info objectForKey:@"id"] forKey:@"id"];
-				[me setValue:[NSString stringWithFormat:@"%@ (%@)", [info objectForKey:@"name"], FTLangGet(@"me")] forKey:@"name"];
-				[[sections objectForKey:@"{search}"] addObject:me];
-				
-				// Adding friends to appropriate sections
-				for (NSDictionary *friend in arr) {
-					[[sections objectForKey:[[friend objectForKey:@"name"] substringToIndex:1]] addObject:friend];
-				}
-				
-				// Sorting sections
-				for (NSString *key in [sections allKeys]) {
-					[[sections objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
-				}
-				[sections writeToFile:cacheFile atomically:YES];
-			}
-			else {
-				sections = [NSMutableArray arrayWithContentsOfFile:cacheFile];
-			}
-			
-			[table reloadData];
-			NSLog(@"TableSize: %@", NSStringFromCGRect(self.table.frame));
-		}
-	}
-	else {
-		[self enableLoadingProgressViewInWindowWithTitle:FTLangGet(@"No internet connection") andAnimationStyle:FTProgressViewAnimationFade];
-		[NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(disableLoadingProgressView) userInfo:nil repeats:NO];
-		[self noInternetConnection];
-	}
+//	NSString *cacheFile = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:@"friendsList.cache"];
+//	[FTFilesystemIO deleteFile:cacheFile];
+//	cacheFile = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:@"friendsSortedArray.cache"];
+//	[FTFilesystemIO deleteFile:cacheFile];
+	[self startDownloadingDataForCurrentPage];
 }
 
 - (NSDictionary *)dictionaryForFriendAtIndexPath:(NSIndexPath *)indexPath {
@@ -120,7 +114,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	searchArray = [[NSMutableArray alloc] init];
+	
 	[super createTableView];
+	
+	searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+	[searchBar setAutocapitalizationType:UITextAutocapitalizationTypeWords];
+	[searchBar setAutocorrectionType:UITextAutocorrectionTypeNo];
+	[searchBar setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+	[searchBar setDelegate:self];
+	[searchBar setTintColor:[UIColor colorWithHexString:@"EDEFF4"]];
+	[searchBar setBarStyle:UIBarStyleDefault];
+	[searchBar setPlaceholder:FTLangGet(@"Search friends")];
+	
+	UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+	[v setBackgroundColor:[UIColor redColor]];
+	[v addSubview:searchBar];
+	[self.view addSubview:v];
+	
 	[table setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 }
 
@@ -131,25 +142,13 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	[super enableLoadingProgressViewWithTitle:FTLangGet(@"Loading friends") withAnimationStyle:FTProgressViewAnimationFade showWhileExecuting:@selector(reloadData) onTarget:self withObject:nil animated:YES];
+	//[super enableLoadingProgressViewWithTitle:FTLangGet(@"Loading friends") withAnimationStyle:FTProgressViewAnimationFade showWhileExecuting:@selector(reloadData) onTarget:self withObject:nil animated:YES];
 }
 
 #pragma mark Tableview delegate & data source methods
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-	if (section == 0) {
-		UISearchBar *bar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 33)];
-		[bar setDelegate:self];
-		[bar setTintColor:[UIColor colorWithHexString:@"EDEFF4"]];
-		[bar setBarStyle:UIBarStyleDefault];
-		[bar setPlaceholder:FTLangGet(@"Search friends")];
-		return bar;
-	}
-	else return nil;
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	if (section == 0) return 44;
+	if (section == 0) return 0;
 	else return 16;
 }
 
@@ -188,27 +187,62 @@
 	return nil;
 }
 
-#pragma mark Data delegate methods
+//#pragma mark Data delegate methods
+//
+//- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
+//	NSLog(@"Facebook response: %@", response);
+//}
+//
+//- (void)request:(FBRequest *)request didLoad:(id)result {
+//	NSLog(@"Facebook result: %@", result);
+//}
+//
+//- (void)facebookDidPost:(NSError *)error {
+//	NSLog(@"facebookDidPost:");
+//}
+//
+//- (void)facebookDidLogin:(NSError *)error {
+//	NSLog(@"facebookDidLogin:");
+//}
 
-- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
-	NSLog(@"Facebook response: %@", response);
+#pragma mark Search bar delegate methods
+
+- (void)searchBar:(UISearchBar *)_searchBar textDidChange:(NSString *)searchText {
+	if ([searchText length] > 0) {
+		if (!isSearching) [_searchBar setShowsCancelButton:YES animated:YES];
+		isSearching = YES;
+		NSArray *sourceArray;
+		if (([searchText length] > lastSearchCharCount) && ([searchArray count] > 0)) {
+			sourceArray = [NSArray arrayWithArray:searchArray];
+		}
+		else {
+			sourceArray = [NSArray arrayWithArray:data];
+		}
+		[searchArray removeAllObjects];
+		for (NSDictionary *d in sourceArray) {
+			NSRange textRange = [(NSString *)[d objectForKey:@"name"] rangeOfString:searchText options:(NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch)];
+			BOOL fits = (textRange.location != NSNotFound);
+			if (fits) [searchArray addObject:d];
+		}
+		NSLog(@"Searched data: %@", searchArray);
+	}
+	else {
+		if (isSearching) [_searchBar setShowsCancelButton:NO animated:YES];
+		isSearching = NO;
+	}
+	[table reloadData];
+	lastSearchCharCount = [searchText length];
 }
 
-- (void)request:(FBRequest *)request didLoad:(id)result {
-	NSLog(@"Facebook result: %@", result);
+- (void)searchBarCancelButtonClicked:(UISearchBar *)_searchBar {
+	[_searchBar resignFirstResponder];
+	[_searchBar setText:@""];
+	[self searchBar:_searchBar textDidChange:@""];
 }
 
-- (void)facebookDidPost:(NSError *)error {
-	NSLog(@"facebookDidPost:");
+- (void)searchBarSearchButtonClicked:(UISearchBar *)_searchBar {
+	[_searchBar resignFirstResponder];
+	[_searchBar setShowsCancelButton:NO animated:YES];
 }
-
-- (void)facebookDidLogin:(NSError *)error {
-	NSLog(@"facebookDidLogin:");
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-	isSearching = YES;
-}
-
 
 @end

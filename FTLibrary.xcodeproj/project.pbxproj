@@ -420,6 +420,8 @@
 		4CCD128813D852590004EF5D /* FTDragDropMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD128513D852590004EF5D /* FTDragDropMenuView.m */; };
 		4CCF855914424E9F007F1043 /* FTFingerDrawingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCF855714424E9F007F1043 /* FTFingerDrawingView.h */; };
 		4CCF855A14424E9F007F1043 /* FTFingerDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF855814424E9F007F1043 /* FTFingerDrawingView.m */; };
+		4CD7769B1461FD9B007A642B /* FTGridViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD776991461FD9B007A642B /* FTGridViewCell.h */; };
+		4CD7769C1461FD9B007A642B /* FTGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD7769A1461FD9B007A642B /* FTGridViewCell.m */; };
 		4CD94A3013FDBBB200BD6C06 /* UIAlertView+Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD94A2E13FDBBB200BD6C06 /* UIAlertView+Tools.h */; };
 		4CD94A3113FDBBB200BD6C06 /* UIAlertView+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD94A2F13FDBBB200BD6C06 /* UIAlertView+Tools.m */; };
 		4CD94A3813FE5E4900BD6C06 /* FTAutoColumnView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD94A3613FE5E4900BD6C06 /* FTAutoColumnView.h */; };
@@ -443,6 +445,8 @@
 		4CED6B3414615374003DE290 /* NSMutableDictionary+ImageMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CED6B3214615374003DE290 /* NSMutableDictionary+ImageMetadata.m */; };
 		4CED6B3B146159B0003DE290 /* FTScrollableClockView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CED6B39146159B0003DE290 /* FTScrollableClockView.h */; };
 		4CED6B3C146159B0003DE290 /* FTScrollableClockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CED6B3A146159B0003DE290 /* FTScrollableClockView.m */; };
+		4CED6B421461A526003DE290 /* FTSearchBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CED6B401461A526003DE290 /* FTSearchBar.h */; };
+		4CED6B431461A526003DE290 /* FTSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CED6B411461A526003DE290 /* FTSearchBar.m */; };
 		4CFEAD8614321FE000EDD9A8 /* FTAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CFEAD8414321FE000EDD9A8 /* FTAlertView.h */; };
 		4CFEAD8714321FE000EDD9A8 /* FTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEAD8514321FE000EDD9A8 /* FTAlertView.m */; };
 		4CFEAD8D1432279A00EDD9A8 /* FTCachedImageLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CFEAD891432279900EDD9A8 /* FTCachedImageLoader.h */; };
@@ -874,6 +878,8 @@
 		4CCD128513D852590004EF5D /* FTDragDropMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDragDropMenuView.m; sourceTree = "<group>"; };
 		4CCF855714424E9F007F1043 /* FTFingerDrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFingerDrawingView.h; sourceTree = "<group>"; };
 		4CCF855814424E9F007F1043 /* FTFingerDrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFingerDrawingView.m; sourceTree = "<group>"; };
+		4CD776991461FD9B007A642B /* FTGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGridViewCell.h; sourceTree = "<group>"; };
+		4CD7769A1461FD9B007A642B /* FTGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTGridViewCell.m; sourceTree = "<group>"; };
 		4CD94A2E13FDBBB200BD6C06 /* UIAlertView+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Tools.h"; sourceTree = "<group>"; };
 		4CD94A2F13FDBBB200BD6C06 /* UIAlertView+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Tools.m"; sourceTree = "<group>"; };
 		4CD94A3613FE5E4900BD6C06 /* FTAutoColumnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAutoColumnView.h; sourceTree = "<group>"; };
@@ -899,6 +905,8 @@
 		4CED6B3214615374003DE290 /* NSMutableDictionary+ImageMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+ImageMetadata.m"; sourceTree = "<group>"; };
 		4CED6B39146159B0003DE290 /* FTScrollableClockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTScrollableClockView.h; sourceTree = "<group>"; };
 		4CED6B3A146159B0003DE290 /* FTScrollableClockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTScrollableClockView.m; sourceTree = "<group>"; };
+		4CED6B401461A526003DE290 /* FTSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSearchBar.h; sourceTree = "<group>"; };
+		4CED6B411461A526003DE290 /* FTSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTSearchBar.m; sourceTree = "<group>"; };
 		4CFEAD8414321FE000EDD9A8 /* FTAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAlertView.h; sourceTree = "<group>"; };
 		4CFEAD8514321FE000EDD9A8 /* FTAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAlertView.m; sourceTree = "<group>"; };
 		4CFEAD891432279900EDD9A8 /* FTCachedImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCachedImageLoader.h; sourceTree = "<group>"; };
@@ -1379,6 +1387,7 @@
 			isa = PBXGroup;
 			children = (
 				4C6F8F5B13F87502004A4FB2 /* Basic view */,
+				4CED6B3F1461A4F9003DE290 /* Search bar */,
 				4CA29DE4144D7EF3002F38BD /* Buttons */,
 				4CCF855514424E80007F1043 /* Finger drawing */,
 				4CE77EF71435FBF500A5AEDA /* Photo editing */,
@@ -1507,6 +1516,7 @@
 		4C6F8F6A13F87686004A4FB2 /* Grid view */ = {
 			isa = PBXGroup;
 			children = (
+				4CD776971461FD6B007A642B /* Cells */,
 				4C6F8F6B13F87696004A4FB2 /* FTAutoGridView.h */,
 				4C6F8F6C13F87696004A4FB2 /* FTAutoGridView.m */,
 			);
@@ -2134,6 +2144,15 @@
 			name = "Finger drawing";
 			sourceTree = "<group>";
 		};
+		4CD776971461FD6B007A642B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4CD776991461FD9B007A642B /* FTGridViewCell.h */,
+				4CD7769A1461FD9B007A642B /* FTGridViewCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		4CE096761440D7FA00B31E11 /* Photo edit view */ = {
 			isa = PBXGroup;
 			children = (
@@ -2187,6 +2206,15 @@
 				4CCD124F13D850BF0004EF5D /* FTPageScrollViewDelegate.h */,
 			);
 			name = "Lazy loading";
+			sourceTree = "<group>";
+		};
+		4CED6B3F1461A4F9003DE290 /* Search bar */ = {
+			isa = PBXGroup;
+			children = (
+				4CED6B401461A526003DE290 /* FTSearchBar.h */,
+				4CED6B411461A526003DE290 /* FTSearchBar.m */,
+			);
+			name = "Search bar";
 			sourceTree = "<group>";
 		};
 		4CFEAD911432279E00EDD9A8 /* Basic */ = {
@@ -2592,6 +2620,8 @@
 				4C131607145EA61D00971E44 /* FTFacebookPhotosViewController.h in Headers */,
 				4CED6B3314615374003DE290 /* NSMutableDictionary+ImageMetadata.h in Headers */,
 				4CED6B3B146159B0003DE290 /* FTScrollableClockView.h in Headers */,
+				4CED6B421461A526003DE290 /* FTSearchBar.h in Headers */,
+				4CD7769B1461FD9B007A642B /* FTGridViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2880,6 +2910,8 @@
 				4C131608145EA61D00971E44 /* FTFacebookPhotosViewController.m in Sources */,
 				4CED6B3414615374003DE290 /* NSMutableDictionary+ImageMetadata.m in Sources */,
 				4CED6B3C146159B0003DE290 /* FTScrollableClockView.m in Sources */,
+				4CED6B431461A526003DE290 /* FTSearchBar.m in Sources */,
+				4CD7769C1461FD9B007A642B /* FTGridViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

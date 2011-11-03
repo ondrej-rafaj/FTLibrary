@@ -10,6 +10,7 @@
 #import "FTFilesystem.h"
 #import "FTDataJson.h"
 #import "FTText.h"
+#import "UIView+Layout.h"
 
 
 @implementation FTFacebookPhotosViewController
@@ -19,32 +20,27 @@
 
 #pragma mark Data handling
 
+- (void)startDownloadingDataForCurrentPage {
+	NSString *url = [[super facebook] urlWithGraphPath:[NSString stringWithFormat:@"%@/photos", albumId] andParams:[NSMutableDictionary dictionary]];
+	[super downloadDataFromUrl:url];
+}
+
+- (void)requestFinished:(ASIHTTPRequest *)request {
+	NSDictionary *d = [request.responseString JSONValue];
+	NSMutableArray *arr = [NSMutableArray arrayWithContentsOfFile:[d objectForKey:@"data"]];
+	
+	NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"updated_time" ascending:NO];
+	[arr sortUsingDescriptors:[NSArray arrayWithObjects:descriptor,nil]];
+	[super setData:[arr copy]];
+	[table reloadData];
+}
+
 - (void)reloadData {
-	Facebook *fb = [super facebook];
-	if (![fb isSessionValid]) {
-		NSLog(@"Invalid session!!!!");
-		[super authorize];
-	}
-	else {
-		NSLog(@"Session is valid!!! :)");
-		NSString *url = [fb urlWithGraphPath:[NSString stringWithFormat:@"%@/photos", albumId] andParams:[NSMutableDictionary dictionary]];
-		
-		NSMutableArray *arr;
-		NSString *fileName = [FTText getSafeText:url];
-		NSString *cacheFile = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:fileName];
-		if (![FTFilesystemIO isFile:cacheFile]) {
-			arr = [NSMutableArray arrayWithArray:[[FTDataJson jsonDataFromUrl:url] objectForKey:@"data"]];
-			NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"updated_time" ascending:NO];
-			[arr sortUsingDescriptors:[NSArray arrayWithObjects:descriptor,nil]];
-			if ([arr count] > 0) [arr writeToFile:cacheFile atomically:YES];
-			[super setData:[arr copy]];
-		}
-		else {
-			arr = [NSMutableArray arrayWithContentsOfFile:cacheFile];
-			[super setData:arr];
-		}
-		[table reloadData];
-	}
+	//	NSString *cacheFile = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:@"friendsList.cache"];
+	//	[FTFilesystemIO deleteFile:cacheFile];
+	//	cacheFile = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:@"friendsSortedArray.cache"];
+	//	[FTFilesystemIO deleteFile:cacheFile];
+	[self startDownloadingDataForCurrentPage];
 }
 
 #pragma mark Memory management
@@ -75,7 +71,7 @@
 #pragma mark Tableview delegate & data source methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	static NSString *ci = @"FTFacebookFriendCell";
+	static NSString *ci = @"FTFacebookPhotosCell";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ci];
 	if (!cell) {
 		cell = [[[FTTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ci] autorelease];
@@ -89,23 +85,31 @@
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark Data delegate methods
+#pragma mark Grid view delegate & data source methods
 
-- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
-	NSLog(@"Facebook response: %@", response);
+- (void)configureGridCell:(FTGridViewCell *)cell atIndex:(NSInteger)index forGridView:(AQGridView *)gridView {
+	NSDictionary *d = [data objectAtIndex:index];
+	[cell.imageView loadImageFromUrl:[d objectForKey:@"picture"]];
+	[cell.imageView makeMarginInSuperViewWithTopMargin:10 leftMargin:10 rightMargin:10 andBottomMargin:10];
 }
 
-- (void)request:(FBRequest *)request didLoad:(id)result {
-	NSLog(@"Facebook result: %@", result);
-}
-
-- (void)facebookDidPost:(NSError *)error {
-	NSLog(@"facebookDidPost:");
-}
-
-- (void)facebookDidLogin:(NSError *)error {
-	NSLog(@"facebookDidLogin:");
-}
+//#pragma mark Data delegate methods
+//
+//- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
+//	NSLog(@"Facebook response: %@", response);
+//}
+//
+//- (void)request:(FBRequest *)request didLoad:(id)result {
+//	NSLog(@"Facebook result: %@", result);
+//}
+//
+//- (void)facebookDidPost:(NSError *)error {
+//	NSLog(@"facebookDidPost:");
+//}
+//
+//- (void)facebookDidLogin:(NSError *)error {
+//	NSLog(@"facebookDidLogin:");
+//}
 
 
 @end
