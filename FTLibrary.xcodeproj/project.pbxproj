@@ -475,6 +475,8 @@
 		68DF4E3113CEF9D200B67940 /* FTDataXml.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DF4E2913CEF9D200B67940 /* FTDataXml.m */; };
 		68EB261413F2F1AB006DB33C /* FTCoreTextStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 68EB261213F2F1AB006DB33C /* FTCoreTextStyle.h */; };
 		68EB261513F2F1AB006DB33C /* FTCoreTextStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB261313F2F1AB006DB33C /* FTCoreTextStyle.m */; };
+		9348CDEC1464041500A6F877 /* FTPageControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9348CDEA1464041500A6F877 /* FTPageControl.h */; };
+		9348CDED1464041500A6F877 /* FTPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9348CDEB1464041500A6F877 /* FTPageControl.m */; };
 		A56A62CE1433606E000C666B /* FTShare.h in Headers */ = {isa = PBXBuildFile; fileRef = A56A62CC1433606E000C666B /* FTShare.h */; };
 		A56A62CF1433606E000C666B /* FTShare.m in Sources */ = {isa = PBXBuildFile; fileRef = A56A62CD1433606E000C666B /* FTShare.m */; };
 		A56A63111433617B000C666B /* NSMutableURLRequest+Parameters.h in Headers */ = {isa = PBXBuildFile; fileRef = A56A62DA1433617B000C666B /* NSMutableURLRequest+Parameters.h */; };
@@ -936,6 +938,8 @@
 		68DF4E2913CEF9D200B67940 /* FTDataXml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTDataXml.m; path = FTLibrary/FTDataXml.m; sourceTree = SOURCE_ROOT; };
 		68EB261213F2F1AB006DB33C /* FTCoreTextStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCoreTextStyle.h; sourceTree = "<group>"; };
 		68EB261313F2F1AB006DB33C /* FTCoreTextStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCoreTextStyle.m; sourceTree = "<group>"; };
+		9348CDEA1464041500A6F877 /* FTPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageControl.h; sourceTree = "<group>"; };
+		9348CDEB1464041500A6F877 /* FTPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPageControl.m; sourceTree = "<group>"; };
 		A56A62CC1433606E000C666B /* FTShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTShare.h; sourceTree = "<group>"; };
 		A56A62CD1433606E000C666B /* FTShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTShare.m; sourceTree = "<group>"; };
 		A56A62D61433617B000C666B /* jQueryInject.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jQueryInject.txt; sourceTree = "<group>"; };
@@ -1411,6 +1415,7 @@
 				4C5761A113CAE8CC0049371F /* Shade view */,
 				4C5761A313CAE8DC0049371F /* Window level views */,
 				4C57612413C5E77D0049371F /* Progress */,
+				9348CDE8146403D800A6F877 /* Page Control */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -2285,6 +2290,15 @@
 			name = TextView;
 			sourceTree = "<group>";
 		};
+		9348CDE8146403D800A6F877 /* Page Control */ = {
+			isa = PBXGroup;
+			children = (
+				9348CDEA1464041500A6F877 /* FTPageControl.h */,
+				9348CDEB1464041500A6F877 /* FTPageControl.m */,
+			);
+			name = "Page Control";
+			sourceTree = "<group>";
+		};
 		A56A62C714336034000C666B /* Share */ = {
 			isa = PBXGroup;
 			children = (
@@ -2622,6 +2636,7 @@
 				4CED6B3B146159B0003DE290 /* FTScrollableClockView.h in Headers */,
 				4CED6B421461A526003DE290 /* FTSearchBar.h in Headers */,
 				4CD7769B1461FD9B007A642B /* FTGridViewCell.h in Headers */,
+				9348CDEC1464041500A6F877 /* FTPageControl.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2912,6 +2927,7 @@
 				4CED6B3C146159B0003DE290 /* FTScrollableClockView.m in Sources */,
 				4CED6B431461A526003DE290 /* FTSearchBar.m in Sources */,
 				4CD7769C1461FD9B007A642B /* FTGridViewCell.m in Sources */,
+				9348CDED1464041500A6F877 /* FTPageControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
