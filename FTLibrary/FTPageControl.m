@@ -248,6 +248,7 @@
 			indicatorButton.exclusiveTouch = YES;
 			indicatorButton.adjustsImageWhenHighlighted = NO;
 			indicatorButton.selected = (i == _currentPage);
+			indicatorButton.userInteractionEnabled = !indicatorButton.selected;
 			[indicatorButton addTarget:self action:@selector(indicatorAction:) forControlEvents:UIControlEventTouchUpInside];
 			[_indicators addObject:indicatorButton];
 			[self addSubview:indicatorButton];
@@ -266,11 +267,11 @@
 			else self.unselectedDotImage = [self _defaultImageDotWithRadius:_dotRadius andColor:_unselectedDotColor];
 		}
 		for (UIButton *button in _indicators) {
-			if (_pageControlFlags.changeInSelectedColor) [button setImage:_selectedDotImage forState:UIControlStateSelected];
-			if (_pageControlFlags.changeInUnselectedColor) {
-				[button setImage:_unselectedDotImage forState:UIControlStateNormal];
-				[button setImage:_unselectedDotImage forState:UIControlStateHighlighted];
-			}
+			[button setImage:_selectedDotImage forState:UIControlStateSelected];
+			[button setImage:_unselectedDotImage forState:UIControlStateNormal];
+			if (button.selected) [button setImage:_selectedDotImage forState:UIControlStateHighlighted];
+			else [button setImage:_unselectedDotImage forState:UIControlStateHighlighted];
+			
 			[button sizeToFit];
 		}
 		_pageControlFlags.changeInSelectedColor = NO;
@@ -291,8 +292,13 @@
 	UIButton *newSelectedIndicator = [_indicators objectAtIndex:_currentPage];
 	
 	selectedIndicator.selected = NO;
+	selectedIndicator.userInteractionEnabled = YES;
 	newSelectedIndicator.selected = YES;
-	
+	newSelectedIndicator.userInteractionEnabled = NO;
+
+	[newSelectedIndicator setImage:_selectedDotImage forState:UIControlStateHighlighted];
+	[selectedIndicator setImage:_unselectedDotImage forState:UIControlStateHighlighted];
+
 	_displayedPage = _currentPage;
 }
 
