@@ -9,6 +9,22 @@
 #import "AQGridViewCell.h"
 #import "FTGridViewCell.h"
 
-@interface FTStoreGridViewCell : FTGridViewCell
+@interface FTStoreGridViewCell : FTGridViewCell {
+	
+	UIView *storeView;
+	
+	UILabel *title;
+	UILabel *description;
+	UILabel *price;
+	
+	UIButton *buyButton;
+	
+}
+
+@property (nonatomic, retain) UIView *storeView;
+@property (nonatomic, retain) UILabel *title;
+@property (nonatomic, retain) UILabel *description;
+@property (nonatomic, retain) UILabel *price;
+@property (nonatomic, retain) UIButton *buyButton;
 
 @end

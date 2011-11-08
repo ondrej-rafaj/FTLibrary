@@ -34,7 +34,7 @@
 
 - (void)setAllElements {
 	[self setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-	[self setBackgroundColor:[UIColor orangeColor]];
+	[self setBackgroundColor:[UIColor scrollViewTexturedBackgroundColor]];
 }
 
 #pragma mark View initialization
@@ -55,30 +55,35 @@
 		return CGSizeMake(150, 80);
 	}
 	else {
-		return CGSizeMake(300, 200);
+		return CGSizeMake(320, 320);
 	}
 }
 
-- (void)configureGridCell:(FTGridViewCell *)cell atIndex:(NSInteger)index forGridView:(AQGridView *)gridView {
-	CGFloat m = 6;
-	CGFloat h = [cell.contentView height];
-	CGFloat side = (h - (2 * m));
-	[cell.imageView setFrame:CGRectMake(m, m, side, side)];
-	
-	[cell.contentView setBackgroundColor:[UIColor randomColor]];
+- (void)configureGridCell:(FTStoreGridViewCell *)cell atIndex:(NSInteger)index forGridView:(AQGridView *)gridView {	
+	[cell setBackgroundColor:[UIColor clearColor]];
+	[cell.contentView setBackgroundColor:[UIColor clearColor]];
+	//[cell.imageView loadImageFromUrl:@"http://www.gotceleb.com/wp-content/uploads/celebrities/avril-lavigne/maxim-magazine-cover-november-2010-issue-scan/avril-lavigne-maxim-magazine-cover-november-2010-issue-scan-01-530x720.jpg"];
+	[cell.imageView loadImageFromUrl:@"http://content.hollywire.com/wp-content/uploads/2010/02/vanity-fair-cover-march-rising-stars-2008.jpg"];
 }
 
 - (AQGridViewCell *)gridView:(AQGridView *)gridView cellForItemAtIndex:(NSUInteger)index {
 	static NSString *ci = @"StoreGridViewCell";
-	FTGridViewCell *cell = (FTGridViewCell *)[gridView dequeueReusableCellWithIdentifier:ci];
+	FTStoreGridViewCell *cell = (FTStoreGridViewCell *)[gridView dequeueReusableCellWithIdentifier:ci];
 	if (!cell) {
 		CGRect r = CGRectMake(0, 0, 0, 0);
 		r.size = [self portraitGridCellSizeForGridView:gridView];
-		cell = [[[FTGridViewCell alloc] initWithFrame:r reuseIdentifier:ci] autorelease];
+		cell = [[[FTStoreGridViewCell alloc] initWithFrame:r reuseIdentifier:ci] autorelease];
 	}
 	[cell.imageView setImage:nil];
 	[self configureGridCell:cell atIndex:index forGridView:grid];
 	return cell;
+}
+
+- (void)gridView:(AQGridView *)gridView didSelectItemAtIndex:(NSUInteger)index {
+	[gridView deselectItemAtIndex:index animated:NO];
+	if ([delegate respondsToSelector:@selector(storeGridView:didClickCell:atIndex:)]) {
+		[delegate storeGridView:self didClickCell:nil atIndex:index];
+	}
 }
 
 #pragma mark Data management

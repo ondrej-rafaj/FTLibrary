@@ -15,6 +15,10 @@
 
 #pragma mark Initialization
 
+- (void)initializeView {
+	
+}
+
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
 	self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier];
 	if (self) {
@@ -24,6 +28,8 @@
 		[imageView setClipsToBounds:YES];
 		[imageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 		[self.contentView addSubview:imageView];
+		
+		[self initializeView];
 	}
 	return self;
 }

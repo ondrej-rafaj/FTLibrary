@@ -19,4 +19,7 @@
 @property (nonatomic, retain) FTImageView *imageView;
 
 
+- (void)initializeView;
+
+
 @end

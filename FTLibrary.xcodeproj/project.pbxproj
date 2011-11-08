@@ -324,6 +324,22 @@
 		4C8AD6091404F5960078DE52 /* FTFullWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8AD6071404F5960078DE52 /* FTFullWebViewController.m */; };
 		4C95CECE13D740E100190E64 /* FTWebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C95CECC13D740E100190E64 /* FTWebViewController.h */; };
 		4C95CECF13D740E100190E64 /* FTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C95CECD13D740E100190E64 /* FTWebViewController.m */; };
+		4C9F73CA14695F2D007B68B1 /* MGSplitCornersView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9F73C414695F2D007B68B1 /* MGSplitCornersView.h */; };
+		4C9F73CB14695F2D007B68B1 /* MGSplitCornersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F73C514695F2D007B68B1 /* MGSplitCornersView.m */; };
+		4C9F73CC14695F2D007B68B1 /* MGSplitDividerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9F73C614695F2D007B68B1 /* MGSplitDividerView.h */; };
+		4C9F73CD14695F2D007B68B1 /* MGSplitDividerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F73C714695F2D007B68B1 /* MGSplitDividerView.m */; };
+		4C9F73CE14695F2D007B68B1 /* MGSplitViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9F73C814695F2D007B68B1 /* MGSplitViewController.h */; };
+		4C9F73CF14695F2D007B68B1 /* MGSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F73C914695F2D007B68B1 /* MGSplitViewController.m */; };
+		4C9F73D314695F42007B68B1 /* FTStoreGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9F73D014695F42007B68B1 /* FTStoreGridView.h */; };
+		4C9F73D414695F42007B68B1 /* FTStoreGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F73D114695F42007B68B1 /* FTStoreGridView.m */; };
+		4C9F73D514695F42007B68B1 /* FTStoreGridViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9F73D214695F42007B68B1 /* FTStoreGridViewCell.h */; };
+		4C9F73DA14695F55007B68B1 /* FTModalFormViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9F73D614695F55007B68B1 /* FTModalFormViewController.h */; };
+		4C9F73DB14695F55007B68B1 /* FTModalFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F73D714695F55007B68B1 /* FTModalFormViewController.m */; };
+		4C9F73DC14695F55007B68B1 /* FTModalViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9F73D814695F55007B68B1 /* FTModalViewController.h */; };
+		4C9F73DD14695F55007B68B1 /* FTStoreGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F73D914695F55007B68B1 /* FTStoreGridViewCell.m */; };
+		4C9F73DF14695F64007B68B1 /* FTModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F73DE14695F64007B68B1 /* FTModalViewController.m */; };
+		4C9F73E514697749007B68B1 /* FTStoreHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9F73E314697749007B68B1 /* FTStoreHeaderView.h */; };
+		4C9F73E614697749007B68B1 /* FTStoreHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F73E414697749007B68B1 /* FTStoreHeaderView.m */; };
 		4CA29DE9144D7F13002F38BD /* FTBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA29DE7144D7F13002F38BD /* FTBarButtonItem.h */; };
 		4CA29DEA144D7F13002F38BD /* FTBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA29DE8144D7F13002F38BD /* FTBarButtonItem.m */; };
 		4CB6E1F913D5D37C002FEC0A /* FTSimpleDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */; };
@@ -797,6 +813,22 @@
 		4C8AD6071404F5960078DE52 /* FTFullWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFullWebViewController.m; sourceTree = "<group>"; };
 		4C95CECC13D740E100190E64 /* FTWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTWebViewController.h; sourceTree = "<group>"; };
 		4C95CECD13D740E100190E64 /* FTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTWebViewController.m; sourceTree = "<group>"; };
+		4C9F73C414695F2D007B68B1 /* MGSplitCornersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSplitCornersView.h; sourceTree = "<group>"; };
+		4C9F73C514695F2D007B68B1 /* MGSplitCornersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSplitCornersView.m; sourceTree = "<group>"; };
+		4C9F73C614695F2D007B68B1 /* MGSplitDividerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSplitDividerView.h; sourceTree = "<group>"; };
+		4C9F73C714695F2D007B68B1 /* MGSplitDividerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSplitDividerView.m; sourceTree = "<group>"; };
+		4C9F73C814695F2D007B68B1 /* MGSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSplitViewController.h; sourceTree = "<group>"; };
+		4C9F73C914695F2D007B68B1 /* MGSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSplitViewController.m; sourceTree = "<group>"; };
+		4C9F73D014695F42007B68B1 /* FTStoreGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStoreGridView.h; sourceTree = "<group>"; };
+		4C9F73D114695F42007B68B1 /* FTStoreGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStoreGridView.m; sourceTree = "<group>"; };
+		4C9F73D214695F42007B68B1 /* FTStoreGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStoreGridViewCell.h; sourceTree = "<group>"; };
+		4C9F73D614695F55007B68B1 /* FTModalFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTModalFormViewController.h; sourceTree = "<group>"; };
+		4C9F73D714695F55007B68B1 /* FTModalFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTModalFormViewController.m; sourceTree = "<group>"; };
+		4C9F73D814695F55007B68B1 /* FTModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTModalViewController.h; sourceTree = "<group>"; };
+		4C9F73D914695F55007B68B1 /* FTStoreGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStoreGridViewCell.m; sourceTree = "<group>"; };
+		4C9F73DE14695F64007B68B1 /* FTModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTModalViewController.m; sourceTree = "<group>"; };
+		4C9F73E314697749007B68B1 /* FTStoreHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStoreHeaderView.h; sourceTree = "<group>"; };
+		4C9F73E414697749007B68B1 /* FTStoreHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStoreHeaderView.m; sourceTree = "<group>"; };
 		4CA29DE7144D7F13002F38BD /* FTBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBarButtonItem.h; sourceTree = "<group>"; };
 		4CA29DE8144D7F13002F38BD /* FTBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTBarButtonItem.m; sourceTree = "<group>"; };
 		4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTSimpleDB.h; path = FTLibrary/FTSimpleDB.h; sourceTree = SOURCE_ROOT; };
@@ -1390,6 +1422,7 @@
 		4C57611D13C5E7570049371F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4C9F73C114695F02007B68B1 /* Store */,
 				4C6F8F5B13F87502004A4FB2 /* Basic view */,
 				4CED6B3F1461A4F9003DE290 /* Search bar */,
 				4CA29DE4144D7EF3002F38BD /* Buttons */,
@@ -1432,6 +1465,7 @@
 		4C57612513C5EA910049371F /* Basic view controller */ = {
 			isa = PBXGroup;
 			children = (
+				4C9F73E014695F7A007B68B1 /* Modal controllers */,
 				4C03667113BA0D6000E8FA09 /* FTViewController.h */,
 				4C03667213BA0D6000E8FA09 /* FTViewController.m */,
 			);
@@ -1627,6 +1661,7 @@
 		4C85BB0413BA4AFD00CB7FCA /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				4C9F73C314695F2D007B68B1 /* MGSplitViewController */,
 				68D6049F143F0C7900C3C84E /* TestFlight */,
 				A56A62D41433617B000C666B /* Twitter+OAuth */,
 				4C6F8F7313F87C1B004A4FB2 /* GridView */,
@@ -1890,6 +1925,59 @@
 				4C8AD6031404F5610078DE52 /* Full controlls */,
 			);
 			name = "Web controller";
+			sourceTree = "<group>";
+		};
+		4C9F73C114695F02007B68B1 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				4C9F73E214697723007B68B1 /* Header */,
+				4C9F73E114695F92007B68B1 /* Cell */,
+				4C9F73D014695F42007B68B1 /* FTStoreGridView.h */,
+				4C9F73D114695F42007B68B1 /* FTStoreGridView.m */,
+			);
+			name = Store;
+			sourceTree = "<group>";
+		};
+		4C9F73C314695F2D007B68B1 /* MGSplitViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4C9F73C414695F2D007B68B1 /* MGSplitCornersView.h */,
+				4C9F73C514695F2D007B68B1 /* MGSplitCornersView.m */,
+				4C9F73C614695F2D007B68B1 /* MGSplitDividerView.h */,
+				4C9F73C714695F2D007B68B1 /* MGSplitDividerView.m */,
+				4C9F73C814695F2D007B68B1 /* MGSplitViewController.h */,
+				4C9F73C914695F2D007B68B1 /* MGSplitViewController.m */,
+			);
+			path = MGSplitViewController;
+			sourceTree = "<group>";
+		};
+		4C9F73E014695F7A007B68B1 /* Modal controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4C9F73D614695F55007B68B1 /* FTModalFormViewController.h */,
+				4C9F73D714695F55007B68B1 /* FTModalFormViewController.m */,
+				4C9F73D814695F55007B68B1 /* FTModalViewController.h */,
+				4C9F73DE14695F64007B68B1 /* FTModalViewController.m */,
+			);
+			name = "Modal controllers";
+			sourceTree = "<group>";
+		};
+		4C9F73E114695F92007B68B1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4C9F73D214695F42007B68B1 /* FTStoreGridViewCell.h */,
+				4C9F73D914695F55007B68B1 /* FTStoreGridViewCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		4C9F73E214697723007B68B1 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				4C9F73E314697749007B68B1 /* FTStoreHeaderView.h */,
+				4C9F73E414697749007B68B1 /* FTStoreHeaderView.m */,
+			);
+			name = Header;
 			sourceTree = "<group>";
 		};
 		4CA29DE4144D7EF3002F38BD /* Buttons */ = {
@@ -2637,6 +2725,14 @@
 				4CED6B421461A526003DE290 /* FTSearchBar.h in Headers */,
 				4CD7769B1461FD9B007A642B /* FTGridViewCell.h in Headers */,
 				9348CDEC1464041500A6F877 /* FTPageControl.h in Headers */,
+				4C9F73CA14695F2D007B68B1 /* MGSplitCornersView.h in Headers */,
+				4C9F73CC14695F2D007B68B1 /* MGSplitDividerView.h in Headers */,
+				4C9F73CE14695F2D007B68B1 /* MGSplitViewController.h in Headers */,
+				4C9F73D314695F42007B68B1 /* FTStoreGridView.h in Headers */,
+				4C9F73D514695F42007B68B1 /* FTStoreGridViewCell.h in Headers */,
+				4C9F73DA14695F55007B68B1 /* FTModalFormViewController.h in Headers */,
+				4C9F73DC14695F55007B68B1 /* FTModalViewController.h in Headers */,
+				4C9F73E514697749007B68B1 /* FTStoreHeaderView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2928,6 +3024,14 @@
 				4CED6B431461A526003DE290 /* FTSearchBar.m in Sources */,
 				4CD7769C1461FD9B007A642B /* FTGridViewCell.m in Sources */,
 				9348CDED1464041500A6F877 /* FTPageControl.m in Sources */,
+				4C9F73CB14695F2D007B68B1 /* MGSplitCornersView.m in Sources */,
+				4C9F73CD14695F2D007B68B1 /* MGSplitDividerView.m in Sources */,
+				4C9F73CF14695F2D007B68B1 /* MGSplitViewController.m in Sources */,
+				4C9F73D414695F42007B68B1 /* FTStoreGridView.m in Sources */,
+				4C9F73DB14695F55007B68B1 /* FTModalFormViewController.m in Sources */,
+				4C9F73DD14695F55007B68B1 /* FTStoreGridViewCell.m in Sources */,
+				4C9F73DF14695F64007B68B1 /* FTModalViewController.m in Sources */,
+				4C9F73E614697749007B68B1 /* FTStoreHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
