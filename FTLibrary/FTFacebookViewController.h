@@ -11,7 +11,7 @@
 #import "FTAppDelegate.h"
 #import "FTShare.h"
 #import "FTLang.h"
-#import "ASIHTTPRequest.h"
+#import "FTDownload.h"
 #import "AQGridView.h"
 #import "FTGridViewCell.h"
 
@@ -27,7 +27,7 @@
 @end
 
 
-@interface FTFacebookViewController : FTViewController <FTShareFacebookDelegate, ASIHTTPRequestDelegate, AQGridViewDelegate, AQGridViewDataSource> {
+@interface FTFacebookViewController : FTViewController <FTShareFacebookDelegate, FTDownloadDelegate, AQGridViewDelegate, AQGridViewDataSource> {
 	
 	Facebook *_facebook;
 	
@@ -35,7 +35,7 @@
 	
 	NSString *facebookAppId;
 	
-	ASIHTTPRequest *dataRequest;
+	FTDownload *download;
 	
 	UISearchBar *searchBar;
 	
@@ -47,6 +47,8 @@
 @property (nonatomic, assign) id <FTFacebookViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) NSString *facebookAppId;
+
+@property (nonatomic, retain) FTDownload *download;
 
 @property (nonatomic) BOOL useGridView;
 
@@ -60,6 +62,8 @@
 - (void)startDownloadingDataForCurrentPage;
 
 - (void)downloadDataFromUrl:(NSString *)url;
+
+- (void)downloadFinishedWithResult:(NSString *)result;
 
 - (void)noInternetConnection;
 

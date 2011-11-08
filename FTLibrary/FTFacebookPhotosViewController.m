@@ -25,14 +25,14 @@
 	[super downloadDataFromUrl:url];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-	NSDictionary *d = [request.responseString JSONValue];
-	NSMutableArray *arr = [NSMutableArray arrayWithContentsOfFile:[d objectForKey:@"data"]];
+- (void)downloadFinishedWithResult:(NSString *)result {
+	NSDictionary *d = [result JSONValue];
+	NSMutableArray *arr = [NSMutableArray arrayWithArray:[d objectForKey:@"data"]];
 	
 	NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"updated_time" ascending:NO];
 	[arr sortUsingDescriptors:[NSArray arrayWithObjects:descriptor,nil]];
 	[super setData:[arr copy]];
-	[table reloadData];
+	[super reloadData];
 }
 
 - (void)reloadData {
@@ -65,7 +65,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 	
-	[super enableLoadingProgressViewWithTitle:FTLangGet(@"Loading pictures") withAnimationStyle:FTProgressViewAnimationFade showWhileExecuting:@selector(reloadData) onTarget:self withObject:nil animated:YES];
+	//[super enableLoadingProgressViewWithTitle:FTLangGet(@"Loading pictures") withAnimationStyle:FTProgressViewAnimationFade showWhileExecuting:@selector(reloadData) onTarget:self withObject:nil animated:YES];
 }
 
 #pragma mark Tableview delegate & data source methods

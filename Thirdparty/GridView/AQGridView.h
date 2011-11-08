@@ -265,6 +265,9 @@ extern NSString * const AQGridViewSelectionDidChangeNotification;
 
 @optional
 
+- (CGFloat)gridView:(AQGridView *) gridView spaceForSeparator:(AQGridViewCellSeparatorStyle)style;
+
+
 // all cells are placed in a logical 'grid cell', all of which are the same size. The default size is 96x128 (portrait).
 // The width/height values returned by this function will be rounded UP to the nearest denominator of the screen width.
 - (CGSize) portraitGridCellSizeForGridView: (AQGridView *) gridView;

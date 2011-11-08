@@ -145,6 +145,16 @@
 	return _elementData;
 }
 
+#pragma mark Hit tests
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+	UIView *v = [super hitTest:point withEvent:event];
+	if (v) {
+		NSLog(@"HIT !!! :)");
+	}
+	return v;
+}
+
 #pragma mark Memory management
 
 - (void)dealloc {

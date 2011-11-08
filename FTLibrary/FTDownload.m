@@ -170,9 +170,12 @@
 #pragma mark Memory managemnt
 
 - (void)dealloc {
-    [urlPath release];
+	[downloadRequest cancel];
+	[downloadRequest setDelegate:nil];
     [downloadRequest release];
-    [super dealloc];
+    [self setDelegate:nil];
+    [urlPath release];
+	[super dealloc];
 }
 
 

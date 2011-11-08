@@ -187,6 +187,7 @@
 
 - (CGRect) cellRectAtIndex: (NSUInteger) index
 {
+	//_topPadding = 60;
 	NSUInteger numPerRow = [self numberOfItemsPerRow];
     if ( numPerRow == 0 )       // avoid a divide-by-zero exception
         return ( CGRectZero );

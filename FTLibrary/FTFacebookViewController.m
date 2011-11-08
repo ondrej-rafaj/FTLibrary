@@ -7,8 +7,11 @@
 //
 
 #import "FTFacebookViewController.h"
+#import "ASIDownloadCache.h"
+#import "FTAppDelegate.h"
 #import "UIView+Layout.h"
 #import "UIColor+Tools.h"
+#import "UIAlertView+Tools.h"
 
 
 @implementation FTFacebookViewController
@@ -16,7 +19,30 @@
 @synthesize delegate;
 @synthesize facebookAppId;
 @synthesize useGridView;
+@synthesize download;
 
+
+#pragma mark Creating elements
+
+- (void)createLoadingIndicator {
+	UIActivityIndicatorView *ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+	[ai startAnimating];
+	CGRect r = ai.bounds;
+	r.size.width += 10;
+	UIView *v = [[UIView alloc] initWithFrame:r];
+	[v addSubview:ai];
+	[ai release];
+	UIBarButtonItem *loading = [[UIBarButtonItem alloc] initWithCustomView:v];
+	[v release];
+	[self.navigationItem setRightBarButtonItem:loading animated:YES];
+	[loading release];
+}
+
+- (void)createReloadButton {
+	UIBarButtonItem *reload = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(didPressReloadButton:)];
+	[self.navigationItem setRightBarButtonItem:reload];
+	[reload release];
+}
 
 #pragma mark Facebook stuff
 
@@ -52,15 +78,10 @@
 		[self authorize];
 	}
 	else {
-		if (dataRequest) {
-			[dataRequest cancel];
-			[dataRequest setDelegate:nil];
-		}
-		[dataRequest release];
-		dataRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:url]];
-		//[dataRequest setCachePolicy:ASICacheForSessionDurationCacheStoragePolicy];
-		[dataRequest setDelegate:self];
-		[dataRequest startAsynchronous];
+		[download release];
+		download = [[FTDownload alloc] initWithPath:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+		[download setDelegate:self];
+		[download startDownload];
 	}
 }
 
@@ -72,31 +93,42 @@
 	
 }
 
-#pragma mark ASIHTTPRequest delegate methods
+#pragma mark Download delegate methods
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
+- (void)downloadFinishedWithResult:(NSString *)result {
 	
 }
 
-- (void)requestFailed:(ASIHTTPRequest *)request {
-	if (self != [self.navigationController.viewControllers objectAtIndex:0]) {
-		[self.navigationController popViewControllerAnimated:YES];
-	}
+- (void)downloadDataPercentageChanged:(CGFloat)percentage forObject:(FTDownload *)object {
+	if (object == download) {
+        //[self.progressView setProgress:(percentage / 100)];
+		NSLog(@"Download in %f percent", percentage);
+    }
 }
 
-- (void)request:(ASIHTTPRequest *)request didReceiveData:(NSData *)_data {
-	NSLog(@"Received data: %@", _data);
+- (void)downloadStatusChanged:(FTDownloadStatus)downloadStatus forObject:(FTDownload *)object {
+    if (object == download) {
+		if (downloadStatus != FTDownloadStatusActive) {
+			
+        }
+        if (downloadStatus == FTDownloadStatusSuccessful) {
+            NSString *s = [object.downloadRequest responseString];
+            [self downloadFinishedWithResult:s];
+			[self createReloadButton];
+        }
+        else if (downloadStatus == FTDownloadStatusFailed) {
+            [UIAlertView showMessage:FTLangGet(@"Error downloading file") withTitle:FTLangGet(@"Error")];
+			[self createReloadButton];
+        }
+    }
 }
 
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	//[self.view setFrame:CGRectMake(0, 0, 320, 460)];
 	
-	UIBarButtonItem *reload = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(reloadData)];
-	[self.navigationItem setRightBarButtonItem:reload];
-	[reload release];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startDelayedReloadData) name:kFTAppDelegateDidOpenAppWithUrl object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -121,7 +153,10 @@
 	[v setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
 	if (useGridView) [grid reloadData];
 	
-	[self startDownloadingDataForCurrentPage];
+	if ([data count] <= 0) {
+		[self startDownloadingDataForCurrentPage];
+		[self createLoadingIndicator];
+	}
 }
 
 - (void)createTableView {
@@ -134,12 +169,20 @@
 	}
 }
 
-
 #pragma mark Loading data
 
 - (void)reloadData {
 	if (!useGridView) [table reloadData];
 	else [grid reloadData];
+}
+
+- (void)startDelayedReloadData {
+	[NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(reloadData) userInfo:nil repeats:NO];
+}
+
+- (void)didPressReloadButton:(UIBarButtonItem *)sender {
+	[self createLoadingIndicator];
+	[self reloadData];
 }
 
 #pragma mark Grid view delegate & data source methods
@@ -171,59 +214,14 @@
 	[gridView deselectItemAtIndex:index animated:NO];
 }
 
-//#pragma mark Facebook delegate methods
-//
-//- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-//	NSLog(@"Facebook error: %@", [error localizedDescription]);
-//}
-
-#pragma mark FTShare delegate methods
-
-- (void)facebookLoginDialogController:(UIViewController *)controller {
-	NSLog(@"facebookLoginDialogController");
-}
-
-- (void)facebookDidLogin:(NSError *)error {
-	NSLog(@"facebookDidLogin");
-}
-
-- (void)facebookDidPost:(NSError *)error {
-	NSLog(@"facebookDidPost");
-}
-
-#pragma mark Facebook session delegate
-
-//- (void)fbDidLogin {
-//	NSLog(@"fbDidLogin");
-//	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    [defaults setObject:[_facebook accessToken] forKey:@"FBAccessTokenKey"];
-//    [defaults setObject:[_facebook expirationDate] forKey:@"FBExpirationDateKey"];
-//    [defaults synchronize];
-//}
-//
-//- (void)fbDidNotLogin:(BOOL)cancelled {
-//	NSLog(@"fbDidNotLogin:");
-//}
-//
-//- (void)fbDidLogout {
-//	NSLog(@"fbDidLogout");
-//	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    if ([defaults objectForKey:@"FBAccessTokenKey"]) {
-//        [defaults removeObjectForKey:@"FBAccessTokenKey"];
-//        [defaults removeObjectForKey:@"FBExpirationDateKey"];
-//        [defaults synchronize];
-//    }
-//}
-
 #pragma mark Memory management
 
 - (void)dealloc {
 	[_facebook release];
 	[facebookAppId release];
-	[dataRequest cancel];
-	[dataRequest setDelegate:nil];
-	[dataRequest release];
+	[download release];
 	[searchBar release];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super dealloc];
 }
 

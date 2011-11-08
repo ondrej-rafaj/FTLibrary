@@ -17,7 +17,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        share = [[FTShare alloc] initWithReferencedController:nil];
+        //share = [[FTShare alloc] initWithReferencedController:nil];
     }
     return self;
 }
@@ -39,18 +39,22 @@
 
 // For 4.2+ support
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    if (self.share.facebook) {
-        return [self.share.facebook handleOpenURL:url];
+	BOOL ok = YES;
+	if (self.share.facebook) {
+        ok = [self.share.facebook handleOpenURL:url];
     }
-    return YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kFTAppDelegateDidOpenAppWithUrl object:url.absoluteString];
+    return ok;
 }
 
 // Pre 4.2 support
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    if (self.share.facebook) {
-        return [self.share.facebook handleOpenURL:url];
+	BOOL ok = YES;
+	if (self.share.facebook) {
+        ok = [self.share.facebook handleOpenURL:url];
     }
-    return YES;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kFTAppDelegateDidOpenAppWithUrl object:url.absoluteString];
+    return ok;
 }
 
 

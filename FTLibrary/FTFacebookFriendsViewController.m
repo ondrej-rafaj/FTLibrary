@@ -14,6 +14,7 @@
 #import "FTTracking.h"
 #import "UIView+Layout.h"
 #import "UIColor+Tools.h"
+#import "UIAlertView+Tools.h"
 
 
 @implementation FTFacebookFriendsViewController
@@ -26,46 +27,40 @@
 	[super downloadDataFromUrl:url];
 }
 
-- (void)getMeInfo {
-	// Getting informations about myself
-	NSString *url = [[super facebook] urlWithGraphPath:@"me" andParams:[NSMutableDictionary dictionary]];
-	NSDictionary *info = [FTDataJson jsonDataFromUrl:url];
-	
+- (void)setMyInfo:(NSDictionary *)info {
 	// Flurry
 	[FTTracking logFacebookUserInfo:info];
 	
 	// Setting informations about myself
-	[sections setValue:[NSMutableArray array] forKey:@"{search}"];
+	NSString *sectionChar = @"«";
+	[sections setValue:[NSMutableArray array] forKey:sectionChar];
 	NSMutableDictionary *me = [NSMutableDictionary dictionary];
 	[me setValue:[info objectForKey:@"id"] forKey:@"id"];
 	[me setValue:[NSString stringWithFormat:@"%@ (%@)", [info objectForKey:@"name"], FTLangGet(@"me")] forKey:@"name"];
-	[[sections objectForKey:@"{search}"] addObject:me];
-	
-	// Adding friends to appropriate sections
-	NSMutableArray *arr;
-	for (NSDictionary *friend in arr) {
-		[[sections objectForKey:[[friend objectForKey:@"name"] substringToIndex:1]] addObject:friend];
+	[[sections objectForKey:sectionChar] addObject:me];
+	// Sorting sections
+	for (NSString *key in [sections allKeys]) {
+		[[sections objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
 	}
+	[table reloadData];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-	NSData *responseData = [request responseData];
-	NSString *response = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-	
-	NSLog(@"response: %@", response);
-	
-	NSLog(@"responseHeaders: %@", request.responseHeaders);
-	NSLog(@"responseStatusCode: %d", request.responseStatusCode);
-	NSLog(@"responseData: %@", request.responseData);
-	NSLog(@"responseStatusMessage: %@", request.responseStatusMessage);
-	NSLog(@"response url: %@", request.url.absoluteString);
-	
-	
-	NSDictionary *d = [request.responseString JSONValue];
-	NSMutableArray *arr = [NSMutableArray arrayWithContentsOfFile:[d objectForKey:@"data"]];
+- (void)downloadMyInfo {
+	NSString *url = [[super facebook] urlWithGraphPath:@"me" andParams:[NSMutableDictionary dictionary]];
+	myInfoDownload = [[FTDownload alloc] initWithPath:url];
+	[myInfoDownload setDelegate:self];
+	[myInfoDownload startDownload];
+}
+
+- (void)downloadFinishedWithResult:(NSString *)result {
+	NSLog(@"My friends: %@", result);
+
+	NSDictionary *d = [result JSONValue];
+	NSMutableArray *arr = [NSMutableArray arrayWithArray:[d objectForKey:@"data"]];
 	[super setData:arr];
 	
 	// Creating index sections
+	[sections release];
 	sections = [[NSMutableDictionary alloc] init];
 	BOOL found;
 	for (NSDictionary *friend in arr) {
@@ -80,12 +75,22 @@
 			[sections setValue:[NSMutableArray array] forKey:c];
 		}
 	}
-	
+		
+	// Adding friends to appropriate sections
+	for (NSDictionary *friend in arr) {
+		[[sections objectForKey:[[friend objectForKey:@"name"] substringToIndex:1]] addObject:friend];
+	}
+
 	// Sorting sections
 	for (NSString *key in [sections allKeys]) {
 		[[sections objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
 	}
 	[table reloadData];
+	
+	if (myInfo) {
+		[self setMyInfo:myInfo];
+	}
+	else [self downloadMyInfo];
 }
 
 - (void)reloadData {
@@ -94,6 +99,19 @@
 //	cacheFile = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:@"friendsSortedArray.cache"];
 //	[FTFilesystemIO deleteFile:cacheFile];
 	[self startDownloadingDataForCurrentPage];
+	[self downloadMyInfo];
+}
+
+- (void)downloadStatusChanged:(FTDownloadStatus)downloadStatus forObject:(FTDownload *)object {
+	if (object == myInfoDownload) {
+		if (downloadStatus == FTDownloadStatusSuccessful) {
+			[self setMyInfo:[object.downloadRequest.responseString JSONValue]];
+		}
+		else if (downloadStatus == FTDownloadStatusFailed) {
+			[UIAlertView showMessage:FTLangGet(@"Error while downloading user data") withTitle:FTLangGet(@"Error")];
+		}
+	}
+	else [super downloadStatusChanged:downloadStatus forObject:object];
 }
 
 - (NSDictionary *)dictionaryForFriendAtIndexPath:(NSIndexPath *)indexPath {
@@ -106,6 +124,8 @@
 - (void)dealloc {
 	[sections release];
 	[searchArray release];
+	[myInfoDownload release];
+	[myInfo release];
 	[super dealloc];
 }
 
@@ -141,8 +161,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	
-	//[super enableLoadingProgressViewWithTitle:FTLangGet(@"Loading friends") withAnimationStyle:FTProgressViewAnimationFade showWhileExecuting:@selector(reloadData) onTarget:self withObject:nil animated:YES];
 }
 
 #pragma mark Tableview delegate & data source methods
@@ -186,24 +204,6 @@
     if (!isSearching) return [[sections allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
 	return nil;
 }
-
-//#pragma mark Data delegate methods
-//
-//- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
-//	NSLog(@"Facebook response: %@", response);
-//}
-//
-//- (void)request:(FBRequest *)request didLoad:(id)result {
-//	NSLog(@"Facebook result: %@", result);
-//}
-//
-//- (void)facebookDidPost:(NSError *)error {
-//	NSLog(@"facebookDidPost:");
-//}
-//
-//- (void)facebookDidLogin:(NSError *)error {
-//	NSLog(@"facebookDidLogin:");
-//}
 
 #pragma mark Search bar delegate methods
 

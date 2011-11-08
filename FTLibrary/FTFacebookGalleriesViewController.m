@@ -24,9 +24,9 @@
 	[super downloadDataFromUrl:url];
 }
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-	NSDictionary *d = [request.responseString JSONValue];
-	NSMutableArray *arr = [NSMutableArray arrayWithContentsOfFile:[d objectForKey:@"data"]];
+- (void)downloadFinishedWithResult:(NSString *)result {
+	NSDictionary *d = [result JSONValue];
+	NSMutableArray *arr = [NSMutableArray arrayWithArray:[d objectForKey:@"data"]];
 	
 	NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"updated_time" ascending:NO];
 	[arr sortUsingDescriptors:[NSArray arrayWithObjects:descriptor,nil]];
@@ -69,8 +69,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	
-	[super enableLoadingProgressViewWithTitle:FTLangGet(@"Loading albums") withAnimationStyle:FTProgressViewAnimationFade showWhileExecuting:@selector(reloadData) onTarget:self withObject:nil animated:YES];
+	//[super enableLoadingProgressViewWithTitle:FTLangGet(@"Loading albums") withAnimationStyle:FTProgressViewAnimationFade showWhileExecuting:@selector(reloadData) onTarget:self withObject:nil animated:YES];
 }
 
 #pragma mark Tableview delegate & data source methods
@@ -89,24 +88,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
-//#pragma mark Data delegate methods
-//
-//- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
-//	NSLog(@"Facebook response: %@", response);
-//}
-//
-//- (void)request:(FBRequest *)request didLoad:(id)result {
-//	NSLog(@"Facebook result: %@", result);
-//}
-//
-//- (void)facebookDidPost:(NSError *)error {
-//	NSLog(@"facebookDidPost:");
-//}
-//
-//- (void)facebookDidLogin:(NSError *)error {
-//	NSLog(@"facebookDidLogin:");
-//}
 
 
 @end

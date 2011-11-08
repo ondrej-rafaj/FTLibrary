@@ -18,6 +18,10 @@
 	NSMutableArray *searchArray;
 	int lastSearchCharCount;
 	
+	FTDownload *myInfoDownload;
+	
+	NSDictionary *myInfo;
+	
 }
 
 - (NSDictionary *)dictionaryForFriendAtIndexPath:(NSIndexPath *)indexPath;
