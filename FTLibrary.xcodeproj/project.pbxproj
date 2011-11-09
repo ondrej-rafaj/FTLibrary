@@ -333,13 +333,13 @@
 		4C9F73D314695F42007B68B1 /* FTStoreGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9F73D014695F42007B68B1 /* FTStoreGridView.h */; };
 		4C9F73D414695F42007B68B1 /* FTStoreGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F73D114695F42007B68B1 /* FTStoreGridView.m */; };
 		4C9F73D514695F42007B68B1 /* FTStoreGridViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9F73D214695F42007B68B1 /* FTStoreGridViewCell.h */; };
-		4C9F73DA14695F55007B68B1 /* FTModalFormViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9F73D614695F55007B68B1 /* FTModalFormViewController.h */; };
-		4C9F73DB14695F55007B68B1 /* FTModalFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F73D714695F55007B68B1 /* FTModalFormViewController.m */; };
 		4C9F73DC14695F55007B68B1 /* FTModalViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9F73D814695F55007B68B1 /* FTModalViewController.h */; };
 		4C9F73DD14695F55007B68B1 /* FTStoreGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F73D914695F55007B68B1 /* FTStoreGridViewCell.m */; };
 		4C9F73DF14695F64007B68B1 /* FTModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F73DE14695F64007B68B1 /* FTModalViewController.m */; };
 		4C9F73E514697749007B68B1 /* FTStoreHeaderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9F73E314697749007B68B1 /* FTStoreHeaderView.h */; };
 		4C9F73E614697749007B68B1 /* FTStoreHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F73E414697749007B68B1 /* FTStoreHeaderView.m */; };
+		4C9F740F146AA317007B68B1 /* FTStoreDataObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9F740D146AA317007B68B1 /* FTStoreDataObject.h */; };
+		4C9F7410146AA317007B68B1 /* FTStoreDataObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F740E146AA317007B68B1 /* FTStoreDataObject.m */; };
 		4CA29DE9144D7F13002F38BD /* FTBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA29DE7144D7F13002F38BD /* FTBarButtonItem.h */; };
 		4CA29DEA144D7F13002F38BD /* FTBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA29DE8144D7F13002F38BD /* FTBarButtonItem.m */; };
 		4CB6E1F913D5D37C002FEC0A /* FTSimpleDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */; };
@@ -822,13 +822,13 @@
 		4C9F73D014695F42007B68B1 /* FTStoreGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStoreGridView.h; sourceTree = "<group>"; };
 		4C9F73D114695F42007B68B1 /* FTStoreGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStoreGridView.m; sourceTree = "<group>"; };
 		4C9F73D214695F42007B68B1 /* FTStoreGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStoreGridViewCell.h; sourceTree = "<group>"; };
-		4C9F73D614695F55007B68B1 /* FTModalFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTModalFormViewController.h; sourceTree = "<group>"; };
-		4C9F73D714695F55007B68B1 /* FTModalFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTModalFormViewController.m; sourceTree = "<group>"; };
 		4C9F73D814695F55007B68B1 /* FTModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTModalViewController.h; sourceTree = "<group>"; };
 		4C9F73D914695F55007B68B1 /* FTStoreGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStoreGridViewCell.m; sourceTree = "<group>"; };
 		4C9F73DE14695F64007B68B1 /* FTModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTModalViewController.m; sourceTree = "<group>"; };
 		4C9F73E314697749007B68B1 /* FTStoreHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStoreHeaderView.h; sourceTree = "<group>"; };
 		4C9F73E414697749007B68B1 /* FTStoreHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStoreHeaderView.m; sourceTree = "<group>"; };
+		4C9F740D146AA317007B68B1 /* FTStoreDataObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStoreDataObject.h; sourceTree = "<group>"; };
+		4C9F740E146AA317007B68B1 /* FTStoreDataObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStoreDataObject.m; sourceTree = "<group>"; };
 		4CA29DE7144D7F13002F38BD /* FTBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBarButtonItem.h; sourceTree = "<group>"; };
 		4CA29DE8144D7F13002F38BD /* FTBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTBarButtonItem.m; sourceTree = "<group>"; };
 		4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTSimpleDB.h; path = FTLibrary/FTSimpleDB.h; sourceTree = SOURCE_ROOT; };
@@ -1930,6 +1930,7 @@
 		4C9F73C114695F02007B68B1 /* Store */ = {
 			isa = PBXGroup;
 			children = (
+				4C9F740C146AA2F7007B68B1 /* Data Objects */,
 				4C9F73E214697723007B68B1 /* Header */,
 				4C9F73E114695F92007B68B1 /* Cell */,
 				4C9F73D014695F42007B68B1 /* FTStoreGridView.h */,
@@ -1954,8 +1955,6 @@
 		4C9F73E014695F7A007B68B1 /* Modal controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4C9F73D614695F55007B68B1 /* FTModalFormViewController.h */,
-				4C9F73D714695F55007B68B1 /* FTModalFormViewController.m */,
 				4C9F73D814695F55007B68B1 /* FTModalViewController.h */,
 				4C9F73DE14695F64007B68B1 /* FTModalViewController.m */,
 			);
@@ -1978,6 +1977,15 @@
 				4C9F73E414697749007B68B1 /* FTStoreHeaderView.m */,
 			);
 			name = Header;
+			sourceTree = "<group>";
+		};
+		4C9F740C146AA2F7007B68B1 /* Data Objects */ = {
+			isa = PBXGroup;
+			children = (
+				4C9F740D146AA317007B68B1 /* FTStoreDataObject.h */,
+				4C9F740E146AA317007B68B1 /* FTStoreDataObject.m */,
+			);
+			name = "Data Objects";
 			sourceTree = "<group>";
 		};
 		4CA29DE4144D7EF3002F38BD /* Buttons */ = {
@@ -2730,9 +2738,9 @@
 				4C9F73CE14695F2D007B68B1 /* MGSplitViewController.h in Headers */,
 				4C9F73D314695F42007B68B1 /* FTStoreGridView.h in Headers */,
 				4C9F73D514695F42007B68B1 /* FTStoreGridViewCell.h in Headers */,
-				4C9F73DA14695F55007B68B1 /* FTModalFormViewController.h in Headers */,
 				4C9F73DC14695F55007B68B1 /* FTModalViewController.h in Headers */,
 				4C9F73E514697749007B68B1 /* FTStoreHeaderView.h in Headers */,
+				4C9F740F146AA317007B68B1 /* FTStoreDataObject.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3028,10 +3036,10 @@
 				4C9F73CD14695F2D007B68B1 /* MGSplitDividerView.m in Sources */,
 				4C9F73CF14695F2D007B68B1 /* MGSplitViewController.m in Sources */,
 				4C9F73D414695F42007B68B1 /* FTStoreGridView.m in Sources */,
-				4C9F73DB14695F55007B68B1 /* FTModalFormViewController.m in Sources */,
 				4C9F73DD14695F55007B68B1 /* FTStoreGridViewCell.m in Sources */,
 				4C9F73DF14695F64007B68B1 /* FTModalViewController.m in Sources */,
 				4C9F73E614697749007B68B1 /* FTStoreHeaderView.m in Sources */,
+				4C9F7410146AA317007B68B1 /* FTStoreDataObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

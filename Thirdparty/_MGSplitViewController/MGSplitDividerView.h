@@ -12,6 +12,7 @@
 @interface MGSplitDividerView : UIView {
 	MGSplitViewController *splitViewController;
 	BOOL allowsDragging;
+    CGPoint _touchPos;
 }
 
 @property (nonatomic, assign) MGSplitViewController *splitViewController; // weak ref.

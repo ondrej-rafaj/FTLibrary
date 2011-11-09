@@ -8,6 +8,24 @@
 
 #import "FTViewController.h"
 
-@interface FTModalViewController : FTViewController
+@interface FTModalViewController : FTViewController {
+	
+	UIToolbar *topToolBar;
+	UIBarButtonItem *closeButton;
+	
+	UIView *contentView;
+	
+}
+
+@property (nonatomic, retain) UIToolbar *topToolBar;
+@property (nonatomic, retain) UIBarButtonItem *closeButton;
+@property (nonatomic, retain) UIView *contentView;
+
+
+- (void)closeModalView;
+
+- (void)createTopToolbar;
+- (void)createTopToolbarWithCloseButton;
+
 
 @end

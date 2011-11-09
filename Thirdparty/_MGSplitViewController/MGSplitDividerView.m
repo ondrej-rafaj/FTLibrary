@@ -1,4 +1,4 @@
-//
+	//
 //  MGSplitDividerView.m
 //  MGSplitView
 //
@@ -180,14 +180,20 @@
 #pragma mark -
 #pragma mark Interaction
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    if (touch) {
+        _touchPos = [touch locationInView:self];
+    }
+}
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	UITouch *touch = [touches anyObject];
 	if (touch) {
-		CGPoint lastPt = [touch previousLocationInView:self];
 		CGPoint pt = [touch locationInView:self];
-		float offset = (splitViewController.vertical) ? pt.x - lastPt.x : pt.y - lastPt.y;
+		float offset = (splitViewController.vertical) ? pt.x - _touchPos.x : pt.y - _touchPos.y;
 		if (!splitViewController.masterBeforeDetail) {
 			offset = -offset;
 		}

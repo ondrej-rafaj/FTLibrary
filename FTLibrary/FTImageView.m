@@ -151,7 +151,7 @@
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
 	NSData *data;
-	NSString *path = [[FTFilesystemPaths getImagesDirectoryPath] stringByAppendingPathComponent:[FTText getSafeText:url]];
+	NSString *path = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:[FTText getSafeText:url]];
 	BOOL isLoadingFromUrl = NO;
 	@synchronized(self) {
 		if (![FTFilesystemIO isFile:path]) {
@@ -185,7 +185,7 @@
 }
 
 - (BOOL)isCacheFileForUrl:(NSString *)url {
-	NSString *path = [[FTFilesystemPaths getImagesDirectoryPath] stringByAppendingPathComponent:[FTText getSafeText:url]];
+	NSString *path = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:[FTText getSafeText:url]];
 	return ([FTFilesystemIO isFile:path]);
 }
 
@@ -194,7 +194,7 @@
 	imageUrl = url;
 	[imageUrl retain];
 	
-	NSString *path = [[FTFilesystemPaths getImagesDirectoryPath] stringByAppendingPathComponent:[FTText getSafeText:url]];
+	NSString *path = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:[FTText getSafeText:url]];
 	if ([FTFilesystemIO isFile:path]) {
 		[NSThread detachNewThreadSelector:@selector(loadImageFromUrlOnBackground:) toTarget:self withObject:url];
 		[self updateDebugInfo:@"Loading from cache"];
@@ -219,7 +219,7 @@
 	[self updateDebugInfo:@"Request successful"];
 	[self enableLoadingElements:NO];
 	UIImage *img = [UIImage imageWithData:[request responseData]];
-	NSString *path = [[FTFilesystemPaths getImagesDirectoryPath] stringByAppendingPathComponent:[FTText getSafeText:request.url.absoluteString]];
+	NSString *path = [[FTFilesystemPaths getCacheDirectoryPath] stringByAppendingPathComponent:[FTText getSafeText:request.url.absoluteString]];
 	[[request responseData] writeToFile:path atomically:YES];
 	[self performSelectorOnMainThread:@selector(setImage:) withObject:img waitUntilDone:NO];
 	

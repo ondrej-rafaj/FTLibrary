@@ -147,12 +147,12 @@
 	[self setFrame:r];
 }
 
-- (void)makeMarginInSuperViewWithTopMargin:(CGFloat)topMargin andSideMArgin:(CGFloat)sideMargin {
+- (void)makeMarginInSuperViewWithTopMargin:(CGFloat)topMargin andSideMargin:(CGFloat)sideMargin {
 	[self makeMarginInSuperViewWithTopMargin:topMargin leftMargin:sideMargin rightMargin:sideMargin andBottomMargin:topMargin];
 }
 
 - (void)makeMarginInSuperView:(CGFloat)margin {
-	[self makeMarginInSuperViewWithTopMargin:margin andSideMArgin:margin];
+	[self makeMarginInSuperViewWithTopMargin:margin andSideMargin:margin];
 }
 
 - (void)bringToFront {

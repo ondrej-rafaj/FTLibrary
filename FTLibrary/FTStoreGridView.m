@@ -8,6 +8,7 @@
 
 #import "FTStoreGridView.h"
 #import "FTSystem.h"
+#import "FTStoreHeaderView.h"
 #import "UIColor+Tools.h"
 
 
@@ -15,12 +16,26 @@
 
 @synthesize grid;
 @synthesize delegate;
+@synthesize dataSource;
 
 
 #pragma mark Creating elements
 
 - (void)createMainGridView {
 	grid = [[AQGridView alloc] initWithFrame:self.bounds];
+	
+	// Setting up header view
+	CGRect r = grid.bounds;
+	r.size.height = 290;
+	FTStoreHeaderView *header = [[FTStoreHeaderView alloc] initWithFrame:r];
+	[grid setGridHeaderView:header];
+	[header release];
+	
+	// Setting up footer view
+	FTStoreHeaderView *footer = [[FTStoreHeaderView alloc] initWithFrame:r];
+	[grid setGridFooterView:footer];
+	[footer release];
+	
 	[grid setSeparatorStyle:AQGridViewCellSeparatorStyleEmptySpace];
 	[grid setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 	[grid setDelegate:self];
@@ -47,7 +62,17 @@
 #pragma mark Grid view delegate & data source methods
 
 - (NSUInteger)numberOfItemsInGridView:(AQGridView *)gridView {
-	return 11;
+	if ([dataSource respondsToSelector:@selector(numberOfItemsInStoreGridView:)]) {
+		return [dataSource numberOfItemsInStoreGridView:self];
+	}
+	else return 0;
+}
+
+- (FTStoreDataObject *)dataObjectForIndex:(NSInteger)index {
+	if ([dataSource respondsToSelector:@selector(storeGridView:dataObjectForItemAtIndex:)]) {
+		return [dataSource storeGridView:self dataObjectForItemAtIndex:index];
+	}
+	else return [[[FTStoreDataObject alloc] init] autorelease];
 }
 
 - (CGSize)portraitGridCellSizeForGridView:(AQGridView *)gridView {
@@ -55,15 +80,21 @@
 		return CGSizeMake(150, 80);
 	}
 	else {
-		return CGSizeMake(320, 320);
+		return CGSizeMake(320, 290);
 	}
 }
 
-- (void)configureGridCell:(FTStoreGridViewCell *)cell atIndex:(NSInteger)index forGridView:(AQGridView *)gridView {	
+- (void)configureGridCell:(FTStoreGridViewCell *)cell atIndex:(NSInteger)index forGridView:(AQGridView *)gridView {
+	FTStoreDataObject *o = [self dataObjectForIndex:index];
 	[cell setBackgroundColor:[UIColor clearColor]];
 	[cell.contentView setBackgroundColor:[UIColor clearColor]];
-	//[cell.imageView loadImageFromUrl:@"http://www.gotceleb.com/wp-content/uploads/celebrities/avril-lavigne/maxim-magazine-cover-november-2010-issue-scan/avril-lavigne-maxim-magazine-cover-november-2010-issue-scan-01-530x720.jpg"];
-	[cell.imageView loadImageFromUrl:@"http://content.hollywire.com/wp-content/uploads/2010/02/vanity-fair-cover-march-rising-stars-2008.jpg"];
+	[cell.imageView loadImageFromUrl:o.imageSUrl];
+	[cell setTitleText:o.title];
+	[cell setDescriptionText:o.description];
+	[cell.price setText:[NSString stringWithFormat:@"£%.2f", [o.price floatValue]]];
+	
+	[cell setCellIndex:index];
+	[cell setDataObject:o];
 }
 
 - (AQGridViewCell *)gridView:(AQGridView *)gridView cellForItemAtIndex:(NSUInteger)index {
@@ -74,16 +105,46 @@
 		r.size = [self portraitGridCellSizeForGridView:gridView];
 		cell = [[[FTStoreGridViewCell alloc] initWithFrame:r reuseIdentifier:ci] autorelease];
 	}
-	[cell.imageView setImage:nil];
+	UIImage *img = nil;
+	if ([dataSource respondsToSelector:@selector(defaultCellImageForStoreGridView:)]) {
+		img = [dataSource defaultCellImageForStoreGridView:self];
+	}
+	[cell.imageView setImage:img];
 	[self configureGridCell:cell atIndex:index forGridView:grid];
+	[cell setDelegate:self];
 	return cell;
 }
 
 - (void)gridView:(AQGridView *)gridView didSelectItemAtIndex:(NSUInteger)index {
 	[gridView deselectItemAtIndex:index animated:NO];
-	if ([delegate respondsToSelector:@selector(storeGridView:didClickCell:atIndex:)]) {
-		[delegate storeGridView:self didClickCell:nil atIndex:index];
+}
+
+#pragma mark Cell delegate methods
+
+- (void)didClickCoverImageWithIndex:(NSInteger)index andObject:(FTStoreDataObject *)dataObject {
+	if ([delegate respondsToSelector:@selector(storeGridView:didClickCellWithObject:atIndex:)]) {
+		FTStoreDataObject *o = [self dataObjectForIndex:index];
+		[delegate storeGridView:self didClickCellWithObject:o atIndex:index];
 	}
+}
+
+- (void)didClickActionButtonWithIndex:(NSInteger)index andObject:(FTStoreDataObject *)dataObject {
+	if ([delegate respondsToSelector:@selector(storeGridView:didClickActionButtonWithObject:atIndex:)]) {
+		FTStoreDataObject *o = [self dataObjectForIndex:index];
+		[delegate storeGridView:self didClickActionButtonWithObject:o atIndex:index];
+	}
+}
+
+#pragma mark Setters and getters
+
+- (void)setHeaderImageUrl:(NSString *)headerUrl andFooterImageUrl:(NSString *)footerUrl {
+	[[(FTStoreHeaderView *)grid.gridHeaderView imageView] loadImageFromUrl:headerUrl];
+	[[(FTStoreHeaderView *)grid.gridFooterView imageView] loadImageFromUrl:footerUrl];
+}
+
+- (void)setHeaderImage:(UIImage *)headerImage andFooterImage:(UIImage *)footerImage {
+	[[(FTStoreHeaderView *)grid.gridHeaderView imageView] setImage:headerImage];
+	[[(FTStoreHeaderView *)grid.gridFooterView imageView] setImage:footerImage];
 }
 
 #pragma mark Data management

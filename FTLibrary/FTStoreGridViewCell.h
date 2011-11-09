@@ -8,6 +8,17 @@
 
 #import "AQGridViewCell.h"
 #import "FTGridViewCell.h"
+#import "FTStoreDataObject.h"
+
+
+@class FTStoreGridViewCell;
+
+@protocol FTStoreGridViewCellDelegate <NSObject>
+
+- (void)didClickActionButtonWithIndex:(NSInteger)index andObject:(FTStoreDataObject *)dataObject;
+- (void)didClickCoverImageWithIndex:(NSInteger)index andObject:(FTStoreDataObject *)dataObject;
+
+@end
 
 @interface FTStoreGridViewCell : FTGridViewCell {
 	
@@ -19,6 +30,11 @@
 	
 	UIButton *buyButton;
 	
+	NSInteger cellIndex;
+	FTStoreDataObject *dataObject;
+	
+	id <FTStoreGridViewCellDelegate> delegate;
+	
 }
 
 @property (nonatomic, retain) UIView *storeView;
@@ -26,5 +42,14 @@
 @property (nonatomic, retain) UILabel *description;
 @property (nonatomic, retain) UILabel *price;
 @property (nonatomic, retain) UIButton *buyButton;
+@property (nonatomic) NSInteger cellIndex;
+@property (nonatomic, retain) FTStoreDataObject *dataObject;
+@property (nonatomic, assign) id <FTStoreGridViewCellDelegate> delegate;
+
+
+- (void)setTitleText:(NSString *)text;
+- (void)setPriceText:(NSString *)text;
+- (void)setDescriptionText:(NSString *)text;
+
 
 @end
