@@ -1,4 +1,4 @@
-//
+ //
 //  FTCoreTextView.m
 //  FTCoreText
 //
@@ -244,7 +244,6 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font);
 @synthesize text = _text;
 @synthesize processedString = _processedString;
 @synthesize path = _path;
-@synthesize context = _context;
 @synthesize URLs = _URLs;
 @synthesize images = _images;
 @synthesize delegate = _delegate;
@@ -868,11 +867,10 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
 {
 	[self updateFramesetterIfNeeded];
 	
-	_context = UIGraphicsGetCurrentContext();
-	CGContextSaveGState(_context);
+	CGContextRef context = UIGraphicsGetCurrentContext();
+
 	[self.backgroundColor setFill];
-	CGContextFillRect(_context, rect);
-	CGContextRestoreGState(_context);
+	CGContextFillRect(context, rect);
 	
 	CGMutablePathRef mainPath = CGPathCreateMutable();
    	
@@ -885,27 +883,20 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
     else {
         CGPathAddPath(mainPath, NULL, _path);
     }
-    
-	
-    
+
 	CTFrameRef drawFrame = CTFramesetterCreateFrame(_framesetter, 
                                                     CFRangeMake(0, 0),
                                                     mainPath, NULL);
-    
-    // flip coordinate system
-    _context = UIGraphicsGetCurrentContext();
-    CGContextClearRect(self.context, self.frame);
     
     //draw images
     if ([_images count] > 0) [self drawImages];
     
     
-	CGContextSetTextMatrix(self.context, CGAffineTransformIdentity);
-	CGContextTranslateCTM(self.context, 0, self.bounds.size.height);
-	CGContextScaleCTM(self.context, 1.0, -1.0);
+	CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+	CGContextTranslateCTM(context, 0, self.bounds.size.height);
+	CGContextScaleCTM(context, 1.0, -1.0);
 	// draw
-	CTFrameDraw(drawFrame, self.context);
-    CGContextSaveGState(self.context);
+	CTFrameDraw(drawFrame, context);
 	
 	// cleanup
 	CFRelease(drawFrame);

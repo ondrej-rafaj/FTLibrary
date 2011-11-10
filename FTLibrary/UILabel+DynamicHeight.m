@@ -22,7 +22,7 @@
 	sizedFrame.size.height = requiredHeight;
 
 	[self setLineBreakMode:UILineBreakModeWordWrap];
-	[self setNumberOfLines:100];
+	[self setNumberOfLines:0];
 	self.frame = sizedFrame;
 	[self setText:text];
 	

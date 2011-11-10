@@ -17,40 +17,38 @@
 	}
 }
 
-- (double)width {
-	CGRect frame = [self frame];
-	return frame.size.width;
+- (CGFloat)width {
+	return CGRectGetWidth(self.frame);
 }
 
-- (void)setWidth:(double)value {
+- (void)setWidth:(CGFloat)value {
 	CGRect frame = [self frame];
-	frame.size.width = round(value);
+	frame.size.width = roundf(value);
 	[self setFrame:frame];
 }
 
-- (double)height {
-	CGRect frame = [self frame];
-	return frame.size.height;	
+- (CGFloat)height {
+	return CGRectGetHeight(self.frame);	
 }
 
-- (void)setHeight:(double)value {
+- (void)setHeight:(CGFloat)value {
 	CGRect frame = [self frame];
-	frame.size.height = round(value);
+	frame.size.height = roundf(value);
 	[self setFrame:frame];
 }
 
 - (CGFloat)bottomPosition {
-	return ([self height] + [self yPosition]);
+	return CGRectGetMaxY(self.frame);
 }
 
 - (CGFloat)rightPosition {
-	return ([self width] + [self xPosition]);
+	return CGRectGetMaxX(self.frame);
 }
 
 - (void)setSize:(CGSize)size {
 	CGRect frame = [self frame];
-	frame.size.width = round(size.width);
-	frame.size.height = round(size.height);
+	frame.size.width = roundf(size.width);
+	frame.size.height = roundf(size.height);
 	[self setFrame:frame];
 }
 
@@ -66,93 +64,98 @@
 
 - (void)setOrigin:(CGPoint)point {
 	CGRect frame = [self frame];
-	frame.origin = point;
+	frame.origin.x = roundf(point.x);
+	frame.origin.y = roundf(point.y);
 	[self setFrame:frame];
 }
 
-- (double)xPosition {
-	CGRect frame = [self frame];
-	return frame.origin.x;
+- (CGFloat)xPosition {
+	return CGRectGetMinX(self.frame);
 }
 
-- (double)yPosition {
-	CGRect frame = [self frame];
-	return frame.origin.y;	
+- (CGFloat)yPosition {
+	return CGRectGetMinY(self.frame);
 }
 
-- (double)baselinePosition {
-	return [self yPosition] + [self height];
+- (CGFloat)baselinePosition {
+	return CGRectGetMaxX(self.frame);
 }
 
-- (void)positionAtX:(double)xValue {
+- (void)positionAtX:(CGFloat)xValue {
 	CGRect frame = [self frame];
-	frame.origin.x = round(xValue);
+	frame.origin.x = roundf(xValue);
 	[self setFrame:frame];
 }
 
-- (void)positionAtY:(double)yValue {
+- (void)positionAtY:(CGFloat)yValue {
 	CGRect frame = [self frame];
-	frame.origin.y = round(yValue);
+	frame.origin.y = roundf(yValue);
 	[self setFrame:frame];
 }
 
-- (void)positionAtX:(double)xValue andY:(double)yValue {
+- (void)positionAtX:(CGFloat)xValue andY:(CGFloat)yValue {
 	CGRect frame = [self frame];
-	frame.origin.x = round(xValue);
-	frame.origin.y = round(yValue);
+	frame.origin.x = roundf(xValue);
+	frame.origin.y = roundf(yValue);
 	[self setFrame:frame];
 }
 
-- (void)positionAtX:(double)xValue andY:(double)yValue withWidth:(double)width {
+- (void)positionAtX:(CGFloat)xValue andY:(CGFloat)yValue withWidth:(CGFloat)width {
 	CGRect frame = [self frame];
-	frame.origin.x = round(xValue);
-	frame.origin.y = round(yValue);
+	frame.origin.x = roundf(xValue);
+	frame.origin.y = roundf(yValue);
 	frame.size.width = width;
 	[self setFrame:frame];	
 }
 
-- (void)positionAtX:(double)xValue andY:(double)yValue withHeight:(double)height {
+- (void)positionAtX:(CGFloat)xValue andY:(CGFloat)yValue withHeight:(CGFloat)height {
 	CGRect frame = [self frame];
-	frame.origin.x = round(xValue);
-	frame.origin.y = round(yValue);
+	frame.origin.x = roundf(xValue);
+	frame.origin.y = roundf(yValue);
 	frame.size.height = height;
 	[self setFrame:frame];	
 }
 
-- (void)positionAtX:(double)xValue withHeight:(double)height {
+- (void)positionAtX:(CGFloat)xValue withHeight:(CGFloat)height {
 	CGRect frame = [self frame];
-	frame.origin.x = round(xValue);
+	frame.origin.x = roundf(xValue);
 	frame.size.height = height;
 	[self setFrame:frame];	
 }
 
 - (void)centerInSuperView {
-	double xPos = round((self.superview.frame.size.width - self.frame.size.width) / 2.0);
-	double yPos = round((self.superview.frame.size.height - self.frame.size.height) / 2.0);	
-	[self positionAtX:xPos andY:yPos];
+	if (self.superview) {
+		CGFloat xPos = roundf((self.superview.frame.size.width - self.frame.size.width) / 2.f);
+		CGFloat yPos = roundf((self.superview.frame.size.height - self.frame.size.height) / 2.f);	
+		[self positionAtX:xPos andY:yPos];
+	}
 }
 
 - (void)aestheticCenterInSuperView {
-	double xPos = round(([self.superview width] - [self width]) / 2.0);
-	double yPos = round(([self.superview height] - [self height]) / 2.0) - ([self.superview height] / 8.0);
-	[self positionAtX:xPos andY:yPos];	
+	if (self.superview) {
+		CGFloat xPos = roundf(([self.superview width] - [self width]) / 2.0);
+		CGFloat yPos = roundf(([self.superview height] - [self height]) / 2.0) - ([self.superview height] / 8.0);
+		[self positionAtX:xPos andY:yPos];	
+	}
 }
 
 - (void)makeMarginInSuperViewWithTopMargin:(CGFloat)topMargin leftMargin:(CGFloat)leftMargin rightMargin:(CGFloat)rightMargin andBottomMargin:(CGFloat)bottomMargin {
-	CGRect r = self.superview.bounds;
-	r.origin.x = leftMargin;
-	r.origin.y = topMargin;
-	r.size.width -= (leftMargin + rightMargin);
-	r.size.height -= (topMargin + bottomMargin);
-	[self setFrame:r];
+	if (self.superview) {
+		CGRect r = self.superview.bounds;
+		r.origin.x = leftMargin;
+		r.origin.y = topMargin;
+		r.size.width -= (leftMargin + rightMargin);
+		r.size.height -= (topMargin + bottomMargin);
+		[self setFrame:r];
+	}
 }
 
 - (void)makeMarginInSuperViewWithTopMargin:(CGFloat)topMargin andSideMargin:(CGFloat)sideMargin {
-	[self makeMarginInSuperViewWithTopMargin:topMargin leftMargin:sideMargin rightMargin:sideMargin andBottomMargin:topMargin];
+	if (self.superview) [self makeMarginInSuperViewWithTopMargin:topMargin leftMargin:sideMargin rightMargin:sideMargin andBottomMargin:topMargin];
 }
 
 - (void)makeMarginInSuperView:(CGFloat)margin {
-	[self makeMarginInSuperViewWithTopMargin:margin andSideMargin:margin];
+	if (self.superview) [self makeMarginInSuperViewWithTopMargin:margin andSideMargin:margin];
 }
 
 - (void)bringToFront {
@@ -163,19 +166,19 @@
 	[self.superview sendSubviewToBack:self];	
 }
 
-- (void)centerAtX{
-    double xPos = round((self.superview.frame.size.width - self.frame.size.width) / 2.0);
+- (void)centerAtX {
+    CGFloat xPos = roundf((self.superview.frame.size.width - self.frame.size.width) / 2.0);
     [self positionAtX:xPos];
 }
 
 - (void)centerAtXQuarter{
-    double xPos = round((self.superview.frame.size.width / 4) - (self.frame.size.width / 2));
+    CGFloat xPos = roundf((self.superview.frame.size.width / 4) - (self.frame.size.width / 2));
     [self positionAtX:xPos];    
 }
 
 - (void)centerAtX3Quarter{
     [self centerAtXQuarter];
-    double xPos = round((self.superview.frame.size.width / 2) + self.frame.origin.x);
+    CGFloat xPos = roundf((self.superview.frame.size.width / 2) + self.frame.origin.x);
     [self positionAtX:xPos];
 }
 

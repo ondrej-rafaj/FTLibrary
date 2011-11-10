@@ -12,11 +12,11 @@
 
 @interface UIView (Layout)
 
-- (double)width;
-- (void)setWidth:(double)width;
+- (CGFloat)width;
+- (void)setWidth:(CGFloat)width;
 
-- (double)height;
-- (void)setHeight:(double)height;
+- (CGFloat)height;
+- (void)setHeight:(CGFloat)height;
 
 - (CGFloat)bottomPosition;
 - (CGFloat)rightPosition;
@@ -27,18 +27,18 @@
 - (CGPoint)origin;
 - (void)setOrigin:(CGPoint)point;
 
-- (double)xPosition;
-- (double)yPosition;
-- (double)baselinePosition;
+- (CGFloat)xPosition;
+- (CGFloat)yPosition;
+- (CGFloat)baselinePosition;
 
-- (void)positionAtX:(double)xValue;
-- (void)positionAtY:(double)yValue;
-- (void)positionAtX:(double)xValue andY:(double)yValue;
+- (void)positionAtX:(CGFloat)xValue;
+- (void)positionAtY:(CGFloat)yValue;
+- (void)positionAtX:(CGFloat)xValue andY:(CGFloat)yValue;
 
-- (void)positionAtX:(double)xValue andY:(double)yValue withWidth:(double)width;
-- (void)positionAtX:(double)xValue andY:(double)yValue withHeight:(double)height;
+- (void)positionAtX:(CGFloat)xValue andY:(CGFloat)yValue withWidth:(CGFloat)width;
+- (void)positionAtX:(CGFloat)xValue andY:(CGFloat)yValue withHeight:(CGFloat)height;
 
-- (void)positionAtX:(double)xValue withHeight:(double)height;
+- (void)positionAtX:(CGFloat)xValue withHeight:(CGFloat)height;
 
 - (void)removeSubviews;
 
