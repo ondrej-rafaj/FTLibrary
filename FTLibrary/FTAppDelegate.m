@@ -17,7 +17,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        //share = [[FTShare alloc] initWithReferencedController:nil];
+        share = [[FTShare alloc] initWithReferencedController:nil];
     }
     return self;
 }
