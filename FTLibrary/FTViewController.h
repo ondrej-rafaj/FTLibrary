@@ -53,6 +53,9 @@
 // Layout
 - (CGRect)fullscreenRect;
 
+// Miscellaneous
+- (void)setTitleWithNoTranslation:(NSString *)title;
+
 // Layout & style
 - (void)setBackgroundWithImageName:(NSString *)imageName;
 

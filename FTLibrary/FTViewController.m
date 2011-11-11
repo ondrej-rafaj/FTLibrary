@@ -304,6 +304,10 @@
 	[super setTitle:title];
 }
 
+- (void)setTitleWithNoTranslation:(NSString *)title {
+	[super setTitle:title];
+}
+
 #pragma mark FTProgressView delegate method
 
 - (void)progressViewHasBeenHidden:(FTProgressView *)progressView {
