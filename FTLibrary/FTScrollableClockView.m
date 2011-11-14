@@ -23,10 +23,22 @@
 
 - (NSDate *)time {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"h:m"];
-    NSDate *zeroDate = [NSDate dateWithTimeIntervalSince1970:0]; 
+    [formatter setDateFormat:@"HH:mm"];
+    NSDate *zeroDate = [NSDate dateWithTimeIntervalSince1970:0];
     zeroDate = [formatter dateFromString:[NSString stringWithFormat:@"%d:%d", self.hours, self.minutes]];
+    //NSLog(@"date: %@ comp: %d:%d", zeroDate.description, self.hours, self.minutes);
     return zeroDate;
+}
+
+- (void)setTime:(NSDate *)atime {
+    [time release];
+    time = [atime retain];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH"];
+    self.hours = [[formatter stringFromDate:time] integerValue];
+    [formatter setDateFormat:@"mm"];
+    self.minutes = [[formatter stringFromDate:time] integerValue];
 }
 
 @end
