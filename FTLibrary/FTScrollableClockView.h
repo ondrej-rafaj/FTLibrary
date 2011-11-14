@@ -56,6 +56,7 @@ typedef enum {
 	NSMutableArray *minuteLabels;
 	
 	id <FTScrollableClockViewDelegate> delegate;
+    
 	
 }
 

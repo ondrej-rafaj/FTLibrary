@@ -12,9 +12,11 @@
 
 @interface FTLabel : UILabel {
     CGFloat _leading;
+    CGFloat _letterSpacing;
 }
 
 @property (nonatomic, assign) CGFloat leading;
+@property (nonatomic, assign) CGFloat letterSpacing;
 
 - (void)rightAnchorToX:(CGFloat)x;
 - (id)initWithFrame:(CGRect)frame font:(UIFont *)font andText:(NSString *)text;

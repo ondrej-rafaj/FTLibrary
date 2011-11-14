@@ -7,6 +7,7 @@
 //
 
 #import "FTScrollableClockView.h"
+#import "FTLabel.h"
 
 
 #pragma mark Time object implementation
@@ -35,23 +36,23 @@
 
 - (UILabel *)timeLabelWithValue:(NSInteger)value forScrollView:(UIScrollView *)scrollView {
 	int y = (value * [self height]);
-	UILabel *label = [[[UILabel alloc] initWithFrame:CGRectMake(0, y, ([self width] / 2), [self height])] autorelease];
+	FTLabel *label = [[[FTLabel alloc] initWithFrame:CGRectMake(0, y, ([self width] / 2), [self height])] autorelease];
 	NSString *textValue;
 	if (scrollView == hours && timeFormat == FTScrollableClockViewTimeFormat12H) {
 		if (value > 12) value -= 12;
 	}
+    [label setLetterSpacing:14];
 	textValue = [NSString stringWithFormat:@"%@%d", ((value < 10) ? @"0" : @""), value];
 	[label setText:textValue];
 	[label setFont:[UIFont boldSystemFontOfSize:14]];
 	[label setTextAlignment:UITextAlignmentCenter];
 	[label setTextColor:[UIColor darkTextColor]];
-	[label setBackgroundColor:[UIColor clearColor]];
 	return label;
 }
 
 - (void)createHoursScrollView {
 	hourLabels = [[NSMutableArray alloc] init];
-	hours = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, ([self width] / 2), [self height])];
+	hours = [[UIScrollView alloc] initWithFrame:CGRectMake(12, 0, ([self width] / 2), [self height])];
 	[hours setShowsVerticalScrollIndicator:NO];
 	[hours setShowsHorizontalScrollIndicator:NO];
 	[hours setDelegate:self];

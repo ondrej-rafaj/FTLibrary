@@ -17,6 +17,7 @@
 @implementation FTLabel
 
 @synthesize leading = _leading;
+@synthesize letterSpacing = _letterSpacing;
 
 
 - (void)rightAnchorToX:(CGFloat)x {
@@ -33,6 +34,7 @@
 	[self setBackgroundColor:[UIColor clearColor]];
 	[self setLineBreakMode:UILineBreakModeWordWrap];
     [self setLeading:0];
+    [self setLetterSpacing:0];
 }
 
 - (id)init {
@@ -130,6 +132,26 @@
         [ctview setText: theText];
         
         [self addSubview:ctview];
+    }
+    else if (_letterSpacing > 0) {
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        CGContextSelectFont (context, [self.font.fontName cStringUsingEncoding:NSASCIIStringEncoding], self.font.pointSize, kCGEncodingMacRoman);
+        CGContextSetCharacterSpacing(context, self.letterSpacing);
+        CGContextSetFillColorWithColor(context, [[UIColor clearColor] CGColor]);
+        CGAffineTransform myTextTransform = CGAffineTransformScale(CGAffineTransformIdentity, 1.f, -1.f );
+        CGContextSetTextMatrix (context, myTextTransform);
+        
+        // draw 1 but invisbly to get the string length.
+        CGPoint p =CGContextGetTextPosition(context);
+        float centeredY = (self.font.pointSize + (self.frame.size.height- self.font.pointSize)/2)-2;
+        CGContextShowTextAtPoint(context, 0, centeredY, [self.text cStringUsingEncoding:NSASCIIStringEncoding], [self.text length]);
+        CGPoint v =CGContextGetTextPosition(context);
+        
+        // calculate width and draw second one.
+        float width = v.x - p.x;
+        float centeredX =(self.frame.size.width- width)/2;
+        CGContextSetFillColorWithColor(context, [self.textColor CGColor]);
+        CGContextShowTextAtPoint(context, centeredX, centeredY, [self.text cStringUsingEncoding:NSASCIIStringEncoding], [self.text length]);
     }
     else {
        [super drawRect:rect]; 
