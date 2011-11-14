@@ -119,6 +119,10 @@
 		4C5761A813CAE93B0049371F /* FTBlockerShadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5761A613CAE93B0049371F /* FTBlockerShadeView.m */; };
 		4C57633D13CB8E170049371F /* FTCarouselView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C57633B13CB8E170049371F /* FTCarouselView.h */; };
 		4C57633E13CB8E170049371F /* FTCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C57633C13CB8E170049371F /* FTCarouselView.m */; };
+		4C65F023146FF357006FF451 /* FTUnlimitedGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C65F021146FF357006FF451 /* FTUnlimitedGridView.h */; };
+		4C65F024146FF357006FF451 /* FTUnlimitedGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C65F022146FF357006FF451 /* FTUnlimitedGridView.m */; };
+		4C65F028146FFA1E006FF451 /* FTUnlimitedGridViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C65F026146FFA1E006FF451 /* FTUnlimitedGridViewCell.h */; };
+		4C65F029146FFA1E006FF451 /* FTUnlimitedGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C65F027146FFA1E006FF451 /* FTUnlimitedGridViewCell.m */; };
 		4C684DAD13D5D76E0074E3C2 /* FTDomainObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C684DA913D5D76E0074E3C2 /* FTDomainObject.h */; };
 		4C684DAE13D5D76E0074E3C2 /* FTDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C684DAA13D5D76E0074E3C2 /* FTDomainObject.m */; };
 		4C684DAF13D5D76E0074E3C2 /* FTDomainObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C684DAA13D5D76E0074E3C2 /* FTDomainObject.m */; };
@@ -135,8 +139,6 @@
 		4C6F8F5F13F87527004A4FB2 /* FTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F8F5D13F87527004A4FB2 /* FTView.m */; };
 		4C6F8F6213F87530004A4FB2 /* FTAutoLineView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F8F6013F87530004A4FB2 /* FTAutoLineView.h */; };
 		4C6F8F6313F87530004A4FB2 /* FTAutoLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F8F6113F87530004A4FB2 /* FTAutoLineView.m */; };
-		4C6F8F6D13F87696004A4FB2 /* FTAutoGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F8F6B13F87696004A4FB2 /* FTAutoGridView.h */; };
-		4C6F8F6E13F87696004A4FB2 /* FTAutoGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6F8F6C13F87696004A4FB2 /* FTAutoGridView.m */; };
 		4C6F8F8B13F87C1B004A4FB2 /* AQGridView+CellLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F8F7413F87C1B004A4FB2 /* AQGridView+CellLayout.h */; };
 		4C6F8F8C13F87C1B004A4FB2 /* AQGridView+CellLocationDelegation.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F8F7513F87C1B004A4FB2 /* AQGridView+CellLocationDelegation.h */; };
 		4C6F8F8D13F87C1B004A4FB2 /* AQGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6F8F7613F87C1B004A4FB2 /* AQGridView.h */; };
@@ -679,6 +681,10 @@
 		4C5761A613CAE93B0049371F /* FTBlockerShadeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTBlockerShadeView.m; sourceTree = "<group>"; };
 		4C57633B13CB8E170049371F /* FTCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCarouselView.h; sourceTree = "<group>"; };
 		4C57633C13CB8E170049371F /* FTCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCarouselView.m; sourceTree = "<group>"; };
+		4C65F021146FF357006FF451 /* FTUnlimitedGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTUnlimitedGridView.h; sourceTree = "<group>"; };
+		4C65F022146FF357006FF451 /* FTUnlimitedGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTUnlimitedGridView.m; sourceTree = "<group>"; };
+		4C65F026146FFA1E006FF451 /* FTUnlimitedGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTUnlimitedGridViewCell.h; sourceTree = "<group>"; };
+		4C65F027146FFA1E006FF451 /* FTUnlimitedGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTUnlimitedGridViewCell.m; sourceTree = "<group>"; };
 		4C684DA913D5D76E0074E3C2 /* FTDomainObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTDomainObject.h; path = FTLibrary/FTDomainObject.h; sourceTree = SOURCE_ROOT; };
 		4C684DAA13D5D76E0074E3C2 /* FTDomainObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTDomainObject.m; path = FTLibrary/FTDomainObject.m; sourceTree = SOURCE_ROOT; };
 		4C684DAB13D5D76E0074E3C2 /* FTStorageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTStorageService.h; path = FTLibrary/FTStorageService.h; sourceTree = SOURCE_ROOT; };
@@ -693,8 +699,6 @@
 		4C6F8F5D13F87527004A4FB2 /* FTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTView.m; sourceTree = "<group>"; };
 		4C6F8F6013F87530004A4FB2 /* FTAutoLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAutoLineView.h; sourceTree = "<group>"; };
 		4C6F8F6113F87530004A4FB2 /* FTAutoLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAutoLineView.m; sourceTree = "<group>"; };
-		4C6F8F6B13F87696004A4FB2 /* FTAutoGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAutoGridView.h; sourceTree = "<group>"; };
-		4C6F8F6C13F87696004A4FB2 /* FTAutoGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAutoGridView.m; sourceTree = "<group>"; };
 		4C6F8F7413F87C1B004A4FB2 /* AQGridView+CellLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AQGridView+CellLayout.h"; sourceTree = "<group>"; };
 		4C6F8F7513F87C1B004A4FB2 /* AQGridView+CellLocationDelegation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AQGridView+CellLocationDelegation.h"; sourceTree = "<group>"; };
 		4C6F8F7613F87C1B004A4FB2 /* AQGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQGridView.h; sourceTree = "<group>"; };
@@ -1562,6 +1566,25 @@
 			name = iCarousel;
 			sourceTree = "<group>";
 		};
+		4C65F020146FF332006FF451 /* Unlimited grid view */ = {
+			isa = PBXGroup;
+			children = (
+				4C65F025146FFA06006FF451 /* Cell */,
+				4C65F021146FF357006FF451 /* FTUnlimitedGridView.h */,
+				4C65F022146FF357006FF451 /* FTUnlimitedGridView.m */,
+			);
+			name = "Unlimited grid view";
+			sourceTree = "<group>";
+		};
+		4C65F025146FFA06006FF451 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				4C65F026146FFA1E006FF451 /* FTUnlimitedGridViewCell.h */,
+				4C65F027146FFA1E006FF451 /* FTUnlimitedGridViewCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		4C684DBB13D5D9510074E3C2 /* Edit controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1611,9 +1634,8 @@
 		4C6F8F6A13F87686004A4FB2 /* Grid view */ = {
 			isa = PBXGroup;
 			children = (
+				4C65F020146FF332006FF451 /* Unlimited grid view */,
 				4CD776971461FD6B007A642B /* Cells */,
-				4C6F8F6B13F87696004A4FB2 /* FTAutoGridView.h */,
-				4C6F8F6C13F87696004A4FB2 /* FTAutoGridView.m */,
 			);
 			name = "Grid view";
 			sourceTree = "<group>";
@@ -2719,7 +2741,6 @@
 				68EB261413F2F1AB006DB33C /* FTCoreTextStyle.h in Headers */,
 				4C6F8F5E13F87527004A4FB2 /* FTView.h in Headers */,
 				4C6F8F6213F87530004A4FB2 /* FTAutoLineView.h in Headers */,
-				4C6F8F6D13F87696004A4FB2 /* FTAutoGridView.h in Headers */,
 				4C6F8F8B13F87C1B004A4FB2 /* AQGridView+CellLayout.h in Headers */,
 				4C6F8F8C13F87C1B004A4FB2 /* AQGridView+CellLocationDelegation.h in Headers */,
 				4C6F8F8D13F87C1B004A4FB2 /* AQGridView.h in Headers */,
@@ -2814,6 +2835,8 @@
 				4C9F7494146AFEB8007B68B1 /* LeavesCache.h in Headers */,
 				4C9F7496146AFEB8007B68B1 /* LeavesView.h in Headers */,
 				4C9F7498146AFEB8007B68B1 /* LeavesViewController.h in Headers */,
+				4C65F023146FF357006FF451 /* FTUnlimitedGridView.h in Headers */,
+				4C65F028146FFA1E006FF451 /* FTUnlimitedGridViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3046,7 +3069,6 @@
 				68EB261513F2F1AB006DB33C /* FTCoreTextStyle.m in Sources */,
 				4C6F8F5F13F87527004A4FB2 /* FTView.m in Sources */,
 				4C6F8F6313F87530004A4FB2 /* FTAutoLineView.m in Sources */,
-				4C6F8F6E13F87696004A4FB2 /* FTAutoGridView.m in Sources */,
 				4C6F8F8E13F87C1B004A4FB2 /* AQGridView.m in Sources */,
 				4C6F8F9013F87C1B004A4FB2 /* AQGridViewAnimatorItem.m in Sources */,
 				4C6F8F9313F87C1B004A4FB2 /* AQGridViewCell.m in Sources */,
@@ -3116,6 +3138,8 @@
 				4C9F7495146AFEB8007B68B1 /* LeavesCache.m in Sources */,
 				4C9F7497146AFEB8007B68B1 /* LeavesView.m in Sources */,
 				4C9F7499146AFEB8007B68B1 /* LeavesViewController.m in Sources */,
+				4C65F024146FF357006FF451 /* FTUnlimitedGridView.m in Sources */,
+				4C65F029146FFA1E006FF451 /* FTUnlimitedGridViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
