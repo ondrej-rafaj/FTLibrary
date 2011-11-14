@@ -15,9 +15,18 @@
 @implementation FTScrollableClockViewTime
 @synthesize hours;
 @synthesize minutes;
+@synthesize time;
 
 - (NSString *)description {
 	return [NSString stringWithFormat:@"FTScrollableClockViewTime - Scrollable clock time is: %d:%d", hours, minutes];
+}
+
+- (NSDate *)time {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"h:m"];
+    NSDate *zeroDate = [NSDate dateWithTimeIntervalSince1970:0]; 
+    zeroDate = [formatter dateFromString:[NSString stringWithFormat:@"%d:%d", self.hours, self.minutes]];
+    return zeroDate;
 }
 
 @end

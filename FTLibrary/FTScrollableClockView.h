@@ -30,9 +30,11 @@ typedef enum {
 @interface FTScrollableClockViewTime : NSObject {
 	NSInteger hours;
 	NSInteger minutes;
+    NSDate *time;
 }
 @property (nonatomic) NSInteger hours;
 @property (nonatomic) NSInteger minutes;
+@property (nonatomic, retain) NSDate *time;
 @end;
 
 
@@ -49,6 +51,7 @@ typedef enum {
 	
 	UIScrollView *hours;
 	UIScrollView *minutes;
+
 	FTScrollableClockViewTimeFormat timeFormat;
 	FTScrollableClockViewTime *_currentTime;
 	
