@@ -523,6 +523,8 @@
 		68EB261513F2F1AB006DB33C /* FTCoreTextStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB261313F2F1AB006DB33C /* FTCoreTextStyle.m */; };
 		9348CDEC1464041500A6F877 /* FTPageControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9348CDEA1464041500A6F877 /* FTPageControl.h */; };
 		9348CDED1464041500A6F877 /* FTPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9348CDEB1464041500A6F877 /* FTPageControl.m */; };
+		93C70E171474195800CA2139 /* FTPageScrollView2.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C70E151474195400CA2139 /* FTPageScrollView2.h */; };
+		93C70E181474195800CA2139 /* FTPageScrollView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C70E161474195500CA2139 /* FTPageScrollView2.m */; };
 		A56A62CE1433606E000C666B /* FTShare.h in Headers */ = {isa = PBXBuildFile; fileRef = A56A62CC1433606E000C666B /* FTShare.h */; };
 		A56A62CF1433606E000C666B /* FTShare.m in Sources */ = {isa = PBXBuildFile; fileRef = A56A62CD1433606E000C666B /* FTShare.m */; };
 		A56A63111433617B000C666B /* NSMutableURLRequest+Parameters.h in Headers */ = {isa = PBXBuildFile; fileRef = A56A62DA1433617B000C666B /* NSMutableURLRequest+Parameters.h */; };
@@ -1010,6 +1012,8 @@
 		68EB261313F2F1AB006DB33C /* FTCoreTextStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCoreTextStyle.m; sourceTree = "<group>"; };
 		9348CDEA1464041500A6F877 /* FTPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageControl.h; sourceTree = "<group>"; };
 		9348CDEB1464041500A6F877 /* FTPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPageControl.m; sourceTree = "<group>"; };
+		93C70E151474195400CA2139 /* FTPageScrollView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageScrollView2.h; sourceTree = "<group>"; };
+		93C70E161474195500CA2139 /* FTPageScrollView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPageScrollView2.m; sourceTree = "<group>"; };
 		A56A62CC1433606E000C666B /* FTShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTShare.h; sourceTree = "<group>"; };
 		A56A62CD1433606E000C666B /* FTShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTShare.m; sourceTree = "<group>"; };
 		A56A62D61433617B000C666B /* jQueryInject.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jQueryInject.txt; sourceTree = "<group>"; };
@@ -2269,6 +2273,8 @@
 		4CCD124713D850B00004EF5D /* Scroll views */ = {
 			isa = PBXGroup;
 			children = (
+				93C70E151474195400CA2139 /* FTPageScrollView2.h */,
+				93C70E161474195500CA2139 /* FTPageScrollView2.m */,
 				4CED6B3814615976003DE290 /* Lazy loading */,
 				4CED6B3714615951003DE290 /* Scrollable clock */,
 			);
@@ -2837,6 +2843,7 @@
 				4C9F7498146AFEB8007B68B1 /* LeavesViewController.h in Headers */,
 				4C65F023146FF357006FF451 /* FTUnlimitedGridView.h in Headers */,
 				4C65F028146FFA1E006FF451 /* FTUnlimitedGridViewCell.h in Headers */,
+				93C70E171474195800CA2139 /* FTPageScrollView2.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3140,6 +3147,7 @@
 				4C9F7499146AFEB8007B68B1 /* LeavesViewController.m in Sources */,
 				4C65F024146FF357006FF451 /* FTUnlimitedGridView.m in Sources */,
 				4C65F029146FFA1E006FF451 /* FTUnlimitedGridViewCell.m in Sources */,
+				93C70E181474195800CA2139 /* FTPageScrollView2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
