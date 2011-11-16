@@ -43,6 +43,8 @@ typedef enum {
 @protocol FTScrollableClockViewDelegate <NSObject>
 
 - (void)scrollableClockView:(FTScrollableClockView *)view didChangeTime:(FTScrollableClockViewTime *)time;
+- (void)scrollableClockViewIsScrolling:(FTScrollableClockView *)view;
+- (void)scrollableClockView:(FTScrollableClockView *)view didEndScrollingWithTime:(FTScrollableClockViewTime *)time;
 
 @end
 

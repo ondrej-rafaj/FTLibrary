@@ -17,31 +17,40 @@
 @synthesize minutes;
 @synthesize time;
 
-- (NSString *)description {
-	return [NSString stringWithFormat:@"FTScrollableClockViewTime - Scrollable clock time is: %d:%d", hours, minutes];
+
+- (void)setHours:(NSInteger)ahours {
+    if (ahours < 0 || ahours > 23) return;
+    hours = ahours;
+}
+
+- (void)setMinutes:(NSInteger)aminutes {
+    if (minutes < 0 || minutes > 59) return;
+    minutes = aminutes;
 }
 
 - (NSDate *)time {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH:mm"];
-    NSDate *zeroDate = [NSDate dateWithTimeIntervalSince1970:0];
-    zeroDate = [formatter dateFromString:[NSString stringWithFormat:@"%d:%d", self.hours, self.minutes]];
-    //NSLog(@"date: %@ comp: %d:%d", zeroDate.description, self.hours, self.minutes);
-    return zeroDate;
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setHour:self.hours];
+    [components setMinute:self.minutes];
+    NSDate *date = [calendar dateFromComponents:components]; 
+    return date;
+
 }
 
 - (void)setTime:(NSDate *)atime {
     [time release];
     time = [atime retain];
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH"];
-    self.hours = [[formatter stringFromDate:time] integerValue];
-    [formatter setDateFormat:@"mm"];
-    self.minutes = [[formatter stringFromDate:time] integerValue];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components = [calendar components:NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:time];
+    self.hours = components.hour;
+    self.minutes = components.minute;
 }
 
 @end
+
 
 #pragma mark Scrolling clock implementation
 
@@ -52,11 +61,15 @@
 @synthesize timeFormat;
 @synthesize delegate;
 
-
 #pragma mark Creating elements
 
-- (UILabel *)timeLabelWithValue:(NSInteger)value forScrollView:(UIScrollView *)scrollView {
-	int y = (value * [self height]);
+- (UILabel *)timeLabelWithValue:(NSInteger)value round:(NSInteger)round forScrollView:(UIScrollView *)scrollView {
+    int multiplier = (scrollView == self.hours)? 0 : (round * 60);
+    if  (scrollView == self.hours) {
+        multiplier = (timeFormat == FTScrollableClockViewTimeFormat12H)? (round * 12) : (round * 24);
+    }
+	int y = (multiplier * [self height]) + (value * [self height]);
+    NSLog(@"y for %@ : %d", (timeFormat == FTScrollableClockViewTimeFormat12H)? @"12H" : @"24H", y);
 	FTLabel *label = [[[FTLabel alloc] initWithFrame:CGRectMake(0, y, ([self width] / 2), [self height])] autorelease];
 	NSString *textValue;
 	if (scrollView == hours && timeFormat == FTScrollableClockViewTimeFormat12H) {
@@ -76,13 +89,18 @@
 	hours = [[UIScrollView alloc] initWithFrame:CGRectMake(12, 0, ([self width] / 2), [self height])];
 	[hours setShowsVerticalScrollIndicator:NO];
 	[hours setShowsHorizontalScrollIndicator:NO];
+    [hours setPagingEnabled:NO];
+    [hours setBounces:YES];
+    [hours setDecelerationRate:UIScrollViewDecelerationRateNormal];
 	[hours setDelegate:self];
 	[hours setBackgroundColor:[UIColor clearColor]];
-	for (int i = 0; i < 24; i++) {
-		UILabel *label = [self timeLabelWithValue:i forScrollView:hours];
-		[hourLabels addObject:label];
-		[hours addSubview:label];
-	}
+    for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < 24; i++) {
+            UILabel *label = [self timeLabelWithValue:i round:j forScrollView:hours];
+            [hourLabels addObject:label];
+            [hours addSubview:label];
+        }
+    }
 	[hours setContentSize:CGSizeMake([hours width], ([hourLabels count] * [hours height]))];
 	[self addSubview:hours];
 }
@@ -92,13 +110,18 @@
 	minutes = [[UIScrollView alloc] initWithFrame:CGRectMake(([self width] / 2), 0, ([self width] / 2), [self height])];
 	[minutes setShowsVerticalScrollIndicator:NO];
 	[minutes setShowsHorizontalScrollIndicator:NO];
-	[minutes setDelegate:self];
+    [minutes setPagingEnabled:NO];
+    [minutes setBounces:YES];
+    [minutes setDecelerationRate:UIScrollViewDecelerationRateNormal];
+    [minutes setDelegate:self];
 	[minutes setBackgroundColor:[UIColor clearColor]];
-	for (int i = 0; i < 60; i++) {
-		UILabel *label = [self timeLabelWithValue:i forScrollView:minutes];
-		[minuteLabels addObject:label];
-		[minutes addSubview:label];
-	}
+    for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < 60; i++) {
+            UILabel *label = [self timeLabelWithValue:i round:j forScrollView:minutes];
+            [minuteLabels addObject:label];
+            [minutes addSubview:label];
+        }
+    }
 	[minutes setContentSize:CGSizeMake([minutes width], ([minuteLabels count] * [minutes height]))];
 	[self addSubview:minutes];
 }
@@ -147,14 +170,20 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	int page = (scrollView.contentOffset.y / [scrollView height]);
 	BOOL valueChanged = NO;
-	if (scrollView == hours) {
+	
+    if (scrollView == hours) {
 		if (_currentTime.hours != page) valueChanged = YES;
+        int limit = (timeFormat == FTScrollableClockViewTimeFormat12H)? 12: 24;
+        page = (page%limit);
 		[_currentTime setHours:page];
 	}
 	else if (scrollView == minutes) {
 		if (_currentTime.minutes != page) valueChanged = YES;
+        int limit = 60;
+        page = (page%limit);
 		[_currentTime setMinutes:page];
 	}
+    
 	if (valueChanged) {
 		if ([delegate respondsToSelector:@selector(scrollableClockView:didChangeTime:)]) {
 			[delegate scrollableClockView:self didChangeTime:_currentTime];
@@ -163,17 +192,52 @@
 }
 
 - (void)snapScrollViewToClosestPosition:(UIScrollView *)scrollView {
-	int page = (scrollView.contentOffset.y / [scrollView height]);
-	CGFloat offset = (page * [scrollView height]);
-	[scrollView setContentOffset:CGPointMake(0, offset) animated:YES];
+    
+    int discard = ((int)scrollView.contentOffset.y % (int)[scrollView height]);
+    int pageY = (discard > ([scrollView height] / 2))? scrollView.contentOffset.y + ([scrollView height] - discard) : scrollView.contentOffset.y - discard; 
+    [scrollView setContentOffset:CGPointMake(0, pageY) animated:YES];
+    return;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
 	[self snapScrollViewToClosestPosition:scrollView];
+    
+    //delegate
+    if (self.delegate && [self.delegate respondsToSelector:@selector(scrollableClockView:didEndScrollingWithTime:)]) {
+        [self.delegate scrollableClockView:self didEndScrollingWithTime:self.currentTime];
+    }
 }
+
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    //delegate
+    if (self.delegate && [self.delegate respondsToSelector:@selector(scrollableClockViewIsScrolling:)]) {
+        [self.delegate scrollableClockViewIsScrolling:self];
+    }
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    //check tableview position
+#warning problems!!!
+    int third = (scrollView.contentOffset.y * 3 / [self height]);
+    int moveY = (scrollView == self.hours)? (24 * [self height]) : (60 * [self height]);
+    if (third != 2) {
+        if (third == 1) moveY *= -1;
+        [scrollView setContentOffset:CGPointMake(0, moveY) animated:NO];
+    }
+    
+    NSLog(@"third: %d, moveY : %d", third, moveY);
+    
+}
+
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
 	[self snapScrollViewToClosestPosition:scrollView];
+    
+    //delegate
+    if (!decelerate && self.delegate && [self.delegate respondsToSelector:@selector(scrollableClockView:didEndScrollingWithTime:)]) {
+        [self.delegate scrollableClockView:self didEndScrollingWithTime:self.currentTime];
+    }
 }
 
 #pragma mark Setters & getters
@@ -222,11 +286,6 @@
 	}
 }
 
-#pragma mark Dev helpers
-
-- (NSString *)description {
-	return [NSString stringWithFormat:@"FTScrollableClockView - Scrollable clock time is: %d:%d", _currentTime.hours, _currentTime.minutes];
-}
 
 #pragma mark Memory management
 
