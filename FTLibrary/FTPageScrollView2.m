@@ -63,9 +63,9 @@
 {
 	CGFloat xOffset = index * self.bounds.size.width;
 	//TODO: enable scrolling animation
-	_delegate = nil;
+	//_delegate = nil;
 	[self setContentOffset:CGPointMake(xOffset, 0) animated:NO];
-	_delegate = self;
+	//_delegate = self;
 	[self _doLayout];
 }
 
@@ -238,7 +238,7 @@
 		self.showsHorizontalScrollIndicator = NO;
 		self.delaysContentTouches = YES;
 		self.canCancelContentTouches = YES;
-		_delegate = self;
+		//_delegate = self;
 		self.scrollsToTop = NO;
 		self.visibleSize = frame.size;
 		_numberOfPages = -1;
