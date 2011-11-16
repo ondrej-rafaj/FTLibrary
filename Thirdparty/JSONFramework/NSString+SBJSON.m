@@ -25,6 +25,10 @@
  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ 
+ CodeSign error: Certificate identity 'iPhone Distribution: Fuerte Int Ltd' appears more than once in the keychain. The codesign tool requires there only be one.
+ 
+ 
  */
 
 #import "NSString+SBJSON.h"
@@ -33,13 +37,12 @@
 @implementation NSString (NSString_SBJSON)
 
 - (id)JSONFragmentValue {
-//    SBJsonParser *jsonParser = [SBJsonParser new];    
-//    id repr = [jsonParser fragmentWithString:self];    
-//    if (!repr)
-//        NSLog(@"-JSONFragmentValue failed. Error trace is: %@", [jsonParser error]);
-//    [jsonParser release];
-//    return repr;
-	return nil;
+    SBJsonParser *jsonParser = [SBJsonParser new];    
+    id repr = [jsonParser fragmentWithString:self];    
+    if (!repr)
+        NSLog(@"-JSONFragmentValue failed. Error trace is: %@", [jsonParser error]);
+    [jsonParser release];
+    return repr;
 }
 
 - (id)JSONValue {

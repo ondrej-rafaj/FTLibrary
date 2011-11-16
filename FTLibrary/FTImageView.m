@@ -164,7 +164,7 @@
 		}
 	}
 	UIImage *img = [UIImage imageWithData:data];
-	[self performSelectorOnMainThread:@selector(setImage:) withObject:img waitUntilDone:NO];
+	if (img) [self performSelectorOnMainThread:@selector(setImage:) withObject:img waitUntilDone:NO];
 	
 	if (isLoadingFromUrl) {
 		if ([delegate respondsToSelector:@selector(imageView:didFinishLoadingImageFromInternet:)]) {

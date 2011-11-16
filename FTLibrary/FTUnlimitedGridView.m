@@ -197,7 +197,6 @@
 #pragma mark Dequeue cells
 
 - (FTUnlimitedGridViewCell *)dequeueReusableCellWithIdentifier:(NSString *)reuseIdentifier {
-	//return nil;
 	NSMutableSet *cells = [_reusableGridCells objectForKey:reuseIdentifier];
 	FTUnlimitedGridViewCell *cell = [[cells anyObject] retain];
 	if (cell == nil) return nil;
