@@ -119,10 +119,7 @@
 
 	if (minVisibleIndex < 0) minVisibleIndex = 0;
 	if (maxVisibleIndex >= _numberOfPages) maxVisibleIndex = _numberOfPages - 1;
-	
-	
-	//NSLog(@"MIN: %d, MAX: %d", minVisibleIndex, maxVisibleIndex);
-	
+
 	NSMutableSet *newVisibleViews = [NSMutableSet new];
 	for (int i = minVisibleIndex; i<= maxVisibleIndex; i++) {
 		FTPageView2 *existingView = nil;
@@ -203,6 +200,7 @@
 {
 	self = [super initWithFrame:frame];
 	if (self) {
+		self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 		self.pagingEnabled = YES;
 		self.showsHorizontalScrollIndicator = NO;
 		self.delaysContentTouches = YES;
@@ -245,13 +243,10 @@
 
 - (NSInteger)selectedIndex
 {
-	NSLog(@"contentOffset: %f", self.contentOffset.x);
-	NSLog(@"view width: %f", self.bounds.size.width);
     NSInteger index = self.contentOffset.x / self.bounds.size.width;
     if (index < 0) index = 0;
     if (index > _numberOfPages - 1) index = _numberOfPages - 1;
 	
-	NSLog(@"Returned index:%d",index);
     return index;
 }
 
