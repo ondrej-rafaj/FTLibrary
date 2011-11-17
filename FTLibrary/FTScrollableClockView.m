@@ -228,7 +228,7 @@
 	
     if (scrollView == hours) {
 		if (_currentTime.hours != page) valueChanged = YES;
-        int limit = (timeFormat == FTScrollableClockViewTimeFormat12H)? 12: 24;
+        int limit = 24;
         page = (page%limit);
 		[_currentTime setHours:page];
 	}
