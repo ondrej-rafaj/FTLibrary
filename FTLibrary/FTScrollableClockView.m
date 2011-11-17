@@ -19,7 +19,6 @@
 
 
 - (void)setHours:(NSInteger)ahours {
-    NSLog(@"hours to change : %d", ahours);
     if (ahours < 0 || ahours > 23) return;
     hours = ahours;
 }
@@ -72,15 +71,19 @@
 
 // move the scroll feed to the center to infinite scroll effect
 - (void)centerScrollFeed:(UIScrollView *)scrollView {
+    
+    // try center approach!
+    
     [self snapScrollViewToClosestPosition:scrollView];
     int h = self.bounds.size.height;
     int moveY = (scrollView == self.hours)? (24 * h) : (60 * h);
     int third = ceilf(scrollView.contentOffset.y/moveY);
     if (third != 2) {
         if (third == 3) moveY *= -1;
-        moveY += scrollView.contentOffset.y;
+        moveY = scrollView.contentOffset.y + moveY;
         if (moveY != 0) [scrollView setContentOffset:CGPointMake(0, moveY) animated:NO];
     }
+    
 }
 
 
@@ -107,7 +110,6 @@
         //[hours scrollRectToVisible:CGRectMake(0, moveY, 1, self.bounds.size.height) animated:YES];
         [self snapScrollViewToClosestPosition:self.hours];
         
-        NSLog(@"pageUP: %d", multiplier);
     }
     
     previousMinute = (page);
@@ -253,6 +255,7 @@
 
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self centerScrollFeed:scrollView];
     //delegate
     if (self.delegate && [self.delegate respondsToSelector:@selector(scrollableClockViewIsScrolling:)]) {
         [self.delegate scrollableClockViewIsScrolling:self];
