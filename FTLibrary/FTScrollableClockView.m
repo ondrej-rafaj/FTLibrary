@@ -119,10 +119,7 @@
 #pragma mark Creating elements
 
 - (UILabel *)timeLabelWithValue:(NSInteger)value round:(NSInteger)round forScrollView:(UIScrollView *)scrollView {
-    int multiplier = (scrollView == self.hours)? 0 : (round * 60);
-    if  (scrollView == self.hours) {
-        multiplier = (timeFormat == FTScrollableClockViewTimeFormat12H)? (round * 12) : (round * 24);
-    }
+    int multiplier = (scrollView == self.hours)? (round * 24) : (round * 60);
 	int y = (multiplier * [self height]) + (value * [self height]);
 	FTLabel *label = [[[FTLabel alloc] initWithFrame:CGRectMake(0, y, ([self width] / 2), [self height])] autorelease];
 	NSString *textValue;
