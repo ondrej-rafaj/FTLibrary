@@ -19,6 +19,7 @@
 
 
 - (void)setHours:(NSInteger)ahours {
+    NSLog(@"hours to change : %d", ahours);
     if (ahours < 0 || ahours > 23) return;
     hours = ahours;
 }
@@ -61,6 +62,58 @@
 @synthesize timeFormat;
 @synthesize delegate;
 
+- (void)snapScrollViewToClosestPosition:(UIScrollView *)scrollView {
+    int h = (int)scrollView.bounds.size.height;
+    int discard = ((int)scrollView.contentOffset.y % h);
+    int pageY = (discard > ([scrollView height] / 2))? scrollView.contentOffset.y + (h - discard) : scrollView.contentOffset.y - discard; 
+    [scrollView setContentOffset:CGPointMake(0, pageY) animated:YES];
+    
+}
+
+// move the scroll feed to the center to infinite scroll effect
+- (void)centerScrollFeed:(UIScrollView *)scrollView {
+    [self snapScrollViewToClosestPosition:scrollView];
+    int h = self.bounds.size.height;
+    int moveY = (scrollView == self.hours)? (24 * h) : (60 * h);
+    int third = ceilf(scrollView.contentOffset.y/moveY);
+    if (third != 2) {
+        if (third == 3) moveY *= -1;
+        moveY += scrollView.contentOffset.y;
+        if (moveY != 0) [scrollView setContentOffset:CGPointMake(0, moveY) animated:NO];
+    }
+}
+
+
+
+
+//check if should add or sub an hour
+-(void)checkPageUp:(int)page {
+    static int previousMinute = 0;
+    if (page == previousMinute) return;
+    int multiplier = 0;
+    //page up
+    if ((page == 0) && (previousMinute <= 59 && previousMinute > 55)) {
+        multiplier = 1;
+    }
+    //page down
+    if ((page == 59) && (previousMinute >= 0 && previousMinute < 5)) {
+        multiplier = -1;
+    }
+    
+    if (multiplier != 0){
+        (multiplier == 1)? self.currentTime.hours++ : self.currentTime.hours--;
+        int moveY = self.hours.contentOffset.y + (multiplier * self.bounds.size.height);
+        [self.hours setContentOffset:CGPointMake(0, moveY) animated:YES];
+        //[hours scrollRectToVisible:CGRectMake(0, moveY, 1, self.bounds.size.height) animated:YES];
+        [self snapScrollViewToClosestPosition:self.hours];
+        
+        NSLog(@"pageUP: %d", multiplier);
+    }
+    
+    previousMinute = (page);
+    
+}
+
 #pragma mark Creating elements
 
 - (UILabel *)timeLabelWithValue:(NSInteger)value round:(NSInteger)round forScrollView:(UIScrollView *)scrollView {
@@ -69,7 +122,6 @@
         multiplier = (timeFormat == FTScrollableClockViewTimeFormat12H)? (round * 12) : (round * 24);
     }
 	int y = (multiplier * [self height]) + (value * [self height]);
-    NSLog(@"y for %@ : %d", (timeFormat == FTScrollableClockViewTimeFormat12H)? @"12H" : @"24H", y);
 	FTLabel *label = [[[FTLabel alloc] initWithFrame:CGRectMake(0, y, ([self width] / 2), [self height])] autorelease];
 	NSString *textValue;
 	if (scrollView == hours && timeFormat == FTScrollableClockViewTimeFormat12H) {
@@ -103,6 +155,8 @@
     }
 	[hours setContentSize:CGSizeMake([hours width], ([hourLabels count] * [hours height]))];
 	[self addSubview:hours];
+    [self centerScrollFeed:self.hours];
+    
 }
 
 - (void)createMinutesScrollView {
@@ -124,6 +178,7 @@
     }
 	[minutes setContentSize:CGSizeMake([minutes width], ([minuteLabels count] * [minutes height]))];
 	[self addSubview:minutes];
+    [self centerScrollFeed:self.minutes];
 }
 
 - (void)createAllElements {
@@ -165,7 +220,10 @@
     return self;
 }
 
+
 #pragma mark Scroll view delegate methods
+
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	int page = (scrollView.contentOffset.y / [scrollView height]);
@@ -182,30 +240,17 @@
         int limit = 60;
         page = (page%limit);
 		[_currentTime setMinutes:page];
+        if (valueChanged) [self checkPageUp:page];
 	}
     
-	if (valueChanged) {
-		if ([delegate respondsToSelector:@selector(scrollableClockView:didChangeTime:)]) {
-			[delegate scrollableClockView:self didChangeTime:_currentTime];
-		}
-	}
-}
-
-- (void)snapScrollViewToClosestPosition:(UIScrollView *)scrollView {
-    
-    int discard = ((int)scrollView.contentOffset.y % (int)[scrollView height]);
-    int pageY = (discard > ([scrollView height] / 2))? scrollView.contentOffset.y + ([scrollView height] - discard) : scrollView.contentOffset.y - discard; 
-    [scrollView setContentOffset:CGPointMake(0, pageY) animated:YES];
-    return;
+    if ([delegate respondsToSelector:@selector(scrollableClockView:didChangeTime:)]) {
+        [delegate scrollableClockView:self didChangeTime:_currentTime];
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
 	[self snapScrollViewToClosestPosition:scrollView];
     
-    //delegate
-    if (self.delegate && [self.delegate respondsToSelector:@selector(scrollableClockView:didEndScrollingWithTime:)]) {
-        [self.delegate scrollableClockView:self didEndScrollingWithTime:self.currentTime];
-    }
 }
 
 
@@ -214,32 +259,21 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(scrollableClockViewIsScrolling:)]) {
         [self.delegate scrollableClockViewIsScrolling:self];
     }
-}   
+}
+
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    //check tableview position
-    int h = self.bounds.size.height;
-    int moveY = (scrollView == self.hours)? (24 * h) : (60 * h);
-    int third = ceilf(scrollView.contentOffset.y/moveY);
-    if (third != 2) {
-        if (third == 3) moveY *= -1;
-        moveY += scrollView.contentOffset.y;
-        if (moveY != 0) [scrollView setContentOffset:CGPointMake(0, moveY) animated:NO];
+    [self centerScrollFeed:scrollView];
+    
+
+    if (self.delegate && [self.delegate respondsToSelector:@selector(scrollableClockView:didEndScrollingWithTime:)]) {
+        [self.delegate scrollableClockView:self didEndScrollingWithTime:self.currentTime];
     }
-    
-    
-    
-    NSLog(@"third: %d, (%.1f/%d)", third, scrollView.contentOffset.y, moveY);
-    
 }
 
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-	[self snapScrollViewToClosestPosition:scrollView];
+	if (!decelerate) [self snapScrollViewToClosestPosition:scrollView];
     
-    //delegate
-    if (!decelerate && self.delegate && [self.delegate respondsToSelector:@selector(scrollableClockView:didEndScrollingWithTime:)]) {
-        [self.delegate scrollableClockView:self didEndScrollingWithTime:self.currentTime];
-    }
 }
 
 #pragma mark Setters & getters
@@ -250,7 +284,9 @@
 	[_currentTime retain];
 	
 	[hours setContentOffset:CGPointMake(0, (_currentTime.hours * [self height])) animated:animated];
-	[minutes setContentOffset:CGPointMake(0, (_currentTime.minutes * [self height])) animated:animated];
+	//[self centerScrollFeed:self.hours];
+    [minutes setContentOffset:CGPointMake(0, (_currentTime.minutes * [self height])) animated:animated];
+    //[self centerScrollFeed:self.minutes];
 }
 
 - (void)setCurrentTime:(FTScrollableClockViewTime *)currentTime {
