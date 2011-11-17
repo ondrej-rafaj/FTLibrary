@@ -155,7 +155,6 @@
     }
 	[hours setContentSize:CGSizeMake([hours width], ([hourLabels count] * [hours height]))];
 	[self addSubview:hours];
-    [self centerScrollFeed:self.hours];
     
 }
 
@@ -178,7 +177,6 @@
     }
 	[minutes setContentSize:CGSizeMake([minutes width], ([minuteLabels count] * [minutes height]))];
 	[self addSubview:minutes];
-    [self centerScrollFeed:self.minutes];
 }
 
 - (void)createAllElements {
@@ -284,9 +282,9 @@
 	[_currentTime retain];
 	
 	[hours setContentOffset:CGPointMake(0, (_currentTime.hours * [self height])) animated:animated];
-	//[self centerScrollFeed:self.hours];
+	[self centerScrollFeed:self.hours];
     [minutes setContentOffset:CGPointMake(0, (_currentTime.minutes * [self height])) animated:animated];
-    //[self centerScrollFeed:self.minutes];
+    [self centerScrollFeed:self.minutes];
 }
 
 - (void)setCurrentTime:(FTScrollableClockViewTime *)currentTime {
