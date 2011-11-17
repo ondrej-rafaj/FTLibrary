@@ -31,9 +31,8 @@
 
 @interface FTPageScrollView2 () <UIScrollViewDelegate>
 - (void)_updateUIForCurrentHorizontalOffset;
-- (void)_doLayout;
 - (FTPageView2 *)_viewForIndex:(NSInteger)index;
-- (void)_disposeOfView:(FTPageView2 *)pageView;
+- (void)_disposeOfVisibleViewsAndTellDelegate:(BOOL)tellDelegate;
 @end
 
 @implementation FTPageScrollView2
@@ -41,7 +40,6 @@
 @synthesize delegate;
 @synthesize dataSource = _dataSource;
 @synthesize visibleSize = _visibleSize;
-@synthesize horizontalMarginWidth = _horizontalMarginWidth;
 
 #pragma mark - UI Handling
 
@@ -50,23 +48,15 @@
 	_numberOfPages = [_dataSource numberOfPagesInPageScrollView:self];
 	if (_numberOfPages > 0) {
 		self.contentSize = CGSizeMake(_numberOfPages * SCROLL_VIEW_WIDTH_FT, SCROLL_VIEW_HEIGHT_FT);
-		
-		if (_visibleViews == nil) { 
-			_visibleViews = [NSMutableArray new];
-		}
-		
-		[self _doLayout];
+		[self _disposeOfVisibleViewsAndTellDelegate:NO];
+		[self _updateUIForCurrentHorizontalOffset];
 	}
 }
 
 - (void)scrollToPageAtIndex:(NSInteger)index animated:(BOOL)animated
 {
 	CGFloat xOffset = index * self.bounds.size.width;
-	//TODO: enable scrolling animation
-	//_delegate = nil;
-	[self setContentOffset:CGPointMake(xOffset, 0) animated:NO];
-	//_delegate = self;
-	[self _doLayout];
+	[self setContentOffset:CGPointMake(xOffset, 0) animated:animated];
 }
 
 - (FTPageView2 *)_viewForIndex:(NSInteger)index
@@ -83,14 +73,15 @@
 			[reusedImageView retain];
 			[_reusableViews removeObject:reusedImageView];
 		}
-		UIImage *buttonImage = [_dataSource scrollView:self imageForPageAtIndex:index];
+		UIImage *buttonImage = [_dataSource pageScrollView:self imageForPageAtIndex:index];
 		[reusedImageView setImage:buttonImage];
 		[reusedImageView sizeToFit];
 		finalView = reusedImageView;
 	}
 	else {
 		UIView *reusedView = [_reusableViews anyObject];
-		reusedView = [_dataSource scrollView:self viewForPageAtIndex:index reusedView:reusedView];		
+		reusedView = [_dataSource pageScrollView:self viewForPageAtIndex:index reusedView:reusedView];	
+		reusedView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		finalView = [reusedView retain];
 		[_reusableViews removeObject:reusedView];
 	}
@@ -98,13 +89,17 @@
 	FTPageView2 *containerView = [_reusableContainers anyObject];
 	if (containerView == nil) {
 		containerView = [[FTPageView2 alloc] initWithFrame:self.bounds];
+		containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 	}
 	else {
 		[containerView retain];
-		[_reusableContainers removeObject:_reusableContainers];
+		[_reusableContainers removeObject:containerView];
 	}
 	
-	[containerView positionAtX:_horizontalMarginWidth + index * SCROLL_VIEW_WIDTH_FT];
+	[containerView setWidth:SCROLL_VIEW_WIDTH_FT];
+	[containerView setHeight:SCROLL_VIEW_HEIGHT_FT];
+	
+	[containerView positionAtX:index * SCROLL_VIEW_WIDTH_FT];
 	containerView.index = index;
 	[containerView addSubview:finalView];
 	[finalView centerInSuperView];
@@ -115,79 +110,54 @@
 
 - (void)_updateUIForCurrentHorizontalOffset
 {
-	CGFloat offset = self.contentOffset.x;
-	if (offset < SCROLL_VIEW_WIDTH_FT * (_numberOfPages - 1)) {
-		//first view
-		FTPageView2 *firstView = [_visibleViews objectAtIndex:0];
-		CGRect firstViewFrame = firstView.frame;
-		CGFloat firstFloorLimit = firstViewFrame.origin.x;
-		
-		CGFloat firstCeilLimit = firstViewFrame.origin.x + firstViewFrame.size.width;
-		if (offset <= firstFloorLimit - _horizontalMarginWidth + _visibleHorizontalPadding) {
-			// we load a view before this one
-			if (firstView.index > 0) {
-				//we can load a view before the current first one
-				FTPageView2 *newView = [self _viewForIndex:firstView.index - 1];
-				[self addSubview:newView];
-				[_visibleViews insertObject:newView atIndex:0];
+	CGFloat xOffset = self.contentOffset.x;
+	
+	CGFloat minVisibleXOffset = xOffset - _visibleHorizontalPadding;
+	CGFloat maxVisibleXOffset = minVisibleXOffset + _visibleHorizontalPadding * 2 + SCROLL_VIEW_WIDTH_FT - 1;
+	NSInteger minVisibleIndex = minVisibleXOffset / SCROLL_VIEW_WIDTH_FT;
+	NSInteger maxVisibleIndex = maxVisibleXOffset / SCROLL_VIEW_WIDTH_FT;	
+
+	if (minVisibleIndex < 0) minVisibleIndex = 0;
+	if (maxVisibleIndex >= _numberOfPages) maxVisibleIndex = _numberOfPages - 1;
+	
+	
+	//NSLog(@"MIN: %d, MAX: %d", minVisibleIndex, maxVisibleIndex);
+	
+	NSMutableSet *newVisibleViews = [NSMutableSet new];
+	for (int i = minVisibleIndex; i<= maxVisibleIndex; i++) {
+		FTPageView2 *existingView = nil;
+		for (FTPageView2 *pageView in _visibleViews) {
+			if (pageView.index == i) {
+				existingView = pageView;
+				break;
 			}
 		}
-		else if (offset >= firstCeilLimit + _visibleHorizontalPadding + _horizontalMarginWidth) {
-			//we remove this view
-			[self _disposeOfView:firstView];
+		if (existingView) {
+			[newVisibleViews addObject:existingView];
+			[_visibleViews removeObject:existingView];
+		}
+		else {
+			FTPageView2 *newView = [self _viewForIndex:i];
+			[self addSubview:newView];
+			[newVisibleViews addObject:newView];
 		}
 	}
-	if (offset > 0) {
-		//last view
-		FTPageView2 *lastView = [_visibleViews lastObject];
-		CGRect lastViewFrame = lastView.frame;
-		CGFloat lastFloorLimit = lastViewFrame.origin.x;
-		//CGFloat lastCeilLimit = lastViewFrame.origin.x + lastViewFrame.size.width;
-		if (offset >= lastFloorLimit - _visibleHorizontalPadding - _horizontalMarginWidth) {
-			// we load a view after this one
-			if (lastView.index < _numberOfPages - 1) {
-				//we can load a view after the current last one
-				FTPageView2 *newView = [self _viewForIndex:lastView.tag + 1];
-				[self addSubview:newView];
-				[_visibleViews addObject:newView];
-			}
-		}
-		else if (offset <= lastFloorLimit - _visibleHorizontalPadding - _horizontalMarginWidth - self.frame.size.width) {
-			[self _disposeOfView:lastView];
-		}
-	}
+	[self _disposeOfVisibleViewsAndTellDelegate:YES];
+	[_visibleViews release];
+	_visibleViews = newVisibleViews;
 }
 			 
-- (void)_disposeOfView:(FTPageView2 *)pageView
+- (void)_disposeOfVisibleViewsAndTellDelegate:(BOOL)tellDelegate
 {
-	[pageView removeFromSuperview];
-	UIView *contentView = pageView.subviews.lastObject;
-	[_reusableViews addObject:contentView];
-	[contentView removeFromSuperview];
-	[_reusableContainers addObject:pageView];
-	[_visibleViews removeObjectAtIndex:0];
-}
-
-- (void)_doLayout {
-	
-	for (int i = 0; i < [_visibleViews count]; i++) {
-		UIView *v = [_visibleViews lastObject];
-		[v removeFromSuperview];
-		[_reusableViews addObject:v];
-		[_visibleViews removeLastObject];
+	for (FTPageView2 *pageView in _visibleViews) {
+		
+		[pageView removeFromSuperview];
+		UIView *contentView = pageView.subviews.lastObject;
+		[_reusableViews addObject:contentView];
+		[contentView removeFromSuperview];
+		[_reusableContainers addObject:pageView];
 	}
-	
-	NSInteger currentPageIndex = self.contentOffset.x / SCROLL_VIEW_WIDTH_FT;
-	
-	[self scrollViewDidEndDecelerating:self];
-	
-	NSInteger startIndex = (currentPageIndex <= 0) ? 0 : currentPageIndex - 1;
-	NSInteger endIndex = (currentPageIndex + 1 >= _numberOfPages) ? currentPageIndex : currentPageIndex + 1;
-	for (int i = startIndex; i <= endIndex; i++) {
-		UIView *v = [self _viewForIndex:i];
-		[self addSubview:v];
-		[_visibleViews addObject:v];
-	}
+	[_visibleViews removeAllObjects];
 }
 
 #pragma mark - Touch handling
@@ -217,8 +187,8 @@
 		
 		for (UIView *v in _visibleViews) {
 			if (CGRectContainsPoint(v.frame, point)) {
-				if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollView:didSelectView:atIndex:)]) {
-					[_pageScrollViewDelegate scrollView:self didSelectView:v atIndex:v.tag];
+				if ([_pageScrollViewDelegate respondsToSelector:@selector(pageScrollView:didSelectView:atIndex:)]) {
+					[_pageScrollViewDelegate pageScrollView:self didSelectView:v atIndex:v.tag];
 				}
 				break;
 			}
@@ -234,20 +204,26 @@
 	self = [super initWithFrame:frame];
 	if (self) {
 		self.pagingEnabled = YES;
-		self.clipsToBounds = NO;
 		self.showsHorizontalScrollIndicator = NO;
 		self.delaysContentTouches = YES;
 		self.canCancelContentTouches = YES;
-		//_delegate = self;
+		[super setDelegate:self];
 		self.scrollsToTop = NO;
 		self.visibleSize = frame.size;
 		_numberOfPages = -1;
 		_dataSourceProvidesViews = NO;
-		_horizontalMarginWidth = 5;
 		_reusableViews = [NSMutableSet new];
 		_reusableContainers = [NSMutableSet new];
 	}
 	return self;
+}
+
+- (void)setFrame:(CGRect)frame
+{
+	NSInteger selectedIndex = [self selectedIndex];
+	[super setFrame:frame];
+	self.contentSize = CGSizeMake(_numberOfPages * SCROLL_VIEW_WIDTH_FT, SCROLL_VIEW_HEIGHT_FT);
+	[self scrollToPageAtIndex:selectedIndex animated:NO];
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview
@@ -269,17 +245,21 @@
 
 - (NSInteger)selectedIndex
 {
+	NSLog(@"contentOffset: %f", self.contentOffset.x);
+	NSLog(@"view width: %f", self.bounds.size.width);
     NSInteger index = self.contentOffset.x / self.bounds.size.width;
     if (index < 0) index = 0;
     if (index > _numberOfPages - 1) index = _numberOfPages - 1;
+	
+	NSLog(@"Returned index:%d",index);
     return index;
 }
 
 - (UIView *)selectedView
 {
 	NSInteger index = [self selectedIndex];
-	for (UIView *v in _visibleViews) {
-		if (v.tag == index) return v;
+	for (FTPageView2 *v in _visibleViews) {
+		if (v.index == index) return v.subviews.lastObject;
 	}
 	return nil;
 }
@@ -292,15 +272,22 @@
 #pragma mark - Setters
 
 - (void)setVisibleSize:(CGSize)size
-{
+{	
+	if (size.width > self.frame.size.width) {
+		self.clipsToBounds = NO;
+	}
+	else {
+		self.clipsToBounds = YES;
+	}
+
 	_visibleSize = size;
-	_visibleHorizontalPadding = (size.width - self.frame.size.width) / 2 + 10;
+	_visibleHorizontalPadding = (size.width - self.frame.size.width) / 2;
 }
 
 - (void)setDataSource:(id <FTPageScrollView2DataSource>)d
 {
 	_dataSource = d;
-	if ([_dataSource respondsToSelector:@selector(scrollView:viewForPageAtIndex:reusedView:)]) {
+	if ([_dataSource respondsToSelector:@selector(pageScrollView:viewForPageAtIndex:reusedView:)]) {
 		_dataSourceProvidesViews = YES;
 	}
 	else {
@@ -326,7 +313,7 @@
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollView:didSlideToIndex:)]) {
-		[_pageScrollViewDelegate scrollView:self didSlideToIndex:[self selectedIndex]];
+		[_pageScrollViewDelegate pageScrollView:self didSlideToIndex:[self selectedIndex]];
 	}
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)]) {
 		[_pageScrollViewDelegate scrollViewDidEndDecelerating:self];
