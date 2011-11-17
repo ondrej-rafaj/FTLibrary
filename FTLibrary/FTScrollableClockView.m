@@ -214,19 +214,21 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(scrollableClockViewIsScrolling:)]) {
         [self.delegate scrollableClockViewIsScrolling:self];
     }
-}
-
+}   
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
     //check tableview position
-#warning problems!!!
-    int third = (scrollView.contentOffset.y * 3 / [self height]);
-    int moveY = (scrollView == self.hours)? (24 * [self height]) : (60 * [self height]);
+    int h = self.bounds.size.height;
+    int moveY = (scrollView == self.hours)? (24 * h) : (60 * h);
+    int third = ceilf(scrollView.contentOffset.y/moveY);
     if (third != 2) {
-        if (third == 1) moveY *= -1;
-        [scrollView setContentOffset:CGPointMake(0, moveY) animated:NO];
+        if (third == 3) moveY *= -1;
+        moveY += scrollView.contentOffset.y;
+        if (moveY != 0) [scrollView setContentOffset:CGPointMake(0, moveY) animated:NO];
     }
     
-    NSLog(@"third: %d, moveY : %d", third, moveY);
+    
+    
+    NSLog(@"third: %d, (%.1f/%d)", third, scrollView.contentOffset.y, moveY);
     
 }
 
