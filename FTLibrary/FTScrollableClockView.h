@@ -45,6 +45,7 @@ typedef enum {
 - (void)scrollableClockView:(FTScrollableClockView *)view didChangeTime:(FTScrollableClockViewTime *)time;
 - (void)scrollableClockViewIsScrolling:(FTScrollableClockView *)view;
 - (void)scrollableClockView:(FTScrollableClockView *)view didEndScrollingWithTime:(FTScrollableClockViewTime *)time;
+- (BOOL)scrollableClockViewshoudPageUp:(FTScrollableClockView *)view;
 
 @end
 

@@ -91,8 +91,17 @@
 
 //check if should add or sub an hour
 -(void)checkPageUp:(int)page {
+    //check change
     static int previousMinute = 0;
     if (page == previousMinute) return;
+    
+    //check if Analog is dragging
+    BOOL shouldPageUP = YES;
+    if ([delegate respondsToSelector:@selector(scrollableClockViewshoudPageUp:)]) {
+        shouldPageUP = [delegate scrollableClockViewshoudPageUp:self];
+    }
+    
+    //check UP or DOWN
     int multiplier = 0;
     //page up
     if ((page == 0) && (previousMinute <= 59 && previousMinute > 55)) {
@@ -103,7 +112,7 @@
         multiplier = -1;
     }
     
-    if (multiplier != 0){
+    if (multiplier != 0 && shouldPageUP){
         (multiplier == 1)? self.currentTime.hours++ : self.currentTime.hours--;
         int moveY = self.hours.contentOffset.y + (multiplier * self.bounds.size.height);
         [self.hours setContentOffset:CGPointMake(0, moveY) animated:YES];
