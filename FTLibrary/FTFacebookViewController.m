@@ -128,11 +128,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	[self.view setBackgroundColor:[UIColor colorWithHexString:@"F2F2F2"]];
+	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startDelayedReloadData) name:kFTAppDelegateDidOpenAppWithUrl object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+	
+	[table setBackgroundColor:[UIColor clearColor]];
+	[grid setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

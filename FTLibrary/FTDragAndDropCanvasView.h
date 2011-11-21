@@ -52,6 +52,7 @@ typedef enum {
 - (void)addElementWithImage:(UIImage *)image;
 - (void)layoutElements:(BOOL)animated;
 
+- (UIImage *)imageWithSize:(CGSize)desiredSize andLogo:(UIImage *)logo;
 - (UIImage *)imageWithSize:(CGSize)imageSize;
 
 - (void)removeAllElements;

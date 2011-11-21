@@ -112,10 +112,10 @@
 
 #pragma mark Class level methods
 
-- (UIImage *)imageWithSize:(CGSize)desiredSize
+- (UIImage *)imageWithSize:(CGSize)desiredSize andLogo:(UIImage *)logo
 {
 	CGSize imageSize = backgroundImageView.image.size;
-
+	
 	CGFloat horizontalRatio = desiredSize.width / imageSize.width;
     CGFloat verticalRatio = desiredSize.height /imageSize.height;
     CGFloat ratio = MAX(horizontalRatio, verticalRatio);
@@ -147,12 +147,32 @@
 		CGContextRestoreGState(context);
 	}
 	
+	if (logo) {
+		CGFloat x = (backgroundImageView.image.size.width - logo.size.width - 10);
+		CGFloat y = (backgroundImageView.image.size.height - logo.size.height - 10);
+		[logo drawAtPoint:CGPointMake(x, y)];
+		
+//		CGContextSaveGState(context);
+//		CGContextTranslateCTM(context, newCenter.x, newCenter.y);
+//		CGFloat scaleValue = 1 * newScaling;
+//		CGContextScaleCTM(context, scaleValue, scaleValue);
+//		
+//		
+//		
+//		CGContextRestoreGState(context);
+	}
+	
 	UIImage *returnedImage = UIGraphicsGetImageFromCurrentImageContext();
 	
 	UIGraphicsEndImageContext();
 	//CGContextRelease(context);
 	
 	return returnedImage;
+}
+
+- (UIImage *)imageWithSize:(CGSize)desiredSize
+{
+	return [self imageWithSize:desiredSize andLogo:nil];
 }
 
 - (void)setBackgroundImage:(UIImage *)backgroundImage

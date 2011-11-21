@@ -91,6 +91,9 @@
 	NSDictionary *d = [data objectAtIndex:index];
 	[cell.imageView loadImageFromUrl:[d objectForKey:@"picture"]];
 	[cell.imageView makeMarginInSuperViewWithTopMargin:10 leftMargin:10 rightMargin:10 andBottomMargin:10];
+	
+	[cell setBackgroundColor:[UIColor clearColor]];
+	[cell.contentView setBackgroundColor:[UIColor clearColor]];
 }
 
 //#pragma mark Data delegate methods

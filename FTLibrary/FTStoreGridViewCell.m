@@ -20,6 +20,7 @@
 @synthesize description;
 @synthesize price;
 @synthesize buyButton;
+@synthesize progressView;
 @synthesize cellIndex;
 @synthesize dataObject;
 @synthesize delegate;
@@ -101,13 +102,21 @@
 	[description setFont:[UIFont systemFontOfSize:12]];
 	[storeView addSubview:description];
 	//[self setDescriptionText:@""];
+	
+	progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+	[progressView setWidth:[description width]];
+	r = progressView.bounds;
+	r.origin.x = [description xPosition];
+	r.origin.y = ([buyButton bottomPosition] + 10);
+	[progressView setFrame:r];
+	[storeView addSubview:progressView];
 }
 
 #pragma mark Actions
 
 - (void)didClickActionButton:(UIButton *)sender {
-	if ([delegate respondsToSelector:@selector(didClickActionButtonWithIndex:andObject:)]) {
-		[delegate didClickActionButtonWithIndex:cellIndex andObject:dataObject];
+	if ([delegate respondsToSelector:@selector(didClickActionButtonWithIndex:withCell:andObject:)]) {
+		[delegate didClickActionButtonWithIndex:cellIndex withCell:self andObject:dataObject];
 	}
 }
 
@@ -142,6 +151,7 @@
 	[description release];
 	[price release];
 	[buyButton release];
+	[progressView release];
 	[dataObject release];
 	[super dealloc];
 }
