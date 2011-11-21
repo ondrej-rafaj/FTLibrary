@@ -114,7 +114,10 @@
 
 - (UIImage *)imageWithSize:(CGSize)desiredSize andLogo:(UIImage *)logo
 {
-	CGSize imageSize = backgroundImageView.image.size;
+	CGSize imageSizePoints = backgroundImageView.image.size;
+	
+	//pixels 
+	CGSize imageSize = CGSizeMake(imageSizePoints.width * backgroundImageView.image.scale, imageSizePoints.height * backgroundImageView.image.scale);
 	
 	CGFloat horizontalRatio = desiredSize.width / imageSize.width;
     CGFloat verticalRatio = desiredSize.height /imageSize.height;
@@ -148,18 +151,19 @@
 	}
 	
 	if (logo) {
-		CGFloat x = (backgroundImageView.image.size.width - logo.size.width - 10);
-		CGFloat y = (backgroundImageView.image.size.height - logo.size.height - 10);
-		[logo drawAtPoint:CGPointMake(x, y)];
+ 		int margin = MAX(newImageSize.width * 2.f / 100.f, newImageSize.height * 2.f / 100.f);
+		CGSize logoSizePixels = CGSizeMake(logo.scale * logo.size.width, logo.scale * logo.size.height);
+		int logoMaxSize = MAX(newImageSize.width * 20.f / 100.f, newImageSize.height * 20.f / 100.f);
 		
-//		CGContextSaveGState(context);
-//		CGContextTranslateCTM(context, newCenter.x, newCenter.y);
-//		CGFloat scaleValue = 1 * newScaling;
-//		CGContextScaleCTM(context, scaleValue, scaleValue);
-//		
-//		
-//		
-//		CGContextRestoreGState(context);
+		CGFloat ratio1 = logoMaxSize / logoSizePixels.height;
+		CGFloat ratio2 = logoMaxSize / logoSizePixels.width;
+		int logoRatio = MIN(ratio1, ratio2);
+		CGSize logoFinalSize = CGSizeMake(logoSizePixels.width * logoRatio, logoSizePixels.height * logoRatio);
+		
+		CGRect logoRect = CGRectMake(newImageSize.width - logoFinalSize.width - margin, 
+									 newImageSize.height - logoFinalSize.height - margin,
+									 logoFinalSize.width, logoFinalSize.height);
+		[logo drawInRect:logoRect];
 	}
 	
 	UIImage *returnedImage = UIGraphicsGetImageFromCurrentImageContext();
