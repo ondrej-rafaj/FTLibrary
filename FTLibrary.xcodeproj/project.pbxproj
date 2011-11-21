@@ -499,6 +499,8 @@
 		4CFEAD8E1432279A00EDD9A8 /* FTCachedImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEAD8A1432279A00EDD9A8 /* FTCachedImageLoader.m */; };
 		4CFEAD8F1432279A00EDD9A8 /* FTDiskCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CFEAD8B1432279A00EDD9A8 /* FTDiskCache.h */; };
 		4CFEAD901432279A00EDD9A8 /* FTDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEAD8C1432279A00EDD9A8 /* FTDiskCache.m */; };
+		6811B5A9147A66D100C1474E /* FTProgressCircle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6811B5A7147A66D100C1474E /* FTProgressCircle.h */; };
+		6811B5AA147A66D100C1474E /* FTProgressCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6811B5A8147A66D100C1474E /* FTProgressCircle.m */; };
 		68134788143B29F700CC309C /* FTShareDataObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 68134786143B29F700CC309C /* FTShareDataObjects.h */; };
 		68134789143B29F700CC309C /* FTShareDataObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 68134787143B29F700CC309C /* FTShareDataObjects.m */; };
 		6834BE2913D9B2EA00781018 /* FTLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6834BE2713D9B2EA00781018 /* FTLabel.h */; };
@@ -987,6 +989,8 @@
 		4CFEAD8A1432279A00EDD9A8 /* FTCachedImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCachedImageLoader.m; sourceTree = "<group>"; };
 		4CFEAD8B1432279A00EDD9A8 /* FTDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTDiskCache.h; sourceTree = "<group>"; };
 		4CFEAD8C1432279A00EDD9A8 /* FTDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDiskCache.m; sourceTree = "<group>"; };
+		6811B5A7147A66D100C1474E /* FTProgressCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProgressCircle.h; sourceTree = "<group>"; };
+		6811B5A8147A66D100C1474E /* FTProgressCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProgressCircle.m; sourceTree = "<group>"; };
 		68134786143B29F700CC309C /* FTShareDataObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTShareDataObjects.h; sourceTree = "<group>"; };
 		68134787143B29F700CC309C /* FTShareDataObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTShareDataObjects.m; sourceTree = "<group>"; };
 		6834BE2713D9B2EA00781018 /* FTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLabel.h; sourceTree = "<group>"; };
@@ -1522,6 +1526,8 @@
 			children = (
 				4C57611F13C5E7770049371F /* FTProgressView.h */,
 				4C57612013C5E7770049371F /* FTProgressView.m */,
+				6811B5A7147A66D100C1474E /* FTProgressCircle.h */,
+				6811B5A8147A66D100C1474E /* FTProgressCircle.m */,
 			);
 			name = Progress;
 			sourceTree = "<group>";
@@ -2844,6 +2850,7 @@
 				4C65F023146FF357006FF451 /* FTUnlimitedGridView.h in Headers */,
 				4C65F028146FFA1E006FF451 /* FTUnlimitedGridViewCell.h in Headers */,
 				93C70E171474195800CA2139 /* FTPageScrollView2.h in Headers */,
+				6811B5A9147A66D100C1474E /* FTProgressCircle.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3148,6 +3155,7 @@
 				4C65F024146FF357006FF451 /* FTUnlimitedGridView.m in Sources */,
 				4C65F029146FFA1E006FF451 /* FTUnlimitedGridViewCell.m in Sources */,
 				93C70E181474195800CA2139 /* FTPageScrollView2.m in Sources */,
+				6811B5AA147A66D100C1474E /* FTProgressCircle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
