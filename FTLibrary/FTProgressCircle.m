@@ -9,30 +9,45 @@
 #import "FTProgressCircle.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define toRad(__ANGLE__) (M_PI * (__ANGLE__) / 180.0)
+#define toDeg(__ANGLE__) (180.0 * (__ANGLE__) / M_PI)
+
 @implementation FTProgressCircle
 
 @synthesize foregroundImage = _foregroundImage;
 @synthesize percentage = _percentage;
 @synthesize shouldAnimate = _shouldAnimate;
 @synthesize fromValue = _fromValue;
-
+@synthesize displayLink = _displayLink;
 
 #pragma mark setters
 
 - (void)setDegrees:(CGFloat)degrees animated:(BOOL)animated {
     float perc = (degrees * 3.6);
-    [self setPercentage:perc animated:animated];
+    if (animated) [self animateToPercentage:perc];
+    else [self setPercentage:perc];
 }
 
-- (void)setPercentage:(CGFloat)percentage animated:(BOOL)animated {
-    self.fromValue = _percentage;
-    _percentage = percentage;
-    self.shouldAnimate = YES;
+- (void)doAnimation {
+    self.fromValue++;
     [self setNeedsDisplay];
+    if (self.fromValue >= self.percentage) {
+        [self.displayLink invalidate];
+    }        
 }
 
-- (void)setPercentage:(CGFloat)percentage {
-    [self setPercentage:percentage animated:NO];
+- (void)animateToPercentage:(int)percentage {
+
+    self.fromValue = 0;
+    self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(doAnimation)];
+    [self doAnimation];
+
+}
+
+- (void)setPercentage:(int)percentage {
+    _percentage = percentage;
+    self.fromValue = _percentage;
+    [self setNeedsDisplay];
 }
 
 
@@ -58,12 +73,16 @@
 - (void)drawRect:(CGRect)rect
 {
 
-    CGFloat percRadians = ((self.percentage  / 3.6) * (2 * M_PI));
-    CGFloat radius = (self.bounds.size.width / 2);
+    float degrees =  (self.fromValue * 3.6);
+    float percRadians = toRad((int)(degrees - 90));
+    float radius = (self.bounds.size.width / 2);
     
-    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:self.center radius:radius startAngle:-90 endAngle:percRadians clockwise:YES];
-    [path applyTransform:CGAffineTransformMakeRotation((-90 * (2 * M_PI)))];
-    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:self.center];
+    [path addLineToPoint:CGPointMake(self.center.x, 0)];
+    [path addArcWithCenter:self.center radius:radius startAngle:toRad(-90) endAngle:percRadians clockwise:YES];
+    [path closePath];
+    //[path applyTransform:CGAffineTransformMakeRotation(toRad(-90))];
 
     
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -76,12 +95,12 @@
 
     CFRelease(arcPath);
     
-
     [self.foregroundImage drawInRect:self.frame];
+    
     CGContextRestoreGState(context);
     
-    [[UIColor blueColor] setStroke];
-    [path stroke];
+    //[[UIColor blueColor] setStroke];
+    //[path stroke];
 
 }
 

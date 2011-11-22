@@ -10,18 +10,20 @@
 
 @interface FTProgressCircle : UIView {
     UIImage *_foregroundImage;
-    float _percentage;
+    int _percentage;
 @private
     BOOL _shouldAnimate;
-    float _fromValue;
+    int _fromValue;
+    CADisplayLink *_displayLink;
 }
 
 @property (nonatomic, retain) IBOutlet UIImage *foregroundImage;
-@property (nonatomic, assign) float percentage;
+@property (nonatomic, assign) int percentage;
 @property (nonatomic, assign, getter=isShouldAnimate) BOOL shouldAnimate;
-@property (nonatomic, assign) float fromValue;
+@property (nonatomic, assign) int fromValue;
+@property (nonatomic, retain) CADisplayLink *displayLink;
 
 - (id)initWithBackgroundImage:(UIImage *)bkgImg andForegroundImage:(UIImage *)frgImg;
-- (void)setPercentage:(CGFloat)percentage animated:(BOOL)animated;
+- (void)animateToPercentage:(int)percentage;
 - (void)setDegrees:(CGFloat)degrees animated:(BOOL)animated;
 @end
