@@ -10,8 +10,6 @@
 #import "FTLabel.h"
 
 
-#pragma mark Time object implementation
-
 @implementation FTScrollableClockViewTime
 @synthesize hours;
 @synthesize minutes;
@@ -62,6 +60,7 @@
 @synthesize delegate;
 
 - (void)snapScrollViewToClosestPosition:(UIScrollView *)scrollView {
+
     int h = (int)scrollView.bounds.size.height;
     int discard = ((int)scrollView.contentOffset.y % h);
     int pageY = (discard > ([scrollView height] / 2))? scrollView.contentOffset.y + (h - discard) : scrollView.contentOffset.y - discard; 
@@ -71,13 +70,10 @@
 
 // move the scroll feed to the center to infinite scroll effect
 - (void)centerScrollFeed:(UIScrollView *)scrollView {
-    
-    // try center approach!
-    
-    [self snapScrollViewToClosestPosition:scrollView];
     int h = self.bounds.size.height;
     int moveY = (scrollView == self.hours)? (24 * h) : (60 * h);
-    int third = ceilf(scrollView.contentOffset.y/moveY);
+    int third = round(scrollView.contentOffset.y/moveY);
+    
     if (third != 2) {
         if (third == 3) moveY *= -1;
         moveY = scrollView.contentOffset.y + moveY;
@@ -151,7 +147,7 @@
 	[hours setShowsHorizontalScrollIndicator:NO];
     [hours setPagingEnabled:NO];
     [hours setBounces:YES];
-    [hours setDecelerationRate:UIScrollViewDecelerationRateNormal];
+    [hours setDecelerationRate:UIScrollViewDecelerationRateFast];
 	[hours setDelegate:self];
 	[hours setBackgroundColor:[UIColor clearColor]];
     for (int j = 0; j < 3; j++) {
@@ -248,29 +244,31 @@
 		[_currentTime setMinutes:page];
         if (valueChanged) [self checkPageUp:page];
 	}
-    
+
     if ([delegate respondsToSelector:@selector(scrollableClockView:didChangeTime:)]) {
         [delegate scrollableClockView:self didChangeTime:_currentTime];
     }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-	[self snapScrollViewToClosestPosition:scrollView];
-    
+	[self centerScrollFeed:scrollView];
+    [self snapScrollViewToClosestPosition:scrollView];
 }
 
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [self centerScrollFeed:scrollView];
+    //
     //delegate
     if (self.delegate && [self.delegate respondsToSelector:@selector(scrollableClockViewIsScrolling:)]) {
         [self.delegate scrollableClockViewIsScrolling:self];
     }
+    [self centerScrollFeed:scrollView];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-    [self centerScrollFeed:scrollView];
     
+    [self snapScrollViewToClosestPosition:scrollView];
+    [self centerScrollFeed:scrollView];
 
     if (self.delegate && [self.delegate respondsToSelector:@selector(scrollableClockView:didEndScrollingWithTime:)]) {
         [self.delegate scrollableClockView:self didEndScrollingWithTime:self.currentTime];
@@ -280,6 +278,7 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
 	if (!decelerate) [self snapScrollViewToClosestPosition:scrollView];
+    else [self centerScrollFeed:scrollView];
     
 }
 
