@@ -157,8 +157,8 @@
 		
 		CGFloat ratio1 = logoMaxSize / logoSizePixels.height;
 		CGFloat ratio2 = logoMaxSize / logoSizePixels.width;
-		int logoRatio = MIN(ratio1, ratio2);
-		CGSize logoFinalSize = CGSizeMake(logoSizePixels.width * logoRatio, logoSizePixels.height * logoRatio);
+		CGFloat logoRatio =  MIN(ratio1, ratio2);
+		CGSize logoFinalSize = CGSizeMake(roundf(logoSizePixels.width * logoRatio), roundf(logoSizePixels.height * logoRatio));
 		
 		CGRect logoRect = CGRectMake(newImageSize.width - logoFinalSize.width - margin, 
 									 newImageSize.height - logoFinalSize.height - margin,
