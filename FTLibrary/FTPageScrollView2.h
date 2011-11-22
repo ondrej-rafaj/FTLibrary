@@ -58,5 +58,6 @@
 - (void)scrollToPageAtIndex:(NSInteger)index animated:(BOOL)animated;
 - (NSInteger)selectedIndex;
 - (UIView *)selectedView;
+- (NSInteger)indexOfView:(UIView *)view;
 
 @end
