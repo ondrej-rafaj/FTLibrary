@@ -18,7 +18,7 @@
 
 - (void)storeGridView:(FTStoreGridView *)storeView didClickCellWithObject:(FTStoreDataObject *)dataObject atIndex:(NSInteger)index;
 
-- (void)storeGridView:(FTStoreGridView *)storeView didClickActionButtonWithObject:(FTStoreDataObject *)dataObject atIndex:(NSInteger)index;
+- (void)storeGridView:(FTStoreGridView *)storeView didClickActionButtonWithObject:(FTStoreDataObject *)dataObject withCell:(FTStoreGridViewCell *)cell atIndex:(NSInteger)index;
 
 @end
 
@@ -30,6 +30,8 @@
 - (FTStoreDataObject *)storeGridView:(FTStoreGridView *)storeView dataObjectForItemAtIndex:(NSInteger)index;
 
 - (UIImage *)defaultCellImageForStoreGridView:(FTStoreGridView *)storeView;
+
+- (FTStoreGridViewCell *)storeGridView:(FTStoreGridView *)storeView cellForItemWithObject:(FTStoreDataObject *)dataObject atIndex:(NSInteger)index;
 
 @end
 
@@ -51,6 +53,9 @@
 
 - (void)setHeaderImageUrl:(NSString *)headerUrl andFooterImageUrl:(NSString *)footerUrl;
 - (void)setHeaderImage:(UIImage *)headerImage andFooterImage:(UIImage *)footerImage;
+
+- (FTStoreDataObject *)dataObjectForIndex:(NSInteger)index;
+- (void)configureGridCell:(FTStoreGridViewCell *)cell atIndex:(NSInteger)index forGridView:(AQGridView *)gridView;
 
 
 @end

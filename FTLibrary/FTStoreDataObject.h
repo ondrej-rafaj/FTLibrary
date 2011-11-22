@@ -13,7 +13,7 @@
 	NSString *title;
 	NSString *description;
 	NSNumber *price;
-	NSNumber *identifier;
+	NSString *identifier;
 	NSString *filename;
 	NSString *downloadUrl;
 	NSString *imageLUrl;
@@ -25,7 +25,7 @@
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *description;
 @property (nonatomic, retain) NSNumber *price;
-@property (nonatomic, retain) NSNumber *identifier;
+@property (nonatomic, retain) NSString *identifier;
 @property (nonatomic, retain) NSString *filename;
 @property (nonatomic, retain) NSString *downloadUrl;
 @property (nonatomic, retain) NSString *imageLUrl;

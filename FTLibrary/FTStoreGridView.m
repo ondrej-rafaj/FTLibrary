@@ -128,10 +128,10 @@
 	}
 }
 
-- (void)didClickActionButtonWithIndex:(NSInteger)index andObject:(FTStoreDataObject *)dataObject {
-	if ([delegate respondsToSelector:@selector(storeGridView:didClickActionButtonWithObject:atIndex:)]) {
+- (void)didClickActionButtonWithIndex:(NSInteger)index withCell:(FTStoreGridViewCell *)cell andObject:(FTStoreDataObject *)dataObject {
+	if ([delegate respondsToSelector:@selector(storeGridView:didClickActionButtonWithObject:withCell:atIndex:)]) {
 		FTStoreDataObject *o = [self dataObjectForIndex:index];
-		[delegate storeGridView:self didClickActionButtonWithObject:o atIndex:index];
+		[delegate storeGridView:self didClickActionButtonWithObject:o withCell:cell atIndex:index];
 	}
 }
 

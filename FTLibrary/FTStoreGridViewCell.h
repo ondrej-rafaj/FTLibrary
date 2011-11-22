@@ -15,8 +15,10 @@
 
 @protocol FTStoreGridViewCellDelegate <NSObject>
 
-- (void)didClickActionButtonWithIndex:(NSInteger)index andObject:(FTStoreDataObject *)dataObject;
+- (void)didClickActionButtonWithIndex:(NSInteger)index withCell:(FTStoreGridViewCell *)cell andObject:(FTStoreDataObject *)dataObject;
 - (void)didClickCoverImageWithIndex:(NSInteger)index andObject:(FTStoreDataObject *)dataObject;
+
+- (void)storeGridViewCellRequestedDataReload:(FTStoreGridViewCell *)cell;
 
 @end
 
@@ -30,6 +32,8 @@
 	
 	UIButton *buyButton;
 	
+	UIProgressView *progressView;
+	
 	NSInteger cellIndex;
 	FTStoreDataObject *dataObject;
 	
@@ -42,6 +46,7 @@
 @property (nonatomic, retain) UILabel *description;
 @property (nonatomic, retain) UILabel *price;
 @property (nonatomic, retain) UIButton *buyButton;
+@property (nonatomic, retain) UIProgressView *progressView;
 @property (nonatomic) NSInteger cellIndex;
 @property (nonatomic, retain) FTStoreDataObject *dataObject;
 @property (nonatomic, assign) id <FTStoreGridViewCellDelegate> delegate;
