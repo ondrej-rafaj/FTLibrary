@@ -7,61 +7,87 @@
 //
 
 #import "FTProgressCircle.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation FTProgressCircle
 
-@synthesize backgroundImage = _backgroundImage;
 @synthesize foregroundImage = _foregroundImage;
-@synthesize value = _value;
+@synthesize percentage = _percentage;
 @synthesize shouldAnimate = _shouldAnimate;
 @synthesize fromValue = _fromValue;
 
 
-- (void)animate {
-    
-}
-
 #pragma mark setters
 
-- (void)setValue:(CGFloat)value animated:(BOOL)animated {
-    self.fromValue = _value;
-    _value = value;
-    self.shouldAnimate = YES;
+- (void)setDegrees:(CGFloat)degrees animated:(BOOL)animated {
+    float perc = (degrees * 3.6);
+    [self setPercentage:perc animated:animated];
 }
 
-- (void)setValue:(CGFloat)value {
-    [self setValue:value animated:NO];
+- (void)setPercentage:(CGFloat)percentage animated:(BOOL)animated {
+    self.fromValue = _percentage;
+    _percentage = percentage;
+    self.shouldAnimate = YES;
+    [self setNeedsDisplay];
 }
+
+- (void)setPercentage:(CGFloat)percentage {
+    [self setPercentage:percentage animated:NO];
+}
+
+
 
 
 - (id)initWithBackgroundImage:(UIImage *)bkgImg andForegroundImage:(UIImage *)frgImg {
     self = [super initWithFrame:CGRectMake(0, 0, bkgImg.size.width, bkgImg.size.height)];
     if (self) {
         // Initialization code
-        self.backgroundImage = [[UIImageView alloc] initWithFrame:self.bounds];
-        [self.backgroundImage setImage:bkgImg];
-        [self addSubview:self.backgroundImage];
+        [self setBackgroundColor:[UIColor clearColor]];
         
+        [self setBackgroundColor:[UIColor colorWithPatternImage:bkgImg]];
         
-        self.foregroundImage = [[UIImageView alloc] initWithFrame:self.bounds];
-        [self.foregroundImage setImage:frgImg];
-        [self addSubview:self.foregroundImage];
-        [self setValue:0];
+        self.foregroundImage = frgImg;
+        [self setPercentage:0];
     }
     return self;    
 }
 
-/*
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
 
+    CGFloat percRadians = ((self.percentage  / 3.6) * (2 * M_PI));
+    CGFloat radius = (self.bounds.size.width / 2);
+    
+    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:self.center radius:radius startAngle:-90 endAngle:percRadians clockwise:YES];
+    [path applyTransform:CGAffineTransformMakeRotation((-90 * (2 * M_PI)))];
+    
+
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSaveGState(context);
+    CGMutablePathRef arcPath = CGPathCreateMutable();
+    CGPathAddPath(arcPath, 0, path.CGPath);
+    CGContextAddPath(context, arcPath);
+    CGContextClip(context);
+
+    CFRelease(arcPath);
+    
+
+    [self.foregroundImage drawInRect:self.frame];
+    CGContextRestoreGState(context);
+    
+    [[UIColor blueColor] setStroke];
+    [path stroke];
+
 }
-*/
+
+
 - (void)dealloc {
     
-    [_backgroundImage release], _backgroundImage = nil;
     [_foregroundImage release], _foregroundImage = nil;
     [super dealloc];
 }

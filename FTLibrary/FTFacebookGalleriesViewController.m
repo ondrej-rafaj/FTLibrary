@@ -32,7 +32,7 @@
 	[arr sortUsingDescriptors:[NSArray arrayWithObjects:descriptor,nil]];
 	NSMutableArray *clean = [NSMutableArray arrayWithArray:arr];
 	for (NSDictionary *d in arr) {
-		NSLog(@"Dic: %@", d);
+		//NSLog(@"Dic: %@", d);
 		if ([[d objectForKey:@"count"] intValue] <= 0) [clean removeObject:d];
 	}
 	//if ([arr count] > 0) [clean writeToFile:cacheFile atomically:YES];

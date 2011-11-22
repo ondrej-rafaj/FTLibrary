@@ -53,7 +53,7 @@
 }
 
 - (void)downloadFinishedWithResult:(NSString *)result {
-	NSLog(@"My friends: %@", result);
+	//NSLog(@"My friends: %@", result);
 
 	NSDictionary *d = [result JSONValue];
 	NSMutableArray *arr = [NSMutableArray arrayWithArray:[d objectForKey:@"data"]];

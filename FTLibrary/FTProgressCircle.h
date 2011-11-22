@@ -9,21 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @interface FTProgressCircle : UIView {
-    UIImageView *_backgroundImage;
-    UIImageView *_foregroundImage;
-    float _value;
+    UIImage *_foregroundImage;
+    float _percentage;
 @private
     BOOL _shouldAnimate;
     float _fromValue;
 }
 
-@property (nonatomic, retain) IBOutlet UIImageView *backgroundImage;
-@property (nonatomic, retain) IBOutlet UIImageView *foregroundImage;
-@property (nonatomic, assign) float value;
+@property (nonatomic, retain) IBOutlet UIImage *foregroundImage;
+@property (nonatomic, assign) float percentage;
 @property (nonatomic, assign, getter=isShouldAnimate) BOOL shouldAnimate;
 @property (nonatomic, assign) float fromValue;
 
 - (id)initWithBackgroundImage:(UIImage *)bkgImg andForegroundImage:(UIImage *)frgImg;
-- (void)setValue:(CGFloat)value animated:(BOOL)animated;
-
+- (void)setPercentage:(CGFloat)percentage animated:(BOOL)animated;
+- (void)setDegrees:(CGFloat)degrees animated:(BOOL)animated;
 @end

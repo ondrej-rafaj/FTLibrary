@@ -487,6 +487,9 @@ static CGFloat tempRotation = 0;
 		v.dragged = YES;
 	}
 	CGPoint translatedPoint = [recognizer translationInView:stickersContainerView];
+    
+    NSLog(@"point: %@", NSStringFromCGPoint(translatedPoint));
+    
 	translatedPoint = CGPointMake(v.positionX * interfaceRotationFactor + translatedPoint.x, v.positionY * interfaceRotationFactor + translatedPoint.y);
 	
 	CGRect newElementFrame;
