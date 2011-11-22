@@ -12,8 +12,8 @@
 @implementation FTError
 
 + (void)handleErrorWithString:(NSString *)errorMessage {
-	[NSException raise:errorMessage format:@""];
-    //NSLog(@"Error: %@", errorMessage);
+	//[NSException raise:errorMessage format:@""];
+    NSLog(@"Error: %@", errorMessage);
 	//abort();
 }
 

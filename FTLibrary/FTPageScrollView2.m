@@ -41,6 +41,18 @@
 @synthesize dataSource = _dataSource;
 @synthesize visibleSize = _visibleSize;
 
+#pragma mark - Others
+
+- (NSInteger)indexOfView:(UIView *)view
+{
+	for (FTPageView2 *page in _visibleViews) {
+		if ([page.subviews objectAtIndex:0] == view) {
+			return page.index;
+		}
+	}
+	return NSNotFound;
+}
+
 #pragma mark - UI Handling
 
 - (void)reloadData
@@ -221,7 +233,7 @@
 	NSInteger selectedIndex = [self selectedIndex];
 	[super setFrame:frame];
 	self.contentSize = CGSizeMake(_numberOfPages * SCROLL_VIEW_WIDTH_FT, SCROLL_VIEW_HEIGHT_FT);
-	[self scrollToPageAtIndex:selectedIndex animated:NO];
+	[self scrollToPageAtIndex:(selectedIndex < 0) ? 0 : selectedIndex animated:NO];
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview
@@ -319,13 +331,6 @@
 {
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollViewWillBeginDragging:)]) {
 		[_pageScrollViewDelegate scrollViewWillBeginDragging:scrollView];
-	}
-}
-
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset
-{
-	if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollViewWillEndDragging:withVelocity:targetContentOffset:)]) {
-		[_pageScrollViewDelegate scrollViewWillEndDragging:scrollView withVelocity:velocity targetContentOffset:targetContentOffset];
 	}
 }
 
