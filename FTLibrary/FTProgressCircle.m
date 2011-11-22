@@ -29,17 +29,20 @@
 }
 
 - (void)doAnimation {
-    self.fromValue++;
-    [self setNeedsDisplay];
+    self.fromValue += 2;
+    
     if (self.fromValue >= self.percentage) {
-        [self.displayLink invalidate];
-    }        
+        self.fromValue = self.percentage;
+        [self.displayLink removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    }
+    [self setNeedsDisplay];
 }
 
 - (void)animateToPercentage:(int)percentage {
-
+    _percentage = percentage;
     self.fromValue = 0;
     self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(doAnimation)];
+    [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [self doAnimation];
 
 }
