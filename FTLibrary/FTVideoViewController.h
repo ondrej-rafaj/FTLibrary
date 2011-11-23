@@ -33,5 +33,6 @@
 @protocol FTVideoViewControllerDelegate <NSObject>
 @optional
 - (void)videoPlayerDidStop:(FTViewController *)videoController;
+- (void)videoPlayerWillDisappear:(FTViewController *)videoController;
 
 @end

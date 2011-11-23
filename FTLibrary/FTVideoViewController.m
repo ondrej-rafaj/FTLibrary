@@ -109,6 +109,11 @@ static UIStatusBarStyle originalStatusBarStyle;
     [self.player stop];
     [[UIApplication sharedApplication] setStatusBarStyle:originalStatusBarStyle];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:self.player];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(videoPlayerWillDisappear:)]) {
+        [self.delegate videoPlayerWillDisappear:self];
+    }
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
