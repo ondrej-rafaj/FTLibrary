@@ -10,7 +10,7 @@
 #import "FTLabel.h"
 
 
-@interface FTAnimatedNumberLabel : FTLabel {
+@interface FTAnimatedLabel : FTLabel {
     NSInteger _value;
     NSInteger _endValue;
     NSTimeInterval _duration;

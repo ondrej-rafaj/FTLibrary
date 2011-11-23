@@ -6,17 +6,17 @@
 //  Copyright 2011 Fuerte International. All rights reserved.
 //
 
-#import "FTAnimatedNumberLabel.h"
+#import "FTAnimatedLabel.h"
 
 
-@interface FTAnimatedNumberLabel ()
+@interface FTAnimatedLabel ()
 
 @property (nonatomic) NSTimeInterval timerSteps; 
 
 @end
 
 
-@implementation FTAnimatedNumberLabel
+@implementation FTAnimatedLabel
 
 @synthesize value = _value;
 @synthesize endValue = _endValue;

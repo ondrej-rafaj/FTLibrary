@@ -511,8 +511,8 @@
 		6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */; };
 		6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */; };
 		68849E0E147CFC94002A54D1 /* FTMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 68849E0D147CFC94002A54D1 /* FTMath.h */; };
-		68849E16147CFEA9002A54D1 /* FTAnimatedNumberLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 68849E14147CFEA9002A54D1 /* FTAnimatedNumberLabel.h */; };
-		68849E17147CFEA9002A54D1 /* FTAnimatedNumberLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68849E15147CFEA9002A54D1 /* FTAnimatedNumberLabel.m */; };
+		68849E16147CFEA9002A54D1 /* FTAnimatedLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 68849E14147CFEA9002A54D1 /* FTAnimatedLabel.h */; };
+		68849E17147CFEA9002A54D1 /* FTAnimatedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68849E15147CFEA9002A54D1 /* FTAnimatedLabel.m */; };
 		68D604A5143F0C7900C3C84E /* TestFlight.h in Headers */ = {isa = PBXBuildFile; fileRef = 68D604A3143F0C7900C3C84E /* TestFlight.h */; };
 		68DD055413D98063004C02C8 /* FTCoreTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = 68DD055213D98063004C02C8 /* FTCoreTextView.h */; };
 		68DD055513D98063004C02C8 /* FTCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DD055313D98063004C02C8 /* FTCoreTextView.m */; };
@@ -1003,8 +1003,8 @@
 		6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGooglePlaceRequest.h; path = FTLibrary/FTGooglePlaceRequest.h; sourceTree = SOURCE_ROOT; };
 		6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGooglePlaceRequest.m; path = FTLibrary/FTGooglePlaceRequest.m; sourceTree = SOURCE_ROOT; };
 		68849E0D147CFC94002A54D1 /* FTMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMath.h; sourceTree = "<group>"; };
-		68849E14147CFEA9002A54D1 /* FTAnimatedNumberLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAnimatedNumberLabel.h; sourceTree = "<group>"; };
-		68849E15147CFEA9002A54D1 /* FTAnimatedNumberLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAnimatedNumberLabel.m; sourceTree = "<group>"; };
+		68849E14147CFEA9002A54D1 /* FTAnimatedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAnimatedLabel.h; sourceTree = "<group>"; };
+		68849E15147CFEA9002A54D1 /* FTAnimatedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAnimatedLabel.m; sourceTree = "<group>"; };
 		68D604A1143F0C7900C3C84E /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		68D604A2143F0C7900C3C84E /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
 		68D604A3143F0C7900C3C84E /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
@@ -2452,8 +2452,8 @@
 		6834BE2B13D9B2F000781018 /* Labels */ = {
 			isa = PBXGroup;
 			children = (
-				68849E14147CFEA9002A54D1 /* FTAnimatedNumberLabel.h */,
-				68849E15147CFEA9002A54D1 /* FTAnimatedNumberLabel.m */,
+				68849E14147CFEA9002A54D1 /* FTAnimatedLabel.h */,
+				68849E15147CFEA9002A54D1 /* FTAnimatedLabel.m */,
 				6834BE2713D9B2EA00781018 /* FTLabel.h */,
 				6834BE2813D9B2EA00781018 /* FTLabel.m */,
 			);
@@ -2861,7 +2861,7 @@
 				93C70E171474195800CA2139 /* FTPageScrollView2.h in Headers */,
 				6811B5A9147A66D100C1474E /* FTProgressCircle.h in Headers */,
 				68849E0E147CFC94002A54D1 /* FTMath.h in Headers */,
-				68849E16147CFEA9002A54D1 /* FTAnimatedNumberLabel.h in Headers */,
+				68849E16147CFEA9002A54D1 /* FTAnimatedLabel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3167,7 +3167,7 @@
 				4C65F029146FFA1E006FF451 /* FTUnlimitedGridViewCell.m in Sources */,
 				93C70E181474195800CA2139 /* FTPageScrollView2.m in Sources */,
 				6811B5AA147A66D100C1474E /* FTProgressCircle.m in Sources */,
-				68849E17147CFEA9002A54D1 /* FTAnimatedNumberLabel.m in Sources */,
+				68849E17147CFEA9002A54D1 /* FTAnimatedLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
