@@ -8,9 +8,7 @@
 
 #import "FTProgressCircle.h"
 #import <QuartzCore/QuartzCore.h>
-
-#define toRad(__ANGLE__) (M_PI * (__ANGLE__) / 180.0)
-#define toDeg(__ANGLE__) (180.0 * (__ANGLE__) / M_PI)
+#import "FTMath.h"
 
 @implementation FTProgressCircle
 
