@@ -286,5 +286,35 @@
 	}
 }
 
+#pragma mark animations
+
+- (void)setImage:(UIImage *)image dissolveInTime:(CGFloat)time {
+    if (!self.image) {
+        [self setImage:image];
+        return;
+    }
+    UIImageView *oldImg = [[UIImageView alloc] initWithImage:self.image];
+    [oldImg setFrame:self.bounds];
+    [self addSubview:oldImg];
+    [oldImg bringToFront];
+    
+    [self setImage:image];
+    
+    CGRect frame = self.frame;
+    frame.size = image.size;
+    [self setFrame:frame];
+    
+    //aniamtion
+    [UIView animateWithDuration:time animations:^{
+        [oldImg setAlpha:0];
+        
+    } completion:^(BOOL finished) {
+        [oldImg removeFromSuperview];
+        [oldImg release];
+    }];
+    
+    
+}
+
 
 @end

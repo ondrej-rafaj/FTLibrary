@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 #import "ASIHTTPRequest.h"
 
 
@@ -78,6 +79,10 @@
 - (void)enableActivityIndicator:(BOOL)enable;
 
 - (void)enableDebugMode:(BOOL)debugMode;
+
+//animations
+
+- (void)setImage:(UIImage *)image dissolveInTime:(CGFloat)time;
 
 
 @end
