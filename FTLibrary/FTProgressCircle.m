@@ -14,6 +14,7 @@
 
 @synthesize foregroundImage = _foregroundImage;
 @synthesize percentage = _percentage;
+@synthesize outlinePath = _outlinePath;
 @synthesize shouldAnimate = _shouldAnimate;
 @synthesize fromValue = _fromValue;
 @synthesize displayLink = _displayLink;
@@ -64,6 +65,7 @@
         
         self.foregroundImage = frgImg;
         [self setPercentage:0];
+        self.outlinePath = NO;
     }
     return self;    
 }
@@ -100,8 +102,11 @@
     
     CGContextRestoreGState(context);
     
-    //[[UIColor blueColor] setStroke];
-    //[path stroke];
+    if (self.outlinePath) {
+        [[UIColor blueColor] setStroke];
+        [path stroke];        
+    }
+
 
 }
 

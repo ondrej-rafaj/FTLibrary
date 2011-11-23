@@ -11,6 +11,7 @@
 @interface FTProgressCircle : UIView {
     UIImage *_foregroundImage;
     int _percentage;
+    BOOL _outlinePath;
 @private
     BOOL _shouldAnimate;
     int _fromValue;
@@ -19,6 +20,7 @@
 
 @property (nonatomic, retain) IBOutlet UIImage *foregroundImage;
 @property (nonatomic, assign) int percentage;
+@property (nonatomic ,assign) BOOL outlinePath;
 @property (nonatomic, assign, getter=isShouldAnimate) BOOL shouldAnimate;
 @property (nonatomic, assign) int fromValue;
 @property (nonatomic, retain) CADisplayLink *displayLink;
