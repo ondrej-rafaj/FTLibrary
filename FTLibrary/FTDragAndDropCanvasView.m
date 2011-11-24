@@ -512,7 +512,7 @@ static CGFloat tempRotation = 0;
 	}
 	CGPoint translatedPoint = [recognizer translationInView:stickersContainerView];
     
-    NSLog(@"point: %@", NSStringFromCGPoint(translatedPoint));
+    //NSLog(@"point: %@", NSStringFromCGPoint(translatedPoint));
     
 	translatedPoint = CGPointMake(v.positionX * interfaceRotationFactor + translatedPoint.x, v.positionY * interfaceRotationFactor + translatedPoint.y);
 	

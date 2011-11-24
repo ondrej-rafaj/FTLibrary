@@ -29,6 +29,8 @@ FTSystemDeviceType;
 
 + (NSString *)deviceName;
 
++ (NSString *)uuid;
+
 + (UIDeviceBatteryState)batteryState;
 
 + (CGFloat)batteryLevel;

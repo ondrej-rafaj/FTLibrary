@@ -218,17 +218,16 @@
     [defaults setObject:appID forKey:@"FTShareFBAppID"];
     [defaults synchronize];
     
-	if ([defaults objectForKey:@"FBAccessTokenKey"] 
-        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+	if ([defaults objectForKey:@"FBAccessTokenKey"] && [defaults objectForKey:@"FBExpirationDateKey"]) {
         self.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
         self.facebook.expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
 	}
     self.facebookParams = nil;
+	NSLog(@"Facebook expiration date: %@", self.facebook.expirationDate);
 }
 
 - (void)facebookLogin {
-	[self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"read_stream", @"read_friendlists", @"read_insights", @"user_birthday", 
-							  @"user_about_me", nil]];
+	[self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"offline_access", @"read_stream", @"read_friendlists", @"read_insights", @"user_birthday", @"user_about_me", nil]];
 }
 
 - (void)shareViaFacebook:(FTShareFacebookData *)data {
