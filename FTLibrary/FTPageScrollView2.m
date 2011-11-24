@@ -53,6 +53,27 @@
 	return NSNotFound;
 }
 
+- (UIView *)viewAtIndex:(NSUInteger)index
+{
+	for (FTPageView2 *page in _visibleViews) {
+		if (page.index == index) {
+			return [page.subviews objectAtIndex:0];
+		}
+	}
+	return nil;
+}
+
+- (NSArray *)visibleViews
+{
+	NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES];
+	NSArray *sortedPageViews = [_visibleViews sortedArrayUsingDescriptors:[NSArray arrayWithObject:descriptor]];
+	NSMutableArray *returnedViews = [NSMutableArray new];
+	for (FTPageView2 *pageView in sortedPageViews) {
+		[returnedViews addObject:pageView.subviews.lastObject];
+	}
+	return returnedViews;
+}
+
 #pragma mark - UI Handling
 
 - (void)reloadData
@@ -62,6 +83,15 @@
 		self.contentSize = CGSizeMake(_numberOfPages * SCROLL_VIEW_WIDTH_FT, SCROLL_VIEW_HEIGHT_FT);
 		[self _disposeOfVisibleViewsAndTellDelegate:NO];
 		[self _updateUIForCurrentHorizontalOffset];
+	}
+}
+
+- (void)reloadPageNumber
+{
+	NSInteger numberOfPages = [_dataSource numberOfPagesInPageScrollView:self];
+	if (numberOfPages != _numberOfPages) {
+		_numberOfPages = numberOfPages;
+		self.contentSize = CGSizeMake(_numberOfPages * SCROLL_VIEW_WIDTH_FT, SCROLL_VIEW_HEIGHT_FT);
 	}
 }
 
@@ -319,7 +349,7 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-	if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollView:didSlideToIndex:)]) {
+	if ([_pageScrollViewDelegate respondsToSelector:@selector(pageScrollView:didSlideToIndex:)]) {
 		[_pageScrollViewDelegate pageScrollView:self didSlideToIndex:[self selectedIndex]];
 	}
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)]) {
