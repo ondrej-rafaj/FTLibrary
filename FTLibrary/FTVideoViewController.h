@@ -34,5 +34,6 @@
 @optional
 - (void)videoPlayerDidStop:(FTViewController *)videoController;
 - (void)videoPlayerWillDisappear:(FTViewController *)videoController;
+- (void)videoPlayerDidRespondTotouch:(FTViewController *)videoController;
 
 @end

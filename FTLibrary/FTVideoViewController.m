@@ -84,11 +84,14 @@ static UIStatusBarStyle originalStatusBarStyle;
     [self.player.view setFrame:self.view.bounds];
     [self.player setFullscreen:YES];
     [self.player prepareToPlay];
+
     [self.view addSubview:self.player.view];
     
     //set notifications
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(videoDidStop:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.player];
+    
+    [self.view setUserInteractionEnabled:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -125,6 +128,14 @@ static UIStatusBarStyle originalStatusBarStyle;
         if (UIInterfaceOrientationIsLandscape(orientation)) return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
         else return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
     }
+}
+
+#pragma mark touches
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(videoPlayerDidRespondTotouch:)]) {
+        [self.delegate videoPlayerDidRespondTotouch:self];
+    }    
 }
 
 @end
