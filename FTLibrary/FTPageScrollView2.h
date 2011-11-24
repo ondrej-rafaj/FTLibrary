@@ -55,9 +55,14 @@
 @property (nonatomic, assign) CGSize visibleSize;
 
 - (void)reloadData;
+- (void)reloadPageNumber; //doesn't reload content but change the contentSize accordingly
+
 - (void)scrollToPageAtIndex:(NSInteger)index animated:(BOOL)animated;
 - (NSInteger)selectedIndex;
 - (UIView *)selectedView;
+
 - (NSInteger)indexOfView:(UIView *)view;
+- (UIView *)viewAtIndex:(NSUInteger)index;
+- (NSArray *)visibleViews;
 
 @end

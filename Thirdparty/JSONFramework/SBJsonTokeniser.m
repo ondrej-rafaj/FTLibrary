@@ -459,25 +459,6 @@
 
     return tok;
 }
-/*
-{
-    "data": [
-			 "",
-			 "",
-			 "",
-			 "",
-			 "",
-			 "http://www.stickertagapp.com/api/2.0/packages/red-black.txt",
-			 "http://www.stickertagapp.com/api/2.0/packages/stamps.txt",
-			 "http://www.stickertagapp.com/api/2.0/packages/stars.txt",
-			 "",
-			 "",
-			 "",
-			 "",
-			 ""
-			 ],
-    "generated": 1318601137
-}
-*/
+
 
 @end

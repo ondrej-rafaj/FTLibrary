@@ -31,6 +31,10 @@ static float systemVersion = -1;
 	return [UIDevice currentDevice].name;
 }
 
++ (NSString *)uuid {
+	return @"";
+}
+
 + (UIDeviceBatteryState)batteryState {
 	return [UIDevice currentDevice].batteryState;
 }
