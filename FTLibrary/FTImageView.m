@@ -6,6 +6,7 @@
 //  Copyright 2011 Fuerte International. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "FTImageView.h"
 #import "UIColor+Tools.h"
 #import "FTFilesystem.h"
@@ -288,33 +289,33 @@
 
 #pragma mark animations
 
-- (void)setImage:(UIImage *)image dissolveInTime:(CGFloat)time {
-    if (!self.image) {
+- (void)setImage:(UIImage *)image dissolveInTime:(CGFloat)time allowUserInteractionWillAnimating:(BOOL)userInteraction
+{
+	if (!self.image) {
         [self setImage:image];
         return;
     }
-    UIImageView *oldImg = [[UIImageView alloc] initWithImage:self.image];
-    [oldImg setFrame:self.bounds];
-    [self addSubview:oldImg];
-    [oldImg bringToFront];
     
-    [self setImage:image];
-    
-    CGRect frame = self.frame;
-    frame.size = image.size;
-    [self setFrame:frame];
-    
-    //aniamtion
-    [UIView animateWithDuration:time animations:^{
-        [oldImg setAlpha:0];
-        
-    } completion:^(BOOL finished) {
-        [oldImg removeFromSuperview];
-        [oldImg release];
-    }];
-    
-    
+	CATransition *fading = [CATransition animation];
+	fading.duration = time;
+	if (!userInteraction) {
+		[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+		fading.delegate = self;
+	}
+	[self.layer addAnimation:fading forKey:nil];
+	self.image = image;
 }
 
+- (void)setImage:(UIImage *)image dissolveInTime:(CGFloat)time
+{
+	[self setImage:image dissolveInTime:time allowUserInteractionWillAnimating:NO];
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+	if ([self.layer animationForKey:@"transition"] == anim) {
+		[[UIApplication sharedApplication] endIgnoringInteractionEvents];
+	}
+}
 
 @end
