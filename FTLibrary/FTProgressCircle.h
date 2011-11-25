@@ -12,18 +12,22 @@
     UIImage *_foregroundImage;
     int _percentage;
     BOOL _outlinePath;
+    float _animationDuration;
 @private
     BOOL _shouldAnimate;
     int _fromValue;
     CADisplayLink *_displayLink;
+    NSInteger _frameInterval;
 }
 
 @property (nonatomic, retain) IBOutlet UIImage *foregroundImage;
 @property (nonatomic, assign) int percentage;
 @property (nonatomic ,assign) BOOL outlinePath;
+@property (nonatomic, assign) float animationDuration;
 @property (nonatomic, assign, getter=isShouldAnimate) BOOL shouldAnimate;
 @property (nonatomic, assign) int fromValue;
 @property (nonatomic, retain) CADisplayLink *displayLink;
+@property (nonatomic, assign) NSInteger frameInterval;
 
 - (id)initWithBackgroundImage:(UIImage *)bkgImg andForegroundImage:(UIImage *)frgImg;
 - (void)animateToPercentage:(int)percentage;

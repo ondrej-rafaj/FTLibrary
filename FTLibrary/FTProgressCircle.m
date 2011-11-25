@@ -15,9 +15,11 @@
 @synthesize foregroundImage = _foregroundImage;
 @synthesize percentage = _percentage;
 @synthesize outlinePath = _outlinePath;
+@synthesize animationDuration = _animationDuration;
 @synthesize shouldAnimate = _shouldAnimate;
 @synthesize fromValue = _fromValue;
 @synthesize displayLink = _displayLink;
+@synthesize frameInterval = _frameInterval;
 
 #pragma mark setters
 
@@ -27,8 +29,14 @@
     else [self setPercentage:perc];
 }
 
-- (void)doAnimation {
-    self.fromValue += 2;
+- (void)doAnimation:(CADisplayLink *)link {
+    if ((self.frameInterval == 0) && (link.duration > 0.0) && (self.animationDuration > 0.0)) {
+        int fr = (self.animationDuration / link.duration);
+        self.frameInterval = MAX(1, ceil(fr / self.percentage));
+        [link setFrameInterval:self.frameInterval];
+         NSLog(@"FR : %d", self.frameInterval);
+    }
+    self.fromValue += 1;
     
     if (self.fromValue >= self.percentage) {
         self.fromValue = self.percentage;
@@ -40,9 +48,9 @@
 - (void)animateToPercentage:(int)percentage {
     _percentage = percentage;
     self.fromValue = 0;
-    self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(doAnimation)];
+    self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(doAnimation:)];
     [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-    [self doAnimation];
+    [self doAnimation:self.displayLink];
 
 }
 
@@ -66,6 +74,8 @@
         self.foregroundImage = frgImg;
         [self setPercentage:0];
         self.outlinePath = NO;
+        self.animationDuration = 0.8;
+        self.frameInterval = 0;
     }
     return self;    
 }
