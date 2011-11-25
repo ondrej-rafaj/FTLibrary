@@ -84,5 +84,6 @@
 
 - (void)setImage:(UIImage *)image dissolveInTime:(CGFloat)time;
 
+- (void)setImage:(UIImage *)image dissolveInTime:(CGFloat)time allowUserInteractionWillAnimating:(BOOL)userInteraction;
 
 @end
