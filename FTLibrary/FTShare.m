@@ -227,13 +227,17 @@
 }
 
 - (void)facebookLogin {
-	[self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", @"offline_access", @"read_stream", @"read_friendlists", @"read_insights", @"user_birthday", @"user_about_me", nil]];
+	[self.facebook authorize:[NSArray arrayWithObjects:@"offline_access", @"read_stream", @"read_friendlists", @"read_insights", @"user_birthday", @"user_about_me", nil]];
+}
+
+- (void)facebookPublishLogin {
+	[self.facebook authorize:[NSArray arrayWithObjects:@"publish_stream", nil]];
 }
 
 - (void)shareViaFacebook:(FTShareFacebookData *)data {
     self.facebookParams = data;
     if (![self.facebook isSessionValid]) {
-        [self facebookLogin];
+        [self facebookPublishLogin];
     }
     else {
         if (![self.facebookParams isRequestValid]) return;
@@ -271,8 +275,7 @@
 }
 
 - (void)dialogDidNotComplete:(FBDialog *)dialog {
-    NSDictionary *dict = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects:FTLangGet(@"Unknown error occured"), nil]
-                                                     forKeys:[NSArray arrayWithObjects:@"description", nil]];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects:FTLangGet(@"Unknown error occured"), nil] forKeys:[NSArray arrayWithObjects:@"description", nil]];
     NSError *error= [NSError errorWithDomain:@"com.fuerte.FTShare" code:400 userInfo:dict];
     if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPost:)]) {
         [self.facebookDelegate facebookDidPost:error];

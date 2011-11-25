@@ -182,5 +182,38 @@
     [self positionAtX:xPos];
 }
 
+- (CGFloat)bottomMargin
+{
+	if (self.superview) {
+		return self.superview.height - self.bottomPosition;	
+	}
+	return 0;
+}
+
+- (void)setBottomMargin:(CGFloat)bottomMargin
+{
+	if (self.superview) {
+		CGRect frame = self.frame;
+		frame.origin.y = self.superview.height - bottomMargin - self.height;
+		self.frame = frame;
+	}
+}
+
+- (CGFloat)rightMargin
+{
+	if (self.superview) {
+		return self.superview.width - self.rightPosition;	
+	}
+	return 0;
+}
+
+- (void)setRightMargin:(CGFloat)rightMargin
+{
+	if (self.superview) {
+		CGRect frame = self.frame;
+		frame.origin.x = self.superview.width - rightMargin - self.width;
+		self.frame = frame;
+	}
+}
 
 @end

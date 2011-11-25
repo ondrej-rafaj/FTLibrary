@@ -55,5 +55,10 @@
 - (void)bringToFront;
 - (void)sendToBack;
 
+- (CGFloat)bottomMargin;
+- (void)setBottomMargin:(CGFloat)bottomMargin;
+
+- (CGFloat)rightMargin;
+- (void)setRightMargin:(CGFloat)rightMargin;
 
 @end

@@ -32,7 +32,14 @@ static float systemVersion = -1;
 }
 
 + (NSString *)uuid {
-	return @"";
+	CFUUIDRef uuid = CFUUIDCreate(NULL);
+	assert(uuid != NULL);
+		
+	CFStringRef uuidStr = CFUUIDCreateString(NULL, uuid);
+	assert(uuidStr != NULL);
+	
+	NSString *result = [NSString stringWithFormat:@"%@", uuidStr];
+	return result;
 }
 
 + (UIDeviceBatteryState)batteryState {
