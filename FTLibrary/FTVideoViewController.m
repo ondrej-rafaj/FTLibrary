@@ -27,6 +27,13 @@ static UIStatusBarStyle originalStatusBarStyle;
     }
 }
 
+- (void)videoDidStart:(NSNotification *)notification {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(videoPlayerDidStart:)]) {
+        [self.delegate videoPlayerDidStart:self];
+    }
+}
+
+
 
 #pragma mark Initialization
 
@@ -90,6 +97,7 @@ static UIStatusBarStyle originalStatusBarStyle;
     //set notifications
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(videoDidStop:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.player];
+    [defaultCenter addObserver:self selector:@selector(videoDidStart:) name:MPMoviePlayerNowPlayingMovieDidChangeNotification object:self.player];
     
     [self.view setUserInteractionEnabled:YES];
 }
