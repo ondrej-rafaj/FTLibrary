@@ -977,11 +977,14 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    CGPoint point = [(UITouch *)[touches anyObject] locationInView:self];
-    NSDictionary *data = [self dataForPoint:point];
-    
-    if (data && self.delegate && [self.delegate respondsToSelector:@selector(touchedData:inCoreTextView:)]) {
-        [self.delegate touchedData:data inCoreTextView:self];
+	[super touchesEnded:touches withEvent:event];
+	
+	if (self.delegate && [self.delegate respondsToSelector:@selector(touchedData:inCoreTextView:)]) {
+		CGPoint point = [(UITouch *)[touches anyObject] locationInView:self];
+		NSDictionary *data = [self dataForPoint:point];
+		if (data) {
+            [self.delegate touchedData:data inCoreTextView:self];
+		}
     }
 }
 
