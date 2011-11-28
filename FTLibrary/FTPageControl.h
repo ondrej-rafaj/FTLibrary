@@ -19,6 +19,8 @@
 		unsigned int changeInSelectedColor:1;
 		unsigned int changeInUnselectedColor:1;
 		unsigned int changeInLayout:1;
+		unsigned int changeInSelectedImage:1;
+		unsigned int changeInUnselectedImage:1;
     } _pageControlFlags;
 }
 
@@ -27,6 +29,9 @@
 
 @property (nonatomic, retain) UIColor *selectedDotColor;
 @property (nonatomic, retain) UIColor *unselectedDotColor;
+@property (nonatomic, retain) UIImage *unselectedDotImage;
+@property (nonatomic, retain) UIImage *selectedDotImage;
+
 @property (nonatomic) CGFloat dotRadius;
 @property (nonatomic) CGFloat dotsSpacing;
 @property (nonatomic, retain) UIImage *dotMask;

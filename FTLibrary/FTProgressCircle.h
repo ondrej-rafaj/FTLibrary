@@ -10,6 +10,7 @@
 
 @interface FTProgressCircle : UIView {
     UIImage *_foregroundImage;
+	UIImage *_backgroundImage;
     int _percentage;
     BOOL _outlinePath;
     float _animationDuration;

@@ -10,8 +10,8 @@
 
 @interface FTPageControl ()
 
-@property (nonatomic, retain) UIImage* unselectedDotImage;
-@property (nonatomic, retain) UIImage* selectedDotImage;
+@property (nonatomic, retain) UIImage *internUnselectedDotImage;
+@property (nonatomic, retain) UIImage *internSelectedDotImage;
 
 - (UIImage *)_defaultImageDotWithRadius:(CGFloat)radius andColor:(UIColor *)color;
 - (UIImage *)_customImageDotWithMaskImage:(UIImage *)maskImage andColor:(UIColor *)color;
@@ -31,9 +31,11 @@
 @synthesize unselectedDotColor = _unselectedDotColor;
 @synthesize dotRadius = _dotRadius;
 @synthesize dotsSpacing = _dotsSpacing;
+@synthesize internUnselectedDotImage = _internUnselectedDotImage;
+@synthesize internSelectedDotImage = _internSelectedDotImage;
+@synthesize dotMask = _dotMask;
 @synthesize unselectedDotImage = _unselectedDotImage;
 @synthesize selectedDotImage = _selectedDotImage;
-@synthesize dotMask = _dotMask;
 
 #pragma mark - User Interaction
 
@@ -108,7 +110,7 @@
 		CGSize sizeThatFit = [self sizeThatFits:CGSizeZero];
 		
 		CGFloat xOffset = (CGRectGetWidth(self.bounds) - sizeThatFit.width) / 2;
-		CGFloat dotWidth = (_dotMask) ? _dotMask.size.width : 2 * _dotRadius;
+		CGFloat dotWidth = (_unselectedDotImage) ? _unselectedDotImage.size.width : 2 * _dotRadius;
 		
 		for (int i = 0; i < _numberOfPages; i++) {
 			UIButton *button = [_indicators objectAtIndex:i];
@@ -135,8 +137,8 @@
 
 - (void)dealloc
 {
-	[_unselectedDotImage release];
-	[_selectedDotImage release];
+	[_internUnselectedDotImage release];
+	[_internSelectedDotImage release];
 	[_selectedDotColor release];
 	[_unselectedDotColor release];
 	[_indicators release];
@@ -230,6 +232,24 @@
 	[self setNeedsLayout];
 }
 
+- (void)setSelectedDotImage:(UIImage *)selectedDotImage
+{
+	[_selectedDotImage release];
+	_selectedDotImage = [selectedDotImage retain];
+	if (selectedDotImage) _pageControlFlags.changeInSelectedImage = YES;
+	else _pageControlFlags.changeInSelectedImage = YES;
+	[self setNeedsLayout];
+}
+
+- (void)setUnselectedDotImage:(UIImage *)unselectedDotImage
+{
+	[_unselectedDotImage release];
+	_unselectedDotImage = [unselectedDotImage retain];	
+	if (unselectedDotImage) _pageControlFlags.changeInUnselectedImage = YES;
+	else _pageControlFlags.changeInUnselectedColor = YES;
+	[self setNeedsLayout];
+}
+
 #pragma mark - UI methods
 
 - (void)_updateIndicatorsIfNeeded
@@ -256,27 +276,42 @@
 		}
 	}
 	
-	if (_pageControlFlags.changeInSelectedColor || _pageControlFlags.changeInUnselectedColor) {
-		
-		if (_pageControlFlags.changeInSelectedColor) {
-			if (_dotMask) self.selectedDotImage = [self _customImageDotWithMaskImage:_dotMask andColor:_selectedDotColor];
-			else self.selectedDotImage = [self _defaultImageDotWithRadius:_dotRadius andColor:_selectedDotColor];
-		}
-		if (_pageControlFlags.changeInUnselectedColor) {
-			if (_dotMask) self.unselectedDotImage = [self _customImageDotWithMaskImage:_dotMask andColor:_unselectedDotColor];
-			else self.unselectedDotImage = [self _defaultImageDotWithRadius:_dotRadius andColor:_unselectedDotColor];
-		}
+	BOOL changes = NO;
+	
+	if (_pageControlFlags.changeInSelectedImage) {
+		self.internSelectedDotImage = _selectedDotImage;
+		changes = YES;
+	}
+	else if (_pageControlFlags.changeInSelectedColor) {
+		if (_dotMask) self.internSelectedDotImage = [self _customImageDotWithMaskImage:_dotMask andColor:_selectedDotColor];
+		else self.internSelectedDotImage = [self _defaultImageDotWithRadius:_dotRadius andColor:_selectedDotColor];
+		changes = YES;
+	}
+	
+	if (_pageControlFlags.changeInUnselectedImage) {
+		self.internUnselectedDotImage = _unselectedDotImage;
+		changes = YES;
+	}
+	else if (_pageControlFlags.changeInUnselectedColor) {
+		if (_dotMask) self.internUnselectedDotImage = [self _customImageDotWithMaskImage:_dotMask andColor:_unselectedDotColor];
+		else self.internUnselectedDotImage = [self _defaultImageDotWithRadius:_dotRadius andColor:_unselectedDotColor];
+		changes = YES;
+	}
+	
+	if (changes) {
 		for (UIButton *button in _indicators) {
-			[button setImage:_selectedDotImage forState:UIControlStateSelected];
-			[button setImage:_unselectedDotImage forState:UIControlStateNormal];
-			if (button.selected) [button setImage:_selectedDotImage forState:UIControlStateHighlighted];
-			else [button setImage:_unselectedDotImage forState:UIControlStateHighlighted];
-			
+			[button setImage:_internSelectedDotImage forState:UIControlStateSelected];
+			[button setImage:_internUnselectedDotImage forState:UIControlStateNormal];
+			if (button.selected) [button setImage:_internSelectedDotImage forState:UIControlStateHighlighted];
+			else [button setImage:_internUnselectedDotImage forState:UIControlStateHighlighted];
 			[button sizeToFit];
 		}
-		_pageControlFlags.changeInSelectedColor = NO;
-		_pageControlFlags.changeInUnselectedColor = NO;
 	}
+	
+	_pageControlFlags.changeInSelectedColor = NO;
+	_pageControlFlags.changeInUnselectedColor = NO;
+	_pageControlFlags.changeInSelectedImage = NO;
+	_pageControlFlags.changeInUnselectedImage = NO;
 }
 
 - (void)updateCurrentPageDisplay
@@ -288,6 +323,7 @@
 
 - (void)_updateCurrentPageDisplay
 {
+	[self layoutIfNeeded];
 	UIButton *selectedIndicator = [_indicators objectAtIndex:_displayedPage];
 	UIButton *newSelectedIndicator = [_indicators objectAtIndex:_currentPage];
 	
@@ -296,8 +332,8 @@
 	newSelectedIndicator.selected = YES;
 	newSelectedIndicator.userInteractionEnabled = NO;
 
-	[newSelectedIndicator setImage:_selectedDotImage forState:UIControlStateHighlighted];
-	[selectedIndicator setImage:_unselectedDotImage forState:UIControlStateHighlighted];
+	[newSelectedIndicator setImage:_internSelectedDotImage forState:UIControlStateHighlighted];
+	[selectedIndicator setImage:_internUnselectedDotImage forState:UIControlStateHighlighted];
 
 	_displayedPage = _currentPage;
 }
@@ -307,7 +343,7 @@
 	if (pageCount == 0) return CGSizeZero;
 	
 	CGSize dotSize;
-	if (_dotMask) dotSize = _dotMask.size;
+	if (_selectedDotImage) dotSize = _selectedDotImage.size;
 	else dotSize = CGSizeMake(2 * _dotRadius, 2 * _dotRadius);
 
 	CGSize returnedSize;
@@ -323,3 +359,4 @@
 }
 
 @end
+

@@ -67,10 +67,9 @@
     self = [super initWithFrame:CGRectMake(0, 0, bkgImg.size.width, bkgImg.size.height)];
     if (self) {
         // Initialization code
-        [self setBackgroundColor:[UIColor clearColor]];
+		self.opaque = NO;
         
-        [self setBackgroundColor:[UIColor colorWithPatternImage:bkgImg]];
-        
+		_backgroundImage = [bkgImg retain];
         self.foregroundImage = frgImg;
         [self setPercentage:0];
         self.outlinePath = NO;
@@ -85,7 +84,7 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-
+	[_backgroundImage drawInRect:rect];
     float degrees =  (self.fromValue * 3.6);
     float percRadians = toRad((int)(degrees - 90));
     float radius = (self.bounds.size.width / 2);
