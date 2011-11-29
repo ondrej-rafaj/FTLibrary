@@ -971,6 +971,19 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
     if ([self superview]) [self setNeedsDisplay];
 }
 
+- (void)setShadowColor:(UIColor *)shadowColor
+{
+	[_shadowColor release];
+	_shadowColor = [shadowColor retain];
+	[self setNeedsDisplay];
+}
+
+- (void)setShadowOffset:(CGSize)shadowOffset
+{
+	_shadowOffset = shadowOffset;
+	[self setNeedsDisplay];
+}
+
 - (void)dealloc
 {
 	if (_framesetter) CFRelease(_framesetter);
