@@ -249,6 +249,8 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font);
 @synthesize delegate = _delegate;
 @synthesize framesetter = _framesetter;
 @synthesize rootNode = _rootNode;
+@synthesize shadowColor = _shadowColor;
+@synthesize shadowOffset = _shadowOffset;
 
 CTFontRef CTFontCreateFromUIFont(UIFont *font)
 {
@@ -896,6 +898,10 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
     //draw images
     if ([_images count] > 0) [self drawImages];
     
+	
+	if (_shadowColor) {
+		CGContextSetShadowWithColor(context, _shadowOffset, 0.f, _shadowColor.CGColor);
+	}
     
 	CGContextSetTextMatrix(context, CGAffineTransformIdentity);
 	CGContextTranslateCTM(context, 0, self.bounds.size.height);
@@ -975,6 +981,7 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
     [_URLs release], _URLs = nil;
     [_images release], _images = nil;
     _delegate = nil;
+	[_shadowColor release];
     [super dealloc];
 }
 

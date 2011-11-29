@@ -29,6 +29,7 @@ extern NSString * const FTCoreTextTagLink;
 @protocol FTCoreTextViewDelegate;
 @interface FTCoreTextView : UIView {
     NSString *_text;
+	//shadow is not yet part of a style. It's applied on the whole view	
 @private
 	NSMutableDictionary *_styles;
     NSString			*_processedString;
@@ -45,7 +46,8 @@ extern NSString * const FTCoreTextTagLink;
 @property (nonatomic, retain) NSMutableDictionary	*URLs;
 @property (nonatomic, retain) NSMutableArray		*images;
 @property (nonatomic, assign) id <FTCoreTextViewDelegate> delegate;
-
+@property (nonatomic, retain) UIColor *shadowColor;
+@property (nonatomic, assign) CGSize shadowOffset;
 
 - (id)initWithFrame:(CGRect)frame;
 
