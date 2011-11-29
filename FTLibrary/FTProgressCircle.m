@@ -34,7 +34,6 @@
         int fr = (self.animationDuration / link.duration);
         self.frameInterval = MAX(1, ceil(fr / self.percentage));
         [link setFrameInterval:self.frameInterval];
-         NSLog(@"FR : %d", self.frameInterval);
     }
     self.fromValue += 1;
     
