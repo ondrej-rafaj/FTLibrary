@@ -888,6 +888,11 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
                                                     CFRangeMake(0, 0),
                                                     mainPath, NULL);
     
+    if (!drawFrame) {
+        NSLog(@"FTCoreText unable to render: %@", self.processedString);
+        return;
+    }
+    
     //draw images
     if ([_images count] > 0) [self drawImages];
     
