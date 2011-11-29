@@ -256,23 +256,30 @@
 {
 	if ([_indicators count] != _numberOfPages) {
 		
-		for (UIView *v in _indicators) {
-			[v removeFromSuperview];
-		}
-		[_indicators removeAllObjects];
-		
-		for (int i = 0; i < _numberOfPages; i++) {
-			UIButton *indicatorButton = [[UIButton alloc] initWithFrame:CGRectZero];
-			indicatorButton.backgroundColor = [UIColor clearColor];
-			indicatorButton.multipleTouchEnabled = NO;
-			indicatorButton.exclusiveTouch = YES;
-			indicatorButton.adjustsImageWhenHighlighted = NO;
-			indicatorButton.selected = (i == _currentPage);
-			indicatorButton.userInteractionEnabled = !indicatorButton.selected;
-			[indicatorButton addTarget:self action:@selector(indicatorAction:) forControlEvents:UIControlEventTouchUpInside];
-			[_indicators addObject:indicatorButton];
-			[self addSubview:indicatorButton];
-			[indicatorButton release];
+		if (_pageControlFlags.changeInLayout) {
+			for (UIView *v in _indicators) {
+				[v removeFromSuperview];
+			}
+			[_indicators removeAllObjects];
+			
+			for (int i = 0; i < _numberOfPages; i++) {
+				UIButton *indicatorButton = [[UIButton alloc] initWithFrame:CGRectZero];
+				indicatorButton.backgroundColor = [UIColor clearColor];
+				indicatorButton.multipleTouchEnabled = NO;
+				indicatorButton.exclusiveTouch = YES;
+				indicatorButton.adjustsImageWhenHighlighted = NO;
+				indicatorButton.selected = (i == _currentPage);
+				indicatorButton.userInteractionEnabled = !indicatorButton.selected;
+				[indicatorButton setImage:_internSelectedDotImage forState:UIControlStateSelected];
+				[indicatorButton setImage:_internUnselectedDotImage forState:UIControlStateNormal];
+				if (indicatorButton.selected) [indicatorButton setImage:_internSelectedDotImage forState:UIControlStateHighlighted];
+				else [indicatorButton setImage:_internUnselectedDotImage forState:UIControlStateHighlighted];
+				[indicatorButton sizeToFit];
+				[indicatorButton addTarget:self action:@selector(indicatorAction:) forControlEvents:UIControlEventTouchUpInside];
+				[_indicators addObject:indicatorButton];
+				[self addSubview:indicatorButton];
+				[indicatorButton release];
+			}
 		}
 	}
 	
