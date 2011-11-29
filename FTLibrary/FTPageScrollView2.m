@@ -67,7 +67,7 @@
 {
 	NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES];
 	NSArray *sortedPageViews = [_visibleViews sortedArrayUsingDescriptors:[NSArray arrayWithObject:descriptor]];
-	NSMutableArray *returnedViews = [NSMutableArray new];
+	NSMutableArray *returnedViews = [[NSMutableArray new] autorelease];
 	for (FTPageView2 *pageView in sortedPageViews) {
 		[returnedViews addObject:pageView.subviews.lastObject];
 	}

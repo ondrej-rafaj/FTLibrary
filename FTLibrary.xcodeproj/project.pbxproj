@@ -530,6 +530,10 @@
 		9348CDED1464041500A6F877 /* FTPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9348CDEB1464041500A6F877 /* FTPageControl.m */; };
 		93C70E171474195800CA2139 /* FTPageScrollView2.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C70E151474195400CA2139 /* FTPageScrollView2.h */; };
 		93C70E181474195800CA2139 /* FTPageScrollView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C70E161474195500CA2139 /* FTPageScrollView2.m */; };
+		93F6E7E41484F549002337ED /* FTTaskMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 93F6E7E21484F549002337ED /* FTTaskMaker.h */; };
+		93F6E7E51484F549002337ED /* FTTaskMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F6E7E31484F549002337ED /* FTTaskMaker.m */; };
+		93F6E7F11484F751002337ED /* FTReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 93F6E7EF1484F751002337ED /* FTReachabilityManager.h */; };
+		93F6E7F21484F751002337ED /* FTReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F6E7F01484F751002337ED /* FTReachabilityManager.m */; };
 		A56A62CE1433606E000C666B /* FTShare.h in Headers */ = {isa = PBXBuildFile; fileRef = A56A62CC1433606E000C666B /* FTShare.h */; };
 		A56A62CF1433606E000C666B /* FTShare.m in Sources */ = {isa = PBXBuildFile; fileRef = A56A62CD1433606E000C666B /* FTShare.m */; };
 		A56A63111433617B000C666B /* NSMutableURLRequest+Parameters.h in Headers */ = {isa = PBXBuildFile; fileRef = A56A62DA1433617B000C666B /* NSMutableURLRequest+Parameters.h */; };
@@ -1024,6 +1028,10 @@
 		9348CDEB1464041500A6F877 /* FTPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPageControl.m; sourceTree = "<group>"; };
 		93C70E151474195400CA2139 /* FTPageScrollView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageScrollView2.h; sourceTree = "<group>"; };
 		93C70E161474195500CA2139 /* FTPageScrollView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPageScrollView2.m; sourceTree = "<group>"; };
+		93F6E7E21484F549002337ED /* FTTaskMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTaskMaker.h; sourceTree = "<group>"; };
+		93F6E7E31484F549002337ED /* FTTaskMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTaskMaker.m; sourceTree = "<group>"; };
+		93F6E7EF1484F751002337ED /* FTReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTReachabilityManager.h; sourceTree = "<group>"; };
+		93F6E7F01484F751002337ED /* FTReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTReachabilityManager.m; sourceTree = "<group>"; };
 		A56A62CC1433606E000C666B /* FTShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTShare.h; sourceTree = "<group>"; };
 		A56A62CD1433606E000C666B /* FTShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTShare.m; sourceTree = "<group>"; };
 		A56A62D61433617B000C666B /* jQueryInject.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jQueryInject.txt; sourceTree = "<group>"; };
@@ -1980,6 +1988,10 @@
 		4C85BC9913BB5D0700CB7FCA /* System */ = {
 			isa = PBXGroup;
 			children = (
+				93F6E7E21484F549002337ED /* FTTaskMaker.h */,
+				93F6E7E31484F549002337ED /* FTTaskMaker.m */,
+				93F6E7EF1484F751002337ED /* FTReachabilityManager.h */,
+				93F6E7F01484F751002337ED /* FTReachabilityManager.m */,
 				4C199BBE1444386F002CC572 /* Tracking */,
 				68A9F38413FA796000BDD396 /* Wellbaked app */,
 				4C5760E613C5CAA00049371F /* Debugging */,
@@ -2862,6 +2874,8 @@
 				6811B5A9147A66D100C1474E /* FTProgressCircle.h in Headers */,
 				68849E0E147CFC94002A54D1 /* FTMath.h in Headers */,
 				68849E19147D045E002A54D1 /* FTAnimatedLabel.h in Headers */,
+				93F6E7E41484F549002337ED /* FTTaskMaker.h in Headers */,
+				93F6E7F11484F751002337ED /* FTReachabilityManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3168,6 +3182,8 @@
 				93C70E181474195800CA2139 /* FTPageScrollView2.m in Sources */,
 				6811B5AA147A66D100C1474E /* FTProgressCircle.m in Sources */,
 				68849E17147CFEA9002A54D1 /* FTAnimatedLabel.m in Sources */,
+				93F6E7E51484F549002337ED /* FTTaskMaker.m in Sources */,
+				93F6E7F21484F751002337ED /* FTReachabilityManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

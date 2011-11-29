@@ -7,15 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-
-@interface FTError : NSObject {
-    
-}
+@interface FTError : NSError
 
 + (void)handleErrorWithString:(NSString *)errorMessage;
 
 + (void)handleError:(NSError *)error;
 
++ (FTError *)errorWithError:(NSError *)error;
++ (FTError *)errorWithTitle:(NSString *)title andDescription:(NSString *)description;
+
+- (void)showAsAlertViewWithDelegate:(id <UIAlertViewDelegate>)delegate;
+- (void)showInConsole;
 
 @end
