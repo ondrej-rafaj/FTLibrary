@@ -47,7 +47,7 @@
 - (void)centerAtX;
 - (void)centerAtXQuarter;
 - (void)centerAtX3Quarter;
-
+- (void)setCenter:(CGPoint)center allowSubpixel:(BOOL)allowSubpixels;
 - (void)makeMarginInSuperViewWithTopMargin:(CGFloat)topMargin leftMargin:(CGFloat)leftMargin rightMargin:(CGFloat)rightMargin andBottomMargin:(CGFloat)bottomMargin;
 - (void)makeMarginInSuperViewWithTopMargin:(CGFloat)topMargin andSideMargin:(CGFloat)sideMargin;
 - (void)makeMarginInSuperView:(CGFloat)margin;

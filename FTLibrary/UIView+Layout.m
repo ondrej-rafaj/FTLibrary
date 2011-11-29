@@ -182,6 +182,12 @@
     [self positionAtX:xPos];
 }
 
+- (void)setCenter:(CGPoint)center allowSubpixel:(BOOL)allowSubpixels
+{
+	self.center = center;
+	if (!allowSubpixels) self.frame = CGRectIntegral(self.frame);
+}
+
 - (CGFloat)bottomMargin
 {
 	if (self.superview) {
