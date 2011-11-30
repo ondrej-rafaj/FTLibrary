@@ -11,6 +11,7 @@
 @interface FTProgressCircle : UIView {
     UIImage *_foregroundImage;
 	UIImage *_backgroundImage;
+	CGPoint _circleCenter;
     int _percentage;
     BOOL _outlinePath;
     float _animationDuration;
@@ -31,6 +32,7 @@
 @property (nonatomic, assign) NSInteger frameInterval;
 
 - (id)initWithBackgroundImage:(UIImage *)bkgImg andForegroundImage:(UIImage *)frgImg;
+- (id)initWithBackgroundImage:(UIImage *)bkgImg andForegroundImage:(UIImage *)frgImg andCircleCenter:(CGPoint)center;
 - (void)animateToPercentage:(int)percentage;
 - (void)setDegrees:(CGFloat)degrees animated:(BOOL)animated;
 @end

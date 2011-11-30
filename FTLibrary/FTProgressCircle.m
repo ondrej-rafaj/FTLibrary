@@ -39,7 +39,7 @@
     
     if (self.fromValue >= self.percentage) {
         self.fromValue = self.percentage;
-        [self.displayLink removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+		_displayLink.paused = YES;
     }
     [self setNeedsDisplay];
 }
@@ -47,8 +47,10 @@
 - (void)animateToPercentage:(int)percentage {
     _percentage = percentage;
     self.fromValue = 0;
-    self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(doAnimation:)];
-    [self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    if (_displayLink == nil) { self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(doAnimation:)];
+		[self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+	}
+	_displayLink.paused = NO;
     [self doAnimation:self.displayLink];
 
 }
@@ -59,15 +61,19 @@
     [self setNeedsDisplay];
 }
 
+- (id)initWithBackgroundImage:(UIImage *)bkgImg andForegroundImage:(UIImage *)frgImg
+{
+	return [self initWithBackgroundImage:bkgImg andForegroundImage:frgImg andCircleCenter:CGPointMake(bkgImg.size.width / 2.f, bkgImg.size.height / 2.f)];
+}
 
-
-
-- (id)initWithBackgroundImage:(UIImage *)bkgImg andForegroundImage:(UIImage *)frgImg {
-    self = [super initWithFrame:CGRectMake(0, 0, bkgImg.size.width, bkgImg.size.height)];
+- (id)initWithBackgroundImage:(UIImage *)bkgImg andForegroundImage:(UIImage *)frgImg andCircleCenter:(CGPoint)center
+{
+	self = [super initWithFrame:CGRectMake(0, 0, bkgImg.size.width, bkgImg.size.height)];
     if (self) {
         // Initialization code
 		self.opaque = NO;
-        
+		
+		_circleCenter = center;
 		_backgroundImage = [bkgImg retain];
         self.foregroundImage = frgImg;
         [self setPercentage:0];
@@ -75,7 +81,7 @@
         self.animationDuration = 0.8;
         self.frameInterval = 0;
     }
-    return self;    
+    return self; 
 }
 
 
@@ -83,24 +89,40 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-	[_backgroundImage drawInRect:rect];
+	CGContextRef context = UIGraphicsGetCurrentContext();
+
     float degrees =  (self.fromValue * 3.6);
     float percRadians = toRad((int)(degrees - 90));
-    float radius = (self.bounds.size.width / 2);
+	float radius = (self.bounds.size.width / 2);
     
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    [path moveToPoint:self.center];
-    [path addLineToPoint:CGPointMake(self.center.x, 0)];
-    [path addArcWithCenter:self.center radius:radius startAngle:toRad(-90) endAngle:percRadians clockwise:YES];
-    [path closePath];
+    UIBezierPath *foregroundTrackPath = [UIBezierPath bezierPath];
+    [foregroundTrackPath moveToPoint:_circleCenter];
+    [foregroundTrackPath addLineToPoint:CGPointMake(_circleCenter.x, 0)];
+    [foregroundTrackPath addArcWithCenter:_circleCenter radius:radius startAngle:toRad(-90) endAngle:percRadians clockwise:YES];
+    [foregroundTrackPath closePath];
     //[path applyTransform:CGAffineTransformMakeRotation(toRad(-90))];
+    
+	UIBezierPath *backgroundTrackPath = [UIBezierPath bezierPath];
+    [backgroundTrackPath moveToPoint:_circleCenter];
+    [backgroundTrackPath addLineToPoint:CGPointMake(_circleCenter.x, 0)];
+    [backgroundTrackPath addArcWithCenter:_circleCenter radius:radius startAngle:3 * M_PI / 2 endAngle:percRadians clockwise:NO];
+    [backgroundTrackPath closePath];
 
+    CGContextSaveGState(context);
+    CGMutablePathRef arcBackgroundArc = CGPathCreateMutable();
+    CGPathAddPath(arcBackgroundArc, 0, backgroundTrackPath.CGPath);
+    CGContextAddPath(context, arcBackgroundArc);
+    CGContextClip(context);
+	
+    CFRelease(arcBackgroundArc);
     
-    CGContextRef context = UIGraphicsGetCurrentContext();
+    [_backgroundImage drawInRect:self.frame];
     
+    CGContextRestoreGState(context);
+
     CGContextSaveGState(context);
     CGMutablePathRef arcPath = CGPathCreateMutable();
-    CGPathAddPath(arcPath, 0, path.CGPath);
+    CGPathAddPath(arcPath, 0, foregroundTrackPath.CGPath);
     CGContextAddPath(context, arcPath);
     CGContextClip(context);
 
@@ -109,13 +131,11 @@
     [self.foregroundImage drawInRect:self.frame];
     
     CGContextRestoreGState(context);
-    
+
     if (self.outlinePath) {
         [[UIColor blueColor] setStroke];
-        [path stroke];        
+        [foregroundTrackPath stroke];        
     }
-
-
 }
 
 
