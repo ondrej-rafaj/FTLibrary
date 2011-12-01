@@ -16,8 +16,9 @@
     NSTimeInterval _duration;
     BOOL _shouldAddPercentSign;
 @private
+    CADisplayLink *_displayLink;
     NSInteger _stepValue;
-    NSTimer *_timer;
+    NSInteger _frameInterval;
 }
 
 @property(nonatomic) NSInteger value;
@@ -25,7 +26,8 @@
 @property(nonatomic) NSTimeInterval duration;
 @property(nonatomic) BOOL shouldAddPercentSign;
 @property(nonatomic) NSInteger stepValue;
-@property(nonatomic, retain) NSTimer *timer;
+@property(nonatomic) NSInteger frameInterval;
+@property(nonatomic, retain) CADisplayLink *displayLink;
 
 - (void)animate;
 - (void)animateToValue:(NSInteger)aValue;

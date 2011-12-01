@@ -7,6 +7,7 @@
 //
 
 #import "FTAnimatedLabel.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface FTAnimatedLabel ()
@@ -24,7 +25,8 @@
 @synthesize shouldAddPercentSign = _shouldAddPercentSign;
 @synthesize stepValue = _stepValue;
 @synthesize timerSteps = _timerSteps;
-@synthesize timer = _timer;
+@synthesize displayLink = _displayLink;
+@synthesize frameInterval = _frameInterval;
 
 - (void)updateValue {
     NSString *format = (self.shouldAddPercentSign)? @"%.2d%%" : @"%.2d";
@@ -54,14 +56,20 @@
     return self;    
 }
 
-
-
-- (void)addCount {
-    self.value = ((self.value + self.stepValue) > self.endValue)? self.endValue : (self.value + self.stepValue);      
-    if(self.value <= self.endValue)[self updateValue];
-    if(self.value == self.endValue) [self.timer invalidate];
+- (void)doAnimation:(CADisplayLink *)link {
+    if ((self.frameInterval == 0) && (link.duration > 0.0) && (self.duration > 0.0)) {
+        int fr = (self.duration / link.duration);
+        self.frameInterval = MAX(1, ceil(fr / (int)self.endValue));
+        [link setFrameInterval:self.frameInterval];
+    }
+    self.value += 1;
+    
+    if (self.value >= self.endValue) {
+        self.value = self.endValue;
+		_displayLink.paused = YES;
+    }
+    [self updateValue];
 }
-
 
 - (void)animate {
     [self animateToValue:self.endValue];
@@ -71,20 +79,15 @@
     self.endValue = aValue;
     
     //reset value 
-    if(self.value >= self.endValue) self.value = 0;
-    self.timerSteps = self.duration / ((self.endValue - self.value) / self.stepValue);
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.timerSteps target:self selector:@selector(addCount) userInfo:nil repeats:YES];
-    [self.timer fire];
+    if (_displayLink == nil) { 
+        self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(doAnimation:)];
+		[self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+	}
+	self.displayLink.paused = NO;
+    [self doAnimation:self.displayLink];
+    
 }
 
-
-- (void)startAnimation {
-    //reset value 
-    if(self.value == self.endValue) self.value = 0;
-    self.timerSteps = self.duration / ((self.endValue - self.value) / self.stepValue);
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.timerSteps target:self selector:@selector(addCount) userInfo:nil repeats:YES];
-    [self.timer fire];
-}
 
 
 
@@ -99,8 +102,7 @@
 
 - (void)dealloc
 {
-    if(self.timer) [self.timer invalidate];
-    [_timer release], _timer = nil;
+    [_displayLink invalidate], _displayLink = nil;
     [super dealloc];
 }
 
