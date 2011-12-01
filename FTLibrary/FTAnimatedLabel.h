@@ -31,6 +31,7 @@
 
 - (void)animate;
 - (void)animateToValue:(NSInteger)aValue;
+- (void)animateFromValue:(NSInteger)fromValue toValue:(NSInteger)toValue;
 - (id)initWithFrame:(CGRect)frame font:(UIFont *)font andEndValue:(NSInteger)value;
 
 @end

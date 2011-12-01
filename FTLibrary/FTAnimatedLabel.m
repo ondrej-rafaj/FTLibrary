@@ -75,6 +75,11 @@
     [self animateToValue:self.endValue];
 }
 
+- (void)animateFromValue:(NSInteger)fromValue toValue:(NSInteger)toValue {
+    self.value = fromValue;
+    [self animateToValue:toValue];
+}
+
 - (void)animateToValue:(NSInteger)aValue {
     self.endValue = aValue;
     
