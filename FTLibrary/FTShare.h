@@ -68,6 +68,8 @@ typedef NSUInteger FTShareOptions;
 - (void)facebookLogin;
 - (void)shareViaFacebook:(FTShareFacebookData *)data;
 - (void)getFacebookData:(FTShareFacebookGetData *)data withDelegate:(id <FBRequestDelegate>)delegate;
+- (BOOL)canUseOfflineAccess;
+- (void)setCanUseOfflineAccess:(BOOL)offline;
 
 - (void)shareViaMail:(FTShareMailData *)data;
 

@@ -227,7 +227,7 @@
 }
 
 - (void)facebookLogin {
-	[self.facebook authorize:[NSArray arrayWithObjects:@"offline_access", @"read_stream", @"read_friendlists", @"read_insights", @"user_birthday", @"user_about_me", nil]];
+	[self.facebook authorize:[NSArray arrayWithObjects:@"offline_access", @"read_stream", @"read_friendlists", @"read_insights", @"user_about_me", nil]];
 }
 
 - (void)facebookPublishLogin {
@@ -319,6 +319,17 @@
     self.facebook = nil;
     self.facebookDelegate = nil;
     self.facebookParams = nil;
+}
+
+#pragma mark Using Offline access
+
+- (BOOL)canUseOfflineAccess {
+	return [[NSUserDefaults standardUserDefaults] boolForKey:@"FTShareCanUseOfflineAccess"];
+}
+
+- (void)setCanUseOfflineAccess:(BOOL)offline {
+	[[NSUserDefaults standardUserDefaults] setBool:offline forKey:@"FTShareCanUseOfflineAccess"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark Facebook request delegate

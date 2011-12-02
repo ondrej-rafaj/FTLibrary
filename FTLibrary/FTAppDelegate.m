@@ -40,6 +40,7 @@
 // For 4.2+ support
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
 	BOOL ok = YES;
+	NSLog(@"Facebook url: %@", url);
 	if (self.share.facebook) {
         ok = [self.share.facebook handleOpenURL:url];
     }
@@ -50,6 +51,7 @@
 // Pre 4.2 support
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
 	BOOL ok = YES;
+	NSLog(@"Facebook url: %@", url);
 	if (self.share.facebook) {
         ok = [self.share.facebook handleOpenURL:url];
     }

@@ -52,7 +52,9 @@
 	return ad.share.facebook;
 }
 
-- (void)authorize {
+- (void)authorizeWithOfflineAccess:(BOOL)offlineAccess {
+	NSString *offline = @"offline_access";
+	if (offlineAccess) offline = nil;
 	[[self facebook] authorize:[NSArray arrayWithObjects:
 								@"publish_stream",
 								@"read_stream",
@@ -66,7 +68,37 @@
 								@"friends_photos",
 								@"user_videos",
 								@"friends_videos",
+								offline,
 								nil]];
+}
+
+- (void)authorize {
+	[self authorizeWithOfflineAccess:NO];
+}
+
+- (void)authorizeWithOfflineRequestAccess {
+	FTAppDelegate *ad = [FTAppDelegate delegate];
+	if (![ad.share canUseOfflineAccess]) {
+		NSString *tl = @"Facebook permissions";
+		NSString *ms = @"Would you like to bla bla bla";
+		NSString *ok = @"Allow";
+		NSString *cn = @"Do not use";
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:tl message:ms delegate:self cancelButtonTitle:cn otherButtonTitles:ok, nil];
+		[alert show];
+		[alert release];
+	}
+	else [self authorizeWithOfflineAccess:YES];
+}
+
+#pragma mark Alert view permissions delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+	if (buttonIndex == 1) {
+		[self authorizeWithOfflineAccess:YES];
+	}
+	else {
+		[self authorizeWithOfflineAccess:NO];
+	}
 }
 
 #pragma mark Connection & Downloading stuff
@@ -75,7 +107,7 @@
 	Facebook *fb = [self facebook];
 	if (![fb isSessionValid]) {
 		NSLog(@"Invalid session!!!!");
-		[self authorize];
+		[self authorizeWithOfflineRequestAccess];
 	}
 	else {
 		[download release];

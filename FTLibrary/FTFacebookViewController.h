@@ -27,7 +27,7 @@
 @end
 
 
-@interface FTFacebookViewController : FTViewController <FTShareFacebookDelegate, FTDownloadDelegate, AQGridViewDelegate, AQGridViewDataSource> {
+@interface FTFacebookViewController : FTViewController <FTShareFacebookDelegate, FTDownloadDelegate, AQGridViewDelegate, AQGridViewDataSource, UIAlertViewDelegate> {
 	
 	Facebook *_facebook;
 	

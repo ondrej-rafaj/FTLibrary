@@ -255,6 +255,7 @@
 		[self configureLoadingProgressView];
 		[loadingProgressView setLabelText:title];
 		[loadingProgressView setAnimationType:animation];
+		[loadingProgressView show:YES];
 	}
 }
 
@@ -272,19 +273,20 @@
 }
 
 - (void)enableLoadingProgressViewWithTitle:(NSString *)title andAnimationStyle:(FTProgressViewAnimation)animation {
+	if (loadingProgressView) {
+		loadingProgressView = nil;
+	}
 	if (!loadingProgressView) {
 		loadingProgressView = [[FTProgressView alloc] initWithView:self.view];
 		[self configureLoadingProgressView];
 		[loadingProgressView setLabelText:title];
 		[loadingProgressView setAnimationType:animation];
+		[loadingProgressView show:YES];
 	}
 }
 
 - (void)disableLoadingProgressView {
-	if (loadingProgressView) {
-		[loadingProgressView hide:YES];
-	}
-	self.loadingProgressView = nil;
+	[loadingProgressView hide:YES];
 }
 
 #pragma mark comapare Design custom setter

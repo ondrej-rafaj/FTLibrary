@@ -370,6 +370,9 @@
 		4C9F74B2146AFF99007B68B1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C85BC1A13BA4B5000CB7FCA /* libz.dylib */; };
 		4C9F74B3146AFF99007B68B1 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C85BC1913BA4B5000CB7FCA /* libxml2.dylib */; };
 		4C9F74B4146AFF9B007B68B1 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE096931442111A00B31E11 /* libFlurryAnalytics.a */; };
+		4C9F7DFF14891E3800177894 /* FTISO8601DateFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9F7DFD14891E3800177894 /* FTISO8601DateFormatter.h */; };
+		4C9F7E0014891E3800177894 /* FTISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F7DFE14891E3800177894 /* FTISO8601DateFormatter.m */; };
+		4C9F7E0114891E3800177894 /* FTISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F7DFE14891E3800177894 /* FTISO8601DateFormatter.m */; };
 		4CA29DE9144D7F13002F38BD /* FTBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA29DE7144D7F13002F38BD /* FTBarButtonItem.h */; };
 		4CA29DEA144D7F13002F38BD /* FTBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA29DE8144D7F13002F38BD /* FTBarButtonItem.m */; };
 		4CB6E1F913D5D37C002FEC0A /* FTSimpleDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */; };
@@ -878,6 +881,8 @@
 		4C9F7491146AFEB8007B68B1 /* LeavesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeavesView.m; sourceTree = "<group>"; };
 		4C9F7492146AFEB8007B68B1 /* LeavesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeavesViewController.h; sourceTree = "<group>"; };
 		4C9F7493146AFEB8007B68B1 /* LeavesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeavesViewController.m; sourceTree = "<group>"; };
+		4C9F7DFD14891E3800177894 /* FTISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTISO8601DateFormatter.h; sourceTree = "<group>"; };
+		4C9F7DFE14891E3800177894 /* FTISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTISO8601DateFormatter.m; sourceTree = "<group>"; };
 		4CA29DE7144D7F13002F38BD /* FTBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBarButtonItem.h; sourceTree = "<group>"; };
 		4CA29DE8144D7F13002F38BD /* FTBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTBarButtonItem.m; sourceTree = "<group>"; };
 		4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTSimpleDB.h; path = FTLibrary/FTSimpleDB.h; sourceTree = SOURCE_ROOT; };
@@ -2109,6 +2114,15 @@
 			path = LeavesView;
 			sourceTree = "<group>";
 		};
+		4C9F7DFB14891E0E00177894 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				4C9F7DFD14891E3800177894 /* FTISO8601DateFormatter.h */,
+				4C9F7DFE14891E3800177894 /* FTISO8601DateFormatter.m */,
+			);
+			name = Date;
+			sourceTree = "<group>";
+		};
 		4CA29DE4144D7EF3002F38BD /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -2272,6 +2286,7 @@
 		4CCD124013D850290004EF5D /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				4C9F7DFB14891E0E00177894 /* Date */,
 				A56A62C714336034000C666B /* Share */,
 				4CCD126013D850EF0004EF5D /* Download */,
 				4C85BC9913BB5D0700CB7FCA /* System */,
@@ -2876,6 +2891,7 @@
 				68849E19147D045E002A54D1 /* FTAnimatedLabel.h in Headers */,
 				93F6E7E41484F549002337ED /* FTTaskMaker.h in Headers */,
 				93F6E7F11484F751002337ED /* FTReachabilityManager.h in Headers */,
+				4C9F7DFF14891E3800177894 /* FTISO8601DateFormatter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3184,6 +3200,7 @@
 				68849E17147CFEA9002A54D1 /* FTAnimatedLabel.m in Sources */,
 				93F6E7E51484F549002337ED /* FTTaskMaker.m in Sources */,
 				93F6E7F21484F751002337ED /* FTReachabilityManager.m in Sources */,
+				4C9F7E0014891E3800177894 /* FTISO8601DateFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3273,6 +3290,7 @@
 				4CCD128113D8521D0004EF5D /* FTRemoteInfoView.m in Sources */,
 				4CCD128813D852590004EF5D /* FTDragDropMenuView.m in Sources */,
 				68437FAD13FC08540072C4B9 /* FTLanguageManager.m in Sources */,
+				4C9F7E0114891E3800177894 /* FTISO8601DateFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
