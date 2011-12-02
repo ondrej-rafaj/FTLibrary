@@ -217,16 +217,16 @@
 
 - (UIImageView *)backgroundView
 {
-	if (backgroundView == nil) {
-		if (self.isViewLoaded) {
+	if (self.isViewLoaded) {
+		if (backgroundView == nil) {
 			backgroundView = [[UIImageView alloc] initWithFrame:self.view.bounds];
 			backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 			backgroundView.contentMode = UIViewContentModeTopLeft;
-			[self.view insertSubview:backgroundView atIndex:0];
 		}
-		else {
-			NSLog(@"FTViewController: you have to access the backgroundView property when the controller's view is loaded! (in -viewDidLoad for example)");
-		}
+		[self.view insertSubview:backgroundView atIndex:0];
+	}
+	else {
+		NSLog(@"FTViewController: you have to access the backgroundView property when the controller's view is loaded! (in -viewDidLoad for example)");
 	}
 	return backgroundView;
 }
