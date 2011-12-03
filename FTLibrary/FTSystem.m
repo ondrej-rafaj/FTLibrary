@@ -138,4 +138,15 @@ static float systemVersion = -1;
     return isConnected;
 }
 
++ (NSString *)deviceInfo {
+	NSString *info = [NSString stringWithFormat:@"%@ version: %@\n", [[UIDevice currentDevice] systemName], [[UIDevice currentDevice] systemVersion]];
+	info = [info stringByAppendingFormat:@"Model: %@\n", [[UIDevice currentDevice] model]];
+	info = [info stringByAppendingFormat:@"Orientation: %d\n", [[UIDevice currentDevice] orientation]];
+	info = [info stringByAppendingFormat:@"Retina: %d\n", [self isRetina]];
+	info = [info stringByAppendingFormat:@"Bundle version: %@\n", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+	info = [info stringByAppendingFormat:@"Short version: %@\n", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+	return info;
+}
+
+
 @end

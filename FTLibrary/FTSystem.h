@@ -57,5 +57,7 @@ FTSystemDeviceType;
 + (BOOL)isInternetPingAvailable;
 + (BOOL)isInternetAvailable;
 
++ (NSString *)deviceInfo;
+
 
 @end

@@ -469,6 +469,8 @@
 		4CCD128813D852590004EF5D /* FTDragDropMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCD128513D852590004EF5D /* FTDragDropMenuView.m */; };
 		4CCF855914424E9F007F1043 /* FTFingerDrawingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CCF855714424E9F007F1043 /* FTFingerDrawingView.h */; };
 		4CCF855A14424E9F007F1043 /* FTFingerDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CCF855814424E9F007F1043 /* FTFingerDrawingView.m */; };
+		4CD394A614893FA8000F0A77 /* Appirater.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD394A414893FA8000F0A77 /* Appirater.h */; };
+		4CD394A714893FA8000F0A77 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD394A514893FA8000F0A77 /* Appirater.m */; };
 		4CD7769B1461FD9B007A642B /* FTGridViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD776991461FD9B007A642B /* FTGridViewCell.h */; };
 		4CD7769C1461FD9B007A642B /* FTGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD7769A1461FD9B007A642B /* FTGridViewCell.m */; };
 		4CD94A3013FDBBB200BD6C06 /* UIAlertView+Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CD94A2E13FDBBB200BD6C06 /* UIAlertView+Tools.h */; };
@@ -966,6 +968,8 @@
 		4CCD128513D852590004EF5D /* FTDragDropMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDragDropMenuView.m; sourceTree = "<group>"; };
 		4CCF855714424E9F007F1043 /* FTFingerDrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTFingerDrawingView.h; sourceTree = "<group>"; };
 		4CCF855814424E9F007F1043 /* FTFingerDrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTFingerDrawingView.m; sourceTree = "<group>"; };
+		4CD394A414893FA8000F0A77 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
+		4CD394A514893FA8000F0A77 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		4CD776991461FD9B007A642B /* FTGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGridViewCell.h; sourceTree = "<group>"; };
 		4CD7769A1461FD9B007A642B /* FTGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTGridViewCell.m; sourceTree = "<group>"; };
 		4CD94A2E13FDBBB200BD6C06 /* UIAlertView+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Tools.h"; sourceTree = "<group>"; };
@@ -1768,6 +1772,7 @@
 		4C85BB0413BA4AFD00CB7FCA /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				4CD394A314893FA8000F0A77 /* AppiRater */,
 				4C9F748D146AFEB7007B68B1 /* LeavesView */,
 				4C9F73C314695F2D007B68B1 /* MGSplitViewController */,
 				68D6049F143F0C7900C3C84E /* TestFlight */,
@@ -2383,6 +2388,15 @@
 			name = "Finger drawing";
 			sourceTree = "<group>";
 		};
+		4CD394A314893FA8000F0A77 /* AppiRater */ = {
+			isa = PBXGroup;
+			children = (
+				4CD394A414893FA8000F0A77 /* Appirater.h */,
+				4CD394A514893FA8000F0A77 /* Appirater.m */,
+			);
+			path = AppiRater;
+			sourceTree = "<group>";
+		};
 		4CD776971461FD6B007A642B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -2892,6 +2906,7 @@
 				93F6E7E41484F549002337ED /* FTTaskMaker.h in Headers */,
 				93F6E7F11484F751002337ED /* FTReachabilityManager.h in Headers */,
 				4C9F7DFF14891E3800177894 /* FTISO8601DateFormatter.h in Headers */,
+				4CD394A614893FA8000F0A77 /* Appirater.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3201,6 +3216,7 @@
 				93F6E7E51484F549002337ED /* FTTaskMaker.m in Sources */,
 				93F6E7F21484F751002337ED /* FTReachabilityManager.m in Sources */,
 				4C9F7E0014891E3800177894 /* FTISO8601DateFormatter.m in Sources */,
+				4CD394A714893FA8000F0A77 /* Appirater.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
