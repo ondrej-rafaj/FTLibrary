@@ -40,7 +40,7 @@
         [self setTextAlignment:UITextAlignmentRight];
         self.value = 0;
         self.endValue = 100;
-        self.duration = 2;
+        self.duration = 1;
         self.stepValue = 2;
         [self updateValue];
         self.shouldAddPercentSign = NO;
