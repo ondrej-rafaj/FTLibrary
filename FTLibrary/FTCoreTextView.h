@@ -26,6 +26,8 @@ extern NSString * const FTCoreTextTagBullet;
 extern NSString * const FTCoreTextTagPage;
 extern NSString * const FTCoreTextTagLink;
 
+extern NSString * const FTCoreTextDataURL;
+
 @protocol FTCoreTextViewDelegate;
 @interface FTCoreTextView : UIView {
     NSString *_text;
@@ -68,8 +70,8 @@ extern NSString * const FTCoreTextTagLink;
 
 @protocol FTCoreTextViewDelegate <NSObject>
 @optional
-- (void)touchedData:(NSDictionary *)data inCoreTextView:(FTCoreTextView *)textView;
-
+- (void)touchedData:(NSDictionary *)data inCoreTextView:(FTCoreTextView *)textView __deprecated;
+- (void)coreTextView:(FTCoreTextView *)coreTextView receivedTouchOnData:(NSDictionary *)data;
 @end
 
 @interface NSString (FTCoreText)

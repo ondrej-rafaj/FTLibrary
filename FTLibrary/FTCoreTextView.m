@@ -1,4 +1,4 @@
- //
+//
 //  FTCoreTextView.m
 //  FTCoreText
 //
@@ -18,6 +18,7 @@ NSString * const FTCoreTextTagImage = @"_image";
 NSString * const FTCoreTextTagBullet = @"_bullet";
 NSString * const FTCoreTextTagPage = @"_page";
 NSString * const FTCoreTextTagLink = @"_link";
+NSString * const FTCoreTextDataURL = @"dataUrl";
 
 typedef enum {
 	FTCoreTextTagOpen,
@@ -305,7 +306,7 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
 				if (index >= range.location && index < range.location + range.length) {
 					NSURL *url = [_URLs objectForKey:key];
 					NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-					if (url) [dict setObject:url forKey:@"url"];
+					if (url) [dict setObject:url forKey:FTCoreTextDataURL];
 					return dict;
 				}
 			}
@@ -870,7 +871,7 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
 	[self updateFramesetterIfNeeded];
 	
 	CGContextRef context = UIGraphicsGetCurrentContext();
-
+	
 	[self.backgroundColor setFill];
 	CGContextFillRect(context, rect);
 	
@@ -885,7 +886,7 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
     else {
         CGPathAddPath(mainPath, NULL, _path);
     }
-
+	
 	CTFrameRef drawFrame = CTFramesetterCreateFrame(_framesetter, 
                                                     CFRangeMake(0, 0),
                                                     mainPath, NULL);
@@ -1004,11 +1005,16 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
 {
 	[super touchesEnded:touches withEvent:event];
 	
-	if (self.delegate && [self.delegate respondsToSelector:@selector(touchedData:inCoreTextView:)]) {
+	if (self.delegate && ([self.delegate respondsToSelector:@selector(touchedData:inCoreTextView:)] || [self.delegate respondsToSelector:@selector(coreTextView:receivedTouchOnData:)])) {
 		CGPoint point = [(UITouch *)[touches anyObject] locationInView:self];
 		NSDictionary *data = [self dataForPoint:point];
 		if (data) {
-            [self.delegate touchedData:data inCoreTextView:self];
+			if ([self.delegate respondsToSelector:@selector(coreTextView:receivedTouchOnData:)]) {
+				[self.delegate coreTextView:self receivedTouchOnData:data];
+			}
+			else {
+				[self.delegate touchedData:data inCoreTextView:self];
+			}
 		}
     }
 }
