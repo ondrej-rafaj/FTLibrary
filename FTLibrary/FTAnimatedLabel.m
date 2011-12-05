@@ -1,6 +1,6 @@
 //
 //  FTAnimatedNumberLabel.m
-//  Regaine
+//  Fuerte International
 //
 //  Created by cescofry on 25/03/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
@@ -40,7 +40,7 @@
         [self setTextAlignment:UITextAlignmentRight];
         self.value = 0;
         self.endValue = 100;
-        self.duration = 2;
+        self.duration = 0.6;
         self.stepValue = 2;
         [self updateValue];
         self.shouldAddPercentSign = NO;

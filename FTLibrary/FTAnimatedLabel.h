@@ -1,6 +1,6 @@
 //
 //  FTAnimatedNumberLabel.h
-//  Regaine
+//  Fuerte International
 //
 //  Created by cescofry on 25/03/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.

@@ -153,6 +153,12 @@
 	[grid reloadData];
 }
 
+#pragma mark Store grid view delegate & datasource methods
+
+- (void)storeGridViewCellRequestedDataReload:(FTStoreGridViewCell *)cell {
+	
+}
+
 #pragma mark Memory management
 
 - (void)dealloc {

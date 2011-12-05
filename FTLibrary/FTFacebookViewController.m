@@ -19,7 +19,7 @@
 @synthesize delegate;
 @synthesize facebookAppId;
 @synthesize useGridView;
-@synthesize download;
+@synthesize download; 
 
 
 #pragma mark Creating elements
@@ -79,10 +79,10 @@
 - (void)authorizeWithOfflineRequestAccess {
 	FTAppDelegate *ad = [FTAppDelegate delegate];
 	if (![ad.share canUseOfflineAccess]) {
-		NSString *tl = @"Facebook permissions";
-		NSString *ms = @"Would you like to bla bla bla";
-		NSString *ok = @"Allow";
-		NSString *cn = @"Do not use";
+		NSString *tl = FTLangGet(@"Facebook permissions");
+		NSString *ms = FTLangGet(@"Would you like to grant extended Facebook permissions to this app so you don't have to re-login again?");
+		NSString *ok = FTLangGet(@"YES");
+		NSString *cn = FTLangGet(@"NO");
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:tl message:ms delegate:self cancelButtonTitle:cn otherButtonTitles:ok, nil];
 		[alert show];
 		[alert release];
@@ -106,7 +106,6 @@
 - (void)downloadDataFromUrl:(NSString *)url {
 	Facebook *fb = [self facebook];
 	if (![fb isSessionValid]) {
-		NSLog(@"Invalid session!!!!");
 		[self authorizeWithOfflineRequestAccess];
 	}
 	else {
@@ -174,8 +173,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
-	
-	NSLog(@"Final view size: %@", NSStringFromCGRect(self.view.frame));
 	
 	UIView *v;
 	if (!useGridView) v = table;

@@ -1,6 +1,6 @@
 //
 //  FTPhotoEditingElementView.h
-//  Regaine
+//  Fuerte International
 //
 //  Created by Ondrej Rafaj on 11/04/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.

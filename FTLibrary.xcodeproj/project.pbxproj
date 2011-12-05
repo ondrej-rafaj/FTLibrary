@@ -1768,6 +1768,7 @@
 		4C85BB0413BA4AFD00CB7FCA /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				4CD394A314893FA8000F0A77 /* AppiRater */,
 				4C9F748D146AFEB7007B68B1 /* LeavesView */,
 				4C9F73C314695F2D007B68B1 /* MGSplitViewController */,
 				68D6049F143F0C7900C3C84E /* TestFlight */,
@@ -2381,6 +2382,13 @@
 				4CCF855814424E9F007F1043 /* FTFingerDrawingView.m */,
 			);
 			name = "Finger drawing";
+			sourceTree = "<group>";
+		};
+		4CD394A314893FA8000F0A77 /* AppiRater */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AppiRater;
 			sourceTree = "<group>";
 		};
 		4CD776971461FD6B007A642B /* Cells */ = {
