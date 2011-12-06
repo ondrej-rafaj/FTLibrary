@@ -626,6 +626,9 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
 							}
 							
 							[processedString replaceCharactersInRange:NSMakeRange(elementContentRange.location, elementContentRange.length + tagRange.length) withString:urlDescription];
+							if (![urlString hasPrefix:@"http://"]) {
+								urlString = [NSString stringWithFormat:@"http://%@", urlString];
+							}
 							NSURL *url = [NSURL URLWithString:urlString];
 							NSRange urlDescriptionRange = NSMakeRange(elementContentRange.location, [urlDescription length]);
 							[_URLs setObject:url forKey:NSStringFromRange(urlDescriptionRange)];

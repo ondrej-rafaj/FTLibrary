@@ -529,6 +529,8 @@
 		68DF4E3113CEF9D200B67940 /* FTDataXml.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DF4E2913CEF9D200B67940 /* FTDataXml.m */; };
 		68EB261413F2F1AB006DB33C /* FTCoreTextStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 68EB261213F2F1AB006DB33C /* FTCoreTextStyle.h */; };
 		68EB261513F2F1AB006DB33C /* FTCoreTextStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB261313F2F1AB006DB33C /* FTCoreTextStyle.m */; };
+		93375151148E3CD400121384 /* FTCustomAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9337514F148E3CD400121384 /* FTCustomAnimationView.h */; };
+		93375152148E3CD400121384 /* FTCustomAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93375150148E3CD400121384 /* FTCustomAnimationView.m */; };
 		9348CDEC1464041500A6F877 /* FTPageControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9348CDEA1464041500A6F877 /* FTPageControl.h */; };
 		9348CDED1464041500A6F877 /* FTPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9348CDEB1464041500A6F877 /* FTPageControl.m */; };
 		93C70E171474195800CA2139 /* FTPageScrollView2.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C70E151474195400CA2139 /* FTPageScrollView2.h */; };
@@ -1029,6 +1031,8 @@
 		68DF4E2913CEF9D200B67940 /* FTDataXml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTDataXml.m; path = FTLibrary/FTDataXml.m; sourceTree = SOURCE_ROOT; };
 		68EB261213F2F1AB006DB33C /* FTCoreTextStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCoreTextStyle.h; sourceTree = "<group>"; };
 		68EB261313F2F1AB006DB33C /* FTCoreTextStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCoreTextStyle.m; sourceTree = "<group>"; };
+		9337514F148E3CD400121384 /* FTCustomAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCustomAnimationView.h; sourceTree = "<group>"; };
+		93375150148E3CD400121384 /* FTCustomAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCustomAnimationView.m; sourceTree = "<group>"; };
 		9348CDEA1464041500A6F877 /* FTPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageControl.h; sourceTree = "<group>"; };
 		9348CDEB1464041500A6F877 /* FTPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPageControl.m; sourceTree = "<group>"; };
 		93C70E151474195400CA2139 /* FTPageScrollView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageScrollView2.h; sourceTree = "<group>"; };
@@ -1536,6 +1540,7 @@
 				4C5761A313CAE8DC0049371F /* Window level views */,
 				4C57612413C5E77D0049371F /* Progress */,
 				9348CDE8146403D800A6F877 /* Page Control */,
+				93375154148E3CDA00121384 /* Custom Animation */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -2534,6 +2539,15 @@
 			name = TextView;
 			sourceTree = "<group>";
 		};
+		93375154148E3CDA00121384 /* Custom Animation */ = {
+			isa = PBXGroup;
+			children = (
+				9337514F148E3CD400121384 /* FTCustomAnimationView.h */,
+				93375150148E3CD400121384 /* FTCustomAnimationView.m */,
+			);
+			name = "Custom Animation";
+			sourceTree = "<group>";
+		};
 		9348CDE8146403D800A6F877 /* Page Control */ = {
 			isa = PBXGroup;
 			children = (
@@ -2900,6 +2914,7 @@
 				93F6E7E41484F549002337ED /* FTTaskMaker.h in Headers */,
 				93F6E7F11484F751002337ED /* FTReachabilityManager.h in Headers */,
 				4C9F7DFF14891E3800177894 /* FTISO8601DateFormatter.h in Headers */,
+				93375151148E3CD400121384 /* FTCustomAnimationView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3209,6 +3224,7 @@
 				93F6E7E51484F549002337ED /* FTTaskMaker.m in Sources */,
 				93F6E7F21484F751002337ED /* FTReachabilityManager.m in Sources */,
 				4C9F7E0014891E3800177894 /* FTISO8601DateFormatter.m in Sources */,
+				93375152148E3CD400121384 /* FTCustomAnimationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

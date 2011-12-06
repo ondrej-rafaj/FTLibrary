@@ -97,6 +97,7 @@
 
 - (void)scrollToPageAtIndex:(NSInteger)index animated:(BOOL)animated
 {
+	if (animated && index != self.selectedIndex) [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 	CGFloat xOffset = index * self.bounds.size.width;
 	[self setContentOffset:CGPointMake(xOffset, 0) animated:animated];
 }
@@ -380,6 +381,7 @@
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
+	[[UIApplication sharedApplication] endIgnoringInteractionEvents]; 
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)]) {
 		[_pageScrollViewDelegate scrollViewDidEndScrollingAnimation:scrollView];
 	}
