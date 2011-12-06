@@ -22,6 +22,7 @@ typedef NSUInteger FTCustomAnimationOptions;
 	
 	CADisplayLink *_displayLink;
 	NSMutableArray *_animations;
+	BOOL _isAnimating;
 }
 
 //handy method to start an animation
@@ -42,6 +43,8 @@ typedef NSUInteger FTCustomAnimationOptions;
 
 - (void)animationWillBegin:(FTCustomAnimation *)animation;
 - (void)animationDidFinish:(FTCustomAnimation *)animation;
+
+- (void)setNeedsDisplayNotAnimated;
 
 @end
 

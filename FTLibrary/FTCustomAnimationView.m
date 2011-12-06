@@ -80,20 +80,24 @@
 		[_animations removeObject:anim];
 		[self animationDidFinish:anim];
 	}
-	if (_animations.count == 0) _displayLink.paused = YES;
+	if (_animations.count == 0) { 
+		_displayLink.paused = YES;
+		_isAnimating = NO;
+	}
 }
 
 #pragma mark - Object lifecycle
 
-- (id)init
+- (id)initWithFrame:(CGRect)frame
 {
-	self = [super init];
+	self = [super initWithFrame:frame];
 	if (self) {
 		_animations = [NSMutableArray new];
 		_displayLink = [[CADisplayLink displayLinkWithTarget:self selector:@selector(_displayLinkDidFire)] retain];
 		_displayLink.paused = YES;
 		_displayLink.frameInterval = 2;
 		[_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+		_isAnimating = NO;
 	}
 	return self;
 }
@@ -102,17 +106,22 @@
 {
 	NSMutableArray *animsToDelete = [NSMutableArray new];
 	for (FTCustomAnimation *anim in _animations) {
-		float progress;
-		NSTimeInterval durationSinceBeginning = [[NSDate date] timeIntervalSince1970] - anim.startTimestamp;
-		NSTimeInterval time = durationSinceBeginning / anim.duration;
-		if (anim.customProgressForTime) {
-			progress = anim.customProgressForTime(time);
-		}
-		else {
-			progress = [self _progressForTime:time andAnimationCurve:anim.animationCurve];
-			if (progress >= 1) [animsToDelete addObject:anim];
+		float progress = 1.f;
+		if (_isAnimating) {
+			NSTimeInterval durationSinceBeginning = [[NSDate date] timeIntervalSince1970] - anim.startTimestamp;
+			NSTimeInterval time = durationSinceBeginning / anim.duration;
+			if (anim.customProgressForTime) {
+				progress = anim.customProgressForTime(time);
+			}
+			else {
+				progress = [self _progressForTime:time andAnimationCurve:anim.animationCurve];
+				if (progress >= 1) [animsToDelete addObject:anim];
+			}
 		}
 		[self drawRect:rect forAnimation:anim withAnimationProgress:progress];
+	}
+	if (_animations.count == 0) {
+		[self drawRect:rect forAnimation:nil withAnimationProgress:1];
 	}
 	if (animsToDelete.count > 0) [self _removeAnimations:animsToDelete];
 }
@@ -131,6 +140,12 @@
 }
 
 #pragma mark - Animations
+
+- (void)setNeedsDisplayNotAnimated
+{
+	
+	[self setNeedsDisplay];
+}
 
 - (void)startAnimationWithDuration:(NSTimeInterval)duration
 {
@@ -168,9 +183,13 @@
 
 - (void)insertAnimation:(FTCustomAnimation *)animation atIndex:(NSInteger)index
 {
+	animation.startTimestamp = [[NSDate date] timeIntervalSince1970];
 	[_animations insertObject:animation atIndex:index];
 	[self animationWillBegin:animation];
-	if (_displayLink.paused) _displayLink.paused = NO;
+	if (_displayLink.paused) {
+		_isAnimating = YES;
+		_displayLink.paused = NO;
+	}
 }
 
 #pragma mark - Animations 'callbacks'

@@ -7,7 +7,6 @@
 //
 
 #import "FTProgressCircle.h"
-#import <QuartzCore/QuartzCore.h>
 #import "FTMath.h"
 
 @implementation FTProgressCircle
@@ -17,48 +16,36 @@
 @synthesize outlinePath = _outlinePath;
 @synthesize animationDuration = _animationDuration;
 @synthesize shouldAnimate = _shouldAnimate;
-@synthesize fromValue = _fromValue;
-@synthesize displayLink = _displayLink;
-@synthesize frameInterval = _frameInterval;
 
 #pragma mark setters
 
-- (void)setDegrees:(CGFloat)degrees animated:(BOOL)animated {
-    float perc = (degrees * 3.6);
-    if (animated) [self animateToPercentage:perc];
-    else [self setPercentage:perc];
+- (void)setDegrees:(CGFloat)degrees animated:(BOOL)animated
+{
+    float perc = degrees / 3.6f;
+	[self setPercentage:perc animated:animated];
 }
 
-- (void)doAnimation:(CADisplayLink *)link {
-    if ((self.frameInterval == 0) && (link.duration > 0.0) && (self.animationDuration > 0.0)) {
-        int fr = (self.animationDuration / link.duration);
-        self.frameInterval = MAX(1, ceil(fr / self.percentage));
-        [link setFrameInterval:self.frameInterval];
-    }
-    self.fromValue += 1;
-    
-    if (self.fromValue >= self.percentage) {
-        self.fromValue = self.percentage;
-		_displayLink.paused = YES;
-    }
-    [self setNeedsDisplay];
+- (void)setPercentage:(int)percentage
+{
+	[self setPercentage:percentage animated:NO];
 }
 
-- (void)animateToPercentage:(int)percentage {
-    _percentage = percentage;
-    self.fromValue = 0;
-    if (_displayLink == nil) { self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(doAnimation:)];
-		[self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+- (void)setPercentage:(int)percentage animated:(BOOL)animated
+{
+	[self setPercentage:percentage fromPercentage:0 animated:animated];
+}
+
+- (void)setPercentage:(int)percentage fromPercentage:(int)fromPercentage animated:(BOOL)animated
+{
+	_percentage = percentage;
+	_startValue = fromPercentage;
+	_difference = percentage - fromPercentage;
+	if (animated) {
+		[self startAnimationWithDuration:_difference / 100];
 	}
-	_displayLink.paused = NO;
-    [self doAnimation:self.displayLink];
-
-}
-
-- (void)setPercentage:(int)percentage {
-    _percentage = percentage;
-    self.fromValue = _percentage;
-    [self setNeedsDisplay];
+	else {
+		[self setNeedsDisplayNotAnimated];
+	}
 }
 
 - (id)initWithBackgroundImage:(UIImage *)bkgImg andForegroundImage:(UIImage *)frgImg
@@ -79,19 +66,17 @@
         [self setPercentage:0];
         self.outlinePath = NO;
         self.animationDuration = 0.8;
-        self.frameInterval = 0;
+		_difference = 0;
     }
     return self; 
 }
 
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)drawRect:(CGRect)rect forAnimation:(FTCustomAnimation *)animation withAnimationProgress:(float)progress
 {
 	CGContextRef context = UIGraphicsGetCurrentContext();
 
-    float degrees =  (self.fromValue * 3.6);
+    float degrees = (_startValue + _difference * progress) * 3.6;
     float percRadians = toRad((int)(degrees - 90));
 	float radius = (self.bounds.size.width / 2);
     
