@@ -93,6 +93,11 @@
     
 }
 
+- (void)stepToValue:(NSInteger)aValue {
+    self.endValue = self.value = aValue;
+    [self updateValue];
+}
+
 
 
 

@@ -29,9 +29,13 @@
 @property(nonatomic) NSInteger frameInterval;
 @property(nonatomic, retain) CADisplayLink *displayLink;
 
+
+- (id)initWithFrame:(CGRect)frame font:(UIFont *)font andEndValue:(NSInteger)value;
+
 - (void)animate;
 - (void)animateToValue:(NSInteger)aValue;
 - (void)animateFromValue:(NSInteger)fromValue toValue:(NSInteger)toValue;
-- (id)initWithFrame:(CGRect)frame font:(UIFont *)font andEndValue:(NSInteger)value;
+- (void)stepToValue:(NSInteger)aValue;
+
 
 @end
