@@ -86,7 +86,7 @@
     //reset value 
     if (_displayLink == nil) { 
         self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(doAnimation:)];
-		[self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+		[self.displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 	}
 	self.displayLink.paused = NO;
     [self doAnimation:self.displayLink];

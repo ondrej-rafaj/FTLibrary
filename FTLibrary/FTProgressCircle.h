@@ -19,17 +19,15 @@
 	float _difference;
 }
 
-@property (nonatomic, retain) IBOutlet UIImage *foregroundImage;
 @property (nonatomic, assign) int percentage;
-@property (nonatomic ,assign) BOOL outlinePath;
-@property (nonatomic, assign) float animationDuration;
-@property (nonatomic, assign, getter=isShouldAnimate) BOOL shouldAnimate;
+@property (nonatomic, assign) BOOL outlinePath;
+@property (nonatomic, assign) NSTimeInterval speed; //speed is in number of loop per second
 
 - (id)initWithBackgroundImage:(UIImage *)bkgImg andForegroundImage:(UIImage *)frgImg;
 - (id)initWithBackgroundImage:(UIImage *)bkgImg andForegroundImage:(UIImage *)frgImg andCircleCenter:(CGPoint)center;
 
-- (void)setPercentage:(int)percentage animated:(BOOL)animated;
-- (void)setPercentage:(int)percentage fromPercentage:(int)fromPercentage animated:(BOOL)animated;
+- (NSTimeInterval)setPercentage:(int)percentage animated:(BOOL)animated;
+- (NSTimeInterval)setPercentage:(int)percentage fromPercentage:(int)fromPercentage animated:(BOOL)animated;
 
 - (void)setDegrees:(CGFloat)degrees animated:(BOOL)animated;
 

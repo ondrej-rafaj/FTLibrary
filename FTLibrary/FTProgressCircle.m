@@ -11,11 +11,9 @@
 
 @implementation FTProgressCircle
 
-@synthesize foregroundImage = _foregroundImage;
 @synthesize percentage = _percentage;
 @synthesize outlinePath = _outlinePath;
-@synthesize animationDuration = _animationDuration;
-@synthesize shouldAnimate = _shouldAnimate;
+@synthesize speed = _speed;
 
 #pragma mark setters
 
@@ -30,21 +28,24 @@
 	[self setPercentage:percentage animated:NO];
 }
 
-- (void)setPercentage:(int)percentage animated:(BOOL)animated
+- (NSTimeInterval)setPercentage:(int)percentage animated:(BOOL)animated
 {
-	[self setPercentage:percentage fromPercentage:0 animated:animated];
+	return [self setPercentage:percentage fromPercentage:0 animated:animated];
 }
 
-- (void)setPercentage:(int)percentage fromPercentage:(int)fromPercentage animated:(BOOL)animated
+- (NSTimeInterval)setPercentage:(int)percentage fromPercentage:(int)fromPercentage animated:(BOOL)animated
 {
 	_percentage = percentage;
 	_startValue = fromPercentage;
 	_difference = percentage - fromPercentage;
 	if (animated) {
-		[self startAnimationWithDuration:_difference / 100];
+		NSTimeInterval animationDuration = ( _difference / 100) / _speed;
+		[self startAnimationWithDuration:animationDuration];
+		return animationDuration;
 	}
 	else {
 		[self setNeedsDisplayNotAnimated];
+		return 0.0;
 	}
 }
 
@@ -59,14 +60,13 @@
     if (self) {
         // Initialization code
 		self.opaque = NO;
-		
 		_circleCenter = center;
 		_backgroundImage = [bkgImg retain];
-        self.foregroundImage = frgImg;
+        _foregroundImage = [frgImg retain];
         [self setPercentage:0];
         self.outlinePath = NO;
-        self.animationDuration = 0.8;
 		_difference = 0;
+		_speed = 1;
     }
     return self; 
 }
@@ -113,7 +113,7 @@
 
     CFRelease(arcPath);
     
-    [self.foregroundImage drawInRect:self.frame];
+    [_foregroundImage drawInRect:self.frame];
     
     CGContextRestoreGState(context);
 

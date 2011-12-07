@@ -58,15 +58,20 @@
 
 - (float)_progressForTime:(float)time andAnimationCurve:(FTCustomAnimationCurve)animationCurve
 {
+	float value = 0.f;
 	switch (animationCurve) {
 		case FTCustomAnimationCurveEaseInOut:
-			return atanf(3.009569674f * time) / 1.25f;
+			value = 0.5f + atanf(3.009569674f * (2 * time - 1)) / 2.5f;
 			break;
+			case FTCustomAnimationCurveEaseOut:
+			value = atanf(3.009569674f * time) / 1.25f;
 		case FTCustomAnimationCurveLinear:
-			return time;
+			value = time;
 			break;
 	}
-	return 0.f;
+	if (value < 0.f) value = 0.f;
+	else if (value > 1.f) value = 1.f;
+	return value;
 }
 
 - (void)_displayLinkDidFire

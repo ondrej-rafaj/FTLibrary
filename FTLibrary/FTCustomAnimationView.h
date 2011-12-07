@@ -10,6 +10,7 @@
 
 typedef enum {
 	FTCustomAnimationCurveEaseInOut,
+	FTCustomAnimationCurveEaseOut,
 	FTCustomAnimationCurveLinear
 } FTCustomAnimationCurve;
 
