@@ -243,7 +243,6 @@
 {
 	self = [super initWithFrame:frame];
 	if (self) {
-		self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 		self.pagingEnabled = YES;
 		self.showsHorizontalScrollIndicator = NO;
 		self.delaysContentTouches = YES;

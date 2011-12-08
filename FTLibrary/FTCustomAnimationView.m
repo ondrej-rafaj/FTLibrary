@@ -146,12 +146,6 @@
 
 #pragma mark - Animations
 
-- (void)setNeedsDisplayNotAnimated
-{
-	
-	[self setNeedsDisplay];
-}
-
 - (void)startAnimationWithDuration:(NSTimeInterval)duration
 {
 	FTCustomAnimation *animation = [FTCustomAnimation new];

@@ -45,8 +45,6 @@ typedef NSUInteger FTCustomAnimationOptions;
 - (void)animationWillBegin:(FTCustomAnimation *)animation;
 - (void)animationDidFinish:(FTCustomAnimation *)animation;
 
-- (void)setNeedsDisplayNotAnimated;
-
 @end
 
 

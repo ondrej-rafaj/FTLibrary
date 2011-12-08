@@ -44,7 +44,7 @@
 		return animationDuration;
 	}
 	else {
-		[self setNeedsDisplayNotAnimated];
+		[self setNeedsDisplay];
 		return 0.0;
 	}
 }
