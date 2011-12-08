@@ -33,6 +33,7 @@
 - (void)_updateUIForCurrentHorizontalOffset;
 - (FTPageView2 *)_viewForIndex:(NSInteger)index;
 - (void)_disposeOfVisibleViewsAndTellDelegate:(BOOL)tellDelegate;
+- (NSInteger)_numberOfViewsPerPage;
 @end
 
 @implementation FTPageScrollView2
@@ -102,6 +103,12 @@
 	[self setContentOffset:CGPointMake(xOffset, 0) animated:animated];
 }
 
+- (NSInteger)_numberOfViewsPerPage
+{
+	NSInteger number = 1;
+	return number + 1;
+}
+
 - (FTPageView2 *)_viewForIndex:(NSInteger)index
 {
 	UIView *finalView = nil;
@@ -123,6 +130,9 @@
 	}
 	else {
 		UIView *reusedView = [_reusableViews anyObject];
+		if ([reusedView respondsToSelector:@selector(prepareForReuse)]) {
+			[(id <FTReusableView>)reusedView prepareForReuse];
+		}
 		reusedView = [_dataSource pageScrollView:self viewForPageAtIndex:index reusedView:reusedView];	
 		reusedView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		finalView = [reusedView retain];
@@ -189,13 +199,23 @@
 			 
 - (void)_disposeOfVisibleViewsAndTellDelegate:(BOOL)tellDelegate
 {
+	BOOL delegateImplementMethod = [_pageScrollViewDelegate respondsToSelector:@selector(pageScrollView:willDiscardView:)];
+	
 	for (FTPageView2 *pageView in _visibleViews) {
 		
 		[pageView removeFromSuperview];
 		UIView *contentView = pageView.subviews.lastObject;
-		[_reusableViews addObject:contentView];
+		if ([contentView respondsToSelector:@selector(willBeDiscarded)]) {
+			[(id <FTReusableView>)contentView willBeDiscarded];
+		}
+		if (tellDelegate && delegateImplementMethod) {
+			[_pageScrollViewDelegate pageScrollView:self willDiscardView:contentView];
+		}
+		if (_reusableViews.count < [self _numberOfViewsPerPage]) {
+			[_reusableViews addObject:contentView];
+			[_reusableContainers addObject:pageView];
+		}
 		[contentView removeFromSuperview];
-		[_reusableContainers addObject:pageView];
 	}
 	[_visibleViews removeAllObjects];
 }

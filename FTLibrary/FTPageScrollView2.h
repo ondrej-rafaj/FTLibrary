@@ -34,6 +34,7 @@
 //the view at index 'index' received a touch
 - (void)pageScrollView:(FTPageScrollView2 *)scrollView didSelectView:(UIView *)view atIndex:(NSInteger)index;
 - (void)pageScrollView:(FTPageScrollView2 *)scrollView didSlideToIndex:(NSInteger)index;
+- (void)pageScrollView:(FTPageScrollView2 *)scrollView willDiscardView:(UIView *)view;
 @end
 
 
@@ -65,4 +66,11 @@
 - (UIView *)viewAtIndex:(NSUInteger)index;
 - (NSArray *)visibleViews;
 
+@end
+
+//informal protocol - view returned by the dataSource method can implement this methods
+@protocol FTReusableView <NSObject>
+@optional
+- (void)prepareForReuse;
+- (void)willBeDiscarded;
 @end
