@@ -38,8 +38,8 @@
 	_percentage = percentage;
 	_startValue = fromPercentage;
 	_difference = percentage - fromPercentage;
-	if (animated) {
-		NSTimeInterval animationDuration = ( _difference / 100) / _speed;
+	if (animated && !self.isAnimating) {
+		NSTimeInterval animationDuration = fabs(( _difference / 100) / _speed);
 		[self startAnimationWithDuration:animationDuration];
 		return animationDuration;
 	}

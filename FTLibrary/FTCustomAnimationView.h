@@ -23,11 +23,14 @@ typedef NSUInteger FTCustomAnimationOptions;
 	
 	CADisplayLink *_displayLink;
 	NSMutableArray *_animations;
-	BOOL _isAnimating;
+	int _disableToken;
 }
+
+@property (nonatomic, assign) BOOL isAnimating;
 
 //handy method to start an animation
 - (void)startAnimationWithDuration:(NSTimeInterval)duration;
+- (void)startAnimationWithDuration:(NSTimeInterval)duration andKey:(NSString *)key;
 
 /* When you add an animation, the method -drawRect:forAnimation:withAnimationProgress: start being called for the
  * time of the animation's 'duration' property. The position you add your animation at will be the 

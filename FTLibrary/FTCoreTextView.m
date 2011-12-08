@@ -896,6 +896,7 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
     
     if (!drawFrame) {
         NSLog(@"FTCoreText unable to render: %@", self.processedString);
+		CGPathRelease(mainPath);
         return;
     }
     
