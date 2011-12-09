@@ -533,6 +533,8 @@
 		93375152148E3CD400121384 /* FTCustomAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93375150148E3CD400121384 /* FTCustomAnimationView.m */; };
 		9348CDEC1464041500A6F877 /* FTPageControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9348CDEA1464041500A6F877 /* FTPageControl.h */; };
 		9348CDED1464041500A6F877 /* FTPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9348CDEB1464041500A6F877 /* FTPageControl.m */; };
+		935E87CF14925DC200F14366 /* Appirater.h in Headers */ = {isa = PBXBuildFile; fileRef = 935E87CD14925DC200F14366 /* Appirater.h */; };
+		935E87D014925DC200F14366 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E87CE14925DC200F14366 /* Appirater.m */; };
 		93C70E171474195800CA2139 /* FTPageScrollView2.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C70E151474195400CA2139 /* FTPageScrollView2.h */; };
 		93C70E181474195800CA2139 /* FTPageScrollView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C70E161474195500CA2139 /* FTPageScrollView2.m */; };
 		93F6E7E41484F549002337ED /* FTTaskMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 93F6E7E21484F549002337ED /* FTTaskMaker.h */; };
@@ -1035,6 +1037,8 @@
 		93375150148E3CD400121384 /* FTCustomAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCustomAnimationView.m; sourceTree = "<group>"; };
 		9348CDEA1464041500A6F877 /* FTPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageControl.h; sourceTree = "<group>"; };
 		9348CDEB1464041500A6F877 /* FTPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPageControl.m; sourceTree = "<group>"; };
+		935E87CD14925DC200F14366 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
+		935E87CE14925DC200F14366 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		93C70E151474195400CA2139 /* FTPageScrollView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageScrollView2.h; sourceTree = "<group>"; };
 		93C70E161474195500CA2139 /* FTPageScrollView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPageScrollView2.m; sourceTree = "<group>"; };
 		93F6E7E21484F549002337ED /* FTTaskMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTaskMaker.h; sourceTree = "<group>"; };
@@ -2392,6 +2396,8 @@
 		4CD394A314893FA8000F0A77 /* AppiRater */ = {
 			isa = PBXGroup;
 			children = (
+				935E87CD14925DC200F14366 /* Appirater.h */,
+				935E87CE14925DC200F14366 /* Appirater.m */,
 			);
 			path = AppiRater;
 			sourceTree = "<group>";
@@ -2915,6 +2921,7 @@
 				93F6E7F11484F751002337ED /* FTReachabilityManager.h in Headers */,
 				4C9F7DFF14891E3800177894 /* FTISO8601DateFormatter.h in Headers */,
 				93375151148E3CD400121384 /* FTCustomAnimationView.h in Headers */,
+				935E87CF14925DC200F14366 /* Appirater.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3225,6 +3232,7 @@
 				93F6E7F21484F751002337ED /* FTReachabilityManager.m in Sources */,
 				4C9F7E0014891E3800177894 /* FTISO8601DateFormatter.m in Sources */,
 				93375152148E3CD400121384 /* FTCustomAnimationView.m in Sources */,
+				935E87D014925DC200F14366 /* Appirater.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
