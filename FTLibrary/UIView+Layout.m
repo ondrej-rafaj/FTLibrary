@@ -41,8 +41,20 @@
 	return CGRectGetMaxY(self.frame);
 }
 
+- (void)setBottomPosition:(CGFloat)position {
+	CGRect frame = self.frame;
+	frame.origin.y = position - frame.size.height;
+	self.frame = frame;
+}
+
 - (CGFloat)rightPosition {
 	return CGRectGetMaxX(self.frame);
+}
+
+- (void)setRightPosition:(CGFloat)position {
+	CGRect frame = self.frame;
+	frame.origin.x = position - frame.size.width;
+	self.frame = frame;
 }
 
 - (void)setSize:(CGSize)size {

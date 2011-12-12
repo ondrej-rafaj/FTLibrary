@@ -19,6 +19,8 @@
 - (void)setHeight:(CGFloat)height;
 
 - (CGFloat)bottomPosition;
+- (void)setBottomPosition:(CGFloat)position;
+
 - (CGFloat)rightPosition;
 
 - (CGSize)size;
