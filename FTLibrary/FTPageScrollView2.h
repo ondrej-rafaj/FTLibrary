@@ -56,7 +56,7 @@
 @property (nonatomic, assign) CGSize visibleSize;
 
 - (void)reloadData;
-- (void)reloadPageNumber; //doesn't reload content but change the contentSize accordingly
+- (void)reloadPageNumber; //doesn't reload content but changes the contentSize accordingly
 
 - (void)scrollToPageAtIndex:(NSInteger)index animated:(BOOL)animated;
 - (NSInteger)selectedIndex;
@@ -68,7 +68,7 @@
 
 @end
 
-//informal protocol - view returned by the dataSource method can implement this methods
+//informal protocol - views returned by the dataSource method can implement these methods
 @protocol FTReusableView <NSObject>
 @optional
 - (void)prepareForReuse;
