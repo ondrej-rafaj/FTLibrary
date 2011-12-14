@@ -523,204 +523,206 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
 				return;
 			}
 			finished = YES;
+            continue;
 		}
-		else {
-			NSString *fullTag = [processedString substringWithRange:tagRange];
-			
-			FTCoreTextTagType tagType;
-			
-			if ([fullTag rangeOfString:@"</"].location == 0) {
-				tagType = FTCoreTextTagClose;
-			}
-			else if ([fullTag rangeOfString:@"/"].location == NSNotFound) {
-				tagType = FTCoreTextTagOpen;
-			}
-			else if ([fullTag rangeOfString:@" /"].location != NSNotFound || [fullTag rangeOfString:@"/"].location != NSNotFound) {
-				tagType = FTCoreTextTagSelfClose;
-			}
-			else {
-				NSLog(@"FTCoreTextView :%@ - Couldn't parse tag '%@' at range %@ - aborting rendering", self, fullTag, NSStringFromRange(tagRange));
-				return;
-			}
-			
-			NSString *tagName = [fullTag stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"< />"]];
-			FTCoreTextStyle *style = [_styles objectForKey:tagName];
-			
-			if (style == nil) {
-				style = [_styles objectForKey:FTCoreTextTagDefault];
-				NSLog(@"FTCoreTextView :%@ - Couldn't find style for tag '%@'", self, tagName);
-			}
-			
-			switch (tagType) {
-				case FTCoreTextTagOpen:
-				{
-					if (currentSupernode.isLink || currentSupernode.isImage) {
-						NSString *predefinedTag = nil;
-						if (currentSupernode.isLink) predefinedTag = FTCoreTextTagLink;
-						else if (currentSupernode.isImage) predefinedTag = FTCoreTextTagImage;
-						NSLog(@"FTCoreTextView :%@ - You can't open a new tag inside a '%@' tag - aborting rendering", self, predefinedTag);
-						return;
-					}
-					
-					FTCoreTextNode *newNode = [FTCoreTextNode new];
-					newNode.style = style;
-					newNode.startLocation = tagRange.location;
-					
-					if ([tagName isEqualToString:FTCoreTextTagLink]) {
-						newNode.isLink = YES;
-					}
-					else if ([tagName isEqualToString:FTCoreTextTagBullet]) {
-						newNode.isBullet = YES;
-						
-						NSString *appendedString = [NSString stringWithFormat:@"%@\t", newNode.style.bulletCharacter];
-						
-						[processedString insertString:appendedString atIndex:tagRange.location + tagRange.length];
-						
-						//bullet styling
-						FTCoreTextStyle *bulletStyle = [FTCoreTextStyle new];
-						bulletStyle.name = @"_FTBulletStyle";
-						bulletStyle.font = newNode.style.bulletFont;
-						bulletStyle.color = newNode.style.bulletColor;
-						bulletStyle.applyParagraphStyling = NO;
-						bulletStyle.paragraphInset = UIEdgeInsetsMake(0, 0, 0, newNode.style.paragraphInset.left);
-						
-						FTCoreTextNode *bulletNode = [FTCoreTextNode new];
-						bulletNode.style = bulletStyle;
-						[bulletStyle release];
-						bulletNode.styleRange = NSMakeRange(tagRange.location, [appendedString length]);
-						
-						[newNode addSubnode:bulletNode];
-						[bulletNode release];
-					}
-					else if ([tagName isEqualToString:FTCoreTextTagImage]) {
-						newNode.isImage = YES;
-					}
-					
-					[processedString replaceCharactersInRange:tagRange withString:@""];
-					
-					[currentSupernode addSubnode:newNode];
-					[newNode release];
-					
-					currentSupernode = newNode;
-					
-					remainingRange.location = tagRange.location;
-					remainingRange.length = [processedString length] - tagRange.location;
-				}
-					break;
-				case FTCoreTextTagClose:
-				{
-					if ([currentSupernode.style.name isEqualToString:FTCoreTextTagDefault] || [currentSupernode.style.name isEqualToString:tagName]) {
-						currentSupernode.isClosed = YES;
-						
-						if (currentSupernode.isLink) {
-							//replace active string with url text
-							
-							NSRange elementContentRange = NSMakeRange(currentSupernode.startLocation, tagRange.location - currentSupernode.startLocation);
-							NSString *elementContent = [processedString substringWithRange:elementContentRange];
-							NSRange pipeRange = [elementContent rangeOfString:@"|"];
-							NSString *urlString = nil;
-							NSString *urlDescription = nil;
-							if (pipeRange.location != NSNotFound) {
-								urlString = [elementContent substringToIndex:pipeRange.location];
-								urlDescription = [elementContent substringFromIndex:pipeRange.location + 1];
-							}
-							
-							[processedString replaceCharactersInRange:NSMakeRange(elementContentRange.location, elementContentRange.length + tagRange.length) withString:urlDescription];
-							if (![urlString hasPrefix:@"http://"]) {
-								urlString = [NSString stringWithFormat:@"http://%@", urlString];
-							}
-							NSURL *url = [NSURL URLWithString:urlString];
-							NSRange urlDescriptionRange = NSMakeRange(elementContentRange.location, [urlDescription length]);
-							[_URLs setObject:url forKey:NSStringFromRange(urlDescriptionRange)];
-							
-							currentSupernode.styleRange = urlDescriptionRange;
-						}
-						else if (currentSupernode.isImage) {
-							//replace active string with emptySpace
-							
-							NSRange elementContentRange = NSMakeRange(currentSupernode.startLocation, tagRange.location - currentSupernode.startLocation);
-							NSString *elementContent = [processedString substringWithRange:elementContentRange];
-							
-							UIImage *img = [UIImage imageNamed:elementContent];
-							
-							if (img) {
-								int skipLine = floorf(img.size.height / currentSupernode.style.font.leading);
-								NSMutableString *lines = [NSMutableString string];
-								for (int i = 0; i < skipLine; i++) {
-									[lines appendFormat:@"\n"];
-								}
-								
-								currentSupernode.imageName = elementContent;
-								[processedString replaceCharactersInRange:NSMakeRange(elementContentRange.location, elementContentRange.length + tagRange.length) withString:lines];
-								[_images addObject:currentSupernode];
-								currentSupernode.styleRange = NSMakeRange(elementContentRange.location, [lines length]);
-							}
-							else {
-								NSLog(@"FTCoreTextView :%@ - Couldn't find image '%@' in main bundle", self, elementContentRange);
-								[processedString replaceCharactersInRange:tagRange withString:@""];
-							}
-						}
-						else {
-							currentSupernode.styleRange = NSMakeRange(currentSupernode.startLocation, tagRange.location - currentSupernode.startLocation);
-							[processedString replaceCharactersInRange:tagRange withString:@""];
-						}
-						
-						if ([currentSupernode.style.appendedCharacter length] > 0) {
-							[processedString insertString:currentSupernode.style.appendedCharacter atIndex:currentSupernode.styleRange.location + currentSupernode.styleRange.length];
-							NSRange newStyleRange = currentSupernode.styleRange;
-							newStyleRange.length += [currentSupernode.style.appendedCharacter length];
-							currentSupernode.styleRange = newStyleRange;							
-						}
-						
-						if (style.paragraphInset.top > 0) {
-							if (![style.name isEqualToString:FTCoreTextTagBullet] ||  [[currentSupernode previousNode].style.name isEqualToString:FTCoreTextTagBullet]) {
-								
-								//fix: add a new line for each new line and set its height to 'top' value
-								[processedString insertString:@"\n" atIndex:currentSupernode.startLocation];
-								NSRange topSpacingStyleRange = NSMakeRange(currentSupernode.startLocation, [@"\n" length]);
-								FTCoreTextStyle *topSpacingStyle = [[FTCoreTextStyle alloc] init];
-								topSpacingStyle.name = [NSString stringWithFormat:@"_FTTopSpacingStyle_%@", currentSupernode.style.name];
-								topSpacingStyle.minLineHeight = currentSupernode.style.paragraphInset.top;
-								topSpacingStyle.maxLineHeight = currentSupernode.style.paragraphInset.top;
-								FTCoreTextNode *topSpacingNode = [[FTCoreTextNode alloc] init];
-								topSpacingNode.style = topSpacingStyle;
-								[topSpacingStyle release];
-								
-								topSpacingNode.styleRange = topSpacingStyleRange;
-								
-								[currentSupernode.supernode insertSubnode:topSpacingNode beforeNode:currentSupernode];
-								[topSpacingNode release];
-								
-								[currentSupernode adjustStylesAndSubstylesRangesByRange:topSpacingStyleRange];
-							}
-						}
-						
-						remainingRange.location = currentSupernode.styleRange.location + currentSupernode.styleRange.length;
-						remainingRange.length = [processedString length] - remainingRange.location;
-						
-						currentSupernode = currentSupernode.supernode;
-					}
-					else {
-						NSLog(@"FTCoreTextView :%@ - Closing tag '%@' at range %@ doesn't match open tag '%@' - aborting rendering", self, fullTag, NSStringFromRange(tagRange), currentSupernode.style.name);
-						return;
-					}
-				}
-					break;
-				case FTCoreTextTagSelfClose:
-				{
-					FTCoreTextNode *newNode = [FTCoreTextNode new];
-					newNode.style = style;
-					[processedString replaceCharactersInRange:tagRange withString:newNode.style.appendedCharacter];
-					newNode.styleRange = NSMakeRange(tagRange.location, [newNode.style.appendedCharacter length]);
-					[currentSupernode addSubnode:newNode];	
-					[newNode release];
-					
-					remainingRange.location = tagRange.location;
-					remainingRange.length = [processedString length] - tagRange.location;
-				}
-					break;
-			}
-		}
+        
+        NSString *fullTag = [processedString substringWithRange:tagRange];
+        
+        FTCoreTextTagType tagType;
+        
+        if ([fullTag rangeOfString:@"</"].location == 0) {
+            tagType = FTCoreTextTagClose;
+        }
+        else if ([fullTag rangeOfString:@"/"].location == NSNotFound) {
+            tagType = FTCoreTextTagOpen;
+        }
+        else if ([fullTag rangeOfString:@" /"].location != NSNotFound || [fullTag rangeOfString:@"/"].location != NSNotFound) {
+            tagType = FTCoreTextTagSelfClose;
+        }
+        else {
+            NSLog(@"FTCoreTextView :%@ - Couldn't parse tag '%@' at range %@ - aborting rendering", self, fullTag, NSStringFromRange(tagRange));
+            return;
+        }
+        
+        NSString *tagName = [fullTag stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"< />"]];
+        FTCoreTextStyle *style = [_styles objectForKey:tagName];
+        
+        if (style == nil) {
+            style = [_styles objectForKey:FTCoreTextTagDefault];
+            NSLog(@"FTCoreTextView :%@ - Couldn't find style for tag '%@'", self, tagName);
+        }
+        
+        switch (tagType) {
+            case FTCoreTextTagOpen:
+            {
+                if (currentSupernode.isLink || currentSupernode.isImage) {
+                    NSString *predefinedTag = nil;
+                    if (currentSupernode.isLink) predefinedTag = FTCoreTextTagLink;
+                    else if (currentSupernode.isImage) predefinedTag = FTCoreTextTagImage;
+                    NSLog(@"FTCoreTextView :%@ - You can't open a new tag inside a '%@' tag - aborting rendering", self, predefinedTag);
+                    return;
+                }
+                
+                FTCoreTextNode *newNode = [FTCoreTextNode new];
+                newNode.style = style;
+                newNode.startLocation = tagRange.location;
+                
+                if ([tagName isEqualToString:FTCoreTextTagLink]) {
+                    newNode.isLink = YES;
+                }
+                else if ([tagName isEqualToString:FTCoreTextTagBullet]) {
+                    newNode.isBullet = YES;
+                    
+                    NSString *appendedString = [NSString stringWithFormat:@"%@\t", newNode.style.bulletCharacter];
+                    
+                    [processedString insertString:appendedString atIndex:tagRange.location + tagRange.length];
+                    
+                    //bullet styling
+                    FTCoreTextStyle *bulletStyle = [FTCoreTextStyle new];
+                    bulletStyle.name = @"_FTBulletStyle";
+                    bulletStyle.font = newNode.style.bulletFont;
+                    bulletStyle.color = newNode.style.bulletColor;
+                    bulletStyle.applyParagraphStyling = NO;
+                    bulletStyle.paragraphInset = UIEdgeInsetsMake(0, 0, 0, newNode.style.paragraphInset.left);
+                    
+                    FTCoreTextNode *bulletNode = [FTCoreTextNode new];
+                    bulletNode.style = bulletStyle;
+                    [bulletStyle release];
+                    bulletNode.styleRange = NSMakeRange(tagRange.location, [appendedString length]);
+                    
+                    [newNode addSubnode:bulletNode];
+                    [bulletNode release];
+                }
+                else if ([tagName isEqualToString:FTCoreTextTagImage]) {
+                    newNode.isImage = YES;
+                }
+                
+                [processedString replaceCharactersInRange:tagRange withString:@""];
+                
+                [currentSupernode addSubnode:newNode];
+                [newNode release];
+                
+                currentSupernode = newNode;
+                
+                remainingRange.location = tagRange.location;
+                remainingRange.length = [processedString length] - tagRange.location;
+            }
+                break;
+            case FTCoreTextTagClose:
+            {
+                
+                if ((![currentSupernode.style.name isEqualToString:FTCoreTextTagDefault] && ![currentSupernode.style.name isEqualToString:tagName]) ) {
+                    NSLog(@"FTCoreTextView :%@ - Closing tag '%@' at range %@ doesn't match open tag '%@' - aborting rendering", self, fullTag, NSStringFromRange(tagRange), currentSupernode.style.name);
+                    return;
+                }
+                
+                currentSupernode.isClosed = YES;
+                
+                if (currentSupernode.isLink) {
+                    //replace active string with url text
+                    
+                    NSRange elementContentRange = NSMakeRange(currentSupernode.startLocation, tagRange.location - currentSupernode.startLocation);
+                    NSString *elementContent = [processedString substringWithRange:elementContentRange];
+                    NSRange pipeRange = [elementContent rangeOfString:@"|"];
+                    NSString *urlString = nil;
+                    NSString *urlDescription = nil;
+                    if (pipeRange.location != NSNotFound) {
+                        urlString = [elementContent substringToIndex:pipeRange.location];
+                        urlDescription = [elementContent substringFromIndex:pipeRange.location + 1];
+                    }
+                    
+                    [processedString replaceCharactersInRange:NSMakeRange(elementContentRange.location, elementContentRange.length + tagRange.length) withString:urlDescription];
+                    if (![urlString hasPrefix:@"http://"]) {
+                        urlString = [NSString stringWithFormat:@"http://%@", urlString];
+                    }
+                    NSURL *url = [NSURL URLWithString:urlString];
+                    NSRange urlDescriptionRange = NSMakeRange(elementContentRange.location, [urlDescription length]);
+                    [_URLs setObject:url forKey:NSStringFromRange(urlDescriptionRange)];
+                    
+                    currentSupernode.styleRange = urlDescriptionRange;
+                }
+                else if (currentSupernode.isImage) {
+                    //replace active string with emptySpace
+
+                    NSRange elementContentRange = NSMakeRange(currentSupernode.startLocation, tagRange.location - currentSupernode.startLocation);
+                    NSString *elementContent = [processedString substringWithRange:elementContentRange];
+                    
+                    UIImage *img = [UIImage imageNamed:elementContent];
+                    
+                    if (img) {
+                        NSString *lines = @"\n";
+                        float leading = floorf(img.size.height + style.paragraphInset.top + style.paragraphInset.bottom);
+                        currentSupernode.style.leading = leading;
+                        
+                        currentSupernode.imageName = elementContent;
+                        [processedString replaceCharactersInRange:NSMakeRange(elementContentRange.location, elementContentRange.length + tagRange.length) withString:lines];
+                        
+                        [_images addObject:currentSupernode];
+                        currentSupernode.styleRange = NSMakeRange(elementContentRange.location, [lines length]);
+                         
+                    }
+                    else {
+                        NSLog(@"FTCoreTextView :%@ - Couldn't find image '%@' in main bundle", self, elementContentRange);
+                        [processedString replaceCharactersInRange:tagRange withString:@""];
+                    }
+                }
+                else {
+                    currentSupernode.styleRange = NSMakeRange(currentSupernode.startLocation, tagRange.location - currentSupernode.startLocation);
+                    [processedString replaceCharactersInRange:tagRange withString:@""];
+                }
+                
+                if ([currentSupernode.style.appendedCharacter length] > 0) {
+                    [processedString insertString:currentSupernode.style.appendedCharacter atIndex:currentSupernode.styleRange.location + currentSupernode.styleRange.length];
+                    NSRange newStyleRange = currentSupernode.styleRange;
+                    newStyleRange.length += [currentSupernode.style.appendedCharacter length];
+                    currentSupernode.styleRange = newStyleRange;							
+                }
+                
+                if (style.paragraphInset.top > 0) {
+                    if (![style.name isEqualToString:FTCoreTextTagBullet] ||  [[currentSupernode previousNode].style.name isEqualToString:FTCoreTextTagBullet]) {
+                        
+                        //fix: add a new line for each new line and set its height to 'top' value
+                        [processedString insertString:@"\n" atIndex:currentSupernode.startLocation];
+                        NSRange topSpacingStyleRange = NSMakeRange(currentSupernode.startLocation, [@"\n" length]);
+                        FTCoreTextStyle *topSpacingStyle = [[FTCoreTextStyle alloc] init];
+                        topSpacingStyle.name = [NSString stringWithFormat:@"_FTTopSpacingStyle_%@", currentSupernode.style.name];
+                        topSpacingStyle.minLineHeight = currentSupernode.style.paragraphInset.top;
+                        topSpacingStyle.maxLineHeight = currentSupernode.style.paragraphInset.top;
+                        FTCoreTextNode *topSpacingNode = [[FTCoreTextNode alloc] init];
+                        topSpacingNode.style = topSpacingStyle;
+                        [topSpacingStyle release];
+                        
+                        topSpacingNode.styleRange = topSpacingStyleRange;
+                        
+                        [currentSupernode.supernode insertSubnode:topSpacingNode beforeNode:currentSupernode];
+                        [topSpacingNode release];
+                        
+                        [currentSupernode adjustStylesAndSubstylesRangesByRange:topSpacingStyleRange];
+                    }
+                }
+                
+                remainingRange.location = currentSupernode.styleRange.location + currentSupernode.styleRange.length;
+                remainingRange.length = [processedString length] - remainingRange.location;
+                
+                currentSupernode = currentSupernode.supernode;
+            
+    
+            }
+                break;
+            case FTCoreTextTagSelfClose:
+            {
+                FTCoreTextNode *newNode = [FTCoreTextNode new];
+                newNode.style = style;
+                [processedString replaceCharactersInRange:tagRange withString:newNode.style.appendedCharacter];
+                newNode.styleRange = NSMakeRange(tagRange.location, [newNode.style.appendedCharacter length]);
+                [currentSupernode addSubnode:newNode];	
+                [newNode release];
+                
+                remainingRange.location = tagRange.location;
+                remainingRange.length = [processedString length] - tagRange.location;
+            }
+                break;
+        }
 	}	
 	
 	rootNode.styleRange = NSMakeRange(0, [processedString length]);
@@ -776,6 +778,15 @@ CTFontRef CTFontCreateFromUIFont(UIFont *font)
 				if (alignment == kCTCenterTextAlignment) x = ((self.frame.size.width - img.size.width) / 2);
 				
 				CGRect frame = CGRectMake(x, lineFrame.origin.y, img.size.width, img.size.height);
+                
+                
+                // adjusting frame
+
+                UIEdgeInsets insets = imageNode.style.paragraphInset;
+                if (alignment != kCTCenterTextAlignment) frame.origin.x = (alignment == kCTLeftTextAlignment)? insets.left : (self.frame.size.width - img.size.width - insets.right);
+                frame.origin.y += insets.top;
+                frame.size.width = ((insets.left + insets.right + img.size.width ) > self.frame.size.width)? self.frame.size.width : img.size.width;
+                
 				[img drawInRect:CGRectIntegral(frame)];
 			}
 			
