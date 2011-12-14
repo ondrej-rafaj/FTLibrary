@@ -66,8 +66,9 @@
 
 - (NSArray *)visibleViews
 {
-	NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES];
+	NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"index" ascending:YES];
 	NSArray *sortedPageViews = [_visibleViews sortedArrayUsingDescriptors:[NSArray arrayWithObject:descriptor]];
+	[descriptor release];
 	NSMutableArray *returnedViews = [[NSMutableArray new] autorelease];
 	for (FTPageView2 *pageView in sortedPageViews) {
 		[returnedViews addObject:pageView.subviews.lastObject];
@@ -367,6 +368,15 @@
 	}
 }
 
+- (void)pageDidChange
+{
+	if ([_pageScrollViewDelegate respondsToSelector:@selector(pageScrollView:didScrollToView:atIndex:)]) {
+		FTPageView2 *page = [[self visibleViews] lastObject];
+		NSLog(@"Visible view: %@", page);
+		[_pageScrollViewDelegate pageScrollView:self didScrollToView:page atIndex:0];
+	}
+}
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(pageScrollView:didSlideToIndex:)]) {
@@ -375,6 +385,7 @@
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)]) {
 		[_pageScrollViewDelegate scrollViewDidEndDecelerating:self];
 	}
+	[self pageDidChange];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -388,6 +399,9 @@
 {
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)]) {
 		[_pageScrollViewDelegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+	}
+	if (!decelerate) {
+		[self pageDidChange];
 	}
 }
 

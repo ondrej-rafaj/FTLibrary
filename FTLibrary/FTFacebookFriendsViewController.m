@@ -40,7 +40,9 @@
 	[[sections objectForKey:sectionChar] addObject:me];
 	// Sorting sections
 	for (NSString *key in [sections allKeys]) {
-		[[sections objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+		NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+		[[sections objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
+		[descriptor release];
 	}
 	[table reloadData];
 }
@@ -83,7 +85,9 @@
 
 	// Sorting sections
 	for (NSString *key in [sections allKeys]) {
-		[[sections objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+		NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+		[[sections objectForKey:key] sortUsingDescriptors:[NSArray arrayWithObject:descriptor]];
+		[descriptor release];
 	}
 	[table reloadData];
 	
