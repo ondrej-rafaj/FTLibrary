@@ -16,6 +16,8 @@
 
 @protocol FTStoreGridViewDelegate <NSObject>
 
+@optional
+
 - (void)storeGridView:(FTStoreGridView *)storeView didClickCellWithObject:(FTStoreDataObject *)dataObject atIndex:(NSInteger)index;
 
 - (void)storeGridView:(FTStoreGridView *)storeView didClickActionButtonWithObject:(FTStoreDataObject *)dataObject withCell:(FTStoreGridViewCell *)cell atIndex:(NSInteger)index;

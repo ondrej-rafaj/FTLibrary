@@ -368,6 +368,15 @@
 	}
 }
 
+- (void)pageDidChange
+{
+	if ([_pageScrollViewDelegate respondsToSelector:@selector(pageScrollView:didScrollToView:atIndex:)]) {
+		FTPageView2 *page = [[self visibleViews] lastObject];
+		NSLog(@"Visible view: %@", page);
+		[_pageScrollViewDelegate pageScrollView:self didScrollToView:page atIndex:0];
+	}
+}
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(pageScrollView:didSlideToIndex:)]) {
@@ -376,6 +385,7 @@
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)]) {
 		[_pageScrollViewDelegate scrollViewDidEndDecelerating:self];
 	}
+	[self pageDidChange];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -389,6 +399,9 @@
 {
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)]) {
 		[_pageScrollViewDelegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
+	}
+	if (!decelerate) {
+		[self pageDidChange];
 	}
 }
 

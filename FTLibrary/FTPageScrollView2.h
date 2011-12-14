@@ -35,6 +35,7 @@
 - (void)pageScrollView:(FTPageScrollView2 *)scrollView didSelectView:(UIView *)view atIndex:(NSInteger)index;
 - (void)pageScrollView:(FTPageScrollView2 *)scrollView didSlideToIndex:(NSInteger)index;
 - (void)pageScrollView:(FTPageScrollView2 *)scrollView willDiscardView:(UIView *)view;
+- (void)pageScrollView:(FTPageScrollView2 *)scrollView didScrollToView:(UIView *)view atIndex:(NSInteger)index;
 @end
 
 
