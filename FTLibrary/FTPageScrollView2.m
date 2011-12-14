@@ -371,9 +371,8 @@
 - (void)pageDidChange
 {
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(pageScrollView:didScrollToView:atIndex:)]) {
-		FTPageView2 *page = [[self visibleViews] lastObject];
-		NSLog(@"Visible view: %@", page);
-		[_pageScrollViewDelegate pageScrollView:self didScrollToView:page atIndex:0];
+		UIView *page = [[self visibleViews] lastObject];
+		[_pageScrollViewDelegate pageScrollView:self didScrollToView:page atIndex:[self selectedIndex]];
 	}
 }
 
