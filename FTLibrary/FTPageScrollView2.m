@@ -34,6 +34,7 @@
 - (FTPageView2 *)_viewForIndex:(NSInteger)index;
 - (void)_disposeOfVisibleViewsAndTellDelegate:(BOOL)tellDelegate;
 - (NSInteger)_numberOfViewsPerPage;
+- (void)_pageDidChange;
 @end
 
 @implementation FTPageScrollView2
@@ -221,6 +222,17 @@
 	[_visibleViews removeAllObjects];
 }
 
+-(void)_pageDidChange
+{
+	if ([_pageScrollViewDelegate respondsToSelector:@selector(pageScrollView:didSlideToIndex:)]) {
+		[_pageScrollViewDelegate pageScrollView:self didSlideToIndex:[self selectedIndex]];
+	}
+	if ([_pageScrollViewDelegate respondsToSelector:@selector(pageScrollView:didScrollToView:atIndex:)]) {
+		UIView *page = [[self visibleViews] lastObject];
+		[_pageScrollViewDelegate pageScrollView:self didScrollToView:page atIndex:[self selectedIndex]];
+	}
+}
+
 #pragma mark - Touch handling
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -368,23 +380,12 @@
 	}
 }
 
-- (void)pageDidChange
-{
-	if ([_pageScrollViewDelegate respondsToSelector:@selector(pageScrollView:didScrollToView:atIndex:)]) {
-		UIView *page = [[self visibleViews] lastObject];
-		[_pageScrollViewDelegate pageScrollView:self didScrollToView:page atIndex:[self selectedIndex]];
-	}
-}
-
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-	if ([_pageScrollViewDelegate respondsToSelector:@selector(pageScrollView:didSlideToIndex:)]) {
-		[_pageScrollViewDelegate pageScrollView:self didSlideToIndex:[self selectedIndex]];
-	}
+	[self _pageDidChange];
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollViewDidEndDecelerating:)]) {
 		[_pageScrollViewDelegate scrollViewDidEndDecelerating:self];
 	}
-	[self pageDidChange];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -396,11 +397,11 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
+	if (!decelerate) {
+		[self _pageDidChange];
+	}
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollViewDidEndDragging:willDecelerate:)]) {
 		[_pageScrollViewDelegate scrollViewDidEndDragging:scrollView willDecelerate:decelerate];
-	}
-	if (!decelerate) {
-		[self pageDidChange];
 	}
 }
 

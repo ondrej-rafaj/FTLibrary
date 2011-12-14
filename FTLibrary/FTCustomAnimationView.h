@@ -18,12 +18,14 @@ typedef NSUInteger FTCustomAnimationOptions;
 
 @class CADisplayLink;
 @class FTCustomAnimation;
+@protocol FTCustomAnimationObserver;
 
 @interface FTCustomAnimationView : UIView {
 	
 	CADisplayLink *_displayLink;
 	NSMutableArray *_animations;
 	int _disableToken;
+	NSMutableArray *_animationObservers;
 }
 
 @property (nonatomic, assign) BOOL isAnimating;
@@ -48,8 +50,10 @@ typedef NSUInteger FTCustomAnimationOptions;
 - (void)animationWillBegin:(FTCustomAnimation *)animation;
 - (void)animationDidFinish:(FTCustomAnimation *)animation;
 
-@end
+- (void)addAnimationObserver:(id <FTCustomAnimationObserver>)observer;
+- (void)removeAnimationObserver:(id <FTCustomAnimationObserver>)observer;
 
+@end
 
 @interface FTCustomAnimation : NSObject
 
@@ -58,5 +62,13 @@ typedef NSUInteger FTCustomAnimationOptions;
 @property (nonatomic, copy) float (^customProgressForTime)(float time); //used if non nil, instead of animationCurve
 @property (nonatomic, assign) BOOL disableUserInteraction; //default: NO
 @property (nonatomic, assign) FTCustomAnimationCurve animationCurve; //default: FTCustomAnimationCurveEaseInOut
+
+@end
+
+@protocol FTCustomAnimationObserver <NSObject>
+
+- (void)animationView:(FTCustomAnimationView *)animationView didChangeProgress:(float)progress forAnimation:(FTCustomAnimation *)animation;
+- (void)animationView:(FTCustomAnimationView *)animationView willStartAnimation:(FTCustomAnimation *)animation;
+- (void)animationView:(FTCustomAnimationView *)animationView didEndAnimation:(FTCustomAnimation *)animation;
 
 @end

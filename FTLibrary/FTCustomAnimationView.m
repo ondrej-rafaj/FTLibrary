@@ -13,6 +13,7 @@
 
 @interface FTCustomAnimation ()
 @property (nonatomic, assign) NSTimeInterval startTimestamp;
+@property (nonatomic, assign) float progress;
 @end
 
 @implementation FTCustomAnimation
@@ -23,6 +24,7 @@
 @synthesize animationCurve = _animationCurve;
 @synthesize duration = _duration;
 @synthesize startTimestamp = _startTimestamp;
+@synthesize progress = _progress;
 
 - (id)init
 {
@@ -32,6 +34,7 @@
 		_disableUserInteraction = NO;
 		_animationCurve = FTCustomAnimationCurveEaseInOut;
 		_duration = 0.3;
+		_progress = 1;
 	}
 	return self;
 }
@@ -84,6 +87,21 @@
 
 - (void)_displayLinkDidFire
 {
+	for (FTCustomAnimation *anim in _animations) {
+		float progress = 0.f;
+		NSTimeInterval durationSinceBeginning = [[NSDate date] timeIntervalSince1970] - anim.startTimestamp;
+		NSTimeInterval time = durationSinceBeginning / anim.duration;
+		if (anim.customProgressForTime) {
+			progress = anim.customProgressForTime(time);
+		}
+		else {
+			progress = [self _progressForTime:time andAnimationCurve:anim.animationCurve];
+		}
+		anim.progress = progress;
+		for (id <FTCustomAnimationObserver> obj in _animationObservers) {
+			[obj animationView:self didChangeProgress:anim.progress forAnimation:anim];
+		}
+	}
 	[self setNeedsDisplay];
 }
 
@@ -91,7 +109,10 @@
 {
 	for (FTCustomAnimation *anim in animations) {
 		[_animations removeObject:anim];
-		[self animationDidFinish:anim];
+		[self _animationDidFinish:anim];
+		for (id <FTCustomAnimationObserver> obj in _animationObservers) {
+			[obj animationView:self didEndAnimation:anim];
+		}
 	}
 	if (_animations.count == 0) { 
 		_displayLink.paused = YES;
@@ -138,17 +159,10 @@
 	for (FTCustomAnimation *anim in _animations) {
 		float progress = 1.f;
 		if (_isAnimating) {
-			NSTimeInterval durationSinceBeginning = [[NSDate date] timeIntervalSince1970] - anim.startTimestamp;
-			NSTimeInterval time = durationSinceBeginning / anim.duration;
-			if (anim.customProgressForTime) {
-				progress = anim.customProgressForTime(time);
-			}
-			else {
-				progress = [self _progressForTime:time andAnimationCurve:anim.animationCurve];
-				if (progress >= 1) [animsToDelete addObject:anim];
-			}
+			progress = anim.progress;
 		}
 		[self drawRect:rect forAnimation:anim withAnimationProgress:progress];
+		if (anim.progress >= 1.f) [animsToDelete addObject:anim];
 	}
 	if (_animations.count == 0) {
 		[self drawRect:rect forAnimation:nil withAnimationProgress:1];
@@ -168,6 +182,19 @@
 	[_displayLink release];
 	[_animations release];
 	[super dealloc];
+}
+
+#pragma mark - Animation Observers Handling
+
+- (void)addAnimationObserver:(id <FTCustomAnimationObserver>)observer
+{
+	if (_animationObservers == nil) _animationObservers = [NSMutableArray new];
+	[_animationObservers addObject:observer];
+}
+
+- (void)removeAnimationObserver:(id <FTCustomAnimationObserver>)observer
+{
+	[_animationObservers removeObject:observer];
 }
 
 #pragma mark - Animations
@@ -192,11 +219,6 @@
 - (void)addAnimation:(FTCustomAnimation *)animation
 {
 	[self insertAnimation:animation atIndex:_animations.count];
-}
-
-- (void)addAnimation:(FTCustomAnimation *)animation withKey:(NSString *)key
-{
-	
 }
 
 - (void)insertAnimation:(FTCustomAnimation *)animation belowAnimation:(FTCustomAnimation *)otherAnimation
@@ -225,7 +247,10 @@
 {
 	animation.startTimestamp = [[NSDate date] timeIntervalSince1970];
 	[_animations insertObject:animation atIndex:index];
-	[self animationWillBegin:animation];
+	[self _animationWillBegin:animation];
+	for (id <FTCustomAnimationObserver> obj in _animationObservers) {
+		[obj animationView:self willStartAnimation:animation];
+	}
 	if (_displayLink.paused) {
 		_isAnimating = YES;
 		_displayLink.paused = NO;
