@@ -59,4 +59,6 @@ typedef NSUInteger FTShareOptions;
 - (void)setUpEmailWithDelegate:(id<FTShareEmailDelegate>)delegate;
 - (void)shareViaEmail:(FTShareEmailData *)data;
 
+- (BOOL)canUseOfflineAccess;
+
 @end

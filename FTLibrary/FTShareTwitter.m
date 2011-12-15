@@ -47,6 +47,7 @@
 
 - (void)dealloc {
     _twitterDelegate = nil;
+    _twitterParams = nil;
     [super dealloc];
 }
 
@@ -59,19 +60,22 @@
     self.twitterDelegate = delegate;
     _twitter.consumerKey = consumerKey;  
     _twitter.consumerSecret = secret;
-    [_twitter clearAccessToken];
+    //[_twitter clearAccessToken];
     _twitterParams = nil;
 }
 
 - (void)shareViaTwitter:(FTShareTwitterData *)data {
-    if (![data isRequestValid]) {
+    if (!data) {
         if (self.twitterDelegate && [self.twitterDelegate respondsToSelector:@selector(twitterData)]) {
             data = [self.twitterDelegate twitterData];
-            if (![data isRequestValid]) [NSException raise:@"Twitter cannot post empy data" format:nil];
         }
         
     }
+    
+    if (![data isRequestValid]) [NSException raise:@"Twitter cannot post empy data" format:@""];
+    
     _twitterParams = data;
+    [_twitterParams retain];
     if(![_twitter isAuthorized]){  
         UIViewController *controller = [SA_OAuthTwitterController controllerToEnterCredentialsWithTwitterEngine:_twitter delegate:self];  
         
@@ -102,8 +106,9 @@
     [defaults synchronize];     
 }
 
-- (NSString *) cachedTwitterOAuthDataForUsername: (NSString *) username {  
-    return [[NSUserDefaults standardUserDefaults] objectForKey: @"twitterAuthData"];  
+- (NSString *) cachedTwitterOAuthDataForUsername: (NSString *) username {
+    NSString *data = [[NSUserDefaults standardUserDefaults] objectForKey: @"twitterAuthData"];
+    return data;  
 }
 
 #pragma mark TwitterEngineDelegate  
@@ -135,7 +140,7 @@
     if ([self.twitterDelegate respondsToSelector:@selector(twitterDidLogin:)]) {
         [self.twitterDelegate twitterDidLogin:nil];
     }
-    [self shareViaTwitter:_twitterParams];
+    [self shareViaTwitter:nil]; // cescofry WRONG!
 }
 
 - (void)OAuthTwitterControllerFailed:(SA_OAuthTwitterController *)controller {

@@ -36,6 +36,10 @@
     return self;
 }
 
+- (BOOL)canUseOfflineAccess {
+    return [_facebookEngine canUseOfflineAccess];
+}
+
 #pragma mark Memory management
 
 - (void)dealloc {
@@ -46,7 +50,6 @@
     _referencedController = nil;
     [super dealloc];
 }
-
 
 
 #pragma mark Twitter section

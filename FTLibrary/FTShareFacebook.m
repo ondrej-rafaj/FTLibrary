@@ -156,6 +156,12 @@
 @synthesize facebook = _facebook;
 @synthesize facebookDelegate = _facebookDelegate;
 
+
+- (void)dealloc {
+    _params = nil;
+    [super dealloc];
+}
+
 - (void)setUpFacebookWithAppID:(NSString *)appID referencedController:(id)referencedController andDelegate:(id<FTShareFacebookDelegate>)delegate {
     
     _facebook = [[Facebook alloc] initWithAppId:appID andDelegate:self];
@@ -190,8 +196,12 @@
     
     if ([options count] > 0) {
         _permissions = nil;
-        _permissions = (NSArray *) options;   
+        _permissions = [[NSArray alloc] initWithArray:options];   
     }
+}
+
+- (BOOL)canUseOfflineAccess {
+    return [_permissions containsObject:@"offline_access"];
 }
 
 
@@ -204,16 +214,21 @@
 
 
 - (void)shareViaFacebook:(FTShareFacebookData *)data {
-    if (![data isRequestValid]) {
+    if (!data) {
         if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookShareData)]) {
             data = [self.facebookDelegate facebookShareData];
-            if (![data isRequestValid]) [NSException raise:@"Facebook cannot post empy data" format:nil];
         }
     }
+    if (![data isRequestValid]) [NSException raise:@"Facebook cannot post empy data" format:@""];
+    
     _params = data;
+    [_params retain];
+    
     if (![_facebook isSessionValid]) {
         [self authorize];
+        return;
     }
+
     
     // check http method
     NSString *httpMethod = [_params graphHttpTypeString];
@@ -223,7 +238,7 @@
     if (!path) {
         if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookPathForRequestofMethodType:)]) {
             path = [self.facebookDelegate facebookPathForRequestofMethodType:&httpMethod];
-            if (!path) [NSException raise:@"Facebook request with not type will have no path either" format:nil];
+            if (!path) [NSException raise:@"Facebook request with not type will have no path either" format:@""];
         }
     }
     
@@ -284,9 +299,6 @@
     [defaults setObject:[_facebook accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[_facebook expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
-    
-    NSLog(@"%@ %@", _facebook.accessToken, _facebook.expirationDate.description);
-    
 	
     if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidLogin:)]) {
         [self.facebookDelegate facebookDidLogin:nil];

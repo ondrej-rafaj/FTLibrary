@@ -103,6 +103,8 @@ typedef enum {
 - (void)shareViaFacebook:(FTShareFacebookData *)data;
 - (void)authorize;
 
+- (BOOL)canUseOfflineAccess;
+
 
 
 #pragma mark --
