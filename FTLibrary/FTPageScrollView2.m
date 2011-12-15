@@ -418,6 +418,7 @@
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)]) {
 		[_pageScrollViewDelegate scrollViewDidEndScrollingAnimation:scrollView];
 	}
+	[self _pageDidChange];
 }
 
 @end
