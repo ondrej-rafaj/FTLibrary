@@ -50,11 +50,13 @@ typedef NSUInteger FTShareOptions;
 
 - (void)setUpTwitterWithConsumerKey:(NSString *)consumerKey secret:(NSString *)secret andDelegate:(id<FTShareTwitterDelegate>)delegate;
 - (void)shareViaTwitter:(FTShareTwitterData *)data;
+- (void)logoutTwitter;
 
 
 
 - (void)setUpFacebookWithAppID:(NSString *)appID permissions:(FTShareFacebookPermission)permissions andDelegate:(id<FTShareFacebookDelegate>)delegate;
 - (void)shareViaFacebook:(FTShareFacebookData *)data;
+- (void)logoutFacebook;
 
 - (void)setUpEmailWithDelegate:(id<FTShareEmailDelegate>)delegate;
 - (void)shareViaEmail:(FTShareEmailData *)data;

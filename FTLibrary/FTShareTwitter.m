@@ -72,10 +72,13 @@
         
     }
     
-    if (![data isRequestValid]) [NSException raise:@"Twitter cannot post empy data" format:@""];
+    if (!data && ![data isRequestValid]) [NSException raise:@"Twitter cannot post empy data" format:@""];
+    else {
+        _twitterParams = data;
+        [_twitterParams retain];
+    }
+
     
-    _twitterParams = data;
-    [_twitterParams retain];
     if(![_twitter isAuthorized]){  
         UIViewController *controller = [SA_OAuthTwitterController controllerToEnterCredentialsWithTwitterEngine:_twitter delegate:self];  
         
@@ -88,6 +91,14 @@
         if (![_twitterParams isRequestValid]) return;
         [_twitter sendUpdate:_twitterParams.message];
     }
+}
+
+
+- (void)logout {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
+    
+    [defaults setObject: nil forKey: @"twitterAuthData"];  
+    [defaults synchronize];
 }
 
 #pragma mark SA_OAuthTwitterEngineDelegate 

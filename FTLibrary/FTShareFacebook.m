@@ -248,8 +248,13 @@
 }
 
 
+- (void)logout {
+    [self.facebook logout:self];
+}
 
 
+
+/*
 - (void)getFacebookData:(NSString *)message ofType:(FTShareFacebookRequestType)type withDelegate:(id <FBRequestDelegate>)delegate {
 	_params = nil;
     _params.message = message;
@@ -261,7 +266,7 @@
         [self.facebook requestWithGraphPath:@"me/friends" andParams:[_params dictionaryFromParams] andHttpMethod:@"POST" andDelegate:self];
 	}
 }
-
+*/
 
 #pragma mark Facebook dialog
 

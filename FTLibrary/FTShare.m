@@ -62,6 +62,10 @@
     [_twitterEngine shareViaTwitter:data];
 }
 
+- (void)logoutTwitter {
+    [_twitterEngine logout];
+}
+
 
 #pragma mark Facebook section
 
@@ -73,6 +77,10 @@
 
 - (void)shareViaFacebook:(FTShareFacebookData *)data {
     [_facebookEngine shareViaFacebook:data];
+}
+
+- (void)logoutFacebook {
+    [_facebookEngine logout];
 }
 
 #pragma mark Email section

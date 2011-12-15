@@ -102,6 +102,7 @@ typedef enum {
 - (void)setUpPermissions:(FTShareFacebookPermission)permission;
 - (void)shareViaFacebook:(FTShareFacebookData *)data;
 - (void)authorize;
+- (void)logout;
 
 - (BOOL)canUseOfflineAccess;
 
