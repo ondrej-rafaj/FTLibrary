@@ -48,7 +48,7 @@
 
 - (Facebook *)facebook {
 	FTAppDelegate *ad = [FTAppDelegate delegate];
-	[ad.share setUpFacebookWithAppID:facebookAppId andDelegate:self];	
+	[ad.share setUpFacebookWithAppID:facebookAppId permissions:FTShareFacebookPermissionNull andDelegate:self];	
 	return ad.share.facebook;
 }
 

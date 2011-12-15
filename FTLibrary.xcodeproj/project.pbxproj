@@ -504,8 +504,12 @@
 		4CFEAD901432279A00EDD9A8 /* FTDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CFEAD8C1432279A00EDD9A8 /* FTDiskCache.m */; };
 		6811B5A9147A66D100C1474E /* FTProgressCircle.h in Headers */ = {isa = PBXBuildFile; fileRef = 6811B5A7147A66D100C1474E /* FTProgressCircle.h */; };
 		6811B5AA147A66D100C1474E /* FTProgressCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 6811B5A8147A66D100C1474E /* FTProgressCircle.m */; };
-		68134788143B29F700CC309C /* FTShareDataObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 68134786143B29F700CC309C /* FTShareDataObjects.h */; };
-		68134789143B29F700CC309C /* FTShareDataObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 68134787143B29F700CC309C /* FTShareDataObjects.m */; };
+		682C1404149A3A180000FCD3 /* FTShareEmail.h in Headers */ = {isa = PBXBuildFile; fileRef = 682C13FE149A3A180000FCD3 /* FTShareEmail.h */; };
+		682C1405149A3A180000FCD3 /* FTShareEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = 682C13FF149A3A180000FCD3 /* FTShareEmail.m */; };
+		682C1406149A3A180000FCD3 /* FTShareFacebook.h in Headers */ = {isa = PBXBuildFile; fileRef = 682C1400149A3A180000FCD3 /* FTShareFacebook.h */; };
+		682C1407149A3A180000FCD3 /* FTShareFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 682C1401149A3A180000FCD3 /* FTShareFacebook.m */; };
+		682C1408149A3A180000FCD3 /* FTShareTwitter.h in Headers */ = {isa = PBXBuildFile; fileRef = 682C1402149A3A180000FCD3 /* FTShareTwitter.h */; };
+		682C1409149A3A180000FCD3 /* FTShareTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 682C1403149A3A180000FCD3 /* FTShareTwitter.m */; };
 		6834BE2913D9B2EA00781018 /* FTLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 6834BE2713D9B2EA00781018 /* FTLabel.h */; };
 		6834BE2A13D9B2EA00781018 /* FTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6834BE2813D9B2EA00781018 /* FTLabel.m */; };
 		68437FAB13FC08540072C4B9 /* FTLanguageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 68437FA913FC08530072C4B9 /* FTLanguageManager.h */; };
@@ -533,8 +537,6 @@
 		93375152148E3CD400121384 /* FTCustomAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93375150148E3CD400121384 /* FTCustomAnimationView.m */; };
 		9348CDEC1464041500A6F877 /* FTPageControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9348CDEA1464041500A6F877 /* FTPageControl.h */; };
 		9348CDED1464041500A6F877 /* FTPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9348CDEB1464041500A6F877 /* FTPageControl.m */; };
-		935E87CF14925DC200F14366 /* Appirater.h in Headers */ = {isa = PBXBuildFile; fileRef = 935E87CD14925DC200F14366 /* Appirater.h */; };
-		935E87D014925DC200F14366 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 935E87CE14925DC200F14366 /* Appirater.m */; };
 		93C70E171474195800CA2139 /* FTPageScrollView2.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C70E151474195400CA2139 /* FTPageScrollView2.h */; };
 		93C70E181474195800CA2139 /* FTPageScrollView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C70E161474195500CA2139 /* FTPageScrollView2.m */; };
 		93F6E7E41484F549002337ED /* FTTaskMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 93F6E7E21484F549002337ED /* FTTaskMaker.h */; };
@@ -1007,8 +1009,12 @@
 		4CFEAD8C1432279A00EDD9A8 /* FTDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTDiskCache.m; sourceTree = "<group>"; };
 		6811B5A7147A66D100C1474E /* FTProgressCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTProgressCircle.h; sourceTree = "<group>"; };
 		6811B5A8147A66D100C1474E /* FTProgressCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProgressCircle.m; sourceTree = "<group>"; };
-		68134786143B29F700CC309C /* FTShareDataObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTShareDataObjects.h; sourceTree = "<group>"; };
-		68134787143B29F700CC309C /* FTShareDataObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTShareDataObjects.m; sourceTree = "<group>"; };
+		682C13FE149A3A180000FCD3 /* FTShareEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTShareEmail.h; sourceTree = "<group>"; };
+		682C13FF149A3A180000FCD3 /* FTShareEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTShareEmail.m; sourceTree = "<group>"; };
+		682C1400149A3A180000FCD3 /* FTShareFacebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTShareFacebook.h; sourceTree = "<group>"; };
+		682C1401149A3A180000FCD3 /* FTShareFacebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTShareFacebook.m; sourceTree = "<group>"; };
+		682C1402149A3A180000FCD3 /* FTShareTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTShareTwitter.h; sourceTree = "<group>"; };
+		682C1403149A3A180000FCD3 /* FTShareTwitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTShareTwitter.m; sourceTree = "<group>"; };
 		6834BE2713D9B2EA00781018 /* FTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLabel.h; sourceTree = "<group>"; };
 		6834BE2813D9B2EA00781018 /* FTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLabel.m; sourceTree = "<group>"; };
 		68437FA913FC08530072C4B9 /* FTLanguageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTLanguageManager.h; sourceTree = "<group>"; };
@@ -1037,8 +1043,6 @@
 		93375150148E3CD400121384 /* FTCustomAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCustomAnimationView.m; sourceTree = "<group>"; };
 		9348CDEA1464041500A6F877 /* FTPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageControl.h; sourceTree = "<group>"; };
 		9348CDEB1464041500A6F877 /* FTPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPageControl.m; sourceTree = "<group>"; };
-		935E87CD14925DC200F14366 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
-		935E87CE14925DC200F14366 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		93C70E151474195400CA2139 /* FTPageScrollView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageScrollView2.h; sourceTree = "<group>"; };
 		93C70E161474195500CA2139 /* FTPageScrollView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPageScrollView2.m; sourceTree = "<group>"; };
 		93F6E7E21484F549002337ED /* FTTaskMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTaskMaker.h; sourceTree = "<group>"; };
@@ -1777,7 +1781,6 @@
 		4C85BB0413BA4AFD00CB7FCA /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
-				4CD394A314893FA8000F0A77 /* AppiRater */,
 				4C9F748D146AFEB7007B68B1 /* LeavesView */,
 				4C9F73C314695F2D007B68B1 /* MGSplitViewController */,
 				68D6049F143F0C7900C3C84E /* TestFlight */,
@@ -2393,15 +2396,6 @@
 			name = "Finger drawing";
 			sourceTree = "<group>";
 		};
-		4CD394A314893FA8000F0A77 /* AppiRater */ = {
-			isa = PBXGroup;
-			children = (
-				935E87CD14925DC200F14366 /* Appirater.h */,
-				935E87CE14925DC200F14366 /* Appirater.m */,
-			);
-			path = AppiRater;
-			sourceTree = "<group>";
-		};
 		4CD776971461FD6B007A642B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -2566,8 +2560,12 @@
 		A56A62C714336034000C666B /* Share */ = {
 			isa = PBXGroup;
 			children = (
-				68134786143B29F700CC309C /* FTShareDataObjects.h */,
-				68134787143B29F700CC309C /* FTShareDataObjects.m */,
+				682C13FE149A3A180000FCD3 /* FTShareEmail.h */,
+				682C13FF149A3A180000FCD3 /* FTShareEmail.m */,
+				682C1400149A3A180000FCD3 /* FTShareFacebook.h */,
+				682C1401149A3A180000FCD3 /* FTShareFacebook.m */,
+				682C1402149A3A180000FCD3 /* FTShareTwitter.h */,
+				682C1403149A3A180000FCD3 /* FTShareTwitter.m */,
 				A56A62CC1433606E000C666B /* FTShare.h */,
 				A56A62CD1433606E000C666B /* FTShare.m */,
 			);
@@ -2881,7 +2879,6 @@
 				4CE77EDF1435D34500A5AEDA /* FTVerticalSlider.h in Headers */,
 				4CE77EF11435E7C900A5AEDA /* JSON.h in Headers */,
 				4CE77EF21435E7C900A5AEDA /* NSString+SBJSON.h in Headers */,
-				68134788143B29F700CC309C /* FTShareDataObjects.h in Headers */,
 				68D604A5143F0C7900C3C84E /* TestFlight.h in Headers */,
 				4CE0967C1440D83200B31E11 /* FTPhotoEditingElementView.h in Headers */,
 				4CE0967E1440D83200B31E11 /* FTPhotoEditingView.h in Headers */,
@@ -2921,7 +2918,9 @@
 				93F6E7F11484F751002337ED /* FTReachabilityManager.h in Headers */,
 				4C9F7DFF14891E3800177894 /* FTISO8601DateFormatter.h in Headers */,
 				93375151148E3CD400121384 /* FTCustomAnimationView.h in Headers */,
-				935E87CF14925DC200F14366 /* Appirater.h in Headers */,
+				682C1404149A3A180000FCD3 /* FTShareEmail.h in Headers */,
+				682C1406149A3A180000FCD3 /* FTShareFacebook.h in Headers */,
+				682C1408149A3A180000FCD3 /* FTShareTwitter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3195,7 +3194,6 @@
 				A56A63431433617B000C666B /* SA_OAuthTwitterEngine.m in Sources */,
 				4CE77EE01435D34500A5AEDA /* FTVerticalSlider.m in Sources */,
 				4CE77EF31435E7C900A5AEDA /* NSString+SBJSON.m in Sources */,
-				68134789143B29F700CC309C /* FTShareDataObjects.m in Sources */,
 				4CE0967D1440D83200B31E11 /* FTPhotoEditingElementView.m in Sources */,
 				4CE0967F1440D83200B31E11 /* FTPhotoEditingView.m in Sources */,
 				4CCF855A14424E9F007F1043 /* FTFingerDrawingView.m in Sources */,
@@ -3232,7 +3230,9 @@
 				93F6E7F21484F751002337ED /* FTReachabilityManager.m in Sources */,
 				4C9F7E0014891E3800177894 /* FTISO8601DateFormatter.m in Sources */,
 				93375152148E3CD400121384 /* FTCustomAnimationView.m in Sources */,
-				935E87D014925DC200F14366 /* Appirater.m in Sources */,
+				682C1405149A3A180000FCD3 /* FTShareEmail.m in Sources */,
+				682C1407149A3A180000FCD3 /* FTShareFacebook.m in Sources */,
+				682C1409149A3A180000FCD3 /* FTShareTwitter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
