@@ -219,10 +219,11 @@
             data = [self.facebookDelegate facebookShareData];
         }
     }
-    if (![data isRequestValid]) [NSException raise:@"Facebook cannot post empy data" format:@""];
-    
-    _params = data;
-    [_params retain];
+    if (!data && ![data isRequestValid]) [NSException raise:@"Facebook cannot post empy data" format:@""];
+    else {
+        _params = data;
+        [_params retain]; 
+    }
     
     if (![_facebook isSessionValid]) {
         [self authorize];
