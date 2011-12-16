@@ -533,6 +533,8 @@
 		68DF4E3113CEF9D200B67940 /* FTDataXml.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DF4E2913CEF9D200B67940 /* FTDataXml.m */; };
 		68EB261413F2F1AB006DB33C /* FTCoreTextStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 68EB261213F2F1AB006DB33C /* FTCoreTextStyle.h */; };
 		68EB261513F2F1AB006DB33C /* FTCoreTextStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EB261313F2F1AB006DB33C /* FTCoreTextStyle.m */; };
+		68F45A15149B95F700A0C3EC /* UIImage+ColorPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 68F45A13149B95F700A0C3EC /* UIImage+ColorPicker.h */; };
+		68F45A16149B95F700A0C3EC /* UIImage+ColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F45A14149B95F700A0C3EC /* UIImage+ColorPicker.m */; };
 		93375151148E3CD400121384 /* FTCustomAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9337514F148E3CD400121384 /* FTCustomAnimationView.h */; };
 		93375152148E3CD400121384 /* FTCustomAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93375150148E3CD400121384 /* FTCustomAnimationView.m */; };
 		9348CDEC1464041500A6F877 /* FTPageControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9348CDEA1464041500A6F877 /* FTPageControl.h */; };
@@ -1039,6 +1041,8 @@
 		68DF4E2913CEF9D200B67940 /* FTDataXml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTDataXml.m; path = FTLibrary/FTDataXml.m; sourceTree = SOURCE_ROOT; };
 		68EB261213F2F1AB006DB33C /* FTCoreTextStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCoreTextStyle.h; sourceTree = "<group>"; };
 		68EB261313F2F1AB006DB33C /* FTCoreTextStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCoreTextStyle.m; sourceTree = "<group>"; };
+		68F45A13149B95F700A0C3EC /* UIImage+ColorPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ColorPicker.h"; sourceTree = "<group>"; };
+		68F45A14149B95F700A0C3EC /* UIImage+ColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ColorPicker.m"; sourceTree = "<group>"; };
 		9337514F148E3CD400121384 /* FTCustomAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCustomAnimationView.h; sourceTree = "<group>"; };
 		93375150148E3CD400121384 /* FTCustomAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCustomAnimationView.m; sourceTree = "<group>"; };
 		9348CDEA1464041500A6F877 /* FTPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageControl.h; sourceTree = "<group>"; };
@@ -1394,6 +1398,8 @@
 				4C03663213BA0B3000E8FA09 /* UIView+Layout.m */,
 				4C03663313BA0B3000E8FA09 /* UIViewController+Utilities.h */,
 				4C03663413BA0B3000E8FA09 /* UIViewController+Utilities.m */,
+				68F45A13149B95F700A0C3EC /* UIImage+ColorPicker.h */,
+				68F45A14149B95F700A0C3EC /* UIImage+ColorPicker.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -2921,6 +2927,7 @@
 				682C1404149A3A180000FCD3 /* FTShareEmail.h in Headers */,
 				682C1406149A3A180000FCD3 /* FTShareFacebook.h in Headers */,
 				682C1408149A3A180000FCD3 /* FTShareTwitter.h in Headers */,
+				68F45A15149B95F700A0C3EC /* UIImage+ColorPicker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3233,6 +3240,7 @@
 				682C1405149A3A180000FCD3 /* FTShareEmail.m in Sources */,
 				682C1407149A3A180000FCD3 /* FTShareFacebook.m in Sources */,
 				682C1409149A3A180000FCD3 /* FTShareTwitter.m in Sources */,
+				68F45A16149B95F700A0C3EC /* UIImage+ColorPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

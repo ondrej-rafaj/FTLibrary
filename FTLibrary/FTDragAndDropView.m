@@ -9,6 +9,7 @@
 #import "FTDragAndDropView.h"
 #import "FTFilesystem.h"
 #import "UIColor+Tools.h"
+#import "UIImage+ColorPicker.h"
 
 
 #define kFTDragAndDropViewButtonSize                0
@@ -147,10 +148,20 @@
 
 #pragma mark Hit tests
 
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    return YES;
+}
+
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
 	UIView *v = [super hitTest:point withEvent:event];
 	if (v) {
 		NSLog(@"HIT !!! :)");
+        UIColor *color = [self.imageView.image colorAtPoint:point];
+        float alpha = [self.imageView.image alphaAtPoint:point];
+
+        NSLog(@"color: %@ with alpha %.2f at point: %@", color.description, alpha, NSStringFromCGPoint(point)); 
+        if (alpha == 0) v = nil;
+        
 	}
 	return v;
 }
@@ -162,6 +173,7 @@
     [_imagePath release];
     [super dealloc];
 }
+
 
 
 @end
