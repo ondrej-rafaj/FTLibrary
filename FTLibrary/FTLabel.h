@@ -21,4 +21,6 @@
 - (void)rightAnchorToX:(CGFloat)x;
 - (id)initWithFrame:(CGRect)frame font:(UIFont *)font andText:(NSString *)text;
 
+- (void)sizeToFitWidth;
+
 @end

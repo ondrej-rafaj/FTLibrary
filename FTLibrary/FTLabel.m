@@ -9,6 +9,7 @@
 #import "FTLabel.h"
 #import "UILabel+DynamicHeight.h"
 #import "FTCoreTextView.h"
+#import "UIView+Layout.h"
 
 @interface FTLabel ()
 + (FTCoreTextAlignement)FTCoreTextAlignementFromUITextAlignment:(UITextAlignment)alignment;
@@ -74,6 +75,12 @@
     return self;
 }
 
+- (void)sizeToFitWidth
+{
+	CGSize size = [self.text sizeWithFont:self.font constrainedToSize:CGSizeMake(self.bounds.size.width, MAXFLOAT) lineBreakMode:self.lineBreakMode];
+	self.size = size;
+}
+
 #pragma mark leading setters
 
 - (CGFloat)leading {
@@ -86,7 +93,6 @@
     if (_leading > 0) {
         [self setNeedsDisplay];
     }
-    
 }
 
 - (void)setText:(NSString *)text {
