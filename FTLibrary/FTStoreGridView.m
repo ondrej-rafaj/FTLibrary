@@ -116,7 +116,7 @@
 }
 
 - (void)gridView:(AQGridView *)gridView didSelectItemAtIndex:(NSUInteger)index {
-	[gridView deselectItemAtIndex:index animated:NO];
+//	[gridView deselectItemAtIndex:index animated:NO];
 }
 
 #pragma mark Cell delegate methods
