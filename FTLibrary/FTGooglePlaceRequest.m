@@ -142,7 +142,7 @@
         
         [self setTypes:(NSArray *)[dictionary objectForKey:@"types"]];
         
-        [self setIconURL:[NSURL URLWithString:(NSString *)[dictionary objectForKey:@"icon"]]];
+        if ([dictionary objectForKey:@"icon"]) [self setIconURL:[NSURL URLWithString:(NSString *)[dictionary objectForKey:@"icon"]]];
         
         [self setReference:(NSString *)[dictionary objectForKey:@"reference"]];
         
@@ -152,7 +152,7 @@
         
         [self setAddress:(NSString *)[dictionary objectForKey:@"formatted_address"]];
         
-        [self setUrl:[NSURL URLWithString:(NSString *)[dictionary objectForKey:@"url"]]];       
+        if ([dictionary objectForKey:@"url"]) [self setUrl:[NSURL URLWithString:(NSString *)[dictionary objectForKey:@"url"]]];       
     }
     
     return  self;
