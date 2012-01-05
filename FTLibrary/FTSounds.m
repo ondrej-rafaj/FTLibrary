@@ -47,7 +47,8 @@
         extension = [soundName substringWithRange:NSMakeRange(extRange.location + 1, (soundName.length - extRange.location - 1))];
         soundName = [soundName substringWithRange:NSMakeRange(0, extRange.location)];
     }
-	NSURL *url = [[NSBundle mainBundle] URLForResource:soundName withExtension:extension];
+	NSString *path = [[NSBundle mainBundle] pathForResource:soundName ofType:extension];
+	NSURL *url = [NSURL fileURLWithPath:path];
     
     NSError *error;
 	AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];

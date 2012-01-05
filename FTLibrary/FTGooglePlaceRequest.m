@@ -130,9 +130,12 @@
     
     if (self && dictionary && [dictionary isKindOfClass:[NSDictionary class]]) {
         NSDictionary *position_ = [[dictionary objectForKey:@"geometry"] objectForKey:@"location"];
-        CLLocationCoordinate2D loc =  CLLocationCoordinate2DMake([[position_ objectForKey:@"lat"] floatValue], [[position_ objectForKey:@"lng"] floatValue]);
+        CLLocationCoordinate2D loc;
+		loc.latitude = [[position_ objectForKey:@"lat"] floatValue];
+		loc.longitude = [[position_ objectForKey:@"lng"] floatValue];
+		
         [self setLocation:loc];
-        
+         
         [self setName:(NSString *)[dictionary objectForKey:@"name"]];
         
         [self setVicinity:(NSString *)[dictionary objectForKey:@"vicinity"]];
