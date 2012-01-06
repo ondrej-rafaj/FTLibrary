@@ -117,7 +117,7 @@ void reachabilityDidChange(SCNetworkReachabilityRef target, SCNetworkReachabilit
 		block();
 	}
 	else if (reachabilityState == FTReachabilityStateNo) {
-		failureBlock(error);
+		if (failureBlock) failureBlock(error);
 	}
 	else {
 		
@@ -133,7 +133,7 @@ void reachabilityDidChange(SCNetworkReachabilityRef target, SCNetworkReachabilit
 			}
 			else {
 				dispatch_async(dispatch_get_main_queue(), ^{
-					failureBlock(error);
+					if (failureBlock) failureBlock(error);
 				});
 			}
 		};
