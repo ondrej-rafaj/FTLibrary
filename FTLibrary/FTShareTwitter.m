@@ -14,6 +14,7 @@
 @implementation FTShareTwitterData 
 
 @synthesize message = _message;
+@synthesize hasControllerSupport = _hasControllerSupport;
 
 - (BOOL)isRequestValid {
     BOOL valid = (self.message && [self.message length] > 0);
@@ -36,6 +37,7 @@
 @implementation FTShareTwitter
 
 @synthesize twitterDelegate = _twitterDelegate;
+@synthesize twitterParams = _twitterParams;
 
 - (id)init {
     self = [super init];
@@ -60,25 +62,24 @@
     self.twitterDelegate = delegate;
     _twitter.consumerKey = consumerKey;  
     _twitter.consumerSecret = secret;
-    //[_twitter clearAccessToken];
+    [_twitter clearAccessToken];
     _twitterParams = nil;
 }
 
 - (void)shareViaTwitter:(FTShareTwitterData *)data {
-    if (!data) {
+    if (![data isRequestValid] || [data hasControllerSupport]) {
         if (self.twitterDelegate && [self.twitterDelegate respondsToSelector:@selector(twitterData)]) {
             data = [self.twitterDelegate twitterData];
+            if (![data isRequestValid] || [data hasControllerSupport]) {
+                FTShareMessageController *messageController = [[FTShareMessageController alloc] initWithMessage:data.message type:FTShareMessageControllerTypeTwitter andelegate:self];
+                UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:messageController];
+                [_referencedController presentModalViewController:nc animated:YES];
+                return;
+            }
         }
         
     }
-    
-    if (!data && ![data isRequestValid]) [NSException raise:@"Twitter cannot post empy data" format:@""];
-    else {
-        _twitterParams = data;
-        [_twitterParams retain];
-    }
-
-    
+    _twitterParams = [data retain];
     if(![_twitter isAuthorized]){  
         UIViewController *controller = [SA_OAuthTwitterController controllerToEnterCredentialsWithTwitterEngine:_twitter delegate:self];  
         
@@ -91,14 +92,6 @@
         if (![_twitterParams isRequestValid]) return;
         [_twitter sendUpdate:_twitterParams.message];
     }
-}
-
-
-- (void)logout {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];  
-    
-    [defaults setObject: nil forKey: @"twitterAuthData"];  
-    [defaults synchronize];
 }
 
 #pragma mark SA_OAuthTwitterEngineDelegate 
@@ -117,9 +110,8 @@
     [defaults synchronize];     
 }
 
-- (NSString *) cachedTwitterOAuthDataForUsername: (NSString *) username {
-    NSString *data = [[NSUserDefaults standardUserDefaults] objectForKey: @"twitterAuthData"];
-    return data;  
+- (NSString *) cachedTwitterOAuthDataForUsername: (NSString *) username {  
+    return [[NSUserDefaults standardUserDefaults] objectForKey: @"twitterAuthData"];  
 }
 
 #pragma mark TwitterEngineDelegate  
@@ -151,7 +143,7 @@
     if ([self.twitterDelegate respondsToSelector:@selector(twitterDidLogin:)]) {
         [self.twitterDelegate twitterDidLogin:nil];
     }
-    [self shareViaTwitter:nil]; // cescofry WRONG!
+    [self shareViaTwitter:_twitterParams];
 }
 
 - (void)OAuthTwitterControllerFailed:(SA_OAuthTwitterController *)controller {
@@ -174,6 +166,24 @@
     _twitter = nil;
     self.twitterDelegate = nil;
     self.twitterDelegate = nil;
+}
+
+#pragma mark sharemessagcontroller delgate
+
+- (void)shareMessageController:(FTShareMessageController *)controller didFinishWithMessage:(NSString *)message {
+
+}
+
+-(void)shareMessageController:(FTShareMessageController *)controller didDisappearWithMessage:(NSString *)message {
+    if (!message || message.length == 0) return;
+    FTShareTwitterData *data = [[FTShareTwitterData alloc] init];
+    [data setMessage:message];
+    [data setHasControllerSupport:NO];
+    [self shareViaTwitter:data];    
+}
+
+- (void)shareMessageControllerDidCancel:(FTShareMessageController *)controller {
+    
 }
 
 @end

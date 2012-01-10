@@ -75,7 +75,7 @@
     if (![data isRequestValid]) {
         if (self.mailDelegate && [self.mailDelegate respondsToSelector:@selector(mailShareData)]) {
             data = [self.mailDelegate mailShareData];      
-            if (![data isRequestValid]) [NSException raise:@"Mail cannot post empy data" format:@""];
+            if (![data isRequestValid]) [NSException raise:@"Mail cannot post empy data" format:nil];
         }
         
     }

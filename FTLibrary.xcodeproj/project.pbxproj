@@ -517,6 +517,8 @@
 		68437FAD13FC08540072C4B9 /* FTLanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 68437FAA13FC08540072C4B9 /* FTLanguageManager.m */; };
 		6861786413D04A9400F57408 /* FTGooglePlaceRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */; };
 		6861786513D04A9400F57408 /* FTGooglePlaceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */; };
+		6868F75114BC954200AE274B /* FTShareMessageController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6868F74F14BC954200AE274B /* FTShareMessageController.h */; };
+		6868F75214BC954200AE274B /* FTShareMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6868F75014BC954200AE274B /* FTShareMessageController.m */; };
 		68849E0E147CFC94002A54D1 /* FTMath.h in Headers */ = {isa = PBXBuildFile; fileRef = 68849E0D147CFC94002A54D1 /* FTMath.h */; };
 		68849E17147CFEA9002A54D1 /* FTAnimatedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68849E15147CFEA9002A54D1 /* FTAnimatedLabel.m */; };
 		68849E19147D045E002A54D1 /* FTAnimatedLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 68849E18147D045E002A54D1 /* FTAnimatedLabel.h */; };
@@ -1023,6 +1025,8 @@
 		68437FAA13FC08540072C4B9 /* FTLanguageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTLanguageManager.m; sourceTree = "<group>"; };
 		6861786213D04A9400F57408 /* FTGooglePlaceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTGooglePlaceRequest.h; path = FTLibrary/FTGooglePlaceRequest.h; sourceTree = SOURCE_ROOT; };
 		6861786313D04A9400F57408 /* FTGooglePlaceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTGooglePlaceRequest.m; path = FTLibrary/FTGooglePlaceRequest.m; sourceTree = SOURCE_ROOT; };
+		6868F74F14BC954200AE274B /* FTShareMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTShareMessageController.h; sourceTree = "<group>"; };
+		6868F75014BC954200AE274B /* FTShareMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTShareMessageController.m; sourceTree = "<group>"; };
 		68849E0D147CFC94002A54D1 /* FTMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMath.h; sourceTree = "<group>"; };
 		68849E15147CFEA9002A54D1 /* FTAnimatedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAnimatedLabel.m; sourceTree = "<group>"; };
 		68849E18147D045E002A54D1 /* FTAnimatedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAnimatedLabel.h; sourceTree = "<group>"; };
@@ -2566,6 +2570,8 @@
 		A56A62C714336034000C666B /* Share */ = {
 			isa = PBXGroup;
 			children = (
+				6868F74F14BC954200AE274B /* FTShareMessageController.h */,
+				6868F75014BC954200AE274B /* FTShareMessageController.m */,
 				682C13FE149A3A180000FCD3 /* FTShareEmail.h */,
 				682C13FF149A3A180000FCD3 /* FTShareEmail.m */,
 				682C1400149A3A180000FCD3 /* FTShareFacebook.h */,
@@ -2928,6 +2934,7 @@
 				682C1406149A3A180000FCD3 /* FTShareFacebook.h in Headers */,
 				682C1408149A3A180000FCD3 /* FTShareTwitter.h in Headers */,
 				68F45A15149B95F700A0C3EC /* UIImage+ColorPicker.h in Headers */,
+				6868F75114BC954200AE274B /* FTShareMessageController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3241,6 +3248,7 @@
 				682C1407149A3A180000FCD3 /* FTShareFacebook.m in Sources */,
 				682C1409149A3A180000FCD3 /* FTShareTwitter.m in Sources */,
 				68F45A16149B95F700A0C3EC /* UIImage+ColorPicker.m in Sources */,
+				6868F75214BC954200AE274B /* FTShareMessageController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
