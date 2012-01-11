@@ -148,5 +148,16 @@ static float systemVersion = -1;
 	return info;
 }
 
++ (void)printAvailableFonts
+{
+	NSMutableString *string = [NSMutableString stringWithString:@"\n"];
+	for (NSString *fontFamilyName in [UIFont familyNames]) {
+		[string appendFormat:@"\n%@", fontFamilyName];
+		for (NSString *fontName in [UIFont fontNamesForFamilyName:fontFamilyName]) {
+			[string appendFormat:@"\n\t%@", fontFamilyName];
+		}
+	}
+	NSLog(@"AVailable Fonts:%@", string);
+}
 
 @end

@@ -20,6 +20,7 @@ typedef enum {
 
 
 @class FTDownload;
+@class FTError;
 
 @protocol FTDownloadDelegate <NSObject>
 
@@ -77,6 +78,19 @@ typedef enum {
 @property (nonatomic, readonly) CGFloat percentDownloaded;
 
 @property (nonatomic, readonly) BOOL isCachingEnabled;
+
+@property (nonatomic, retain) NSString *downloadToFilePath;
+
+#if NS_BLOCKS_AVAILABLE
+
+@property (nonatomic, copy) void (^startBlock)(void);
+@property (nonatomic, copy) void (^progressBlock)(float progress);
+@property (nonatomic, copy) void (^completionBlock)(NSString *stringResponse, NSData *dataResponse, NSURL *fileURL);
+@property (nonatomic, copy) void (^failureBlock)(FTError *error);
+
+- (id)initWithPath:(NSString *)url startBlock:(void (^)(void))start progressBlock:(void (^)(float progress))progress completionBlock:(void (^)(NSString *stringResponse, NSData *dataResponse, NSURL *fileURL))completion failureBlock:(void (^)(FTError *error))failure;
+
+#endif
 
 
 - (id)initWithPath:(NSString *)url;

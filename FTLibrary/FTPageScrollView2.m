@@ -414,7 +414,9 @@
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
-	[[UIApplication sharedApplication] endIgnoringInteractionEvents]; 
+	if([[UIApplication sharedApplication] isIgnoringInteractionEvents]) {
+		[[UIApplication sharedApplication] endIgnoringInteractionEvents];
+	}
 	if ([_pageScrollViewDelegate respondsToSelector:@selector(scrollViewDidEndScrollingAnimation:)]) {
 		[_pageScrollViewDelegate scrollViewDidEndScrollingAnimation:scrollView];
 	}

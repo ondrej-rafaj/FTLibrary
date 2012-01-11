@@ -8,7 +8,7 @@
 
 #import "FTDownload.h"
 #import "ASIDownloadCache.h"
-
+#import "FTError.h"
 
 @implementation FTDownload
 
@@ -22,6 +22,14 @@
 @synthesize bytesTotal;
 @synthesize progressBarValue;
 @synthesize percentDownloaded;
+@synthesize downloadToFilePath = _downloadToFilePath;
+
+#if NS_BLOCKS_AVAILABLE
+@synthesize startBlock = _startBlock;
+@synthesize progressBlock = _progressBlock;
+@synthesize completionBlock = _completionBlock;
+@synthesize failureBlock = _failureBlock;
+#endif
 
 #pragma mark Initialization
 
@@ -56,6 +64,25 @@
     return self;
 }
 
+#if NS_BLOCKS_AVAILABLE
+
+- (id)initWithPath:(NSString *)url startBlock:(void (^)(void))start 
+	 progressBlock:(void (^)(float progress))progress 
+   completionBlock:(void (^)(NSString *stringResponse, NSData *dataResponse, NSURL *fileURL))completion 
+	  failureBlock:(void (^)(FTError *error))failure
+{
+	self = [self initWithPath:url];
+	if (self) {
+		self.completionBlock = completion;
+		self.startBlock = start;
+		self.failureBlock = failure;
+		self.progressBlock = progress;
+	}
+	return self;
+}
+
+#endif
+
 #pragma mark Calculations
 
 - (CGFloat)getDownloadStatusInPercents {
@@ -72,6 +99,7 @@
         [urlPath retain];
     }
     downloadRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlPath]];
+	if (_downloadToFilePath) downloadRequest.downloadDestinationPath = _downloadToFilePath;
 	NSLog(@"Download request: %@", downloadRequest.url.relativeString);
     if (isCachingEnabled) {
 		[downloadRequest setCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
@@ -115,6 +143,9 @@
         [progressView setProgress:newProgress];
     }
     progressBarValue = newProgress;
+#if NS_BLOCKS_AVAILABLE
+	if (_progressBlock) _progressBlock(newProgress);
+#endif
 }
 
 - (void)request:(ASIHTTPRequest *)request didReceiveBytes:(long long)bytes {
@@ -145,6 +176,9 @@
         [delegate downloadStarted:self];
     }
     [self fireDownloadStatusDelegateMethod];
+#if NS_BLOCKS_AVAILABLE
+	if (_startBlock) _startBlock();
+#endif
 }
 
 - (void)requestFailed:(ASIHTTPRequest *)request {
@@ -154,11 +188,17 @@
     [self fireDownloadStatusDelegateMethod];
 	NSLog(@"Request status code: %d", request.responseStatusCode);
 	NSLog(@"Request error: %@", request.error.localizedDescription);
+#if NS_BLOCKS_AVAILABLE
+	if (_failureBlock) _failureBlock([FTError errorWithError:request.error]);
+#endif
 }
 
 - (void)requestFinished:(ASIHTTPRequest *)request {
     status = FTDownloadStatusSuccessful;
     [self fireDownloadStatusDelegateMethod];
+#if NS_BLOCKS_AVAILABLE
+	if (_completionBlock) _completionBlock(request.responseString, request.responseData, (_downloadToFilePath) ? [NSURL fileURLWithPath:_downloadToFilePath] : nil);
+#endif
 }
 
 #pragma mark Settings
@@ -173,8 +213,15 @@
 	[downloadRequest cancel];
 	[downloadRequest setDelegate:nil];
     [downloadRequest release];
+	[_downloadToFilePath release];
     [self setDelegate:nil];
     [urlPath release];
+#if NS_BLOCKS_AVAILABLE
+	[_startBlock release];
+	[_progressBlock release];
+	[_completionBlock release];
+	[_failureBlock release];
+#endif
 	[super dealloc];
 }
 

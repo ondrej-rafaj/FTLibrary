@@ -243,6 +243,8 @@ NSInteger rangeSort(NSString *range1, NSString *range2, void *context);
 - (void)drawImages;
 - (void)doInit;
 - (void)didMakeChanges;
+- (NSString *)defaultTagNameForKey:(NSString *)tagKey;
+- (NSMutableArray *)divideTextInPages:(NSString *)string;
 
 @end
 
@@ -304,12 +306,30 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 }
 
 #pragma mark - FTCoreTextView business
+#pragma mark -
+
+- (void)changeDefaultTag:(NSString *)coreTextTag toTag:(NSString *)newDefaultTag
+{
+	if ([_defaultsTags objectForKey:coreTextTag] == nil) {
+		[NSException raise:NSInvalidArgumentException format:[NSString stringWithFormat:@"%@ is not a default tag of FTCoreTextView. Use the constant FTCoreTextTag constants."]];
+	}
+	else {
+		[_defaultsTags setObject:newDefaultTag forKey:coreTextTag];
+	}
+}
+
+- (NSString *)defaultTagNameForKey:(NSString *)tagKey
+{
+	return [_defaultsTags objectForKey:tagKey];
+}
 
 - (void)didMakeChanges
 {
 	_coreTextViewFlags.updatedAttrString = NO;
 	_coreTextViewFlags.updatedFramesetter = NO;
 }
+
+#pragma mark - UI related
 
 - (NSDictionary *)dataForPoint:(CGPoint)point
 {
@@ -369,90 +389,6 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 	return returnedDict;
 }
 
-- (void)applyStyle:(FTCoreTextStyle *)style inRange:(NSRange)styleRange onString:(NSMutableAttributedString **)attributedString
-{
-	[*attributedString addAttribute:(id)kCTForegroundColorAttributeName
-							  value:(id)style.color.CGColor
-							  range:styleRange];
-	
-	if (style.isUnderLined) {
-		NSNumber *underline = [NSNumber numberWithInt:kCTUnderlineStyleSingle];
-		[*attributedString addAttribute:(id)kCTUnderlineStyleAttributeName
-								  value:(id)underline
-								  range:styleRange];
-	}	
-	
-	CTFontRef ctFont = CTFontCreateFromUIFont(style.font);
-	
-	[*attributedString addAttribute:(id)kCTFontAttributeName
-							  value:(id)ctFont
-							  range:styleRange];
-	CFRelease(ctFont);
-	
-	CTTextAlignment alignment = style.textAlignment;
-	CGFloat maxLineHeight = style.maxLineHeight;
-	CGFloat minLineHeight = style.minLineHeight;
-	CGFloat paragraphLeading = style.leading;
-	
-	CGFloat paragraphSpacingBefore = style.paragraphInset.top;
-	CGFloat paragraphSpacingAfter = style.paragraphInset.bottom;
-	CGFloat paragraphFirstLineHeadIntent = style.paragraphInset.left;
-	CGFloat paragraphHeadIntent = style.paragraphInset.left;
-	CGFloat paragraphTailIntent = style.paragraphInset.right;
-	
-	//if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
-	paragraphSpacingBefore = 0;
-	//}
-	
-	CFIndex numberOfSettings = 9;
-	CGFloat tabSpacing = 28.f;
-	
-	BOOL applyParagraphStyling = style.applyParagraphStyling;
-	
-	if ([style.name isEqualToString:FTCoreTextTagBullet]) {
-		applyParagraphStyling = YES;
-	}
-	else if ([style.name isEqualToString:@"_FTBulletStyle"]) {
-		applyParagraphStyling = YES;
-		numberOfSettings++;
-		tabSpacing = style.paragraphInset.right;
-		paragraphSpacingBefore = 0;
-		paragraphSpacingAfter = 0;
-		paragraphFirstLineHeadIntent = 0;
-		paragraphTailIntent = 0;
-	}
-	else if ([style.name hasPrefix:@"_FTTopSpacingStyle"]) {
-		[*attributedString removeAttribute:(id)kCTParagraphStyleAttributeName range:styleRange];
-	}
-	
-	if (applyParagraphStyling) {
-		
-		CTTextTabRef tabArray[] = { CTTextTabCreate(0, tabSpacing, NULL) };
-		
-		CFArrayRef tabStops = CFArrayCreate( kCFAllocatorDefault, (const void**) tabArray, 1, &kCFTypeArrayCallBacks );
-		CFRelease(tabArray[0]);
-		
-		CTParagraphStyleSetting settings[] = {
-			{kCTParagraphStyleSpecifierAlignment, sizeof(alignment), &alignment},
-			{kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &maxLineHeight},
-			{kCTParagraphStyleSpecifierMinimumLineHeight, sizeof(CGFloat), &minLineHeight},
-			{kCTParagraphStyleSpecifierParagraphSpacingBefore, sizeof(CGFloat), &paragraphSpacingBefore},
-			{kCTParagraphStyleSpecifierParagraphSpacing, sizeof(CGFloat), &paragraphSpacingAfter},
-			{kCTParagraphStyleSpecifierFirstLineHeadIndent, sizeof(CGFloat), &paragraphFirstLineHeadIntent},
-			{kCTParagraphStyleSpecifierHeadIndent, sizeof(CGFloat), &paragraphHeadIntent},
-			{kCTParagraphStyleSpecifierTailIndent, sizeof(CGFloat), &paragraphTailIntent},
-			{kCTParagraphStyleSpecifierLineSpacing, sizeof(CGFloat), &paragraphLeading},
-			{kCTParagraphStyleSpecifierTabStops, sizeof(CFArrayRef), &tabStops}//always at the end
-		};
-		
-		CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings, numberOfSettings);
-		[*attributedString addAttribute:(id)kCTParagraphStyleAttributeName
-								  value:(id)paragraphStyle 
-								  range:styleRange];
-		CFRelease(tabStops);
-		CFRelease(paragraphStyle);
-	}
-}
 
 - (void)updateFramesetterIfNeeded
 {
@@ -475,7 +411,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 		if (_processedString == nil) {
 			[self processText];
 		}
-		FTCoreTextStyle *style = [_styles objectForKey:FTCoreTextTagDefault];
+		FTCoreTextStyle *style = [_styles objectForKey:[self defaultTagNameForKey:FTCoreTextTagDefault]];
 		suggestedSize = [_processedString sizeWithFont:style.font constrainedToSize:CGSizeMake(self.bounds.size.width, MAXFLOAT)];
 	}
 	else {
@@ -502,31 +438,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 	self.frame = viewFrame;
 }
 
-/*!
- * @abstract divide the text in different pages according to the tags <_page/> found
- *
- */
-
-- (NSMutableArray *)divideTextInPages:(NSString *)string
-{
-    NSMutableArray *result = [NSMutableArray array];
-    int prevStart = 0;
-    while (YES) {
-        NSRange rangeStart = [string rangeOfString:@"<_page/>"];
-        if (rangeStart.location != NSNotFound) {
-            NSString *page = [string substringWithRange:NSMakeRange(prevStart, rangeStart.location)];
-            [result addObject:page];
-            string = [string stringByReplacingCharactersInRange:rangeStart withString:@""];
-            prevStart = rangeStart.location;
-        }
-        else {
-            NSString *page = [string substringWithRange:NSMakeRange(prevStart, (string.length - prevStart))];
-            [result addObject:page];
-            break;
-        }
-    }
-    return result;
-}
+#pragma mark - Text processing
 
 /*!
  * @abstract remove the tags from the text and create a tree representation of the text
@@ -541,7 +453,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
     [_images removeAllObjects];
 	
 	FTCoreTextNode *rootNode = [[FTCoreTextNode new] autorelease];
-	rootNode.style = [_styles objectForKey:FTCoreTextTagDefault];
+	rootNode.style = [_styles objectForKey:[self defaultTagNameForKey:FTCoreTextTagDefault]];
 	
 	FTCoreTextNode *currentSupernode = rootNode;
 	
@@ -631,7 +543,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
         FTCoreTextStyle *style = [_styles objectForKey:tagName];
         
         if (style == nil) {
-            style = [_styles objectForKey:FTCoreTextTagDefault];
+            style = [_styles objectForKey:[self defaultTagNameForKey:FTCoreTextTagDefault]];
             NSLog(@"FTCoreTextView :%@ - Couldn't find style for tag '%@'", self, tagName);
         }
         
@@ -640,8 +552,8 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
             {
                 if (currentSupernode.isLink || currentSupernode.isImage) {
                     NSString *predefinedTag = nil;
-                    if (currentSupernode.isLink) predefinedTag = FTCoreTextTagLink;
-                    else if (currentSupernode.isImage) predefinedTag = FTCoreTextTagImage;
+                    if (currentSupernode.isLink) predefinedTag = [self defaultTagNameForKey:FTCoreTextTagLink];
+                    else if (currentSupernode.isImage) predefinedTag = [self defaultTagNameForKey:FTCoreTextTagImage];
                     NSLog(@"FTCoreTextView :%@ - You can't open a new tag inside a '%@' tag - aborting rendering", self, predefinedTag);
                     return;
                 }
@@ -650,10 +562,10 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
                 newNode.style = style;
                 newNode.startLocation = tagRange.location;
                 
-                if ([tagName isEqualToString:FTCoreTextTagLink]) {
+                if ([tagName isEqualToString:[self defaultTagNameForKey:FTCoreTextTagLink]]) {
                     newNode.isLink = YES;
                 }
-                else if ([tagName isEqualToString:FTCoreTextTagBullet]) {
+                else if ([tagName isEqualToString:[self defaultTagNameForKey:FTCoreTextTagBullet]]) {
                     newNode.isBullet = YES;
                     
                     NSString *appendedString = [NSString stringWithFormat:@"%@\t", newNode.style.bulletCharacter];
@@ -676,7 +588,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
                     [newNode addSubnode:bulletNode];
                     [bulletNode release];
                 }
-                else if ([tagName isEqualToString:FTCoreTextTagImage]) {
+                else if ([tagName isEqualToString:[self defaultTagNameForKey:FTCoreTextTagImage]]) {
                     newNode.isImage = YES;
                 }
                 
@@ -693,7 +605,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
                 break;
             case FTCoreTextTagTypeClose:
             {
-                if ((![currentSupernode.style.name isEqualToString:FTCoreTextTagDefault] && ![currentSupernode.style.name isEqualToString:tagName]) ) {
+                if ((![currentSupernode.style.name isEqualToString:[self defaultTagNameForKey:FTCoreTextTagDefault]] && ![currentSupernode.style.name isEqualToString:tagName]) ) {
                     NSLog(@"FTCoreTextView :%@ - Closing tag '%@' at range %@ doesn't match open tag '%@' - aborting rendering", self, fullTag, NSStringFromRange(tagRange), currentSupernode.style.name);
                     return;
                 }
@@ -761,7 +673,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
                 }
                 
                 if (style.paragraphInset.top > 0) {
-                    if (![style.name isEqualToString:FTCoreTextTagBullet] ||  [[currentSupernode previousNode].style.name isEqualToString:FTCoreTextTagBullet]) {
+                    if (![style.name isEqualToString:[self defaultTagNameForKey:FTCoreTextTagBullet]] ||  [[currentSupernode previousNode].style.name isEqualToString:[self defaultTagNameForKey:FTCoreTextTagBullet]]) {
                         
                         //fix: add a new line for each new line and set its height to 'top' value
                         [processedString insertString:@"\n" atIndex:currentSupernode.startLocation];
@@ -839,6 +751,137 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
     return (NSArray *)result;
 }
 
+/*!
+ * @abstract divide the text in different pages according to the tags <_page/> found
+ *
+ */
+
+- (NSMutableArray *)divideTextInPages:(NSString *)string
+{
+    NSMutableArray *result = [NSMutableArray array];
+    int prevStart = 0;
+    while (YES) {
+        NSRange rangeStart = [string rangeOfString:[NSString stringWithFormat:@"<%@/>", [self defaultTagNameForKey:FTCoreTextTagPage]]];
+		if (rangeStart.location == NSNotFound) rangeStart = [string rangeOfString:[NSString stringWithFormat:@"<%@ />", [self defaultTagNameForKey:FTCoreTextTagPage]]];
+		
+        if (rangeStart.location != NSNotFound) {
+            NSString *page = [string substringWithRange:NSMakeRange(prevStart, rangeStart.location)];
+            [result addObject:page];
+            string = [string stringByReplacingCharactersInRange:rangeStart withString:@""];
+            prevStart = rangeStart.location;
+        }
+        else {
+            NSString *page = [string substringWithRange:NSMakeRange(prevStart, (string.length - prevStart))];
+            [result addObject:page];
+            break;
+        }
+    }
+    return result;
+}
+
+#pragma mark Styling
+
+- (void)addStyle:(FTCoreTextStyle *)style
+{
+    [_styles setValue:style forKey:style.name];
+	[self didMakeChanges];
+    if ([self superview]) [self setNeedsDisplay];
+}
+
+- (void)addStyles:(NSArray *)styles
+{
+	for (FTCoreTextStyle *style in styles) {
+		[_styles setValue:style forKey:style.name];
+	}
+	[self didMakeChanges];
+    if ([self superview]) [self setNeedsDisplay];
+}
+
+- (void)applyStyle:(FTCoreTextStyle *)style inRange:(NSRange)styleRange onString:(NSMutableAttributedString **)attributedString
+{
+	[*attributedString addAttribute:(id)kCTForegroundColorAttributeName
+							  value:(id)style.color.CGColor
+							  range:styleRange];
+	
+	if (style.isUnderLined) {
+		NSNumber *underline = [NSNumber numberWithInt:kCTUnderlineStyleSingle];
+		[*attributedString addAttribute:(id)kCTUnderlineStyleAttributeName
+								  value:(id)underline
+								  range:styleRange];
+	}	
+	
+	CTFontRef ctFont = CTFontCreateFromUIFont(style.font);
+	
+	[*attributedString addAttribute:(id)kCTFontAttributeName
+							  value:(id)ctFont
+							  range:styleRange];
+	CFRelease(ctFont);
+	
+	CTTextAlignment alignment = style.textAlignment;
+	CGFloat maxLineHeight = style.maxLineHeight;
+	CGFloat minLineHeight = style.minLineHeight;
+	CGFloat paragraphLeading = style.leading;
+	
+	CGFloat paragraphSpacingBefore = style.paragraphInset.top;
+	CGFloat paragraphSpacingAfter = style.paragraphInset.bottom;
+	CGFloat paragraphFirstLineHeadIntent = style.paragraphInset.left;
+	CGFloat paragraphHeadIntent = style.paragraphInset.left;
+	CGFloat paragraphTailIntent = style.paragraphInset.right;
+	
+	//if (SYSTEM_VERSION_LESS_THAN(@"5.0")) {
+	paragraphSpacingBefore = 0;
+	//}
+	
+	CFIndex numberOfSettings = 9;
+	CGFloat tabSpacing = 28.f;
+	
+	BOOL applyParagraphStyling = style.applyParagraphStyling;
+	
+	if ([style.name isEqualToString:[self defaultTagNameForKey:FTCoreTextTagBullet]]) {
+		applyParagraphStyling = YES;
+	}
+	else if ([style.name isEqualToString:@"_FTBulletStyle"]) {
+		applyParagraphStyling = YES;
+		numberOfSettings++;
+		tabSpacing = style.paragraphInset.right;
+		paragraphSpacingBefore = 0;
+		paragraphSpacingAfter = 0;
+		paragraphFirstLineHeadIntent = 0;
+		paragraphTailIntent = 0;
+	}
+	else if ([style.name hasPrefix:@"_FTTopSpacingStyle"]) {
+		[*attributedString removeAttribute:(id)kCTParagraphStyleAttributeName range:styleRange];
+	}
+	
+	if (applyParagraphStyling) {
+		
+		CTTextTabRef tabArray[] = { CTTextTabCreate(0, tabSpacing, NULL) };
+		
+		CFArrayRef tabStops = CFArrayCreate( kCFAllocatorDefault, (const void**) tabArray, 1, &kCFTypeArrayCallBacks );
+		CFRelease(tabArray[0]);
+		
+		CTParagraphStyleSetting settings[] = {
+			{kCTParagraphStyleSpecifierAlignment, sizeof(alignment), &alignment},
+			{kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &maxLineHeight},
+			{kCTParagraphStyleSpecifierMinimumLineHeight, sizeof(CGFloat), &minLineHeight},
+			{kCTParagraphStyleSpecifierParagraphSpacingBefore, sizeof(CGFloat), &paragraphSpacingBefore},
+			{kCTParagraphStyleSpecifierParagraphSpacing, sizeof(CGFloat), &paragraphSpacingAfter},
+			{kCTParagraphStyleSpecifierFirstLineHeadIndent, sizeof(CGFloat), &paragraphFirstLineHeadIntent},
+			{kCTParagraphStyleSpecifierHeadIndent, sizeof(CGFloat), &paragraphHeadIntent},
+			{kCTParagraphStyleSpecifierTailIndent, sizeof(CGFloat), &paragraphTailIntent},
+			{kCTParagraphStyleSpecifierLineSpacing, sizeof(CGFloat), &paragraphLeading},
+			{kCTParagraphStyleSpecifierTabStops, sizeof(CFArrayRef), &tabStops}//always at the end
+		};
+		
+		CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(settings, numberOfSettings);
+		[*attributedString addAttribute:(id)kCTParagraphStyleAttributeName
+								  value:(id)paragraphStyle 
+								  range:styleRange];
+		CFRelease(tabStops);
+		CFRelease(paragraphStyle);
+	}
+}
+
 #pragma mark - Object lifecycle
 
 - (id)initWithFrame:(CGRect)frame
@@ -877,7 +920,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 	self.contentMode = UIViewContentModeRedraw;
 	[self setUserInteractionEnabled:YES];
 	
-	FTCoreTextStyle *defaultStyle = [FTCoreTextStyle new];
+	FTCoreTextStyle *defaultStyle = [FTCoreTextStyle styleWithName:FTCoreTextTagDefault];
 	[self addStyle:defaultStyle];	
 	
 	FTCoreTextStyle *linksStyle = [defaultStyle copy];
@@ -885,7 +928,13 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 	linksStyle.name = FTCoreTextTagLink;
 	[_styles setValue:linksStyle forKey:linksStyle.name];
 	[linksStyle release];
-	[defaultStyle release];
+	
+	_defaultsTags = [NSMutableDictionary dictionaryWithObjectsAndKeys:FTCoreTextTagDefault, FTCoreTextTagDefault,
+					 FTCoreTextTagLink, FTCoreTextTagLink,
+					 FTCoreTextTagImage, FTCoreTextTagImage,
+					 FTCoreTextTagPage, FTCoreTextTagPage,
+					 FTCoreTextTagBullet, FTCoreTextTagBullet,
+					 nil];
 }
 
 - (void)dealloc
@@ -900,6 +949,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
     [_images release];
 	[_shadowColor release];
 	[_attributedString release];
+	[_defaultsTags release];
     [super dealloc];
 }
 
@@ -941,24 +991,6 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 {
 	_shadowOffset = shadowOffset;
 	if ([self superview]) [self setNeedsDisplay];
-}
-
-#pragma mark Setting Styles
-
-- (void)addStyle:(FTCoreTextStyle *)style
-{
-    [_styles setValue:style forKey:style.name];
-	[self didMakeChanges];
-    if ([self superview]) [self setNeedsDisplay];
-}
-
-- (void)addStyles:(NSArray *)styles
-{
-	for (FTCoreTextStyle *style in styles) {
-		[_styles setValue:style forKey:style.name];
-	}
-	[self didMakeChanges];
-    if ([self superview]) [self setNeedsDisplay];
 }
 
 #pragma mark - Custom Getters
@@ -1021,7 +1053,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 			CGContextSetShadowWithColor(context, _shadowOffset, 0.f, _shadowColor.CGColor);
 		}
 		
-		FTCoreTextStyle *defaultStyle = [_styles objectForKey:FTCoreTextTagDefault];
+		FTCoreTextStyle *defaultStyle = [_styles objectForKey:[self defaultTagNameForKey:FTCoreTextTagDefault]];
 		[defaultStyle.color setFill];
 		[_processedString drawInRect:rect
 							withFont:defaultStyle.font
@@ -1108,7 +1140,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 				if (alignment == kCTRightTextAlignment) x = (self.frame.size.width - img.size.width);
 				if (alignment == kCTCenterTextAlignment) x = ((self.frame.size.width - img.size.width) / 2);
 				
-				CGRect frame = CGRectMake(x, lineFrame.origin.y, img.size.width, img.size.height);
+				CGRect frame = CGRectMake(x, (lineFrame.origin.y - img.size.height), img.size.width, img.size.height);
                 
                 // adjusting frame
 				

@@ -59,5 +59,7 @@ FTSystemDeviceType;
 
 + (NSString *)deviceInfo;
 
++ (void)printAvailableFonts;
+
 
 @end
