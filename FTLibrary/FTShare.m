@@ -36,10 +36,6 @@
     return self;
 }
 
-- (BOOL)canUseOfflineAccess {
-    return [_facebookEngine canUseOfflineAccess];
-}
-
 #pragma mark Memory management
 
 - (void)dealloc {
@@ -52,6 +48,7 @@
 }
 
 
+
 #pragma mark Twitter section
 
 - (void)setUpTwitterWithConsumerKey:(NSString *)consumerKey secret:(NSString *)secret andDelegate:(id<FTShareTwitterDelegate>)delegate {
@@ -60,10 +57,6 @@
 
 - (void)shareViaTwitter:(FTShareTwitterData *)data {
     [_twitterEngine shareViaTwitter:data];
-}
-
-- (void)logoutTwitter {
-    [_twitterEngine logout];
 }
 
 
@@ -77,10 +70,6 @@
 
 - (void)shareViaFacebook:(FTShareFacebookData *)data {
     [_facebookEngine shareViaFacebook:data];
-}
-
-- (void)logoutFacebook {
-    [_facebookEngine logout];
 }
 
 #pragma mark Email section

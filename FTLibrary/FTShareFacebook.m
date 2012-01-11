@@ -57,6 +57,7 @@
 @synthesize caption = _caption;
 @synthesize picture = _picture;
 @synthesize description = _description;
+@synthesize hasControllerSupport = _hasControllerSupport;
 @synthesize uploadPhoto = _uploadPhoto;
 @synthesize type = _type;
 @synthesize httpType = _httpType;
@@ -155,12 +156,8 @@
 
 @synthesize facebook = _facebook;
 @synthesize facebookDelegate = _facebookDelegate;
-
-
-- (void)dealloc {
-    _params = nil;
-    [super dealloc];
-}
+@synthesize params = _params;
+@synthesize permissions = _permissions;
 
 - (void)setUpFacebookWithAppID:(NSString *)appID referencedController:(id)referencedController andDelegate:(id<FTShareFacebookDelegate>)delegate {
     
@@ -196,12 +193,8 @@
     
     if ([options count] > 0) {
         _permissions = nil;
-        _permissions = [[NSArray alloc] initWithArray:options];   
+        _permissions = [(NSArray *) options retain];   
     }
-}
-
-- (BOOL)canUseOfflineAccess {
-    return [_permissions containsObject:@"offline_access"];
 }
 
 
@@ -214,22 +207,22 @@
 
 
 - (void)shareViaFacebook:(FTShareFacebookData *)data {
-    if (!data) {
+    if (![data isRequestValid] || [data hasControllerSupport]) {
         if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookShareData)]) {
             data = [self.facebookDelegate facebookShareData];
+            if (![data isRequestValid] || [data hasControllerSupport]) {
+                _params = [data retain];
+                FTShareMessageController *messageController = [[FTShareMessageController alloc] initWithMessage:data.message type:FTShareMessageControllerTypeFacebook andelegate:self];
+                UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:messageController];
+                [_referencedController presentModalViewController:nc animated:YES];
+                return;
+            }
         }
     }
-    if (!data && ![data isRequestValid]) [NSException raise:@"Facebook cannot post empy data" format:@""];
-    else {
-        _params = data;
-        [_params retain]; 
-    }
-    
+    _params = [data retain];
     if (![_facebook isSessionValid]) {
         [self authorize];
-        return;
     }
-
     
     // check http method
     NSString *httpMethod = [_params graphHttpTypeString];
@@ -239,7 +232,7 @@
     if (!path) {
         if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookPathForRequestofMethodType:)]) {
             path = [self.facebookDelegate facebookPathForRequestofMethodType:&httpMethod];
-            if (!path) [NSException raise:@"Facebook request with not type will have no path either" format:@""];
+            if (!path) [NSException raise:@"Facebook request with no type will have no path either" format:@""];
         }
     }
     
@@ -248,15 +241,11 @@
 }
 
 
-- (void)logout {
-    [self.facebook logout:self];
-}
 
 
-
-/*
 - (void)getFacebookData:(NSString *)message ofType:(FTShareFacebookRequestType)type withDelegate:(id <FBRequestDelegate>)delegate {
 	_params = nil;
+    _params = [[FTShareFacebookData alloc] init];
     _params.message = message;
     _params.type = type;
 	if (![self.facebook isSessionValid]) {
@@ -266,36 +255,7 @@
         [self.facebook requestWithGraphPath:@"me/friends" andParams:[_params dictionaryFromParams] andHttpMethod:@"POST" andDelegate:self];
 	}
 }
-*/
 
-#pragma mark Facebook dialog
-
-/*
-#warning DEPRECATED!
-- (void)dialogDidComplete:(FBDialog *)dialog {
-	if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPost:)]) {
-        [self.facebookDelegate facebookDidPost:nil];
-    }
-    
-    _facebook = nil;
-    self.facebookDelegate = nil;
-    _params = nil;
-}
-
-- (void)dialogDidNotComplete:(FBDialog *)dialog {
-    NSDictionary *dict = [NSDictionary dictionaryWithObjects: [NSArray arrayWithObjects:@"Unknown error occured", nil] forKeys:[NSArray arrayWithObjects:@"description", nil]];
-    NSError *error= [NSError errorWithDomain:@"com.fuerte.FTShare" code:400 userInfo:dict];
-    if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPost:)]) {
-        [self.facebookDelegate facebookDidPost:error];
-    }
-    
-    _facebook = nil;
-    self.facebookDelegate = nil;
-    _params = nil;
-}
-
-*/
- 
  
 #pragma mark Facebook login
 
@@ -305,6 +265,9 @@
     [defaults setObject:[_facebook accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[_facebook expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
+    
+    NSLog(@"%@ %@", _facebook.accessToken, _facebook.expirationDate.description);
+    
 	
     if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidLogin:)]) {
         [self.facebookDelegate facebookDidLogin:nil];
@@ -347,6 +310,30 @@
     if (self.facebookDelegate && [self.facebookDelegate respondsToSelector:@selector(facebookDidPost:)]) {
         [self.facebookDelegate facebookDidPost:error];
     }
+}
+
+#pragma mark sharemessagcontroller delgate
+
+- (void)shareMessageController:(FTShareMessageController *)controller didFinishWithMessage:(NSString *)message {
+
+}
+
+- (void)shareMessageController:(FTShareMessageController *)controller didDisappearWithMessage:(NSString *)message {
+    if (!message || message.length == 0 || !_params) return;
+    
+    FTShareFacebookData *data = [[FTShareFacebookData alloc] init];
+    [data setHasControllerSupport:NO];
+    [data setMessage:message];
+    [data setLink:_params.link];
+    [data setHttpType:_params.httpType];
+    [data setUploadPhoto:_params.uploadPhoto];
+    [data setCaption:_params.caption];
+    [data setName:_params.name];
+    [self shareViaFacebook:data];    
+}
+
+- (void)shareMessageControllerDidCancel:(FTShareMessageController *)controller {
+    
 }
 
 
