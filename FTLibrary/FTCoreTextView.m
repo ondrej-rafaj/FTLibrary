@@ -311,7 +311,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 - (void)changeDefaultTag:(NSString *)coreTextTag toTag:(NSString *)newDefaultTag
 {
 	if ([_defaultsTags objectForKey:coreTextTag] == nil) {
-		[NSException raise:NSInvalidArgumentException format:[NSString stringWithFormat:@"%@ is not a default tag of FTCoreTextView. Use the constant FTCoreTextTag constants."]];
+		[NSException raise:NSInvalidArgumentException format:@"%@ is not a default tag of FTCoreTextView. Use the constant FTCoreTextTag constants.", coreTextTag];
 	}
 	else {
 		[_defaultsTags setObject:newDefaultTag forKey:coreTextTag];
@@ -462,7 +462,10 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 	BOOL finished = NO;
 	NSRange remainingRange = NSMakeRange(0, [processedString length]);
 	
-	NSString *regEx = @"<(/){0,1}[_a-zA-Z0-9]*( /){0,1}>";
+	//@"<(/){0,1}[_a-zA-Z0-9]*( /){0,1}>";
+//	NSString *regEx = @"<(/){0,1}[_a-zA-Z0-9]*( /){0,1}>";
+	NSString *regEx = @"<(/){0,1}.*?( /){0,1}>";
+	
 	
 	BOOL systemUnder3_2 = ([self isSystemUnder3_2]);
 	
@@ -528,18 +531,17 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
         if ([fullTag rangeOfString:@"</"].location == 0) {
             tagType = FTCoreTextTagTypeClose;
         }
-        else if ([fullTag rangeOfString:@"/"].location == NSNotFound) {
+        else if ([fullTag rangeOfString:@"/>"].location == NSNotFound && [fullTag rangeOfString:@" />"].location == NSNotFound) {
             tagType = FTCoreTextTagTypeOpen;
         }
-        else if ([fullTag rangeOfString:@" /"].location != NSNotFound || [fullTag rangeOfString:@"/"].location != NSNotFound) {
+        else {
             tagType = FTCoreTextTagTypeSelfClose;
         }
-        else {
-            NSLog(@"FTCoreTextView :%@ - Couldn't parse tag '%@' at range %@ - aborting rendering", self, fullTag, NSStringFromRange(tagRange));
-            return;
-        }
         
-        NSString *tagName = [fullTag stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"< />"]];
+		NSArray *tagsComponents = [fullTag componentsSeparatedByString:@" "];
+		NSString *tagName = (tagsComponents.count > 0) ? [tagsComponents objectAtIndex:0] : fullTag;
+        tagName = [tagName stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"< />"]];
+
         FTCoreTextStyle *style = [_styles objectForKey:tagName];
         
         if (style == nil) {
@@ -797,6 +799,13 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
     if ([self superview]) [self setNeedsDisplay];
 }
 
+- (void)removeAllStyles
+{
+	[_styles removeAllObjects];
+	[self didMakeChanges];
+    if ([self superview]) [self setNeedsDisplay];
+}
+
 - (void)applyStyle:(FTCoreTextStyle *)style inRange:(NSRange)styleRange onString:(NSMutableAttributedString **)attributedString
 {
 	[*attributedString addAttribute:(id)kCTForegroundColorAttributeName
@@ -929,12 +938,12 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 	[_styles setValue:linksStyle forKey:linksStyle.name];
 	[linksStyle release];
 	
-	_defaultsTags = [NSMutableDictionary dictionaryWithObjectsAndKeys:FTCoreTextTagDefault, FTCoreTextTagDefault,
+	_defaultsTags = [[NSMutableDictionary dictionaryWithObjectsAndKeys:FTCoreTextTagDefault, FTCoreTextTagDefault,
 					 FTCoreTextTagLink, FTCoreTextTagLink,
 					 FTCoreTextTagImage, FTCoreTextTagImage,
 					 FTCoreTextTagPage, FTCoreTextTagPage,
 					 FTCoreTextTagBullet, FTCoreTextTagBullet,
-					 nil];
+					 nil] retain];
 }
 
 - (void)dealloc
@@ -1016,14 +1025,17 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 			[self processText];
 		}
 		
-		NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_processedString];
-		
-		for (FTCoreTextNode *node in [_rootNode allSubnodes]) {
-			[self applyStyle:node.style inRange:node.styleRange onString:&string];
+		if (_processedString) {
+			
+			NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:_processedString];
+			
+			for (FTCoreTextNode *node in [_rootNode allSubnodes]) {
+				[self applyStyle:node.style inRange:node.styleRange onString:&string];
+			}
+			
+			[_attributedString release];
+			_attributedString = string;
 		}
-		
-		[_attributedString release];
-		_attributedString = string;
 	}
 	return _attributedString;
 }
@@ -1092,7 +1104,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 			CTFrameDraw(drawFrame, context);
 		}
 		// cleanup
-		CFRelease(drawFrame);
+		if (drawFrame) CFRelease(drawFrame);
 		CGPathRelease(mainPath);
 	}
 }

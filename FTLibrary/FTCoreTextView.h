@@ -72,6 +72,8 @@ extern NSString * const FTCoreTextDataURL;
 - (void)addStyle:(FTCoreTextStyle *)style;
 - (void)addStyles:(NSArray *)styles;
 
+- (void)removeAllStyles;
+
 - (NSArray *)stylesArray __deprecated;
 - (NSArray *)styles;
 
