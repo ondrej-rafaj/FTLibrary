@@ -189,23 +189,23 @@ static NSString *appID;
 
 
 + (NSString *)get:(NSString *)key comment:(NSString *)comment {
-	return NSLocalizedString(key, comment);
-//	if (!translations) {
-//		if (![FTProjectInitialization debugging]) return key;
-//		else return [NSString stringWithFormat:@"[%@]", key];
-//	}
-//    if (!defaultLanguage) defaultLanguage = @"en";
-//    FTLanguage *language = [translations objectForKey:defaultLanguage]; 
-//    NSString *ret = [language.data objectForKey:key];
-//    if (!ret) {
-//        if ([FTProject debugging]) [FTError handleErrorWithString:[NSString stringWithFormat:@"No translation for language :%@ at key: %@", defaultLanguage, key]];
-//        [self reportMissingTranslation:key andComment:comment];
-//    }
-//	if (ret) return ret;
-//	else {
-//		if (![FTProjectInitialization debugging]) return key;
-//		else return [NSString stringWithFormat:@"[%@]", key];
-//	}
+//	return NSLocalizedString(key, comment);
+	if (!translations) {
+		if (![FTProjectInitialization debugging]) return key;
+		else return [NSString stringWithFormat:@"[%@]", key];
+	}
+    if (!defaultLanguage) defaultLanguage = @"en";
+    FTLanguage *language = [translations objectForKey:defaultLanguage]; 
+    NSString *ret = [language.data objectForKey:key];
+    if (!ret) {
+        if ([FTProject debugging]) [FTError handleErrorWithString:[NSString stringWithFormat:@"No translation for language :%@ at key: %@", defaultLanguage, key]];
+        [self reportMissingTranslation:key andComment:comment];
+    }
+	if (ret) return ret;
+	else {
+		if (![FTProjectInitialization debugging]) return key;
+		else return [NSString stringWithFormat:@"[%@]", key];
+	}
 }
 
 + (NSString *)get:(NSString *)key {
