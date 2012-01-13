@@ -17,6 +17,7 @@
 @optional
 -(void)ErrorMessage:(NSString*)msg;
 -(BOOL) OverWriteOperation:(NSString*)file;
+-(void) UnzipProgress:(uLong)myCurrentFileIndex total:(uLong)myTotalFileCount;
 
 @end
 
@@ -28,9 +29,15 @@
 	
 	NSString*   _password;
 	id			_delegate;
+	
+	unsigned long _totalFileCount;
 }
 
 @property (nonatomic, retain) id delegate;
+
+#if NS_BLOCKS_AVAILABLE
+@property (nonatomic, copy) void (^progressBlock)(float progress);
+#endif
 
 -(BOOL) CreateZipFile2:(NSString*)zipFile;
 -(BOOL) CreateZipFile2:(NSString*)zipFile Password:(NSString*)password;

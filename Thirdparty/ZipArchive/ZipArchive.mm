@@ -18,12 +18,17 @@
 -(void)OutputErrorMessage:(NSString*)msg;
 -(BOOL) OverWrite:(NSString*)file;
 -(NSDate*)Date1980;
+-(void) DoUnzipProgress:(unsigned long)myCurrentFileIndex;
+
 @end
 
 
 
 @implementation ZipArchive
 @synthesize delegate = _delegate;
+#if NS_BLOCKS_AVAILABLE
+@synthesize progressBlock = _progressBlock;
+#endif
 
 -(id)init
 {
@@ -31,6 +36,7 @@
 	if(self)
 	{
 		_zipFile = NULL ;
+		_totalFileCount = 0;
 	}
 	return self;
 }
@@ -132,6 +138,7 @@
 
 -(BOOL) CloseZipFile2
 {
+	_totalFileCount = 0;
 	_password = nil;
 	if( _zipFile==NULL )
 		return NO;
@@ -149,6 +156,7 @@
 		if( unzGetGlobalInfo(_unzFile, &globalInfo )==UNZ_OK )
 		{
 			NSLog(@"%ld entries in the zip file",globalInfo.number_entry);
+			_totalFileCount = globalInfo.number_entry;
 		}
 	}
 	return _unzFile!=NULL;
@@ -170,7 +178,7 @@
 	{
 		[self OutputErrorMessage:@"Failed"];
 	}
-	
+	 unsigned long kFileCount = 0;
 	do{
 		if( [_password length]==0 )
 			ret = unzOpenCurrentFile( _unzFile );
@@ -262,7 +270,8 @@
 				[orgDate release];
 				orgDate = nil;
 			}
-			
+			kFileCount++;
+			[self DoUnzipProgress:kFileCount];
 		}
 		unzCloseCurrentFile( _unzFile );
 		ret = unzGoToNextFile( _unzFile );
@@ -272,6 +281,7 @@
 
 -(BOOL) UnzipCloseFile
 {
+	 _totalFileCount = 0;
 	_password = nil;
 	if( _unzFile )
 		return unzClose( _unzFile )==UNZ_OK;
@@ -290,6 +300,15 @@
 	if( _delegate && [_delegate respondsToSelector:@selector(OverWriteOperation)] )
 		return [_delegate OverWriteOperation:file];
 	return YES;
+}
+
+-(void) DoUnzipProgress:(uLong)myCurrentFileIndex
+{
+    if( _delegate && [_delegate respondsToSelector:@selector(UnzipProgress:total:)] )
+		[_delegate UnzipProgress:myCurrentFileIndex total:_totalFileCount];
+#if NS_BLOCKS_AVAILABLE
+	if (_progressBlock) _progressBlock((float)((double)myCurrentFileIndex / (double)_totalFileCount));
+#endif
 }
 
 #pragma mark get NSDate object for 1980-01-01
