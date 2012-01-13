@@ -30,7 +30,7 @@ typedef enum {
 
 @property (nonatomic, assign) FTCoreTextNode	*supernode;
 @property (nonatomic, retain) NSArray			*subnodes;
-@property (nonatomic, retain) FTCoreTextStyle	*style;
+@property (nonatomic, copy)	  FTCoreTextStyle	*style;
 @property (nonatomic, assign) NSRange			styleRange;
 @property (nonatomic, assign) BOOL				isClosed;
 @property (nonatomic, assign) NSInteger			startLocation;
@@ -462,10 +462,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 	BOOL finished = NO;
 	NSRange remainingRange = NSMakeRange(0, [processedString length]);
 	
-	//@"<(/){0,1}[_a-zA-Z0-9]*( /){0,1}>";
-//	NSString *regEx = @"<(/){0,1}[_a-zA-Z0-9]*( /){0,1}>";
-	NSString *regEx = @"<(/){0,1}.*?( /){0,1}>";
-	
+	NSString *regEx = @"<(/){0,1}.*?( /){0,1}>";	
 	
 	BOOL systemUnder3_2 = ([self isSystemUnder3_2]);
 	
@@ -541,7 +538,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 		NSArray *tagsComponents = [fullTag componentsSeparatedByString:@" "];
 		NSString *tagName = (tagsComponents.count > 0) ? [tagsComponents objectAtIndex:0] : fullTag;
         tagName = [tagName stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"< />"]];
-
+		
         FTCoreTextStyle *style = [_styles objectForKey:tagName];
         
         if (style == nil) {
@@ -647,7 +644,7 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
                     
                     if (img) {
                         NSString *lines = @"\n";
-                        float leading = floorf(img.size.height + style.paragraphInset.top + style.paragraphInset.bottom);
+                        float leading = img.size.height;
                         currentSupernode.style.leading = leading;
                         
                         currentSupernode.imageName = elementContent;
@@ -939,11 +936,11 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 	[linksStyle release];
 	
 	_defaultsTags = [[NSMutableDictionary dictionaryWithObjectsAndKeys:FTCoreTextTagDefault, FTCoreTextTagDefault,
-					 FTCoreTextTagLink, FTCoreTextTagLink,
-					 FTCoreTextTagImage, FTCoreTextTagImage,
-					 FTCoreTextTagPage, FTCoreTextTagPage,
-					 FTCoreTextTagBullet, FTCoreTextTagBullet,
-					 nil] retain];
+					  FTCoreTextTagLink, FTCoreTextTagLink,
+					  FTCoreTextTagImage, FTCoreTextTagImage,
+					  FTCoreTextTagPage, FTCoreTextTagPage,
+					  FTCoreTextTagBullet, FTCoreTextTagBullet,
+					  nil] retain];
 }
 
 - (void)dealloc
