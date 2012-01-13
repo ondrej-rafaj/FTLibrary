@@ -189,6 +189,7 @@ static NSString *appID;
 
 
 + (NSString *)get:(NSString *)key comment:(NSString *)comment {
+//	return NSLocalizedString(key, comment);
 	if (!translations) {
 		if (![FTProjectInitialization debugging]) return key;
 		else return [NSString stringWithFormat:@"[%@]", key];
