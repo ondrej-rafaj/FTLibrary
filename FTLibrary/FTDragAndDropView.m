@@ -149,18 +149,16 @@
 #pragma mark Hit tests
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
-    return YES;
+    return [super pointInside:point withEvent:event];
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
 	UIView *v = [super hitTest:point withEvent:event];
 	if (v) {
-		NSLog(@"HIT !!! :)");
-        UIColor *color = [self.imageView.image colorAtPoint:point];
         float alpha = [self.imageView.image alphaAtPoint:point];
-
-        NSLog(@"color: %@ with alpha %.2f at point: %@", color.description, alpha, NSStringFromCGPoint(point)); 
+        
         if (alpha == 0) v = nil;
+        else NSLog(@"Detected positive alpha for %@", [self.imagePath lastPathComponent]);
         
 	}
 	return v;

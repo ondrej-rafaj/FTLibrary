@@ -11,7 +11,6 @@
 
 @interface UIImage (ColorPicker)
 
-
 - (UIColor *)colorAtPoint:(CGPoint)point;
 - (float)alphaAtPoint:(CGPoint)point;
 

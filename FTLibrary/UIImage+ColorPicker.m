@@ -9,8 +9,6 @@
 #import "UIImage+ColorPicker.h"
 #import <QuartzCore/QuartzCore.h>
 
-static float _lastAlpha;
-
 @implementation UIImage (ColorPicker)
 
 - (CGContextRef) createARGBBitmapContextFromImage:(CGImageRef) inImage {
@@ -75,9 +73,10 @@ static float _lastAlpha;
 
 
 
-- (UIColor*) getPixelColorAtLocation:(CGPoint)point {
+- (UIColor*) getPixelColorAtLocation:(CGPoint)point andAlpha:(float *)_alpha {
     UIColor* color = nil;
     CGImageRef inImage = self.CGImage;
+    *_alpha = NSNotFound;
     // Create off screen bitmap context to draw the image into. Format ARGB is 4 bytes for each pixel: Alpa, Red, Green, Blue
     
     
@@ -86,7 +85,7 @@ static float _lastAlpha;
     
     size_t w = CGImageGetWidth(inImage);
     size_t h = CGImageGetHeight(inImage);
-    CGRect rect = {{0,0},{w,h}}; 
+    CGRect rect = CGRectMake(0, 0, w, h);
     
     // Draw the image to the bitmap context. Once we draw, the memory
     // allocated for the context for rendering will then contain the
@@ -104,12 +103,12 @@ static float _lastAlpha;
         int red = data[offset+1];
         int green = data[offset+2];
         int blue = data[offset+3];
-        _lastAlpha = (alpha/255.0f);
+        *_alpha = (alpha/255.0f);
         //NSLog(@"offset: %i colors: RGB A %i %i %i  %i",offset,red,green,blue,alpha);
         color = [UIColor colorWithRed:(red/255.0f) green:(green/255.0f) blue:(blue/255.0f) alpha:(alpha/255.0f)];
     }
     else {
-        _lastAlpha = NSNotFound;
+        *_alpha = NSNotFound;
     }
     
     // When finished, release the context
@@ -125,13 +124,14 @@ static float _lastAlpha;
 
 
 - (UIColor *)colorAtPoint:(CGPoint)point {
-    return [self getPixelColorAtLocation:point];
+    return [self getPixelColorAtLocation:point andAlpha:nil];
 }
 
 
 - (float)alphaAtPoint:(CGPoint)point {
-    [self colorAtPoint:point];
-    return _lastAlpha;    
+    float alpha;
+    [self getPixelColorAtLocation:point andAlpha:&alpha];
+    return alpha;    
 }
 
 + (UIColor *)colorFromImage:(UIImage *)image atPoint:(CGPoint)point {
@@ -140,8 +140,7 @@ static float _lastAlpha;
 
 
 + (float)alphaFromImage:(UIImage *)image atPoint:(CGPoint)point {
-    [image alphaAtPoint:point];
-    return _lastAlpha;
+    return [image alphaAtPoint:point];
 }
 
 @end
