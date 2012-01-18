@@ -158,7 +158,16 @@
         float alpha = [self.imageView.image alphaAtPoint:point];
         
         if (alpha == 0) v = nil;
-        else NSLog(@"Detected positive alpha for %@", [self.imagePath lastPathComponent]);
+        
+        UIView *colorV = [self viewWithTag:256];
+        if (!colorV) {
+            colorV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+            [colorV setTag:256];
+            [self addSubview:colorV];
+            [colorV release];
+        }
+        
+        [colorV setBackgroundColor:[self.imageView.image colorAtPoint:point]];
         
 	}
 	return v;

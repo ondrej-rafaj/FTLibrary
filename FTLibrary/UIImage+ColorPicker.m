@@ -95,21 +95,25 @@
     // Now we can get a pointer to the image data associated with the bitmap
     // context.
     unsigned char* data = CGBitmapContextGetData (cgctx);
+    int offset = NSNotFound;
+    int alpha = NSNotFound;
+    int red = NSNotFound;
+    int green = NSNotFound;
+    int blue = NSNotFound;
+    *_alpha = NSNotFound;
     if (data != NULL) {
         //offset locates the pixel in the data from x,y.
         //4 for 4 bytes of data per pixel, w is width of one row of data.
-        int offset = 4*((w*round(point.y))+round(point.x));
-        int alpha =  data[offset];
-        int red = data[offset+1];
-        int green = data[offset+2];
-        int blue = data[offset+3];
+        offset = 4*((w*round(point.y))+round(point.x));
+        alpha =  data[offset];
+        red = data[offset+1];
+        green = data[offset+2];
+        blue = data[offset+3];
         *_alpha = (alpha/255.0f);
-        //NSLog(@"offset: %i colors: RGB A %i %i %i  %i",offset,red,green,blue,alpha);
-        color = [UIColor colorWithRed:(red/255.0f) green:(green/255.0f) blue:(blue/255.0f) alpha:(alpha/255.0f)];
+
     }
-    else {
-        *_alpha = NSNotFound;
-    }
+    NSLog(@"offset:\t(%d out of\t%lu) Alpha %d",offset, (4 * w * h) ,alpha);
+    color = [UIColor colorWithRed:(red/255.0f) green:(green/255.0f) blue:(blue/255.0f) alpha:(alpha/255.0f)];
     
     // When finished, release the context
     CGContextRelease(cgctx);
@@ -124,7 +128,8 @@
 
 
 - (UIColor *)colorAtPoint:(CGPoint)point {
-    return [self getPixelColorAtLocation:point andAlpha:nil];
+    float alpha = NSNotFound;
+    return [self getPixelColorAtLocation:point andAlpha:&alpha];
 }
 
 
@@ -135,12 +140,15 @@
 }
 
 + (UIColor *)colorFromImage:(UIImage *)image atPoint:(CGPoint)point {
-    return [image colorAtPoint:point];
+    float alpha = NSNotFound;
+    return [image getPixelColorAtLocation:point andAlpha:&alpha];
 }
 
 
 + (float)alphaFromImage:(UIImage *)image atPoint:(CGPoint)point {
-    return [image alphaAtPoint:point];
+    float alpha = NSNotFound;
+    [image getPixelColorAtLocation:point andAlpha:&alpha];
+    return alpha;
 }
 
 @end
