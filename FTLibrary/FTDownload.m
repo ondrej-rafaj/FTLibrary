@@ -100,7 +100,7 @@
     }
     downloadRequest = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:urlPath]];
 	if (_downloadToFilePath) downloadRequest.downloadDestinationPath = _downloadToFilePath;
-	NSLog(@"Download request: %@", downloadRequest.url.relativeString);
+	//NSLog(@"Download request: %@", downloadRequest.url.relativeString);
     if (isCachingEnabled) {
 		[downloadRequest setCachePolicy:ASIOnlyLoadIfNotCachedCachePolicy];
 		[downloadRequest setCacheStoragePolicy:ASICachePermanentlyCacheStoragePolicy];
