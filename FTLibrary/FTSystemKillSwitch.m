@@ -71,7 +71,7 @@
 @synthesize isApplicationLocked;
 @synthesize delegate;
 
-
+static BOOL asAlertAlready = NO;
 
 #pragma mark getter setter;
 
@@ -125,41 +125,31 @@
 - (void)getData {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-
-    BOOL internetAvailable = [FTSystem isInternetAvailable];
-    
+    message = nil;
     message = [[FTSystemKillSwitchMessage alloc] init];
-    if (!internetAvailable) {
-        if (self.isApplicationLocked) {
-            message.title = @"Application locked";
-            message.message = @"Internet Connetion is required in order to unlock the application";
-            message.web = nil;
-            message.appStore = [NSURL URLWithString:@"http://www.wellbakedapp.com"];            
-        }
+
+    NSString *type = (isDebugActive)? @"staging" : @"live";
+    NSString *request = [NSString stringWithFormat:@"%@-%@.json", url, type]; //http://new.fuerteint.com/_files/calpol_testing/killswitch/live.json
+    NSDictionary *dictionaryData = [FTDataJson jsonDataFromUrl:request];
+    
+    if (isDebugActive) {
+        self.versions.staging = [[dictionaryData objectForKey:@"version"] floatValue];
+        self.versions.live = 0.0;
     }
     else {
-        NSString *type = (isDebugActive)? @"staging" : @"live";
-        NSString *request = [NSString stringWithFormat:@"%@-%@.json", url, type]; //http://new.fuerteint.com/_files/calpol_testing/killswitch/live.json
-        NSDictionary *dictionaryData = [FTDataJson jsonDataFromUrl:request];
-        
-        if (isDebugActive) {
-            self.versions.staging = [[dictionaryData objectForKey:@"version"] floatValue];
-            self.versions.live = 0.0;
-        }
-        else {
-            self.versions.live = [[dictionaryData objectForKey:@"version"] floatValue];
-            self.versions.staging = 0.0;
-        }
-        
-        NSDictionary *data = [dictionaryData objectForKey:@"data"];
-        self.versions.minimum = [[data objectForKey:@"minversion"] floatValue];
-        
-        message.title = [data objectForKey:@"title"];
-        message.message = [data objectForKey:@"message"];
-        message.web = [NSURL URLWithString:[data objectForKey:@"web"]];
-        message.appStore = [NSURL URLWithString:[data objectForKey:@"appstore"]];
-    
+        self.versions.live = [[dictionaryData objectForKey:@"version"] floatValue];
+        self.versions.staging = 0.0;
     }
+    
+    NSDictionary *data = [dictionaryData objectForKey:@"data"];
+    self.versions.minimum = [[data objectForKey:@"minversion"] floatValue];
+    
+    message.title = (data)? [data objectForKey:@"title"] : @"\nApplication locked";
+    message.message = (data)? [data objectForKey:@"message"] : @"Internet Connetion is required in order to unlock the application";
+    message.web = (data)? [NSURL URLWithString:[data objectForKey:@"web"]] :nil;
+    message.appStore = (data)? [NSURL URLWithString:[data objectForKey:@"appstore"]] : nil;
+    
+
     [self performSelectorOnMainThread:@selector(foreGroundResult) withObject:nil waitUntilDone:NO];
     
     [pool drain];
@@ -168,17 +158,21 @@
 
 - (void)foreGroundResult {
     static UIView *alertView;
+    /*
     static UIView *shadow;
     if (!shadow) {
         shadow = [[UIView alloc] initWithFrame:appWindow.bounds];
         [shadow setBackgroundColor:[UIColor blackColor]];
         [shadow setAlpha:blockerShadow];
     }
+    */
     
-    for (UIView *view in appWindow.subviews) {
-        if ([view isEqual:alertView]) {
-            [view removeFromSuperview];
-            NSLog(@"alertView found and removed");
+    for (UIWindow *win in [[UIApplication sharedApplication] windows]) {
+        for (UIView *view in win.subviews) {
+            if ([view isEqual:alertView]) {
+                [(UIAlertView *)alertView dismissWithClickedButtonIndex:0 animated:NO];
+                NSLog(@"alertView found and removed");
+            }
         }
     }
     
@@ -195,8 +189,8 @@
         alertView = nil;
         //show view on window
         if(appWindow) {
-            [shadow setHidden:NO];
-            [appWindow addSubview:shadow];
+            //[shadow setHidden:NO];
+            //[appWindow addSubview:shadow];
             
             if ([[self delegate] respondsToSelector:@selector(viewForAppKillSwitchWithMessage:)]) {
                 alertView = [[self delegate] viewForAppKillSwitchWithMessage:message];
@@ -209,14 +203,15 @@
             }
             
             [alertView setTag:kFTSystemKillSwitchAlertTag];
-            [appWindow addSubview:alertView];
-            [alertView centerInSuperView];
+            [(UIAlertView *)alertView show];
+            //[appWindow addSubview:alertView];
+            //[alertView centerInSuperView];
                 
         }
     }
     else {
         [self setIsApplicationLocked:NO];
-        [shadow setHidden:YES];
+        //[shadow setHidden:YES];
         
     }
     [self setStoredVersions:self.versions];
