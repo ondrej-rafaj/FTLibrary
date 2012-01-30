@@ -22,4 +22,6 @@ typedef enum {
 + (void)performBlockOnMainQueue:(void (^)(void))block;
 + (void)performBlockOnMainQueue:(void (^)(void))block andWait:(BOOL)wait;
 
++ (void)performBlock:(void (^)(void))block afterDelay:(NSTimeInterval)delay;
+
 @end
