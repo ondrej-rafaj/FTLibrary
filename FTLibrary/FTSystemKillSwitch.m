@@ -56,7 +56,7 @@
 
 
 @interface FTSystemKillSwitch(Private)
--(void)foreGroundResult;
+- (void)foreGroundResult;
 @end
 
 @implementation FTSystemKillSwitch
@@ -71,7 +71,7 @@
 @synthesize isApplicationLocked;
 @synthesize delegate;
 
-static BOOL asAlertAlready = NO;
+//static BOOL asAlertAlready = NO;
 
 #pragma mark getter setter;
 
@@ -84,7 +84,6 @@ static BOOL asAlertAlready = NO;
 }
 
 - (FTSystemKillSwitchVersions *)storedVersions {
-    
     NSDictionary *resutls = [[NSUserDefaults standardUserDefaults] dictionaryForKey:kFTSystemKillSwitchVersions];
     FTSystemKillSwitchVersions *ver = [[FTSystemKillSwitchVersions alloc] init];
     ver.live = [[resutls objectForKey:@"live"] floatValue];
