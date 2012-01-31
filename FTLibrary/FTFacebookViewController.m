@@ -48,7 +48,7 @@
 
 - (Facebook *)facebook {
 	FTAppDelegate *ad = [FTAppDelegate delegate];
-	[ad.share setUpFacebookWithAppID:facebookAppId permissions:FTShareFacebookPermissionNull andDelegate:self];	
+	[ad.share setUpFacebookWithAppID:facebookAppId permissions:FTShareFacebookPermissionOffLine | FTShareFacebookPermissionRead andDelegate:self];	
 	return ad.share.facebook;
 }
 
@@ -89,6 +89,13 @@
 //	}
 //	else 
 	[self authorizeWithOfflineAccess:YES];
+}
+
+- (FTShareFacebookData *)facebookShareData {
+	FTShareFacebookData *d = [[FTShareFacebookData alloc] init];
+	[d setHttpType:FTShareFacebookHttpTypeGet];
+	[d setType:FTShareFacebookRequestTypeFriends];
+	return d;
 }
 
 #pragma mark Alert view permissions delegate

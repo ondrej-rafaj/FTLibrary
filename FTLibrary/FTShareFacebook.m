@@ -241,7 +241,7 @@
         if (!path) [NSException raise:@"Facebook request with no type will have no path either" format:@""];
     }
     
-    [_facebook requestWithGraphPath:path andParams:[_params dictionaryFromParams] andHttpMethod:httpMethod andDelegate:self];
+    if (path) [_facebook requestWithGraphPath:path andParams:[_params dictionaryFromParams] andHttpMethod:httpMethod andDelegate:self];
     
 }
 
