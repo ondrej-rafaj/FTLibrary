@@ -77,17 +77,18 @@
 }
 
 - (void)authorizeWithOfflineRequestAccess {
-	FTAppDelegate *ad = [FTAppDelegate delegate];
-	if (![ad.share canUseOfflineAccess]) {
-		NSString *tl = FTLangGet(@"Facebook permissions");
-		NSString *ms = FTLangGet(@"Would you like to grant extended Facebook permissions to this app so you don't have to re-login again?");
-		NSString *ok = FTLangGet(@"YES");
-		NSString *cn = FTLangGet(@"NO");
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:tl message:ms delegate:self cancelButtonTitle:cn otherButtonTitles:ok, nil];
-		[alert show];
-		[alert release];
-	}
-	else [self authorizeWithOfflineAccess:YES];
+//	FTAppDelegate *ad = [FTAppDelegate delegate];
+//	if (![ad.share canUseOfflineAccess]) {
+//		NSString *tl = FTLangGet(@"Facebook permissions");
+//		NSString *ms = FTLangGet(@"Would you like to grant extended Facebook permissions to this app so you don't have to re-login again?");
+//		NSString *ok = FTLangGet(@"YES");
+//		NSString *cn = FTLangGet(@"NO");
+//		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:tl message:ms delegate:self cancelButtonTitle:cn otherButtonTitles:ok, nil];
+//		[alert show];
+//		[alert release];
+//	}
+//	else 
+	[self authorizeWithOfflineAccess:YES];
 }
 
 #pragma mark Alert view permissions delegate
