@@ -8,6 +8,7 @@
 
 #import "FTFacebookViewController.h"
 #import "ASIDownloadCache.h"
+#import "FTSystem.h"
 #import "FTAppDelegate.h"
 #import "UIView+Layout.h"
 #import "UIColor+Tools.h"
@@ -160,6 +161,22 @@
 			[self createReloadButton];
         }
     }
+}
+
+#pragma mark Layout
+
+- (void)doLayoutSubviews {
+	[super doLayoutSubviews];
+	if ([FTSystem isPhoneIdiom]) {
+		if (isLandscape) {
+			[table setWidth:480];
+			[grid setWidth:480];
+		}
+		else {
+			[table setWidth:320];
+			[grid setWidth:320];
+		}
+	}
 }
 
 #pragma mark View lifecycle

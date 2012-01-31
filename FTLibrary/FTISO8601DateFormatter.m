@@ -619,6 +619,7 @@ static BOOL is_leap_year(NSUInteger year);
 }
 - (NSDate *) dateFromString:(NSString *)string timeZone:(out NSTimeZone **)outTimeZone range:(out NSRange *)outRange {
 	NSTimeZone *timeZone = nil;
+	if (!string) string = @"1970-01-01T01:01:01+0000";
 	NSDateComponents *components = [self dateComponentsFromString:string timeZone:&timeZone range:outRange];
 	if (outTimeZone)
 		*outTimeZone = timeZone;
