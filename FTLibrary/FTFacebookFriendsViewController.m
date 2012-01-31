@@ -154,6 +154,7 @@
 	UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
 	[v setBackgroundColor:[UIColor redColor]];
 	[v addSubview:searchBar];
+	[v setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
 	[self.view addSubview:v];
 	
 	[table setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
