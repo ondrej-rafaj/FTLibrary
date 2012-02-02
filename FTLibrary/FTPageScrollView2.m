@@ -30,6 +30,9 @@
 @end
 
 @interface FTPageScrollView2 () <UIScrollViewDelegate>
+
+@property (nonatomic, assign) CGSize internalPageSize;
+
 - (void)_updateUIForCurrentHorizontalOffset;
 - (FTPageView2 *)_viewForIndex:(NSInteger)index;
 - (void)_disposeOfVisibleViewsAndTellDelegate:(BOOL)tellDelegate;
@@ -42,6 +45,8 @@
 @synthesize delegate;
 @synthesize dataSource = _dataSource;
 @synthesize visibleSize = _visibleSize;
+@synthesize pageSize = _pageSize;
+@synthesize internalPageSize = _internalPageSize;
 
 #pragma mark - Others
 
@@ -83,7 +88,7 @@
 {
 	_numberOfPages = [_dataSource numberOfPagesInPageScrollView:self];
 	if (_numberOfPages > 0) {
-		self.contentSize = CGSizeMake(_numberOfPages * SCROLL_VIEW_WIDTH_FT, SCROLL_VIEW_HEIGHT_FT);
+		self.contentSize = CGSizeMake(_numberOfPages * _internalPageSize.width, _internalPageSize.height);
 		[self _disposeOfVisibleViewsAndTellDelegate:NO];
 		[self _updateUIForCurrentHorizontalOffset];
 	}
@@ -94,20 +99,23 @@
 	NSInteger numberOfPages = [_dataSource numberOfPagesInPageScrollView:self];
 	if (numberOfPages != _numberOfPages) {
 		_numberOfPages = numberOfPages;
-		self.contentSize = CGSizeMake(_numberOfPages * SCROLL_VIEW_WIDTH_FT, SCROLL_VIEW_HEIGHT_FT);
+		self.contentSize = CGSizeMake(_numberOfPages * _internalPageSize.width, _internalPageSize.height);
 	}
 }
 
 - (void)scrollToPageAtIndex:(NSInteger)index animated:(BOOL)animated
 {
 	if (animated && index != self.selectedIndex) [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-	CGFloat xOffset = index * self.bounds.size.width;
+	CGFloat xOffset = index * _internalPageSize.width;
+	if (index != 0 && self.contentSize.width - xOffset < self.bounds.size.width) {
+		xOffset = self.contentSize.width - self.bounds.size.width;
+	}
 	[self setContentOffset:CGPointMake(xOffset, 0) animated:animated];
 }
 
 - (NSInteger)_numberOfViewsPerPage
 {
-	NSInteger number = 1;
+	NSInteger number = self.bounds.size.width / _internalPageSize.width;
 	return number + 1;
 }
 
@@ -143,18 +151,23 @@
 	
 	FTPageView2 *containerView = [_reusableContainers anyObject];
 	if (containerView == nil) {
-		containerView = [[FTPageView2 alloc] initWithFrame:self.bounds];
-		containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+		containerView = [[FTPageView2 alloc] initWithFrame:CGRectMake(0, 0, _internalPageSize.width, _internalPageSize.height)];
+		if (self.pagingEnabled) {
+			containerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+		}
+		else {
+			containerView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+		}
 	}
 	else {
 		[containerView retain];
 		[_reusableContainers removeObject:containerView];
 	}
 	
-	[containerView setWidth:SCROLL_VIEW_WIDTH_FT];
-	[containerView setHeight:SCROLL_VIEW_HEIGHT_FT];
+	[containerView setWidth:_internalPageSize.width];
+	[containerView setHeight:_internalPageSize.height];
 	
-	[containerView positionAtX:index * SCROLL_VIEW_WIDTH_FT];
+	[containerView positionAtX:index * _internalPageSize.width];
 	containerView.index = index;
 	[containerView addSubview:finalView];
 	[finalView centerInSuperView];
@@ -169,8 +182,8 @@
 	
 	CGFloat minVisibleXOffset = xOffset - _visibleHorizontalPadding;
 	CGFloat maxVisibleXOffset = minVisibleXOffset + _visibleHorizontalPadding * 2 + SCROLL_VIEW_WIDTH_FT - 1;
-	NSInteger minVisibleIndex = minVisibleXOffset / SCROLL_VIEW_WIDTH_FT;
-	NSInteger maxVisibleIndex = maxVisibleXOffset / SCROLL_VIEW_WIDTH_FT;	
+	NSInteger minVisibleIndex = minVisibleXOffset / _internalPageSize.width;
+	NSInteger maxVisibleIndex = maxVisibleXOffset / _internalPageSize.width;	
 
 	if (minVisibleIndex < 0) minVisibleIndex = 0;
 	if (maxVisibleIndex >= _numberOfPages) maxVisibleIndex = _numberOfPages - 1;
@@ -295,14 +308,29 @@
 {
 	NSInteger selectedIndex = [self selectedIndex];
 	[super setFrame:frame];
-	self.contentSize = CGSizeMake(_numberOfPages * SCROLL_VIEW_WIDTH_FT, SCROLL_VIEW_HEIGHT_FT);
+	if (self.pagingEnabled) {
+		_internalPageSize = self.bounds.size;
+	}
+	self.contentSize = CGSizeMake(_numberOfPages * _internalPageSize.width, SCROLL_VIEW_HEIGHT_FT);
 	[self scrollToPageAtIndex:(selectedIndex < 0) ? 0 : selectedIndex animated:NO];
+	[self _updateUIForCurrentHorizontalOffset];
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview
 {
 	if (_numberOfPages == -1 && newSuperview) {
 		[self reloadData];
+	}
+}
+
+- (void)setPagingEnabled:(BOOL)pagingEnabled
+{
+	[super setPagingEnabled:pagingEnabled];
+	if (pagingEnabled) {
+		_internalPageSize = self.bounds.size;
+	}
+	else {
+		_internalPageSize = _pageSize;
 	}
 }
 
@@ -318,7 +346,7 @@
 
 - (NSInteger)selectedIndex
 {
-    NSInteger index = self.contentOffset.x / self.bounds.size.width;
+    NSInteger index = self.contentOffset.x / _internalPageSize.width;
     if (index < 0) index = 0;
     if (index > _numberOfPages - 1) index = _numberOfPages - 1;
 	
@@ -352,6 +380,12 @@
 
 	_visibleSize = size;
 	_visibleHorizontalPadding = (size.width - self.frame.size.width) / 2;
+}
+
+- (void)setPageSize:(CGSize)pageSize
+{
+	_pageSize = pageSize;
+	if (!self.pagingEnabled) _internalPageSize = pageSize;
 }
 
 - (void)setDataSource:(id <FTPageScrollView2DataSource>)d

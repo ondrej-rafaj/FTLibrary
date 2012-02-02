@@ -23,6 +23,7 @@
 @optional
 
 - (void)facebookViewController:(FTFacebookViewController *)controller didSelectPicture:(NSString *)url withData:(NSDictionary *)data;
+- (void)facebookViewController:(FTFacebookViewController *)controller didSelectPicture:(UIImage *)picture;
 
 @end
 

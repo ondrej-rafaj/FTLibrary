@@ -55,6 +55,7 @@
 @property (nonatomic, assign) id <FTPageScrollView2DataSource> dataSource;
 @property (nonatomic, assign) id <FTPageScrollView2Delegate> delegate;
 @property (nonatomic, assign) CGSize visibleSize;
+@property (nonatomic, assign) CGSize pageSize; 
 
 - (void)reloadData;
 - (void)reloadPageNumber; //doesn't reload content but changes the contentSize accordingly
