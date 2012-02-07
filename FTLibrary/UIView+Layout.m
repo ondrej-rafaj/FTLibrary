@@ -89,6 +89,30 @@
 	return CGRectGetMinY(self.frame);
 }
 
+- (void)setXOrigin:(CGFloat)xOrigin
+{
+	CGRect frame = self.frame;
+	frame.origin.x = xOrigin;
+	self.frame = frame;
+}
+
+- (void)setYOrigin:(CGFloat)yOrigin
+{
+	CGRect frame = self.frame;
+	frame.origin.y = yOrigin;
+	self.frame = frame;
+}
+
+- (CGFloat)xOrigin
+{
+	return CGRectGetMinX(self.frame);
+}
+
+- (CGFloat)yOrigin
+{
+	return CGRectGetMinY(self.frame);
+}
+
 - (CGFloat)baselinePosition {
 	return CGRectGetMaxX(self.frame);
 }
