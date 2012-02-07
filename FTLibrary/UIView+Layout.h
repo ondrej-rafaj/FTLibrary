@@ -63,4 +63,7 @@
 - (CGFloat)rightMargin;
 - (void)setRightMargin:(CGFloat)rightMargin;
 
+- (void)setAutoresizingNone;
+- (void)setAutoresizingWidthAndHeight;
+
 @end

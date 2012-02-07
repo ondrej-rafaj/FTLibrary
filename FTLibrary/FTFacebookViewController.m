@@ -55,7 +55,7 @@
 
 - (void)authorizeWithOfflineAccess:(BOOL)offlineAccess {
 	NSString *offline = @"offline_access";
-	if (offlineAccess) offline = nil;
+	//if (offlineAccess) offline = nil;
 	[[self facebook] authorize:[NSArray arrayWithObjects:
 								@"publish_stream",
 								@"read_stream",
@@ -121,6 +121,7 @@
 		[download release];
 		download = [[FTDownload alloc] initWithPath:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 		[download setDelegate:self];
+		[download cachingEnabled:YES];
 		[download startDownload];
 	}
 }

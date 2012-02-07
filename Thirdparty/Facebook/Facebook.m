@@ -515,7 +515,7 @@ urlSchemeSuffix = _urlSchemeSuffix;
 		[params setValue:self.accessToken forKey:@"access_token"];
 	}
 	NSString *url = [FBRequest serializeURL:fullURL params:params httpMethod:@"GET"];
-	NSLog(@"Facebook url: %@", url);
+	//NSLog(@"Facebook url: %@", url);
 	return url;
 }
 

@@ -50,6 +50,7 @@
 - (void)downloadMyInfo {
 	NSString *url = [[super facebook] urlWithGraphPath:@"me" andParams:[NSMutableDictionary dictionary]];
 	myInfoDownload = [[FTDownload alloc] initWithPath:url];
+	[myInfoDownload cachingEnabled:YES];
 	[myInfoDownload setDelegate:self];
 	[myInfoDownload startDownload];
 }
@@ -135,6 +136,13 @@
 
 #pragma mark View lifecycle
 
+- (void)closeFBController {
+	[self dismissModalViewControllerAnimated:YES];
+	if ([delegate respondsToSelector:@selector(facebookViewControllerDidCancel:)]) {
+		[delegate facebookViewControllerDidCancel:self];
+	}
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
@@ -158,6 +166,11 @@
 	[self.view addSubview:v];
 	
 	[table setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+	
+	if ([FTSystem isPhoneIdiom]) {
+		UIBarButtonItem *close = [[UIBarButtonItem alloc] initWithTitle:FTLangGet(@"Cancel") style:UIBarButtonItemStyleBordered target:self action:@selector(closeFBController)];
+		[self.navigationItem setLeftBarButtonItem:close];
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated {

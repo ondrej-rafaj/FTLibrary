@@ -303,7 +303,7 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
     [request setHTTPBody:[self generatePostBody]];
   }
 	
-	NSLog(@"Facebook url: %@", url);
+	//NSLog(@"Facebook url: %@", url);
 
   _connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 

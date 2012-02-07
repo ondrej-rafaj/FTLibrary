@@ -234,4 +234,13 @@
 	}
 }
 
+- (void)setAutoresizingNone {
+	[self setAutoresizingMask:UIViewAutoresizingNone];
+}
+
+- (void)setAutoresizingWidthAndHeight {
+	[self setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+}
+
+
 @end
