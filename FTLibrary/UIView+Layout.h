@@ -26,6 +26,11 @@
 - (CGSize)size;
 - (void)setSize:(CGSize)size;
 
+- (CGFloat)xOrigin;
+- (CGFloat)yOrigin;
+- (void)setXOrigin:(CGFloat)xOrigin;
+- (void)setYOrigin:(CGFloat)yOrigin;
+
 - (CGPoint)origin;
 - (void)setOrigin:(CGPoint)point;
 
