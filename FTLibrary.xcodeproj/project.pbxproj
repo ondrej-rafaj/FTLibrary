@@ -375,6 +375,10 @@
 		4C9F7E0114891E3800177894 /* FTISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F7DFE14891E3800177894 /* FTISO8601DateFormatter.m */; };
 		4CA29DE9144D7F13002F38BD /* FTBarButtonItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CA29DE7144D7F13002F38BD /* FTBarButtonItem.h */; };
 		4CA29DEA144D7F13002F38BD /* FTBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CA29DE8144D7F13002F38BD /* FTBarButtonItem.m */; };
+		4CAEBED014E3C9FE006FB57B /* FTQRCodeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CAEBECE14E3C9FE006FB57B /* FTQRCodeView.h */; };
+		4CAEBED114E3C9FE006FB57B /* FTQRCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAEBECF14E3C9FE006FB57B /* FTQRCodeView.m */; };
+		4CAEBED514E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CAEBED314E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.h */; };
+		4CAEBED614E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CAEBED414E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.m */; };
 		4CB6E1F913D5D37C002FEC0A /* FTSimpleDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */; };
 		4CB6E1FA13D5D37C002FEC0A /* FTSimpleDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E1F813D5D37C002FEC0A /* FTSimpleDB.m */; };
 		4CB6E1FB13D5D37C002FEC0A /* FTSimpleDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB6E1F813D5D37C002FEC0A /* FTSimpleDB.m */; };
@@ -895,6 +899,10 @@
 		4C9F7DFE14891E3800177894 /* FTISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTISO8601DateFormatter.m; sourceTree = "<group>"; };
 		4CA29DE7144D7F13002F38BD /* FTBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTBarButtonItem.h; sourceTree = "<group>"; };
 		4CA29DE8144D7F13002F38BD /* FTBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTBarButtonItem.m; sourceTree = "<group>"; };
+		4CAEBECE14E3C9FE006FB57B /* FTQRCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTQRCodeView.h; sourceTree = "<group>"; };
+		4CAEBECF14E3C9FE006FB57B /* FTQRCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTQRCodeView.m; sourceTree = "<group>"; };
+		4CAEBED314E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGoogleQRCodeURLComposer.h; sourceTree = "<group>"; };
+		4CAEBED414E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTGoogleQRCodeURLComposer.m; sourceTree = "<group>"; };
 		4CB6E1F713D5D37C002FEC0A /* FTSimpleDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTSimpleDB.h; path = FTLibrary/FTSimpleDB.h; sourceTree = SOURCE_ROOT; };
 		4CB6E1F813D5D37C002FEC0A /* FTSimpleDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTSimpleDB.m; path = FTLibrary/FTSimpleDB.m; sourceTree = SOURCE_ROOT; };
 		4CB6E1FC13D5D442002FEC0A /* UIScrollView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+Layout.h"; sourceTree = "<group>"; };
@@ -1531,6 +1539,7 @@
 		4C57611D13C5E7570049371F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4CAEBECC14E3C9D8006FB57B /* QR Codes */,
 				4C9F73C114695F02007B68B1 /* Store */,
 				4C6F8F5B13F87502004A4FB2 /* Basic view */,
 				4CED6B3F1461A4F9003DE290 /* Search bar */,
@@ -2163,6 +2172,24 @@
 			name = UIBarButtonItem;
 			sourceTree = "<group>";
 		};
+		4CAEBECC14E3C9D8006FB57B /* QR Codes */ = {
+			isa = PBXGroup;
+			children = (
+				4CAEBECE14E3C9FE006FB57B /* FTQRCodeView.h */,
+				4CAEBECF14E3C9FE006FB57B /* FTQRCodeView.m */,
+			);
+			name = "QR Codes";
+			sourceTree = "<group>";
+		};
+		4CAEBED214E3CA0A006FB57B /* QR Codes */ = {
+			isa = PBXGroup;
+			children = (
+				4CAEBED314E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.h */,
+				4CAEBED414E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.m */,
+			);
+			name = "QR Codes";
+			sourceTree = "<group>";
+		};
 		4CB6E1CB13D5A392002FEC0A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -2309,6 +2336,7 @@
 		4CCD124013D850290004EF5D /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				4CAEBED214E3CA0A006FB57B /* QR Codes */,
 				4C9F7DFB14891E0E00177894 /* Date */,
 				A56A62C714336034000C666B /* Share */,
 				4CCD126013D850EF0004EF5D /* Download */,
@@ -2935,6 +2963,8 @@
 				682C1408149A3A180000FCD3 /* FTShareTwitter.h in Headers */,
 				68F45A15149B95F700A0C3EC /* UIImage+ColorPicker.h in Headers */,
 				6868F75114BC954200AE274B /* FTShareMessageController.h in Headers */,
+				4CAEBED014E3C9FE006FB57B /* FTQRCodeView.h in Headers */,
+				4CAEBED514E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3249,6 +3279,8 @@
 				682C1409149A3A180000FCD3 /* FTShareTwitter.m in Sources */,
 				68F45A16149B95F700A0C3EC /* UIImage+ColorPicker.m in Sources */,
 				6868F75214BC954200AE274B /* FTShareMessageController.m in Sources */,
+				4CAEBED114E3C9FE006FB57B /* FTQRCodeView.m in Sources */,
+				4CAEBED614E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

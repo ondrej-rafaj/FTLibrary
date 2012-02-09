@@ -20,7 +20,8 @@
 @synthesize delegate;
 @synthesize facebookAppId;
 @synthesize useGridView;
-@synthesize download; 
+@synthesize download;
+@synthesize controllerName;
 
 
 #pragma mark Creating elements
@@ -45,6 +46,16 @@
 	[reload release];
 }
 
+- (void)createTableView {
+	if (!useGridView) [super createTableView];
+	else {
+		grid = [[AQGridView alloc] initWithFrame:CGRectMake(0, 0, 320, [self.view height])];
+		[grid setDelegate:self];
+		[grid setDataSource:self];
+		[self.view addSubview:grid];
+	}
+}
+
 #pragma mark Facebook stuff
 
 - (Facebook *)facebook {
@@ -54,7 +65,7 @@
 }
 
 - (void)authorizeWithOfflineAccess:(BOOL)offlineAccess {
-	NSString *offline = @"offline_access";
+	//NSString *offline = @"offline_access";
 	//if (offlineAccess) offline = nil;
 	[[self facebook] authorize:[NSArray arrayWithObjects:
 								@"publish_stream",
@@ -69,7 +80,7 @@
 								@"friends_photos",
 								@"user_videos",
 								@"friends_videos",
-								offline,
+								@"offline_access",
 								nil]];
 }
 
@@ -219,16 +230,6 @@
 	}
 }
 
-- (void)createTableView {
-	if (!useGridView) [super createTableView];
-	else {
-		grid = [[AQGridView alloc] initWithFrame:CGRectMake(0, 0, 320, [self.view height])];
-		[grid setDelegate:self];
-		[grid setDataSource:self];
-		[self.view addSubview:grid];
-	}
-}
-
 #pragma mark Loading data
 
 - (void)reloadData {
@@ -243,6 +244,27 @@
 - (void)didPressReloadButton:(UIBarButtonItem *)sender {
 	[self createLoadingIndicator];
 	[self reloadData];
+}
+
+#pragma mark Saving status methods
+
+- (NSString *)keyForController {
+	return [NSString stringWithFormat:@"FTFacebookViewControllerKeyFor%@", controllerName];
+}
+
+- (void)saveOffset:(CGPoint)offset {
+	[[NSUserDefaults standardUserDefaults] setValue:NSStringFromCGPoint(offset) forKey:[self keyForController]];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	[[NSUserDefaults standardUserDefaults] setValue:[NSDate date] forKey:[[self keyForController] stringByAppendingString:@"Date"]];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (CGPoint)lastOffset {
+	NSString *p = [[NSUserDefaults standardUserDefaults] valueForKey:[self keyForController]];
+	if (!p || ([p length] < 5)) return CGPointZero;
+	else {
+		return CGPointFromString(p);
+	}
 }
 
 #pragma mark Grid view delegate & data source methods
@@ -274,6 +296,18 @@
 	[gridView deselectItemAtIndex:index animated:NO];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+	NSLog(@"View did scroll: %@", NSStringFromCGPoint(scrollView.contentOffset));
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+	[self saveOffset:scrollView.contentOffset];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+	if (!decelerate) [self saveOffset:scrollView.contentOffset];
+}
+
 #pragma mark Memory management
 
 - (void)dealloc {
@@ -281,6 +315,7 @@
 	[facebookAppId release];
 	[download release];
 	[searchBar release];
+	[controllerName release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super dealloc];
 }

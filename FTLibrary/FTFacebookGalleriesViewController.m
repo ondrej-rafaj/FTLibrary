@@ -55,6 +55,13 @@
 	[super dealloc];
 }
 
+#pragma mark Initialization
+
+- (void)initializingSequence {
+	[super initializingSequence];
+	[self setControllerName:@"FTFacebookViewController"];
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {

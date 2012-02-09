@@ -44,6 +44,8 @@
 	AQGridView *grid;
 	BOOL useGridView;
 	
+	NSString *controllerName;
+	
 }
 
 @property (nonatomic, assign) id <FTFacebookViewControllerDelegate> delegate;
@@ -53,6 +55,8 @@
 @property (nonatomic, retain) FTDownload *download;
 
 @property (nonatomic) BOOL useGridView;
+
+@property (nonatomic, retain) NSString *controllerName;
 
 
 - (Facebook *)facebook;

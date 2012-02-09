@@ -134,6 +134,13 @@
 	[super dealloc];
 }
 
+#pragma mark Initialization
+
+- (void)initializingSequence {
+	[super initializingSequence];
+	[self setControllerName:@"FTFacebookFriendsViewController"];
+}
+
 #pragma mark View lifecycle
 
 - (void)closeFBController {
