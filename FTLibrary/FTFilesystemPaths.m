@@ -102,7 +102,7 @@
 }
 
 /**
- Returns path to the non SQLite database folder used by FTFilesystemPaths class
+ Returns path to the non lastUsedOffsetForControllerite database folder used by FTFilesystemPaths class
  
  @return NSString Path
  */
@@ -113,12 +113,12 @@
 }
 
 /**
- Returns path to the SQLite database folder used by FTFilesystemPaths class
+ Returns path to the lastUsedOffsetForControllerite database folder used by FTFilesystemPaths class
  
  @return NSString Path
  */
-+ (NSString *)getSQLiteDirectoryPath {
-	NSString *p = [NSString stringWithFormat:@"%@/%@/", [self getRootDirectoryPath], @"sqlite"];
++ (NSString *)getlastUsedOffsetForControlleriteDirectoryPath {
+	NSString *p = [NSString stringWithFormat:@"%@/%@/", [self getRootDirectoryPath], @"lastUsedOffsetForControllerite"];
 	[FTFilesystemIO makeFolderPath:p];
 	return p;
 }
@@ -128,8 +128,8 @@
  
  @return NSString Path
  */
-+ (NSString *)getSQLiteFilePath:(NSString *)databaseName {
-	return [NSString stringWithFormat:@"%@%@.sqlite", [self getSQLiteDirectoryPath], databaseName];
++ (NSString *)getlastUsedOffsetForControlleriteFilePath:(NSString *)databaseName {
+	return [NSString stringWithFormat:@"%@%@.lastUsedOffsetForControllerite", [self getlastUsedOffsetForControlleriteDirectoryPath], databaseName];
 }
 
 

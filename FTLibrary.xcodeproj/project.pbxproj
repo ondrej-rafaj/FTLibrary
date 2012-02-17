@@ -119,6 +119,8 @@
 		4C5761A813CAE93B0049371F /* FTBlockerShadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5761A613CAE93B0049371F /* FTBlockerShadeView.m */; };
 		4C57633D13CB8E170049371F /* FTCarouselView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C57633B13CB8E170049371F /* FTCarouselView.h */; };
 		4C57633E13CB8E170049371F /* FTCarouselView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C57633C13CB8E170049371F /* FTCarouselView.m */; };
+		4C6299A814E92F8E0080FB36 /* FTExtendedViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C6299A614E92F8E0080FB36 /* FTExtendedViewController.h */; };
+		4C6299A914E92F8E0080FB36 /* FTExtendedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C6299A714E92F8E0080FB36 /* FTExtendedViewController.m */; };
 		4C65F023146FF357006FF451 /* FTUnlimitedGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C65F021146FF357006FF451 /* FTUnlimitedGridView.h */; };
 		4C65F024146FF357006FF451 /* FTUnlimitedGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C65F022146FF357006FF451 /* FTUnlimitedGridView.m */; };
 		4C65F028146FFA1E006FF451 /* FTUnlimitedGridViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C65F026146FFA1E006FF451 /* FTUnlimitedGridViewCell.h */; };
@@ -709,6 +711,8 @@
 		4C5761A613CAE93B0049371F /* FTBlockerShadeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTBlockerShadeView.m; sourceTree = "<group>"; };
 		4C57633B13CB8E170049371F /* FTCarouselView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCarouselView.h; sourceTree = "<group>"; };
 		4C57633C13CB8E170049371F /* FTCarouselView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCarouselView.m; sourceTree = "<group>"; };
+		4C6299A614E92F8E0080FB36 /* FTExtendedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTExtendedViewController.h; sourceTree = "<group>"; };
+		4C6299A714E92F8E0080FB36 /* FTExtendedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTExtendedViewController.m; sourceTree = "<group>"; };
 		4C65F021146FF357006FF451 /* FTUnlimitedGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTUnlimitedGridView.h; sourceTree = "<group>"; };
 		4C65F022146FF357006FF451 /* FTUnlimitedGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTUnlimitedGridView.m; sourceTree = "<group>"; };
 		4C65F026146FFA1E006FF451 /* FTUnlimitedGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTUnlimitedGridViewCell.h; sourceTree = "<group>"; };
@@ -1586,6 +1590,7 @@
 		4C57612513C5EA910049371F /* Basic view controller */ = {
 			isa = PBXGroup;
 			children = (
+				4C6299A414E92F6B0080FB36 /* Extended */,
 				4C9F73E014695F7A007B68B1 /* Modal controllers */,
 				4C03667113BA0D6000E8FA09 /* FTViewController.h */,
 				4C03667213BA0D6000E8FA09 /* FTViewController.m */,
@@ -1625,6 +1630,15 @@
 				4C57633C13CB8E170049371F /* FTCarouselView.m */,
 			);
 			name = iCarousel;
+			sourceTree = "<group>";
+		};
+		4C6299A414E92F6B0080FB36 /* Extended */ = {
+			isa = PBXGroup;
+			children = (
+				4C6299A614E92F8E0080FB36 /* FTExtendedViewController.h */,
+				4C6299A714E92F8E0080FB36 /* FTExtendedViewController.m */,
+			);
+			name = Extended;
 			sourceTree = "<group>";
 		};
 		4C65F020146FF332006FF451 /* Unlimited grid view */ = {
@@ -2965,6 +2979,7 @@
 				6868F75114BC954200AE274B /* FTShareMessageController.h in Headers */,
 				4CAEBED014E3C9FE006FB57B /* FTQRCodeView.h in Headers */,
 				4CAEBED514E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.h in Headers */,
+				4C6299A814E92F8E0080FB36 /* FTExtendedViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3281,6 +3296,7 @@
 				6868F75214BC954200AE274B /* FTShareMessageController.m in Sources */,
 				4CAEBED114E3C9FE006FB57B /* FTQRCodeView.m in Sources */,
 				4CAEBED614E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.m in Sources */,
+				4C6299A914E92F8E0080FB36 /* FTExtendedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

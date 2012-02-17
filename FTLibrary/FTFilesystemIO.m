@@ -238,6 +238,10 @@
 	}
 }
 
++ (void)copyFile:(NSString *)source to:(NSString *)destination {
+	[[NSFileManager defaultManager] copyItemAtPath:source toPath:destination error:nil];
+}
+
 
 
 @end

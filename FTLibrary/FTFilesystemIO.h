@@ -43,5 +43,7 @@
 
 + (void)deleteFilesOlderThan:(NSDate *)date inDirectory:(NSString *)dir;
 
++ (void)copyFile:(NSString *)source to:(NSString *)destination;
+
 
 @end

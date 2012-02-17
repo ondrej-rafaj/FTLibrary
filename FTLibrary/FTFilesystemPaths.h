@@ -31,9 +31,9 @@
 
 + (NSString *)getDatabaseDirectoryPath;
 
-+ (NSString *)getSQLiteDirectoryPath;
++ (NSString *)getlastUsedOffsetForControlleriteDirectoryPath;
 
-+ (NSString *)getSQLiteFilePath:(NSString *)databaseName;
++ (NSString *)getlastUsedOffsetForControlleriteFilePath:(NSString *)databaseName;
 
 
 

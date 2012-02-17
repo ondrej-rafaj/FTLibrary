@@ -262,6 +262,34 @@
 	[self setAutoresizingMask:UIViewAutoresizingNone];
 }
 
+- (void)setAutoresizingBottomLeft {
+	[self setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin];
+}
+
+- (void)setAutoresizingBottomRight {
+	[self setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin];
+}
+
+- (void)setAutoresizingTopLeft {
+	[self setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
+}
+
+- (void)setAutoresizingTopRight {
+	[self setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin];
+}
+
+- (void)setAutoresizingTopCenter {
+	[self setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin];
+}
+
+- (void)setAutoresizingCenter {
+	[self setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin];
+}
+
+- (void)setAutoresizingBottomCenter {
+	[self setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin];
+}
+
 - (void)setAutoresizingWidthAndHeight {
 	[self setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
 }

@@ -69,6 +69,13 @@
 - (void)setRightMargin:(CGFloat)rightMargin;
 
 - (void)setAutoresizingNone;
+- (void)setAutoresizingBottomLeft;
+- (void)setAutoresizingBottomRight;
+- (void)setAutoresizingTopLeft;
+- (void)setAutoresizingTopRight;
+- (void)setAutoresizingTopCenter;
+- (void)setAutoresizingCenter;
+- (void)setAutoresizingBottomCenter;
 - (void)setAutoresizingWidthAndHeight;
 
 @end
