@@ -12,12 +12,17 @@
 
 @implementation UIView (Effects)
 
-- (void)addShadowWithOffset:(CGFloat)offset withColor:(UIColor *)color andOpacity:(CGFloat)opacity {
+
+- (void)addShadowWithOffsetSize:(CGSize)offset withColor:(UIColor *)color andOpacity:(CGFloat)opacity {
     self.layer.shadowColor = [color CGColor];
-    self.layer.shadowOffset = CGSizeMake(offset, offset);
+    self.layer.shadowOffset = offset;
     self.layer.shadowOpacity = opacity;
-    self.layer.shadowRadius = offset;
-    self.layer.shouldRasterize = YES;
+    self.layer.shadowRadius = offset.height;
+    self.layer.shouldRasterize = YES;    
+}
+
+- (void)addShadowWithOffset:(CGFloat)offset withColor:(UIColor *)color andOpacity:(CGFloat)opacity {
+    [self addShadowWithOffsetSize:CGSizeMake(offset, offset) withColor:color andOpacity:opacity];
 }
 
 - (void)addShadow {
