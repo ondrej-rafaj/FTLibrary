@@ -11,23 +11,35 @@
 
 @implementation UIScrollView (Layout)
 
-- (void) setContentWidth:(double)aWidth {
+- (void)setContentWidth:(double)aWidth {
 	CGSize newContentSize = [self contentSize];
 	newContentSize.width = aWidth;
 	[self setContentSize:newContentSize];
 }
 
-- (void) setContentHeight:(double)aHeight {
+- (void)setContentHeight:(double)aHeight {
 	CGSize newContentSize = [self contentSize];
 	newContentSize.height = aHeight;
 	[self setContentSize:newContentSize];	
 }
 
-- (void) scrollContentToLeft {
+- (void)setContentWidthTimes:(NSInteger)times {
+	CGSize s = self.bounds.size;
+	s.width = (s.width * times);
+	[self setContentSize:s];
+}
+
+- (void)setContentHeightTimes:(NSInteger)times {
+	CGSize s = self.bounds.size;
+	s.height = (s.height * times);
+	[self setContentSize:s];
+}
+
+- (void)scrollContentToLeft {
 	[self scrollContentToXPosition:0];
 }
 
-- (void) scrollContentToXPosition:(double)xPosition {
+- (void)scrollContentToXPosition:(double)xPosition {
 	CGPoint offset = [self contentOffset];
 	offset.x = xPosition;
 	[self setContentOffset:offset];

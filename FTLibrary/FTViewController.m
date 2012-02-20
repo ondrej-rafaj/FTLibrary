@@ -103,6 +103,12 @@
 	[self doLayoutSubviews];
 }
 
+#pragma mark Creating elements
+
+- (void)createAllElements {
+	
+}
+
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
@@ -282,11 +288,42 @@
 		[loadingProgressView setLabelText:title];
 		[loadingProgressView setAnimationType:animation];
 		[loadingProgressView show:YES];
+		[loadingProgressView setMode:FTProgressViewModeCustomView];
+	}
+}
+
+- (void)enableLoadingProgressViewWithTitle:(NSString *)title withAnimationStyle:(FTProgressViewAnimation)animation andCustomView:(UIView *)view {
+	if (loadingProgressView) {
+		loadingProgressView = nil;
+	}
+	if (!loadingProgressView) {
+		loadingProgressView = [[FTProgressView alloc] initWithView:self.view];
+		[loadingProgressView setCustomView:view];
+		[self configureLoadingProgressView];
+		[loadingProgressView setLabelText:title];
+		[loadingProgressView setMode:FTProgressViewModeCustomView];
+		[loadingProgressView setAnimationType:animation];
+		[loadingProgressView show:YES];
 	}
 }
 
 - (void)disableLoadingProgressView {
 	[loadingProgressView hide:YES];
+}
+
+#pragma mark Internet connection issues
+
+- (void)hideNoConnectionMessage {
+	[loadingProgressView hide:YES];
+}
+
+- (BOOL)checkForConnectionWithMessage {
+	BOOL is = [FTSystem isInternetAvailable];
+	if (!is) {
+		[self enableLoadingProgressViewWithTitle:FTLangGet(@"No internet connection") withAnimationStyle:FTProgressViewAnimationZoom andCustomView:[[UIView alloc] init]];
+		[NSTimer scheduledTimerWithTimeInterval:1.2 target:self selector:@selector(hideNoConnectionMessage) userInfo:nil repeats:NO];
+	}
+	return is;
 }
 
 #pragma mark comapare Design custom setter

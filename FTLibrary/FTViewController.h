@@ -58,8 +58,8 @@
 
 // Layout & style
 - (void)setBackgroundWithImageName:(NSString *)imageName;
-
 - (void)doLayoutSubviews;
+- (void)createAllElements;
 
 // Table views
 - (void)createTableViewWithStyle:(UITableViewStyle)style andAddToTheMainView:(BOOL)addToView;
@@ -73,7 +73,10 @@
 - (void)enableLoadingProgressViewInWindowWithTitle:(NSString *)title andAnimationStyle:(FTProgressViewAnimation)animation;
 - (void)enableLoadingProgressViewWithTitle:(NSString *)title withAnimationStyle:(FTProgressViewAnimation)animation showWhileExecuting:(SEL)method onTarget:(id)target withObject:(id)object animated:(BOOL)animated;
 - (void)enableLoadingProgressViewWithTitle:(NSString *)title andAnimationStyle:(FTProgressViewAnimation)animation;
+- (void)enableLoadingProgressViewWithTitle:(NSString *)title withAnimationStyle:(FTProgressViewAnimation)animation andCustomView:(UIView *)view;
 - (void)disableLoadingProgressView;
+
+- (BOOL)checkForConnectionWithMessage;
 
 
 @end
