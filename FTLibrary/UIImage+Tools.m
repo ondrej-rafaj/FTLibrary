@@ -34,6 +34,76 @@ static inline CGFloat toRadians (CGFloat degrees) { return degrees * M_PI/180.0f
 
 @implementation UIImage (Tools)
 
+- (UIImage *)imageByTilingPatternInRect:(CGRect)rect toDesiredSize:(CGSize)size
+{
+	CGFloat scale = [UIScreen mainScreen].scale;
+	
+	CGImageRef originalImage = self.CGImage;
+	CGRect pixelsImageRect = CGRectMake(0, 0, CGImageGetWidth(originalImage), CGImageGetHeight(originalImage));
+	CGRect pixelsPatternRect = CGRectMake(scale * CGRectGetMinX(rect), scale * CGRectGetMinY(rect), scale * CGRectGetWidth(rect), scale * CGRectGetHeight(rect));
+	
+	CGImageRef topLeftCap;
+	if (size.height > self.size.height) {
+		topLeftCap = CGImageCreateWithImageInRect(originalImage, CGRectMake(0, 0, CGRectGetMinX(pixelsPatternRect), CGRectGetMinY(pixelsPatternRect)));
+	}
+	else {
+		topLeftCap = CGImageCreateWithImageInRect(originalImage, CGRectMake(0, 0, CGRectGetMinX(pixelsPatternRect), CGImageGetHeight(originalImage)));
+	}
+	
+	CGImageRef topRightCap;
+	if (size.height > self.size.height) {
+		topRightCap = CGImageCreateWithImageInRect(originalImage, CGRectMake(CGRectGetMaxX(pixelsPatternRect), 0, CGRectGetWidth(pixelsImageRect) - CGRectGetMaxX(pixelsPatternRect), CGRectGetMinY(pixelsPatternRect)));
+	}
+	else {
+		topRightCap = CGImageCreateWithImageInRect(originalImage, CGRectMake(CGRectGetMaxX(pixelsPatternRect), 0, CGRectGetWidth(pixelsImageRect) - CGRectGetMaxX(pixelsPatternRect), CGImageGetHeight(originalImage)));
+	}
+	
+	CGImageRef btmLeftCap, btmRightCap, topTile, btmTile, leftTile, rightTile;
+	if (size.height > self.size.height) {
+		btmLeftCap = CGImageCreateWithImageInRect(originalImage, CGRectMake(0, CGRectGetMaxY(pixelsPatternRect), CGRectGetMinX(pixelsPatternRect), CGRectGetHeight(pixelsImageRect) - CGRectGetMaxY(pixelsPatternRect)));
+		btmRightCap = CGImageCreateWithImageInRect(originalImage, CGRectMake(CGRectGetMaxX(pixelsPatternRect), CGRectGetMaxY(pixelsPatternRect), CGRectGetWidth(pixelsImageRect) - CGRectGetMaxX(pixelsPatternRect), CGRectGetHeight(pixelsImageRect) - CGRectGetMaxY(pixelsPatternRect)));
+		
+		topTile = CGImageCreateWithImageInRect(originalImage, CGRectMake(CGRectGetMinX(pixelsPatternRect), 0, CGRectGetWidth(pixelsPatternRect), CGRectGetMinY(pixelsPatternRect)));
+		btmTile = CGImageCreateWithImageInRect(originalImage, CGRectMake(CGRectGetMinX(pixelsPatternRect), CGRectGetMaxY(pixelsPatternRect), CGRectGetWidth(pixelsPatternRect), CGRectGetHeight(pixelsImageRect) - CGRectGetMaxY(pixelsPatternRect)));
+		leftTile = CGImageCreateWithImageInRect(originalImage, CGRectMake(0, CGRectGetMinY(pixelsPatternRect), CGRectGetMinX(pixelsPatternRect), CGRectGetHeight(pixelsPatternRect)));
+		rightTile = CGImageCreateWithImageInRect(originalImage, CGRectMake(CGRectGetMaxX(pixelsPatternRect), CGRectGetMinY(pixelsPatternRect), CGRectGetWidth(pixelsImageRect) - CGRectGetMaxX(pixelsPatternRect), CGRectGetHeight(pixelsPatternRect)));
+	}
+	
+	CGImageRef middleTile = CGImageCreateWithImageInRect(originalImage, pixelsPatternRect);
+	
+	CGRect newCenterFrame;
+	if (size.height > self.size.height) {
+		newCenterFrame.origin = CGPointMake(CGImageGetWidth(topLeftCap) / scale, CGImageGetHeight(topLeftCap) / scale);
+		newCenterFrame.size = CGSizeMake(size.width - newCenterFrame.origin.x - CGImageGetWidth(btmRightCap) / scale, size.height - newCenterFrame.origin.y - CGImageGetHeight(btmRightCap) / scale);
+	}
+	else {
+		newCenterFrame.origin = CGPointMake(CGImageGetWidth(topLeftCap) / scale, 0);
+		newCenterFrame.size = CGSizeMake(size.width - newCenterFrame.origin.x - CGImageGetWidth(topRightCap) / scale, self.size.height);
+	}
+	
+	UIGraphicsBeginImageContextWithOptions(size, NO, scale);	
+	[[UIImage imageWithCGImage:topLeftCap scale:scale orientation:UIImageOrientationUp] drawAtPoint:CGPointMake(0, 0)];
+	[[UIImage imageWithCGImage:topRightCap scale:scale orientation:UIImageOrientationUp] drawAtPoint:CGPointMake(CGRectGetMaxX(newCenterFrame), 0)];
+	
+	[[UIImage imageWithCGImage:middleTile scale:scale orientation:UIImageOrientationUp] drawAsPatternInRect:newCenterFrame];
+	
+	if (size.height > self.size.height) {
+		
+		[[UIImage imageWithCGImage:btmLeftCap scale:scale orientation:UIImageOrientationUp] drawAtPoint:CGPointMake(CGRectGetMaxY(newCenterFrame), 0)];
+		[[UIImage imageWithCGImage:btmRightCap scale:scale orientation:UIImageOrientationUp] drawAtPoint:CGPointMake(CGRectGetMaxX(newCenterFrame), CGRectGetMaxY(newCenterFrame))];
+		
+		[[UIImage imageWithCGImage:topTile scale:scale orientation:UIImageOrientationUp] drawAsPatternInRect:CGRectMake(CGRectGetMinX(newCenterFrame), 0, CGRectGetWidth(newCenterFrame), CGRectGetMinY(newCenterFrame))];
+		[[UIImage imageWithCGImage:leftTile scale:scale orientation:UIImageOrientationUp] drawAsPatternInRect:CGRectMake(0, CGRectGetMinY(newCenterFrame), CGRectGetMinX(newCenterFrame), CGRectGetHeight(newCenterFrame))];
+		[[UIImage imageWithCGImage:btmTile scale:scale orientation:UIImageOrientationUp] drawAsPatternInRect:CGRectMake(CGRectGetMinX(newCenterFrame), CGRectGetMaxY(newCenterFrame), CGRectGetWidth(newCenterFrame), size.height - CGRectGetMaxY(newCenterFrame))];
+		[[UIImage imageWithCGImage:rightTile scale:scale orientation:UIImageOrientationUp] drawAsPatternInRect:CGRectMake(CGRectGetMaxX(newCenterFrame), CGRectGetMinY(newCenterFrame), size.width - CGRectGetMaxX(newCenterFrame), CGRectGetHeight(newCenterFrame))];
+	}
+	
+	UIImage *returnedImage = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	
+	return returnedImage;
+}
+
 + (UIImage *)alphaPatternImageWithSguareSide:(CGFloat)side withColor1:(UIColor *)color1 andColor2:(UIColor *)color2 {
 	if ([FTSystem isRetina]) side = (side * 2);
 	CGFloat screenScale = [UIScreen mainScreen].scale;

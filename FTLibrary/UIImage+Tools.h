@@ -26,6 +26,8 @@
 - (UIImage *)scaleWithMaxSize:(CGFloat)maxSize;
 - (UIImage *)scaleWithMaxSize:(CGFloat)maxSize quality:(CGInterpolationQuality)quality;
 
+- (UIImage *)imageByTilingPatternInRect:(CGRect)rect toDesiredSize:(CGSize)size;
+
 #pragma mark conversion/detection
 
 // converts UIImage to grayscale with 8bpp
