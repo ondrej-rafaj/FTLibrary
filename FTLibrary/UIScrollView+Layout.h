@@ -14,6 +14,8 @@
 
 - (void)setContentWidth:(double)aWidth;
 - (void)setContentHeight:(double)aHeight;
+- (void)setContentWidthTimes:(NSInteger)times;
+- (void)setContentHeightTimes:(NSInteger)times;
 - (void)scrollContentToLeft;
 - (void)scrollContentToXPosition:(double)xPosition;
 
