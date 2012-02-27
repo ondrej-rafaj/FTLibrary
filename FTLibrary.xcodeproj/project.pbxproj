@@ -547,6 +547,8 @@
 		93375152148E3CD400121384 /* FTCustomAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 93375150148E3CD400121384 /* FTCustomAnimationView.m */; };
 		9348CDEC1464041500A6F877 /* FTPageControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9348CDEA1464041500A6F877 /* FTPageControl.h */; };
 		9348CDED1464041500A6F877 /* FTPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9348CDEB1464041500A6F877 /* FTPageControl.m */; };
+		93671A6F14FBC1D50000154D /* NSIndexPath+Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 93671A6D14FBC1D50000154D /* NSIndexPath+Tools.h */; };
+		93671A7014FBC1D50000154D /* NSIndexPath+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 93671A6E14FBC1D50000154D /* NSIndexPath+Tools.m */; };
 		93C70E171474195800CA2139 /* FTPageScrollView2.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C70E151474195400CA2139 /* FTPageScrollView2.h */; };
 		93C70E181474195800CA2139 /* FTPageScrollView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C70E161474195500CA2139 /* FTPageScrollView2.m */; };
 		93F6E7E41484F549002337ED /* FTTaskMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 93F6E7E21484F549002337ED /* FTTaskMaker.h */; };
@@ -1063,6 +1065,8 @@
 		93375150148E3CD400121384 /* FTCustomAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCustomAnimationView.m; sourceTree = "<group>"; };
 		9348CDEA1464041500A6F877 /* FTPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageControl.h; sourceTree = "<group>"; };
 		9348CDEB1464041500A6F877 /* FTPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPageControl.m; sourceTree = "<group>"; };
+		93671A6D14FBC1D50000154D /* NSIndexPath+Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+Tools.h"; sourceTree = "<group>"; };
+		93671A6E14FBC1D50000154D /* NSIndexPath+Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+Tools.m"; sourceTree = "<group>"; };
 		93C70E151474195400CA2139 /* FTPageScrollView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPageScrollView2.h; sourceTree = "<group>"; };
 		93C70E161474195500CA2139 /* FTPageScrollView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPageScrollView2.m; sourceTree = "<group>"; };
 		93F6E7E21484F549002337ED /* FTTaskMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTaskMaker.h; sourceTree = "<group>"; };
@@ -1416,6 +1420,8 @@
 				4C03663413BA0B3000E8FA09 /* UIViewController+Utilities.m */,
 				68F45A13149B95F700A0C3EC /* UIImage+ColorPicker.h */,
 				68F45A14149B95F700A0C3EC /* UIImage+ColorPicker.m */,
+				93671A6D14FBC1D50000154D /* NSIndexPath+Tools.h */,
+				93671A6E14FBC1D50000154D /* NSIndexPath+Tools.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -2980,6 +2986,7 @@
 				4CAEBED014E3C9FE006FB57B /* FTQRCodeView.h in Headers */,
 				4CAEBED514E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.h in Headers */,
 				4C6299A814E92F8E0080FB36 /* FTExtendedViewController.h in Headers */,
+				93671A6F14FBC1D50000154D /* NSIndexPath+Tools.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3297,6 +3304,7 @@
 				4CAEBED114E3C9FE006FB57B /* FTQRCodeView.m in Sources */,
 				4CAEBED614E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.m in Sources */,
 				4C6299A914E92F8E0080FB36 /* FTExtendedViewController.m in Sources */,
+				93671A7014FBC1D50000154D /* NSIndexPath+Tools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
