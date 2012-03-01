@@ -58,7 +58,7 @@ static inline CGFloat toRadians (CGFloat degrees) { return degrees * M_PI/180.0f
 		topRightCap = CGImageCreateWithImageInRect(originalImage, CGRectMake(CGRectGetMaxX(pixelsPatternRect), 0, CGRectGetWidth(pixelsImageRect) - CGRectGetMaxX(pixelsPatternRect), CGImageGetHeight(originalImage)));
 	}
 	
-	CGImageRef btmLeftCap, btmRightCap, topTile, btmTile, leftTile, rightTile;
+	CGImageRef btmLeftCap = NULL, btmRightCap = NULL, topTile = NULL, btmTile = NULL, leftTile = NULL, rightTile = NULL;
 	if (size.height > self.size.height) {
 		btmLeftCap = CGImageCreateWithImageInRect(originalImage, CGRectMake(0, CGRectGetMaxY(pixelsPatternRect), CGRectGetMinX(pixelsPatternRect), CGRectGetHeight(pixelsImageRect) - CGRectGetMaxY(pixelsPatternRect)));
 		btmRightCap = CGImageCreateWithImageInRect(originalImage, CGRectMake(CGRectGetMaxX(pixelsPatternRect), CGRectGetMaxY(pixelsPatternRect), CGRectGetWidth(pixelsImageRect) - CGRectGetMaxX(pixelsPatternRect), CGRectGetHeight(pixelsImageRect) - CGRectGetMaxY(pixelsPatternRect)));
@@ -97,6 +97,15 @@ static inline CGFloat toRadians (CGFloat degrees) { return degrees * M_PI/180.0f
 		[[UIImage imageWithCGImage:btmTile scale:scale orientation:UIImageOrientationUp] drawAsPatternInRect:CGRectMake(CGRectGetMinX(newCenterFrame), CGRectGetMaxY(newCenterFrame), CGRectGetWidth(newCenterFrame), size.height - CGRectGetMaxY(newCenterFrame))];
 		[[UIImage imageWithCGImage:rightTile scale:scale orientation:UIImageOrientationUp] drawAsPatternInRect:CGRectMake(CGRectGetMaxX(newCenterFrame), CGRectGetMinY(newCenterFrame), size.width - CGRectGetMaxX(newCenterFrame), CGRectGetHeight(newCenterFrame))];
 	}
+	CGImageRelease(btmLeftCap);
+	CGImageRelease(btmRightCap);
+	CGImageRelease(topTile);
+	CGImageRelease(btmTile);
+	CGImageRelease(leftTile);
+	CGImageRelease(rightTile);
+	CGImageRelease(topLeftCap);
+	CGImageRelease(topRightCap);
+	CGImageRelease(middleTile);
 	
 	UIImage *returnedImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
