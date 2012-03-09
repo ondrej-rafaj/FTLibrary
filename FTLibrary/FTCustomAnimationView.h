@@ -45,6 +45,8 @@ typedef NSUInteger FTCustomAnimationOptions;
 - (void)insertAnimation:(FTCustomAnimation *)animation belowAnimation:(FTCustomAnimation *)otherAnimation;
 - (void)insertAnimation:(FTCustomAnimation *)animation aboveAnimation:(FTCustomAnimation *)otherAnimation;
 
+- (void)removeAllAnimations;
+
 - (void)drawRect:(CGRect)rect forAnimation:(FTCustomAnimation *)animation withAnimationProgress:(float)progress;
 
 - (void)animationWillBegin:(FTCustomAnimation *)animation;

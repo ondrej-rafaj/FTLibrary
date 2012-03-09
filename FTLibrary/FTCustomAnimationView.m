@@ -34,7 +34,7 @@
 		_disableUserInteraction = NO;
 		_animationCurve = FTCustomAnimationCurveEaseInOut;
 		_duration = 0.3;
-		_progress = 1;
+		_progress = 0;
 	}
 	return self;
 }
@@ -108,11 +108,11 @@
 - (void)_removeAnimations:(NSArray *)animations
 {
 	for (FTCustomAnimation *anim in animations) {
-		[_animations removeObject:anim];
 		[self _animationDidFinish:anim];
 		for (id <FTCustomAnimationObserver> obj in _animationObservers) {
 			[obj animationView:self didEndAnimation:anim];
 		}
+		[_animations removeObject:anim];
 	}
 	if (_animations.count == 0) { 
 		_displayLink.paused = YES;
@@ -255,6 +255,11 @@
 		_isAnimating = YES;
 		_displayLink.paused = NO;
 	}
+}
+
+- (void)removeAllAnimations
+{
+	[self _removeAnimations:_animations];
 }
 
 #pragma mark - Animations 'callbacks'
