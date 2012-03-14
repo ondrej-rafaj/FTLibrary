@@ -403,15 +403,13 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
                     [returnedDict setObject:attributes forKey:FTCoreTextDataAttributes];
                     
                     CGRect runBounds;
-                    CGFloat ascent;//height above the baseline
-                    CGFloat descent;//height below the baseline
                     runBounds.size.width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, NULL); //8
                     runBounds.size.height = ascent + descent;
                     
                     CGFloat xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, NULL); //9
-                    runBounds.origin.x = origins[i].x + self.frame.origin.x + xOffset + 0;
-                    runBounds.origin.y = origins[i].y + self.frame.origin.y + 0;
-                    runBounds.origin.y += descent + ascent;
+                    runBounds.origin.x = baselineOrigin.x + self.frame.origin.x + xOffset + 0;
+                    runBounds.origin.y = baselineOrigin.y + lineFrame.size.height - ascent; 
+                    
                     
                     [returnedDict setObject:NSStringFromCGRect(runBounds) forKey:FTCoreTextDataFrame];
                     
