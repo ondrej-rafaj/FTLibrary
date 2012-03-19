@@ -71,6 +71,12 @@
     return self;
 }
 
+- (void)awakeFromNib
+{
+	cellDetailLabel.backgroundColor = [UIColor whiteColor];
+	cellTitleLabel.backgroundColor = [UIColor whiteColor];
+}
+
 #pragma mark Settings
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -306,13 +306,11 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 
 - (BOOL)isSystemUnder3_2
 {
-    static BOOL checked = NO;
-    static BOOL systemUnder3_2;
-    if (!checked) {
-        checked = YES;
-        systemUnder3_2 = SYSTEM_VERSION_LESS_THAN(@"3.2");
+    static NSNumber *systemUnder3_2 = nil;
+    if (systemUnder3_2 == nil) {
+        systemUnder3_2 = [NSNumber numberWithBool:SYSTEM_VERSION_LESS_THAN(@"3.2")];
     }
-	return systemUnder3_2;
+	return systemUnder3_2.boolValue;
 }
 
 #pragma mark - FTCoreTextView business
@@ -665,9 +663,10 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
                     if (![urlString hasPrefix:@"http://"]) {
                         urlString = [NSString stringWithFormat:@"http://%@", urlString];
                     }
+					urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@""];
                     NSURL *url = [NSURL URLWithString:urlString];
                     NSRange urlDescriptionRange = NSMakeRange(elementContentRange.location, [urlDescription length]);
-                    [_URLs setObject:url forKey:NSStringFromRange(urlDescriptionRange)];
+                    if (url) [_URLs setObject:url forKey:NSStringFromRange(urlDescriptionRange)];
                     
                     currentSupernode.styleRange = urlDescriptionRange;
                 }
@@ -957,6 +956,10 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 
 - (void)doInit
 {
+	if ([self.layer respondsToSelector:@selector(setContentsScale:)]) {
+		self.layer.contentsScale = [[UIScreen mainScreen] scale];
+	}
+	
 	// Initialization code
 	_framesetter = NULL;
 	_styles = [[NSMutableDictionary alloc] init];

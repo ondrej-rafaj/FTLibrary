@@ -50,7 +50,7 @@
 - (UIImage *)_defaultImageDotWithRadius:(CGFloat)radius andColor:(UIColor *)color
 {
 	CGFloat screenScale = [UIScreen mainScreen].scale;
-	CGFloat imageWidth = screenScale * radius * 2;
+	CGFloat imageWidth = radius * 2;
 	CGRect dotRect = CGRectMake(0, 0, imageWidth, imageWidth);
 	UIGraphicsBeginImageContextWithOptions(dotRect.size, NO, screenScale);
 	CGContextRef context = UIGraphicsGetCurrentContext();
@@ -65,7 +65,7 @@
 {
 	CGFloat screenScale = [UIScreen mainScreen].scale;
 
-	CGRect dotRect = CGRectMake(0, 0, maskImage.size.width * screenScale, maskImage.size.height * screenScale);
+	CGRect dotRect = CGRectMake(0, 0, maskImage.size.width, maskImage.size.height);
 	UIGraphicsBeginImageContextWithOptions(dotRect.size, NO, screenScale);
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	[color setFill];
