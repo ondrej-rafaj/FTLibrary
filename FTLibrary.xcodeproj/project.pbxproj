@@ -181,6 +181,10 @@
 		4C72E6C913BA1AC6003EB741 /* FTTracking.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C72E6C713BA1AC6003EB741 /* FTTracking.h */; };
 		4C72E6CA13BA1AC6003EB741 /* FTTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E6C813BA1AC6003EB741 /* FTTracking.m */; };
 		4C72E6CB13BA1AC6003EB741 /* FTTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C72E6C813BA1AC6003EB741 /* FTTracking.m */; };
+		4C7F86211527A0BF003BB555 /* EEToolbarCenterButtonOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C7F861D1527A0BF003BB555 /* EEToolbarCenterButtonOverlay.h */; };
+		4C7F86221527A0BF003BB555 /* EEToolbarCenterButtonOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7F861E1527A0BF003BB555 /* EEToolbarCenterButtonOverlay.m */; };
+		4C7F86231527A0BF003BB555 /* UIToolbar+EEToolbarCenterButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C7F861F1527A0BF003BB555 /* UIToolbar+EEToolbarCenterButton.h */; };
+		4C7F86241527A0BF003BB555 /* UIToolbar+EEToolbarCenterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C7F86201527A0BF003BB555 /* UIToolbar+EEToolbarCenterButton.m */; };
 		4C85BB7513BA4AFD00CB7FCA /* ASIAuthenticationDialog.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C85BB0613BA4AFD00CB7FCA /* ASIAuthenticationDialog.h */; };
 		4C85BB7613BA4AFD00CB7FCA /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BB0713BA4AFD00CB7FCA /* ASIAuthenticationDialog.m */; };
 		4C85BB7713BA4AFD00CB7FCA /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C85BB0713BA4AFD00CB7FCA /* ASIAuthenticationDialog.m */; };
@@ -771,6 +775,10 @@
 		4C72E6C313BA1A6E003EB741 /* FTProjectInitialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTProjectInitialization.m; sourceTree = "<group>"; };
 		4C72E6C713BA1AC6003EB741 /* FTTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTTracking.h; sourceTree = "<group>"; };
 		4C72E6C813BA1AC6003EB741 /* FTTracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTracking.m; sourceTree = "<group>"; };
+		4C7F861D1527A0BF003BB555 /* EEToolbarCenterButtonOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEToolbarCenterButtonOverlay.h; sourceTree = "<group>"; };
+		4C7F861E1527A0BF003BB555 /* EEToolbarCenterButtonOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEToolbarCenterButtonOverlay.m; sourceTree = "<group>"; };
+		4C7F861F1527A0BF003BB555 /* UIToolbar+EEToolbarCenterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIToolbar+EEToolbarCenterButton.h"; sourceTree = "<group>"; };
+		4C7F86201527A0BF003BB555 /* UIToolbar+EEToolbarCenterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+EEToolbarCenterButton.m"; sourceTree = "<group>"; };
 		4C85BB0613BA4AFD00CB7FCA /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		4C85BB0713BA4AFD00CB7FCA /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		4C85BB0813BA4AFD00CB7FCA /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -1817,9 +1825,21 @@
 			name = "Project initialization";
 			sourceTree = "<group>";
 		};
+		4C7F861C1527A0BF003BB555 /* EEToolbar */ = {
+			isa = PBXGroup;
+			children = (
+				4C7F861D1527A0BF003BB555 /* EEToolbarCenterButtonOverlay.h */,
+				4C7F861E1527A0BF003BB555 /* EEToolbarCenterButtonOverlay.m */,
+				4C7F861F1527A0BF003BB555 /* UIToolbar+EEToolbarCenterButton.h */,
+				4C7F86201527A0BF003BB555 /* UIToolbar+EEToolbarCenterButton.m */,
+			);
+			path = EEToolbar;
+			sourceTree = "<group>";
+		};
 		4C85BB0413BA4AFD00CB7FCA /* Thirdparty */ = {
 			isa = PBXGroup;
 			children = (
+				4C7F861C1527A0BF003BB555 /* EEToolbar */,
 				4C9F748D146AFEB7007B68B1 /* LeavesView */,
 				4C9F73C314695F2D007B68B1 /* MGSplitViewController */,
 				68D6049F143F0C7900C3C84E /* TestFlight */,
@@ -2987,6 +3007,8 @@
 				4CAEBED514E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.h in Headers */,
 				4C6299A814E92F8E0080FB36 /* FTExtendedViewController.h in Headers */,
 				93671A6F14FBC1D50000154D /* NSIndexPath+Tools.h in Headers */,
+				4C7F86211527A0BF003BB555 /* EEToolbarCenterButtonOverlay.h in Headers */,
+				4C7F86231527A0BF003BB555 /* UIToolbar+EEToolbarCenterButton.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3305,6 +3327,8 @@
 				4CAEBED614E3CA4D006FB57B /* FTGoogleQRCodeURLComposer.m in Sources */,
 				4C6299A914E92F8E0080FB36 /* FTExtendedViewController.m in Sources */,
 				93671A7014FBC1D50000154D /* NSIndexPath+Tools.m in Sources */,
+				4C7F86221527A0BF003BB555 /* EEToolbarCenterButtonOverlay.m in Sources */,
+				4C7F86241527A0BF003BB555 /* UIToolbar+EEToolbarCenterButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
