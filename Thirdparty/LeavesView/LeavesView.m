@@ -385,6 +385,10 @@ CGFloat distance(CGPoint a, CGPoint b);
 	pageCache.dataSource = value;
 }
 
+- (CGFloat)leafEdge {
+	return leafEdge;
+}
+
 - (void)setLeafEdge:(CGFloat)aLeafEdge {
 	leafEdge = aLeafEdge;
 	
