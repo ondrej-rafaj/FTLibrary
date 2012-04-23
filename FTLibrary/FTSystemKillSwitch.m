@@ -141,7 +141,7 @@
     }
     
     NSDictionary *data = [dictionaryData objectForKey:@"data"];
-    self.versions.minimum = [[data objectForKey:@"minversion"] floatValue];
+    if (data) self.versions.minimum = [[data objectForKey:@"minversion"] floatValue];
     
     message.title = (data)? [data objectForKey:@"title"] : @"\nApplication locked";
     message.message = (data)? [data objectForKey:@"message"] : @"Internet Connetion is required in order to unlock the application";

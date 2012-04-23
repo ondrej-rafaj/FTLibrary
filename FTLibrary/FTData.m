@@ -16,9 +16,14 @@
 	return [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
 }
 
-+ (NSString *)stringWithContentsOfUrl:(NSString *)url {
++ (NSString *)stringWithContentsOfUrl:(NSString *)urlString {
 	NSError *error = nil;
-	NSString *string = [NSString stringWithContentsOfURL:[NSURL URLWithString:url] encoding:NSUTF8StringEncoding error:&error];
+    NSURLResponse *response;
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSURLRequest *req = [NSURLRequest requestWithURL:url cachePolicy:NSURLCacheStorageAllowed timeoutInterval:5];
+    NSData *data = [NSURLConnection sendSynchronousRequest:req returningResponse:&response error:&error];
+    NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
 	if (error) {
 		[FTError handleError:error];
 	}
