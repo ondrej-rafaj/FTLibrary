@@ -9,6 +9,17 @@
 #import <UIKit/UIKit.h>
 
 
+@class FTImageSpinView;
+
+@protocol FTImageSpinViewDelegate <NSObject>
+
+@optional
+
+- (void)imageSpinView:(FTImageSpinView *)spinView didRotateToIndex:(NSInteger)index;
+
+@end
+
+
 @interface FTImageSpinView : UIView <UIScrollViewDelegate> {
     
 	NSMutableArray *imageNames;
@@ -17,8 +28,8 @@
 	
 	UIScrollView *scrollView;
 	
-	int currentIndex;
-	int currentOffset;
+	NSInteger currentIndex;
+	NSInteger currentOffset;
 	
 	CGFloat animationSpeed;
 	
@@ -31,13 +42,15 @@
 
 @property (nonatomic, retain) UIScrollView *scrollView;
 
-@property (nonatomic, readonly) int currentIndex;
+@property (nonatomic, readonly) NSInteger currentIndex;
 
 @property (nonatomic) CGFloat animationSpeed;
 
 @property (nonatomic) BOOL isReverse;
 
 @property (nonatomic) BOOL debugMode;
+
+@property (nonatomic, assign) id <FTImageSpinViewDelegate> delegate;
 
 
 - (void)addImage:(NSString *)imagePath;

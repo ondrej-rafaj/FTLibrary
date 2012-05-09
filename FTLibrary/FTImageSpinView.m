@@ -26,6 +26,7 @@
 @synthesize animationSpeed;
 @synthesize isReverse;
 @synthesize debugMode;
+@synthesize delegate = _delegate;
 
 
 #pragma mark Positioning
@@ -108,6 +109,9 @@
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	[imageCanvas setImage:[self imageAtIndex:index]];
 	[pool drain];
+	if ([_delegate respondsToSelector:@selector(imageSpinView:didRotateToIndex:)]) {
+		[_delegate imageSpinView:self didRotateToIndex:index];
+	}
 }
 
 

@@ -3057,6 +3057,7 @@
 		4C03654513BA023A00E8FA09 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = FT;
 				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Fuerte International";
 			};

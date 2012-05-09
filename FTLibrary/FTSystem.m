@@ -19,7 +19,7 @@ static float systemVersion = -1;
 + (FTSystemDeviceType)deviceType {
 	if (cachedDeviceType) return cachedDeviceType;
 	NSString *dt = [UIDevice currentDevice].model;
-	NSLog(@"Device type: %@", dt);
+	//NSLog(@"Device type: %@", dt);
 	if([dt isEqualToString:@"iPhone"] || [dt isEqualToString:@"iPhone Simulator"]) cachedDeviceType = FTSystemDeviceTypeiPhone;
 	else if ([dt isEqualToString:@"iPad"] || [dt isEqualToString:@"iPad Simulator"]) cachedDeviceType = FTSystemDeviceTypeiPad;
 	else if ([dt isEqualToString:@"iPod touch"]) cachedDeviceType = FTSystemDeviceTypeiPod;
