@@ -956,9 +956,14 @@ UITextAlignment UITextAlignmentFromCoreTextAlignment(FTCoreTextAlignement alignm
 
 - (void)doInit
 {
+    CGFloat scale = [UIScreen mainScreen].scale;
 	if ([self.layer respondsToSelector:@selector(setContentsScale:)]) {
-		self.layer.contentsScale = [[UIScreen mainScreen] scale];
+		self.layer.contentsScale = scale;
 	}
+    if ([self.layer respondsToSelector:@selector(setRasterizationScale:)]) {
+        self.layer.rasterizationScale = scale;
+        self.layer.shouldRasterize = YES;        
+    }
 	
 	// Initialization code
 	_framesetter = NULL;
