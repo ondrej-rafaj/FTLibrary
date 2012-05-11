@@ -21,13 +21,17 @@
 	
 }
 
-- (id)init {
-	self = [super init];
-	if (self) {
-		[self initializeView];
-	}
-	return self;
-}
+/* [super init] will call initWithFrame: so no need to override the init method
+ * MOREOVER a view should never be initialized using init, but initWithFrame which is the 
+ * designated initializer */
+
+//- (id)init {
+//	self = [super init];
+//	if (self) {
+//		[self initializeView];
+//	}
+//	return self;
+//}
 
 - (id)initWithFrame:(CGRect)frame {
 	self = [super initWithFrame:frame];
