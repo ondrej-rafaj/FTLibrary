@@ -47,6 +47,7 @@
 @synthesize visibleSize = _visibleSize;
 @synthesize pageSize = _pageSize;
 @synthesize internalPageSize = _internalPageSize;
+@synthesize reuseView = _reuseView;
 
 #pragma mark - Others
 
@@ -226,7 +227,7 @@
 		if (tellDelegate && delegateImplementMethod) {
 			[_pageScrollViewDelegate pageScrollView:self willDiscardView:contentView];
 		}
-		if (_reusableViews.count < [self _numberOfViewsPerPage]) {
+		if (_reusableViews.count < [self _numberOfViewsPerPage] && _reuseView) {
 			[_reusableViews addObject:contentView];
 			[_reusableContainers addObject:pageView];
 		}
@@ -295,6 +296,7 @@
 		self.canCancelContentTouches = YES;
 		[super setDelegate:self];
 		self.scrollsToTop = NO;
+		_reuseView = YES;
 		self.visibleSize = frame.size;
 		_numberOfPages = -1;
 		_dataSourceProvidesViews = NO;
@@ -320,6 +322,13 @@
 {
 	if (_numberOfPages == -1 && newSuperview) {
 		[self reloadData];
+	}
+}
+
+- (void)willMoveToWindow:(UIWindow *)newWindow
+{
+	if (newWindow == nil) {
+		[self _disposeOfVisibleViewsAndTellDelegate:YES];
 	}
 }
 
