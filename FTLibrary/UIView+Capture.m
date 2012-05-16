@@ -14,8 +14,7 @@
 	UIGraphicsBeginImageContext(self.bounds.size);
 	[self.layer renderInContext:UIGraphicsGetCurrentContext()];
 	UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();	
-	
+	UIGraphicsEndImageContext();
 	return viewImage;
 }
 
