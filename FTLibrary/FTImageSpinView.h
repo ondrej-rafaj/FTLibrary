@@ -73,5 +73,7 @@
 
 - (void)removeAllImages;
 
+- (int)numberOfImages;
+
 
 @end

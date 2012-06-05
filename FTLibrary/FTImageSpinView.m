@@ -106,6 +106,10 @@
 
 #pragma mark Rotating images
 
+- (int)numberOfImages {
+	return [imageNames count];
+}
+
 - (void)displayImageAtIndex:(int)index {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	[imageCanvas setImage:[self imageAtIndex:index]];
