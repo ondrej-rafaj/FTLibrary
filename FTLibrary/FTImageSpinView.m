@@ -26,6 +26,7 @@
 @synthesize animationSpeed;
 @synthesize isReverse;
 @synthesize debugMode;
+@synthesize hasLeadingZero = _hasLeadingZero;
 @synthesize delegate = _delegate;
 
 
@@ -149,8 +150,15 @@
 - (void)loadImagesFromBundleWithFileFormat:(NSString *)format withStartIndex:(int)startIndex andFinalIdex:(int)finalIndex {
 	//finalIndex = 30;
 	for (int i = startIndex; i <= finalIndex; i++) {
-		NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:format, i] ofType:nil];
-		[self addImage:path];
+		if (!_hasLeadingZero) {
+			NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:format, i] ofType:nil];
+			[self addImage:path];
+		}
+		else {
+			NSString *s = [NSString stringWithFormat:@"%@%d", ((i < 100) ? @"0" : @""), i];
+			NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:format, s] ofType:nil];
+			[self addImage:path];
+		}
 	}
 	[self displayCurrentImage];
 }
@@ -180,6 +188,9 @@
 - (UIImage *)imageAtIndex:(int)index {
 	NSData *imageData = [[NSData alloc] initWithContentsOfFile:[imageNames objectAtIndex:index]];
 	UIImage *image = [UIImage imageWithData:imageData];
+	if (!image) {
+		NSLog(@"Error index: %d", index);
+	}
 	[imageData release];
 	return image;
 }

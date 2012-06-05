@@ -47,6 +47,9 @@
 
 - (void)positionAtX:(CGFloat)xValue withHeight:(CGFloat)height;
 
+- (CGPoint)boundsCenter;
+- (void)setCenterIntegral:(CGPoint)center;
+
 - (void)removeSubviews;
 
 - (void)centerInSuperView;

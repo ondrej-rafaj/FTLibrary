@@ -50,6 +50,8 @@
 
 @property (nonatomic) BOOL debugMode;
 
+@property (nonatomic) BOOL hasLeadingZero;
+
 @property (nonatomic, assign) id <FTImageSpinViewDelegate> delegate;
 
 

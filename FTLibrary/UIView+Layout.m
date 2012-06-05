@@ -258,6 +258,18 @@
 	}
 }
 
+- (CGPoint)boundsCenter
+{
+	CGRect frame = self.bounds;
+	return CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
+}
+
+- (void)setCenterIntegral:(CGPoint)center
+{
+	self.center = center;
+	self.frame = CGRectIntegral(self.frame);
+}
+
 - (void)setAutoresizingNone {
 	[self setAutoresizingMask:UIViewAutoresizingNone];
 }
