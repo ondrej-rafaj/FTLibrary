@@ -280,7 +280,7 @@
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-	if (decelerate) {
+	if (!decelerate) {
 		if ([_delegate respondsToSelector:@selector(imageSpinViewDidEndMoving:)]) {
 			[_delegate imageSpinViewDidEndMoving:self];
 		}
