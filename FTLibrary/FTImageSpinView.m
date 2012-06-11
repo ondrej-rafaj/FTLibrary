@@ -212,13 +212,7 @@
 	[self doLayout];
 }
 
-#pragma mark ScrolView delegate method
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(imageSpinViewDidEndSpinning:)]) {
-        [self.delegate imageSpinViewDidEndSpinning:self];
-    }
-}
+#pragma mark ScrolView delegate methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)sv {
 	NSDate *start = nil;
@@ -267,13 +261,30 @@
 
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
 	[self doLayout];
+	if ([_delegate respondsToSelector:@selector(imageSpinViewDidStartMoving:)]) {
+		[_delegate imageSpinViewDidStartMoving:self];
+	}
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
 	[self doLayout];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(imageSpinViewDidStartSpinning:)]) {
-        [self.delegate imageSpinViewDidStartSpinning:self];
-    }
+	if ([_delegate respondsToSelector:@selector(imageSpinViewDidStartMoving:)]) {
+		[_delegate imageSpinViewDidStartMoving:self];
+	}
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+	if ([_delegate respondsToSelector:@selector(imageSpinViewDidEndMoving:)]) {
+		[_delegate imageSpinViewDidEndMoving:self];
+	}
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+	if (!decelerate) {
+		if ([_delegate respondsToSelector:@selector(imageSpinViewDidEndMoving:)]) {
+			[_delegate imageSpinViewDidEndMoving:self];
+		}
+	}
 }
 
 #pragma mark Memory management
