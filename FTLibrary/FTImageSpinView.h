@@ -16,6 +16,8 @@
 @optional
 
 - (void)imageSpinView:(FTImageSpinView *)spinView didRotateToIndex:(NSInteger)index;
+- (void)imageSpinViewDidStartSpinning:(FTImageSpinView *)spinView;
+- (void)imageSpinViewDidEndSpinning:(FTImageSpinView *)spinView;
 
 @end
 

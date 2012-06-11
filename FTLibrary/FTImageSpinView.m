@@ -212,7 +212,13 @@
 	[self doLayout];
 }
 
-#pragma mark ScrolView delegate methods
+#pragma mark ScrolView delegate method
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(imageSpinViewDidEndSpinning:)]) {
+        [self.delegate imageSpinViewDidEndSpinning:self];
+    }
+}
 
 - (void)scrollViewDidScroll:(UIScrollView *)sv {
 	NSDate *start = nil;
@@ -265,6 +271,9 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
 	[self doLayout];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(imageSpinViewDidStartSpinning:)]) {
+        [self.delegate imageSpinViewDidStartSpinning:self];
+    }
 }
 
 #pragma mark Memory management
