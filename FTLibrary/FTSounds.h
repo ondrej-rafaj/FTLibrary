@@ -1,6 +1,6 @@
 //
 //  FTSounds.h
-//  AudiEvent
+//  FTLibrary
 //
 //  Created by Ondrej Rafaj on 26/04/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
@@ -21,6 +21,7 @@
 @property(nonatomic, assign) BOOL isPlaying;
 
 - (void)playSound:(NSString *)soundName;
+- (void)playLoopSound:(NSString *)soundName;
 
 - (void)stopAllSounds;
 
