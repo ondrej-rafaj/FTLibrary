@@ -1,6 +1,6 @@
 //
 //  FTSounds.m
-//  AudiEvent
+//  FTLibrary
 //
 //  Created by Ondrej Rafaj on 26/04/2011.
 //  Copyright 2011 Fuerte International. All rights reserved.
@@ -62,6 +62,31 @@
 	[pool drain];
 }
 
+- (void)doPlayLoopSound:(NSString *)soundName {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	
+    NSString *extension = @"mp3";
+    NSRange extRange = [soundName rangeOfString:@"."];
+    if (extRange.location != NSNotFound) {
+        extension = [soundName substringWithRange:NSMakeRange(extRange.location + 1, (soundName.length - extRange.location - 1))];
+        soundName = [soundName substringWithRange:NSMakeRange(0, extRange.location)];
+    }
+	NSString *path = [[NSBundle mainBundle] pathForResource:soundName ofType:extension];
+	NSURL *url = [NSURL fileURLWithPath:path];
+    
+    NSError *error;
+	AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+	[audioPlayer setNumberOfLoops:-1];
+	[audioPlayer setDelegate:self];
+	if (audioPlayer == nil) NSLog(@"Audio player error: %@", [error description]);
+	else {
+		[playerArray addObject:audioPlayer];
+		[audioPlayer play];
+        self.isPlaying = YES;
+	}
+	[pool drain];
+}
+
 - (void)playSoundOnBackground:(NSString *)soundName {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	[self performSelectorInBackground:@selector(doPlaySound:) withObject:soundName];
@@ -70,6 +95,16 @@
 
 - (void)playSound:(NSString *)soundName {
 	[NSThread detachNewThreadSelector:@selector(playSoundOnBackground:) toTarget:self withObject:soundName];
+}
+
+- (void)playLoopSoundOnBackground:(NSString *)soundName {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	[self performSelectorInBackground:@selector(doPlayLoopSound:) withObject:soundName];
+	[pool drain];
+}
+
+- (void)playLoopSound:(NSString *)soundName {
+	[NSThread detachNewThreadSelector:@selector(playLoopSoundOnBackground:) toTarget:self withObject:soundName];
 }
 
 #pragma mark Memory management

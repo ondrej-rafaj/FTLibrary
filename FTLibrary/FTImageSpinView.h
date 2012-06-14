@@ -16,6 +16,14 @@
 @optional
 
 - (void)imageSpinView:(FTImageSpinView *)spinView didRotateToIndex:(NSInteger)index;
+- (void)imageSpinViewDidStartSpinning:(FTImageSpinView *)spinView;
+- (void)imageSpinViewDidEndSpinning:(FTImageSpinView *)spinView;
+
+- (void)imageSpinView:(FTImageSpinView *)spinView didCalculateSecondaryValueToIndex:(NSInteger)index;
+
+- (void)imageSpinViewDidStartMoving:(FTImageSpinView *)spinView;
+
+- (void)imageSpinViewDidEndMoving:(FTImageSpinView *)spinView;
 
 @end
 
