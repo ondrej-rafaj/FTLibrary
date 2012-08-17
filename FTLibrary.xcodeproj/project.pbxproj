@@ -3058,7 +3058,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = FT;
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Fuerte International";
 			};
 			buildConfigurationList = 4C03654813BA023A00E8FA09 /* Build configuration list for PBXProject "FTLibrary" */;
