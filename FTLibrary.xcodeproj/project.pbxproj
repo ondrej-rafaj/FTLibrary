@@ -3491,6 +3491,10 @@
 				GCC_PREFIX_HEADER = "FTLibrary/FTLibrary-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"/usr/include/libxml2/**",
+					$SDK_DIR/usr/include/libxml2,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3519,6 +3523,10 @@
 				GCC_PREFIX_HEADER = "FTLibrary/FTLibrary-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"/usr/include/libxml2/**",
+					$SDK_DIR/usr/include/libxml2,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
