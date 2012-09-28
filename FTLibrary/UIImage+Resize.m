@@ -166,8 +166,9 @@
 // Returns an affine transform that takes into account the image orientation when drawing a scaled image
 - (CGAffineTransform)transformForOrientation:(CGSize)newSize {
     CGAffineTransform transform = CGAffineTransformIdentity;
-    
     switch (self.imageOrientation) {
+        case UIImageOrientationUp:             // EXIF = 3
+        case UIImageOrientationUpMirrored:     // EXIF = 3
         case UIImageOrientationDown:           // EXIF = 3
         case UIImageOrientationDownMirrored:   // EXIF = 4
             transform = CGAffineTransformTranslate(transform, newSize.width, newSize.height);
