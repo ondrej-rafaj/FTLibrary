@@ -500,8 +500,6 @@
 		4CE77EF21435E7C900A5AEDA /* NSString+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CE77EEF1435E7C900A5AEDA /* NSString+SBJSON.h */; };
 		4CE77EF31435E7C900A5AEDA /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE77EF01435E7C900A5AEDA /* NSString+SBJSON.m */; };
 		4CEB1BFE1403B33400B70C98 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEB1BFD1403B33400B70C98 /* UIKit.framework */; };
-		4CED6B3314615374003DE290 /* NSMutableDictionary+ImageMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CED6B3114615374003DE290 /* NSMutableDictionary+ImageMetadata.h */; };
-		4CED6B3414615374003DE290 /* NSMutableDictionary+ImageMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CED6B3214615374003DE290 /* NSMutableDictionary+ImageMetadata.m */; };
 		4CED6B3B146159B0003DE290 /* FTScrollableClockView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CED6B39146159B0003DE290 /* FTScrollableClockView.h */; };
 		4CED6B3C146159B0003DE290 /* FTScrollableClockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CED6B3A146159B0003DE290 /* FTScrollableClockView.m */; };
 		4CED6B421461A526003DE290 /* FTSearchBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 4CED6B401461A526003DE290 /* FTSearchBar.h */; };
@@ -1021,8 +1019,6 @@
 		4CEB1BFD1403B33400B70C98 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4CEB1BFF1403B34700B70C98 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4CEB1C001403B36400B70C98 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		4CED6B3114615374003DE290 /* NSMutableDictionary+ImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+ImageMetadata.h"; sourceTree = "<group>"; };
-		4CED6B3214615374003DE290 /* NSMutableDictionary+ImageMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+ImageMetadata.m"; sourceTree = "<group>"; };
 		4CED6B39146159B0003DE290 /* FTScrollableClockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTScrollableClockView.h; sourceTree = "<group>"; };
 		4CED6B3A146159B0003DE290 /* FTScrollableClockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTScrollableClockView.m; sourceTree = "<group>"; };
 		4CED6B401461A526003DE290 /* FTSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTSearchBar.h; sourceTree = "<group>"; };
@@ -1396,8 +1392,6 @@
 				4C03661413BA0B3000E8FA09 /* NSArray+Tools.m */,
 				4C03661513BA0B3000E8FA09 /* NSMutableArray+Tools.h */,
 				4C03661613BA0B3000E8FA09 /* NSMutableArray+Tools.m */,
-				4CED6B3114615374003DE290 /* NSMutableDictionary+ImageMetadata.h */,
-				4CED6B3214615374003DE290 /* NSMutableDictionary+ImageMetadata.m */,
 				4C03661713BA0B3000E8FA09 /* NSString+Tools.h */,
 				4C03661813BA0B3000E8FA09 /* NSString+Tools.m */,
 				4C03661D13BA0B3000E8FA09 /* UIColor+Tools.h */,
@@ -2972,7 +2966,6 @@
 				4C1315FF145EA5D600971E44 /* FTFacebookViewController.h in Headers */,
 				4C131603145EA5F900971E44 /* FTFacebookGalleriesViewController.h in Headers */,
 				4C131607145EA61D00971E44 /* FTFacebookPhotosViewController.h in Headers */,
-				4CED6B3314615374003DE290 /* NSMutableDictionary+ImageMetadata.h in Headers */,
 				4CED6B3B146159B0003DE290 /* FTScrollableClockView.h in Headers */,
 				4CED6B421461A526003DE290 /* FTSearchBar.h in Headers */,
 				4CD7769B1461FD9B007A642B /* FTGridViewCell.h in Headers */,
@@ -3058,7 +3051,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = FT;
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Fuerte International";
 			};
 			buildConfigurationList = 4C03654813BA023A00E8FA09 /* Build configuration list for PBXProject "FTLibrary" */;
@@ -3294,7 +3287,6 @@
 				4C131600145EA5D600971E44 /* FTFacebookViewController.m in Sources */,
 				4C131604145EA5F900971E44 /* FTFacebookGalleriesViewController.m in Sources */,
 				4C131608145EA61D00971E44 /* FTFacebookPhotosViewController.m in Sources */,
-				4CED6B3414615374003DE290 /* NSMutableDictionary+ImageMetadata.m in Sources */,
 				4CED6B3C146159B0003DE290 /* FTScrollableClockView.m in Sources */,
 				4CED6B431461A526003DE290 /* FTSearchBar.m in Sources */,
 				4CD7769C1461FD9B007A642B /* FTGridViewCell.m in Sources */,
