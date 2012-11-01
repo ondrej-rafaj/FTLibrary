@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FlurryAnalytics.h"
-
 
 @interface FTTracking : NSObject
 

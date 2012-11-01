@@ -9,14 +9,14 @@
 #import "FTTracking.h"
 #import "FTProjectInitialization.h"
 #import "FTError.h"
-
+#import "Flurry.h"
 
 @implementation FTTracking
 
 + (void)logEvent:(NSString *)event withParameters:(NSDictionary *)params {
 	BOOL ok = NO;
 	if ([FTProjectInitialization isUsing:FTProjectInitializationFunctionTypeTrackingFlurry]) {
-		[FlurryAnalytics logEvent:event withParameters:params];
+		[Flurry logEvent:event withParameters:params];
 		ok = YES;
 	}
 	if ([FTProjectInitialization isUsing:FTProjectInitializationFunctionTypeTrackingGoogle]) {
@@ -31,7 +31,7 @@
 + (void)logEvent:(NSString *)event {
 	BOOL ok = NO;
 	if ([FTProjectInitialization isUsing:FTProjectInitializationFunctionTypeTrackingFlurry]) {
-		[FlurryAnalytics logEvent:event];
+		[Flurry logEvent:event];
 		ok = YES;
 	}
 	if ([FTProjectInitialization isUsing:FTProjectInitializationFunctionTypeTrackingGoogle]) {
@@ -47,11 +47,11 @@
 	BOOL ok = NO;
 	if ([FTProjectInitialization isUsing:FTProjectInitializationFunctionTypeTrackingFlurry]) {
 		// Tracking user id
-		[FlurryAnalytics setUserID:[NSString stringWithFormat:@"fb-%@", [info objectForKey:@"id"]]];
+		[Flurry setUserID:[NSString stringWithFormat:@"fb-%@", [info objectForKey:@"id"]]];
 		
 		// Tracking gender
 		NSString *g = [info objectForKey:@"gender"];
-		[FlurryAnalytics setGender:[g substringToIndex:1]];
+		[Flurry setGender:[g substringToIndex:1]];
 		
 		// Tracking age
 		NSString *bd = [info objectForKey:@"birthday"];
@@ -60,7 +60,7 @@
 		NSDate *bdDate = [df dateFromString:bd];
 		NSCalendar *defaultCal = [NSCalendar currentCalendar];
 		NSDateComponents *bdComponents = [defaultCal components:kCFCalendarUnitYear fromDate:bdDate toDate:[NSDate date] options:0];
-		[FlurryAnalytics setAge:bdComponents.year];
+		[Flurry setAge:bdComponents.year];
 		
 		ok = YES;
 	}
