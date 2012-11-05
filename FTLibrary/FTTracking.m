@@ -13,6 +13,22 @@
 
 @implementation FTTracking
 
++ (void)logAllPageViews:(id)target
+{
+    BOOL ok = NO;
+	if ([FTProjectInitialization isUsing:FTProjectInitializationFunctionTypeTrackingFlurry]) {
+		[Flurry logAllPageViews:target];
+		ok = YES;
+	}
+	if ([FTProjectInitialization isUsing:FTProjectInitializationFunctionTypeTrackingGoogle]) {
+		
+		ok = YES;
+	}
+	if (!ok) {
+		[FTError handleErrorWithString:@"No tracking has been initialized!"];
+	}
+}
+
 + (void)logEvent:(NSString *)event withParameters:(NSDictionary *)params {
 	BOOL ok = NO;
 	if ([FTProjectInitialization isUsing:FTProjectInitializationFunctionTypeTrackingFlurry]) {
@@ -32,6 +48,22 @@
 	BOOL ok = NO;
 	if ([FTProjectInitialization isUsing:FTProjectInitializationFunctionTypeTrackingFlurry]) {
 		[Flurry logEvent:event];
+		ok = YES;
+	}
+	if ([FTProjectInitialization isUsing:FTProjectInitializationFunctionTypeTrackingGoogle]) {
+		
+		ok = YES;
+	}
+	if (!ok) {
+		[FTError handleErrorWithString:@"No tracking has been initialized!"];
+	}
+}
+
++ (void)logError:(NSString *)errorID message:(NSString *)message error:(NSError *)error
+{
+    BOOL ok = NO;
+	if ([FTProjectInitialization isUsing:FTProjectInitializationFunctionTypeTrackingFlurry]) {
+		[Flurry logError:errorID message:message error:error];
 		ok = YES;
 	}
 	if ([FTProjectInitialization isUsing:FTProjectInitializationFunctionTypeTrackingGoogle]) {
