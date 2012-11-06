@@ -7,7 +7,7 @@
 //
 
 #import "FTProjectInitialization.h"
-#import "FlurryAnalytics.h"
+#import "Flurry.h"
 #import "FTLang.h"
 
 
@@ -55,7 +55,7 @@
 }
 
 + (void)enableFlurryWithApiKey:(NSString *)apiKey {
-	[FlurryAnalytics startSession:apiKey];
+	[Flurry startSession:apiKey];
 	[self setUsedFunctionality:FTProjectInitializationFunctionTypeTrackingFlurry];
 }
 
