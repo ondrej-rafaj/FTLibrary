@@ -127,9 +127,12 @@ static NSString *appID;
     if (hasInternet) {
         NSArray *allLangs;
         NSMutableDictionary *backUpData = [NSMutableDictionary dictionary];
-        NSDictionary *dataDictionary = [FTDataJson jsonDataFromUrl:remoteURL];
-        allLangs = [dataDictionary objectForKey:@"data"];
+        //NSDictionary *dataDictionary = [FTDataJson jsonDataFromUrl:remoteURL];
+        //allLangs = [dataDictionary objectForKey:@"data"];
         
+		//fix to allow only one language
+		allLangs = [NSArray arrayWithObject:[NSDictionary dictionaryWithObjectsAndKeys:remoteURL, @"en", nil]];
+		
         for (NSDictionary *dict in allLangs) {
             NSString *key = [[dict allKeys] objectAtIndex:0];
             if ([[backUpData allKeys] containsObject:key]) continue;
