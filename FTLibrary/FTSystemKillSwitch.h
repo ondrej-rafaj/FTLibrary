@@ -65,7 +65,7 @@
 @property (nonatomic, retain) FTSystemKillSwitchMessage *message;
 @property (nonatomic, assign) BOOL isDebugActive;
 @property (nonatomic, assign) BOOL isApplicationLocked;
-@property (nonatomic, assign) id <FTSystemKillSwitchDelegate> delegate;
+@property (nonatomic, retain) id <FTSystemKillSwitchDelegate> delegate;
 
 
 - (id)initWithAppURL:(NSString *)aUrl;

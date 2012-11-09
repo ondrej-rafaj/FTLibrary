@@ -230,7 +230,8 @@
 		appWindow = [FTAppDelegate window];
 		blockerShadow = 0.6;
         self.versions = [self storedVersions];
-        
+
+		self.delegate = nil;
         
 	}
 	return self;
@@ -274,7 +275,10 @@
     [hash release];
     [message release];
     [versions release];
-    delegate = nil;
+	[delegate release];
+
+	delegate = nil;
+
 	[super dealloc];
 }
 
