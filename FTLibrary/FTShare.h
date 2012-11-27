@@ -17,7 +17,6 @@
 #import <MessageUI/MessageUI.h>
 
 
-#import "FTShareTwitter.h"
 #import "FTShareFacebook.h"
 #import "FTShareEmail.h"
 
@@ -34,7 +33,6 @@ typedef NSUInteger FTShareOptions;
 
 @interface FTShare : NSObject <UIActionSheetDelegate> {
     
-    FTShareTwitter *_twitterEngine;
     FTShareFacebook *_facebookEngine;
     FTShareEmail *_emailEngine;
     
@@ -47,11 +45,6 @@ typedef NSUInteger FTShareOptions;
 
 - (id)initWithReferencedController:(id)controller;
 - (void)showActionSheetWithtitle:(NSString *)title andOptions:(FTShareOptions)options;
-
-- (void)setUpTwitterWithConsumerKey:(NSString *)consumerKey secret:(NSString *)secret andDelegate:(id<FTShareTwitterDelegate>)delegate;
-- (void)shareViaTwitter:(FTShareTwitterData *)data;
-- (void)logoutTwitter;
-
 
 
 - (void)setUpFacebookWithAppID:(NSString *)appID permissions:(FTShareFacebookPermission)permissions andDelegate:(id<FTShareFacebookDelegate>)delegate;

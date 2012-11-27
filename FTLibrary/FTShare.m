@@ -25,7 +25,6 @@
     if (self) {
         // Initialization code here.
         [self setReferencedController:controller];
-        _twitterEngine = [[FTShareTwitter alloc] init];
         
         _facebookEngine = [[FTShareFacebook alloc] init];
         self.facebook = nil;
@@ -44,28 +43,11 @@
 
 - (void)dealloc {
     [_facebookEngine release], _facebookEngine = nil;
-    [_twitterEngine release], _twitterEngine = nil;
     [_emailEngine release], _emailEngine = nil;
     
     _referencedController = nil;
     [super dealloc];
 }
-
-
-#pragma mark Twitter section
-
-- (void)setUpTwitterWithConsumerKey:(NSString *)consumerKey secret:(NSString *)secret andDelegate:(id<FTShareTwitterDelegate>)delegate {
-    [_twitterEngine setUpTwitterWithConsumerKey:consumerKey secret:secret referencedController:_referencedController andDelegate:delegate];
-}
-
-- (void)shareViaTwitter:(FTShareTwitterData *)data {
-    [_twitterEngine shareViaTwitter:data];
-}
-
-- (void)logoutTwitter {
-    [_twitterEngine logout];
-}
-
 
 #pragma mark Facebook section
 
@@ -147,7 +129,6 @@
     }
     else  if ([btnText isEqualToString:@"Twitter"]) {
         //implement Twitter
-        [_twitterEngine shareViaTwitter:nil];
     }
 }
 
