@@ -112,7 +112,7 @@
         *_alpha = (alpha/255.0f);
 
     }
-    NSLog(@"offset:\t(%d out of\t%lu) Alpha %d",offset, (4 * w * h) ,alpha);
+//    NSLog(@"offset:\t(%d out of\t%lu) Alpha %d",offset, (4 * w * h) ,alpha);
     color = [UIColor colorWithRed:(red/255.0f) green:(green/255.0f) blue:(blue/255.0f) alpha:(alpha/255.0f)];
     
     // When finished, release the context
