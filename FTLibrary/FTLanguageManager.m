@@ -137,18 +137,27 @@ static NSString *appID;
             NSString *key = [[dict allKeys] objectAtIndex:0];
             if ([[backUpData allKeys] containsObject:key]) continue;
             NSString *url = [[allLangs objectAtIndex:0] objectForKey:key];
-            NSDictionary *thisLangData = [FTDataJson jsonDataFromUrl:url];
-            NSDictionary *data = [thisLangData objectForKey:@"data"];
+
+	        NSDictionary *thisLangData = (id)[FTDataJson jsonDataFromUrl: url];
+            NSArray *data = [thisLangData objectForKey:@"data"];
             if (!data || [data count] == 0) continue;
-            
+
+	        NSDictionary *values = [data objectAtIndex: 0];
+
+	        url = values[key];
+
+	        thisLangData = (id)[FTDataJson jsonDataFromUrl: url];
+
             FTLanguage *language = [[FTLanguage alloc] init];
             language.key = key;
             language.url = url;
-            language.data = data;
+            language.data = thisLangData[@"data"];
             [translations setObject:language forKey:key];
             [backUpData setObject:data forKey:key];
             NSLog(@"%d translations found for Language %@", [data count], key);
-            
+
+	        [language release];
+
             if (!isDefault && defaultLanguage && [key isEqualToString:defaultLanguage]) isDefault = YES;
         }
         
@@ -156,6 +165,9 @@ static NSString *appID;
         
         SBJsonWriter *writer = [[SBJsonWriter alloc] init];
         NSString *dataString = [writer stringWithObject:backUpData error:&error];
+
+	    [writer release];
+
         if (error) [FTError handleError:error];
         [dataString writeToFile:localeURL atomically:YES encoding:NSUTF8StringEncoding error:&error];
         //[dataString writeToURL:[NSURL URLWithString:localeURL] atomically:YES encoding:NSUTF8StringEncoding error:&error];
@@ -166,7 +178,7 @@ static NSString *appID;
     else {
         NSDictionary *allLangs;
         NSString *dataString = [NSString stringWithContentsOfFile:localeURL encoding:NSUTF8StringEncoding error:&error];
-        allLangs = [FTDataJson jsonDataFromString:dataString];
+        allLangs = (id)[FTDataJson jsonDataFromString: dataString];
         
         NSArray *allLangStrings = [allLangs allKeys];
         
@@ -179,7 +191,9 @@ static NSString *appID;
             language.data = data;
             [translations setObject:language forKey:key];
             NSLog(@"%d translations found for Language %@ (backup)", [data count], key);
-            
+
+	        [language release];
+
             if (!isDefault && defaultLanguage && [key isEqualToString:defaultLanguage]) isDefault = YES;
         }
         

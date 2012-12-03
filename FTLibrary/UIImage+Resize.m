@@ -70,7 +70,7 @@
     }
     
     return [self resizedImage:newSize
-                    transform:[self transformForOrientation:newSize]
+                    transform: CGAffineTransformIdentity //(NSClassFromString(@"PKPass") != nil) ? CGAffineTransformIdentity : [self transformForOrientation:newSize]
                drawTransposed:drawTransposed
          interpolationQuality:quality];
 }
