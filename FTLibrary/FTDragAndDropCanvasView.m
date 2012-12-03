@@ -281,13 +281,18 @@
 - (void)addElementWithPath:(NSString *)imagePath reversed:(BOOL)reversed
 {
     FTDragAndDropView *element = [[FTDragAndDropView alloc] initWithImagePath:imagePath reversed:reversed];
-	element.positionX = self.bounds.size.width / 2;
-	element.positionY = self.bounds.size.height / 2;
+
 	if ([delegate respondsToSelector:@selector(createdElement:withData:)]) {
 		[delegate createdElement:element withData:element.elementData];
 	}
-	[self didEditElement:element];
+
     [self configureElement:element];
+
+	element.positionX = element.center.x / interfaceRotationFactor;
+	element.positionY = element.center.y / interfaceRotationFactor;
+
+	[self didEditElement:element];
+
     [element release];
 }
 
@@ -348,8 +353,10 @@
     [pin release];
     
     [elements addObject:element];
-    [element setCenter:CGPointMake(self.bounds.size.width / 2, self.bounds.size.height / 2)];
+
     [stickersContainerView addSubview:element];
+
+	[element centerInSuperView];
     //[self activateElement:element];
 }
 
@@ -503,19 +510,24 @@ static CGFloat tempRotation = 0;
 }
 
 - (void)moveView:(UIPanGestureRecognizer *)recognizer {
-	
+
 	FTDragAndDropView *v = (FTDragAndDropView *)recognizer.view;
+
     [self activateElement:v];
-	
+
 	if([recognizer state] == UIGestureRecognizerStateBegan) {
+
 		v.dragged = YES;
 	}
-	CGPoint translatedPoint = [recognizer translationInView:stickersContainerView];
+
+	CGPoint translatedPoint = [recognizer translationInView: stickersContainerView];
     
-    //NSLog(@"point: %@", NSStringFromCGPoint(translatedPoint));
-    
+    //NSLog(@"point: %@, VPX: %f, View: %@, IRF: %f", NSStringFromCGPoint(translatedPoint), v.positionX, NSStringFromCGRect(v.frame), interfaceRotationFactor);
+
 	translatedPoint = CGPointMake(v.positionX * interfaceRotationFactor + translatedPoint.x, v.positionY * interfaceRotationFactor + translatedPoint.y);
-	
+
+	//NSLog(@"Computed point: %@", NSStringFromCGPoint(translatedPoint));
+
 	CGRect newElementFrame;
 	newElementFrame.size = v.bounds.size;
 	newElementFrame.origin = CGPointMake(translatedPoint.x - newElementFrame.size.width / 2, translatedPoint.y - newElementFrame.size.height / 2);
