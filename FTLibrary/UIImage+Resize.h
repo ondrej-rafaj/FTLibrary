@@ -19,7 +19,7 @@
 
 - (UIImage *) resizedImageWithContentMode: (UIViewContentMode) contentMode bounds: (CGSize) bounds interpolationQuality: (CGInterpolationQuality) quality;
 
-- (UIImage *) resizedImage: (CGSize) newSize fromSource: (UIImagePickerControllerSourceType) source interpolationQuality: (CGInterpolationQuality) quality;
+- (UIImage *) resizedImage: (CGSize) newSize fromSource: (UIImagePickerControllerCameraDevice) source interpolationQuality: (CGInterpolationQuality) quality;
 
 @end
 

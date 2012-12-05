@@ -56,9 +56,9 @@
 	return [transparentBorderImage roundedCornerImage: cornerRadius borderSize: borderSize];
 }
 
-- (UIImage *) resizedImage: (CGSize) newSize fromSource: (UIImagePickerControllerSourceType) source interpolationQuality: (CGInterpolationQuality) quality {
+- (UIImage *) resizedImage: (CGSize) newSize fromSource: (UIImagePickerControllerCameraDevice) source interpolationQuality: (CGInterpolationQuality) quality {
 
-	CGAffineTransform transform = (source == UIImagePickerControllerSourceTypeCamera) ? [self transformForOrientation: newSize] : CGAffineTransformIdentity;
+	CGAffineTransform transform = (self.imageOrientation == UIImageOrientationDown || self.imageOrientation == UIImageOrientationRight) ? [self transformForOrientation: newSize] : CGAffineTransformIdentity;
 
 	BOOL drawTransposed;
 
