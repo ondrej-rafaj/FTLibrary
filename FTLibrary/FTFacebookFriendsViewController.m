@@ -10,7 +10,6 @@
 #import "FTSystem.h"
 #import "UIColor+Tools.h"
 #import "UIAlertView+Tools.h"
-#import "FTTracking.h"
 
 @implementation FTFacebookFriendsViewController
 
@@ -147,6 +146,7 @@
 - (void) initializingSequence {
 
 	[super initializingSequence];
+
 	[self setControllerName: @"FTFacebookFriendsViewController"];
 }
 
