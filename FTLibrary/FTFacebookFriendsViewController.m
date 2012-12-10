@@ -10,7 +10,7 @@
 #import "FTSystem.h"
 #import "UIColor+Tools.h"
 #import "UIAlertView+Tools.h"
-
+#import "FTTracking.h"
 
 @implementation FTFacebookFriendsViewController
 
