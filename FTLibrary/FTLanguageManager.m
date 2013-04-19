@@ -139,26 +139,36 @@ static NSString *appID;
             NSString *url = [[allLangs objectAtIndex:0] objectForKey:key];
 
 	        NSDictionary *thisLangData = (id)[FTDataJson jsonDataFromUrl: url];
-            NSArray *data = [thisLangData objectForKey:@"data"];
-            if (!data || [data count] == 0) continue;
 
-	        NSDictionary *values = [data objectAtIndex: 0];
-
-	        url = values[key];
-
-	        thisLangData = (id)[FTDataJson jsonDataFromUrl: url];
-
-            FTLanguage *language = [[FTLanguage alloc] init];
-            language.key = key;
-            language.url = url;
-            language.data = thisLangData[@"data"];
-            [translations setObject:language forKey:key];
-            [backUpData setObject:data forKey:key];
-            NSLog(@"%d translations found for Language %@", [data count], key);
-
-	        [language release];
-
-            if (!isDefault && defaultLanguage && [key isEqualToString:defaultLanguage]) isDefault = YES;
+            NSObject* agnosticData = [thisLangData objectForKey:@"data"];
+            if ([agnosticData isKindOfClass:[NSArray class]]) {
+                NSArray *data = (NSArray*)agnosticData;
+                if (!data || [data count] == 0) continue;
+                NSDictionary *values = [data objectAtIndex: 0];
+                url = values[key];
+                thisLangData = (id)[FTDataJson jsonDataFromUrl: url];
+                FTLanguage *language = [[FTLanguage alloc] init];
+                language.key = key;
+                language.url = url;
+                language.data = thisLangData[@"data"];
+                [translations setObject:language forKey:key];
+                [backUpData setObject:data forKey:key];
+                NSLog(@"%d translations found for Language %@", [data count], key);
+                [language release];
+                if (!isDefault && defaultLanguage && [key isEqualToString:defaultLanguage]) isDefault = YES;
+            }
+            else if ([agnosticData isKindOfClass:[NSDictionary class]]) {
+                NSDictionary* values = (NSDictionary*)agnosticData;
+                FTLanguage *language = [[FTLanguage alloc] init];
+                language.key = key;
+                language.url = url;
+                language.data = values;
+                [translations setObject:language forKey:key];
+                [backUpData setObject:values forKey:key];
+                NSLog(@"%d translations found for Language %@", [values count], key);
+                [language release];
+                if (!isDefault && defaultLanguage && [key isEqualToString:defaultLanguage]) isDefault = YES;
+            }
         }
         
         //write to file for locale!
