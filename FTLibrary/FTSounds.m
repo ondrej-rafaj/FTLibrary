@@ -48,16 +48,18 @@
         soundName = [soundName substringWithRange:NSMakeRange(0, extRange.location)];
     }
 	NSString *path = [[NSBundle mainBundle] pathForResource:soundName ofType:extension];
-	NSURL *url = [NSURL fileURLWithPath:path];
-    
-    NSError *error;
-	AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-	[audioPlayer setDelegate:self];
-	if (audioPlayer == nil) NSLog(@"Audio player error: %@", [error description]);
-	else {
-		[playerArray addObject:audioPlayer];
-		[audioPlayer play];
-        self.isPlaying = YES;
+	if (path) {
+		NSURL *url = [NSURL fileURLWithPath:path];
+		
+		NSError *error;
+		AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+		[audioPlayer setDelegate:self];
+		if (audioPlayer == nil) NSLog(@"Audio player error: %@", [error description]);
+		else {
+			[playerArray addObject:audioPlayer];
+			[audioPlayer play];
+			self.isPlaying = YES;
+		}
 	}
 	[pool drain];
 }
