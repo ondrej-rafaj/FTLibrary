@@ -159,15 +159,15 @@
         
         if (alpha == 0) v = nil;
         
-        UIView *colorV = [self viewWithTag:256];
-        if (!colorV) {
-            colorV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-            [colorV setTag:256];
-            [self addSubview:colorV];
-            [colorV release];
-        }
-        
-        [colorV setBackgroundColor:[self.imageView.image colorAtPoint:point]];
+//        UIView *colorV = [self viewWithTag:256];
+//        if (!colorV) {
+//            colorV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+//            [colorV setTag:256];
+//            [self addSubview:colorV];
+//            [colorV release];
+//        }
+//        
+//        [colorV setBackgroundColor:[self.imageView.image colorAtPoint:point]];
         
 	}
 	return v;

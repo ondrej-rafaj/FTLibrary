@@ -10,21 +10,23 @@
 
 
 @interface FTFacebookFriendsViewController : FTFacebookViewController <UISearchBarDelegate, UIScrollViewDelegate> {
-	
+
 	NSMutableDictionary *sections;
-	
+
 	BOOL isSearching;
-	
+
 	NSMutableArray *searchArray;
+
 	int lastSearchCharCount;
-	
+
 	FTDownload *myInfoDownload;
-	
+
 	NSDictionary *myInfo;
-	
+
 }
 
-- (NSDictionary *)dictionaryForFriendAtIndexPath:(NSIndexPath *)indexPath;
+- (NSDictionary *) dictionaryForFriendAtIndexPath: (NSIndexPath *) indexPath;
 
+- (void) setMyInfo: (NSDictionary *) info;
 
 @end

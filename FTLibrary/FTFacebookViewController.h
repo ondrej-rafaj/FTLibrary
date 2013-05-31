@@ -22,59 +22,63 @@
 
 @optional
 
-- (void)facebookViewController:(FTFacebookViewController *)controller didSelectPicture:(NSString *)url withData:(NSDictionary *)data;
-- (void)facebookViewController:(FTFacebookViewController *)controller didSelectPicture:(UIImage *)picture;
-- (void)facebookViewControllerDidCancel:(FTFacebookViewController *)controller;
+- (void) facebookViewController: (FTFacebookViewController *) controller didSelectPicture: (NSString *) url withData: (NSDictionary *) data;
+
+- (void) facebookViewController: (FTFacebookViewController *) controller didSelectPicture: (UIImage *) picture;
+
+- (void) facebookViewControllerDidCancel: (FTFacebookViewController *) controller;
 
 @end
 
 
 @interface FTFacebookViewController : FTViewController <FTShareFacebookDelegate, FTDownloadDelegate, AQGridViewDelegate, AQGridViewDataSource, UIAlertViewDelegate> {
-	
+
 	Facebook *_facebook;
-	
+
 	id <FTFacebookViewControllerDelegate> delegate;
-	
+
 	NSString *facebookAppId;
-	
+
 	FTDownload *download;
-	
+
 	UISearchBar *searchBar;
-	
+
 	AQGridView *grid;
+
 	BOOL useGridView;
-	
+
 	NSString *controllerName;
-	
+
 }
 
-@property (nonatomic, assign) id <FTFacebookViewControllerDelegate> delegate;
+@property(nonatomic, assign) id <FTFacebookViewControllerDelegate> delegate;
 
-@property (nonatomic, retain) NSString *facebookAppId;
+@property(nonatomic, retain) NSString *facebookAppId;
 
-@property (nonatomic, retain) FTDownload *download;
+@property(nonatomic, retain) FTDownload *download;
 
-@property (nonatomic) BOOL useGridView;
+@property(nonatomic) BOOL useGridView;
 
-@property (nonatomic, retain) NSString *controllerName;
+@property(nonatomic, retain) NSString *controllerName;
 
 
-- (Facebook *)facebook;
+- (Facebook *) facebook;
 
-- (void)authorize;
+- (void) authorize;
 
-- (void)reloadData;
+- (void) reloadData;
 
-- (void)startDownloadingDataForCurrentPage;
+- (void) startDownloadingDataForCurrentPage;
 
-- (void)downloadDataFromUrl:(NSString *)url;
+- (void) downloadDataFromUrl: (NSString *) url;
 
-- (void)downloadFinishedWithResult:(NSString *)result;
+- (void) downloadFinishedWithResult: (NSString *) result;
 
-- (void)noInternetConnection;
+- (void) noInternetConnection;
 
-- (void)configureGridCell:(AQGridViewCell *)cell atIndex:(NSInteger)index forGridView:(AQGridView *)gridView;
+- (void) configureGridCell: (AQGridViewCell *) cell atIndex: (NSInteger) index forGridView: (AQGridView *) gridView;
 
+- (void) createReloadButton;
 
 
 @end

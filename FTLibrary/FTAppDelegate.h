@@ -13,18 +13,18 @@
 #import "FTShare.h"
 
 
-#define kFTAppDelegateDidOpenAppWithUrl						@"FTAppDelegateDidOpenAppWithUrl"
+#define kFTAppDelegateDidOpenAppWithUrl                        @"FTAppDelegateDidOpenAppWithUrl"
+#define kFTAppDelegateDidNotLoginFacebook                   @"kFTAppDelegateDidNotLoginFacebook"
 
+@interface FTAppDelegate : NSObject <UIApplicationDelegate, FBSessionDelegate>
 
-@interface FTAppDelegate : NSObject <UIApplicationDelegate, FBSessionDelegate> 
+@property(nonatomic, retain) FTShare *share;
 
-@property (nonatomic, retain) FTShare *share;
++ (FTAppDelegate *) delegate;
 
-+ (FTAppDelegate *)delegate;
++ (UIWindow *) windowFromSelector: (SEL) selector;
 
-+ (UIWindow *)windowFromSelector:(SEL)selector;
-
-+ (UIWindow *)window;
++ (UIWindow *) window;
 
 
 @end
