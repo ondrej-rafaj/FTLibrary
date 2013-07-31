@@ -10,8 +10,6 @@
 
 @implementation FTShare
 
-@synthesize facebook;
-
 
 
 @synthesize referencedController = _referencedController;
@@ -27,8 +25,6 @@
         [self setReferencedController:controller];
         _twitterEngine = [[FTShareTwitter alloc] init];
         
-        _facebookEngine = [[FTShareFacebook alloc] init];
-        self.facebook = nil;
         
         _emailEngine = [[FTShareEmail alloc] init];
     }
@@ -39,7 +35,6 @@
 #pragma mark Memory management
 
 - (void)dealloc {
-    [_facebookEngine release], _facebookEngine = nil;
     [_twitterEngine release], _twitterEngine = nil;
     [_emailEngine release], _emailEngine = nil;
     
@@ -59,18 +54,6 @@
     [_twitterEngine shareViaTwitter:data];
 }
 
-
-#pragma mark Facebook section
-
-- (void)setUpFacebookWithAppID:(NSString *)appID permissions:(FTShareFacebookPermission)permissions andDelegate:(id<FTShareFacebookDelegate>)delegate {
-    [_facebookEngine setUpFacebookWithAppID:appID referencedController:_referencedController andDelegate:delegate];
-    self.facebook = _facebookEngine.facebook;
-    [_facebookEngine setUpPermissions:permissions];
-}
-
-- (void)shareViaFacebook:(FTShareFacebookData *)data {
-    [_facebookEngine shareViaFacebook:data];
-}
 
 #pragma mark Email section
 
@@ -106,10 +89,6 @@
         [actionSheet addButtonWithTitle:@"Mail"];
         index++;
     }
-    if (options & FTShareOptionsFacebook){
-        [actionSheet addButtonWithTitle:@"Facebook"];
-        index++;
-    } 
     if (options & FTShareOptionsTwitter){
         [actionSheet addButtonWithTitle:@"Twitter"];
         index++;
@@ -129,10 +108,6 @@
     if ([btnText isEqualToString:@"Mail"]) {
         //implement mail
         [_emailEngine shareViaMail:nil];
-    }
-    else  if ([btnText isEqualToString:@"Facebook"]) {
-        //implement FAcebook
-        [_facebookEngine shareViaFacebook:nil];
     }
     else  if ([btnText isEqualToString:@"Twitter"]) {
         //implement Twitter

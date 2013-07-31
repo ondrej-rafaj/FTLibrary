@@ -18,13 +18,14 @@
 
 
 #import "FTShareTwitter.h"
-#import "FTShareFacebook.h"
 #import "FTShareEmail.h"
 
+//  This definition can be used to determine whether the FTLibrary has Facebook support intergrated or is no-Facebook version compatible with up-to-date Facebook iOS SDK framework
+//  Use compiler macro "#ifdef FTLIBRARY_NOFACEBOOK" to conditional compiling for no-facebook version
+#define FTLIBRARY_NOFACEBOOK = 1
 
 enum {
     FTShareOptionsMail              = 1 << 0,
-    FTShareOptionsFacebook          = 1 << 1,
     FTShareOptionsTwitter           = 1 << 2
 };
 typedef NSUInteger FTShareOptions;
@@ -35,13 +36,11 @@ typedef NSUInteger FTShareOptions;
 @interface FTShare : NSObject <UIActionSheetDelegate> {
     
     FTShareTwitter *_twitterEngine;
-    FTShareFacebook *_facebookEngine;
     FTShareEmail *_emailEngine;
     
     id _referencedController;
 }
 
-@property (nonatomic, retain) Facebook *facebook; // needs to be pubblic for UIApplication
 @property (nonatomic, assign) id referencedController;
 
 
@@ -50,11 +49,6 @@ typedef NSUInteger FTShareOptions;
 
 - (void)setUpTwitterWithConsumerKey:(NSString *)consumerKey secret:(NSString *)secret andDelegate:(id<FTShareTwitterDelegate>)delegate;
 - (void)shareViaTwitter:(FTShareTwitterData *)data;
-
-
-
-- (void)setUpFacebookWithAppID:(NSString *)appID permissions:(FTShareFacebookPermission)permissions andDelegate:(id<FTShareFacebookDelegate>)delegate;
-- (void)shareViaFacebook:(FTShareFacebookData *)data;
 
 - (void)setUpEmailWithDelegate:(id<FTShareEmailDelegate>)delegate;
 - (void)shareViaEmail:(FTShareEmailData *)data;

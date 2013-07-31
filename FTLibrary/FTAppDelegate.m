@@ -46,9 +46,6 @@
 - (BOOL) application: (UIApplication *) application openURL: (NSURL *) url sourceApplication: (NSString *) sourceApplication annotation: (id) annotation {
 
 	BOOL ok = YES;
-	if(self.share.facebook) {
-		ok = [self.share.facebook handleOpenURL: url];
-	}
 
 	if(ok) {
 		[[NSNotificationCenter defaultCenter] postNotificationName: kFTAppDelegateDidOpenAppWithUrl object: url.absoluteString];
@@ -64,9 +61,7 @@
 - (BOOL) application: (UIApplication *) application handleOpenURL: (NSURL *) url {
 
 	BOOL ok = YES;
-	if(self.share.facebook) {
-		ok = [self.share.facebook handleOpenURL: url];
-	}
+
 	[[NSNotificationCenter defaultCenter] postNotificationName: kFTAppDelegateDidOpenAppWithUrl object: url.absoluteString];
 	return ok;
 }

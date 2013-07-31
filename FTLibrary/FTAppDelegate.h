@@ -9,14 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import <UIKit/UIKit.h>
-#import "Facebook.h"
 #import "FTShare.h"
 
 
 #define kFTAppDelegateDidOpenAppWithUrl                        @"FTAppDelegateDidOpenAppWithUrl"
 #define kFTAppDelegateDidNotLoginFacebook                   @"kFTAppDelegateDidNotLoginFacebook"
 
-@interface FTAppDelegate : NSObject <UIApplicationDelegate, FBSessionDelegate>
+@interface FTAppDelegate : NSObject <UIApplicationDelegate>
 
 @property(nonatomic, retain) FTShare *share;
 
