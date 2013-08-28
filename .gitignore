@@ -37,3 +37,5 @@ FTLibrary.xcodeproj/xcuserdata/jakubzelfel.xcuserdatad/xcschemes/FTLibrary.xcsch
 FTLibrary.xcodeproj/xcuserdata/jakubzelfel.xcuserdatad/xcschemes/xcschememanagement.plist
 
 FTLibrary.xcodeproj/xcuserdata/rafiki270.xcuserdatad/xcschemes/FTLibrary.xcscheme
+build
+*.xcuserdatad
