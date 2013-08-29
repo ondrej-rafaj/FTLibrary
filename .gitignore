@@ -14,7 +14,7 @@ FTLibrary.xcodeproj/project.xcworkspace/xcuserdata/baldophpourprix.xcuserdatad/U
 
 FTLibrary.xcodeproj/project.xcworkspace/xcuserdata/baldoph.xcuserdatad/UserInterfaceState.xcuserstate
 
-/DerivedData/
+DerivedData/
 FTLibrary.xcodeproj/xcuserdata/alexsiddall.xcuserdatad/xcschemes/xcschememanagement.plist
 
 FTLibrary.xcodeproj/xcuserdata/alexsiddall.xcuserdatad/xcschemes/FTLibrary.xcscheme
@@ -33,4 +33,13 @@ FTLibrary.xcodeproj/xcuserdata/jakubzelfel.xcuserdatad/xcschemes/xcschememanagem
 FTLibrary.xcodeproj/xcuserdata/rafiki270.xcuserdatad/xcschemes/FTLibrary.xcscheme
 FTLibrary.xcodeproj/project.xcworkspace/xcuserdata
 
-/build/
+build/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+xcuserdata/**/*
