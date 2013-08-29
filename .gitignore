@@ -1,20 +1,14 @@
 
 .DS_Store
 
-<<<<<<< HEAD
 /FTLibrary.xcodeproj/xcuserdata/rafiki270.xcuserdatad/xcdebugger/
 /FTLibrary.xcodeproj/project.xcworkspace/xcuserdata/rafiki270.xcuserdatad/UserInterfaceState.xcuserstate
-=======
 FTLibrary.xcodeproj/xcuserdata/baldophpourprix.xcuserdatad/xcschemes/xcschememanagement.plist
-
 FTLibrary.xcodeproj/xcuserdata/baldophpourprix.xcuserdatad/xcschemes/FTLibrary.xcscheme
->>>>>>> ignore
 
 FTLibrary.xcodeproj/xcuserdata/baldoph.xcuserdatad/xcschemes/xcschememanagement.plist
 
 FTLibrary.xcodeproj/xcuserdata/baldoph.xcuserdatad/xcschemes/FTLibrary.xcscheme
-
-.gitignore
 
 FTLibrary.xcodeproj/project.xcworkspace/xcuserdata/baldophpourprix.xcuserdatad/UserInterfaceState.xcuserstate
 
