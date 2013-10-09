@@ -554,6 +554,7 @@
 		93F6E7E51484F549002337ED /* FTTaskMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F6E7E31484F549002337ED /* FTTaskMaker.m */; };
 		93F6E7F11484F751002337ED /* FTReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 93F6E7EF1484F751002337ED /* FTReachabilityManager.h */; };
 		93F6E7F21484F751002337ED /* FTReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F6E7F01484F751002337ED /* FTReachabilityManager.m */; };
+		A02DF77F180594FA0043D50B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02DF77E180594FA0043D50B /* Security.framework */; };
 		A098C6C71642BFBB00CA53E3 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A098C6C61642BFBB00CA53E3 /* libFlurry.a */; };
 		A098C6CA1642BFDE00CA53E3 /* Flurry.h in Headers */ = {isa = PBXBuildFile; fileRef = A098C6C91642BFDE00CA53E3 /* Flurry.h */; };
 		A56A62CE1433606E000C666B /* FTShare.h in Headers */ = {isa = PBXBuildFile; fileRef = A56A62CC1433606E000C666B /* FTShare.h */; };
@@ -1074,6 +1075,7 @@
 		93F6E7E31484F549002337ED /* FTTaskMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTTaskMaker.m; sourceTree = "<group>"; };
 		93F6E7EF1484F751002337ED /* FTReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTReachabilityManager.h; sourceTree = "<group>"; };
 		93F6E7F01484F751002337ED /* FTReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTReachabilityManager.m; sourceTree = "<group>"; };
+		A02DF77E180594FA0043D50B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A098C6C61642BFBB00CA53E3 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry.a; path = Thirdparty/Flurry/libFlurry.a; sourceTree = "<group>"; };
 		A098C6C91642BFDE00CA53E3 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		A56A62CC1433606E000C666B /* FTShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTShare.h; sourceTree = "<group>"; };
@@ -1141,6 +1143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A02DF77F180594FA0043D50B /* Security.framework in Frameworks */,
 				4C85BC2913BA4B5000CB7FCA /* CoreMedia.framework in Frameworks */,
 				A56A634B1433679B000C666B /* libOAuth.a in Frameworks */,
 				4C03655213BA023A00E8FA09 /* Foundation.framework in Frameworks */,
@@ -1267,6 +1270,7 @@
 		4C03655013BA023A00E8FA09 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A02DF77E180594FA0043D50B /* Security.framework */,
 				A098C6C61642BFBB00CA53E3 /* libFlurry.a */,
 				4CE096801440D8BF00B31E11 /* libTestFlight.a */,
 				A56A634A1433679B000C666B /* libOAuth.a */,
