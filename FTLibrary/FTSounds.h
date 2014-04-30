@@ -20,6 +20,14 @@
 @property(nonatomic, assign) id<FTSoundsDelegate> delegate;
 @property(nonatomic, assign) BOOL isPlaying;
 
+/**
+ *  If set to YES, the audio player will be configured to support audio background playback
+ *  This values must be configured before the playback is started.
+ *  Dont forget to configure Info plist with "UIBackgroundModes: audio"
+ *  Default: NO
+ */
+@property(nonatomic, assign, getter = isBackgroundPlaybackEnabled) BOOL backgroundPlaybackEnabled;
+
 - (void)playSound:(NSString *)soundName;
 - (void)playLoopSound:(NSString *)soundName;
 

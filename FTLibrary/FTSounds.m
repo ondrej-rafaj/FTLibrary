@@ -36,6 +36,8 @@
     }
     [arr release];
     self.isPlaying = NO;
+    
+    [[AVAudioSession sharedInstance] setActive:NO error: nil];
 }
 
 - (void)doPlaySound:(NSString *)soundName {
@@ -59,6 +61,13 @@
 			[playerArray addObject:audioPlayer];
 			[audioPlayer play];
 			self.isPlaying = YES;
+            
+            if ([self isBackgroundPlaybackEnabled])
+            {
+                //Make sure the system follows our playback status for
+                [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+                [[AVAudioSession sharedInstance] setActive: YES error: nil];
+            }
 		}
 	}
 	[pool drain];
@@ -85,6 +94,13 @@
 		[playerArray addObject:audioPlayer];
 		[audioPlayer play];
         self.isPlaying = YES;
+        
+        if ([self isBackgroundPlaybackEnabled])
+        {
+            //Make sure the system follows our playback status for
+            [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+            [[AVAudioSession sharedInstance] setActive: YES error: nil];
+        }
 	}
 	[pool drain];
 }
